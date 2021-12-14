@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dealermeet__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF((ISPICKVAL(Promotions__r.Type__c,&apos;Dealers Meet&apos;)||ISPICKVAL(Promotions__r.Type__c,&apos;Dealers Salesman Meet&apos;)||ISPICKVAL(Promotions__r.Type__c,&apos;Dealers Factory Visit&apos;)) ,&apos;Dealers Meet&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Dealermeet</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

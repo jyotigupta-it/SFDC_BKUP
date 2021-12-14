@@ -1,0 +1,37 @@
+<aura:component controller="NpsController" >
+    
+    <!-- call doInit function on component load -->  
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+    
+    <aura:attribute name="executiveName" type="list" />
+    <aura:attribute name="selectedExecutiveName" type="String" />
+    
+    <aura:attribute name="selectedAccountChild" type="list" />
+    <aura:attribute name="selectPartyType" type="String" />
+    <aura:attribute name="noneAttribute" type="String" default="--None--"/>
+    
+    <div class="slds-theme_default">
+        <lightning:card variant="Narrow" title="Executive Assignment" iconName="standard:account" >
+            <p class="slds-p-horizontal_small">
+                Assign Executive To Selected Accounts
+            </p>
+        </lightning:card>
+        <lightning:layout multipleRows="true">
+            
+            <!--Executive List -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:select name="assignToExecutive"
+                                  value="{!v.selectedExecutiveName}"
+                                  label="Assign To Executive">
+                    <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                    <aura:iteration items="{!v.executiveName}" var="val">
+                        <option value="{!val}">{!val}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+            
+        </lightning:layout>
+        
+        <lightning:button variant="neutral" label="Save" title="Save" onclick="{! c.saveAssignment }" class="slds-m-bottom_large slds-align_absolute-center"/>
+    </div>
+</aura:component>

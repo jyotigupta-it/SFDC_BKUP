@@ -1,0 +1,29 @@
+<apex:page standardController="Tour_Plan__c" recordSetVar="30">
+<script>function setFocusOnLoad(){}</script>
+<apex:form >
+<apex:pageBlock >
+
+    <apex:pageBlockButtons >
+        <apex:commandButton value="Save" action="{!save}"/>
+    </apex:pageBlockButtons>
+
+    <apex:pageBlockTable value="{!Tour_Plan__c}" var="tp">
+
+    <apex:column headerValue="Date">
+        <apex:inputfield value="{!Tour_Plan__c.Date__c}"/>
+    </apex:column>
+    <apex:column headerValue="Distributor">    
+        <apex:inputfield value="{!Tour_Plan__c.Distributor_Dealer__c}"/>
+    </apex:column>    
+    <apex:column headerValue="Place">
+        <apex:inputfield value="{!Tour_Plan__c.Place__c}"/>
+    </apex:column>    
+    <apex:column headerValue="Remarkes">
+        <apex:inputfield value="{!Tour_Plan__c.Remarks__c}"/>    
+    </apex:column>    
+
+    </apex:pageBlockTable>
+</apex:pageBlock>    
+</apex:form>
+
+</apex:page>

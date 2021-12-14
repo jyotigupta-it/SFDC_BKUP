@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LeadConvertSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowOwnerChange>true</allowOwnerChange>
+    <objectMapping>
+        <inputObject>Lead</inputObject>
+        <mappingFields>
+            <inputField>Contact_Number_Mobile__c</inputField>
+            <outputField>Contact_Number_Mobile__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>DistrictP__c</inputField>
+            <outputField>District__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Party_Type__c</inputField>
+            <outputField>Party_Type__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>StateP__c</inputField>
+            <outputField>State__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Taluk__c</inputField>
+            <outputField>Taluk_Tehsil__c</outputField>
+        </mappingFields>
+        <outputObject>Account</outputObject>
+    </objectMapping>
+    <opportunityCreationOptions>VisibleOptional</opportunityCreationOptions>
+</LeadConvertSettings>

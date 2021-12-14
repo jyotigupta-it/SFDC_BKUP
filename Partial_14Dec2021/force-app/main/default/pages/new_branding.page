@@ -1,0 +1,10 @@
+<apex:page standardController="Distributor_Dealer__c">
+<apex:form >
+<apex:pageBlock >
+<apex:pageblockSection >
+<apex:inputField value="{!Distributor_Dealer__c.Is_Branding_Done__c}"/>
+<apex:inputField value="{!Distributor_Dealer__c.Any_Branding_Required__c}"/>
+</apex:pageblockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Territory2Rule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <name>Central Bihar</name>
+    <objectType>Account</objectType>
+    <ruleItems>
+        <field>Account.Cluster_of_Taluka__c</field>
+        <operation>equals</operation>
+        <value>Central Bihar</value>
+    </ruleItems>
+</Territory2Rule>

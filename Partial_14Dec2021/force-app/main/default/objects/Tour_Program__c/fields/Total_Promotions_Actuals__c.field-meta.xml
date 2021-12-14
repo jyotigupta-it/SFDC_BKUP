@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Promotions_Actuals__c</fullName>
+    <externalId>false</externalId>
+    <formula>Architects_Meet_Actuals__c +
+ Boarers_Meet_Actuals__c +
+ Builders_Meet_Actuals__c +
+ Dealers_Factory_Visit_Actuals__c +
+ Dealers_Meet_Actuals__c +
+ Dealers_Salesmen_Meet_Actuals__c +
+ Engineers_Meet_Actuals__c +
+ Exhibition_Actuals__c +
+ Farmers_Meet_Actuals__c +
+ Jeep_Campaign_Actuals__c +
+ Mechanics_Meet_Actuals__c +
+ Mini_Meet_Actuals__c +
+ Plumber_Mechanic_Engineers_Factory_Visit__c +
+ Plumbers_Meet_Actuals__c +
+ Shandy_Show_Actuals__c +
+ Tractor_Show_Actuals__c+ Group_Activity_Actuals__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Promotions (Actuals)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

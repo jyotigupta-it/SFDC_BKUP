@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unique_SPR__c</fullName>
+    <description>related to the unique spr.</description>
+    <externalId>false</externalId>
+    <label>Unique SPR</label>
+    <referenceTo>Unique_SPR__c</referenceTo>
+    <relationshipLabel>New Special Pricing Requests</relationshipLabel>
+    <relationshipName>New_Special_Pricing_Requests</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Asset_Already_Present</fullName>
+        <ccEmails>dhananjaya.hs@ashirvad.com</ccEmails>
+        <description>Asset Already Present</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Template_for_already_Present</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_verification_email</fullName>
+        <ccEmails>dhananjaya.hs@ashirvad.com</ccEmails>
+        <description>Send verification email</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Verification</template>
+    </alerts>
+    <rules>
+        <fullName>Already Present Email alert On Asset</fullName>
+        <actions>
+            <name>Asset_Already_Present</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Verification__c</field>
+            <operation>equals</operation>
+            <value>Already Present</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Verification email for asset</fullName>
+        <actions>
+            <name>Send_verification_email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Asset.Verification__c</field>
+            <operation>equals</operation>
+            <value>Verified</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

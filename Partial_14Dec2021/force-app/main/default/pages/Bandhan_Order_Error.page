@@ -1,0 +1,3 @@
+<apex:page standardController="Bandhan_Orders__c" >
+<b><center><p style="color:red;font-size: 18px;">Bandhan Orders can be created only through "Create Bandhan Order" button in Account page</p></center></b>
+</apex:page>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Tourplan__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&apos;/apex/AP_TOURPLAN_CALENDAR?id=&apos;+ Id , &apos;Create Tourplan&apos;,&apos;_self&apos;)</formula>
+    <label>Create Tourplan</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

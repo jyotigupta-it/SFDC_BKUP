@@ -1,0 +1,67 @@
+<apex:page sidebar="false" showHeader="false" standardController="User" extensions="Quiz_validation_controller" tabStyle="User">
+<apex:slds />
+    <style type="text/css">
+        @media only screen and (min-width: 250px) and (max-width: 770px) {
+            .ws {
+            white-space:normal!important;
+            }}
+          
+    </style>
+    <style>
+    tab { padding-left: 4em; }
+</style>
+ <!--   <apex:pageBlock >-->
+        <div width="100%" ID="Table1" style="margin: 0px;">
+            <div class="slds-page-header">
+                                  <div class="slds-media">
+                                    <div class="slds-media__body">
+                                    <div class="slds-clearfix">
+                                    <div class="slds-float_left">
+            <img src="{!$Resource.AshirvadLogoNew}" width="100"/>
+           
+           </div>
+    <div class="slds-float_right">
+    <div class="slds-p-top_small ws">
+           <!-- <apex:outputText value="Monthly Quiz " styleClass="forms"/>-->
+   
+            <apex:outputText value="Date: {0, date, MMMM d','  yyyy}" styleClass="forms">
+             <apex:param value="{!NOW()}" />
+            </apex:outputText>
+            </div>
+            </div>
+            </div>
+             <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                                </div>
+                                 </div>
+
+        </div>
+ <!--   </apex:pageBlock>-->
+ <div class="slds-text-heading_medium">
+ <div class="slds-p-around_small">
+    <apex:outputText value="The Quiz is to evaluate How much you understand" styleClass="forms"/>
+    </div>
+   </div>
+   
+ <div class="slds-p-horizontal_x-large slds-p-vertical_x-small">
+    <apex:form id="form1">
+   
+
+ <b>Please read the instructions below and then click on Proceed</b> 
+    <ol>
+     <li>1.All the questions are mandatory </li>
+      <li>2.The test should be taken between 4th and 6th of the month </li>
+     <li> 3.At any point of time, if you need to leave the quiz, click the save and close button. You can come back any time between 4th and 6th to complete the quiz</li>
+     <li> 4.If the quiz is not SUBMITTED within the 6th 6:00 pm of this month, it will be marked incomplete and you will not be able to take the test for that particular month</li>
+    <li> 5.Good Luck and All the Best...</li>
+    </ol>
+
+    <br/>   
+Click on the button to proceed ...
+           <div class="slds-p-vertical_x-small">
+            <apex:pagemessages />            
+            <apex:commandButton action="{!navigate}" value="Proceed" styleClass="slds-button slds-button_brand"/>
+             </div>
+    </apex:Form>      
+    </div>
+</apex:page>

@@ -1,0 +1,245 @@
+<apex:page controller="GeoLocationController" sidebar="false" showHeader="false" docType="HTML-5.0" >
+<apex:slds />
+<style>
+ 
+    .buttoncolor {
+        color: #ffffff!important;
+        background-color: #ffba48!important;
+    }
+ 
+     .dropdown,
+            .accpopup input[type="text"],
+            .accpopup textarea {
+            background-color: #fff;
+            color: #16325c;
+            border: 1px solid #d8dde6;
+            border-radius: .25rem;
+            width: 100%;
+            transition: border .1s linear, background-color .1s linear;
+            display: inline-block;
+            padding: 5px 5px;
+      } 
+      .left_sidebar{float:left;width:20%;    padding: 0 20px 0 10px;}
+      .left_sidebar select{width:90%;}
+      .right_sidebar{float:left;width:80%}
+
+</style>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEvilF_q1-eQ5rS_DNfb_onAvHewdV3cs"></script>
+
+
+<apex:form >
+        <!-------filter division------------------>
+        <div class="left_sidebar slds-grid slds-wrap">
+             <div class="slds-col">    
+                    <span class="slds-p-left_medium">USER :</span> <apex:inputField label="user" styleClass="slds-m-left_medium" value="{!a.ownerId}" id="usr"/>
+                
+                     <div class="slds-form-element slds-p-around_x-small" >
+                        <div class="slds-form-element__control ">
+                            <label class="slds-form-element__label slds-text-title_caps">OBJECT:</label>                        
+                                <apex:selectList value="{!selectedObject}" title="objects" size="1" id="objects" multiselect="false" styleClass="dropdown" >
+                                    <apex:selectOptions value="{!objectList}" />
+                                    <apex:actionsupport event="onchange" rerender="actype,dt" action="{!AccountType}" status="status"/>                         
+                                </apex:selectList>                        
+                        </div>
+                    </div>
+                    
+                    <apex:outputPanel id="actype">
+                        <apex:outputPanel id="type" rendered="{!if(selectedObject=='Accounts'|| selectedObject=='Visits',true,false)}">
+                        <div class="slds-form-element slds-p-around_x-small" >
+                            <div class="slds-form-element__control ">
+                                <label class="slds-form-element__label slds-text-title_caps">Type:</label>                       
+                                    <apex:selectList value="{!selectedAccountType}" title="account type" size="1" id="accountType" multiselect="false" styleClass="dropdown">
+                                        <apex:selectOptions value="{!AccountType}" />                                
+                                    </apex:selectList>                       
+                            </div>
+                        </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel id="dt">
+                        <apex:outputPanel id="dte" rendered="{!if(selectedObject=='Promotions'|| selectedObject=='Visits',true,false)}">
+                            <div class="slds-p-left_medium">
+                               <span class="slds-p-right_medium"> FROM </span><apex:input styleClass="slds-p-left_medium slds-input" type="date" value="{!fromDate}"/>
+                                <br/>
+                                <span class="slds-p-right_medium slds-m-top_medium">To</span> <apex:input type="date" styleClass="slds-p-left_medium slds-input" value="{!toDate}"/>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>                    
+                                       
+                </div>
+                
+                    <div class="slds-col">                       
+                            <div class="slds-form-element slds-p-around_x-small"> 
+                                <apex:commandButton action="{!showRecords}" styleClass="slds-button slds-button--neutral buttoncolor mob_wid mt3 ml0 topbtnwidth w150 mt17" value="Search" reRender="map"/>
+                                <apex:commandButton onclick="window.open('/home/home.jsp','_self');return false" styleClass="slds-button slds-button--neutral buttoncolor mob_wid mt3 ml0 topbtnwidth w150 mt17" value="Home Page"/>
+                            </div>
+                    </div>
+                
+        </div>
+        
+        
+        <!------Map division--------->
+         
+         <div id="gmap" class="right_sidebar">
+         
+             <apex:outputPanel id="map"> 
+             
+               
+                     <apex:outputPanel id="bs" rendered="{!if(selectedObject!='Accounts' && selectedObject!='Promotions' && selectedObject!='Visits' ,true,false)}">  
+                     <apex:map width="" height="600px" mapType="roadmap" zoomLevel="3"
+                          center="{latitude: 29.01, longitude: 77.38}">
+                     </apex:map>   
+                     </apex:outputPanel>   
+                  
+                     <apex:outputPanel id="acc" rendered="{!if(selectedObject=='Accounts',true,false)}">    
+                     <apex:map width="" height="600px" mapType="roadmap" zoomLevel="3"
+                          center="{latitude: 29.01, longitude: 77.38}">
+                             <apex:repeat value="{! dealerAccountList }" var="loc">                                
+                                          <apex:mapMarker title="{! loc.Name },{! loc.BillingStreet},,{! loc.BillingCity},{! loc.BillingState}" 
+                                              position="{!loc.Geo_Location_JSON__c}" icon="{! URLFOR($Resource.RedIcon) }">                            
+                                              <apex:mapInfoWindow >
+                                                    <apex:outputPanel layout="block" style="font-weight: bold;">
+                                                      <apex:outputText >{! loc.Name }</apex:outputText>
+                                                    </apex:outputPanel>
+                                                    
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.Primary_Contact_Person_Name__c}</apex:outputText>
+                                                    </apex:outputPanel> 
+                                                    
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.Contact_Number_Mobile__c}</apex:outputText>
+                                                    </apex:outputPanel> 
+                                        
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.BillingStreet}</apex:outputText>
+                                                    </apex:outputPanel>               
+                                        
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.BillingCity}, {! loc.BillingState}</apex:outputText>
+                                                    </apex:outputPanel>          
+                                              </apex:mapInfoWindow>                                                              
+                                          </apex:mapMarker>     
+                             </apex:repeat> 
+                            
+                             <apex:repeat value="{! distributorAccountList}" var="loc">                                
+                                          <apex:mapMarker title="{! loc.Name },{! loc.BillingStreet},,{! loc.BillingCity},{! loc.BillingState}" 
+                                              position="{!loc.Geo_Location_JSON__c}" icon="{! URLFOR($Resource.GreenIcon) }" >                            
+                                              <apex:mapInfoWindow >
+                                                    <apex:outputPanel layout="block" style="font-weight: bold;">
+                                                      <apex:outputText >{! loc.Name }</apex:outputText>
+                                                    </apex:outputPanel>
+                                                    
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.Primary_Contact_Person_Name__c}</apex:outputText>
+                                                    </apex:outputPanel> 
+                                                    
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.Contact_Number_Mobile__c}</apex:outputText>
+                                                    </apex:outputPanel>
+                                        
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.BillingStreet}</apex:outputText>
+                                                    </apex:outputPanel>               
+                                        
+                                                    <apex:outputPanel layout="block">
+                                                      <apex:outputText >{! loc.BillingCity}, {! loc.BillingState}</apex:outputText>
+                                                    </apex:outputPanel>          
+                                              </apex:mapInfoWindow>                                                              
+                                          </apex:mapMarker>     
+                             </apex:repeat>  
+                            
+                             <apex:repeat value="{! IndividualContactAccountList}" var="loc">                                
+                                      <apex:mapMarker title="{! loc.Name },{! loc.BillingStreet},,{! loc.BillingCity},{! loc.BillingState}" 
+                                          position="{!loc.Geo_Location_JSON__c}" icon="{! URLFOR($Resource.BlueIcon) }">                            
+                                          <apex:mapInfoWindow >
+                                                <apex:outputPanel layout="block" style="font-weight: bold;">
+                                                  <apex:outputText >{! loc.Name }</apex:outputText>
+                                                </apex:outputPanel>
+                                    
+                                                <apex:outputPanel layout="block">
+                                                  <apex:outputText >{! loc.BillingStreet}</apex:outputText>
+                                                </apex:outputPanel>               
+                                    
+                                                <apex:outputPanel layout="block">
+                                                  <apex:outputText >{! loc.BillingCity}, {! loc.BillingState}</apex:outputText>
+                                                </apex:outputPanel>          
+                                          </apex:mapInfoWindow>                                                              
+                                      </apex:mapMarker>     
+                         </apex:repeat> 
+                         
+                     </apex:map>   
+                     </apex:outputPanel>    
+                     
+                     <apex:outputPanel id="prom" rendered="{!if(selectedObject=='Promotions',true,false)}">    
+                     <apex:map width="" height="600px" mapType="roadmap" zoomLevel="3"
+                          center="{latitude: 29.01, longitude: 77.38}">
+                         <apex:repeat value="{! promotionList }" var="loc">
+                              <apex:mapMarker title="{! loc.Name }" 
+                                  position="{!loc.Geo_Location_JSON__c}" icon="{! URLFOR($Resource.RedIcon) }">                            
+                                  <apex:mapInfoWindow >
+                                        <apex:outputPanel layout="block" style="font-weight: bold;">
+                                          <apex:outputText >{! loc.Name }</apex:outputText>
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel layout="block">
+                                          <apex:outputText >{! loc.Type__c}</apex:outputText>
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel layout="block">
+                                          <apex:outputText >{! loc.CreatedDate}</apex:outputText>
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel layout="block">
+                                          <apex:outputText >{! loc.Geo_Address__c}</apex:outputText>
+                                        </apex:outputPanel>               
+                                                                     
+                                  </apex:mapInfoWindow>                          
+                              </apex:mapMarker>
+                         </apex:repeat>  
+                     </apex:map>   
+                     </apex:outputPanel>    
+                     
+                     <apex:outputPanel id="vsts" rendered="{!if(selectedObject=='Visits',true,false)}">    
+                     <apex:map width="" height="600px" mapType="roadmap" zoomLevel="3"
+                          center="{latitude: 29.01, longitude: 77.38}">
+                         <apex:repeat value="{! visitList }" var="loc">
+                              <apex:mapMarker title="{! loc.Name }" 
+                                  position="{!loc.Geo_Location_JSON__c}" icon="{! URLFOR($Resource.RedIcon) }">                            
+                                  <apex:mapInfoWindow >
+                                        <apex:outputPanel layout="block" style="font-weight: bold;">
+                                          <apex:outputText >{! loc.Name }</apex:outputText>
+                                        </apex:outputPanel>
+                                        
+                                         <apex:outputPanel layout="block">
+                                          <apex:outputText >{! loc.Party_Type__c}</apex:outputText>
+                                        </apex:outputPanel>
+                                        
+                                         <apex:outputPanel layout="block">
+                                          <apex:outputText >{! loc.Purpose_of_Visit__c}</apex:outputText>
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel layout="block">
+                                          <apex:outputText >{! loc.CreatedDate}</apex:outputText>
+                                        </apex:outputPanel>               
+                            
+                                        <apex:outputPanel layout="block">
+                                          <apex:outputText >{! loc.Geo_Address__c}</apex:outputText>
+                                        </apex:outputPanel>          
+                                  </apex:mapInfoWindow>                          
+                              </apex:mapMarker>
+                         </apex:repeat>  
+                     </apex:map>   
+                     </apex:outputPanel> 
+                     
+                     
+                              
+              </apex:outputPanel>   
+              
+         </div>
+            
+           
+</apex:form>
+
+  
+</apex:page>

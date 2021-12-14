@@ -1,0 +1,1266 @@
+<apex:page controller="BrandingRequestController" contentType="text/html" showHeader="false" sidebar="false" applyBodyTag="false" standardStylesheets="false" docType="html-5.0">
+    <apex:slds />
+    <apex:form >
+        <html>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_js)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_UI_js)}"/>
+            
+            <link href="{!URLFOR($Resource.Ashd_jquery_UI_css)}" rel="stylesheet"/>
+            <!--<link  href="{!URLFOR($Resource.Ashd_bootstrap_css)}" rel="stylesheet"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_theme_css)}" rel="stylesheet"/>-->
+            <apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_js)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.Ashd_angular_js)}"/>
+            <link  href="{!URLFOR($Resource.Ashd_bootstrap_select_css)}" rel="stylesheet"/>
+            <link  href="{!URLFOR($Resource.font_awsome_css)}" rel="stylesheet"/>
+            <link  href="{!URLFOR($Resource.sticky_css)}" rel="stylesheet"/>
+            <apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_select_js)}"/>
+            
+            
+            
+            
+            
+            
+            
+            
+            <style class="cp-pen-styles">
+                <!--   body{font-family:Calibri !important;}
+
+.navbar-inverse{background-color:#19a8db !important;background-image: -webkit-linear-gradient(top,#19a8db,#0ebdf7 100%); color:#FFF !important; border-radius:0px !important;padding:7px;margin:0; }
+.navbar-nav{float:right;}
+.navbar-inverse .navbar-nav>li>a{color:#FFF !important;}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{border-color:#0ebdf7 !important;}
+.navbar{margin-bottom:0px !important;border:0px #FFF none}
+.jumbotron{margin:0px 0px !important; padding:10px 10px 2px 15px !important}
+.nav-mn{color:#FFF !important; font-size:16px !important;padding-right:10px; margin-top:17px;}
+.nav-mn a {color:#FFF !important;}
+.nav-mn a:hover{text-decoration:none}
+
+.noPadding-noMargin{padding:0px !important;margin:0px !important}
+
+
+
+.blockcontent{
+background-color: #ffffff;
+z-index: 1;
+position: absolute;
+height: 250px;
+top: 30%;
+left: 35%;
+border: 2px solid #0f8fbb;
+border-radius: 5px;
+padding: 30px;
+}
+.brandTable{
+margin-top:10px;
+}
+body{
+/*background-color:#ffffff!important;*/
+}
+.bb{
+background-color:#ffffff!important;
+
+}
+label i {
+display: inline-block;
+height: 25px;
+position: relative;
+top: 6px;
+font-style: normal;
+color: #ccc;
+
+cursor: pointer;
+-webkit-tap-highlight-color: transparent;
+}
+
+input[type="radio"],
+input[type="checkbox"] { display: none; }
+input[type="radio"] + i:before,
+input[type="checkbox"] + i:before {
+font-family: 'FontAwesome';
+font-size: 20px;
+height: 26px;
+width: 26px;
+display: inline-block;
+/*margin-left: 100px;*/
+} 
+input[type="checkbox"] + i:before { content: "\f096"; }
+
+input[type="checkbox"]:checked + i:before { content: "\f046"; }
+
+input[type="checkbox"]:checked + i + span,
+input[type="checkbox"]:checked + i:before { color: rgba(0, 128, 0, 0.5); }
+
+.button{
+width:100px!important;
+height:34px!important;
+margin-bottom:5px!important;
+}
+
+.button-Approve{ background-color:#24aa98;color:#fff }
+
+.button-width{width:95px !important;Height:34px!important;}
+
+.tdheader{
+width:40%;
+font-weight:bold;
+font-size:14px;
+padding-bottom:5px
+}
+.tdbody{
+font-weight:lighter;
+font-size:14px;
+padding-bottom:5px
+}
+
+//For Approval Submit
+
+#commentsER{
+display:none;
+}
+.approvalBar{
+background-color:#19a8db!important;
+height:25px!important;
+
+}
+// For Approval submit ends 
+
+.placeholder{color: grey;}
+select option:first-child{color: grey; display: none;}
+select option{color: #555;} 
+.grp{margin-bottom: 5px!important;}-->
+                .alertfullwindow{
+                height:100%!important;
+                width:100%!important;
+                left:0!important;
+                top:0!important;
+                position:absolute!important;
+                background-color:#000000!important;
+                opacity:.5!important;
+                z-index:2;
+                }
+                
+                .alertcontent{
+                padding:0px;
+                top: 35%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid ##e3e2e2;
+                border-radius:5px;
+                z-index: 2;
+                left:40%;
+                }
+                
+                .navi li {
+                float:left;
+                margin-left:20px;
+                }
+                
+                .mainblock{
+                width:100%!important;
+                height:100%;
+                top:0!important;
+                left:0!important;
+                position:fixed!important;
+                background-color:#000000!important;
+                opacity:.5!important;
+                z-index:1!important;
+                }
+                .main{
+                
+                z-index: 2!important;
+                top: 8%!important;
+                margin-bottom:10%;
+                position: absolute!important;
+                background-color: white!important;
+                border-radius: 5px;
+                padding: 15px;
+                right:34%;
+                width:387px!important;
+                }
+                .cls_btn {
+                padding-left: 5px 15px!important;
+                border-radius:2px!important;
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid rgb(221, 219, 218);
+                transition: border .15s linear;
+                background-color: rgba(27, 82, 151, 1);
+                border-color: rgba(27, 82, 151, 1);
+                color: rgb(255, 255, 255);
+                }
+                .blockwindow1{
+                height:100%!important;
+                width:100%!important;
+                left:0!important;
+                top:0!important;
+                position:fixed!important;
+                background-color:#000000!important;
+                opacity:.5!important;
+                }
+                
+                .approval{
+                z-index: 1!important;
+                
+                margin-bottom:10%;
+                
+                background-color: white!important;
+                border-radius: 5px;
+                padding: 0;
+                
+                
+                position:absolute!important;
+                top:20%!important;
+                left:37%;
+                }
+                @media only screen and (min-width: 250px) and (max-width: 640px) {
+                .main{ 
+                z-index: 2!important;
+                top: 8%!important;
+                margin-bottom:10%;
+                position: absolute!important;
+                background-color: white!important;
+                border-radius: 5px;
+                padding: 15px;
+                right:5%;
+                width:79%!important;
+                }
+                .approval{
+                z-index: 1!important;
+                
+                margin-bottom:10%;
+                
+                background-color: white!important;
+                border-radius: 5px;
+                padding: 0;
+                
+                width:90%;
+                position:absolute!important;
+                top:10%!important;
+                left:5%;
+                }
+                .alertcontent{
+                padding:0px;
+                top: 10%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid ##e3e2e2;
+                border-radius:5px;
+                z-index: 2;
+                left:5%;
+                width:90%;
+                }
+                }
+            </style>
+            
+            <script>
+            var alertbol=true;
+            
+            
+            var alertblock=true;
+            
+            function alertWindow(msg,pic){
+                var htmcode='';
+                var suc='';
+                
+                if(pic=='alert'){
+                    htmcode='<span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span><b style="font-family:Calibri !important;">Alert</b>';
+                }else {
+                    htmcode='<span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span>';
+                    suc='padding-bottom:20px;';
+                }
+                $(document).ready(function(){
+                    alertblock=false;
+                    $('#submit').blur();
+                    $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);'+suc+'" >'+htmcode+'<span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;">'+msg+'</label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="cls_btn acnc" value="Close" /></div></div>');
+                    $('.acnc').click(function(){
+                        alertblock=true;
+                        $('#block').remove();
+                        $('.blockcontent').remove();
+                        $('.alertcontent').remove();
+                        window.location.reload();
+                    });
+                    
+                });
+            }   
+            
+            
+            
+            /******JQUERY CODE***************/
+            var SelectedAccount={};
+            SelectedAccount.Name='';
+            SelectedAccount.Id='';
+            
+            $(document).ready(function(){
+                $('#inputValidation').keyup(function(){
+                    BrandingRequestController.collectAccount($('#inputValidation').val(),document.getElementById('cluster').value,function(res,evt){
+                        debugger;
+                        console.log(res);
+                        console.log(evt);
+                        if(evt.status){ 
+                            var names=[];
+                            
+                            for(var i=0;i<res.length;i++){
+                                var jk=new Object();
+                                jk.label=res[i].Name;
+                                jk.value=res[i].Name;
+                                jk.myValue=res[i].Id;
+                                names.push(jk);
+                            }         
+                            
+                            $('#inputValidation').autocomplete({
+                                minLength: 2,
+                                source: names,
+                                select:function(event,ui){
+                                    
+                                    console.log('UUUII'+ui.item);
+                                    SelectedAccount.Name=ui.item.label;
+                                    SelectedAccount.Id=ui.item.myValue;
+                                    console.log(SelectedAccount);
+                                    $('#inputValidation').val(SelectedAccount.Name);
+                                    console.log($('#inputValidation').val());
+                                }
+                            });
+                            
+                            $('#inputValidation').keyup(function(){
+                                if ($('#inputValidation').val().length==0){
+                                    SelectedAccount.Name='';
+                                    SelectedAccount.Id='';
+                                    
+                                }
+                            });
+                            
+                            
+                        }
+                        else{
+                        }
+                    });
+                    
+                    
+                });
+            });
+            
+            function blockwindow(){
+                $(document).ready(function(){
+                    $('#submit').blur();
+                    $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div align="center" class="blockcontent"><label style="font-size:100px;color:#0ebdf7;">&#128077;</label><br/><h5>Your Branding Request Successfully Submitted!!</h5></div>')
+                });
+            }
+            $(document).ready(function(){
+                $('body').keyup(function(event){
+                    if(event.keyCode==27){
+                        if(alertblock){
+                            $('#block').remove();
+                            $('.blockcontent').remove();
+                            $('.blockwindow1').remove();
+                            $('.approval').remove();
+                        }
+                    }  
+                });
+            });  
+            
+            
+            
+            function ApproveReject(obj,p){
+                if(p=='Approve' && (obj.vend == undefined || obj.vend =='')){
+                    alertWindow('Please select the vendor.','');
+                }
+                else{
+                    var onComment;
+                    if(p=='Approve'){
+                        onComment='Approval';
+                    }
+                    else{
+                        onComment='Rejection';
+                    }
+                    $(document).ready(function(){
+                        $('body').append('<div class="blockwindow1"></div> <div class="approval col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor: pointer;" class="glyphicon glyphicon-remove appcnc" ></span> <span style="float:left;font-weight: bold;font-size: 16px;">Approval/Rejection Detail</span> </div> </div><div style="width:100%;padding: 5px 10px;"> <h4 style="text-align:left;padding-left:10px;">'+ obj.ShopName+'</h4> <h4 style="text-align:left;padding-left:10px;">Comments :</h4> <div align="center" style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5px;" ><span id="commentsER" style="color:red;float: left;">Enter the Comments</span> <textarea class="form-control" style="resize:none;" placeholder="Enter '+onComment+' reason" id="comments" rows="5"></textarea></div> </div> <div style="border-top: 1px solid rgba(0, 0, 0, 0.11);text-align: right;padding: 10px 15px;"> <input type="button" id="sub" class="cls_btn" value="Submit" /> <input type="button" class="cls_btn appcnc" value="Close"> </div> </div>');
+                        $('#sub').click(function(){
+                            this.blur();
+                            if(p=='Reject'){
+                                if($('#comments').val().trim().length==0){
+                                    $('#commentsER').css({'display':'block'});
+                                    return;
+                                }
+                            } 
+                            obj.comment=$('#comments').val();
+                            obj.action=p;
+                            var ArrayObj=[];
+                            ArrayObj.push(obj.Id);
+                            var ArrayVendor=[];
+                            ArrayVendor.push(obj.vend);
+                            debugger;
+                            console.log(obj.vend);
+                            console.log('azuuz8saagdfygsdf');
+                            console.log(ArrayObj);
+                            console.log(obj.comment);
+                            if(p=='Approve'){
+                                BrandingRequestController .approveRequest(ArrayObj,$('#comments').val(),ArrayVendor,function(res,evt){
+                                    debugger;
+                                    if(evt.status){
+                                        console.log(res);
+                                        if(res){
+                                            alertWindow('The selected Shop name(s) has been Approved','');
+                                        }else{
+                                            alertWindow('The selected Shop name(s) has failed to Approve','alert');
+                                        }  
+                                    }else{
+                                        //alert('Error in Connection');
+                                        alertWindow('Error in Connection','alert');
+                                    }
+                                });
+                            }else if(p=='Reject'){
+                                BrandingRequestController .rejectRequest(ArrayObj,$('#comments').val(),ArrayVendor,function(res,evt){
+                                    if(evt.status){
+                                        console.log(res);
+                                        
+                                        
+                                        if(res){
+                                            
+                                            alertWindow('The selected Shop name(s) has been Rejected','');
+                                            
+                                        }else{
+                                            
+                                            alertWindow('The selected Shop name(s) has failed to Reject','alert');
+                                            
+                                            
+                                        }  
+                                        
+                                        
+                                        
+                                    }else{
+                                        //alert('Error in Connection');
+                                        alertWindow('Error in Connection','alert');
+                                    }
+                                    
+                                });
+                                
+                                
+                            }
+                            
+                            
+                            
+                            
+                            $('.blockwindow1').remove();
+                            $('.approval').remove();
+                            //window.location.reload();
+                        });
+                        $('.appcnc').click(function(){
+                            $('.blockwindow1').remove();
+                            $('.approval').remove();
+                        });
+                    });
+                }
+            }
+            
+            function ApproveRejectAll(ArrObj,p){
+                var isError = false;
+                var ShopName='';
+                var isFirst=true;
+                for(var x in ArrObj){
+                    
+                    
+                    if((ArrObj[x].vend == undefined || ArrObj[x].vend == '') && ArrObj[x].select){
+                        //alert(ArrObj[x].ShopName);
+                        
+                        isError=true;
+                        if(isFirst){
+                            ShopName= ArrObj[x].ShopName;
+                            isFirst=false;
+                        }
+                        else
+                        {
+                            ShopName+=', '+ArrObj[x].ShopName;    
+                        }
+                        
+                    }
+                }
+                if(isError)
+                {
+                    alertWindow('Please select the vendor for '+ShopName);
+                }
+                else
+                {
+                    
+                    var onComment;
+                    if(p=='Approve'){
+                        onComment='Approval';
+                    }else{
+                        onComment='Rejection';
+                    }
+                    
+                    $(document).ready(function(){
+                        $('body').append('<div class="blockwindow1"></div> <div class="approval col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor: pointer;" class="glyphicon glyphicon-remove appcnc" ></span> <span style="float:left;font-weight: bold;font-size: 16px;">Approval/Rejection Detail</span> </div> </div><div style="width:100%;padding: 5px 10px;">  <h4 style="text-align:left;padding-left:10px;">Comments :</h4> <div align="center" style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5px;" ><span id="commentsER" style="color:red;float: left;">Enter the Comments</span> <textarea class="form-control" style="resize:none;" placeholder="Enter '+onComment+' reason" id="comments" rows="5"></textarea></div> </div> <div style="border-top: 1px solid rgba(0, 0, 0, 0.11);text-align: right;padding: 10px 15px;"> <input type="button" id="sub" class="btn btn-default" value="Submit" /> <input type="button" class="btn btn-default appcnc" value="Close"> </div> </div>');
+                        $('#sub').click(function(){
+                            this.blur();
+                            var ArrayObj=[];
+                            var ArrayVendor=[];  
+                            if(p=='Reject'){
+                                
+                                
+                                if($('#comments').val().trim().length==0){
+                                    $('#commentsER').css({'display':'block'});
+                                    return;
+                                }
+                            }
+                            for(var i=0;i<ArrObj.length;i++){
+                                if(ArrObj[i].select){
+                                    console.log($('#comments').val());
+                                    ArrObj[i].comment=$('#comments').val();
+                                    ArrObj[i].action=p;
+                                    ArrayObj.push(ArrObj[i].Id);
+                                    ArrayVendor.push(ArrObj[i].vend);
+                                    
+                                }
+                            }
+                            
+                            
+                            if(p=='Approve'){
+                                
+                                BrandingRequestController .approveRequest(ArrayObj,$('#comments').val(),ArrayVendor,function(res,evt){
+                                    if(evt.status){
+                                        console.log(res);
+                                        
+                                        
+                                        if(res){
+                                            
+                                            
+                                            alertWindow('The selected Shop name(s) has been Approved','');
+                                            
+                                        }else{
+                                            
+                                            alertWindow('The selected Shop name(s) has failed to Approve','alert');
+                                            
+                                            
+                                        }  
+                                        
+                                        
+                                        
+                                    }else{
+                                        //alert('Error in Connection');
+                                        alertWindow('Error in Connection','alert');
+                                    }
+                                    
+                                });
+                            }
+                            else if(p=='Reject'){
+                                BrandingRequestController .rejectRequest(ArrayObj,$('#comments').val(),ArrayVendor,function(res,evt){
+                                    if(evt.status){
+                                        console.log(res);
+                                        
+                                        
+                                        if(res){
+                                            
+                                            alertWindow('The selected Shop name(s) has been Rejected','');
+                                            
+                                        }else{
+                                            
+                                            alertWindow('The selected Shop name(s) has failed to Reject','alert');
+                                            
+                                            
+                                        }  
+                                        
+                                        
+                                        
+                                    }else{
+                                        //alert('Error in Connection');
+                                        alertWindow('Error in Connection','alert');
+                                    }
+                                    
+                                });
+                                
+                                
+                            }
+                            
+                            $('.blockwindow1').remove();
+                            $('.approval').remove();
+                            // window.location.reload();
+                        });
+                        $('.appcnc').click(function(){
+                            $('.blockwindow1').remove();
+                            $('.approval').remove();
+                        });
+                    });
+                    
+                }
+                
+            }
+            
+            
+            
+            /******Angular CODE***************/
+            var app=angular.module('myapp',[]);
+            app.factory('Ashirwad_Fact',function($q,$log){
+                var factVar={};
+                factVar.getVertical=function(){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectVertical(function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);                        
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                                                             );
+                    return(defer.promise);                    
+                };
+                factVar.getProfile=function(){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectProfile(function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);                        
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                                                            );
+                    return(defer.promise);                    
+                };
+                factVar.getCluster=function(){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectCluster(function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);                        
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                                                            );
+                    return(defer.promise);                    
+                };
+                factVar.getVendor=function(clusList){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectVendors(clusList,function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);                        
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                                                            );
+                    return(defer.promise);                    
+                };
+                factVar.getAccount=function(){
+                    var defer=$q.defer();
+                    BrandingRequestController.getDetails(function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);                        
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                                                        );
+                    return(defer.promise);                    
+                };
+                
+                return factVar;
+            });
+            
+            
+            app.controller('myctrl',function($scope,Ashirwad_Fact){
+                $scope.Vendor=[];
+                
+                $scope.mshow=true;
+                $scope.mm=false;
+                
+                
+                
+                $scope.data=[];
+                
+                Ashirwad_Fact.getProfile().then(function(resp){
+                    console.log(resp);
+                    if(resp=='Regional Branding Manager' || resp=='System Administrator' || resp=='TL'  ){
+                        $scope.mshow=true;
+                        
+                    }else{
+                        $scope.mshow=false;
+                        $scope.mm=true;
+                    }
+                    console.log($scope.profile);
+                    
+                    
+                });
+                
+                
+                
+                Ashirwad_Fact.getAccount().then(function(ress){
+                    console.log('branksfh'+ress);
+                    //alert(ress);
+                    debugger;
+                    var tempcluster=[];
+                    var tempSubmitter=[];
+                    
+                    var newReq=ress.newrequest;
+                    var oldReq=ress.oldrequest;
+                    var appro=ress.approval;
+                    var vendor=ress.vendor;
+                    
+                    for(var i=0;i<newReq.length;i++){
+                        var temp=new Object();
+                        temp.submittedById=newReq[i].Submitted_By__c;
+                        temp.btype=newReq[i].Branding_Type__c;
+                        temp.CreatedBy=newReq[i].CreatedBy;
+                        temp.clusterId=newReq[i].Shop_Name__r.APPL_Taluk__c;
+                        temp.dealercategory=newReq[i].Type__c;
+                        temp.vend=newReq[i].User1__c;
+                        if(temp.btype=='Recce'){
+                            temp.mediaType='*Not Applicable*';
+                        }else{    
+                            temp.mediaType=newReq[i].Media_Type__c;
+                        }
+                        var submitter = {};
+                        
+                        
+                        /****Previous Record History*********/
+                        temp.Pbtype='';
+                        temp.Pmtype=''; 
+                        
+                        for(var j=0;j<oldReq.length;j++){
+                            if(oldReq[j].Shop_Name__c==newReq[i].Shop_Name__c){
+                                temp.Pmtype=oldReq[j].Branding_Type__c==null?'':oldReq[j].Branding_Type__c; 
+                                temp.Pmtype=oldReq[j].Media_Type__c==null?'':oldReq[j].Media_Type__c;
+                                
+                            }
+                        }
+                        
+                        if(temp.Pbtype.length==0){
+                            temp.Pbtype=temp.btype;
+                        }
+                        if(temp.Pmtype.length==0){
+                            temp.Pmtype=temp.mediaType;
+                        }
+                        
+                        /*********Approval/REjection/Pending Table*********/
+                        temp.Approve=[];
+                        for(var j=0;j<appro.length;j++){
+                            
+                            if(appro[j].TargetObjectId==newReq[i].Id){
+                                temp.Approve.push(appro[j]);
+                            }
+                        }
+                        debugger;
+                        var submitterTempObj=new Object();
+                        if(!JSON.stringify(tempSubmitter).includes(newReq[i].Submitted_By__c)){
+                            
+                            submitterTempObj.sname=newReq[i].Submitted_By__r.Name;//Vendor__r.Name;
+                            submitterTempObj.sid=newReq[i].Submitted_By__c;//Vendor__r.Id;
+                            tempSubmitter.push(submitterTempObj);
+                            
+                        }
+                        /*Cluster Code*/
+                        if(tempcluster.length==0){
+                            //alert('cluster name'+newReq[i].Shop_Name__r.APPL_Taluk__r.Cluster__c);
+                            tempcluster.push(newReq[i].Shop_Name__r.APPL_Taluk__r.Cluster__c);
+                        }else{
+                            var cc=0;
+                            angular.forEach(tempcluster,function(it,ind){
+                                if(it==newReq[i].Shop_Name__r.APPL_Taluk__r.Cluster__c){
+                                    cc=cc+1;
+                                }
+                            });
+                            if(cc==0){
+                                tempcluster.push(newReq[i].Shop_Name__r.APPL_Taluk__r.Cluster__c);
+                            }
+                        } 
+                        
+                        var tempdate = new Date(newReq[i].CreatedDate);
+                        temp.CreatedDate= '' +tempdate.getDate() +'/'+( tempdate.getMonth()+1) + '/'+tempdate.getFullYear();
+                        temp.cluster=newReq[i].Cluster__c;                                                                        
+                        temp.isEscalated=newReq[i].Escalated_To_Branding_Head__c;
+                        if(temp.isEscalated){
+                            temp.isEscalated = 'Yes';
+                        }else{
+                            temp.isEscalated = ' ';
+                        }
+                        
+                        
+                        temp.Id=newReq[i].Id;
+                        debugger;
+                        //alert('json'+JSON.stringify(newReq[i].Shop_Name__r.Name));
+                        temp.ShopName=newReq[i].Shop_Name__r.Name;
+                        temp.ShopId=newReq[i].Shop_Name__r.Id;
+                        temp.rtype=newReq[i].Request_Type__c;
+                        temp.vtype=newReq[i].Vertical_type__c;
+                        temp.ShopImg=newReq[i].Shop_Name__r.Website;
+                        
+                        if( temp.ShopImg==undefined){
+                            temp.ShopImg='{!URLFOR($Resource.Photo_not_Available_Image)}';
+                        }
+                        temp.select=false;       
+                        temp.action='';
+                        temp.comment='';
+                        temp.status= newReq[i].Branding_Approved_Rejected__c;
+                        
+                        if(newReq[i].Shop_Name__r.Primary_Contact_Person_Name__c!=undefined){
+                            temp.contactName=newReq[i].Shop_Name__r.Primary_Contact_Person_Name__c;
+                        }else{
+                            temp.contactName='*Not Available*';
+                        }
+                        
+                        temp.contactMob=newReq[i].Shop_Name__r.Contact_Number_Mobile__c;
+                        temp.contactPhone='';
+                        if(newReq[i].Shop_Name__r.Contact_Number_Phone_1__c!=undefined){
+                            temp.contactPhone=newReq[i].Shop_Name__r.Contact_Number_Phone_1__c;
+                        }                        
+                        temp.contact=''+temp.contactMob;                                         
+                        var tempdatesubmit=new Date(newReq[i].Submit_For_Aprroval_Date__c);
+                        temp.submitforApproval= '' +tempdatesubmit.getDate() +'/'+( tempdatesubmit.getMonth()+1) + '/'+tempdatesubmit.getFullYear();                      
+                        temp.PinNo='';
+                        if(newReq[i].Shop_Name__r.PIN_Code__c!=undefined){
+                            temp.PinNo=newReq[i].Shop_Name__r.PIN_Code__c;
+                        }
+                        temp.State='';
+                        if(newReq[i].Shop_Name__r.State__c!=undefined){
+                            temp.State=newReq[i].Shop_Name__r.State__c;
+                        }
+                        temp.District='';
+                        if(newReq[i].Shop_Name__r.District__c!=undefined){
+                            temp.District=newReq[i].Shop_Name__r.District__c;
+                        }
+                        temp.city='';
+                        if(newReq[i].Shop_Name__r.City__c!=undefined){
+                            temp.city=newReq[i].Shop_Name__r.City__c;
+                        }
+                        temp.StreetAddress='';
+                        if(newReq[i].Shop_Name__r.Street_Address__c!=undefined ){
+                            temp.StreetAddress=newReq[i].Shop_Name__r.Street_Address__c;
+                        }
+                        temp.address=''+temp.StreetAddress+','+temp.city+','+temp.State+','+temp.District+','+temp.PinNo+'';
+                        
+                        $scope.data.push(temp);
+                        console.log($scope.data);
+                        
+                    }
+                    $scope.submitter=[];
+                    $scope.submitter.push('Select Submitter');
+                    angular.forEach(tempSubmitter,function(it,ind){
+                        //alert('Cluster name'+it);
+                        $scope.submitter.push(it);
+                    });
+                    
+                    for(var i=0;i<$scope.data.length;i++){
+                        $scope.data[i].vlist=[];
+                        var tt=new Object();
+                        tt.vid='';
+                        tt.vname='None';
+                        $scope.data[i].vlist.push(tt);
+                        for(var j=0;j<vendor.length;j++){   
+                            // alert(vendor[j].Vendor_Cluster__c.toLowerCase());
+                            //  alert($scope.data[i].cluster.toLowerCase());
+                            // if(vendor[j].Vendor_Cluster__c.toLowerCase()==$scope.data[i].cluster.toLowerCase()){
+                            
+                            var zz=new Object(); 
+                            console.log("test zz id"+vendor[j].Vendor_Account__c);
+                            //console.log("test zz name"+vendor[j].Vendor_Account__r.Name);
+                            // alert(vendor[j].Vendor__r.Name);
+                            zz.vname=vendor[j].Name;//Vendor__r.Name;
+                            zz.vid=vendor[j].Id;//Vendor__r.Id;
+                            $scope.data[i].vlist.push(zz); 
+                            console.log("test zz"+JSON.stringify(zz));
+                            // }
+                        } 
+                        
+                    }
+                    console.log($scope.data);                                      
+                    var lstclus=[];                       
+                    console.log($scope.data);
+                    $scope.k=$scope.data;                    
+                    console.log('*************');
+                    console.log(tempcluster);            
+                    $scope.cluster=[];
+                    $scope.fcluster=[];
+                    $scope.cluster.push('Select Cluster');
+                    $scope.fcluster.push('Select Cluster');
+                    angular.forEach(tempcluster,function(it,ind){
+                        //alert('Cluster name'+it);
+                        $scope.cluster.push(it);
+                        $scope.fcluster.push(it);
+                    });
+                    
+                });
+                
+                console.log($scope.data);
+                
+                $scope.fChangeHandler=function(){
+                    
+                      $scope.k=[];
+                    
+                    var applyFilter = false;
+                    if(($scope.fclus != 'Select Cluster' && $scope.fclus != undefined && $scope.fclus != '') && applyFilter == false){
+                        applyFilter = true;
+                    }
+                    if(($scope.fsubmitter != 'Select Submitter' && $scope.fsubmitter != undefined && $scope.fsubmitter != '') && applyFilter == false){
+                        applyFilter = true;
+                        }
+                     if(($scope.fenddate != undefined && $scope.fenddate != ''&& $scope.fstrdate != undefined && $scope.fstrdate != '') && applyFilter == false){
+                        applyFilter = true;
+                        }
+                    if(applyFilter == false){
+                        $scope.k = $scope.data;
+                        }
+                    else{
+                        for(var i=0;i<$scope.data.length;i++){
+                            var flag=false;
+                            if($scope.fclus!='Select Cluster' && $scope.fclus!=undefined && $scope.fclus!=''){                           
+                                if($scope.data[i].cluster!=$scope.fclus){
+                                    // $scope.k.push($scope.data[i]);
+                                    flag=true;
+                                }
+                                
+                            }
+                            if($scope.fsubmitter!='Select Submitter' && $scope.fsubmitter!=undefined && $scope.fsubmitter!=''){                           
+                                if($scope.data[i].submittedById!=$scope.fsubmitter){
+                                    // $scope.k.push($scope.data[i]);
+                                    flag=true;
+                                }
+                                
+                            }
+                         
+                            if($scope.fstrdate!=undefined && $scope.fstrdate!=''&& $scope.fenddate!=undefined && $scope.fenddate!=''){ 
+                                var submittedDate=$scope.data[i].submitforApproval.split('/');
+                                var selDate=new Date(submittedDate[2],submittedDate[1]-1,submittedDate[0],00,00,00,00);
+                                 if(!(selDate>=$scope.fstrdate && selDate<=$scope.fenddate )){
+                                    // $scope.k.push($scope.data[i]);
+                                    flag=true;
+                                }
+                                
+                            }
+                            if(flag==false)
+                            {     $scope.data[i].select=false;  
+                                      $scope.k.push($scope.data[i]); 
+                                    }
+                            
+                        }           
+                    }
+                    
+                };
+                $scope.search=function(){
+                    console.log($scope.nam);
+                    console.log($scope.clus);
+                    $scope.k=[];
+                    if($scope.nam.length==0){
+                        $scope.k=$scope.data;
+                    }else{
+                        for(var i=0;i<$scope.data.length;i++){
+                            if($scope.data[i].ShopName.toLowerCase().startsWith($scope.nam.toLowerCase())){
+                                
+                                if($scope.data[i].cluster==$scope.clus){
+                                    $scope.k.push($scope.data[i]);
+                                }
+                                
+                            }
+                            
+                        }           
+                    }
+                    
+                };
+                
+                /****************************************ISHAQUE EDITED*********************************/
+                $scope.approve=function(obj,p){
+                    ApproveReject(obj,p);
+                    
+                };
+                $scope.reject=function(obj,p){
+                    ApproveReject(obj,p);
+                };
+                
+                $scope.seeall=function(){
+                    console.log($scope.data);
+                };
+                $scope.approveall=function(p){
+                    var count=0;
+                    for(var i=0;i<$scope.data.length;i++){
+                        if($scope.data[i].select){
+                            count++;
+                        }
+                    }
+                    if(count==0){
+                        //alert('please select Shop');
+                        alertWindow('No Shop is selected. Please select the Shop(s).','alert');
+                        return;
+                    }
+                    ApproveRejectAll($scope.data,p);
+                };
+                $scope.rejectall=function(p){
+                    var count=0;
+                    for(var i=0;i<$scope.data.length;i++){
+                        if($scope.data[i].select){
+                            count++;
+                        }
+                    }
+                    if(count==0){
+                        //alert('please select Shop');
+                        alertWindow('No Shop is selected. Please select the Shop(s).','alert');
+                        return;
+                    }
+                    ApproveRejectAll($scope.data,p);
+                };
+                $scope.selectall=function(p){
+                    debugger;
+                    var count=0;
+                    for(var i=0;i<$scope.k.length;i++){
+                        
+                          $scope.k[i].select = true;
+                        
+                    }
+                    // $scope.k.push($scope.data[i]); 
+                    
+                };
+                /***************************************************************************************/
+                
+                $scope.fan=function(z){
+                    $(document).ready(function(){
+                        
+                        $('body').append('<div class="mainblock"></div> <div class="main"> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor: pointer;" class="glyphicon glyphicon-remove dcnc"  onclick="cnc()"></span> <span style="float:left;font-weight: bold;font-size: 16px;">'+z.ShopName+'</span> </div> </div><div style="width:100%;padding: 25px 20px;min-height:200px;"> <div class="slds-grid slds-wrap"><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2"> <img src="'+z.ShopImg+'" class="img-responsive" style="border-radius:5px;height:150px;border: 1px solid rgba(0, 255, 243, 0.25);"/> </div><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2"> <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked"> <tr> <td class="tdheader">BDM </td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.CreatedBy.Name+'</td> </tr> <tr> <td class="tdheader">Contact Name</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.contactName+'</td> </tr> <tr> <td class="tdheader">Contact No</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.contact+'</td> </tr> <tr> <td class="tdheader">Brand Type</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.btype+'</td> </tr> <tr> <td class="tdheader">Dealer Category</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.dealercategory+'</td> </tr> <tr> <td class="tdheader">Status</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.status+'</td> </tr></table> </div></div> </div>  <div class="slds-grid slds-wrap"><div style="width:100%;min-height:100px;"><label style="font-weight:bold;font-size:14px;padding-bottom:2px">Address :</label><label style="font-weight:lighter;font-size:14px;padding-bottom:2px;padding-left:10px;">'+z.address+'</label><br/> <!--<div style="width:100%;">--><div class="slds-grid slds-wrap"><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 ">Last branding request on : '+z.CreatedDate+' </div> <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2">Last request submitted by BDM : '+z.submitforApproval+'</div></div> <div class="slds-grid slds-wrap"><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2">Previous Brand Type : '+z.Pbtype+' </div><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2">Previous Media Type:'+z.Pmtype+' </div></div></div> <div id="approval" style="margin:20px;"></div></div><div style="border-top: 1px solid rgba(0, 0, 0, 0.11);text-align: right;padding: 10px 15px;"> <input type="button" class="cls_btn" value="Close" onclick="cnc()"> </div> </div>');
+                        
+                        if(z.Approve.length>0){
+                            $('#approval').append('<center><h3>History</h3></center> <div align="center"> <table class="table" align="center"> <thead><td>Action</td><td>Date</td><td>Comments</td><td>Action taken by</td></thead> <tbody id="apbody"> </tbody> </table> </div>');
+                            for(var i=0;i<z.Approve.length;i++){
+                                var ttdate = new Date(z.Approve[i].CompletedDate);
+                                var zz= '' +ttdate.getDate() +'/'+( ttdate.getMonth()+1) + '/'+ttdate.getFullYear();
+                                var comm='';
+                                if(z.Approve[i].StepsAndWorkitems[0].Comments!=undefined){
+                                    comm=z.Approve[i].StepsAndWorkitems[0].Comments;
+                                }
+                                $('#apbody').append('<tr><td>'+z.Approve[i].Status+'</td><td>'+zz+'</td><td>'+comm+'</td><td>'+z.Approve[i].LastActor.Name+'</td></tr>');
+                            }
+                        }
+                    });
+                };
+                
+            });
+            
+            $(document).ready(function(){
+                $('body').keyup(function(e){
+                    
+                    if(e.keyCode==27){
+                        $('.mainblock').remove();
+                        $('.main').remove();
+                    }
+                });
+            });
+            </script>
+            
+            
+            
+            <!-- ApproveReject Script-->
+            <script>
+            $(document).ready(function(){
+                $('#appcnc').click(function(){
+                    $('.blockwindow1').remove();
+                    $('.approval').remove();
+                });
+                
+            });
+            </script>
+            
+            <script language="javascript" type="text/javascript">
+            function cnc(){
+                this.blur();
+                
+                $(document).ready(function(){
+                    $('.mainblock').remove();
+                    $('.main').remove(); 
+                });
+                
+            }
+            </script> 
+            <body ng-app="myapp" ng-controller="myctrl">
+                <div class="slds-scope">
+                    <div class="bs-example" data-example-id="inverted-navbar" > 
+                        <div class="slds-page-header">
+                            <div class="slds-media">
+                                <div class="slds-media__body">
+                                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="" style="float:left">
+                                        <img src="{!$Resource.AshirvadLogoNew}"  width="130px" />
+                                    </h1>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <div  id="bs-example-navbar-collapse-9" style="float:right;margin-top:22px;"> 
+                                        <ul class="navi"> 
+                                            <li class="nav-mn">
+                                                <span class="glyphicon glyphicon-list">
+                                                    <a style="font-family:Calibri !important;" href="/apex/BrandingList">List View</a>
+                                                </span>
+                                            </li> 
+                                            <li id="li2" class="nav-mn">
+                                                <span class="glyphicon glyphicon-plus">
+                                                    <a id="link1" style="font-family:Calibri !important;" href="/apex/BrandingApproval">Branding Approval</a>
+                                                </span>
+                                            </li>
+                                            <li class="nav-mn">
+                                                <span class="glyphicon glyphicon-home">
+                                                    <a style="font-family:Calibri !important;" href="/home/home.jsp">Home</a>
+                                                </span>
+                                            </li> 
+                                        </ul>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-text-heading_medium slds-p-around_x-small">RBM Action </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="slds-grid slds-wrap">
+                        
+                        <div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_x-small" >
+                            <select id="cluster" class="slds-select " ng-model="clus" ng-options="item as item for item in cluster">
+                                
+                            </select>      
+                        </div>
+                        
+                        <div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_x-small">
+                            <div class="has-feedback">
+                                <input type="text" class="slds-input"  id="search" placeholder="Search" ng-model="nam"  ng-keyup="search()" /> 
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </div>  
+                        
+                        <div  class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_x-small"  >
+                            <button type = "button" ng-show="mshow" class = "slds-button slds-button_brand" ng-click="approveall('Approve')"> Approve All</button>
+                            <button type = "button" ng-show="mshow" class = "slds-button slds-button_brand" ng-click="rejectall('Reject')"> Reject All</button>
+                            <button type = "button" ng-show="mshow" class = "slds-button slds-button_brand" ng-click="selectall('selectAll')"> Select All</button>
+                        </div>    
+                        
+                        
+                    </div>
+                    <div class="slds-grid slds-wrap">
+                        <div  class="slds-size--1-of-1 slds-medium-size--1-of-4 slds-small-size--1-of-1 slds-large-size--1-of-4 slds-p-around_x-small"  >
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1">Start Date</label>
+                                <div class="slds-form-element__control">
+                                    <input type="date" id="text-input-date-1" ng-model='fstrdate' ng-change="fChangeHandler()"  class="slds-input" />
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div  class="slds-size--1-of-1 slds-medium-size--1-of-4 slds-small-size--1-of-1 slds-large-size--1-of-4 slds-p-around_x-small"  >
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1">End Date</label>
+                                <div class="slds-form-element__control">
+                                    <input type="date" id="text-input-date-2"  ng-model='fenddate' ng-change="fChangeHandler()" class="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="slds-size--1-of-1 slds-medium-size--1-of-4 slds-small-size--1-of-1 slds-large-size--1-of-4 slds-p-around_x-small"  >
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1">Cluster</label>
+                                <div class="slds-form-element__control">
+                                    <select id="fcluster" class="slds-select " ng-model="fclus" ng-change="fChangeHandler()" ng-options="item as item for item in fcluster">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div  class="slds-size--1-of-1 slds-medium-size--1-of-4 slds-small-size--1-of-1 slds-large-size--1-of-4 slds-p-around_x-small"  >
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1">Submitted by</label>
+                                <div class="slds-form-element__control">
+                                    <select id="submitter" class="slds-select " ng-model="fsubmitter" ng-change="fChangeHandler()" ng-options="vv.sid as vv.sname for vv in submitter">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    <div style="padding:0px;" class="col-sm-12 ">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked">
+                            <tbody>
+                                <tr  ng-repeat="p in k">
+                                    <td >
+                                        
+                                        <br/>
+                                        <img class="img-rounded" alt="{!$resource.AP_Add_Icon}" style="width:100px;height:100px;" src="{{p.ShopImg}}" />                   
+                                        <br/>
+                                        
+                                        <label for="{{p.Id}}" ng-show="mshow">
+                                            <input type="checkbox"  id="{{p.Id}}"  ng-model="p.select" ng-change="seeall()" />
+                                            <i>  </i> <span></span>
+                                        </label>
+                                        
+                                        
+                                        
+                                    </td>
+                                    <td>
+                                        <div  class="col-sm-12">
+                                            <div class="row-ins">
+                                                <span style="font-weight: bold;font-size: 25px;"> {{p.ShopName}}</span>
+                                            </div>
+                                            <div class="row-ins">
+                                                <label style=" font-weight :600;"> Sales Rep :</label> 
+                                                <span style="font-weight: 100;"> {{p.CreatedBy.Name}} </span>
+                                                <span style="font-weight:600;    text-decoration: underline">
+                                                    <a href="#"  class="popup" ng-click="fan(p)" >View Detail</a>  
+                                                </span> 
+                                            </div>
+                                            
+                                            <div class="row-ins">
+                                                <label style=" font-weight :600;">Brand Type :</label> 
+                                                <span style="font-weight: 100;">{{p.btype}}</span>
+                                            </div>
+                                            <div class="row-ins">
+                                                <label style=" font-weight :600;">Request Type :</label> 
+                                                <span style="font-weight: 100;">{{p.rtype}}</span>
+                                            </div>
+                                            <div class="row-ins">
+                                                <label style=" font-weight :600;">Vertical Type :</label> 
+                                                <span style="font-weight: 100;">{{p.vtype}}</span>
+                                            </div>
+                                            <div class="row-ins">
+                                                <label style=" font-weight :600;">Cluster :</label> 
+                                                <span style="font-weight: 100;">{{p.cluster}}</span>
+                                            </div>
+                                            
+                                            <div class="row-ins">
+                                                <span style="font-weight:100;">Last branding request on :</span> <span style="font-weight:100;color:blue;">{{p.CreatedDate}} </span>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <span  style="font-weight:100;">Last request submitted by sales rep : </span> 
+                                                <span style="font-weight:100;color:blue;"> {{p.submitforApproval}} </span>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </td>
+                                    <td>
+                                        <div >
+                                            <label>Vendor</label><br/>
+                                            <select class="slds-select"  ng-model="p.vend" ng-disabled="mm" ng-options="vv.vid as vv.vname for vv in p.vlist">
+                                                
+                                            </select>
+                                        </div>
+                                    </td>
+                                    
+                                    <td ng-show="mshow">
+                                        <div  class="col-sm-3">                           
+                                            <div class="row-in "><input type="button" onclick="this.blur()" value="Approve " class = "slds-button slds-button_brand" ng-click="approve(p,'Approve')" /></div>                    
+                                            <div class="row-in"><input type="button" onclick="this.blur()" value="Reject" class = "slds-button slds-button_brand slds-m-top_x-small" ng-click="reject(p,'Reject')"  /></div>                    
+                                        </div>        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>   
+                </div>
+            </body>
+        </html>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,891 @@
+<apex:page controller="VendorPageController" showHeader="false" sidebar="false" applyBodyTag="false" standardStylesheets="false">
+
+   
+<!--<apex:includeScript value="{!URLFOR($Resource.Ashd_angular_js)}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-sanitize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>-->
+    
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_Angular_JS_1_6_2)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_Animate_JS_1_6_2)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_Sanitize_JS_1_6_2)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_UI_Bootstrap_tpls_JS_2_5)}"/>
+    
+    
+    
+<apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_js)}"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_UI_js)}"/>
+<link href="{!URLFOR($Resource.Ashd_jquery_UI_css)}" rel="stylesheet"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_css)}" rel="stylesheet"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_theme_css)}" rel="stylesheet"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_js)}"/>
+
+
+<apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_select_js)}"/>
+<style>
+
+
+
+ body{font-family: Calibri!important;}
+.navbar-inverse{background-color:#19a8db !important;background-image: -webkit-linear-gradient(top,#19a8db,#0ebdf7 100%); color:#FFF !important; border-radius:0px !important;padding:7px; }
+.navbar-nav{float:right;}
+.navbar-inverse .navbar-nav>li>a{color:#FFF !important;}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{border-color:#0ebdf7 !important;}
+.navbar{margin-bottom:0px !important;border:0px #FFF none}
+.jumbotron{margin:0px 0px !important; padding:10px !important}
+
+ .nav-mn{color:#FFF !important; font-size:16px !important;padding-right:10px;margin-top:17px;}
+ .nav-mn a {color:#FFF !important;}
+ .nav-mn a:hover{text-decoration:none}
+#msg{
+    display:none;
+}
+<!--body{
+    background-color:#ebebe0!important;
+}-->
+thead{
+    background-color:#ebebe0!important;
+}
+.bbc{
+padding:10px;
+    background-color:#ffffff!important;
+}
+.bodyy{
+    width:100%;
+   
+    
+}
+.tablebody,tr,{
+    background-color:#ffffff!important;
+    height:100%!important;
+    width:100%!important;
+}
+.mainBlock{
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:1;
+    background-color:#000000;
+    opacity:.3;
+}
+.main{
+    z-index:1!important;
+    background-color:#ffffff!important;
+    height:500px!important;
+    top:10%!important;
+    border:2px solid #19a8db !important;
+    border-radius:2px!important;
+    
+}
+.alertfullwindow{
+    height:100%!important;
+    width:100%!important;
+    left:0!important;
+    top:0!important;
+    position:fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+    z-index:2;
+}
+
+.alertcontent{
+            padding:0px;
+                top: 35%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid ##e3e2e2;
+                border-radius:5px;
+                z-index: 2;
+        }
+        
+.confirmBlock{
+            padding: 0px;
+            top: 30%;
+            background-color: #ffffff;
+            position: fixed;
+            border: 2px solid #e3e2e2;
+            border-radius: 5px;
+            z-index: 2;
+        }
+.blockwindow{
+    height:100%!important;
+    width:100%!important;
+    left:0!important;
+    top:0!important;
+    position:fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+}
+.ImageWindow{
+    
+    
+    position:fixed!important;
+    top:15%!important;
+    z-index:1!important;
+    background-color:#ffffff!important;                    
+                    margin-bottom:10%;
+                    border-radius: 5px;
+                    padding: 0;
+                min-width:450px!important;
+}
+.upddetail{
+    
+    
+    position:fixed!important;
+    top:15%!important;
+    z-index:1!important;
+    
+    
+    z-index: 1!important;
+                    
+                    margin-bottom:10%;
+                
+                    background-color: #ffffff!important;
+                    border-radius: 5px;
+                    padding: 0;
+}
+.upddetailBar{
+    background-color:#2471A3!important;
+    height:25px!important;
+}
+
+
+.circleBlock{
+    height:100%!important;
+    width:100%!important;
+    left:0!important;
+    top:0!important;
+    position:fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+}
+#circle{
+    border: 15px solid white!important;
+        border-radius: 50%!important;
+    width: 60px!important;
+    height: 60px!important;
+    position: fixed!important;
+    top: 40%!important;
+    left: 45%!important;
+    z-index: 1!important;
+    border-left-color:#19a8db!important;
+    
+}
+</style>
+<script>
+    var ImageURL="{!$Label.AttachmentURL}";
+
+    var reloadbol=false;
+    var alertblock=true;
+    console.log(ImageURL);
+
+        function alertWindow(msg,pic){
+            var htmcode='';
+            var suc='';
+          
+           if(pic=='alert'){
+               htmcode='<span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span><b style="font-family:Calibri !important;">Alert</b>';
+           }else {
+            htmcode='<span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span>';
+            suc='padding-bottom:20px;';
+           }
+           $(document).ready(function(){
+               alertblock=false;
+                $('#submit').blur();
+                $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="padding:20px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);'+suc+'" >'+htmcode+'<span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;">'+msg+'</label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="btn btn-default acnc" value="Close" /></div></div>');
+                $('.acnc').click(function(){
+                    alertblock=true;
+                    $('#block').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+                    if(reloadbol){
+                        window.location.reload();
+                    }
+            });
+            
+           });
+        }   
+    
+    var app=angular.module('myApp',['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+    var id='';
+    var obj;
+    var no;
+    var bol;
+    var sc='';
+        $(document).ready(function(){
+             $('body').keyup(function(e){
+            
+                 if(e.keyCode==27){
+                     //if(alertblock){
+                          $('.blockwindow').remove();
+                          $('.upddetail').remove();
+                          $('.ImageWindow').remove();
+                          $('.alertcontent').remove();
+                    // }
+                 }
+             });
+        });
+    
+    function displayPic(evt){
+             //console.log('zuzuzuzu');
+                $(document).ready(function(){
+                    $('#ban').prop('src',evt.target.src);                    
+                });
+            }
+    
+    function blockWindow(obj){
+    console.log(obj);
+                $(document).ready(function(){
+                    console.log(ImageURL);
+                    $('body').append('<div class="blockwindow"></div> <div class="ImageWindow col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor:pointer" class="glyphicon glyphicon-remove appcnc"></span> <span style="float:left;font-weight: bold;font-size: 16px;">Image Window</span> </div> </div> <div style="width:100%;padding: 5px 10px;text-align:center;"> <h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">'+obj.shopname+'</h4> <div align="center" style="width:30%;float:left;vertical-align: bottom;bottom: 30px;position: absolute;"margin-bottom:10px;> <div style="float:left;width:50%;"> Before <img alt="Not Uploaded" onmouseover="displayPic(event)" src="'+ImageURL+obj.docc2+'" style="height:50px;width:100%;border:1px solid #000000;border-radius:2px;margin:2px;"/> </div> <div style="float:right;width:50%;"> After <img alt="Not Uploaded" onmouseover="displayPic(event)" src="'+ImageURL+obj.docc1+'" style="height:50px;width:100%;border-radius:2px;margin:2px;border:1px solid #000000;"/> </div> </div> <div style="width: 70%;height: 80%;float:right;margin-right: -2%;margin-bottom:30px;"> <img alt="Not Uploaded" id="ban" src="'+ImageURL+obj.docc2+'" style="width: 80%;border-radius:2px;margin:2px;border:1px solid #000000;height: 260px;" /> </div> </div> </div>');   
+                     $('.appcnc').click(function(){
+                
+                    $('.blockwindow').remove();
+                    $('.ImageWindow').remove();
+                    
+                });    
+               });
+            }   
+    
+    /**DOCUMENT Upload Check***/
+    function blockwindow(p,z,n){
+        obj=p;
+        no=n;
+        sc='';
+        bol=true;
+        //console.log('doc1 '+obj.doc1);
+        //console.log('docc1 '+obj.docc1);
+        //console.log('doc2 '+obj.doc2);
+        //console.log('docc2 '+obj.docc2);
+        //console.log('url1 '+obj.url1);
+        //console.log('url2 '+obj.url2);
+        if(no==0){
+        
+           if(obj.doc1!='' && obj.docc1!=undefined ){
+               //console.log('if1');
+               bol=false;
+               sc=''+obj.doc1;
+               //console.log(sc);
+               obj.tk=true;
+           }else if(obj.doc1=='' && obj.docc1!=undefined ){
+               sc='/servlet/servlet.FileDownload?file='+obj.docc1;
+               //console.log('if2');
+               //console.log(sc);
+           }else if(obj.doc1!='' && obj.docc1==undefined){
+               //console.log('If3');
+               //console.log(sc);
+               sc=''+obj.doc1;
+               obj.tk=true;
+           } 
+           //console.log(sc);
+        }else if(no==1){
+            if(obj.doc2!='' && obj.docc2!=undefined ){
+               console.log('if1');
+               bol=false;
+               sc=''+obj.doc2;
+               console.log(sc);
+               obj.tk=true;
+           }else if(obj.doc2=='' && obj.docc2!=undefined ){
+               sc='/servlet/servlet.FileDownload?file='+obj.docc2;
+               console.log('if2');
+               console.log(sc);
+               console.log(obj.docc2);
+           }else if(obj.doc2!='' && obj.docc2==undefined){
+               //console.log('If3');
+               //console.log(sc);
+               sc=''+obj.doc2;
+               obj.tk=true;
+           } 
+            //console.log(sc); 
+        }
+        $(document).ready(function(){
+        
+            $('body').append('<div class="blockwindow"></div> <div class="upddetail col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right; cursor:pointer;" onclick="cnc()" class="glyphicon glyphicon-remove"></span> <span style="float:left;font-weight: bold;font-size: 16px;">File Upload Window ['+z+']</span> </div> </div> <div style="width:100%;padding: 5px 10px;"> <div style="text-align:center;width:100%;"> <input class="form-control" type="file" id="ff" onchange="getImage()" /><span id="msg" style="color:red;float:left"></span> </div> <div align="center" style="margin-top:5px;text-align:left;"> <br/> <label>Shop Name :</label>'+p.shopname+' </div> <div align="center"s style="margin-bottom:10px;" > <img src="'+sc+'" id="img" alt="Upload Image" style="width:200px;height:200px;border:1px solid #19a8db;border-radius:2px;" /> </div> </div> <div style="border-top: 1px solid rgba(0, 0, 0, 0.11);text-align: right;padding: 10px 15px;"> <input type="button" class="btn btn-default" value="Upload" onclick="upd()"/> <input type="button" class="btn btn-default"  onclick="cnc()" value="Close"> </div> </div>');
+            //$('body').append('<div class="mainBlock"></div><div class="col-sm-6 col-sm-offset-3 main"><div style="padding-top: 30px;padding-left: 20px;"><h1>'+z+'</h1><label style="margin-right:20px;">Shop Name :</label>'+p.shopname+'<br/><label style="margin-right:20px;">Contact Name:</label>'+p.cname+'<br/><br/><div align="center" style="padding:30px;"><input onclick="this.blur();" type="file" accept="image/*" id="ff" onchange="getImage()"/><br/><img src="'+sc+'" width="275px" height="200px;" id="img"/><br/><input style="margin-top:10px;margin-bottom:10px;" type="button" value="Upload" onclick="upd()"/><input style="margin-top:10px;margin-bottom:10px;" type="button" value="Cancel" onclick="cnc()"/></div></div></div>');
+            //$('body').append('<div class="blockwindow"></div> <div class="col-sm-4 col-sm-offset-4 upddetail"> <div class="row upddetailBar"> <label style="float:left;color:#ffffff;font-family:helvetica;font-size:15px;padding-left:5px;">File Upload Window ['+z+']</label><label id="appcnc"style="float:right;color:#ffffff;font-size:20px;padding-right:5px;" onclick="cnc()">X</label> </div> <div style="text-align:center;width:100%;"> <input class="form-control" type="file" id="ff" onchange="getImage()" /> <div align="center" style="margin-top:5px;text-align:left;"> <br/> <label>Shop Name :</label>'+p.shopname+' </div> </div> <br/> <div class="col-sm-10 col-sm-offset-2"> <img src="'+sc+'" id="img" alt="Upload Image" style="width:inherit;height:200px;border:1px solid #19a8db;border-radius:2px;" /> </div> <div style="margin-top:5px;text-align:center; "> <input type="button" style="margin:10px;" class="btn btn-default" value="Upload" onclick="upd()"/> <input type="button" style="margin:10px;" class="btn btn-default" value="Cancel" id="updcnc" onclick="cnc()"/> </div> </div> </div>');
+            id=p.id;
+        });
+    }
+    var bf='';
+    var af='';
+    var ff;
+    function getImage(){
+        var img=document.getElementById('img');
+        ff=document.getElementById('ff');
+        var fr=new FileReader();
+        fr.onload=function(evt){
+            
+            bf=evt.target.result;
+            img.setAttribute('src',bf);
+        }
+        fr.readAsDataURL(ff.files[0]);
+    }
+    function cnc(){
+        this.blur();
+        $(document).ready(function(){
+          $('.blockwindow').remove();
+          $('.upddetail').remove();
+      });
+    }
+    
+    
+    function upd(){
+    this.blur();
+    $(document).ready(function(){
+        var ftype=['.jpg','.png','.jpeg'];
+        
+        
+        
+        
+        if(document.getElementById('ff').value.length==0){
+            //alert('Please choose Image first');
+            //alertWindow('Please choose image first','alert');
+            $('#msg').css({'display':'block'});
+            $('#msg').html('Please choose image first');
+            return;
+        }
+        var ftbol=false;
+        for(var i=0;i<ftype.length;i++){
+            var k=ff.files[0].name.substring(ff.files[0].name.lastIndexOf('.'),ff.files[0].name.length);
+            //console.log(k);
+            if(k.toLowerCase()==ftype[i]){
+                ftbol=true;
+                break;
+            }
+        }
+        if(!ftbol){
+            //alert('Invalid File Type please upload *.jpg,*.png format  file');
+            //alertWindow('Invalid File Type please upload *.jpg,*.png format  file','alert');
+            $('#msg').css({'display':'block'});
+            $('#msg').html('Invalid file type please upload *.jpg,*.png format  file');
+            return; 
+        }
+        
+        
+        
+        
+        if(((ff.files[0].size/1024)/1024)>1){
+            //alert('Size Error Must Be less than 1Mb');
+            //alertWindow('Size Error Must Be less than 1Mb','alert');
+            $('#msg').css({'display':'block'});
+            $('#msg').html('Image Size should be less than 1Mb');
+            return;
+        }
+        
+        
+        reloadbol=true;
+           $(document).ready(function(){
+               var ci=1;
+               $('body').append('<div class="circleBlock"></div><div id="circle"></div>');
+               loadingCircle();
+               function loadingCircle(){
+                var cir=document.getElementById('circle');
+                    if(ci==360){
+                        ci=0;
+                    }
+                
+                    cir.style.transform='rotate('+ci+'deg)';
+                    ci++;
+                
+                setTimeout(loadingCircle,1);
+              }
+           });
+        
+        var VenBrand=new Object();
+            VenBrand.BrandId=obj.id;
+         
+        
+        
+        
+        obj.tk=true;
+        if(no==0){
+            obj.doc1=bf;
+            obj.docfmt1=k;
+            VenBrand.afterDoc=obj.doc1;
+            VenBrand.afterDocExt=obj.docfmt1;
+            VenBrand.afterDocId='';
+            if(obj.docc1!=undefined){
+                VenBrand.afterDocId=obj.docc1;
+            }
+            reloadbol=false;
+            VendorPageController.uploadImage(VenBrand,false,function(res,evt){
+                        $(document).ready(function(){
+                           $('.circleBlock').remove();
+                           $('#circle').remove();
+                       });
+            //console.log(evt);
+          //console.log(res);
+                if(evt.status){
+                    if(res!='Failed'){
+                        obj.docc1=res;
+                        alertWindow('Image of the Shop uploaded successfully.','');
+                        $('#critical_btn').removeClass('btn btn-default').addClass('btn btn-success');
+                    }else{alertWindow('Image of the Shop failed to upload.','alert');}
+                }else{
+                    alertWindow('Error in connection','alert');
+                }
+            });
+            
+        }
+       if(no==1){
+          obj.doc2=bf;
+          obj.docfmt2=k;
+          VenBrand.beforeDoc=obj.doc2;
+          VenBrand.beforeDocExt=obj.docfmt2;
+          VenBrand.beforeDocId='';
+          if(obj.docc2!=undefined ){
+             VenBrand.beforeDocId=obj.docc2;
+          }
+          reloadbol=false;
+          VendorPageController.uploadImage(VenBrand,true,function(res,evt){
+          //console.log(evt);
+          //console.log(res);
+                      $(document).ready(function(){
+                           $('.circleBlock').remove();
+                           $('#circle').remove();
+                       });
+            if(evt.status){
+                if(res!='Failed'){
+                    obj.docc2=res;
+                    $('#critical_btn2').removeClass('btn btn-default').addClass('btn btn-success');
+                    alertWindow('Image of the Shop uploaded successfully.','');
+                }else{alertWindow('Image of the Shop failed to upload.','alert');}
+            }else{
+                alertWindow('Error in connection.','alert');
+            }
+      
+         });
+      }
+      //console.log(obj);
+      
+      
+      
+          $('.blockwindow').remove();
+          $('.upddetail').remove();
+      });
+    }
+  
+
+app.factory('Ashirwad_Fact',function($q,$log){
+    var tt={};
+    tt.saveRecords=function(idlst,statlst,adoclst,bdoclst,bimagelst,aimagelst,bimagefmt,aimagefmt,boollst){
+        var defer=$q.defer();
+        VendorPageController.saveList(idlst,statlst,adoclst,bdoclst,bimagelst,aimagelst,bimagefmt,aimagefmt,boollst,function(res,evt){
+            if(evt.status){
+                
+                defer.resolve(res);
+            }else{
+                $log.error(evt.Message);
+                defer.reject(event.Message);
+            }
+             
+            },{ buffer: true, escape: false, timeout: 30000 }
+            );
+       return(defer.promise);
+    },
+    tt.getVendor=function(){
+        var defer=$q.defer();
+        VendorPageController.collectVendorBrand(function(res,evt){
+            if(evt.status){
+                
+                defer.resolve(res);
+            }else{
+                $log.error(evt.Message);
+                defer.reject(event.Message);
+            }
+             
+            },{ buffer: true, escape: false, timeout: 30000 }
+            );
+            
+        
+        return(defer.promise);
+    }
+    return tt;
+});
+    app.controller('ctrl',function($scope,Ashirwad_Fact){
+    $scope.Status=['Open','Completed','Rework'];
+           
+           Ashirwad_Fact.getVendor().then(function(resp){
+                console.log(resp);
+                $scope.data=[];
+                for(var i=0;i<resp.length;i++){
+                
+                    var temp=new Object();
+                    temp.id=resp[i].Id;
+                    temp.shopname=resp[i].Shop_Name__r.Name;
+                    temp.btype=resp[i].Branding_Type__c;
+                    temp.type=resp[i].Type__c;
+                    temp.vtype=resp[i].Vertical_type__c;
+                    temp.rtype=resp[i].Request_Type__c;
+                    temp.mediatype=resp[i].Media_Type__c;
+                    temp.cname=resp[i].Shop_Name__r.Primary_Contact_Person_Name__c;
+                    temp.mob=resp[i].Shop_Name__r.Contact_Number_Mobile__c;
+                    temp.phone=resp[i].Shop_Name__r.Contact_Number_Phone__c;
+                    temp.address=resp[i].Shop_Name__r.Street_Address__c+','+resp[i].Shop_Name__r.City__c+','+resp[i].Shop_Name__r.District__c+','+resp[i].Shop_Name__r.State__c+','+resp[i].Shop_Name__r.PIN_Code__c;                    
+                    temp.active=true;                    
+                    temp.ena=false;
+                    temp.shw=false;
+                    temp.shw1=true;
+                    temp.stat=[];
+                    temp.stat=$scope.Status;
+                    temp.vstatus=resp[i].Branding_Approved_Rejected__c;
+                    temp.ena=false;
+                    if(temp.vstatus=='Vendor Assigned-Rework'){
+                        temp.stat=['Rework','Completed'];
+                        temp.status='Rework';
+                    }else if(temp.vstatus=='Vendor Assigned'){
+                        temp.stat=['Open','Completed'];             
+                        temp.status='Open';
+                        
+                    }else if(temp.vstatus=='Request Completed and Submitted'){
+                        temp.stat=[];
+                        temp.stat.push('Submitted');
+                        temp.ena=true;
+                        temp.status= temp.stat[0];
+                        temp.ena=true;
+                        temp.shw=true;
+                        temp.shw1=false;
+                        temp.active=false;
+                   }
+                   
+                   temp.docc1='';
+                    temp.docc2='';
+                    temp.Attachments=[];
+                    temp.Attachments=resp[i].Attachments;
+                    temp.Attachments=resp[i].Attachments;
+                    if(temp.Attachments==undefined){
+                        temp.docc1='';
+                        temp.docc2='';
+                    }else if(temp.Attachments.length==1){
+                    //console.log('zuzu');
+                        var a;
+                        if(temp.Attachments[0]!=undefined){
+                            a=temp.Attachments[0].Name.toLowerCase();
+                            //console.log(a);
+                            if(a.search('before')!=-1){
+                                temp.docc2=temp.Attachments[0].Id;
+                            }else{
+                                temp.docc1=temp.Attachments[0].Id;
+                            }
+                        }
+                        
+                    }else if(temp.Attachments.length==2){
+                        var a;
+                        if(temp.Attachments[0]!=undefined){
+                            a=temp.Attachments[0].Name.toLowerCase();
+                            //console.log(a);
+                            if(a.search('before')!=-1){
+                                temp.docc2=temp.Attachments[0].Id;
+                                temp.docc1=temp.Attachments[1].Id;
+                            }else{
+                                temp.docc1=temp.Attachments[0].Id;
+                                temp.docc2=temp.Attachments[1].Id;
+                            }
+                        }
+                    }
+                    
+                    
+                    temp.doc1='';
+                    temp.docfmt1='';
+                    temp.docfmt2='';
+                    temp.doc2='';
+                    temp.url1='';
+                    temp.url2='';
+                    temp.tk=false;
+                    temp.rejectComment=resp[i].RejectComment__c;
+                    $scope.data.push(temp);
+                }
+                //console.log($scope.data);
+           });
+           
+              $scope.after=function(obj){
+          
+               $(document).ready(function(){
+                   blockwindow(obj,'After',0);
+                   //console.log($scope.data);
+               });
+               
+               
+           };
+           $scope.before=function(obj){
+               
+               $(document).ready(function(){
+                   blockwindow(obj,'Before',1);
+                   //console.log($scope.data);
+               });
+           };
+           
+           
+           
+           
+           $scope.view=function(obj){
+               blockWindow(obj);
+           }
+           
+          /**********************************************************************************/ 
+           
+           $scope.submitConfirmation=function(){
+        
+                               //alert('Submitted');
+               //console.log($scope.data);
+               var idlst=[];
+               var statlst=[];
+               var bimagelst=[];
+               var bimagefmt=[];
+               
+               var aimagelst=[];
+               var aimagefmt=[];
+               var boollst=[];
+               var adoclst=[];
+               var bdoclst=[];
+               
+              var VenBrandLst=[];
+              
+              
+              
+              var Defect=[];
+            
+            
+            
+            for(var i=0;i<$scope.data.length;i++){
+               //console.log($scope.data[i]);
+               var dtemp=new Object();
+               dtemp.name=$scope.data[i].shopname;
+               dtemp.error=true;
+               dtemp.defect=[];
+               
+               if($scope.data[i].active){
+                   //var VenBrand=new Object();
+                   //VenBrand.BrandId=$scope.data[i].id;
+                
+               
+                   
+                   idlst.push($scope.data[i].id);
+                   if($scope.data[i].status=='Open'){
+                       statlst.push('Vendor Assigned');
+                       //VenBrand.Status='Vendor Assigned';
+                   }else if($scope.data[i].status=='Completed'){
+                       var VenBrand=new Object();
+                       VenBrand.BrandId=$scope.data[i].id;
+                       if($scope.data[i].docc2.length!=18){
+                            dtemp.defect.push(' Before');
+                            dtemp.error=false;
+                        
+                           //alert('Please insert image for '+$scope.data[i].shopname );
+                           //return;
+                        }
+                       if($scope.data[i].docc1.length!=18){
+                            dtemp.defect.push(' After');
+                            dtemp.error=false;
+                        }
+                        
+                        
+                       statlst.push('Request Completed and Submitted');
+                       VenBrand.Status='Request Completed and Submitted';
+                       VenBrandLst.push(VenBrand);
+                   }else{
+                       statlst.push('Vendor Assigned-Rework');
+                       //VenBrand.Status='Vendor Assigned-Rework';
+                   }
+                   
+                   if(!dtemp.error){
+                        Defect.push(dtemp);
+                   }
+                   //VenBrandLst.push(VenBrand);
+                   
+                 
+                }
+                
+            }
+            
+            
+            if(Defect.length>0){
+                var ERROR='<h5><b>Please upload Image for the following shop(s):</b></h5><br/><table><tr> ';
+                        for(var i=0;i<Defect.length;i++){
+                            ERROR+='<td style="font-weight:100;">'+Defect[i].name+'</td>'+'<td style="font-weight:100;">-</td>'+'<td style="font-weight:100;">'+ Defect[i].defect+'</td></tr>';
+                        }
+                        ERROR+='</table>';
+                    
+                        alertWindow(ERROR,'alert');
+
+                return;
+            }
+            if(VenBrandLst.length==0){
+                alertWindow('Please complete atleast one request to submit.','alert');
+                return;
+            }       
+        
+       
+        
+        $(document).ready(function(){
+            $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div> <div class="col-sm-4 col-sm-offset-4 confirmBlock"> <div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);"> <span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span> <b style="font-family:Calibri !important;">Confirm Submission</b> <span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span> </div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left"> <h5><b>Are you sure you want to submit all Requests ?</b></h5> </label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"> <input id="yes" type="button" class="btn btn-default acnc" value="Yes"> <input id="no" type="button" class="btn btn-default acnc" value="No"> </div> </div>');
+        
+            $('#yes').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                
+                
+                
+                $scope.submit(VenBrandLst);
+                //return true;
+            });
+            $('.acnc').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('#no').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('body').keyup(function(evt){
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+        });
+    
+    };
+         
+           
+           
+           $scope.submit=function(VenBrandLst){
+          
+           
+              
+               $(document).ready(function(){
+                   var ci=1;
+                   $('body').append('<div class="circleBlock"></div><div id="circle"></div>');
+                   loadingCircle();
+                   function loadingCircle(){
+                    var cir=document.getElementById('circle');
+                        if(ci==360){
+                            ci=0;
+                        }
+                    
+                        cir.style.transform='rotate('+ci+'deg)';
+                        ci++;
+                    
+                    setTimeout(loadingCircle,1);
+                  }
+               });
+               
+               
+               
+                   //Ashirwad_Fact.saveRecords(idlst,statlst,adoclst,bdoclst,bimagelst,aimagelst,bimagefmt,aimagefmt,boollst).then(function(resp){
+                   if(VenBrandLst.length>0){
+                   
+                   
+                       VendorPageController.submitData(VenBrandLst,function(res,evt){
+                            $(document).ready(function(){
+                               $('.circleBlock').remove();
+                               $('#circle').remove();
+                           });
+                           if(evt.status){
+                           
+                               reloadbol=true;
+                               if(res==true){
+                               
+                                   //alert('Saved');
+                                   alertWindow('Updated Branding Requests has been submitted successfully.','');
+                               }else{
+                                   //alert('Not Saved!!');
+                                   alertWindow('Updated Shop is not submitted successfully.','alert');
+                               }
+                           }else{
+                                alertWindow('Error in connection.','alert');
+                           }
+                       });
+                  }else{
+                        $(document).ready(function(){
+                               $('.circleBlock').remove();
+                               $('#circle').remove();
+                           });
+                      alertWindow('Please update or list is empty or already submitted.','alert');   //change this message here
+                  }
+                 
+           };
+           
+    
+    });
+   
+</script>
+
+<body ng-app="myApp" ng-controller="ctrl">
+<div class="bs-example" data-example-id="inverted-navbar" > 
+<nav class="navbar navbar-inverse"> 
+<div class="container-fluid"> 
+<div class="navbar-header"><img src="{!$Resource.AshirvadTranspaarentLogo}" height="56px" width="143px" /></div> 
+
+   
+ <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9"> 
+        <ul class="nav navbar-nav"> 
+             <!--<li ><a style="font-weight:bolder;" href="/apex/BrandingList">List View</a></li>-->
+             <li class="nav-mn">
+                   <span class="glyphicon glyphicon-list">
+                   <a style="font-family: Calibri!important;"  href="/apex/VendorList">Vendor List</a>
+                   </span>
+             </li> 
+             <li class="nav-mn">
+                   <span class="glyphicon glyphicon-home">
+                   <a style="font-family: Calibri!important;"  href="/home/home.jsp">Home</a>
+                   </span>
+             </li> 
+       </ul>
+       <div   style="font-family:Calibri !important;margin-top:15px;width:90%;color:#FFF;font-size:20px;text-align:center;">Vendor Branding </div>
+     
+
+ </div>
+  </div> 
+  </nav>
+  
+   </div>
+   <div style="width:98%;margin-left:1%;background-color:#ffffff;height:88%;overflow:auto;position:absolute">
+       <div class="bodyy bbc" align="right" height="20px"><input type="button" class="btn btn-info" onclick="this.blur();" ng-click="submitConfirmation()" value="Submit"/></div>
+       <div class="bodyy">
+<table class="table">
+    <thead>
+      
+        <th>Shop Name</th><th>Branding Type</th><th>Vertical Type</th><th>Request Type</th><th>Media Type</th><th>Product Type</th><th>Shop Address</th><th>Contact Name</th><th>Contact Number</th><th>Branding_Status</th><th colspan="2">Upload Shop Image</th>
+      
+    </thead>
+    <tbody id="tablebody">
+      <tr ng-repeat="p in data" id="{{p.id}}">
+          <td style="width:15%;" >{{p.shopname}}</td>
+          <td style="width:10%;" >{{p.btype}}</td>
+          <td style="width:10%;" >{{p.vtype}}</td>
+          <td style="width:10%;" >{{p.rtype}}</td>
+          <td style="width:10%;">{{p.mediatype}}</td>
+          <td style="width:10%;">{{p.type}}</td>
+          <td style="width:30%;">{{p.address}}</td>
+          <td style="width:15%;">{{p.cname}}</td>
+          <td style="width:10%;">{{p.mob}}<br/>{{p.phone}}</td>
+          <td style="width:10%;">                    
+              <div style="display:flex;">                  
+                  <span uib-tooltip="{{p.rejectComment}}" ng-show="p.status=='Rework'"   class="glyphicon glyphicon-info-sign" style="color:red;width:20px;float:left;"></span>                      
+                  <select style="float:right;" class="form-control" ng-disabled="p.ena" ng-model="p.status" ng-options="stat for stat in p.stat">
+           
+                 </select>
+             </div>
+          </td>
+           <td ng-show="p.shw1" style="width:3%;"><label class="btn btn-default" ng-disabled="" id='critical_btn2' onclick="this.blur();"  ng-click="before(p)">Before</label></td>
+          <td ng-show="p.shw1" style="width:3%;"><label  class="btn btn-default" ng-disabled="" id='critical_btn' onclick="this.blur();" ng-click="after(p)">After</label></td> 
+          <td colspan="2" align="center" ng-show="p.shw" style="width:6%;"><label class="btn btn-default" onclick="this.blur()" ng-click="view(p)">View Images</label></td>
+      </tr>
+    
+    </tbody>
+  
+</table>
+</div>
+   </div>
+   
+</body>
+
+</apex:page>

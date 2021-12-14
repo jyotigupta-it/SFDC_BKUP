@@ -1,0 +1,435 @@
+<apex:page standardController="Promotion__c" showHeader="false" extensions="CreatePromotionMemberClass1">
+  <!-- <apex:form >
+         <apex:pageBlock >
+       
+         <apex:pageBlockSection id="conc2" rendered="false"> 
+                <apex:pageBlockTable value="{!contacts1}" var="c" >
+                <apex:column headerValue="Mobile">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                                 
+                    <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                     <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+               
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Architects Meet' || prm.Type__c=='Builders Meet' || prm.Type__c=='Engineers Meet')}">    
+                <apex:pageBlockTable value="{!contacts1}" var="c">               
+                    <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                   <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                   
+                    <apex:column headerValue="Visit Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Visit_Type__c}" required="true"/>
+                    </apex:column> 
+                     <apex:column headerValue="Visit Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Visit_Type__c}"/>
+                    </apex:column> 
+                    <apex:column headerValue="Firm Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Firm_Name__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Firm Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Firm_Name__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.State__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.State__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="District" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.District__c}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="District" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.District__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.City__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.City__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Phone" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Phone__c}"/>
+                    </apex:column>
+                     <apex:column headerValue="Phone" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Phone__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Status" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Status__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Status" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Status__c}"/>
+                    </apex:column> 
+                    <apex:column headerValue="Email" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Email__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Email" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Email__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Pin" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.PIN_Code__c}" required="true"/>
+                    </apex:column> 
+                    <apex:column headerValue="Pin" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.PIN_Code__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection rendered="{!prm.Type__c=='Boarers Meet'}">    
+                <apex:pageBlockTable value="{!contacts1}" var="c">               
+                    <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                   <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="Dealer" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.State__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.State__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="District" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.District__c}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="District" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.District__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.City__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.City__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Visit Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Visit_Type__c}" required="true"/>
+                    </apex:column> 
+                     <apex:column headerValue="Visit Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Visit_Type__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+           
+            <apex:pageBlockSection rendered="{!prm.Type__c=='Dealers Meet'}">    
+                <apex:pageBlockTable value="{!contacts1}" var="c">               
+                     <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                   <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                     <apex:column headerValue="State" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.State__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.State__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="District" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.District__c}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="District" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.District__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.City__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.City__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Visit Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Visit_Type__c}" required="true"/>
+                    </apex:column> 
+                     <apex:column headerValue="Visit Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Visit_Type__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Farmers Meet' || prm.Type__c=='Mechanic Meet')}">    
+                <apex:pageBlockTable value="{!contacts1}" var="c">               
+                     <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                   <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="Dealer" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                     <apex:column headerValue="State" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.State__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.State__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="District" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.District__c}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="District" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.District__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.City__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.City__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Visit Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Visit_Type__c}" required="true"/>
+                    </apex:column> 
+                     <apex:column headerValue="Visit Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Visit_Type__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+             <apex:pageBlockSection rendered="{!(prm.Type__c=='Plumber Meet' || prm.Type__c=='Dealers Salesman Meet'|| prm.Type__c='Dealers Factory Visit')}">    
+                <apex:pageBlockTable value="{!contacts1}" var="c">               
+                     <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                   <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.State__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.State__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="District" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.District__c}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="District" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.District__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.City__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.City__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Visit Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Visit_Type__c}" required="true"/>
+                    </apex:column> 
+                     <apex:column headerValue="Visit Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Visit_Type__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Exhibition' || prm.Type__c=='Tractor Show' || prm.Type__c=='Jeep Campaign') }">    
+                <apex:pageBlockTable value="{!contacts1}" var="c">               
+                     <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                   <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                     <apex:column headerValue="State" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.State__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.State__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="District" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.District__c}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="District" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.District__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.City__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.City__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Visit Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Visit_Type__c}" required="true"/>
+                    </apex:column> 
+                     <apex:column headerValue="Visit Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Visit_Type__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Plumber/Mechanic/Engineers Factory Visit'  ||  prm.Type__c=='Shandy Show' || prm.Type__c=='Mini Meet') }">    
+                <apex:pageBlockTable value="{!contacts1}" var="c">      
+                    <apex:column headerValue="Party Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Party_Type__c}"/>
+                    </apex:column>
+                   <apex:column headerValue="Party Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Party_Type__c}" required="true"/>
+                    </apex:column>         
+                     <apex:column headerValue="Name" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Name}"/>
+                    </apex:column>
+                   <apex:column headerValue="Name" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Name}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Dealer" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Dealer__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Distributor" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Mobile" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                     <apex:column headerValue="State" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.State__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="State" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.State__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="District" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.District__c}" required="true"/>
+                    </apex:column>
+                     <apex:column headerValue="District" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.District__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.City__c}" required="true"/>
+                    </apex:column>
+                    <apex:column headerValue="Location" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.City__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Visit Type" rendered="{!c.Name==''}">
+                        <apex:inputField value="{!c.Visit_Type__c}" required="true"/>
+                    </apex:column> 
+                     <apex:column headerValue="Visit Type" rendered="{!c.Name!=''}">
+                        <apex:outputField value="{!c.Visit_Type__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+      
+        </apex:pageblock>
+        <apex:commandButton value="Save" action="{!Save1}"/>
+        <apex:commandButton value="Cancel" action="{!Cancel}"/>
+    </apex:form> -->
+</apex:page>

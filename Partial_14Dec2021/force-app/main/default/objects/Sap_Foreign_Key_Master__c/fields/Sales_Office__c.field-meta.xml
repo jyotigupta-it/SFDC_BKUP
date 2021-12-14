@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Office__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Sales Office</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Sap_Foreign_Key_Master__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Sales Office</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Sap_Foreign_Key_Master__c</referenceTo>
+    <relationshipLabel>Sap Foreign Key Masters</relationshipLabel>
+    <relationshipName>Sap_Foreign_Key_Masters</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

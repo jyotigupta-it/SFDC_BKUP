@@ -1,0 +1,144 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="businessProposalInstance" type="DP_Detail__c"/>
+    <aura:attribute name="billingCommitmentSales" type="Sales_Projection__c"/>
+    <aura:attribute name="dealerNetworkAdditionSales" type="Sales_Projection__c"/>
+    <aura:attribute name="projectedSales" type="Business_Activity_History__c[]"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="calledFromBusinessProposal" type="boolean" default="false"/>
+    <aura:attribute name="makeReadOnly" type="boolean"/>
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+    
+    <lightning:recordEditForm aura:id="recordForm1" objectApiName="DP_Detail__c" recordTypeId="{!v.businessProposalInstance.RecordTypeId}">
+        <!-- Error message -->
+        <lightning:messages />
+        <!-- Fields -->
+        <lightning:accordion aura:id="accordion" activeSectionName="A" allowMultipleSectionsOpen="true">
+            <lightning:accordionSection name="A" label="In Case you are appointed as our distributer:">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="In_your_showroom_how_much_space_you_can__c" fieldName="In_your_showroom_how_much_space_you_can__c" 
+                                              value="{!v.businessProposalInstance.In_your_showroom_how_much_space_you_can__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="Size_of_Dedicated_Godown_for_Ashirvad__c" fieldName="Size_of_Dedicated_Godown_for_Ashirvad__c" 
+                                              value="{!v.businessProposalInstance.Size_of_Dedicated_Godown_for_Ashirvad__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="Sales_Staff_You_Can_Allocate_to_Ashirvad__c" fieldName="Sales_Staff_You_Can_Allocate_to_Ashirvad__c" 
+                                              value="{!v.businessProposalInstance.Sales_Staff_You_Can_Allocate_to_Ashirvad__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="Working_Capital__c" fieldName="Working_Capital__c" 
+                                              value="{!v.businessProposalInstance.Working_Capital__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="Can_You_Increase_the_Capital__c" fieldName="Can_You_Increase_the_Capital__c" 
+                                              value="{!v.businessProposalInstance.Can_You_Increase_the_Capital__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="Can_you_Provide_Bank_Gu__c" fieldName="Can_you_Provide_Bank_Gu__c" 
+                                              value="{!v.businessProposalInstance.Can_you_Provide_Bank_Gu__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="Billing_Software_Using__c" fieldName="Billing_Software_Using__c" 
+                                              value="{!v.businessProposalInstance.Billing_Software_Using__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="No_Objection_in_using_Secondary_Software__c" fieldName="No_Objection_in_using_Secondary_Software__c" 
+                                              value="{!v.businessProposalInstance.No_Objection_in_using_Secondary_Software__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_7-of-7 slds-medium-size_2-of-7 slds-large-size_2-of-7  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField aura:id="Proposed_date_to_start_with_Ashirvad__c" fieldName="Proposed_date_to_start_with_Ashirvad__c" 
+                                              value="{!v.businessProposalInstance.Proposed_date_to_start_with_Ashirvad__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                </div>
+            </lightning:accordionSection>
+        </lightning:accordion>
+    </lightning:recordEditForm>
+    
+    <lightning:recordEditForm aura:id="recordForm2" objectApiName="Sales_Projection__c" recordTypeId="{!v.billingCommitmentSales.RecordTypeId}">
+        <!-- Error message -->
+        <lightning:messages />
+        <!-- Fields -->
+        <lightning:accordion aura:id="accordion" activeSectionName="B" allowMultipleSectionsOpen="true">
+             <lightning:accordionSection name="B" label="Billing Commitment In Lacs">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Month_1_Rs_in_Lac__c" fieldName="Month_1_Rs_in_Lac__c" 
+                                              value="{!v.billingCommitmentSales.Month_1_Rs_in_Lac__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Month_2_Rs_In_Lacks__c" fieldName="Month_2_Rs_In_Lacks__c" 
+                                              value="{!v.billingCommitmentSales.Month_2_Rs_In_Lacks__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Month_3_Rs_In_Lacks__c" fieldName="Month_3_Rs_In_Lacks__c" 
+                                              value="{!v.billingCommitmentSales.Month_3_Rs_In_Lacks__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Month_4_Rs_In_Lacks__c" fieldName="Month_4_Rs_In_Lacks__c" 
+                                              value="{!v.billingCommitmentSales.Month_4_Rs_In_Lacks__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Month_5_Rs_In_Lacks__c" fieldName="Month_5_Rs_In_Lacks__c" 
+                                              value="{!v.billingCommitmentSales.Month_5_Rs_In_Lacks__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Month_6_Rs_In_Lacks__c" fieldName="Month_6_Rs_In_Lacks__c" 
+                                              value="{!v.billingCommitmentSales.Month_6_Rs_In_Lacks__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                </div>
+            </lightning:accordionSection>
+        </lightning:accordion>
+    </lightning:recordEditForm>
+
+    <lightning:recordEditForm aura:id="recordForm3" objectApiName="Sales_Projection__c" recordTypeId="{!v.dealerNetworkAdditionSales.RecordTypeId}">
+        <!-- Error message -->
+        <lightning:messages />
+        <!-- Fields -->
+        <lightning:accordion aura:id="accordion" activeSectionName="C" allowMultipleSectionsOpen="true">
+            <lightning:accordionSection name="C" label="Dealer Network Addition">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Dealer_Network_Addition__c" fieldName="Dealer_Network_Addition__c" 
+                                              value="{!v.dealerNetworkAdditionSales.Dealer_Network_Addition__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Dealer_Network_Addition_2__c" fieldName="Dealer_Network_Addition_2__c" 
+                                              value="{!v.dealerNetworkAdditionSales.Dealer_Network_Addition_2__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Dealer_Network_Addition_3__c" fieldName="Dealer_Network_Addition_3__c" 
+                                              value="{!v.dealerNetworkAdditionSales.Dealer_Network_Addition_3__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Dealer_Network_Addition_4__c" fieldName="Dealer_Network_Addition_4__c" 
+                                              value="{!v.dealerNetworkAdditionSales.Dealer_Network_Addition_4__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Dealer_Network_Addition_5__c" fieldName="Dealer_Network_Addition_5__c" 
+                                              value="{!v.dealerNetworkAdditionSales.Dealer_Network_Addition_5__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-6 slds-medium-size_2-of-6 slds-large-size_2-of-6  slds-p-left_medium slds-p-right_medium">
+                        <lightning:inputField required="true" aura:id="Dealer_Network_Addition_6__c" fieldName="Dealer_Network_Addition_6__c" 
+                                              value="{!v.dealerNetworkAdditionSales.Dealer_Network_Addition_6__c}" disabled="{!v.makeReadOnly}"/>
+                    </div>
+                </div>
+            </lightning:accordionSection>
+        </lightning:accordion>
+    </lightning:recordEditForm>
+
+    <!-- <lightning:recordEditForm aura:id="recordForm4" objectApiName="DP_Detail__c" recordTypeId="{!v.businessProposalInstance.RecordTypeId}">
+        <lightning:messages /> -->
+        <lightning:accordion aura:id="accordion" activeSectionName="D" allowMultipleSectionsOpen="true">
+            <lightning:accordionSection name="D" label="Projected Sales in lacs (Product Wise)">
+                <aura:iteration items="{!v.projectedSales}" var="project" indexVar="index">
+                    <c:currentBusinessActivityAndHistory businessInstance="{!project}" rowIndex="{!index}" calledFromBusinessProposal="true" makeOnlyRead="{!v.makeReadOnly}"/>
+                </aura:iteration>
+            </lightning:accordionSection>
+        </lightning:accordion>
+    <!-- </lightning:recordEditForm> -->
+</aura:component>

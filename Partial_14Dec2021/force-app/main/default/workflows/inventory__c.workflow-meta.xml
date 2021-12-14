@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Closing_Stock_update</fullName>
+        <field>Closing_Stocks__c</field>
+        <formula>Closing_Stocks__c - (PRIORVALUE(opening_stock__c) - opening_stock__c)</formula>
+        <name>Closing Stock update (-)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Closing_Stock_update_pos</fullName>
+        <field>Closing_Stocks__c</field>
+        <formula>Closing_Stocks__c + (opening_stock__c - PRIORVALUE(opening_stock__c))</formula>
+        <name>Closing Stock update (+)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Sinkup change in Opening stock with closing stock %28%2B%29</fullName>
+        <actions>
+            <name>Closing_Stock_update_pos</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(ISCHANGED(opening_stock__c ),PRIORVALUE(opening_stock__c) &lt; opening_stock__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sinkup change in Opening stock with closing stock %28-%29</fullName>
+        <actions>
+            <name>Closing_Stock_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(ISCHANGED(opening_stock__c ),PRIORVALUE(opening_stock__c) &gt; opening_stock__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

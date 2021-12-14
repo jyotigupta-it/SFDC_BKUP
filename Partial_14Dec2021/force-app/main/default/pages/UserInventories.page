@@ -1,0 +1,183 @@
+<apex:page sidebar="false" StandardController="inventory__c" extensions="UserInventory" recordSetVar="inventoryList">
+<apex:form >
+<apex:pageMessages id="errorMsg"></apex:pageMessages>
+<apex:pageBlock ><br/>
+<apex:outputPanel >
+<center><font size="6"><apex:outputLabel value="Collateral Inventory of {!Userdata}" style="font-size:66%;"> </apex:outputLabel></font></center><br/>
+<b><apex:outputLabel value="Search By User" rendered="{!renderSearch}"/></b><br/><br/>
+<apex:inputField label="User" value="{!inventory__c.Owner_Account__c}"  id="searchData" rendered="{!renderSearch}" />
+<apex:commandButton value="Search" action="{!search}" rendered="{!renderSearch}" /> <br/><br/>
+
+<b><apex:outputLabel value="Search By Product, Product Type, Product Code, Item Code" rendered="{!renderSearch}"/></b><br/><br/>
+<apex:inputText value="{!searchText}"  id="searchInventory" rendered="{!renderSearch}" />
+<apex:commandButton value="Search" action="{!searchInventory}" rendered="{!renderSearch}" /> 
+
+<div align="right"><apex:commandButton value="My Inventory" action="{!getCollaterals}" rendered="{!renderSearch}"/></div>
+<br/></apex:outputPanel>
+<!--div style="overflow: scroll; height:150px;"-->
+<apex:pageBlockSection title="Product Collaterals" columns="1" rendered="{!prodrender}">
+<apex:PageBlockTable id="myPanel" value="{!productCollateralList}" var="pitem" rowClasses="odd,even"  border="1" cellspacing="0" cellpadding="20" columnsWidth="20%,20%,30%,20%,10%,10%,10%,10%">
+<apex:column headerValue="Product Id">
+<apex:outputLink value="/{!pitem.Id}" target="_blank">{!pitem.name}</apex:outputLink>
+</apex:column>
+<apex:column headerValue="Product">
+<apex:outputfield value="{!pitem.Product__c}"/>
+</apex:column>
+<apex:column headerValue="Product Description">
+<apex:outputfield value="{!pitem.Product_Description__c}"/>
+</apex:column>
+<apex:column headerValue="Language">
+<apex:outputfield value="{!pitem.Color_Language_Size__c}"/>
+</apex:column>
+<apex:column headerValue="Opening Stock">
+<apex:outputField value="{!pitem.opening_stock__c}"/>
+</apex:column>
+<apex:column headerValue="Used Stock">
+<apex:outputField value="{!pitem.Used_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Stock in Transit">
+<apex:outputField value="{!pitem.Received_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Closing Stock">
+<apex:outputField value="{!pitem.Closing_Stocks__c}"/>
+</apex:column>
+</apex:PageBlockTable>
+<!--<apex:outputPanel id="myButtons" style="float:right;">
+<apex:commandButton action="{!BeginningPro}" title="Beginning" value="<<" disabled="{!disablePreviousPro}" reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!PreviousPro}" title="Previous" value="<" disabled="{!disablePreviousPro}" reRender="myPanel,myButtons"/>       
+<apex:commandButton action="{!NextPro}" title="Next" value=">" disabled="{!disableNextPro}"  reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!EndPro}" title="End" value=">>" disabled="{!disableNextPro}" reRender="myPanel,myButtons"/> 
+</apex:outputPanel>-->
+
+</apex:pageBlockSection><br/>
+<!--div style="overflow: scroll; height:150px;"-->
+<apex:pageBlockSection title="Gifts" columns="1" rendered="{!giftrender}">
+<apex:PageBlockTable id="myPanel" value="{!giftList}" var="pitem" rowClasses="odd,even"  border="1" cellspacing="0" cellpadding="20" columnsWidth="20%,20%,20%,10%,20%,10%,10%,10%,10%">
+<apex:column headerValue="Gift ID">
+<apex:outputLink value="/{!pitem.Id}" target="_blank">{!pitem.name}</apex:outputLink>
+</apex:column>
+<apex:column headerValue="Product">
+<apex:outputfield value="{!pitem.Product__c}"/>
+</apex:column>
+<apex:column headerValue="Product Description">
+<apex:outputfield value="{!pitem.Product_Description__c}"/>
+</apex:column>
+<apex:column headerValue="Item Code">
+<apex:outputfield value="{!pitem.Item_Code__c}"/>
+</apex:column>
+<apex:column headerValue="Color">
+<apex:outputfield value="{!pitem.Color_Language_Size__c}"/>
+</apex:column>
+<apex:column headerValue="Opening Stock">
+<apex:outputField value="{!pitem.opening_stock__c}"/>
+</apex:column>
+<apex:column headerValue="Used Stock">
+<apex:outputField value="{!pitem.Used_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Stock in Transit">
+<apex:outputField value="{!pitem.Received_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Closing Stock">
+<apex:outputField value="{!pitem.Closing_Stocks__c}"/>
+</apex:column>
+</apex:PageBlockTable>
+
+<!--<apex:outputPanel id="myButtons" style="float:right;">
+<apex:commandButton action="{!BeginningGif}" title="Beginning" value="<<" disabled="{!disablePreviousGif}" reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!PreviousGif}" title="Previous" value="<" disabled="{!disablePreviousGif}" reRender="myPanel,myButtons"/>       
+<apex:commandButton action="{!NextGif}" title="Next" value=">" disabled="{!disableNextGif}"  reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!EndGif}" title="End" value=">>" disabled="{!disableNextGif}" reRender="myPanel,myButtons"/> 
+</apex:outputPanel>-->
+
+</apex:pageBlockSection><br/>
+<!--div style="overflow: scroll; height:150px;"-->
+<apex:pageBlockSection title="Samples" columns="1" rendered="{!samprender}">
+<apex:PageBlockTable id="myPanel" value="{!sampleList}" var="pitem" rowClasses="odd,even"  border="1" cellspacing="0" cellpadding="20" columnsWidth="10%,20%,30%,20%,10%,10%,10%,10%">
+<apex:column headerValue="Sample ID">
+<apex:outputLink value="/{!pitem.Id}" target="_blank">{!pitem.name}</apex:outputLink>
+</apex:column>
+<apex:column headerValue="Product">
+<apex:outputfield value="{!pitem.Product__c}"/>
+</apex:column>
+<apex:column headerValue="Product Description">
+<apex:outputfield value="{!pitem.Product_Description__c}"/>
+</apex:column>
+<apex:column headerValue="Size">
+<apex:outputfield value="{!pitem.Color_Language_Size__c}"/>
+</apex:column>
+<apex:column headerValue="Opening Stock">
+<apex:outputField value="{!pitem.opening_stock__c}"/>
+</apex:column>
+<apex:column headerValue="Used Stock">
+<apex:outputField value="{!pitem.Used_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Stock in Transit">
+<apex:outputField value="{!pitem.Received_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Closing Stock">
+<apex:outputField value="{!pitem.Closing_Stocks__c}"/>
+</apex:column>
+</apex:PageBlockTable>
+
+<!--<apex:outputPanel id="myButtons" style="float:right;">
+<apex:commandButton action="{!BeginningSamp}" title="Beginning" value="<<" disabled="{!disablePreviousSamp}" reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!PreviousSamp}" title="Previous" value="<" disabled="{!disablePreviousSamp}" reRender="myPanel,myButtons"/>       
+<apex:commandButton action="{!NextSamp}" title="Next" value=">" disabled="{!disableNextSamp}"  reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!EndSamp}" title="End" value=">>" disabled="{!disableNextSamp}" reRender="myPanel,myButtons"/> 
+</apex:outputPanel>-->
+
+</apex:pageBlockSection><br/>
+<!--div style="overflow: scroll; height:150px;"-->
+<apex:pageBlockSection title="Package Materials" columns="1" rendered="{!packrender}">
+<apex:PageBlockTable id="myPanel" value="{!packageMaterialList}" var="pitem" rowClasses="odd,even"  border="1" cellspacing="0" cellpadding="20" columnsWidth="10%,20%,30%,20%,10%,10%,10%,10%">
+<apex:column headerValue="Package ID">
+<apex:outputLink value="/{!pitem.Id}" target="_blank">{!pitem.name}</apex:outputLink>
+</apex:column>
+<apex:column headerValue="Product">
+<apex:outputfield value="{!pitem.Product__c}"/>
+</apex:column>
+<apex:column headerValue="Product Description">
+<apex:outputfield value="{!pitem.Product_Description__c}"/>
+</apex:column>
+<apex:column headerValue="Size">
+<apex:outputfield value="{!pitem.Color_Language_Size__c}"/>
+</apex:column>
+<apex:column headerValue="Opening Stock">
+<apex:outputField value="{!pitem.opening_stock__c}"/>
+</apex:column>
+<apex:column headerValue="Used Stock">
+<apex:outputField value="{!pitem.Used_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Stock in Transit">
+<apex:outputField value="{!pitem.Received_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Closing Stock">
+<apex:outputField value="{!pitem.Closing_Stocks__c}"/>
+</apex:column>
+</apex:PageBlockTable>
+
+<!--<apex:outputPanel id="myButtons" style="float:right;">
+
+<apex:outputPanel id="myButtons" style="float:right;">
+<apex:commandButton action="{!BeginningPack}" title="Beginning" value="<<" disabled="{!disablePreviousPack}" reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!PreviousPack}" title="Previous" value="<" disabled="{!disablePreviousPack}" reRender="myPanel,myButtons"/>       
+<apex:commandButton action="{!NextPack}" title="Next" value=">" disabled="{!disableNextPack}"  reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!EndPack}" title="End" value=">>" disabled="{!disableNextPack}" reRender="myPanel,myButtons"/> 
+</apex:outputPanel>-->
+
+</apex:pageBlockSection>
+
+
+
+<font size="3"><div align="center"><apex:commandButton value="Next" action="{!RenderNext}" rendered="{!renderNext}"/></div></font>
+<font size="3"><div align="center"><apex:commandButton value="Previous" action="{!RenderPrevious}" rendered="{!renderPrevious}"/></div></font>
+
+<!--<apex:outputPanel id="myButtons" style="float:right;">
+<apex:commandButton action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!Previous}" title="Previous" value="<" disabled="{!disablePrevious}" reRender="myPanel,myButtons"/>       
+<apex:commandButton action="{!Next}" title="Next" value=">" disabled="{!disableNext}"  reRender="myPanel,myButtons"/>
+<apex:commandButton action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="myPanel,myButtons"/> 
+</apex:outputPanel>-->
+</apex:pageblock>
+</apex:form>
+</apex:page>

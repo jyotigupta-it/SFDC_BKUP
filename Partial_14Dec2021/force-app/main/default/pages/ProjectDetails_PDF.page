@@ -1,0 +1,380 @@
+<apex:page renderAs="pdf" applyBodyTag="false" controller="Addl_Disc_Component_Controller" extensions="GetApproval" standardStylesheets="false" applyHtmlTag="false" showHeader="false">
+  <!--<apex:attribute name="opporId" type="Id" description="Id of the opportunity" assignTo="{!oppId}"/> -->
+  <!--<apex:param value="{!$CurrentPage.parameters.opporId}" assignTo="{!oppId}" id="param1" name="opportyId"/> -->
+     <!-- -->
+    <html>
+        <head>
+             <style>
+             .Pending{
+             background: #E9AF32;
+             }
+             
+            
+                table {
+                    border-collapse: collapse;
+                     Padding: 10px;
+                     font-family: arial;
+                }
+                table, th, td {
+                    border: 1px solid black;
+                    
+                }
+                
+                td {
+                
+                    text-align:right;
+                }
+                #total {
+                    background: #FF3333;
+                }
+                .trHead {
+                    background: #C2C2A3;
+                }
+                .blueClass {
+                    background: #85D6FF;
+
+                }
+                .blueDClass {
+                    background: #5CADFF;
+                    }
+                    
+                    .blueEClass {
+                    background: #E9AF32;
+                    }
+                
+                    .trHead2 th{
+                    background: #C2C2A3;
+                    text-align: left;
+                }
+                .trCenter {
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+        
+           
+            <P align="right">
+                <apex:image id="logo" value="{!$Resource.AshirvadLogoNew}" width="100" height="60"/> <br/>
+            </P>
+            <center>
+                <h3 style="font-family: Arial Unicode MS;"><u>Request for Additional Discount</u></h3>
+            </center>
+            <p align="right" style="font-family: Arial Unicode MS; font-size: 12px; ">Date:<b>{!DAY(TODAY())}-{!MONTH(TODAY())}-{!YEAR(TODAY())}</b></p>
+             
+             <h4 style="font-family: Arial Unicode MS;"><b>SPR Status and Comments:submitted By {!OwnerName}</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px;">
+                
+             <tr class="trHead">
+                 <th>Status</th><th>Comments</th>
+                
+                </tr>
+
+               <apex:repeat var="Obj" value="{!listofApprovalNew}">
+                
+                      
+                <tr class="{!Obj.stepStatus}">       
+                    
+                 
+                    <!--  <td style="background: #18F4BC;">{!Obj.InnerCreatedDate}</td> -->
+                       <td style="background: #18F4BC;">{!Obj.stepStatus}</td>
+             
+                  <!-- <td style="background: #18F4BC;">{!Obj.actorNameStep1}</td>
+                      <td style="background: #18F4BC;">{!Obj.actorNameStep2}</td>
+                 
+                 <td style="text-align:left; background: #18F4BC;">{!Obj.actorComment1}</td> -->
+                 <td style="text-align:left; background: #18F4BC;">{!Obj.actorComment2}</td>
+                 
+                </tr>    
+                  
+                </apex:repeat>
+             
+            </table>
+           
+            <apex:repeat value="{!OppDetails}" var="op">
+            <h4 style="font-family: Arial Unicode MS;"><b>Project Details:</b></h4>
+            <table class="trHead2" style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr><th>Project Name</th><td><b>{!op.opp.Name}</b></td></tr>
+                <tr><th>Project Number</th><td>{!op.opp.Project_Number__c}</td></tr>
+                <tr><th>Project By</th><td>{!op.opp.Project_By__r.Name}</td></tr>
+                <tr><th>Project Location</th><td>{!op.opp.Project_Location__c}, {!op.opp.Street_Address__c}, {!op.opp.Project_State__c}, {!op.opp.Project_District__c}</td></tr>
+                 <tr><th>Project State</th><td> {!op.opp.State__c}</td></tr> <!--  {!op.opp.Project_State__c}-->
+                <tr><th>Project Type</th><td>{!op.opp.Project_Type__c}</td></tr>
+                <tr><th>Close Date</th><td><apex:outputText value="{0,date,MM/dd/yy}"><apex:param value="{!op.opp.CloseDate}"/> </apex:outputText></td></tr>
+                   <tr><th>Distributor Name </th><td>{!op.customerName}</td></tr>
+                <tr><th>If Contractor..Name Location</th><td></td></tr>  
+                <tr><th>No. of Bathrooms</th><td>{!op.opp.No_of_Bathrooms__c}</td></tr>  
+                 <tr><th>No. of Floors</th><td>{!op.opp.No_of_Floors__c}</td></tr>  
+                <tr><th>Probability</th><td>{!op.opp.Probability__c}%</td></tr> 
+                <tr><th>No. of Visits to Project</th><td>{!count}</td></tr>               
+            </table>
+            <br/>
+            
+             <!-- SPR old and new -->
+         
+   
+     
+          
+           
+           
+              <!--
+            <apex:pageBlock>
+            <c:new_SPR/>
+            </apex:pageBlock>
+-->
+            <!-- new SPr-->
+<h4 style="font-family: Arial Unicode MS;"><b>NEW SPR:(To Be Approved)</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>MRP</th><th>APPL STD Disc %</th><th class="blueClass">Discount to customer on MRP %</th><th>Invoice Value to customer</th><th>ORC %</th><th>Price Validity</th><th>NET Invoice value from APPL</th><th class="blueDClass">CTC</th><th>Additonal Disc on APPL Disc %</th>
+                </tr>
+
+                <apex:repeat var="opp" value="{!sprNEW }">
+                <tr>       
+                    <td><b>{!opp.oli.product2.name}</b></td>
+                    <td>{!opp.oli.Offer_MRP__c}</td>
+                    <td>{!opp.oli.APPL_STD_Discount__c}</td>
+                    <td class="blueClass">{!opp.oli.Addl_Discount_Required__c}</td>
+                    <td>{!opp.oli.Invoice_Value_to_Customer__c}</td>
+                    <td>{!opp.oli.ORC_Margin_to_Dlr_Dist__c}</td>
+                    <td>&nbsp;<apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.oli.Validity_for_the_Price__c}" /> </apex:outputText>&nbsp;</td>
+                   <td>{!opp.oli.NET_Invoice_Value_to_Distributer__c}</td>
+                    <td class="blueDClass">{!opp.oli.Total_Discount_on_MRP__c}</td>
+                    <td>{!opp.oli.Additional_Discount_on_APPL_Discount__c}</td>
+                    
+                </tr>        
+                </apex:repeat>
+                <tr class="blueDClass">
+                    <th colspan="9" align="right" >Average Disc % for All Products</th>
+                    <td >{!averageOfPro1}</td>
+                </tr>
+                    <tr id="total">
+                    <th colspan="9" align="right">Invoice Value from APPL</th>
+                    <td >{!Special_Pricing_Request_Offer}</td>
+                </tr>
+               
+            </table>
+<!-- ends here -->
+            <!--
+            <h4 style="font-family: Arial Unicode MS;"><b>Pricing Details:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>MRP</th><th>APPL STD Disc %</th><th class="blueClass">Discount to customer on MRP %</th><th>Invoice Value to customer</th><th>ORC %</th><th>Price Validity</th><th>NET Invoice value from APPL</th><th class="blueDClass">CTC</th><th>Additonal Disc on APPL Disc %</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Offer_MRP__c}</td>
+                    <td>{!pro.APPL_STD_Discount__c}</td>
+                    <td class="blueClass">{!pro.Addl_Discount_Required__c}</td>
+                   
+                    <td>{!pro.Invoice_Value_to_Customer__c}</td>
+                    <td>{!pro.ORC_Margin_to_Dlr_Dist__c}</td>
+                    <td>&nbsp;<apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Validity_for_the_Price__c}" /> </apex:outputText>&nbsp;</td>
+                    <td>{!pro.NET_Invoice_Value_to_Distributer__c}</td>
+                    <td class="blueDClass">{!pro.Total_Discount_on_MRP__c}</td>
+                    <td>{!pro.Additional_Discount_on_APPL_Discount__c}</td>
+                </tr>        
+                </apex:repeat>
+                <tr class="blueDClass">
+                    <th colspan="9" align="right" >Average Disc % for All Products</th>
+                    <td >{!op.averageOfPro}</td>
+                </tr>
+                <tr id="total">
+                    <th colspan="9" align="right">Invoice Value from APPL</th>
+                    <td >{!op.opp.Special_Pricing_Request_Offer__c}</td>
+                </tr>
+            </table>
+-->
+            <h4 style="font-family: Arial Unicode MS;"><b>Supply Details:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>Tentative Order Date</th><th>Delivery Start Date</th><th>Delivery End Date</th><th>Competitor Name</th><th>Supply Value/lot</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Tentative_Date__c}</td>
+                    <td><apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Delivery_Start_Date__c}" /> </apex:outputText></td>
+                    <td><apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Delivery_End_Date__c}" /> </apex:outputText></td>
+                    <td>{!pro.Competitor_name_Offer__c}</td>
+                    <td>{!pro.Delivery_Schedule__c}</td>
+                </tr>        
+                </apex:repeat>
+            </table>
+            
+
+            <h4 style="font-family: Arial Unicode MS; "><b>Payment Terms:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px;">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>Payment Terms</th><th>Reason</th><th>Why Additional Discount?</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td class="trCenter"><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Payment_Terms__c}</td>
+                    <td>{!pro.Reason__c}</td>
+                    <td>{!pro.Why_Additional_Discount__c}</td>
+                </tr>        
+                </apex:repeat>
+            </table>
+
+            <h4 style="font-family: Arial Unicode MS; "><b>Premium Details:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px;">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>Premium</th><th>Premium Percentage</th><th>Reason</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td class="trCenter"><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Premium__c}</td>
+                    <td>{!pro.Premium_Percentage__c}</td>
+                    <td>{!pro.Premium_Reason__c}</td>
+                </tr>        
+                </apex:repeat>
+            </table>
+            
+          <br></br>
+          <br></br>
+          <br></br>
+       
+            
+            <h4 style="font-family: Arial Unicode MS; "><b>ORC Details:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px;">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>ORC/ Margin to Dlr/Dist %</th><th>ORC_Details__c</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td class="trCenter"><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.ORC_Margin_to_Dlr_Dist__c}</td>
+                    <td>{!pro.ORC_Margin_to_Dlr_Dist__c}</td>
+                </tr>        
+                </apex:repeat>
+            </table>
+            
+            <apex:relatedList list="ProcessSteps" ></apex:relatedList>
+
+            </apex:repeat>
+           <!-- new status table -->
+  <h4 style="font-family: Arial Unicode MS;"><b>SPR Approval History:submitted By {!OwnerName}</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px;">
+                
+             <tr class="trHead">
+                 <th>CreatedDate</th><th>StepStatus</th><th>Initial Approver</th><th>Final Approver</th>
+                
+                </tr>
+
+                <apex:repeat var="Obj" value="{!listofApproval}">
+                
+                      
+                <tr class="{!Obj.stepStatus}">       
+                    
+                 
+                      <td>{!Obj.InnerCreatedDate}</td>
+                       <td>{!Obj.stepStatus}</td>
+                    
+                       
+                   
+                   <td>{!Obj.actorNameStep1}</td>
+                      <td>{!Obj.actorNameStep2}</td>
+                   <!-- <td>{!Obj.comments}</td>-->
+                  
+                    
+                 
+                    
+                    
+                </tr>    
+                  
+                </apex:repeat>
+             
+            </table>
+           <!-- 
+            <h4 style="font-family: Arial Unicode MS;"><b>Approval History Information:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px;">
+                
+             <tr class="trHead">
+                    <th>Date</th><th>Assignedto</th><th>SubmittedBy</th><th>Status</th><th>Currently Assigned to</th><th>Originally Assigned to</th>
+                
+                </tr>
+
+                <apex:repeat var="processObj" value="{!changeStatus}">
+                
+                       
+                <tr class="{!processObj.newVariable.StepStatus}">       
+                   --> 
+                    <!--keep it commented <td ><apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!processObj.ProcessInstance.CreatedDate}"/> </apex:outputText></td>-->
+                    
+<!--                       <td>{!processObj.newVariable.ProcessInstance.CreatedDate}</td>
+                      <td>{!processObj.newVariable.ProcessInstance.LastActor.name}</td>
+                      
+                   
+                   <td>{!processObj.newVariable.ProcessInstance.SubmittedBy.name}</td>-->
+                   
+                   <!--  keep it commented <td>{!processObj.ProcessInstanceStep.StepStatus}</td>
+                   <td>{!processObj.statusValue}</td>-->
+                     <!-- <td class="{!processObj.newVariable.StepStatus}">{!processObj.newVariable.StepStatus}</td>
+                   
+                       <td>{!processObj.newVariable.Actor.name}</td>            
+                       <td>{!processObj.newVariable.OriginalActor.Name}</td> -->
+                     <!-- <td>{!processObj.Comments}</td>-->
+                    
+                    
+<!--                </tr>        
+                </apex:repeat>
+             
+            </table>
+-->
+           <!--testing  -->
+                    
+<!-- old SPr-->
+<h4 style="font-family: Arial Unicode MS;"><b>OLD SPR:(Approved SPR's)</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>MRP</th><th>APPL STD Disc %</th><th class="blueClass">Discount to customer on MRP %</th><th>Invoice Value to customer</th><th>ORC %</th><th>Price Validity</th><th>NET Invoice value from APPL</th><th class="blueDClass">CTC</th><th>Additonal Disc on APPL Disc %</th>
+                </tr>
+
+                <apex:repeat var="opp" value="{!sprOLD }">
+                <tr>       
+                    <td><b>{!opp.oli.product2.name}</b></td>
+                    <td>{!opp.oli.Offer_MRP__c}</td>
+                    <td>{!opp.oli.APPL_STD_Discount__c}</td>
+                    <td class="blueClass">{!opp.oli.Addl_Discount_Required__c}</td>
+                    <td>{!opp.oli.Invoice_Value_to_Customer__c}</td>
+                    <td>{!opp.oli.ORC_Margin_to_Dlr_Dist__c}</td>
+                    <td>&nbsp;<apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.oli.Validity_for_the_Price__c}" /> </apex:outputText>&nbsp;</td>
+                   <td>{!opp.oli.NET_Invoice_Value_to_Distributer__c}</td>
+                    <td class="blueDClass">{!opp.oli.Total_Discount_on_MRP__c}</td>
+                    <td>{!opp.oli.Additional_Discount_on_APPL_Discount__c}</td>
+                    
+                </tr>        
+                </apex:repeat>
+                <tr class="blueDClass">
+                    <th colspan="9" align="right" >Average Disc % for All Products</th>
+                    <td >{!averageOfPro}</td>
+                </tr>
+                    <tr id="total">
+                    <th colspan="9" align="right">Invoice Value from APPL</th>
+                    <td >{!Special_Pricing_Request_Offer}</td>
+                </tr>
+            </table>
+<!-- ends here -->
+
+
+        
+        </body>
+            </html>
+</apex:page>

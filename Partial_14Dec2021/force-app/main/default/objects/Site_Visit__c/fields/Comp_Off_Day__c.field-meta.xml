@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comp_Off_Day__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Comp Off Day</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3 AND 4 AND 5</booleanFilter>
+        <filterItems>
+            <field>Tour_Plan1__c.Calculate_Day__c</field>
+            <operation>equals</operation>
+            <value>Sunday</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Visit_Type__c</field>
+            <operation>equals</operation>
+            <value>Holiday</value>
+        </filterItems>
+        <filterItems>
+            <field>Tour_Plan1__c.Comp_Off_Utilized__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </filterItems>
+        <filterItems>
+            <field>$User.Id</field>
+            <operation>equals</operation>
+            <valueField>Tour_Plan1__c.Tour_Program__r.OwnerId</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Date__c</field>
+            <operation>equals</operation>
+            <valueField>Tour_Plan1__c.Tour_Plans__r.Date__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Tour_Plan1__c</referenceTo>
+    <relationshipLabel>Site Visits (Comp Off Day)</relationshipLabel>
+    <relationshipName>Site_Visits1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

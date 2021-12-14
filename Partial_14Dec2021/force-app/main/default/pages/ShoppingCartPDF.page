@@ -1,0 +1,175 @@
+<!--Created By : KVP- Chakresh Verma
+*Name : ShoppingCartPDF
+*Created on :  Aug 2020
+*Description : This Vf is used for diplaying order Details after placing the order.
+-->
+
+<apex:page readOnly="true"
+           applyHtmlTag="false"    
+           sidebar="false"    
+           showHeader="false"    
+           cache="true"
+           controller="ShoppingCartPageTempController"
+           action="{!fetchProductLine}"
+           docType="html-5.0">
+    <html lang="en">
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <title>Order Details</title>
+            <apex:stylesheet value="{!URLFOR($Resource.BootStrap1)}" />
+            <apex:stylesheet value="{!URLFOR($Resource.BootStrap2)}" />
+            <script src="{!URLFOR($Resource.jQueryJs1)}"></script>
+            <script src="{!URLFOR($Resource.jQueryJs2)}"></script>
+            <script src="{!URLFOR($Resource.jQueryJs3)}"></script>
+            <apex:stylesheet value="{!URLFOR($Resource.OpPDFcss)}" />
+            <style>
+             
+            </style>
+            
+            <script>
+                function createPDF() {
+                var sTable = document.getElementById('tab').innerHTML;
+                
+                var style = "<style>";
+                style = style + "table {width: 100%;font: 17px Calibri;}";
+                style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+                style = style + "padding: 2px 3px;text-align: center;}";
+                style = style + "</style>";
+                
+                // CREATE A WINDOW OBJECT.
+                var win = window.open('', '', 'height=700,width=700');
+                
+                win.document.write('<html><head>');
+                win.document.write('<title>Profile</title>');   // <title> FOR PDF HEADER.
+                win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+                win.document.write('</head>');
+                win.document.write('<body>');
+                win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+                win.document.write('</body></html>');
+                
+                win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+                
+                win.print();
+                win.save();
+                // PRINT THE CONTENTS.
+            }
+            
+            function back(){
+                
+                backButton();
+            }
+            
+            
+            </script>
+            
+        </head>
+        
+        <body calss="body1">
+            <apex:form id="frmId">
+                <apex:actionFunction action="{!backToOrder}" name="backButton" reRender="frmId" status="counterStatus"/>
+                <apex:actionstatus id="counterStatus">
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv waiDiv" id="el_loading" >
+                            <div class="waitingHolder div1" >
+                                <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                                <span class="waitingDescription">Loading...</span>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionstatus>
+            </apex:form>
+            <div class="div2">
+                
+                <apex:image url="{!$Resource.Ashirvad_logo_updated}" styleClass="ashiImage" width="90" height="80" />
+                
+                <div class="btn-group div3" >
+                    <button class="button-success" type="button" 
+                            id="btPrint" onclick="createPDF()">
+                        Create PDF 
+                    </button>
+                    <button class="button-success" onclick="back()">Back To Order</button>
+                </div>
+                <div class="alert alert-success alignCenter" >
+                    <strong>Success!</strong> Thanks for placing the order.
+                </div>               
+            </div>
+            
+            
+            
+            
+            <div class="bs-example div4" id="tab" >
+                <table class="table" id="tableID" >
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="2" class="alignCenter">
+                                <div class="alert alert-success">
+                                    <strong>Dealer Name - </strong> {!dealerName}
+                                </div>
+                            </th>
+                            <th colspan="2" class="alignCenter">
+                                <div class="alert alert-success">
+                                    <strong>Dealer Phone - </strong>{!dealerPhone}
+                                </div>
+                            </th>
+                            
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="alignCenter">
+                                <div class="alert alert-success">
+                                    <strong>Distributor Name - </strong> {!dsitributorName}
+                                </div>
+                            </th>
+                            <th colspan="2" class="alignCenter">
+                                <div class="alert alert-success">
+                                    <strong>Distributor Mobile - </strong> {!dsitributorPhone}
+                                </div>
+                            </th>
+                            
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="alignCenter">
+                                <div class="alert alert-success">
+                                    <strong>Order Date - {!orderDateToPDF}</strong> 
+                                </div>
+                            </th>
+                            <th colspan="2" class="alignCenter">
+                                <div class="alert alert-success">
+                                    <strong>Order Time - {!orderTimeToPDF}</strong> 
+                                </div>
+                            </th>
+                            
+                            
+                        </tr>
+                        
+                        
+                        
+                        <tr>
+                            
+                            <th class="alignCenter">S.No</th>
+                            <th class="alignCenter">Product</th>
+                            <th class="alignCenter">Family</th>
+                            <th class="alignCenter">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:variable value="{!1}" var="count" />
+                        
+                        
+                        <apex:repeat value="{!createdOrder}" var="wrp">
+                            
+                            
+                            <tr>
+                                <td class="alignCenter">{!count}
+                                    <apex:variable value="{!count+1}" var="count" /> </td>
+                                <td class="alignCenter">{!wrp.Product__r.Name}</td>
+                                <td class="alignCenter">{!wrp.Product__r.Family}</td>
+                                <td class="alignCenter">{!wrp.Quantity__c}</td>
+                            </tr>
+                        </apex:repeat>          
+                    </tbody>
+                </table>
+            </div>
+        </body>
+    </html>
+</apex:page>

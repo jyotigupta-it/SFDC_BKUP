@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This page will display all the Branding shop list for BDM</description>
+    <label>Branding Shop List</label>
+    <motif>Custom4: Hexagon</motif>
+    <page>BrandingListTGM</page>
+</CustomTab>

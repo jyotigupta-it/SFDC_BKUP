@@ -1,0 +1,15 @@
+<apex:page controller="UploadKYCController" showHeader="false">
+    <apex:includeLightning />    
+    <div id="lightningComponentid"/>
+    <script>
+    $Lightning.use("c:UploadKYCApp", function() {
+        $Lightning.createComponent("c:UploadKYCComp",
+                                   {messagingSessionID:"{!$CurrentPage.Parameters.sId}",
+                                   contextUserID:"{!$CurrentPage.Parameters.uId}"},
+                                   "lightningComponentid",
+                                   function(cmp){
+                                       console.log('Display Lightning component in visualforce page');
+                                   });
+    });
+    </script>
+</apex:page>

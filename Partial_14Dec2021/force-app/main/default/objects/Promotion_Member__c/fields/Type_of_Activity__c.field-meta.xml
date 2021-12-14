@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Activity__c</fullName>
+    <description>Used in related list Account</description>
+    <externalId>false</externalId>
+    <formula>Text(Promotions2__r.Type__c)</formula>
+    <label>Type of Activity</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

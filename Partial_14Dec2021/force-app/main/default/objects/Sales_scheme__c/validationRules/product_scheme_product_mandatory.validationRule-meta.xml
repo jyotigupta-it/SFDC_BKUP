@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>product_scheme_product_mandatory</fullName>
+    <active>true</active>
+    <description>Either district or state or city</description>
+    <errorConditionFormula>AND( 
+RecordType.Name = &apos;Product scheme&apos;,
+ISPICKVAL( Product_filter_type__c, &apos;&apos;  )
+)</errorConditionFormula>
+    <errorDisplayField>Product_filter_type__c</errorDisplayField>
+    <errorMessage>Product filter is mandatory for product schemes</errorMessage>
+</ValidationRule>

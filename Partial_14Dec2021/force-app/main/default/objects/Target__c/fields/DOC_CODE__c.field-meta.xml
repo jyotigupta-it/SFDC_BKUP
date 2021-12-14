@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DOC_CODE__c</fullName>
+    <externalId>false</externalId>
+    <formula>&apos;APPL/MKT/&apos;+ Vertical_Symbol__c+&apos;/&apos;+ Left(Target_User__r.FirstName ,1)+Left( Target_User__r.LastName ,1)+&apos;-&apos;+ Payment_Number__c</formula>
+    <label>DOC CODE</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

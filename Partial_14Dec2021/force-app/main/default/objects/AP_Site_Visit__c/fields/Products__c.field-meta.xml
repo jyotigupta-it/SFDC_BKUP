@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Products__c</fullName>
+    <externalId>false</externalId>
+    <label>Products</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Air Admittance Valve</fullName>
+                <default>false</default>
+                <label>Air Admittance Valve</label>
+            </value>
+            <value>
+                <fullName>Column Pipes</fullName>
+                <default>false</default>
+                <label>Column Pipes</label>
+            </value>
+            <value>
+                <fullName>Concealed Cisterns</fullName>
+                <default>false</default>
+                <label>Concealed Cisterns</label>
+            </value>
+            <value>
+                <fullName>Concealed Valves</fullName>
+                <default>false</default>
+                <label>Concealed Valves</label>
+            </value>
+            <value>
+                <fullName>CPVC</fullName>
+                <default>false</default>
+                <label>CPVC</label>
+            </value>
+            <value>
+                <fullName>External Drainage</fullName>
+                <default>false</default>
+                <label>External Drainage</label>
+            </value>
+            <value>
+                <fullName>Grease Seperator</fullName>
+                <default>false</default>
+                <label>Grease Seperator</label>
+            </value>
+            <value>
+                <fullName>Multiquick</fullName>
+                <default>false</default>
+                <label>Multiquick</label>
+            </value>
+            <value>
+                <fullName>Sanitary System</fullName>
+                <default>false</default>
+                <label>Sanitary System</label>
+            </value>
+            <value>
+                <fullName>Silent SWR</fullName>
+                <default>false</default>
+                <label>Silent SWR</label>
+            </value>
+            <value>
+                <fullName>SWR</fullName>
+                <default>false</default>
+                <label>SWR</label>
+            </value>
+            <value>
+                <fullName>UPVC</fullName>
+                <default>false</default>
+                <label>UPVC</label>
+            </value>
+            <value>
+                <fullName>V4</fullName>
+                <default>false</default>
+                <label>V4</label>
+            </value>
+            <value>
+                <fullName>Valves (BUV &amp; BFV)</fullName>
+                <default>false</default>
+                <label>Valves (BUV &amp; BFV)</label>
+            </value>
+            <value>
+                <fullName>Waste &amp; Traps</fullName>
+                <default>false</default>
+                <label>Waste &amp; Traps</label>
+            </value>
+            <value>
+                <fullName>WCPC new order</fullName>
+                <default>false</default>
+                <label>WCPC new order</label>
+            </value>
+            <value>
+                <fullName>WCPC repeat order</fullName>
+                <default>false</default>
+                <label>WCPC repeat order</label>
+            </value>
+            <value>
+                <fullName>Agri Pipes</fullName>
+                <default>false</default>
+                <label>Agri Pipes</label>
+            </value>
+            <value>
+                <fullName>Casing Pipes</fullName>
+                <default>false</default>
+                <label>Casing Pipes</label>
+            </value>
+            <value>
+                <fullName>WST</fullName>
+                <default>false</default>
+                <label>WST</label>
+            </value>
+            <value>
+                <fullName>HDPE</fullName>
+                <default>false</default>
+                <label>HDPE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

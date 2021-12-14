@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>start_point_positive</fullName>
+    <active>true</active>
+    <errorConditionFormula>Start_point__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>Start_point__c</errorDisplayField>
+    <errorMessage>Enter positive value in start point</errorMessage>
+</ValidationRule>

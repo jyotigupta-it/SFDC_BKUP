@@ -1,0 +1,124 @@
+<apex:component controller="Component_Req_for_Disc_Template" access="global">
+    <apex:attribute name="CurrentProject" description="This is the Project Id." type="Id" assignTo="{!ThisAccId}"/>
+    <html>
+        
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="2" align="left"><b>Request for Additional Discount</b></td>
+    </tr>
+    <tr>
+        <td><b>Developer/Builder/City </b></td>
+        <td><b>{!CurrentAcc.Project_Owner_Developer_Name__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>Is our Product specified in Tender?</b></td>
+        <td><b>{!CurrentAcc.Products__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>Who is the buyer, Developer or Contractor</b></td>
+        <td><b>{!CurrentAcc.Contractor__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>If Contractor, Name and Location</b></td>
+        <td><b>{!CurrentAcc.Contractor__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>No of Bath Rooms</b></td>
+        <td><b>{!CurrentAcc.No_of_Bathrooms__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>Supplies through (Our Partner)</b></td>
+        <td><b>{!CurrentAcc.Supplying_Distributor__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>Supply Value/lot</b></td>
+        <td><b>{!CurrentAcc.Order_Value_in_Rs__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>Price validity</b></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><b>Payment Terms</b></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><b>Tentative date of order</b></td>
+        <td><b><apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                       <apex:param value="{!CurrentAcc.Expected_Date_of_Order__c}" />
+                       </apex:outputText></b>
+                       </td>
+       
+    </tr>
+    <tr>
+        <td><b>Competitor Details: Price etc</b></td>
+        <td><b>{!CurrentAcc.Competitor_s_Info__c}</b></td>
+    </tr>
+    <tr>
+        <td><b>Why this discount required?</b></td>
+        <td>></td>
+    </tr>
+    <tr>
+        <td><b>If possible please send the proof of competition Prices</b></td>
+        <td></td>
+    </tr>
+</table><br/>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="9"><b>Pricing Details</b></td>
+    </tr>
+      <tr>
+         <td><b>MRP</b></td>
+         
+         <td><b>APPL STD disc</b></td>
+          
+         <td><b>Discount to customer on MRP</b></td>
+          
+         <td><b>Discount Value</b></td>
+         
+         <td><b>ORC</b></td>
+         
+         <td><b>ORC Value</b></td>
+         
+         <td><b>NET Invoice value to distributor</b></td>
+         
+         <td><b>TOTAL Discount on MRP (CTC)</b></td>
+         
+         <td><b>Additonal Disc on APPL Disc</b></td>
+      </tr>
+       <apex:repeat value="{!LineItems}" var="o">
+    <tr>
+         
+        
+        <td><b>{!o.Order_Value__c}</b></td>
+        
+       
+        <td><b>{!o.APPL_STD_Discount__c}</b></td>  
+        
+        
+        <td><b>{!o.Disc_to_Customer_on_MRP__c}</b></td>
+       
+       
+        <td><b>{!o.Disc_to_Customer_on_MRP_Amount__c}</b></td>
+        
+       
+        <td><b>{!o.ORC_Margin_to_Dlr_Dist__c}</b></td>
+        
+       
+        <td><b>{!o.ORC_Margin_to_Dlr_Dist_Amount__c}</b></td>
+        
+        
+        <td><b>{!o.Final_Order_Value_after_Discount__c}</b></td>
+        
+       
+        <td><b>{!o.Total_Disc_on_MRP_CTC__c}</b></td>
+        
+        
+        <td><b>{!o.Addl_disc_on_APPL_STD_Disc__c}</b></td>
+
+    </tr>
+       </apex:repeat>
+</table>
+
+    </html>
+</apex:component>

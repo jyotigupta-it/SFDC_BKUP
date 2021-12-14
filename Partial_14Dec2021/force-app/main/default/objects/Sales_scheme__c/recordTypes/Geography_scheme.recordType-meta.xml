@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Geography_scheme</fullName>
+    <active>true</active>
+    <label>Geography scheme</label>
+    <picklistValues>
+        <picklist>Point_accrual_type__c</picklist>
+        <values>
+            <fullName>PER_PRODUCT</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>PRODUCT_VALUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TOTAL_BILL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Product_filter_type__c</picklist>
+        <values>
+            <fullName>PRODUCT</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>PRODUCT_CATEGORY</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

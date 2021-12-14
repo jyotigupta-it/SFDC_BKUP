@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Architects / Engineers / Consultants Factory Visit</fullName>
+        <default>false</default>
+        <label>Architects / Engineers / Consultants Factory Visit</label>
+    </customValue>
+    <customValue>
+        <fullName>Architects Meets</fullName>
+        <default>false</default>
+        <label>Architects Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Boarers Meets</fullName>
+        <default>false</default>
+        <label>Boarers Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Builders Meets</fullName>
+        <default>false</default>
+        <label>Builders Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Column Dealer / Distributor Meets</fullName>
+        <default>false</default>
+        <label>Column Dealer / Distributor Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Column Distributors / Dealers Factory Visit</fullName>
+        <default>false</default>
+        <label>Column Distributors / Dealers Factory Visit</label>
+    </customValue>
+    <customValue>
+        <fullName>Column DSM Meet / Training</fullName>
+        <default>false</default>
+        <label>Column DSM Meet / Training</label>
+    </customValue>
+    <customValue>
+        <fullName>Engineers Meets</fullName>
+        <default>false</default>
+        <label>Engineers Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Exhibition / Agri Fairs</fullName>
+        <default>false</default>
+        <label>Exhibition / Agri Fairs</label>
+    </customValue>
+    <customValue>
+        <fullName>Exhibition / Construction Fairs</fullName>
+        <default>false</default>
+        <label>Exhibition / Construction Fairs</label>
+    </customValue>
+    <customValue>
+        <fullName>Group Activity</fullName>
+        <default>false</default>
+        <label>Group Activity</label>
+    </customValue>
+    <customValue>
+        <fullName>Inshop Boarers Meets</fullName>
+        <default>false</default>
+        <label>Inshop Boarers Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Inshop Mechanic Meets</fullName>
+        <default>false</default>
+        <label>Inshop Mechanic Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Inshop Plumber Meets</fullName>
+        <default>false</default>
+        <label>Inshop Plumber Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Jeep Campaign</fullName>
+        <default>false</default>
+        <label>Jeep Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Mechanics Factory Visit</fullName>
+        <default>false</default>
+        <label>Mechanics Factory Visit</label>
+    </customValue>
+    <customValue>
+        <fullName>Mega Farmer Meets</fullName>
+        <default>false</default>
+        <label>Mega Farmer Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Mega Mechanic Meets</fullName>
+        <default>false</default>
+        <label>Mega Mechanic Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Mega Plumbers Meets</fullName>
+        <default>false</default>
+        <label>Mega Plumbers Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Mini Farmer Meet</fullName>
+        <default>false</default>
+        <label>Mini Farmer Meet</label>
+    </customValue>
+    <customValue>
+        <fullName>Naaka Meets</fullName>
+        <default>false</default>
+        <label>Naaka Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Onsite Plumber Meets</fullName>
+        <default>false</default>
+        <label>Onsite Plumber Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Plumbers Factory Visit</fullName>
+        <default>false</default>
+        <label>Plumbers Factory Visit</label>
+    </customValue>
+    <customValue>
+        <fullName>Plumbing Dealer / Distributor Meets</fullName>
+        <default>false</default>
+        <label>Plumbing Dealer / Distributor Meets</label>
+    </customValue>
+    <customValue>
+        <fullName>Plumbing Dealers Factory Visits</fullName>
+        <default>false</default>
+        <label>Plumbing Dealers Factory Visits</label>
+    </customValue>
+    <customValue>
+        <fullName>Plumbing DSM Meet/Training</fullName>
+        <default>false</default>
+        <label>Plumbing DSM Meet/Training</label>
+    </customValue>
+    <customValue>
+        <fullName>Projects DSM Meet / Training</fullName>
+        <default>false</default>
+        <label>Projects DSM Meet / Training</label>
+    </customValue>
+    <customValue>
+        <fullName>Shandy Shows</fullName>
+        <default>false</default>
+        <label>Shandy Shows</label>
+    </customValue>
+    <customValue>
+        <fullName>Tractor Show</fullName>
+        <default>false</default>
+        <label>Tractor Show</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Product Promotion</fullName>
+        <default>false</default>
+        <label>Product Promotion</label>
+    </customValue>
+    <customValue>
+        <fullName>Done</fullName>
+        <default>false</default>
+        <label>Done</label>
+    </customValue>
+    <customValue>
+        <fullName>RNR</fullName>
+        <default>false</default>
+        <label>RNR</label>
+    </customValue>
+    <customValue>
+        <fullName>Not done</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not done</label>
+    </customValue>
+    <masterLabel>Promtional Activity Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,188 @@
+<apex:page standardController="Account" extensions="ProjectClass" sidebar="false" standardStylesheets="false" applyHtmlTag="false" showHeader="false">
+<head>
+    <style>
+    @page {
+    /* Landscape orientation */
+    margin-top:15px;
+    margin-bottom:0px;
+    size:landscape;
+    }
+    @page { size: 15in 8in; /* A4 width and height */ }
+    </style>
+</head>
+<head> 
+      <style type="text/css">
+body {
+
+#table1 {
+border:0px solid #000;
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+margin:20px auto;
+background-color:#F2F2F2;
+
+
+}
+</style>  
+</head>
+<apex:form >
+ <table width="100%" style="font-size:12pt;">
+        <tr>
+               
+                <td align="center"><b>Date:
+                <apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                                                                    <apex:param value="{!TODAY()}" />
+                                                                    </apex:outputText></b>
+                                                                </td>
+            </tr>
+            </table>
+             
+
+
+ <table border="1" cellspacing="0" style="font-size:15pt;" width="70%" align="center" >
+               <tr>
+                    <td><b>Request For Additional Discount</b></td>
+                    <td></td>
+               </tr>
+               
+                   <tr>
+                        <td><b>Developer/Builder/City</b></td>
+                        <td><apex:outputText value="{!Account.Project_Owner_Developer_Name__r.Name}"/></td>
+                   </tr>
+                            <tr>
+                                <td><b>Project Name /Location</b></td>
+                                <td><apex:outputText value="{!Account.Name}"/> / <apex:outputText value="{!Account.Project_Location__c}"/></td>
+                            </tr>
+                            
+                                <tr>
+                                   <td><b>Is our product specified in tender?</b></td>
+                                   <td><apex:outputText value="{!Account.Products__c}"/></td>
+                                </tr>
+                                
+                                    <tr>
+                                        <td><b>Who is the buyer? Developer or Contractor</b></td>
+                                        <td><apex:outputText value="{!Account.Contractor__r.Name}"/></td>
+                                        </tr>
+                                        
+                                            <tr>
+                                                <td><b>If Contractor.. Name &amp; Location</b></td>
+                                                <td><apex:outputText value="{!Account.Contractor__r.Name}"/>/<apex:outputText value="{!Account.Contractor__r.City__c}"/></td>
+                                            </tr>
+                                            
+                                                <tr>
+                                                    <td><b>No of Bath rooms</b></td>
+                                                    <td><apex:outputText value="{!ROUND(Account.No_of_Bathrooms__c,0)}"/></td>
+                                                </tr>
+                                                
+                                                    <tr>
+                                                        <td><b>Supplies through (Our Partner)</b></td>
+                                                        <td><apex:outputText value="{!Account.Supplying_Distributor__r.Name}"/></td>
+                                                    </tr>
+                                                    
+                                                        <tr>
+                                                            <td><b>Supply Value/lot</b></td>
+                                                            <td><apex:outputText value="{!ROUND(Account.Order_Value_in_Rs__c,0)}"/></td>
+                                                        </tr>
+                                                        
+                                                            <tr>
+                                                                <td><b>Tentative date of order</b></td>
+                                                                <td><apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                                                                    <apex:param value="{!Account.Expected_Date_of_Order__c}" />
+                                                                    </apex:outputText>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                                <tr>
+                                                                    <td><b>Competitor Details: Price etc</b></td>
+                                                                    <td><apex:outputText value="{!Account.Competitor_s_Info__c}"/></td>
+                                                                </tr>
+                                                                <table border="1"  cellspacing="0" style="font-size:15pt;border-top:white;" width="70%" align="center" >
+                                                                 <tr>
+                                                                    <td align="center" width="61%"><b>Pricing Details</b></td>
+                                                                    
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Products</b></td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!o.Products__c} </td>
+                                                                    </apex:repeat>
+                                                                    
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td>MRP</td>
+                                                                    
+
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!ROUND(o.Order_Value__c,0)} </td>
+                                                                    </apex:repeat>
+                                                                    
+                                                                    </tr>
+                                                                    
+                                                                    
+                                                                    <tr>
+                                                                    <td>APPL STD disc</td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!o.APPL_STD_Discount__c}% </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    <td>Discount to customer on MRP</td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!o.Disc_to_Customer_on_MRP__c}% </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td>Discount Value</td>
+                                                                    
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!ROUND(o.Disc_to_Customer_on_MRP_Amount__c,0)} </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td>Invoice Value to customer</td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!ROUND(o.Order_Value__c,0)-ROUND(o.Disc_to_Customer_on_MRP_Amount__c,0)} </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    
+                                                                      <tr>
+                                                                    <td>ORC</td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!o.ORC_Margin_to_Dlr_Dist__c}% </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    
+                                                                     <tr>
+                                                                    <td>ORC Value</td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!ROUND(o.ORC_Margin_to_Dlr_Dist_Amount__c,0)} </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                    <td>NET Invoice value to distributor</td>
+                                                                   <apex:repeat value="{!orders}" var="o"><td>{!ROUND(o.Final_Order_Value_after_Discount__c,0)} </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    
+                                                                     <tr>
+                                                                    <td>TOTAL Discount on MRP (CTC)</td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!o.Total_Disc_on_MRP_CTC__c}% </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                    
+                                                                      <tr>
+                                                                    <td>Additonal Disc on APPL Disc</td>
+                                                                    <apex:repeat value="{!orders}" var="o"><td>{!o.Addl_disc_on_APPL_STD_Disc__c}% </td>
+                                                                    </apex:repeat>
+                                                                    </tr>
+                                                                                                                                  
+                                                                     
+                                                                     
+       
+                
+                
+                
+                                                                    
+
+</table>
+</table>
+</apex:form>  
+</apex:page>

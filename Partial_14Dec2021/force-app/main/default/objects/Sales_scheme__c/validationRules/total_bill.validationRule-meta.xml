@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>total_bill</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISPICKVAL( Point_accrual_type__c , &apos;TOTAL_BILL&apos;),
+ISBLANK( amount_per_point__c ),
+NOT (ISBLANK( Point_per_product__c ))
+)</errorConditionFormula>
+    <errorDisplayField>Point_accrual_type__c</errorDisplayField>
+    <errorMessage>Amount per point is needed for Total bill type and point per product should be blank</errorMessage>
+</ValidationRule>

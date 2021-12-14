@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Addl_disc_on_APPL_STD_Disc__c</fullName>
+    <externalId>false</externalId>
+    <formula>(Total_Disc_on_MRP_CTC__c - APPL_STD_Discount__c) / APPL_STD_Discount__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Addl disc on APPL STD Disc %</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

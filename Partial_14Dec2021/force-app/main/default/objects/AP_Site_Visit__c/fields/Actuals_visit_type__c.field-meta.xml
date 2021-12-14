@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actuals_visit_type__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(INCLUDES( AP_Tour_Plan__r.Visit_Type__c ,&quot;Head Quarter&quot;),&quot;Head Quarter&quot;,NULL)+
+if(INCLUDES( AP_Tour_Plan__r.Visit_Type__c ,&quot;Ex-Station&quot;),&quot;Ex-Station&quot;,NULL)+
+if(INCLUDES( AP_Tour_Plan__r.Visit_Type__c ,&quot;Out Station&quot;),&quot;Out Station&quot;,NULL)+
+if(INCLUDES( AP_Tour_Plan__r.Visit_Type__c ,&quot;Leave&quot;),&quot;Leave&quot;,NULL)+
+if(INCLUDES( AP_Tour_Plan__r.Visit_Type__c ,&quot;Holiday&quot;),&quot;Holiday&quot;,NULL)+
+if(INCLUDES( AP_Tour_Plan__r.Visit_Type__c ,&quot;Meetings/Training/Others&quot;),&quot;Meetings/Training/Others&quot;,NULL)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Planed visit type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

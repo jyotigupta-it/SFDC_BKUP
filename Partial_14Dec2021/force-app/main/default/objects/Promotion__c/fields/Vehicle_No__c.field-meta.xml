@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vehicle_No__c</fullName>
+    <externalId>false</externalId>
+    <label>Vehicle No</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AP-03 BU-4368</fullName>
+                <default>false</default>
+                <label>AP-03 BU-4368</label>
+            </value>
+            <value>
+                <fullName>AP-09 CG-5812</fullName>
+                <default>false</default>
+                <label>AP-09 CG-5812</label>
+            </value>
+            <value>
+                <fullName>AP-10 AY-3375</fullName>
+                <default>false</default>
+                <label>AP-10 AY-3375</label>
+            </value>
+            <value>
+                <fullName>AP-16 CC-6437</fullName>
+                <default>false</default>
+                <label>AP-16 CC-6437</label>
+            </value>
+            <value>
+                <fullName>AP-16- CJ-3483</fullName>
+                <default>false</default>
+                <label>AP-16- CJ-3483</label>
+            </value>
+            <value>
+                <fullName>AP-16 DC-1872</fullName>
+                <default>false</default>
+                <label>AP-16 DC-1872</label>
+            </value>
+            <value>
+                <fullName>BR-01 PF-1877</fullName>
+                <default>false</default>
+                <label>BR-01 PF-1877</label>
+            </value>
+            <value>
+                <fullName>BR-01 PG-4148</fullName>
+                <default>false</default>
+                <label>BR-01 PG-4148</label>
+            </value>
+            <value>
+                <fullName>CG-04 HU-6194</fullName>
+                <default>false</default>
+                <label>CG-04 HU-6194</label>
+            </value>
+            <value>
+                <fullName>GJ-01-DV-6931</fullName>
+                <default>false</default>
+                <label>GJ-01-DV-6931</label>
+            </value>
+            <value>
+                <fullName>GJ-01 RC-2583</fullName>
+                <default>false</default>
+                <label>GJ-01 RC-2583</label>
+            </value>
+            <value>
+                <fullName>GJ-01  RK-7129</fullName>
+                <default>false</default>
+                <label>GJ-01  RK-7129</label>
+            </value>
+            <value>
+                <fullName>HR-70 A-8201</fullName>
+                <default>false</default>
+                <label>HR-70 A-8201</label>
+            </value>
+            <value>
+                <fullName>KA-51 A-9336</fullName>
+                <default>false</default>
+                <label>KA-51 A-9336</label>
+            </value>
+            <value>
+                <fullName>KA-51 MG-7459</fullName>
+                <default>false</default>
+                <label>KA-51 MG-7459</label>
+            </value>
+            <value>
+                <fullName>KA-51 MQ-7465</fullName>
+                <default>false</default>
+                <label>KA-51 MQ-7465</label>
+            </value>
+            <value>
+                <fullName>KA-51 Z-7948</fullName>
+                <default>false</default>
+                <label>KA-51 Z-7948</label>
+            </value>
+            <value>
+                <fullName>MH-12 GT-7088</fullName>
+                <default>false</default>
+                <label>MH-12 GT-7088</label>
+            </value>
+            <value>
+                <fullName>MH-12 JF-543</fullName>
+                <default>false</default>
+                <label>MH-12 JF-543</label>
+            </value>
+            <value>
+                <fullName>MH-12 LV-4363</fullName>
+                <default>false</default>
+                <label>MH-12 LV-4363</label>
+            </value>
+            <value>
+                <fullName>MH-12 MB-8129</fullName>
+                <default>false</default>
+                <label>MH-12 MB-8129</label>
+            </value>
+            <value>
+                <fullName>MH-12 MB-8130</fullName>
+                <default>false</default>
+                <label>MH-12 MB-8130</label>
+            </value>
+            <value>
+                <fullName>MP-09 CM-8052</fullName>
+                <default>false</default>
+                <label>MP-09 CM-8052</label>
+            </value>
+            <value>
+                <fullName>MP-09 CT-8096</fullName>
+                <default>false</default>
+                <label>MP-09 CT-8096</label>
+            </value>
+            <value>
+                <fullName>MP-09 GG-3009</fullName>
+                <default>false</default>
+                <label>MP-09 GG-3009</label>
+            </value>
+            <value>
+                <fullName>MP-09 TR-1824</fullName>
+                <default>false</default>
+                <label>MP-09 TR-1824</label>
+            </value>
+            <value>
+                <fullName>PB-10 ET-2221</fullName>
+                <default>false</default>
+                <label>PB-10 ET-2221</label>
+            </value>
+            <value>
+                <fullName>PB-10 FH-2329</fullName>
+                <default>false</default>
+                <label>PB-10 FH-2329</label>
+            </value>
+            <value>
+                <fullName>RJ-14 UC-7914</fullName>
+                <default>false</default>
+                <label>RJ-14 UC-7914</label>
+            </value>
+            <value>
+                <fullName>RJ-14 UC-8870</fullName>
+                <default>false</default>
+                <label>RJ-14 UC-8870</label>
+            </value>
+            <value>
+                <fullName>RJ-14 UE-0645</fullName>
+                <default>false</default>
+                <label>RJ-14 UE-0645</label>
+            </value>
+            <value>
+                <fullName>RJ-14 UE-5421</fullName>
+                <default>false</default>
+                <label>RJ-14 UE-5421</label>
+            </value>
+            <value>
+                <fullName>RJ-14 UE-8534</fullName>
+                <default>false</default>
+                <label>RJ-14 UE-8534</label>
+            </value>
+            <value>
+                <fullName>TN-37 BP-7581</fullName>
+                <default>false</default>
+                <label>TN-37 BP-7581</label>
+            </value>
+            <value>
+                <fullName>TN-66 B-2527</fullName>
+                <default>false</default>
+                <label>TN-66 B-2527</label>
+            </value>
+            <value>
+                <fullName>TN-70 D-9052</fullName>
+                <default>false</default>
+                <label>TN-70 D-9052</label>
+            </value>
+            <value>
+                <fullName>TN-70 R-7704</fullName>
+                <default>false</default>
+                <label>TN-70 R-7704</label>
+            </value>
+            <value>
+                <fullName>TN-70 R-7705</fullName>
+                <default>false</default>
+                <label>TN-70 R-7705</label>
+            </value>
+            <value>
+                <fullName>TN-99 1793</fullName>
+                <default>false</default>
+                <label>TN-99 1793</label>
+            </value>
+            <value>
+                <fullName>TS-07 EL-4438</fullName>
+                <default>false</default>
+                <label>TS-07 EL-4438</label>
+            </value>
+            <value>
+                <fullName>UP-32 FQ-2882</fullName>
+                <default>false</default>
+                <label>UP-32 FQ-2882</label>
+            </value>
+            <value>
+                <fullName>UP-32 HB-5388</fullName>
+                <default>false</default>
+                <label>UP-32 HB-5388</label>
+            </value>
+            <value>
+                <fullName>UP-80 BM-7801</fullName>
+                <default>false</default>
+                <label>UP-80 BM-7801</label>
+            </value>
+            <value>
+                <fullName>WB-12 D-6195</fullName>
+                <default>false</default>
+                <label>WB-12 D-6195</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

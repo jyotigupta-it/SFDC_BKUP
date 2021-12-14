@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BDM_Conformation_Comments__c</fullName>
+    <externalId>false</externalId>
+    <label>BD Confirmation Comments</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Busy</fullName>
+                <default>false</default>
+                <label>Busy</label>
+            </value>
+            <value>
+                <fullName>Contacted over phone &amp; will meet in 2 days</fullName>
+                <default>false</default>
+                <label>Contacted over phone &amp; will meet in 2 days</label>
+            </value>
+            <value>
+                <fullName>Given dealer details</fullName>
+                <default>false</default>
+                <label>Given dealer details</label>
+            </value>
+            <value>
+                <fullName>Given price details</fullName>
+                <default>false</default>
+                <label>Given price details</label>
+            </value>
+            <value>
+                <fullName>Given price list</fullName>
+                <default>false</default>
+                <label>Given price list</label>
+            </value>
+            <value>
+                <fullName>Given Quotation</fullName>
+                <default>false</default>
+                <label>Given Quotation</label>
+            </value>
+            <value>
+                <fullName>Gone for other brand</fullName>
+                <default>false</default>
+                <label>Gone for other brand</label>
+            </value>
+            <value>
+                <fullName>Not Approved Brand</fullName>
+                <default>false</default>
+                <label>Not Approved Brand</label>
+            </value>
+            <value>
+                <fullName>Not Reachable</fullName>
+                <default>false</default>
+                <label>Not Reachable</label>
+            </value>
+            <value>
+                <fullName>Purchased ashirvad pipes</fullName>
+                <default>false</default>
+                <label>Purchased ashirvad pipes</label>
+            </value>
+            <value>
+                <fullName>Referred distributor</fullName>
+                <default>false</default>
+                <label>Referred distributor</label>
+            </value>
+            <value>
+                <fullName>Resent SMS</fullName>
+                <default>false</default>
+                <label>Resent SMS</label>
+            </value>
+            <value>
+                <fullName>RInging no response</fullName>
+                <default>false</default>
+                <label>RInging no response</label>
+            </value>
+            <value>
+                <fullName>Switched off</fullName>
+                <default>false</default>
+                <label>Switched off</label>
+            </value>
+            <value>
+                <fullName>Will contact today</fullName>
+                <default>false</default>
+                <label>Will contact today</label>
+            </value>
+            <value>
+                <fullName>Will meet by the end of the day</fullName>
+                <default>false</default>
+                <label>Will meet by the end of the day</label>
+            </value>
+            <value>
+                <fullName>Will meet by tomorrow</fullName>
+                <default>false</default>
+                <label>Will meet by tomorrow</label>
+            </value>
+            <value>
+                <fullName>Given technical details</fullName>
+                <default>false</default>
+                <label>Given technical details</label>
+            </value>
+            <value>
+                <fullName>Customer is yet to respond</fullName>
+                <default>false</default>
+                <label>Customer is yet to respond</label>
+            </value>
+            <value>
+                <fullName>Product has been replaced</fullName>
+                <default>false</default>
+                <label>Product has been replaced</label>
+            </value>
+            <value>
+                <fullName>Given Technical Manual</fullName>
+                <default>false</default>
+                <label>Given Technical Manual</label>
+            </value>
+            <value>
+                <fullName>No Vacancy</fullName>
+                <default>false</default>
+                <label>No Vacancy</label>
+            </value>
+            <value>
+                <fullName>Contacted over phone &amp; waiting for BOQ</fullName>
+                <default>false</default>
+                <label>Contacted over phone &amp; waiting for BOQ</label>
+            </value>
+            <value>
+                <fullName>BOQ received , will quote shortly</fullName>
+                <default>false</default>
+                <label>BOQ received , will quote shortly</label>
+            </value>
+            <value>
+                <fullName>Disconnected</fullName>
+                <default>false</default>
+                <label>Disconnected</label>
+            </value>
+            <value>
+                <fullName>Whatsapp  reply</fullName>
+                <default>false</default>
+                <label>Whatsapp  reply</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

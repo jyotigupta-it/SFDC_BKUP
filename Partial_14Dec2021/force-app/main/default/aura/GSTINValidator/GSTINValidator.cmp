@@ -1,0 +1,73 @@
+<aura:component controller="GSTINValidatorController" 
+                implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    
+    <aura:attribute name="errorMessage" type="String" access="private"/>
+    <aura:attribute name="successMessage" type="String" access="private"/>
+    <aura:attribute name="recordId" type="Id" access="public"/>
+    <aura:attribute name="showSpinner" type="Boolean" access="private" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>    
+    
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading--medium" >GSTIN Validator</h4>
+    </div>
+    
+    <div class="slds-modal__content slds-p-around--x-small min-height slds-align_absolute-center slds-size_1-of-1 slds-is-relative"
+         aura:id="modalbody" id="modalbody">
+        
+        <aura:if isTrue="{!v.showSpinner}">
+            <lightning:spinner alternativeText="Loading.." 
+                               title="Loading.." variant="brand" size="medium"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!!empty(v.errorMessage)}">
+            <div class="slds-notify_container slds-is-relative upgrade-toast-z-index">
+                <div class="slds-notify slds-notify_toast slds-theme_error toast-min_width" role="status">
+                    <span class="slds-icon_container slds-icon-utility-error 
+                                 slds-m-right_small slds-no-flex slds-align-top slds-float_left">
+                        <lightning:icon iconName="utility:error" size="small" variant="inverse"/>
+                    </span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small">{!v.errorMessage}</h2>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!!empty(v.successMessage)}">
+            <div class="slds-notify_container slds-is-relative upgrade-toast-z-index">
+                <div class="slds-notify slds-notify_toast slds-theme_success toast-min_width" role="status">
+                    <span class="slds-icon_container slds-icon-utility-success 
+                                 slds-m-right_small slds-no-flex slds-align-top slds-float_left">
+                        <lightning:icon iconName="utility:success" size="small" variant="inverse"/>
+                    </span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small">{!v.successMessage}</h2>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+    </div>
+    
+    <footer class="slds-modal__footer">
+        <lightning:button variant="neutral" 
+                          label="Close"
+                          title="Close"
+                          onclick="{! c.cancelModel }"/>
+    </footer>
+    
+</aura:component>

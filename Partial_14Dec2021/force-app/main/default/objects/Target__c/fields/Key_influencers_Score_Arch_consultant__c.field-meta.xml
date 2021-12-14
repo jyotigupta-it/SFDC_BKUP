@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Key_influencers_Score_Arch_consultant__c</fullName>
+    <externalId>false</externalId>
+    <formula>Key_influencers_Weighta_Arch_consultant__c *  (Key_influencers_Arch_consultant_ACHVD__c/100)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Key influencers Score( Arch/consultant)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

@@ -1,0 +1,96 @@
+<apex:page sidebar="false" StandardController="Case" extensions="CtrlGiftInventory" tabStyle="inventory__c">
+
+<script src= "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<script language="javascript">
+j$ = jQuery.noConflict();
+
+j$(document).ready(function(){
+if('{!flagvar}' == 'true'){
+window.top.location = '/{!currentCase.Id}';
+}
+$('div').children().attr('readonly', true);
+});
+</script>
+
+<apex:form >
+<apex:pageMessages />
+<apex:pageBlock ><br/>
+<center>
+<apex:commandLink value="Click here to navigate to Detailed Inventory Page" action="/apex/UserInventories" target="_blank" style="align-center;"/></center>
+<br/>﻿ 
+<apex:pageBlockSection title="Gifts List of {!Userdata}" columns="1" rendered="{!renderother}">
+<h1> The request does not have any Gifts Involved </h1>
+</apex:pageBlockSection>
+<!--div style="overflow: scroll; height:150px;"-->
+<apex:pageBlockSection title="Gifts List of {!Userdata}" columns="1" rendered="{!renderpage}">
+<apex:pageBlockSection title="Mega Meet" columns="1" >
+<apex:PageBlockTable id="myPanel" value="{!giftListMega}" var="pitem" rowClasses="odd,even"  border="1" cellspacing="0" cellpadding="20" columnsWidth="10%,10%,20%,10%,10%,10%,10%,10%,10%">
+<apex:column headerValue="Gift ID">
+<apex:outputLink value="/{!pitem.Id}" target="_blank">{!pitem.name}</apex:outputLink>
+</apex:column>
+<apex:column headerValue="Product">
+<apex:outputfield value="{!pitem.Product__c}"/>
+</apex:column>
+<apex:column headerValue="Product Description">
+<apex:outputfield value="{!pitem.Product_Description__c}"/>
+</apex:column>
+<apex:column headerValue="Color">
+<apex:outputfield value="{!pitem.Color_Language_Size__c}"/>
+</apex:column>
+<apex:column headerValue="Type of Meet">
+<apex:outputfield value="{!pitem.Type_Of_Meet__c}"/>
+</apex:column>
+<apex:column headerValue="Opening Stock">
+<apex:outputField value="{!pitem.opening_stock__c}"/>
+</apex:column>
+<apex:column headerValue="Used Stock">
+<apex:outputField value="{!pitem.Used_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Stock in Transit">
+<apex:outputField value="{!pitem.Received_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Closing Stock">
+<apex:outputField value="{!pitem.Closing_Stocks__c}"/>
+</apex:column>
+</apex:PageBlockTable>
+
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Mini Meet" columns="1" >
+<apex:PageBlockTable id="myPanel" value="{!giftListMini}" var="pitem" rowClasses="odd,even"  border="1" cellspacing="0" cellpadding="20" columnsWidth="10%,10%,20%,10%,10%,10%,10%,10%,10%">
+<apex:column headerValue="Gift ID">
+<apex:outputLink value="/{!pitem.Id}" target="_blank">{!pitem.name}</apex:outputLink>
+</apex:column>
+<apex:column headerValue="Product">
+<apex:outputfield value="{!pitem.Product__c}"/>
+</apex:column>
+<apex:column headerValue="Product Description">
+<apex:outputfield value="{!pitem.Product_Description__c}"/>
+</apex:column>
+<apex:column headerValue="Color">
+<apex:outputfield value="{!pitem.Color_Language_Size__c}"/>
+</apex:column>
+<apex:column headerValue="Type of Meet">
+<apex:outputfield value="{!pitem.Type_Of_Meet__c}"/>
+</apex:column>
+<apex:column headerValue="Opening Stock">
+<apex:outputField value="{!pitem.opening_stock__c}"/>
+</apex:column>
+<apex:column headerValue="Used Stock">
+<apex:outputField value="{!pitem.Used_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Stock in Transit">
+<apex:outputField value="{!pitem.Received_Stock__c}"/>
+</apex:column>
+<apex:column headerValue="Closing Stock">
+<apex:outputField value="{!pitem.Closing_Stocks__c}"/>
+</apex:column>
+</apex:PageBlockTable>
+
+</apex:pageBlockSection>
+</apex:pageBlockSection>
+</apex:pageblock>
+</apex:form>
+</apex:page>

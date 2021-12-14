@@ -1,0 +1,2144 @@
+<!--  
+    Author: Satyanarayana
+    Description : Tour Plan Page : Display TourPlan in Calendar View.
+                  Create TourPlan for the Month and submit it for approval to the Manager.
+    Date : 01/03/2015    -->
+   
+<apex:page standardcontroller="Target__c" extensions="APPL_TOURPLAN_CALENDARCONTROLLER" showHeader="false" sidebar="false" id="thepage" docType="html-5.0" standardStylesheets="false" title="Ashirvad Tour Plan">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <apex:slds />
+    <head>
+        <title>Bootstrap Example</title>
+     
+       
+        <c:AP_JQUERY_Component />
+        <c:AP_Calendar_Component />
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script type='text/javascript' src='/canvas/sdk/js/publisher.js'/>
+       
+       
+       
+         <script>
+   
+   function abc(){
+        var x_State = j$("[id$=xx_state]").val();
+        var x_district = j$("[id$=xx_district]").val();
+        console.log(x_district );
+        APPL_TOURPLAN_CALENDARCONTROLLER.marketvalue(x_district,function(res,evt){
+        console.log(evt);
+        console.log(res);
+            if(evt.status){
+                if(res=='New'){
+                    j$("[id$=xx_Market]").val('New');
+                }else{
+                    j$("[id$=xx_Market]").val('Existing');
+                }
+            }
+        });
+       
+    }
+   
+ 
+  </script>
+ 
+ 
+            <!--c:AP_MultiselectComponent /-->
+      <apex:includeScript value="{!URLFOR($Resource.Moment)}"/>
+                    <!--  apex:includeScript value="{!URLFOR($Resource.APPL_AlertifyJS, '/alertify.js')}"/>
+                    <apex:stylesheet value="{!URLFOR($Resource.APPL_AlertifyJS, '/css/alertify.css')}"/>
+                    <apex:stylesheet value="{!URLFOR($Resource.APPL_AlertifyJS, '/css/alertify.rtl.css')}"/-->
+    </head>
+   
+    <style>
+       
+        .ac_checked_date {
+            background-color:lightblue;
+        }
+       
+        .waitingSearchDiv {
+            position: absolute;
+            text-align: center;PL_TOURPLAN_CALENDAR_CLONE2 line 595, column 91: Element type "button" must be followed by either attribute specifications, ">" or "/>"  
+￼   Error: Element type "button" must be followed by either attribute specifications, ">" or "/>".  
+  = Required InformationPage Information
+            top: 0;
+            z-index: 80;
+            left: 0;
+        }
+        .waitingSearchDiv .waitingHolder, .waitingSearchDiv .waitingSearchHolder {
+            border: none;
+            background-color: transparent;
+            font-size: 1em;
+            font-weight: normal;
+            padding: 0;
+        }
+        .waitingSearchDiv .waitingHolder {
+            font-weight: bold;
+            font-size: 1.20em;
+            position: relative;
+            padding: .5em;
+            white-space: nowrap;
+            margin: auto;
+            width: 40%;
+            top: 45%;
+        }
+       
+        .ui-dialog-title{
+            font-size: 18px !important;
+           
+        }
+       
+        .ui-dialog .ui-dialog-titlebar-close {
+            width: 35px;
+            height: 30px;
+        }
+        .ui-dialog .ui-dialog-titlebar-closedealerpopup {
+            width: 35px;
+            height: 30px;
+        }
+   PL_TOURPLAN_CALENDAR_CLONE2 line 595, column 91: Element type "button" must be followed by either attribute specifications, ">" or "/>"  
+￼   Error: Element type "button" must be followed by either attribute specifications, ">" or "/>".  
+  = Required InformationPage Information
+       
+        //
+        //.button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close padding-left:30px;
+       
+        #calendar {
+        display: inline-block;
+        vertical-align: top;
+        }
+       
+        #wrap {
+        margin: 0 auto;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+       
+        }
+       
+        .leftPanel {
+           
+        }
+       
+        #external-events {
+        display: inline-block;
+        vertical-align: top;
+        padding: 0;
+        text-align: left;
+        border-radius:5px 5px 0 0;
+        }
+       
+        .dataWidgets {
+            background: #14558E;
+            box-shadow: 1px 1px 1px #000672;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+        }
+       
+        .heading {
+            margin-top: 0;
+            padding-top: 1em;
+            background-color: #006074;
+            color: #fff;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 6px;
+            height: 12px;
+            border-radius: 5px 5px 0 0;
+        }
+       
+        .filterResults .heading table td {
+            color: #fff !important;
+            font-size: 12px;
+            vertical-align: top;
+            text-align: center;
+        }
+       
+        /*Added */
+        .filterPanel {
+            height: 175px;
+            background-color: #ededed;
+            border: none;
+            border-radius: 5px;
+        }
+       
+        label {
+            display: inline-block;
+        }
+       
+        .external-event-row { /* try to mimick the look of a real event */
+            margin: 0;
+            padding: 10px 4px;
+            font-size: .85em;
+            cursor: pointer;
+        }
+       
+        .external-event-row:nth-child(odd) {
+            background: #EDEDED;
+        }
+       
+        .external-event-row:nth-child(even) {
+            background: #D7D7D7;
+        }
+       
+        #external-events p {
+        margin: 1.5em 0;
+        font-size: 11px;
+        color: #666;
+        }
+       
+        #external-events p input {
+        margin: 0;
+        vertical-align: middle;
+        }
+       
+        .acctName {
+            width: 100px;
+            border-radius: 5px;
+            text-align: center;
+            padding: 2px;
+        }
+        .acctNamedel {
+            width: 100px;
+            border-radius: 5px;
+            text-align: center;
+            padding: 2px;
+        }
+       
+        .aphabeticFilter {
+            width: 100%;
+            overflow-wrap: break-word;
+            padding: 10px 0;
+        }
+       
+        .aphabeticFilter a {
+            text-decoration: none;
+            color: #2B608B;
+            margin: 2px;
+            font-size: 12px;
+        }
+       
+        .filterBody{
+            padding: 5px;
+        }
+       
+        .resultContainer {
+            min-height: 5px;
+            /*overflow-x: hidden;
+                overflow-y: auto;*/
+            }
+       
+        .noResults {
+            text-align:center;
+            padding: 5px;
+        }
+       
+        .contentCls {
+            width: 45px;
+            text-align: center;
+        }
+       
+        .Dealer {
+            background: #8DBE3D;
+        }
+       
+        .Customer {
+            background: #4FC7E9;
+        }
+       
+        .Prospect {
+            background: #EBC13D;
+        }
+       
+        .pageTitle {
+            font-size: 20px;
+            padding-bottom: 20px;
+            color: #F4492E;
+        }
+       
+        .mapIt {
+            float: right;
+            display: inline;
+            background-color: #fbfbfb;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #474747;
+            color: #185ea3;
+            font-weight: bold;
+            font-size: 16px;
+            width: 275px;
+            text-align: center;
+            cursor:pointer;
+        }
+       
+        table th,
+            table td {
+                text-align: left;
+            }
+       
+        table.layout {
+            width: 100%;
+            border-collapse: collapse;
+        }
+       
+        table.display {
+            margin: 1em 0;
+        }
+       
+        table.display th,
+            table.display td{
+                border: 1px solid #B3BFAA;
+                padding: .5em 1em;
+            }
+       
+        table.display th { background: #D5E0CC; }
+        table.display td { background: #fff; }
+       
+        table.responsive-table {
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+        }
+                          .custombadge {
+                              display: inline-block;
+                              min-width: 10px;
+                              padding: 3px 7px;
+                              padding-top: 3px;
+                              padding-right: 7px;
+                              padding-bottom: 3px;
+                              padding-left: 7px;
+                              font-size: 12px;
+                              font-weight: 700;
+                              line-height: 1;
+                              color: #fff;
+                              text-align: center;
+                              white-space: nowrap;
+                              vertical-align: baseline;
+                              border-radius: 10px;
+                          }
+                         
+                          .checkdropdown {
+                              height: 75px!important;
+                          }
+                         
+                          .checkdropdown1 {
+                              height: 190px!important;
+                          }
+                         
+                          .fc-other-month .fc-day-number { display:none;}
+                          .ui-accordion .ui-accordion-content {padding:0px!important;}
+                      <!--    .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;width:100%;height:100%}
+                          .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+                          .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+                          .tg .tg-733k{font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+                                 .tg .tg-il5c{background-color:#D2E4FC;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;  text-align: -webkit-center}-->
+                               .fc-first {
+                                 border-left: 1px solid #ddd!important;
+                                 border-top: 1px solid #ddd!important;
+                                  }
+                                  .fc-day-header{background: #fafaf9!important;border-top: 1px solid #ddd!important;border-right: 1px solid #ddd!important;}
+                                  .fc-past, .fc-future {background: none;}
+    .ui-widget-header{font-family: "Salesforce Sans",Arial,sans-serif!important; text-transform: uppercase!important;color: #54698d;line-height: 1.25;font-size:15px!important;}
+                               
+                               .ui-widget-content,.ui-widget-header{background-color:#fff;}
+    .ui-widget-overlay{background-color: #000;opacity: 0.5;background-image: none;}
+    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{ background:none;}
+    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{color: #676767;}
+    .slds-table thead th {background: #fafaf9;}
+    .ui-widget-header{background:none;font-weight: normal!important;border: none;
+    border-radius: 0;}
+    table.fc-border-separate {border-collapse: collapse;}
+    .ui-widget-overlay {
+    background-color: #000;
+    opacity: 0.5;
+    background-image: none;
+}
+
+ label {  font-family: "Salesforce Sans",Arial,sans-serif!important; }
+ .ui-accordion-header {
+     background: #fafaf9!important;
+    border: 1px solid #ddd!important;
+    color: #6f6f6f!important;
+   }
+    .relative_pos {
+    position:relative;
+    }
+    .abs_pos {
+    position:absolute;
+    top: 5px;
+    right: 16px;
+    }
+   .ui-dialog-buttonpane .ui-button-text {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #0070d2;
+    border: 1px solid #0070d2;
+    color: #fff;
+    font-weight:normal!important;
+        font-size: .75rem;
+    }
+    .ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default{ border: 1px solid #ddd;
+font-weight:normal;
+}
+.fc-header-right {
+text-align: right!important;
+font-size:12px;
+}
+.fc-header-left {
+font-size:12px;
+}
+.fc-header-center {
+text-align: center!important;
+}
+                                @media only screen and (min-width: 250px) and (max-width: 770px)
+                                {
+                                   .ui-dialog {
+                                   width:90%!important;}
+                                   #button {
+                                   padding:0px!important;
+                                   }
+                                   .tpr {
+                                   display:block!important;
+                                   width:146px!important;
+                                   margin-left:0px!important;
+                                   margin-top:5px!important;
+                                   }
+                                   .slds-truncate {
+                                   white-space:normal!important;
+                                   }
+                                   .fc-header-center {
+                                    font-size:12px;
+                                    }
+                                    #button {
+                                    margin:0px!important;
+                                    }
+                               
+                                }                            
+ 
+             
+             
+              .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                z-index:999999;
+            }
+           
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+           
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+           
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            /* The Closedealer Button */
+            .closedealerpopup {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+           
+            .closedealerpopup :hover,
+            .closedealerpopup :focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+     </style>
+     
+     
+                           
+                         <apex:pageMessages id="themsg"/>
+                                 <apex:include pageName="CSS_Daily_Visit_Plan"/>
+                                     <div id="header" >
+                                          <div class="slds-page-header">
+                                      <div class="slds-media">
+                                           <div class="slds-media__body">
+                                             <div id="logo">
+                                                 <img src="{!$Resource.newLogo}" alt="Ashirvad Logo" width="100" />
+                                                     </div>
+                                                 <div id="button">
+                                                     
+                                                     <button onclick="submitForApproval()" class="slds-button slds-button_brand">Submit for Approval</button >
+                                                     <button class="slds-button slds-button_neutral tpr"  title="Tour Plan Report" onclick="window.open('/'+tourPlanReportId+'?pv0='+x_targetName+'&isdtp=nv', 'popupWindow', 'width=1300,height=650,scrollbars=yes,titlebar=no, toolbar=no,resizable=yes,status=no')">Tour Plan Report</button >
+                                                       
+                                                         </div>
+                                                         </div>
+                                                          <p class="slds-text-body_small slds-line-height_reset"></p>
+                                                     </div>
+                                                </div>
+                                           </div>
+                                                         
+                                                         <div id='wrap' class="slds-p-around_small">
+                                                         <div class="leftPanel">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--2-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                                         <div id='calendar'>
+                                                         </div>
+                                                         </div>
+                                                         
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 ">
+                                                         <span id= "breakSpan"></span>
+                                                         
+                                                         <div id='external-events' style="display:none;">
+                                                         <h3>PROMOTIONAL ACTIVITY</h3>
+                                                         <apex:outputPanel id="FilterResults" styleClass="filterResults" layout="block">  
+                                                         <table class="slds-table slds-table_bordered  slds-max-medium-table_stacked-horizontal slds-table_col-bordered tg"   id="example">
+                                                         <thead>
+                                                                   <tr class="slds-text-title_caps">
+                                                         <th><div class="slds-truncate" title="Promotion Type">Promotion Type</div></th>
+                                                         <th scope="col"><div class="slds-truncate" title="Target">Target</div></th>
+                                                         <th scope="col"><div class="slds-truncate" title="Promotion Type">Promotion Type</div></th>
+                                                         <th scope="col"><div class="slds-truncate" title="Target">Target</div></th>
+                                                         </tr>
+                                                         </thead>
+                                                                    <tbody>
+                                                         <apex:repeat value="{!targetWrapperList_Promotional}" var="w">
+                                                         <tr>
+                                                         <td data-label="Promotion Type" class="tg-il5c"><div class="slds-truncate" title="{!w.targetWrapper1.activityName}">{!w.targetWrapper1.activityName}</div></td>
+                                                         <td data-label="Target" class="contentCls tg-733k"><div class="slds-truncate" title="{!w.targetWrapper1.targetValue}">{!w.targetWrapper1.targetValue}</div></td>
+                                                         <td data-label="Promotion Type" class="tg-il5c"><div class="slds-truncate" title="{!w.targetWrapper2.activityName}">{!w.targetWrapper2.activityName}</div></td>
+                                                         <td data-label="Target" class="contentCls tg-733k"><div class="slds-truncate" title="{!w.targetWrapper2.targetValue}">{!w.targetWrapper2.targetValue}</div></td>
+                                                         </tr>
+                                                         
+                                                         <!-- <td></td>
+                                                         <td></td> <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #f1c40f;">{!w.planningValue}</span></td>
+                                                         <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #d35400;">{!w.remainingValue}</span></td> -->
+                                                         </apex:repeat>  
+                                                         </tbody>                                      
+                                                         </table>
+                                                         </apex:outputPanel>
+                                                         
+                                                         
+                                                         <h3>RETAILING</h3>
+                                                         <apex:outputPanel layout="block" style="height:auto;">
+                                                         <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_col-bordered tg"   id="example">
+                                                         <thead>
+                                                                   <tr class="slds-text-title_caps">
+                                                         <th scope="col"><div class="slds-truncate" title="Type"><b>Type</b></div></th>
+                                                         <th scope="col"><div class="slds-truncate" title="Target"><b>Target</b></div></th>
+                                                         <!-- th width="100px"><b>Planned</b></th>
+                                                         <th width="100px"><b>Remaining</b></th-->
+                                                         </tr></thead>
+                                                         <tbody>
+                                                         
+                                                         <apex:repeat value="{!targetWrapperList_Retailing}" var="w">
+                                                         <tr>
+                                                         <td data-label="Type" class="tg-il5c"><div class="slds-truncate" title="{!w.activityName}">
+                                                          {!w.activityName}</div>
+                                                         </td>
+                                                         <td data-label="Target" class="contentCls tg-733k"><div class="slds-truncate" title="{!w.targetValue}">{!w.targetValue}</div></td>
+                                                         
+                                                         <!-- <td></td>
+                                                         <td></td> <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #f1c40f;">{!w.planningValue}</span></td>
+                                                         <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #d35400;">{!w.remainingValue}</span></td> -->
+                                                         </tr>
+                                                         
+                                                         
+                                                         </apex:repeat>
+                                                         </tbody>
+                                                         </table>                                                      
+                                                         </apex:outputPanel>
+                                                         
+                                                         <h3>INDUSTRIAL VISITS</h3>
+                                                         <apex:outputPanel layout="block" style="height:auto;">
+                                                         <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_col-bordered tg"   id="example">
+                                                         <thead>
+                                                                   <tr class="slds-text-title_caps">
+                                                         <th scope="col"><div class="slds-truncate" title="Type"><b>Type</b></div></th>
+                                                         <th scope="col"><div class="slds-truncate" title="Target"><b>Target</b></div></th>
+                                                         <!-- th width="100px"><b>Planned</b></th>
+                                                         <th width="100px"><b>Remaining</b></th-->
+                                                         </tr></thead>
+                                                         <tbody>
+                                                         
+                                                         <apex:repeat value="{!targetWrapperList_Industrial}" var="w">
+                                                         <tr>
+                                                         <td data-label="Type" class="tg-il5c"><div class="slds-truncate" title="{!w.activityName}">
+                                                          {!w.activityName}</div>
+                                                         </td>
+                                                         <td data-label="Target" class="contentCls tg-733k"><div class="slds-truncate" title="{!w.targetValue}">{!w.targetValue}</div></td>
+                                                         
+                                                         <!-- <td></td>
+                                                         <td></td> <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #f1c40f;">{!w.planningValue}</span></td>
+                                                         <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #d35400;">{!w.remainingValue}</span></td> -->
+                                                         </tr>
+                                                         
+                                                         
+                                                         </apex:repeat>
+                                                         </tbody>
+                                                         </table>                                                      
+                                                         </apex:outputPanel>
+                                                         
+                                                         <h3>{!PromotionType}</h3>
+                                                         <apex:outputPanel layout="block" style="height:auto;">
+                                                         <table id="example" class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal tg slds-table_col-bordered">
+                                                         <thead>
+                                                                   <tr class="slds-text-title_caps">
+                                                         <th scope="col"><div class="slds-truncate" title="Type"><b>Type</b></div></th>
+                                                         <th scope="col"><div class="slds-truncate" title="Target"><b>Target</b></div></th>
+                                                         <!--  <th width="100px"><b>Planned</b></th>
+                                                         <th width="100px"><b>Remaining</b></th> -->
+                                                         </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                         <apex:repeat value="{!targetWrapperList_market}" var="w">
+                                                         <tr>
+                                                         <td data-label="Type" class="tg-il5c"><div class="slds-truncate" title="{!w.activityName}">{!w.activityName}</div></td>
+                                                         <td data-label="Target" class="contentCls tg-733k"><div class="slds-truncate" title="{!w.targetValue}">{!w.targetValue}</div></td>
+                                                         
+                                                         <!-- <td></td>
+                                                         <td></td> <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #f1c40f;">{!w.planningValue}</span></td>
+                                                         <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #d35400;">{!w.remainingValue}</span></td> -->
+                                                         </tr>
+                                                         </apex:repeat>
+                                                         </tbody>
+                                                         </table>
+                                                         
+                                                         </apex:outputPanel>
+                                                         
+                                                         <h3>PRIMARY SALES</h3>
+                                                         <apex:outputPanel layout="block" style="height:auto;">
+                                                         <table  id="example" class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_col-bordered tg">
+                                                         <!--  <div class="resultContainer">  -->  
+                                                         <thead>
+                                                                   <tr class="slds-text-title_caps">
+                                                         <th scope="col"><div class="slds-truncate" title="Type"><b>Type</b></div></th>
+                                                         <th scope="col"><div class="slds-truncate" title="Target"><b>Target</b></div></th>
+                                                         <!-- <th width="100px"><b>Planned</b></th>
+                                                         <th width="100px"><b>Remaining</b></th> -->
+                                                         </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                         <apex:repeat value="{!targetWrapperList_primarySales}" var="w">
+                                                         <tr>
+                                                          <td data-label="Type" class="tg-il5c"><div class="slds-truncate" title="{!w.activityName}">{!w.activityName}</div></td>
+                                                         <td data-label="Target" class="contentCls tg-733k"><div class="slds-truncate" title="{!w.targetValue}">{!w.targetValue}</div></td>
+                                                         <!--  <td></td>
+                                                         <td></td> -->
+                                                         <!-- class="custombadge" style="background-color: #2ecc71;" <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #f1c40f;">{!w.planningValue}</span></td>
+                                                         <td width="100px" class="contentCls"><span class="custombadge" style="background-color: #d35400;">{!w.remainingValue}</span></td> -->
+                                                         </tr>
+                                                         </apex:repeat>
+                                                         </tbody>
+                                                         </table>
+                                                         </apex:outputPanel>    
+                                                         </div>
+                                                         </div>
+                                                         </div>
+                                                         </div>
+                                                         </div>
+                                                 <body>
+                                                 
+                                                 
+                                                 <div id="dialog-form" style="display:none;font-size:15px;background-color:white; !important;">  
+                                                 <apex:form id="theform">
+                                                     <!----------------------------------------dp name popup------------------------------------- -->
+                                                      <div id="myModal" class="modal">    
+                                                       <div class="modal-content" >
+                                                        <span class="close">&times;</span>
+                                                       
+                                                          <apex:outputpanel id="lookupPanel"  styleclass="outpanel">  
+                                                         
+                                                         
+                                                             <div class="slds-page-header">
+                                                                  <div clss="slds-media">
+                                                                    <div class="slds-media__body">
+                                                                     <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                                                     <p class="slds-text-body_small slds-line-height_reset"></p>
+                                                                    </div>
+                                                                  </div>
+                                                              </div>
+                                                           
+                                                            <div class="slds-p-around_x-small">
+                                                                <p>Please enter the search term below and click the 'Go' button.  This will
+                                                                   execute a search across all text fields</p>
+                                                                <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>    
+                                                             
+                                                                <apex:input value="{!query}" id="query" disabled="false" type="text"/>
+                                                                <span><apex:commandButton value="Go" action="{!runQuery}" rerender="lookupPanel,dptable"/></span>
+                                                               
+                                                            </div>
+                                                           
+                                                          <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptable">
+                                                              <thead>
+                                                                <tr class="slds-text-title_caps">
+                                                                    <th>Name</th>
+                                                                    <th>Party Type</th>
+                                                                    <th>Mobile No</th>
+                                                                    <th>Status </th>
+                                                                    <th>State </th>
+                                                                    <th>District</th>
+                                                                    <th>location</th>
+                                                                </tr>  
+                                                              </thead>
+                                                              <tbody id="myTable">                                                                            
+                                                                  <apex:repeat value="{!accounts}" var="account">    
+                                                                                         
+                                                                              <tr class="slds-hint-parent">
+                                                                                  <td data-label="Name" >
+                                                                                      <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                                                                              <div class="slds-truncate" title="Name"><apex:outputLink value="#" id="theaccountid" onclick="myFunction2('{!account.id}')">{!account.Name}</apex:outputLink>  </div>
+                                                                                  </td>
+                                                                                  <td data-label="Party Type">
+                                                                                      <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                                                                  </td>
+                                                                                   <td data-label="Mobile No">
+                                                                                      <div class="slds-truncate" title="Mobile No"> <apex:outputText value="{!account.Contact_Number_Mobile__c}" escape="false" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="Status ">
+                                                                                      <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Status__c}" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="State ">
+                                                                                      <div class="slds-truncate" title="State "><apex:outputField value="{!account.State__c}" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="District ">
+                                                                                      <div class="slds-truncate" title="District "><apex:outputField value="{!account.District__c}" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="location">
+                                                                                      <div class="slds-truncate" title="location"><apex:outputField value="{!account.City__c}" /></div>
+                                                                                  </td>
+                                                                              </tr>                                                                                    
+                                                                         
+                                                                             <input id="closebtn" type="hidden" />
+                                                                  </apex:repeat>
+                                                              </tbody>
+                                                          </table>    
+                                                         
+                                                          </apex:outputpanel>
+                                                          </div></div>
+                                 
+                                                     
+                                                      <!--------------------------------------dp name popup end-----------------------------------------  -->
+                                                     
+                                                      <!----------------------------------------dealer name popup------------------------------------- -->
+                                                      <div id="myModal2" class="modal">    
+                                                       <div class="modal-content" >
+                                                        <span class="closedealerpopup">&times;</span>
+                                                       
+                                                          <apex:outputpanel id="lookupPanel2"  styleclass="outpanel">  
+                                                         
+                                                         
+                                                             <div class="slds-page-header">
+                                                                  <div clss="slds-media">
+                                                                    <div class="slds-media__body">
+                                                                     <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                                                     <p class="slds-text-body_small slds-line-height_reset"></p>
+                                                                    </div>
+                                                                  </div>
+                                                              </div>
+                                                           
+                                                            <div class="slds-p-around_x-small">
+                                                                <p>Please enter the search term below and click the 'Go' button.  This will
+                                                                   execute a search across all text fields</p>
+                                                                <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>    
+                                                             
+                                                                <apex:input value="{!query2}" id="query2" disabled="false" type="text"/>
+                                                                <span><apex:commandButton value="Go" action="{!runDealerQuery}" rerender="lookupPanel2,dptable2"/></span>
+                                                               
+                                                            </div>
+                                                           
+                                                          <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptable2">
+                                                              <thead>
+                                                                <tr class="slds-text-title_caps">
+                                                                    <th>Name</th>
+                                                                    <th>Party Type</th>
+                                                                    <th>Mobile No</th>
+                                                                    <th>Status </th>
+                                                                    <th>State </th>
+                                                                    <th>District</th>
+                                                                    <th>location</th>
+                                                                </tr>  
+                                                              </thead>
+                                                              <tbody id="myTabledealer">                                                                            
+                                                                  <apex:repeat value="{!dealeraccounts}" var="account">    
+                                                                                         
+                                                                              <tr class="slds-hint-parent">
+                                                                                  <td data-label="Name" >
+                                                                                      <input type="hidden" id="acctNamedel{!account.Id}" value="{!account.Name}" />
+                                                                                              <div class="slds-truncate" title="Name"><apex:outputLink value="#" id="theaccountid2" onclick="myFunctiondealer2('{!account.id}')">{!account.Name}</apex:outputLink>  </div>
+                                                                                  </td>
+                                                                                  <td data-label="Party Type">
+                                                                                      <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                                                                  </td>
+                                                                                   <td data-label="Mobile No">
+                                                                                      <div class="slds-truncate" title="Mobile No"> <apex:outputText value="{!account.Contact_Number_Mobile__c}" escape="false" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="Status ">
+                                                                                      <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Status__c}" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="State ">
+                                                                                      <div class="slds-truncate" title="State "><apex:outputField value="{!account.State__c}" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="District ">
+                                                                                      <div class="slds-truncate" title="District "><apex:outputField value="{!account.District__c}" /></div>
+                                                                                  </td>
+                                                                                  <td data-label="location">
+                                                                                      <div class="slds-truncate" title="location"><apex:outputField value="{!account.City__c}" /></div>
+                                                                                  </td>
+                                                                              </tr>                                                                                    
+                                                                         
+                                                                             <input id="closebtn" type="hidden" />
+                                                                  </apex:repeat>
+                                                              </tbody>
+                                                          </table>    
+                                                         
+                                                          </apex:outputpanel>
+                                                          </div></div>
+                                 
+                                                     
+                                                      <!--------------------------------------dealer name popup end-----------------------------------------  -->
+                                                                                 
+                                  <!--------------------------------------Meeting Popup--------------------------------------------  -->
+                                 
+                                      <div id="myMeetingModal" class="modal">    
+                                                               <div class="modal-content" >
+                                                                <span class="closeMeeting">&times;</span>
+                                                               
+                                                                  <apex:outputpanel id="lookupPanelMeeting"  styleclass="outpanel">  
+                                                                 
+                                                                 
+                                                                     <div class="slds-page-header">
+                                                                          <div clss="slds-media">
+                                                                            <div class="slds-media__body">
+                                                                             <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                                                             <p class="slds-text-body_small slds-line-height_reset"></p>
+                                                                            </div>
+                                                                          </div>
+                                                                      </div>
+                                                                   
+                                                                    <div class="slds-p-around_x-small">
+                                                                        <p>Please enter the search term below and click the 'Go' button.  This will
+                                                                           execute a search across all text fields</p>
+                                                                        <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>  
+                                                                        <apex:input value="{!searchUser}" id="queryMeeting" disabled="false" type="text"/>
+                                                                        <span><apex:commandButton value="Go" action="{!runUserQuery}" rerender="lookupPanelMeeting,dptableMeeting"/></span>
+                                                                       
+                                                                    </div>
+                                                                   
+                                                                  <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableMeeting">
+                                                                      <thead>
+                                                                        <tr class="slds-text-title_caps">
+                                                                            <th>Full Name</th>
+                                                                            <th>Title</th>
+                                                                            <th>Phone</th>
+                                                                            <th>Email</th>
+                                                                        </tr>  
+                                                                      </thead>
+                                                                      <tbody id="myTable">  
+                                                                         
+                                                                          <apex:repeat value="{!userMeetingList}" var="user">      
+                                                                                      <tr class="slds-hint-parent">
+                                                                                          <td data-label="Full Name" >
+                                                                                           <input type="hidden" id="UserName{!user.id}" value="{!User.Name}" />
+                                                                                              <div class="slds-truncate" title="Full Name"><apex:outputLink value="#" onclick="myFunction5('{!user.id}')">{!user.Name}</apex:outputLink>  </div>
+                                                                                          </td>
+                                                                                          <td data-label="Title">
+                                                                                              <div class="slds-truncate" title="Title"><apex:outputText value="{!user.Title}" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="Phone">
+                                                                                              <div class="slds-truncate" title="Phone"> <apex:outputText value="{!user.Phone}" escape="false" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="Email">
+                                                                                              <div class="slds-truncate" title="Email"><apex:outputText value="{!user.Email}" /></div>
+                                                                                          </td>
+                                                                                      </tr>
+                                                                                     <input id="closebtn" type="hidden" />
+                                                                          </apex:repeat>
+                                                                      </tbody>
+                                                                  </table>
+                                                                  </apex:outputpanel>
+                                                                  </div></div>
+                                     
+                                  <!--------------------------------------Meeting Popup End----------------------------------------  -->
+                                 
+                                                 </apex:form>
+                                                 
+                                               
+                                                 <apex:form >
+                                                           
+                   
+                                                           
+                                                         <div class="tg">
+                                                         <div class="HolidayClass">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">
+                                                         
+                                                         <label id="holId">Holiday/Market Closed</label></div>
+                                                        <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                        <!----<input type="checkbox" id="chckbox" onchange="disableFields('holiday');"/>--->  
+                                                         <apex:inputCheckbox id="chckbox" onclick="disableFields('holiday');"/>
+                                                           
+                                                         </div></div> </div>
+                                                         
+                                                         
+                                                         <div class="LeaveClass">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">            
+                                                         <label id="leavId">Leave</label></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                         <!---<input type="checkbox" id="chckbox1" onchange="disableFields('leave');"/> -->
+                                                         <apex:inputCheckbox id="chckbox1" onclick="disableFields('leave');"/>  
+                                                         </div></div></div>
+                                                         
+                                                         <div class="MettingClass">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">
+                                                         <label id="leavId">Meetings/Training/<br/>Others</label></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                         <!--<input type="checkbox" id="chckbox2" onchange="disableFields('Metting');"/>--->
+                                                          <apex:inputCheckbox id="chckbox2" onclick="disableFields('Metting');"/>    
+                                                         </div></div></div>
+                                                         
+                                                         <div class="MettingDescClass" style="display:none;">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">
+                                                         <label id="leavId">Comments<span style="color:red">*</span></label></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                         <textarea rows="5" cols="35" id="CommentsMetting"/>
+                                                         <!--  input type="checkbox" id="chckbox2" onchange="disableFields('Metting');"/-->    
+                                                         </div></div></div>
+                                                         
+                                                         <div class="dropdownDiv"><div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">
+                                                         <label>Promotional Type<span style="color:red"></span></label></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k"> <select class="form-control multSel slds-input" id="promotionalvallist" multiple="true" size="3" >
+                                                         <!--  Option value="--None--">--None--</Option-->
+                                                         <apex:repeat value="{!promotionalValues}" var="prolist">
+                                                         <Option value="{!prolist}">{!prolist}</Option>
+                                                         </apex:repeat>
+                                                         </select></div></div>   </div>    
+                                                         
+                                                         <!--<tr><td><b>Promotional Type:<span style="color:red">*</span></b></td>  <td><apex:inputField value="{!tourPlanInstance.Promotional_Type__c}" required="true" styleClass="form-control"/></td></tr>-->
+                                                     
+                                                         <!--<tr>
+                                                         <td>Visit Type : </td><td><apex:inputField value="{!tourPlanInstance.Visit_Type__c}" required="true" styleClass=" slds-input"/></td></tr>-->
+                                                     
+                                                         <div class="dropdownDiv">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">Visit Type<span style="color:red">*</span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k"> <select class="form-control multSel slds-input" id="retailvallist" size="1" >
+                                                         <Option value="" selected="true">--None--</Option>
+                                                         <Option value="" selected="true">Head Quarter</Option>
+                                                         <Option value="" selected="true">Head Quarter-Metro</Option>
+                                                         <Option value="" selected="true">Head Quarter-State Captital</Option>
+                                                         <Option value="" selected="true">Ex-station</Option>
+                                                         <Option value="" selected="true">Outstation</Option>
+                                                         <!--<apex:repeat value="{!retailingValues}" var="retlist">
+                                                         <Option value="{!retlist}">{!retlist}</Option>
+                                                         </apex:repeat>-->
+                                                         </select></div></div></div>
+                                                        <!-- <div class="dropdownDiv">
+                                                          <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">Working with<span style="color:red">*</span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                         <apex:inputtext value="{!tourPlanInstance.Working_with__c}"   id="Workinguser" styleClass="Workinguser slds-input slds-combobox__input" style="display:none" />                                                    
+                                                                <apex:outputPanel layout="inline" style="vertical-align:middle" >
+                                                                   <div class="lookup_style">
+                                                                    <input type="text" size="20" id="userid" value="{!tourPlanInstance.Working_with__r.name}" class="slds-input " />
+                                                                   
+                                                                    <a href="#" id="myBtn" class="lk positionabs" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionTLuser(userid)"/></a>
+                                                                 </div>
+                                                                 </apex:outputPanel>
+                                                          </div></div></div>-->
+                                                         
+                                                         
+                                                          <div class="Center">
+                                                           <apex:outputPanel rendered="{!IF(Target__c.Vertical__c == 'Induial',true, false)}">
+                                                         <div class="slds-grid slds-wrap ">
+                                                         <div class=" slds-inputslds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">Dealer Name<span style="color:red">*</span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k relative_pos">
+                                                         
+                                                                                                             
+                                                           <apex:inputField value="{!tourPlanInstance.Dealer__c}" id="dealertargetId" styleClass="dealertargetId slds-input slds-combobox__input" style="display:none" />
+                                                           <apex:outputPanel layout="inline" style="vertical-align:middle" id="yxx_account">
+                                                               
+                                                                <input type="text" size="20" id="dealertargetName" value="{!tourPlanInstance.Dealer__r.Name}" Class="slds-input"/>                                                                
+                                                                <a href="#" id="myBtn" class="lk positionabs" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="Myfunctiondealer(dealertargetName)"/> </a>
+                                                            </apex:outputPanel>  
+                                                           
+                                                         </div></div>
+                                                        </apex:outputPanel></div>
+                                                        
+                                                        
+                                                        <!--Beat Master picklist-->
+                                                        
+                                                         <div class="dropdownDiv">
+                                                          <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">Beat Master<span style="color:red">*</span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                         <!--<apex:inputField id="beatMaster" value="{!tourPlanInstance.Beat__r.name}" /></div></div></div>-->
+                                                             <apex:selectList size="1" id="beatValueSelected" styleClass="form-control multSel slds-input">
+                                                                 <apex:selectOptions value="{!Options}"></apex:selectOptions>
+                                                                 
+                                                             </apex:selectList>
+                                                             <apex:outputText value="{!BeatMasterName}" label="You have selected:"/>
+                                                        <!--<apex:inputField value="{!tourPlanInstance.State__c}" styleClass="form-control multSel slds-input" id="xx_beatmaster"/>-->
+                                                       </div>
+                                                         </div></div>
+                                                         
+                                                        <!--end of beat master-->
+                                                         <div class="dropdownDiv">
+                                                          <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">State<span style="color:red">*</span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                         
+                                                         <apex:inputField value="{!tourPlanInstance.State__c}" styleClass="form-control multSel slds-input" id="xx_state"/>
+                                                         <!-- select class="form-control multSel" id="xx_state" size="1" style="width:300px">
+                                                         <apex:repeat value="{!allocatedStates}" var="X_State">
+                                                         <option value="{!X_State}"> {!X_State}</option>
+                                                         </apex:repeat>
+                                                         </select-->
+                                                         </div></div></div>
+                                                         
+                                                         <div class="dropdownDiv">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">District<span style="color:red">*</span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k">
+                                                         
+                                                         <!--  select class="form-control multSel" id="xx_district" size="1" style="width:300px" disabled="true">
+                                                         <Option value="" selected="true">--None--</Option>
+                                                         <apex:repeat value="{!allocatedDistricts}" var="X_District">
+                                                         <option value="{!X_District}"> {!X_District}</option>
+                                                         </apex:repeat>
+                                                         </select> -->
+                                                         
+                                                         <apex:inputField value="{!tourPlanInstance.District__c}" onchange="abc()" required="true" styleClass="form-control multSel slds-input" id="xx_district"/>
+                                                         
+                                                         
+                                                         </div></div></div>
+                                                         
+                                                         <div class="Center">
+                                                         <apex:outputPanel rendered="{!IF(Target__c.Vertical__c != 'Industrial',true, false)}">
+                                                         <div class="slds-grid slds-wrap ">
+                                                         <div class=" slds-inputslds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">DP Name<span style="color:red"></span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k relative_pos">
+                                                         
+                                                       <!--<apex:inputField value="{!tourPlanInstance.Account__c}" required="true"  id="xx_acc"/>-->
+                                                       
+                                                           <apex:inputField value="{!tourPlanInstance.Account__c}" id="targetId" styleClass="targetId slds-input slds-combobox__input" style="display:none" />
+                                                           <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account">
+                                                               <!--<apex:inputHidden value="{!tourPlanInstance.Account__c}" id="targetId" />
+                                                                <inputText type="text" size="20" id="targetId"/>-->
+                                                                <input type="text" size="20" id="targetName" value="{!tourPlanInstance.Account__r.Name}" Class="slds-input"/>                                                                
+                                                                <a href="#" id="myBtn" class="lk positionabs" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="Myfunction(targetName)"/> </a>
+                                                            </apex:outputPanel>  
+                                                           <!--<apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account">
+                                                               <apex:inputHidden value="{!tourPlanInstance.Account__c}" id="targetId" />
+                                                                <apex:inputText size="20" id="targetName" value="{!dpacc}" styleClass="slds-input"/>
+                                                                <a href="#" id="myBtn" class="lk" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" /> </a>
+                                                            </apex:outputPanel>-->
+                                                         <!--<a href="#" onclick="openLookupPopup('{!$Component.targetName}', '{!$Component.targetId}'); return false" class="abs_pos" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20"/> </a>-->
+                                                               
+                                                         </div></div>
+                                                         </apex:outputPanel></div>
+                                                         
+                                 
+                                                       
+                                                                                                                 
+                                                         
+                                                          <div class="dropdownDiv">
+                                                          <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">Market Type<span style="color:red">*</span></div>
+                                                   
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k"><apex:inputField value="{!tourPlanInstance.Market_Type__c}" required="true" styleClass="form-control multSel slds-input" id="xx_Market"/></div></div></div>
+                                                         
+                                                        <!-- <div class="dropdownDiv">
+                                                         <div class="slds-grid slds-wrap">
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-il5c">Location<span style="color:red">*</span></div>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k"><apex:inputField value="{!tourPlanInstance.Location__c}" required="true" styleClass="form-control multSel slds-input" id="xx_location"/></div></div></div>-->
+                                                         
+                                                         
+                                                       </div>
+                                                       <!-- ----------------------- Script For working with Lookup start ------------------ -->
+                                                         <script>
+                    // Get the modal for project by field which fetches account
+                    var modalMeeting = document.getElementById('myMeetingModal');
+                    var elmMeeting;
+                    var fldMeeting;
+                   
+                   
+                    // Get the <span> element that closes the modal
+                    var spanMeeting = document.getElementsByClassName("closeMeeting")[0];
+                   
+                    // When the user clicks the button, open the modal
+                    function MyfunctionTLuser(elid, fldid) {                    
+                       
+                        var modal2Meeting = document.getElementById('myMeetingModal');
+                        elmMeeting = elid.id;  
+                        fldMeeting = 'Workinguser' + fldid;        
+                        modal2Meeting.style.display = "block";
+                    }
+                   
+                    // When the user clicks on <span> (x), close the modal
+                    spanMeeting.onclick = function() {
+                        modalMeeting.style.display = "none";
+                    }
+                   
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                        if (event.target == modalMeeting) {
+                            modalMeeting.style.display = "none";
+                        }
+                    }
+                                                   
+               
+                    function myFunction5(userid) {
+                     console.log('userid--'+userid);
+                     var nameElementId = 'UserName'+userid;
+                      console.log('nameElementId ,,,,--'+nameElementId );
+                        //var x = event.target;
+                        var val = document.getElementById(nameElementId).value;
+                          var aid = userid;
+                           console.log('aid--'+aid);
+                        document.getElementById("thepage:theform:queryMeeting").value =  val; //fetch searched string
+                        document.getElementById(elmMeeting).value =  val;    //assign to Project by input field
+                        document.getElementsByClassName('Workinguser')[0].value = aid;
+                        modalMeeting.style.display = "none";
+                    }  
+               
+               
+                    var j$ = jQuery.noConflict();
+                    j$(document).ready(function(){
+                      j$("#myInput").on("keyup", function() {
+                        var value = j$(this).val().toLowerCase();
+                        j$("#myTable tr").filter(function() {
+                          j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                      });
+                    });
+                   
+                    j$('#myMeetingModal').find('#myInput').focus();
+                </script>
+                <!-- ----------------------- Script For working with lookup End ------------------ -->
+               
+                <script>
+                                                            //Dealer name lookup      
+       
+                                                            // Get the modal for project by field which fetches account
+                                                            var modal = document.getElementById('myModal2');
+                                                            var elmDistr;
+                                                            var fldDistr;
+                                                           
+                                                           
+                                                            // Get the <span> element that closes the modal
+                                                           var span = document.getElementsByClassName("closedealerpopup")[0];
+                                                           
+                                                            // When the user clicks the button, open the modal
+                                                            function Myfunctiondealer(elidDistr,fldidDistr) {  
+                                                            //alert('hiii'); 
+                                                               // alert(span);
+                                                                //alert('--elid--'+elidDistr.id + '--'+fldidDistr);
+                                                                var modal2 = document.getElementById('myModal2');
+                                                                elmDistr = elidDistr.id;  
+                                                                fldDistr = 'dealertargetId';
+                                                                console.log('elmDistr='+elmDistr);
+                                                                console.log('fldDistr='+fldDistr);                    
+                                                                modal2.style.display = "block";
+                                                            }
+                                                           
+                                                            // When the user clicks on <span> (x), close the modal
+                                                            span.onclick = function() {
+                                                            //alert('x is called');
+                                                               var modal = document.getElementById('myModal2');
+                                                                modal.style.display = "none";
+                                                            }
+                                                           
+                                                            // When the user clicks anywhere outside of the modal, close it
+                                                            window.onclick = function(event) {
+                                                                var modal = document.getElementById('myModal2');
+                                                                if (event.target == modal) {
+                                                                    modal.style.display = "none";
+                                                                }
+                                                            }
+                                                     
+                                                       
+                                                            function myFunctiondealer2(acctId) {
+                                                            //alert(acctId)
+                                                            var modal = document.getElementById('myModal2');
+                                                                 var nameElementId = 'acctNamedel'+acctId;
+                                                                   //alert(nameElementId );
+                                                                  var val = document.getElementById(nameElementId).value;
+                                                                  console.log("testing tuesdaay.........party name"+val);
+                                                                  var aid = acctId;
+                                                                 
+                                                                 
+                                                               
+                                                                document.getElementById("thepage:theform:query2").value =  val; //fetch search string on popup
+                                                                document.getElementById(elmDistr).value =  val;    //assign to input search element
+                                                                document.getElementsByClassName('dealertargetId')[0].value = aid;    // input field
+                                                                console.log(val);
+                                                                console.log(aid);  
+                                                                         
+                                                                modal.style.display = "none";
+                                                            }  
+                                                       
+                                                       
+                                                            var j$ = jQuery.noConflict();
+                                                            j$(document).ready(function(){
+                                                              j$("#myInput").on("keyup", function() {
+                                                                var value = j$(this).val().toLowerCase();
+                                                                j$("#myTabledealer tr").filter(function() {
+                                                                  j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                                                                });
+                                                              });
+                                                            });
+                                                           
+                                                            j$('#myModal2').find('#myInput').focus();
+                                                        </script>
+               
+               
+               
+               
+               
+                                                        <script>
+                                                            //DP name lookup      
+       
+                                                            // Get the modal for project by field which fetches account
+                                                            var modal = document.getElementById('myModal');
+                                                            var elmDistr;
+                                                            var fldDistr;
+                                                           
+                                                           
+                                                            // Get the <span> element that closes the modal
+                                                            var span = document.getElementsByClassName("close")[0];
+                                                           
+                                                            // When the user clicks the button, open the modal
+                                                            function Myfunction(elidDistr,fldidDistr) {                    
+                                                              //alert('--elid--'+elidDistr.id + '--'+fldidDistr);
+                                                                var modal2 = document.getElementById('myModal');
+                                                                elmDistr = elidDistr.id;  
+                                                                fldDistr = 'targetIdField';
+                                                                console.log('elmDistr='+elmDistr);
+                                                                console.log('fldDistr='+fldDistr);                    
+                                                                modal2.style.display = "block";
+                                                            }
+                                                           
+                                                            // When the user clicks on <span> (x), close the modal
+                                                            span.onclick = function() {
+                                                                //alert('x is called');
+                                                                var modal = document.getElementById('myModal');
+                                                                modal.style.display = "none";
+                                                            }
+                                                           
+                                                            // When the user clicks anywhere outside of the modal, close it
+                                                            window.onclick = function(event) {
+                                                                var modal = document.getElementById('myModal');
+                                                                if (event.target == modal) {
+                                                                    modal.style.display = "none";
+                                                                }
+                                                            }
+                                                     
+                                                       
+                                                            function myFunction2(acctId) {
+                                                                 var nameElementId = 'acctName'+acctId;
+                                                                  console.log(acctId);
+                                                                  var val = document.getElementById(nameElementId).value;
+                                                                  console.log("testing.........party name"+val);
+                                                                  var aid = acctId;
+                                                                 
+                                                                  console.log('elmDistr--'+elmDistr);
+                                                               
+                                                                console.log('aid--'+aid);
+                                                               
+                                                                document.getElementById("thepage:theform:query").value =  val; //fetch search string on popup
+                                                                document.getElementById(elmDistr).value =  val;    //assign to input search element
+                                                                document.getElementsByClassName('targetId')[0].value = aid;    // input field  
+                                                                //document.getElementById("thepage:theform:targetId").value =  aid;            
+                                                                modal.style.display = "none";
+                                                            }  
+                                                       
+                                                       
+                                                            var j$ = jQuery.noConflict();
+                                                            j$(document).ready(function(){
+                                                              j$("#myInput").on("keyup", function() {
+                                                                var value = j$(this).val().toLowerCase();
+                                                                j$("#myTable tr").filter(function() {
+                                                                  j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                                                                });
+                                                              });
+                                                            });
+                                                           
+                                                            j$('#myModalDistributor').find('#myInput').focus();
+                                                       
+                                                       
+                                                           
+                                                           
+                                                            function targetSave() {
+                                                                  //  console.log('checking...'+tourPlanId,param,clickedDate, prompType, visitType,x_State, x_district,x_location, $('[id$=chckbox]').is(':checked'), $('[id$=chckbox1]').is(':checked'), $('[id$=chckbox2]').is(':checked'), mettingComments, accId,dealeraccId);
+                                                      APPL_TOURPLAN_CALENDARCONTROLLER.saveTourPlan(tourPlanId,param,clickedDate, prompType, visitType,x_State, x_district, $('[id$=chckbox]').is(':checked'), $('[id$=chckbox1]').is(':checked'), $('[id$=chckbox2]').is(':checked'), mettingComments, accId,dealeraccId,beatMasterVal,function(res, event) {
+                                                                                 
+                                                                             
+                                                                                 if(event.status) {
+                                                                                     console.log('---resnow---'+res.tourPlanId);
+                                                                                     console.log('---res---'+res);
+                                                                                       console.log('---res.tourPlan.Id ---'+res.tourPlan.Id );
+                                                                                     j$('#calendar').fullCalendar( 'removeEvents', res.tourPlan.Id );
+                                                                                     var newEvent = {
+                                                                                         title: (res.tourPlan.Visit_Type__c != 'Holiday' && res.tourPlan.Visit_Type__c != 'Leave') ? ((res.tourPlan.Promotional_Type__c != undefined ? res.tourPlan.Promotional_Type__c+';':'')+(res.tourPlan.Visit_Type__c != undefined ? res.tourPlan.Visit_Type__c+';': '')+(res.tourPlan.Beat_Name__c == undefined?'No Beat':res.tourPlan.Beat_Name__c)) : 'Holiday/Market Closed/Leave',
+                                                                                         start: new Date(res.sDate),
+                                                                                         end: new Date(res.sDate),
+                                                                                         id: res.tourPlan.Id,
+                                                                                         allDay: true,
+                                                                                         rendering: "inverse-background",
+                                                                                         default: true,
+                                                                                         AA_pType: res.tourPlan.Promotional_Type__c,
+                                                                                         AA_vType: res.tourPlan.Visit_Type__c,
+                                                                                         AA_State: res.tourPlan.State__c,
+                                                                                         AA_District: res.tourPlan.District__c,
+                                                                                         AA_BeatMaster : res.tourPlan.Beat__c,
+                                                                                         AA_Location: res.tourPlan.Location__c,
+                                                                                         AA_Holiday: res.tourPlan.Holiday_Market_Closed__c,
+                                                                                         AA_Leave: res.tourPlan.Visit_Type__c == 'Leave' ? 'true' : 'false',
+                                                                                         AA_Meeting: res.tourPlan.Visit_Type__c == 'Meetings/Training/Others' ? 'true' : 'false',
+                                                                                         AA_MeetingDesc: res.tourPlan.Comments__c,
+                                                                                         color: (res.tourPlan.Visit_Type__c != 'Holiday' && res.tourPlan.Visit_Type__c != 'Leave') ? '#2ecc71' : '#7f8c8d'
+                                                                                     };
+                                                                                     
+                                                                                     j$('#calendar').fullCalendar('renderEvent', newEvent, true);                      
+                                                                                     events = j$('#calendar').fullCalendar('clientEvents');
+                                                                                     j$("#el_loading_Img").hide();
+                                                                                 } else if (event.type === 'exception') {
+                                                                                     j$("#el_loading_Img").hide();
+                                                                                     alert(event.message);
+                                                                                 }
+                                                                                 
+                                                                             });
+                                             
+                                              }
+                                                        </script>
+                                                     </apex:form>
+                                                    </div>
+                                                         
+                                                         <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 150%;opacity:0.45;width:100%;display:none;">
+                                                         <div class="waitingHolder" style="top: 104.2px; width: 100px; right:50px;">
+                                                         <!-- <img class="waitingImage" src= "{!$Resource.Redcircle}" width="360" height="110"  title="Please Wait..." /><br/> -->
+                                                         <span class="waitingDescription" style="Color:#303F9F;font-size: xx-large;opacity:1.25"><h1>Approval Pending...</h1></span>  
+                                                         </div>
+                                                         </div>
+                                                       
+                                                         
+                                                         <div class="waitingSearchDiv" id="el_loading_Img" style="background-color: #fbfbfb;height: 150%;opacity:0.85;width:100%;display:none;">
+                                                         <div class="waitingHolder" style="top: 104.2px; width: 100px; right:50px;">
+                                                         <img class="waitingImage" src= "{!$Resource.Redcircle}" width="360" height="110"  title="Please Wait..." /><br/>
+                                                         <span class="waitingDescription" style="Color:blue">Saving...</span>  
+                                                         </div>
+                                                         </div>
+                                                         </body>
+                                                         
+                                                         <script>
+                                                         var j$ = jQuery.noConflict();
+                                                                                    var jsonArr = [];
+                                                                                    var prompType = '';
+                                                                                    var visitType = '';
+                                                                                    var x_State = '';
+                                                                                    var accId = '';
+                                                                                    var dealeraccId='';
+                                                                                    var beatMasterVal='';
+                                                                                    var workinguser='';
+                                                                                    var targetDetails = {};
+                                                                                    var verticaltype = '';
+                                                                                    var x_district = '';
+                                                                                    //var x_location = '';
+                                                                                    var clickedDate = '';
+                                                                                    var param = '';
+                                                                                    var x_prompType = '';
+                                                                                    var x_visitType = '';
+                                                                                    var result = [];
+                                                                                    var monthEvents = [];
+                                                                                    var events = [];
+                                                                                    var boolValue = '';
+                                                                                    var confirm_MSG = '{!$Label.Approval_Confirm_Message}'; // Accessing Custom Label
+                                                                                    var tourPlanId = '';
+                                                                                    var holiday ;
+                                                                                    var leave ;
+                                                                                    var metting;
+                                                                                    var mettingComments;
+                                                                                    var x_targetName = '{!targetName}';
+                                                                                    var tourPlanReportId = '{!$Label.TourPlan_My_Report_Id}';
+                                                                                    var x_unallocatedStates = [];
+                                                                                    var RolNm ='{!UsrRolNme}';
+                                                                                    var Userprofile='{!UsrProfile}';
+                                                                                    var rolepicklist='{!Rolepicklst}';
+                                                                                   
+                                                                                   
+                                                                                    //Document -- Ready Function - Start.
+                                                                                    j$(document).ready(function() {
+                                                             
+                                                             if('{!approvalStatus}' == 'Pending') {
+                                                                 j$("#el_loading").show();
+                                                                 j$("#button").hide();
+                                                             } else if('{!approvalStatus}' == 'Approved') {
+                                                                 j$("#button").hide();
+                                                             }
+                                                             
+                                                             j$.each({!allocatedStates}, function(index, statvalue) {
+                                                              alert(statvalue);
+                                                             });
+                          
+                                                             if( navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+                                                                 //alert(navigator.userAgent.match(/Android/i));
+                                                               <!--  j$("#wrap").attr('style', 'font-size: 18px;width: 98%;padding-left:20px;');-->
+                                                                 j$(".leftPanel").attr('style', 'font-size: 18px;width:100%;display:inline-block;');
+                                                                 var X_breakPoint = "<br/>";
+                                                                 j$("#breakSpan").html(X_breakPoint);
+                                                                 j$("#calendar").attr('style', 'width:100%;');
+                                                                 j$("#external-events").attr('style', 'width:100%;padding-left:5px;');
+                                                                 j$("#button").attr('style', 'padding-right:220px;');
+                                                                 
+                                                             } else {
+                                                               <!--  j$("#wrap").attr('style', 'font-size: 14px;width:100%;height:95%;padding-left:20px;');-->
+                                                                 j$(".leftPanel").attr('style', 'font-size: 14px;width:100%;height:80%;display:inline-block;');
+                                                                 j$("#external-events").attr('style', 'width:100%;padding-left:5px;');
+                                                                 j$("#calendar").attr('style', 'width:100%;height:80%');
+                                                             }
+                                                             
+                                                             //Applying Accordion to the Target Section.
+                                                             j$('#external-events').accordion({
+                                                                 collapsible: true,
+                                                                 heightStyle: "content"
+                                                             });
+                                                             
+                                                             j$('#dialog-form').dialog({
+                                                                 autoOpen: false,
+                                                                 height: 600,
+                                                                 //width:500,                                                                
+                                                                 width:1300,
+                                                                 modal: true,
+                                                                 buttons:{
+                                                                     "Save": function() {   
+                                                                            
+                                                                          var countError = -1;  
+                                                                           var hasError = false;    
+                                                                         prompType = j$("[id$=promotionalvallist]").val();  
+                                                                         visitType = j$("[id$=retailvallist]").val();   
+                                                                         x_State = j$("[id$=xx_state]").val();  
+                                                                         x_district = j$("[id$=xx_district]").val();    
+                                                                         //x_location = j$("[id$=xx_location]").val();    
+                                                                         holiday = j$("[id$=chckbox]").prop('checked'); 
+                                                                         leave = j$("[id$=chckbox1]").prop('checked');  
+                                                                         metting = j$("[id$=chckbox2]").prop('checked');    
+                                                                         accId = j$("[id$=targetId]").val();    
+                                                                         dealeraccId =j$("[id$=dealertargetId]").val(); 
+                                                                          beatMasterVal= j$("[id$=beatValueSelected]").val();
+                                                                         //workinguser =j$("[id$=Workinguser]").val();  
+                                                                       // alert(accId); 
+                                                                         //alert(dealeraccId +'before assigning');  
+                                                                         mettingComments = j$('#CommentsMetting').val();    
+                                                                         
+                                                                         
+                                                                            
+                                                                         if(holiday == true || leave == true || metting == true) {  
+                                                                                dealeraccId = null; 
+                                                                                beatMasterVal = null;
+                                                                                accId=null; 
+                                                                             console.log('holiday........'+holiday);    
+                                                                             console.log('leave ........'+leave );  
+                                                                             console.log('metting ........'+metting );  
+                                                                             if(metting == true && j$('#CommentsMetting').val() == '') {    
+                                                                                 j$("#CommentsMetting").css("border-color","Red");  
+                                                                                 console.log('metting ........'+metting );  
+                                                                                 alert('Please enter comments');    
+                                                                             } else {   
+                                                                                    
+                                                                                j$("#el_loading_Img").show();   
+                                                                                    
+                                                                                
+                                                                                    
+                                                                                 if(targetDetails.Vertical__c == 'Column'|| targetDetails.Vertical__c == 'Plumbing') {  
+                                                                                      /*        
+                                                                                        if(accId == null || accId == "") {  
+                                                                                           // alert('please select DP Name');   
+                                                                                        }   
+                                                                                            else    
+                                                                                            {   
+                                                                                        */  
+                                                                                        console.log('inside if');   
+                                                                                            targetSave();   
+                                                                                              window.location.reload(); 
+                                                                                            //window.setTimeout(function(){window.location.reload()}, 3000);    
+                                                                                            j$(this).dialog("close");   
+                                                                                                
+                                                                                       // } 
+                                                                                  } 
+                                                                                        
+                                                                                    
+                                                                                 else { 
+                                                                                 console.log('inside else');                                                        
+                                                                                 targetSave();  
+                                                                                 //console.log('gsdhfgdsyfg');  
+                                                                                    
+                                                                                 window.location.reload();  
+                                                                                 //window.setTimeout(function(){window.location.reload()}, 3000);   
+                                                                                 j$(this).dialog("close");  
+                                                                                 }  
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                             }  
+                                                                                
+                                                                            
+                                                                            
+                                                                         }   
+                                                                            
+                                                                         else if(prompType == null && (visitType  == null || visitType == '--None--')) {    
+                                                                                
+                                                                             j$("[id$=promotionalvallist]").css("border-color","Red");  
+                                                                             j$("[id$=retailvallist]").css("border-color","Red");   
+                                                                             alert('Please populate values at least one field from Promotional Type or Visit Type');    
+                                                                         } 
+                                                                           
+                                                                         else if(x_district == '--None--' || x_district == '' || x_district == null) {  
+                                                                                
+                                                                             j$("[id$=promotionalvallist]").css("border-color","#cccccc");  
+                                                                             j$("[id$=retailvallist]").css("border-color","#cccccc");   
+                                                                             j$("[id$=xx_district]").css("border-color","Red"); 
+                                                                             alert('Please populate District value');   
+                                                                         } 
+                                                                          // else if(beatMasterVal == '--None--' || beatMasterVal == '' || beatMasterVal == null) {
+                                                                             
+                                                                         //  j$("[id$=promotionalvallist]").css("border-color","#cccccc");
+                                                                         // j$("[id$=retailvallist]").css("border-color","#cccccc");
+                                                                          //   j$("[id$=beatValueSelected]").css("border-color","Red");
+                                                                        //     alert('Please populate BeatMaster value');
+                                                                        // } 
+                                                                         else { 
+                                                                                
+                                                                             j$("[id$=xx_district]").css("border-color","#cccccc"); 
+                                                                              
+                                                                             j$("[id$=promotionalvallist]").css("border-color","#cccccc");  
+                                                                             j$("[id$=retailvallist]").css("border-color","#cccccc");   
+                                                                                
+                                                                             if(prompType == '') {  
+                                                                                 prompType = null;  
+                                                                             }  
+                                                                             if(visitType == '') {  
+                                                                                 visitType = null;  
+                                                                             }  
+                                                                             if(beatMasterVal == '--None--' || beatMasterVal == '' || beatMasterVal == null) {
+                                                                               beatMasterVal = null;
+                                                                                //   alert(beatMasterVal +',.....after assigning');
+                                                                             }
+                                                                             if(dealeraccId == '' || dealeraccId == undefined) {    
+                                                                                 dealeraccId = null;    
+                                                                                 //  alert(dealeraccId +',.....after assigning');   
+                                                                             }  
+                                                                             if(accId == '' || accId == undefined) {    
+                                                                                 accId = null;  
+                                                                                 //  alert(accId +',.....after assigning'); 
+                                                                             }  
+                                                                             j$("#el_loading_Img").show();  
+                                                                            
+                                                                            
+                                                                              if(targetDetails.Vertical__c == 'Column'  && rolepicklist!='RGM' )    
+                                                                               {    
+                                                                               targetSave();    
+                                                                                j$(this).dialog("close");   
+                                                                                           /*console.log('--workinguser ==='+workinguser ); 
+                                                                                            
+                                                                                           // if(workinguser == null || workinguser == "") {*/  
+                                                                                                //alert('please select DP Neefefrfrgferfergergtgtgtegttame');   
+                                                                                                //console.log('--workinguser22 ==='+workinguser );  
+                                                                                                // j$("#el_loading_Img").hide();    
+                                                                                                /* }else {  
+                                                                                
+                                                                                                   targetSave();    
+                                                                                                  j$(this).dialog("close"); 
+                                                                                                                                                            
+                                                                                                }*/ 
+                                                                                            
+                                                                                 }else {    
+                                                                                
+                                                                                              targetSave(); 
+                                                                                    
+                                                                                                  console.log('-----dealeraccId ,,,,,,,'+dealeraccId );                                                             
+                                                                                             j$(this).dialog("close");  
+                                                                                
+                                                                                         }  
+                                                                                
+                                                                             //alert('Site Visit and Other Activities Saved');  
+                                                                            
+                                                                            
+                                                                         }  
+                                                                        
+                                                                                
+                                                                            
+                                                                          document.getElementById('targetName').value = ""; 
+                                                                          document.getElementByID('dealertargetName').value = "";   
+                                                                           document.getElementById('userid').value = "";    
+                                                                          console.log('inside save');   
+                                                                          j$("[id$=xx_Market]").val('--None--');    
+                                                                         //window.reload(); 
+                                                                            
+                                                                     }, 
+                                                                     "Cancel": function() { 
+                                                                     j$("#dialog-form").dialog("close");    
+                                                                        window.location.close();    
+                                                                     console.log('inside cancel before null');  
+                                                                        
+                                                                     }  
+                                                                 }  
+                                                             });    
+                                                         }); // Document Ready function - End.
+                                             
+                                              j$(function() {
+                                                 
+                                                  param = "{!$CurrentPage.parameters.id}"; //CF00NV0000000ZF68_lkid
+                                                  EventJSON(param);
+                                                 
+                                                  APPL_TOURPLAN_CALENDARCONTROLLER.returnTarget(param,function(res, event) {
+                                                 
+                                                      if(event.status) {
+                                                          if(typeof res != "undefined"){
+                                                             targetDetails = res;
+                                                         }
+                                                      }
+                                                     
+                                                 
+                                                  });
+                                                  initExternalEvents();
+                                                 
+                                                  APPL_TOURPLAN_CALENDARCONTROLLER.retreiveStateValues(param, function(res, event) {
+                                                      if(event.status) {
+                                                          j$.each(res, function(i, item) {
+                                                           x_unallocatedStates.push(item);
+                                                          });
+                                                          }
+                                                          });
+                                                             
+                                              });
+                                             
+                                             
+                                             
+                                             
+                                              function initExternalEvents() {
+                                                  /* initialize the external events -----------------------------------------------------------------*/
+                                                  j$('#external-events div.external-event').each(function() {
+                                                      // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                                                      // it doesn't need to have a start or end
+                                                      var eventObject = {
+                                                          title: j$.trim(j$(this).text()) // use the element's text as the event title
+                                                      };
+                                                     
+                                                      // store the Event Object in the DOM element so we can get to it later
+                                                      j$(this).data('eventObject', eventObject);
+                                                     
+                                                      // make the event draggable using jQuery UI
+                                                      j$(this).draggable({
+                                                          zIndex: 999,
+                                                          revert: true,      // will cause the event to go back to its
+                                                          revertDuration: 0,  //  original position after the drag
+                                                          stop: function( event, ui ) {
+                                                             
+                                                          }
+                                                      });
+                                                  });
+                                              }
+                                             
+                                              //Populating event JSON data with css.
+                                              function EventJSON(targetId) {
+                                                  APPL_TOURPLAN_CALENDARCONTROLLER.retreiveTourRelatedTarget(targetId, function(res, event) {
+                                                      if(event.status) {                                                          
+                                                         
+                                                          j$.each(res, function(i, item) {
+                                                             
+                                                              var eventTitle = '';
+                                                              if(item.tourPlan.Visit_Type__c != 'Holiday' && item.tourPlan.Visit_Type__c != 'Leave' && item.tourPlan.Visit_Type__c != 'Meetings/Training/Others') {
+                                                                 
+                                                                  if(item.tourPlan.Promotional_Type__c != undefined) {
+                                                                     
+                                                                      eventTitle += item.tourPlan.Promotional_Type__c+';';
+                                                                  }
+                                                                  if(item.tourPlan.Visit_Type__c != '--None--' && item.tourPlan.Visit_Type__c != undefined) {
+                                                                     
+                                                                      eventTitle += item.tourPlan.Visit_Type__c+';';
+                                                                  }
+                                                                   if(item.tourPlan.Beat_Name__c != '') {
+                                                                     
+                                                                      eventTitle += item.tourPlan.Beat_Name__c;
+                                                                  }                                                             
+                                                              } else {
+                                                                 
+                                                                  eventTitle = item.tourPlan.Visit_Type__c == 'Holiday' ? 'Holiday/Market Closed' : (item.tourPlan.Visit_Type__c == 'Leave'? 'Leave' : 'Meetings/Training /Others');
+                                                              }
+                                                             
+                                                             
+                                                              jsonArr.push({
+                                                                  title:  eventTitle,
+                                                                  start: new Date(item.sDate),
+                                                                  end: new Date(item.sDate),
+                                                                  allDay: true,
+                                                                  id: item.tourPlan.Id,
+                                                                  rendering: "inverse-background",
+                                                                  default: true,
+                                                                  AA_pType: item.tourPlan.Promotional_Type__c,
+                                                                  AA_vType: item.tourPlan.Visit_Type__c,
+                                                                  AA_State: item.tourPlan.State__c,
+                                                                  AA_District: item.tourPlan.District__c,
+                                                                  AA_Location: item.tourPlan.Location__c,
+                                                                  AA_Holiday: item.tourPlan.Holiday_Market_Closed__c,
+                                                                  AA_BeatMaster : item.tourPlan.Beat__c,
+                                                                  AA_Leave: item.tourPlan.Visit_Type__c == 'Leave' ? true : false,
+                                                                  AA_Meeting: item.tourPlan.Visit_Type__c == 'Meetings/Training/Others' ? true : false,
+                                                                  AA_MeetingDesc: item.tourPlan.Comments__c,
+                                                                  color: item.tourPlan.Visit_Type__c != 'Holiday' && item.tourPlan.Visit_Type__c != 'Leave' ? '#2ecc71' : '#7f8c8d'
+                                                              });
+                                                          });
+                                                          initializeFullCal();
+                                                          getEventsForCurrentMonth();
+                                                      }
+                                                  });
+                                              }
+                                             
+                                             
+                                             
+                                             
+                                              function getEventsForCurrentMonth() {
+                                                 
+                                                  events = j$('#calendar').fullCalendar('clientEvents');
+                                                  for(var i=0;i < events.length;i++) {
+                                                      result.push(events[i].id);
+                                                  }
+                                              }
+                                             
+                                              //Calendar Initialization.
+                                              function initializeFullCal() {
+                                                  /* initialize the calendar -----------------------------------------------------------------*/
+                                                  j$('#calendar').fullCalendar({
+                                                     
+                                                      theme: true,
+                                                      eventLimit: true, // for all non-agenda views
+                                                      month: "{!startDateMonth}",
+                                                      year: "{!startDateYear}",
+                                                      defaultView: 'month',
+                                                      allDayDefault:true,
+                                                      header: {
+                                                          left: 'today',
+                                                          center: 'title',
+                                                          right: 'month,agendaWeek,agendaDay'
+                                                      },
+                                                      dayClick: function(date, allDay, jsEvent, view) {
+                                                         
+                                                          if(date.getMonth() == {!startDateMonth} && date.getFullYear() == {!startDateYear} && '{!approvalStatus}' != 'Approved') {
+                                                              tourPlanId = '';
+                                                              if(events.length > 0) {
+                                                                  for(var i=0; i < events.length; i++) {
+                                                                      if (moment(events[i].start).format('DD/MM/YYYY') ==  moment(date).format('DD/MM/YYYY')) {
+                                                                          boolValue = false;
+                                                                          break;
+                                                                      } else {
+                                                                          boolValue = true;
+                                                                      }
+                                                                  }
+                                                              } else {
+                                                                  boolValue = true;
+                                                              }
+                                                             
+                                                              if(boolValue) {
+                                                                 
+                                                                  //j$("[id$=promotionalvallist]").css("border-color","#cccccc");
+                                                                  popupDialog(date);
+                                                              }
+                                                          }
+                                                      },
+                                                      viewRender: function (view) {
+                                                          j$(".fc-day-number").prepend('<apex:image url="{!$Resource.AddIcon}" width="18" height="18" style="cursor:pointer" styleClass="dayPointer" />');
+                                                      },
+                                                      eventRender: function(event, element) {                      
+                                                          element.find('.fc-event-time').hide();
+                                                          /*element.qtip({
+                                                            content: event.description
+                                                        });*/              
+                                                          },
+                                                          eventClick: function(event, jsEvent, view) {
+                                                             
+                                                              EditEvent(event);
+                                                              //event =
+                                                              j$('#calendar').fullCalendar('updateEvent', event);
+                                                          },
+                                                          events: jsonArr,
+                                                          editable: false,
+                                                          droppable: false, // this allows things to be dropped onto the calendar !!!
+                                                          drop: function(date, allDay) { // this function is called when something is dropped
+                                                              // retrieve the dropped element's stored Event Object
+                                                              var originalEventObject = j$(this).data('eventObject');
+                                                              //alert(originalEventObject);
+                                                              // we need to copy it, so that multiple events don't have a reference to the same object
+                                                              var copiedEventObject = j$.extend({}, originalEventObject);
+                                                             
+                                                              // assign it the date that was reported
+                                                              copiedEventObject.start = date;
+                                                              copiedEventObject.allDay = allDay;
+                                                             
+                                                              // render the event on the calendar
+                                                              // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                                                              j$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+                                                             
+                                                              // is the "remove after drop" checkbox checked?
+                                                              if (j$('#drop-remove').is(':checked')) {
+                                                                  // if so, remove the element from the "Draggable Events" list
+                                                                  j$(this).remove();
+                                                              }
+                                                          }
+                                                      });
+                                                      j$('#external-events').show();
+                                                  }
+                                                 
+                                                 
+                                                  /* On Date Click Popup to save event details. */
+                                                  function popupDialog(date) {
+                                                     
+                                                      //j$('.multSel').prop('disabled', false);
+                                                      j$(".dropdownDiv").show();
+                                                      j$(".HolidayClass").show();
+                                                      j$(".LeaveClass").show();
+                                                      j$(".MettingClass").show();
+                                                      j$("#dialog-form").removeClass("checkdropdown");
+                                                      j$("#dialog-form").removeClass("checkdropdown1");
+                                                      j$("[id$=promotionalvallist]").val('');
+                                                      j$(".MettingDescClass").hide();
+                                                      j$("[id$=beatValueSelected]").val('--None--');
+
+                                                      if(j$("[id$=retailvallist]").val() != '--None--') {
+                                                          j$("[id$=retailvallist]").val('--None--');
+                                                      }
+                                                      //j$("[id$=chckbox]").val('');
+                                                      //j$('.multSel').prop('disabled', false);
+                                                      j$('#chckbox').attr('checked', false);
+                                                      j$('#chckbox1').attr('checked', false);
+                                                      j$('#chckbox2').attr('checked', false);
+                                                      if(j$("[id$=xx_district]").val() != null) {
+                                                          j$("[id$=xx_district]").val(null);
+                                                      }
+                                                     
+                                                      j$("#CommentsMetting").val('');
+                                                      //j$("[id$=xx_district]").val('');
+                                                     // j$("[id$=xx_location]").val('');
+                                                      //clickedDate = date.getDate()+'/'+(parseInt(date.getMonth()+1))+'/'+date.getFullYear();
+                                                      clickedDate = moment(date).format('DD/MM/YYYY');
+                                                      j$("#dialog-form").dialog( "option", "title", "Tour Plan - "+ clickedDate);
+                                                      j$("#dialog-form").dialog('open');
+                                                     
+                                                      j$.each(x_unallocatedStates, function(index, statvalue) {
+                                                         j$("[id$=xx_state] option[value='"+statvalue+"']").remove();
+                                                      });
+                                                     //j$("[id$=xx_state] option[value='Goa']").remove();
+                                                      //j$("[id$=xx_state] option[value='Delhi']").remove();
+                                                      //j$("[id$=xx_state]").prop('disabled',true);
+                                                  }
+                                                  </script>
+       
+        <script>
+        /* On Date Click Popup to Update event details. */
+        function EditEvent(event) {
+           console.log('Edit Coming');
+            var promSplitvalues = [];
+            var tempPromVal = '';
+            var tempVisitVal = '';
+            var tempHol = '';
+            var tempLeave = '';
+            var tempMeeting = '';
+            var tempMeetingDesc = '';
+            tempPromVal = String(event.AA_pType);
+            tempVisitVal = String(event.AA_vType);
+            tempHol =  String(event.AA_Holiday);
+            tempLeave = String(event.AA_Leave);
+            tempMeeting = String(event.AA_Meeting);
+            tempBeatMaster = String(event.AA_BeatMaster);
+            //tempMeetingDesc =
+            console.log('tempBeatMaster'+tempBeatMaster);
+            var prom_Values = [];
+           
+            j$.each(x_unallocatedStates, function(index, statvalue) {
+                     j$("[id$=xx_state] option[value='"+statvalue+"']").remove();
+             });
+           j$("[id$=beatValueSelected]").val(tempBeatMaster);
+           
+            if(tempHol == 'true' || tempLeave == 'true' || tempMeeting == 'true') {
+               
+                if(tempHol == 'true') {
+                   
+                    j$("#CommentsMetting").val('');
+                    j$("#chckbox").prop('checked', true);
+                    j$("#chckbox1").prop('checked', false);
+                    j$("#chckbox2").prop('checked', false);
+                    j$(".LeaveClass").hide();
+                    j$(".HolidayClass").show();
+                    j$(".MettingClass").hide();
+                    j$(".MettingDescClass").hide();
+                    j$("#CommentsMetting").val('');
+                    j$("#dialog-form").removeClass("checkdropdown1");
+                    j$("#dialog-form").addClass("checkdropdown");
+                } else if(tempLeave == 'true') {
+                   
+                    j$("#CommentsMetting").val('');
+                    j$("#chckbox1").prop('checked', true);
+                    j$("#chckbox").prop('checked', false);
+                    j$("#chckbox2").prop('checked', false);
+                    j$(".HolidayClass").hide();
+                    j$(".LeaveClass").show();
+                    j$(".MettingClass").hide();
+                    j$(".MettingDescClass").hide();
+                    j$("#CommentsMetting").val('');
+                    j$("#dialog-form").removeClass("checkdropdown1");
+                    j$("#dialog-form").addClass("checkdropdown");
+                } else if(tempMeeting == 'true') {
+                   
+                    j$("#chckbox2").prop('checked', true);
+                    j$("#chckbox1").prop('checked', false);
+                    j$("#chckbox").prop('checked', false);
+                    j$(".HolidayClass").hide();
+                    j$(".LeaveClass").hide();
+                    j$(".MettingClass").show();
+                    j$(".MettingDescClass").show();
+                    j$("#CommentsMetting").val('');
+                   
+                    j$("#CommentsMetting").val(event.AA_MeetingDesc);
+                    j$("#dialog-form").removeClass("checkdropdown");
+                    j$("#dialog-form").addClass("checkdropdown1");
+                }
+               
+                j$("[id$=promotionalvallist]").val('');
+                
+                j$("[id$=retailvallist]").val('');
+                //j$("[id$=xx_state]").val('');
+                j$("[id$=xx_district]").val(null);
+                //j$("[id$=xx_location]").val(event.AA_Location);
+                //j$('.multSel').prop('disabled', true);
+               
+                //j$('.multSel').attr('disabled',true);
+                j$(".dropdownDiv").hide();
+               
+                clickedDate = moment(event.start).format('DD/MM/YYYY');
+                tourPlanId = event.id;
+                j$("#dialog-form").dialog( "option", "title", "Tour Plan - "+ clickedDate);
+                j$("#dialog-form").dialog('open');
+                //j$("[id$=xx_state]").prop('disabled',true);
+            }
+           
+            //if(tempPromVal != 'undefined' && tempVisitVal != '' && tempPromVal != '' && tempVisitVal != 'undefined') {
+            else {
+                if(tempPromVal != 'undefined') {
+                    promSplitvalues = event.AA_pType.split(';');
+                   
+                    j$.each( promSplitvalues, function( key, value ) {
+                        prom_Values.push(value);
+                    });
+                }
+               
+                j$("#CommentsMetting").val('');
+                j$(".MettingDescClass").hide();
+                j$("#dialog-form").removeClass("MettingDescClass");
+                j$("[id$=promotionalvallist]").val('');
+                j$("[id$=retailvallist]").val('');
+                //j$("[id$=xx_state]").val('');
+                j$("[id$=xx_district]").val(null);
+               // j$("[id$=xx_location]").val('');
+                j$("[id$=chckbox]").val(event.AA_Holiday);
+                //j$('.multSel').prop('disabled', false);
+                j$("[id$=promotionalvallist]").val(prom_Values);
+                j$("[id$=retailvallist]").val(event.AA_vType);
+                //j$("[id$=xx_state]").val(event.AA_State);
+                j$("[id$=xx_district]").val(event.AA_District);
+                //j$("[id$=xx_location]").val(event.AA_Location);
+                //j$("#chckbox").prop('checked', false);
+                //j$('.multSel').prop('disabled', false);                              
+                j$("#dialog-form").removeClass("checkdropdown");
+                j$("#dialog-form").removeClass("checkdropdown1");
+                j$(".dropdownDiv").show();
+                clickedDate = moment(event.start).format('DD/MM/YYYY');
+                tourPlanId = event.id;
+               
+                j$(".LeaveClass").show();
+                j$(".HolidayClass").show();
+                j$(".MettingClass").show();
+                j$("#chckbox").prop('checked', false);
+                j$("#chckbox1").prop('checked', false);
+                j$("#chckbox2").prop('checked', false);
+               
+                j$("#dialog-form").dialog( "option", "title", "Tour Plan - "+ clickedDate);
+                j$("#dialog-form").dialog('open');
+                //j$("[id$=xx_state]").prop('disabled',true);
+            }
+        }
+        </script>
+       
+        <script>
+       
+        /* Submit For Approval method; */
+        function submitForApproval() {
+           
+            var tarMonth = {!startDateMonth}+1;
+            var tarYear = {!startDateYear};
+            //moment("2012-02", "YYYY-MM").daysInMonth();
+            var monYear =   tarYear+"-"+tarMonth ;
+            var NO_OF_DAYS = moment(monYear, "YYYY-MM").daysInMonth();
+            var NO_TourPlan = j$('#calendar').fullCalendar('clientEvents');
+           
+            if(NO_TourPlan.length < NO_OF_DAYS) {
+               
+                alert('Please fill Tour Plan for all the days of the month');
+            } else {
+               
+                var r = confirm(confirm_MSG);
+                if (r == true) {
+                    j$("#el_loading_Img").show();
+                    APPL_TOURPLAN_CALENDARCONTROLLER.saveTargetonApproval(param, 'Pending','Pending', function(res, event) {
+                        if(event.status) {
+                            j$("#el_loading_Img").hide();
+                            alert('Successfully TourPlan Submitted for Approval!');
+                            j$("#el_loading").show();
+                           
+                            if((typeof sforce != 'undefined') && (sforce != null)) {
+                               
+                                //sforce.one.navigateToSObject(param, 'detail');
+                                //sforce.one.back(?);
+                                Sfdc.canvas.publisher.publish({name: "publisher.close", payload:{ refresh:"true"}});
+                               
+                            } else {
+                               
+                                window.location.href = '/'+param;
+                               
+                            }  
+                        } else if (event.type === 'exception') {
+                                                                                         
+                            //j$("#el_loading").hide();
+                            j$("#el_loading_Img").hide();
+                            console.log(event.message);
+                            if(event.message.indexOf("Contact your administrator for help.") >= 0) {
+                                alert('Manager is not defined for you. Contact your administrator for help...');
+                            } else if(event.message.indexOf("first error: ALREADY_IN_PROCESS, Cannot submit object already in process.") >= 0) {
+                                alert('Already record is in Approval.');
+                            }  else {
+                               alert(event.message);
+                            }
+                          }
+                    });
+                }
+            }
+            //Call for Remoting    
+        }
+       
+        /* Disable fields on check of Holiday/Market Closed */
+        function disableFields(checktype) {
+       
+           
+            if(checktype == 'holiday') {
+                 
+               var x = $('[id$=chckbox]').is(':checked');
+                //var x=j$('#chckbox').prop('checked');
+               console.log("xx....."+x);
+                if(x==true) {  
+                 //alert("comingvvvvvvvvv....."+checktype );  // Checkbox -- True
+                    //j$('.multSel').prop('disabled', true);
+                    //j$('.multSel').attr('disabled',true);
+                    j$(".dropdownDiv").hide();
+                    j$(".LeaveClass").hide();
+                    j$(".MettingClass").hide();
+                    j$(".Center").hide();
+                    //j$(".MettingDescClass").hide();
+                    j$("#dialog-form").addClass("checkdropdown");
+                   
+                } else {
+                   
+                    //j$('.multSel').prop('disabled', false);
+                    j$(".dropdownDiv").show();
+                    j$(".LeaveClass").show();
+                    j$(".MettingClass").show();
+                    //j$(".MettingDescClass").show();
+                       j$(".Center").show();
+                    j$("#dialog-form").removeClass("checkdropdown");
+                    if(j$("[id$=xx_district]").val() == null) {
+                        //j$("[id$=xx_district]").val('--None--');
+                        //alert('123');
+                    }
+                    //j$("[id$=xx_state]").prop('disabled',true);
+                    j$("#dialog-form").dialog( "option", "height", 600 );
+                }
+            } else if(checktype == 'leave') {
+                  var y=$('[id$=chckbox1]').is(':checked');
+                  console.log("yy....."+y);
+                   if(y==true) { // Checkbox -- True
+                    //j$('.multSel').prop('disabled', true);
+                    //j$('.multSel').attr('disabled',true);
+                    j$(".dropdownDiv").hide();
+                    j$(".HolidayClass").hide();
+                    j$(".MettingClass").hide();
+                    //j$(".MettingDescClass").hide();
+                    j$(".Center").hide();
+                     j$("#dialog-form").addClass("checkdropdown");
+                   
+                } else {
+                   
+                    //j$('.multSel').prop('disabled', false);
+                    j$(".dropdownDiv").show();
+                    j$(".HolidayClass").show();
+                    j$(".MettingClass").show();
+                    //j$(".MettingDescClass").show();
+                    j$("#dialog-form").removeClass("checkdropdown");
+                    if(j$("[id$=xx_district]").val() == null) {
+                        //j$("[id$=xx_district]").val(null);
+                        //alert('234');
+                    }
+                    //j$("[id$=xx_state]").prop('disabled',true);
+                    j$("#dialog-form").dialog( "option", "height", 600 );
+                }
+            } else if(checktype == 'Metting') {
+                   var z=$('[id$=chckbox2]').is(':checked');
+                   console.log("zz....."+z);
+                  if(z==true) { // Checkbox -- True
+                   
+                    j$(".MettingClass").show();
+                    j$(".MettingDescClass").show();
+                    //j$('.multSel').attr('disabled',true);
+                    j$(".dropdownDiv").hide();
+                    j$(".HolidayClass").hide();
+                    j$(".LeaveClass").hide();
+                    j$(".Center").hide();
+                    j$("#dialog-form").addClass("checkdropdown1");
+                } else {
+                    //alert('123');
+                    //j$('.multSel').attr('disabled',false);
+                    j$(".MettingDescClass").hide();
+                    j$(".dropdownDiv").show();
+                    j$(".HolidayClass").show();
+                    j$(".LeaveClass").show();
+                    j$(".MettingClass").show();
+                   
+                    j$("#dialog-form").removeClass("checkdropdown1");
+                    j$("#dialog-form").removeClass("checkdropdown");
+                    j$("#dialog-form").dialog( "option", "height", 600 );
+                   
+                }
+            }
+        }
+       
+       
+ </script>
+</apex:page>

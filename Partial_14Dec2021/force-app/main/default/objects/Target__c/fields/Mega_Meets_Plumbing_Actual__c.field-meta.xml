@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mega_Meets_Plumbing_Actual__c</fullName>
+    <description>Mega Plumbers Meets, Architects / Engineers / Consultants Factory Visit, 
+Plumbers Factory Visit, Architects Meets, 
+Engineers Meets, Plumbing Dealers Factory Visits, Plumbing Dealer / Distributor Meets</description>
+    <externalId>false</externalId>
+    <label>Mega Meets Plumbing (Actual)</label>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Other Activities</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Othet_Activities__c</field>
+        <operation>equals</operation>
+        <value>Promotional Activity</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Promotion_Type__c</field>
+        <operation>equals</operation>
+        <value>Mega Plumbers Meets, Architects / Engineers / Consultants Factory Visit, Plumbers Factory Visit, Architects Meets, Engineers Meets, Plumbing Dealers Factory Visits, Plumbing Dealer / Distributor Meets, Plumbing DSM Meet/Training</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AP_Site_Visit__c.Target__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

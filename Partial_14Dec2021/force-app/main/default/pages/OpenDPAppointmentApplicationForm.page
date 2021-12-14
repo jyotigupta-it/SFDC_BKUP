@@ -1,0 +1,13 @@
+<apex:page standardController="Account" recordSetVar="accounts">
+    <script>
+        var compDefinition = { 
+            "componentDef" : "c:dpAppointmentApplicationFormlightning", 
+            "attributes" :{ 
+             } 
+            };
+        // Base64 encode the compDefinition JS object
+        var encodedCompDef = btoa(JSON.stringify(compDefinition));
+        window.parent.location = "/one/one.app#"+encodedCompDef;
+        //window.open('/lightning/cmp/c__dpAppointmentApplicationFormlightning', "_self");
+    </script>
+</apex:page>

@@ -1,0 +1,50 @@
+<apex:page id="page_ld" standardController="Tour_Program__c" >
+<apex:form id="form_ld">
+
+        <script type="text/javascript">
+            function addLoadEvent(func) { 
+                var oldonload = window.onload; 
+                if (typeof window.onload != 'function') { 
+                    window.onload = func; 
+                }
+                else { 
+                    window.onload = function() { 
+                        if (oldonload) { 
+                            oldonload(); 
+                        } 
+                        func(); 
+                    } 
+                } 
+            }
+            addLoadEvent(test); 
+            function test() {
+                
+                document.getElementById("{!$Component.j_id2:gen:com}").value = "TourProgram";
+               
+                
+            }
+        </script>
+
+<apex:sectionHeader title="Tour Program Edit" subtitle="New Tour Program " />
+<apex:pageBlock >
+    <apex:pageMessages />
+    <apex:pageBlockButtons location="Both">
+        <apex:commandButton value="Save" Action="{!Save}"/>
+        <apex:commandButton value="Cancel" Action="{!Cancel}"/>
+         
+    </apex:pageBlockButtons>
+<apex:pageBlockSection id="gen" title="Tour Program Information" collapsible="false">
+    <apex:repeat value="{!$ObjectType.Tour_Program__c.FieldSets.TourProgram1}" var="f"> 
+       <apex:inputField value="{!Tour_Program__c[f]}" required="true"/>
+    </apex:repeat>
+    <apex:inputhidden value="{!Tour_Program__c.Name}" id="com"/>
+    
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Promotion Targets" collapsible="false">
+<apex:repeat value="{!$ObjectType.Tour_Program__c.FieldSets.TourProgram2}" var="f" > 
+      <apex:inputField value="{!Tour_Program__c[f]}"/>
+    </apex:repeat>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,84 @@
+<aura:component controller="LCC_CreateInvoice" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="serviceChargeList" type="List"/>
+    <aura:attribute name="selectedList" type="List" />
+    <aura:attribute name="showSCList" type="Boolean" default="true"/>
+    <aura:attribute name="showInvoice" type="Boolean" default="false"/>
+    <aura:attribute name="spinner" type="boolean" default="FALSE"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:if isTrue="{!v.spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.showSCList}">
+        <h2>Service Charges</h2>
+        
+        <div class="slds-scrollable" style="height:100%;">
+            <table width = "150%" class="slds-table slds-table_cell-buffer slds-table_fixed-layout slds-max-medium-table_stacked-horizontal slds-table_bordered" role="grid">      
+                <thead>  
+                    <tr class="slds-text-title--caps">
+                        <th class="slds-is-sortable" scope="col">           
+                            <div class="slds-truncate" title="Select">Select</div>
+                        </th>
+                        <th class="slds-is-sortable" scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th class="slds-is-sortable" scope="col">
+                            <div class="slds-truncate" title="Cutomer Name">Customer Name</div>
+                        </th>
+                        <th class="slds-is-sortable" scope="col">
+                            <div class="slds-truncate" title="Location Name">Location Name</div>
+                        </th>
+                        <th class="slds-is-sortable" scope="col">
+                            <div class="slds-truncate" title="Plumber">Plumber</div>
+                        </th>
+                        <th class="slds-is-sortable" scope="col">
+                            <div class="slds-truncate" title="Service Charges">Service Charges</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>        
+                    <aura:iteration items="{!v.serviceChargeList}" var="sci">
+                        <tr>
+                            <th>
+                                <label class="slds-checkbox">
+                                    <ui:inputCheckbox aura:id="checkCar" name ="{!sci.sc.Id}" value="{!sci.check}" text="{!sci.sc.Id}" click="{!c.makeTrue}" />
+                                    <span class="slds-checkbox--faux" />
+                                    <span class="slds-form-element__label"></span>
+                                </label>
+                            </th>
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!sci.sc.Name}">{!sci.sc.Name}</div>
+                            </th>
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!sci.sc.Customer_Name__c}">{!sci.sc.Customer_Name__c}</div>
+                            </th>
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!sci.sc.Location_Name__c}">{!sci.sc.Location_Name__c}</div>
+                            </th>
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!sci.sc.Plumber__c}">{!sci.sc.Plumber__c}</div>
+                            </th>
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!sci.sc.Service_Charge_Amount__c}">{!sci.sc.Service_Charge_Amount__c}</div>
+                            </th>
+                        </tr>
+                        
+                    </aura:iteration>
+                </tbody>	
+            </table>  
+        </div>
+        <br/>
+        <center><lightning:button label="Select All" class="slds-button_neutral" onclick="{!c.selectAll}"  /><lightning:button label="Clear" class="slds-button_neutral" onclick="{!c.clearList}"  /><lightning:button label="Submit" class="slds-button_brand" onclick="{!c.handleSelected}"  /></center>
+    </aura:if>
+    <aura:if isTrue="{!v.showInvoice}">
+        
+        {!v.body}
+    </aura:if>
+</aura:component>

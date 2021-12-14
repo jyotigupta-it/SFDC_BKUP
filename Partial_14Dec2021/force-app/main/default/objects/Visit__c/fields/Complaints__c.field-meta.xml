@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Complaints__c</fullName>
+    <externalId>false</externalId>
+    <label>Complaints</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Raised_Complaint__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Wrong/Invalid Number</fullName>
+                <color>#330000</color>
+                <default>false</default>
+                <label>Wrong/Invalid Number</label>
+            </value>
+            <value>
+                <fullName>Not Attended</fullName>
+                <color>#FF6600</color>
+                <default>false</default>
+                <label>Not Attended</label>
+            </value>
+            <value>
+                <fullName>BDM Response Poor</fullName>
+                <default>false</default>
+                <label>BDM Response Poor</label>
+            </value>
+            <value>
+                <fullName>Supply not in Time</fullName>
+                <default>false</default>
+                <label>Supply not in Time</label>
+            </value>
+            <value>
+                <fullName>Service Poor</fullName>
+                <default>false</default>
+                <label>Service Poor</label>
+            </value>
+            <value>
+                <fullName>Technical Issues</fullName>
+                <default>false</default>
+                <label>Technical Issues</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Wrong/Invalid Number</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Not Attended</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>BDM Response Poor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Supply not in Time</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Service Poor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Technical Issues</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

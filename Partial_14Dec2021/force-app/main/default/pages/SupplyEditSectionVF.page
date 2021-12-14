@@ -1,0 +1,426 @@
+<!-- *******************XXX**********************************
+
+Created By      :Subhajit Ghosh
+Created Date    :11-05-2019
+Modified Date   :
+Version         :1.0
+Description     :Controller of SupplyEditSectionVF page, Edit the supply on click of edit button
+
+
+********************XXX*********************************** -->
+<apex:page Standardcontroller="Opportunity" extensions="SupplyEditSectionController,CustomLookupForProject" docType="html-5.0" showHeader="false" sidebar="false" >
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type='text/javascript' src='/canvas/sdk/js/publisher.js'/>
+    <style>
+        .lookup_style {
+            position:relative!important;
+        }
+    .lookup_style a {
+        position: absolute!important;
+        right: 2px!important;
+        top: 5px!important;
+    }
+    .mand {
+        font-size: 20px!important;
+        color: red!important;    
+    }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <style type="text/css">
+            .multi_select select,.multi_select .lookupInput input
+            {
+                background-color: #fff;
+                color: #16325c;
+                
+                border: 1px solid #d8dde6;
+                
+                border-radius: .25rem;margin-right: 5px; 
+                padding-left: .5rem;
+                padding-right: 1.5rem;
+                
+                min-height: calc(1.875rem + (1px * 2));
+                
+                height: inherit;
+            }
+    .multi_select .lookupInput input {
+        position: relative;
+        top: -2px;
+    }
+    .multi_select .lookupInput a {
+        position: relative;
+        z-index: 9999;
+        right: 35px;top: -3px;
+    }
+    
+    
+    .imgClass:hover {
+        cursor:pointer;
+    }
+    .fieldSize {
+        width: 60px;
+    }
+    .look_css input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+    }
+    .look_css {
+        position:relative;
+    }
+    .look_css a {
+        position:absolute;
+        right:3px;
+        top:6px;
+    }
+    .form_inputs select {
+        width:100%!important;
+    }
+    @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .slds-input, .look_css input[type="text"] {
+            width:150px!important;
+        }
+        
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        z-index:999999;
+    }
+    
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    .delete_img img {
+        width:20px!important;
+        height:20px!important;
+        max-width:20px!important;
+    }
+    </style>
+    
+    <apex:slds />
+        <apex:form id="theform">
+            
+ <!----------------------------------------Distributor Name popup------------------------------------- -->
+<div id="myModal" class="modal">    
+ <div class="modal-content" >
+ <span class="close">&times;</span>
+                      
+ <apex:outputpanel id="lookupPanel"  styleclass="outpanel">   
+                            
+                            
+<div class="slds-page-header">
+ <div clss="slds-media">
+<div class="slds-media__body">
+  <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+<p class="slds-text-body_small slds-line-height_reset"></p>
+ </div>
+ </div>
+</div>
+                                        
+<div class="slds-p-around_x-small">
+ <p>Please enter the search term below and click the 'Go' button.  This will
+execute a search across all text fields</p>
+<p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>   
+ <apex:input value="{!orderQuery}" id="query" disabled="false" type="text"/> 
+  <span><apex:commandButton value="Go" action="{!runOrderQuery}" rerender="lookupPanel,dptable"/></span>
+                                                    
+ </div>
+                                                    
+ <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptable">
+<thead>
+ <tr class="slds-text-title_caps">
+ <th>Name</th>
+ <th>Primary Contact Person Name</th>
+<th>Party Type</th>
+<th>Contact Number (Mobile)</th>
+<th>State</th>
+<th>District</th>
+ <th>Location</th>
+ <!--<th>Status</th>
+  <th>Street Address</th>
+ <th>Ramco ID</th>-->
+  </tr>   
+  </thead>
+ <tbody id="myTable">   
+                                                            
+   <apex:repeat value="{!orderAccounts}" var="account">       
+  <tr class="slds-hint-parent">
+<td data-label="Name" >
+ <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+  <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2('{!account.id}')">{!account.Name}</apex:outputLink>  </div>
+   </td>
+ <td data-label="Primary Contact Person Name ">
+ <div class="slds-truncate" title="Primary Contact Person Name"><apex:outputText value="{!account.Primary_Contact_Person_Name__c}" /></div>
+ </td>
+ <td data-label="Party Type">
+ <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+</td>
+<td data-label="Contact Number (Mobile)">
+<div class="slds-truncate" title="Contact Number (Mobile)"><apex:outputText value="{!account.Contact_Number_Mobile__c}" /></div>
+</td>
+<td data-label="State ">
+<div class="slds-truncate" title="State"><apex:outputText value="{!account.State__c}" /></div>
+</td>
+<td data-label="District ">
+<div class="slds-truncate" title="District"><apex:outputText value="{!account.District__c}" /></div>
+</td>
+<td data-label="Location ">
+<div class="slds-truncate" title="Location"><apex:outputText value="{!account.City__c}" /></div>
+</td>
+<!--<td data-label="Status ">
+<div class="slds-truncate" title="Status "><apex:outputText value="{!account.Status__c}" /></div>
+</td>
+<td data-label="Street Address">
+<div class="slds-truncate" title="Street Address"><apex:outputText value="{!account.Street_Address__c}" /></div>
+</td>
+<td data-label="Ramco ID">
+<div class="slds-truncate" title="Ramco ID"><apex:outputText value="{!account.Ramco_ID__c}" /></div>
+</td>-->
+</tr>
+
+                                                                                                                
+<input id="closebtn" type="hidden" />
+</apex:repeat>
+</tbody>
+</table> 
+
+
+</apex:outputpanel>
+</div></div> 
+                                                                                                                    
+<!--------------------------------------Distributor Name popup end-----------------------------------------  -->
+
+<apex:pageMessages id="shwMsg"></apex:pageMessages>
+<apex:outputpanel >
+<apex:actionstatus id="status">
+<apex:facet name="start">
+<div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+height: 100%;opacity:0.65;width:120%;"> 
+<div class="waitingHolder" style="top: 74.2px; width: 91px;">
+<img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+<span class="waitingDescription">Loading...</span>
+</div>
+</div>
+</apex:facet>
+</apex:actionstatus>
+</apex:outputpanel>
+
+
+
+
+                                                                                                                                            
+<!-- *********APPL Supply Section*********** -->
+
+<apex:outputpanel title="SUPPLY" rendered="{!applType == 'supplyType'}" >
+
+<div>
+<apex:variable var="i" value="{!1}" />
+<table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+<thead>
+<tr class="slds-text-title_caps">
+<th>Order No.</th>
+<th>Product</th>
+<th>Invoice Value</th>
+<th>Invoice Date</th>
+<th>Distributor Name</th> 
+<th>ORC/Markup</th>
+<th>ORC Status</th>
+<th>Payment Terms</th>
+<th>Supply Status</th>
+<th>Delete </th>
+</tr>   
+</thead>
+<tbody>   
+<apex:repeat value="{!SupplyListPro}" var="oppSupply"  rendered="{!SupplyListPro != null && !SupplyListPro.empty}">
+<tr class="slds-hint-parent">
+<td data-label="ORDER NO." >
+<div class="slds-truncate" title="Order No.">
+<apex:outputText value="{!oppSupply.SupplyLineItemInstance.SupplyDetails__r.New_Order__r.Name}"/>
+</div>
+</td>
+<td data-label="PRODUCT" >
+<div class="slds-truncate" title="Product">
+<apex:outputText value="{!oppSupply.SupplyLineItemInstance.Product_name__c}"/>
+</div>
+</td>                         
+
+<td data-label="Invoice Value" >
+<div class="slds-truncate" title="Invoice Value">
+<apex:inputField value="{!oppSupply.SupplyLineItemInstance.Order_Value__c}" styleClass="fieldSize"/>
+</div>
+</td>               
+<td data-label="Invoice Date" >
+<div class="slds-truncate" title="Invoice Date">
+<apex:inputField value="{!oppSupply.SupplyLineItemInstance.Invoice_Date__c}"/>
+</div>
+</td>
+
+<td data-label="Distributor Name" class="multi_select">
+
+<apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account" >
+<apex:outputField value="{!oppSupply.SupplyLineItemInstance.Distributor_Name__c}" id="targetId" styleClass="targetfield{!i}"/>
+
+</apex:outputPanel>
+
+</td>                         
+<td data-label="ORC/Markup" >
+<div class="slds-truncate" title="ORC/Markup">
+<apex:outputField value="{!oppSupply.SupplyLineItemInstance.ORC_Markup__c}" styleClass="fieldMSize"/>
+</div>
+</td>       
+<td data-label="ORC Status" >
+<div class="slds-truncate" title="ORC Status">
+<apex:inputField value="{!oppSupply.SupplyLineItemInstance.ORC_Status__c}"/>
+</div>
+</td>
+
+<td data-label="Payment Terms" >
+<div class="slds-truncate" title="Payment Terms">
+<apex:inputField value="{!oppSupply.SupplyLineItemInstance.Payment_Terms__c}"/>
+</div>
+</td>                         
+
+<td data-label="Supply Status" >
+<div class="slds-truncate" title="Supply Status">
+<apex:inputField value="{!oppSupply.SupplyLineItemInstance.Supply_Status__c}" />
+</div>
+</td>       
+<td data-label="delete" >
+<div class="slds-truncate" >
+<apex:image id="theImage" styleClass="imgClass" value="{!$Resource.DeleteIcon}" width="20" height="20" onclick="javascript:if (window.confirm('Are you sure?')) deleteData('{!oppSupply.SupplyLineItemInstance.Id}') " />
+</div>
+</td>  
+
+</tr>
+<apex:variable var="i" value="{!i+1}" />
+</apex:repeat>
+</tbody>
+</table>
+</div> 
+</apex:outputpanel> 
+
+
+
+
+
+                                                                                                                                                                                                                                                            
+<div class="slds-p-around_small">
+<center>
+<apex:commandButton value="Save"  action="{!savePage}" status="status" rerender="shwMsg" styleClass="slds-button slds-button_brand" />
+<apex:commandButton value="Cancel" onclick="window.top.location='/{!oppProId}'; return false" styleClass="slds-button slds-button_neutral"/>
+</center>
+</div>
+
+<!-- <apex:actionFunction action="{!deleteRow}" name="deleteRow" rerender="EditBlock" status="status">
+<apex:param name="delId" value="" /> 
+</apex:actionFunction> -->
+<apex:actionFunction action="{!deleteData}" name="deleteData" rerender="EditBlock,theform" status="status">
+<apex:param name="emptyDataId" value="" />
+</apex:actionFunction>
+
+
+<script>
+// Get the modal for project by field which fetches account
+var modal = document.getElementById('myModal');
+
+    var elm;
+    var fld;
+    
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    function Myfunction(elid, fldid) {                    
+        //  alert('--elid--'+elid.id + '--'+fldid);
+        console.log('--elid--'+elid.id + '--'+fldid); 
+        var modal2 = document.getElementById('myModal');
+        console.log('fld='+fld);  
+        elm = elid.id;  
+        fld = 'targetfield' + fldid; 
+        console.log('modal2='+modal2);                    
+        modal2.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+    
+    function myFunction2(acctId) { 
+        var nameElementId = 'acctName'+acctId;
+        console.log(acctId);
+        var val = document.getElementById(nameElementId).value;
+        var aid = acctId; 
+        console.log("myFunction2");
+        console.log("myFunction2 id with no. " + elm);
+        console.log("myFunction2 selected value " + val);
+        console.log("myFunction2 selected value " + aid);
+        console.log("myFunction2 styleclass id " + fld);
+        //var x = event.target;
+        document.getElementById("j_id0:theform:query").value =  val; //fetch searched string
+        document.getElementById(elm).value =  val;    //assign to Project by input field
+        document.getElementsByClassName(fld)[0].value = aid;
+        modal.style.display = "none";
+    }  
+    
+    
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function(){
+        j$("#myInput").on("keyup", function() {
+            var value = j$(this).val().toLowerCase();
+            j$("#myTable tr").filter(function() {
+                j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
+    j$('#myModal').find('#myInput').focus();
+    </script>
+</apex:form>
+
+</apex:page>

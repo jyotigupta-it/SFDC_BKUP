@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_mandatory_when_source_is_INFO</fullName>
+    <active>true</active>
+    <description>Email is mandatory when source is INFO.</description>
+    <errorConditionFormula>AND(ISPICKVAL( Source__c ,&apos;INFO&apos;),ISBLANK( Email__c ))</errorConditionFormula>
+    <errorDisplayField>Email__c</errorDisplayField>
+    <errorMessage>Please enter Email ID</errorMessage>
+</ValidationRule>

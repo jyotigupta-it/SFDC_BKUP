@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>API_KEY_ASHIRWAD</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>API_KEY_ASHIRWAD</shortDescription>
+        <value>Ababc126b65c69b5e2599dc5d4a9cb253</value>
+    </labels>
+    <labels>
+        <fullName>AccountDetailPageRedirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccountDetailPageRedirect</shortDescription>
+        <value>https://appl-ashirvadpipes.lightning.force.com/lightning/r/Account/</value>
+    </labels>
+    <labels>
+        <fullName>ActivateUpdateOppTriggerRevampLogic</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ActivateUpdateOppTriggerRevampLogic</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
+        <fullName>AnniversaryMsg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AnniversaryMsg</shortDescription>
+        <value>Wishing more laughter more joy more love for both of you in the years to come -  Ashirvad Pipes Pvt. Ltd</value>
+    </labels>
+    <labels>
+        <fullName>Approval_Confirm_Message</fullName>
+        <categories>Used in Tourplan Calendar page to Submit for Approval.</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Confirm Message</shortDescription>
+        <value>Once you submit this record for approval, you might not be able to edit it or recall it from the approval process depending on your settings. Continue?</value>
+    </labels>
+    <labels>
+        <fullName>Ashirvad_Top_Brand</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ashirvad Top Brand</shortDescription>
+        <value>Ashirvad Pipe</value>
+    </labels>
+    <labels>
+        <fullName>AttachmentURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AttachmentURL</shortDescription>
+        <value>https://c.na45.content.force.com/servlet/servlet.FileDownload?file=</value>
+    </labels>
+    <labels>
+        <fullName>BirthdayMsg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BirthdayMsg</shortDescription>
+        <value>Wishing you a beautiful day with good health and happiness forever  -  Ashirvad Pipes Pvt. Ltd</value>
+    </labels>
+    <labels>
+        <fullName>Borewell_Operators_Column</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Borewell Operators -Column</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>BrandingCreatedDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BrandingCreatedDate</shortDescription>
+        <value>14/11/2020</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Approved_by_Branding_Manager</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Approved by Branding Manager</shortDescription>
+        <value>Approved by Head Branding</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Approved_by_Branding_Team</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Approved by Branding Team</shortDescription>
+        <value>Approved by Regional Branding Manager</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Approved_by_TL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Approved by TL</shortDescription>
+        <value>Approved by Team Leader</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_BDM_consent_validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - BDM consent validation</shortDescription>
+        <value>Operation Cancelled :  Kindly get the BDM consent offline before approving the request.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Branding_images_validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Branding images validation</shortDescription>
+        <value>Operation Cancelled : Kindly Attach the completed branding installation images for all the shops in the request.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_City_Validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - City Validation</shortDescription>
+        <value>Kindly fill in the City Details.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Completed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Completed</shortDescription>
+        <value>Completed</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Completed_By_BDM</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Completed By BDM</shortDescription>
+        <value>Completed By BDM</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Completed_by_Branding_Team</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Completed by Branding Team</shortDescription>
+        <value>Completed by Regional Branding Manager</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Completed_by_Vendor</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Completed by Vendor</shortDescription>
+        <value>Completed by Vendor</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Customer_Support_validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Customer Support validation</shortDescription>
+        <value>Operation Cancelled : Kindly provide the customer support feedback for all shops in the request.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Enter_atleast_1_shop</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Enter atleast 1 shop</shortDescription>
+        <value>Please Enter atleast one valid shop in the Branding Request.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Error_Occurred</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Error Occurred</shortDescription>
+        <value>Error Ocurred while saving, Kindly fill in the mandatory fields or contact your system administartor.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Error_in_Upload</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Error in Upload</shortDescription>
+        <value>Error occured while uploading attachment. Kindly try again later.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Image_Uploaded</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Image Uploaded</shortDescription>
+        <value>Files Uploaded Successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Metro</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Metro</shortDescription>
+        <value>Metro</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Metro_Non_Metro_shops</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Metro/Non Metro shops</shortDescription>
+        <value>Please select only those Shops that are in</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_New</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - New</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Non_Metro</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Non Metro</shortDescription>
+        <value>Non Metro</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Recce_Approved_by_Branding_team</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Recce Approved by Branding team</shortDescription>
+        <value>Recce Approved-Regional Branding Manager</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Recce_Submitted_by_Vendor</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Recce Submitted by Vendor</shortDescription>
+        <value>Recce Submitted by Vendor</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Recce_Validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Recce Validation</shortDescription>
+        <value>Operation Cancelled : Kindly create Recce reports and attach recce images for all shops in the request.</value>
+    </labels>
+    <labels>
+        <fullName>Branding_Request_Rejection_Comments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Rejection Comments</shortDescription>
+        <value>Operation Cancelled : Kindly enter the comments before rejecting a request.</value>
+    </labels>
+    <labels>
+        <fullName>COLUMN</fullName>
+        <categories>Values are in percentage formulae</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>COLUMN</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>CONTACTS_VISIT_Column</fullName>
+        <categories>in Percentage</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CONTACTS VISIT(Column)</shortDescription>
+        <value>40</value>
+    </labels>
+    <labels>
+        <fullName>CPVC</fullName>
+        <categories>Values are in percentage formulae</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CPVC</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>ChurnUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ChurnUrl</shortDescription>
+        <value>http://180.179.7.179/integration/read/jsonChurn</value>
+    </labels>
+    <labels>
+        <fullName>Collateral_Request_Completed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Collateral Request - Completed</shortDescription>
+        <value>Completed</value>
+    </labels>
+    <labels>
+        <fullName>Contact_Visits_Target_Plumbing_age</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Visits Target Plumbing (% age)</shortDescription>
+        <value>45</value>
+    </labels>
+    <labels>
+        <fullName>Contacts_Visits_Column_BOREWELL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contacts Visits - Column(BOREWELL )</shortDescription>
+        <value>33.33</value>
+    </labels>
+    <labels>
+        <fullName>Contacts_Visits_Column_FARMERS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contacts Visits - Column(FARMERS)</shortDescription>
+        <value>33.33</value>
+    </labels>
+    <labels>
+        <fullName>Contacts_Visits_Column_MECHANICS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contacts Visits - Column(MECHANICS)</shortDescription>
+        <value>33.33</value>
+    </labels>
+    <labels>
+        <fullName>Crypto_Key</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Crypto Key</shortDescription>
+        <value>380db410e8b11fa9</value>
+    </labels>
+    <labels>
+        <fullName>Dealer_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dealer Label</shortDescription>
+        <value>Dealer</value>
+    </labels>
+    <labels>
+        <fullName>Demotors</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Demotors</shortDescription>
+        <value>Demotors</value>
+    </labels>
+    <labels>
+        <fullName>Display_field_based_on_rating</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Display field based on rating</shortDescription>
+        <value>8</value>
+    </labels>
+    <labels>
+        <fullName>Domain_Name_SPR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Domain Name SPR</shortDescription>
+        <value>https://appl-ashirvadpipes.lightning.force.com</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_mega_gifts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate mega gifts</shortDescription>
+        <value>Same collateral has been selected more than once in the Mega Gift section</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_mini_gifts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate mini gifts</shortDescription>
+        <value>Same collateral has been selected more than once in the Mini Gifts section</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_packaging_collateral</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate packaging collateral</shortDescription>
+        <value>Same collateral has been selected more than once in the packaging material section</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_sample_collateral</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate sample collateral</shortDescription>
+        <value>Same collateral has been selected more than once in the sample section</value>
+    </labels>
+    <labels>
+        <fullName>EX_STATION</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EX-STATION</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>Ex_station_Column</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ex-station-Column</shortDescription>
+        <value>8</value>
+    </labels>
+    <labels>
+        <fullName>Ex_station_Plumbing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ex-station-Plumbing</shortDescription>
+        <value>7</value>
+    </labels>
+    <labels>
+        <fullName>Farmers_Panchayat_Head_Column</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Farmers / Panchayat Head - Column</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>GIFT_ITEMS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GIFT ITEMS</shortDescription>
+        <value>GIFT ITEMS</value>
+    </labels>
+    <labels>
+        <fullName>GSTIN_No_Account</fullName>
+        <categories>GSTIN</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GSTIN No Account</shortDescription>
+        <value>No Account found!</value>
+    </labels>
+    <labels>
+        <fullName>GSTIN_Server_Error</fullName>
+        <categories>GSTIN</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GSTIN Server Error</shortDescription>
+        <value>Server Error : Please try again after sometime.</value>
+    </labels>
+    <labels>
+        <fullName>GSTIN_Success</fullName>
+        <categories>GSTIN</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GSTIN Success</shortDescription>
+        <value>GSTIN validated successfully.</value>
+    </labels>
+    <labels>
+        <fullName>GSTIN_Unknown_Error</fullName>
+        <categories>GSTIN</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GSTIN Unknown Error</shortDescription>
+        <value>Unknown Error : Please contact system admin.</value>
+    </labels>
+    <labels>
+        <fullName>GSTIN_no_gstin_number</fullName>
+        <categories>GSTIN</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GSTIN No gstin number</shortDescription>
+        <value>No GSTIN available on this Account!</value>
+    </labels>
+    <labels>
+        <fullName>HEAD_QUARTER</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HEAD QUARTER</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>HEAD_QUARTER_METRO</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HEAD QUARTER - METRO</shortDescription>
+        <value>20</value>
+    </labels>
+    <labels>
+        <fullName>HEAD_QUARTER_STATE_CAPITAL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HEAD QUARTER - STATE CAPITAL</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>Head_Quaters_Column</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Head_Quaters_Column</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>Head_Quaters_Plumbing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Head Quaters Plumbing</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>In_Time</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>In Time</shortDescription>
+        <value>9:30</value>
+    </labels>
+    <labels>
+        <fullName>Infy_AutoDispatch1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Please select a valid Distributor/BDM</value>
+    </labels>
+    <labels>
+        <fullName>Infy_BrandingDetail1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Please Enter atleast one shop in the Branding Request</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Please Enter only Dealer or distributer or direct dealer shops in the request</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper10</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Quantity to be dispatched must be greater than 0.</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper11</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Collateral name cannot be null.</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Branding Request - Duplicate shops</shortDescription>
+        <value>Same shop has been selected in the request more than once. Kindly correct this.</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper3</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>There are branding requests already created for the shop specified in this request.</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper4</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Error Ocurred while saving, Kindly fill in the mandatory fields for :</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper5</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Requested Quantity must be greater than 0, Please enter the valid data.</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper6</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>The request must have atleast One Collateral</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper7</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Collateral name cannot be null, Please enter the valid data.</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper8</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Same Collateral has been added more than Once. Please Check.</value>
+    </labels>
+    <labels>
+        <fullName>Infy_CommonHelper9</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Used for Infy implementation.</shortDescription>
+        <value>Please add atleast One Collateral</value>
+    </labels>
+    <labels>
+        <fullName>KYC_Upload_Link_Expiry_Time</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KYC Upload Link Expiry Time</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>Key_Influencers_Target_Plumbing_age</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Key Influencers Target Plumbing(% age)</shortDescription>
+        <value>33</value>
+    </labels>
+    <labels>
+        <fullName>Mechanics_Winders</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mechanics / Winders - Column</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>MiscellaneousCost</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Miscellaneous Cost</shortDescription>
+        <value>3000</value>
+    </labels>
+    <labels>
+        <fullName>NEW_PRODUCT</fullName>
+        <categories>Values are in percentage formulae</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NEW PRODUCT</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>NptbUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NptbUrl</shortDescription>
+        <value>http://180.179.7.179/integration/read/jsonNTBP</value>
+    </labels>
+    <labels>
+        <fullName>Number_Of_NPS_Lookup</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Number Of NPS Lookup</shortDescription>
+        <value>3</value>
+    </labels>
+    <labels>
+        <fullName>OUTSTATION</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OUTSTATION</shortDescription>
+        <value>6</value>
+    </labels>
+    <labels>
+        <fullName>Out_Time</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Out Time</shortDescription>
+        <value>18:00</value>
+    </labels>
+    <labels>
+        <fullName>Out_station_Column</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Out-station-Column</shortDescription>
+        <value>7</value>
+    </labels>
+    <labels>
+        <fullName>Out_station_Plumbing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Out-station-Plumbing</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>PACKING_MATERIALS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PACKING MATERIALS</shortDescription>
+        <value>PACKING MATERIALS</value>
+    </labels>
+    <labels>
+        <fullName>PRODUCT_COLLATERALS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PRODUCT COLLATERALS</shortDescription>
+        <value>PRODUCT COLLATERALS</value>
+    </labels>
+    <labels>
+        <fullName>Passive</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Passive</shortDescription>
+        <value>Passive</value>
+    </labels>
+    <labels>
+        <fullName>Payment_team_Email_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment team Email Id</shortDescription>
+        <value>kunal@warpdrivetech.in</value>
+    </labels>
+    <labels>
+        <fullName>Plumber_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Plumber Label</shortDescription>
+        <value>Plumber</value>
+    </labels>
+    <labels>
+        <fullName>PriceValidity_days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>To add months to price validity</shortDescription>
+        <value>60</value>
+    </labels>
+    <labels>
+        <fullName>Product_Details_Team_Email_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Product Details Team Email Id</shortDescription>
+        <value>so.sap@ashirvad.com,hanumanthappa.vr@ashirvad.com</value>
+    </labels>
+    <labels>
+        <fullName>PromotionRedirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PromotionRedirect</shortDescription>
+        <value>https://appl-ashirvadpipes.lightning.force.com/lightning/r/Promotion__c/</value>
+    </labels>
+    <labels>
+        <fullName>Promotors</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Promotors</shortDescription>
+        <value>Promotors</value>
+    </labels>
+    <labels>
+        <fullName>QuantityDispatched_cannot_be_blank</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QuantityDispatched cannot be blank</shortDescription>
+        <value>Please enter the Quantity dispatched.</value>
+    </labels>
+    <labels>
+        <fullName>Question_Modify</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Question Modify</shortDescription>
+        <value>@@@@</value>
+    </labels>
+    <labels>
+        <fullName>Quiz_Chatter_Group_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quiz - Chatter Group Id</shortDescription>
+        <value>0F9300000004fPj</value>
+    </labels>
+    <labels>
+        <fullName>Return_order_emails</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Return order emails</shortDescription>
+        <value>sainath.gs@ashirvad.com,
+aman.rastogi@ashirvad.com,
+nishant.ketu@ashirvad.com,
+sakthimani.esackimuthu@ashirvad.com,
+hanumanthappa.vr@ashirvad.com</value>
+    </labels>
+    <labels>
+        <fullName>SAMPLES</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAMPLES</shortDescription>
+        <value>SAMPLES</value>
+    </labels>
+    <labels>
+        <fullName>SILENT_SWR</fullName>
+        <categories>Values are in percentage formulae</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SILENT SWR</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>SWR</fullName>
+        <categories>Values are in percentage formulae</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SWR</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>SecondaryOneTimeUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SecondaryOneTimeUrl</shortDescription>
+        <value>http://180.179.7.179/integration/index.php/read/jsonSecondrySales?start_date=30-07-2018&amp;end_date=02-08-2018</value>
+    </labels>
+    <labels>
+        <fullName>SecondaryUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SecondaryUrl</shortDescription>
+        <value>http://180.179.7.179/integration/read/jsonSecondrySales</value>
+    </labels>
+    <labels>
+        <fullName>Site_Visit_SMS</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Site Visit SMS</shortDescription>
+        <value>Dear Sir, Hope you had a fruitful conversation with Ashirvad Pipes representative. If not, please talk to us on 9902333333. Happy Selling</value>
+    </labels>
+    <labels>
+        <fullName>SprAPI_EndDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SprAPI_EndDate</shortDescription>
+        <value>2021-06-09</value>
+    </labels>
+    <labels>
+        <fullName>SprAPI_StartDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SprAPI_StartDate</shortDescription>
+        <value>2021-06-01</value>
+    </labels>
+    <labels>
+        <fullName>TargetPageRedirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TargetPageRedirect</shortDescription>
+        <value>https://appl-ashirvadpipes--c.na45.visual.force.com/apex/APPL_SITEVISIT_CALENDAR?scontrolCaching=1&amp;id=</value>
+    </labels>
+    <labels>
+        <fullName>TourPlan_My_Report_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TourPlan My Report Id</shortDescription>
+        <value>00O30000008UPLm</value>
+    </labels>
+    <labels>
+        <fullName>TourPlan_Report_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TourPlan Report Id</shortDescription>
+        <value>00O30000008UPLh</value>
+    </labels>
+    <labels>
+        <fullName>Trigger_Active_Visit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trigger Active Visit</shortDescription>
+        <value>No</value>
+    </labels>
+    <labels>
+        <fullName>Trigger_delete_visit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Trigger delete visit</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
+        <fullName>UPVC</fullName>
+        <categories>Values are in percentage formulae</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UPVC</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>V4</fullName>
+        <categories>Values are in percentage formulae</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>V4</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>WhatsApp_number</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WhatsApp number</shortDescription>
+        <value>+918061341880</value>
+    </labels>
+    <labels>
+        <fullName>account_location_undefined</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>account_location_undefined</shortDescription>
+        <value>Account location undefined</value>
+    </labels>
+    <labels>
+        <fullName>an_unknown_error_occurred</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>an_unknown_error_occurred</shortDescription>
+        <value>An unknown error occurred</value>
+    </labels>
+    <labels>
+        <fullName>duplicate_collaterals</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>duplicate collaterals</shortDescription>
+        <value>Same collateral has been selected more than once in the product collateral section</value>
+    </labels>
+    <labels>
+        <fullName>location_information_is_unavailable</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>location_information_is_unavailable</shortDescription>
+        <value>Location information is unavailable</value>
+    </labels>
+    <labels>
+        <fullName>mandatory_Shipping_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>mandatory Shipping Details</shortDescription>
+        <value>Shipping Mode and Shipping details are mandatory. Please Enter the details before approving the request</value>
+    </labels>
+    <labels>
+        <fullName>not_dealer_account</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>not_dealer_account</shortDescription>
+        <value>Not a dealer account</value>
+    </labels>
+    <labels>
+        <fullName>qr_code_already_exists</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>qr_code_already_exists</shortDescription>
+        <value>QR code already exists</value>
+    </labels>
+    <labels>
+        <fullName>test_Notice1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>test Notice1</shortDescription>
+        <value>There is a new notice awaiting for you.</value>
+    </labels>
+    <labels>
+        <fullName>the_request_to_get_user_location_timed_out</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>the_request_to_get_user_location_timed_out</shortDescription>
+        <value>The request to get user location timed out</value>
+    </labels>
+    <labels>
+        <fullName>user_denied_the_request_for_geolocation</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>user_denied_the_request_for_geolocation</shortDescription>
+        <value>User denied the request for geolocation</value>
+    </labels>
+    <labels>
+        <fullName>user_location_incorrect</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>user_location_incorrect</shortDescription>
+        <value>User location incorrect</value>
+    </labels>
+    <labels>
+        <fullName>user_location_undefined</fullName>
+        <categories>QR Scanner</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>user_location_undefined</shortDescription>
+        <value>User location undefined</value>
+    </labels>
+</CustomLabels>

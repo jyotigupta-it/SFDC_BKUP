@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>verified_is_checked_status_is_mandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Verified__c = TRUE, 
+OR( 
+INCLUDES( Verification_Status1__c ,&quot;&quot; ), 
+ISBLANK( Call_Center_Remarks__c )))</errorConditionFormula>
+    <errorMessage>Please Enter Verification Status and Call Center Remarks...!!!</errorMessage>
+</ValidationRule>

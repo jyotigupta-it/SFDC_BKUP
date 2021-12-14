@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Branding_Approved_Rejected__c</fullName>
+    <externalId>false</externalId>
+    <label>Branding Approved/Rejected</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+                <label>Submitted</label>
+            </value>
+            <value>
+                <fullName>Not Submitted</fullName>
+                <default>false</default>
+                <label>Not Submitted</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Submitted To TL</fullName>
+                <default>false</default>
+                <label>Submitted To TL</label>
+            </value>
+            <value>
+                <fullName>Approved by TL</fullName>
+                <default>false</default>
+                <label>Approved by TL</label>
+            </value>
+            <value>
+                <fullName>Rejected by TL</fullName>
+                <default>false</default>
+                <label>Rejected by TL</label>
+            </value>
+            <value>
+                <fullName>Escalated by  Head Branding</fullName>
+                <default>false</default>
+                <label>Escalated by  Head Branding</label>
+            </value>
+            <value>
+                <fullName>Submitted To RBM</fullName>
+                <default>false</default>
+                <label>Submitted To RBM</label>
+            </value>
+            <value>
+                <fullName>Approved by RBM</fullName>
+                <default>false</default>
+                <label>Approved by RBM</label>
+            </value>
+            <value>
+                <fullName>Rejected by RBM</fullName>
+                <default>false</default>
+                <label>Rejected by RBM</label>
+            </value>
+            <value>
+                <fullName>Escalated by RBM</fullName>
+                <default>false</default>
+                <label>Escalated by RBM</label>
+            </value>
+            <value>
+                <fullName>Submitted To Branding Head</fullName>
+                <default>false</default>
+                <label>Submitted To Branding Head</label>
+            </value>
+            <value>
+                <fullName>Approved By Branding Head</fullName>
+                <default>false</default>
+                <label>Approved By Branding Head</label>
+            </value>
+            <value>
+                <fullName>Rejected By Branding Head</fullName>
+                <default>false</default>
+                <label>Rejected By Branding Head</label>
+            </value>
+            <value>
+                <fullName>Submitted To Vendor</fullName>
+                <default>false</default>
+                <label>Submitted To Vendor</label>
+            </value>
+            <value>
+                <fullName>Approved By Vendor</fullName>
+                <default>false</default>
+                <label>Approved By Vendor</label>
+            </value>
+            <value>
+                <fullName>Rejected By Vendor</fullName>
+                <default>false</default>
+                <label>Rejected By Vendor</label>
+            </value>
+            <value>
+                <fullName>Request Created</fullName>
+                <default>false</default>
+                <label>Request Created</label>
+            </value>
+            <value>
+                <fullName>Vendor Assigned-Rework</fullName>
+                <default>false</default>
+                <label>Vendor Assigned-Rework</label>
+            </value>
+            <value>
+                <fullName>Vendor Assigned-Completed</fullName>
+                <default>false</default>
+                <label>Vendor Assigned-Completed</label>
+            </value>
+            <value>
+                <fullName>Request Completed and Submitted</fullName>
+                <default>false</default>
+                <label>Request Completed and Submitted</label>
+            </value>
+            <value>
+                <fullName>Vendor Assigned</fullName>
+                <default>false</default>
+                <label>Vendor Assigned</label>
+            </value>
+            <value>
+                <fullName>Escalated to Branding Head</fullName>
+                <default>false</default>
+                <label>Escalated to Branding Head</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

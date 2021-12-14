@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Remarks_for_Not_meeting_the_Visit_Target</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+  Total_Expenses__c  &gt; 0, Status__c =&apos;Tour Plan Not Completed&apos;, ISBLANK( Remarks_for_Not_meeting_the_Visit_Target__c ))</errorConditionFormula>
+    <errorMessage>Enter Remarks for Not meeting the Visit Target...!!!</errorMessage>
+</ValidationRule>

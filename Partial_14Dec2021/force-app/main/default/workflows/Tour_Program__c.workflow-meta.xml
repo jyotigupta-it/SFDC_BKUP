@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Expenses_Approval_Approved</fullName>
+        <description>Expenses Approval Approved</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Expenses_Approval_Approved</template>
+    </alerts>
+    <alerts>
+        <fullName>Expenses_Approval_Rejected</fullName>
+        <description>Expenses Approval Rejected</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Expenses_Approval_Rejected</template>
+    </alerts>
+    <alerts>
+        <fullName>Tour_Program_is_Approved</fullName>
+        <description>Tour Program is Approved</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Tour_Program_Approved</template>
+    </alerts>
+    <alerts>
+        <fullName>Tour_Program_is_Rejected</fullName>
+        <description>Tour Program is Rejected</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Tour_Program_Rejected</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Expenses_Approval_Approved</fullName>
+        <field>Expenses_Approval__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Expenses Approval Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Expenses_Approval_Rejected</fullName>
+        <field>Expenses_Approval__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Expenses Approval Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Expenses_Approval_Submitted</fullName>
+        <field>Expenses_Approval__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Expenses Approval Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Expenses_Approved</fullName>
+        <field>Expenses_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Expenses Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Tour_Program_Approved</fullName>
+        <field>Tour_Program_Approval__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Tour Program Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Tour_Program_Approved1</fullName>
+        <field>Tour_Program_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Tour Program Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Tour_Program_Rejected</fullName>
+        <field>Tour_Program_Approval__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Tour Program Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Tour_Program_Submitted</fullName>
+        <field>Tour_Program_Approval__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Tour Program Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_January_15</fullName>
+        <field>To_Date__c</field>
+        <formula>From_Date__c + 15</formula>
+        <name>Update January 15</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Tour_Program_Name</fullName>
+        <field>Name</field>
+        <formula>Owner:User.FirstName +&quot;&quot;+ Owner:User.LastName +&quot;&quot;+TEXT(DAY( From_Date__c ))+&quot;/&quot; + TEXT(MONTH( From_Date__c ))+&quot;/&quot; +TEXT(YEAR( From_Date__c ))</formula>
+        <name>Update Tour Program Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Tour_Program_Unique_Name</fullName>
+        <field>Unique_Tour_Program_Name__c</field>
+        <formula>Name</formula>
+        <name>Update Tour Program Unique Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_owner_and_date</fullName>
+        <field>Name</field>
+        <formula>Owner:User.FirstName &amp; Owner:User.LastName  &amp; &apos; &apos; &amp; &apos;(&apos; &amp;TEXT(DAY( From_Date__c ))+&quot;/&quot; + TEXT(MONTH(From_Date__c ))+&quot;/&quot; +TEXT(YEAR(From_Date__c)) &amp; &apos; &apos; &amp; &quot;-&quot; &amp; &apos; &apos; &amp; TEXT(DAY(To_Date__c  ))+&quot;/&quot; + TEXT(MONTH( To_Date__c ))+&quot;/&quot; +TEXT(YEAR( To_Date__c )) &amp; &apos;)&apos;</formula>
+        <name>Update owner and date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Tour Program Name</fullName>
+        <actions>
+            <name>Update_Tour_Program_Unique_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_owner_and_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Tour_Program__c.OwnerId</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update To Date in Tour Program</fullName>
+        <actions>
+            <name>Update_January_15</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Tour_Program__c.From_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

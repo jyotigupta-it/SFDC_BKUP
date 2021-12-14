@@ -1,0 +1,34 @@
+<apex:page standardcontroller="Case" extensions="ctrlUploadBrandinImages">
+<apex:form >
+<apex:pageMessages ></apex:pageMessages>
+<apex:pageBlock ><br/>
+                <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!uploadAttachment}" />
+                <apex:commandButton value="Cancel" action="{!Cancel}" />
+                </apex:pageBlockButtons>
+             <center>  Below are the links which can be used to compress the images. After compression, please upload the compressed images.<br/><br/>
+                   <a href="http://www.imageoptimizer.net/Pages/Home.aspx" target="_blank">imageoptimizer </a><br/>
+                   <a href="http://jpeg-optimizer.com/" target="_blank">jpeg-optimizer</a><br/>
+                   <a href="http://tools.dynamicdrive.com/imageoptimizer/index.php" target="_blank">dynamicdrive imageoptimizer</a><br/>
+              </center>
+                <apex:pageblockSection columns="2">
+                <apex:outputPanel >
+                <apex:outputLabel styleClass="labelCol vfLabelColTextWrap" value="Branding Request : "></apex:outputLabel>
+                <apex:commandLink action="/{!currentRequestId}" value="{!currentRequestNumber}" target="_blank" />
+                </apex:outputPanel>
+                </apex:pageblockSection><br/>
+                <apex:pageBlockTable var="request" value="{!wrapperView}">
+                <apex:column headerValue="Branding Shop Name">
+                <apex:outputLink value="/{!request.brRequest.Shop_Name__c}" target="_blank">{!request.brRequest.Shop_Name__r.name}</apex:outputLink>
+                </apex:column>
+                <apex:column headerValue="Upload Images">
+                <apex:inputFile value="{!request.csvFileBody}"  filename="{!request.csvAsString}" >
+                </apex:inputFile>
+                </apex:column>
+                </apex:pageBlockTable> 
+                 
+    </apex:pageblock>
+ 
+ 
+ </apex:form>
+</apex:page>

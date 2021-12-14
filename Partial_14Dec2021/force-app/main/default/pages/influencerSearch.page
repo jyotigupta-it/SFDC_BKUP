@@ -1,0 +1,31 @@
+<apex:page standardController="Account"  extensions="OpportunitySearchController">  
+
+<apex:form id="formId" >
+     
+   <apex:pageBlock id="pgblk" >
+   <apex:pageMessages ></apex:pageMessages>
+<apex:variable var="rowNum" value="{!0}"/> 
+<apex:pageBlockSection id="pbsec2" rendered="{!display}" >
+  
+  <apex:pageBlockTable value="{!searchResults}" id="pbt" var="opp" rendered="{!display}" >
+  <apex:column headerValue="Sl.No" id="rowno"  >
+                     <apex:variable var="rowNum" value="{!rowNum + 1}" id="rownum"/>
+                     {!rowNum}
+                 </apex:column>
+  
+    <apex:column headerValue="Project Name">
+  
+   <apex:commandLink action="{!URLFOR($Action.Opportunity.View,opp.Opportunity__r.Id)}" value="{!opp.Opportunity__r.Name}" target="_blank" immediate="true"/>
+ <!-- <apex:outputlink value="/{!acc.Party_Name__r.id}" ></apex:outputlink> -->
+  </apex:column>
+     <!--<apex:column value="{!opp.Opportunity__r.Name}"  /> -->
+      <apex:column value="{!opp.Opportunity__r.CreatedDate}"  /> 
+     <apex:column value="{!opp.Opportunity__r.Approximate_Project_Value__c}"  />  
+      <apex:column value="{!opp.Opportunity__r.Project_District__c}"  /> 
+  </apex:pageBlockTable>
+ </apex:pageBlockSection> 
+ 
+  
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

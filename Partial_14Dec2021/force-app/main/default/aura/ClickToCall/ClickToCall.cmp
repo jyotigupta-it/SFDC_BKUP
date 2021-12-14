@@ -1,0 +1,91 @@
+<aura:component  controller="ClickToCallController" access="global" implements="force:lightningQuickActionWithoutHeader,force:appHostable,force:hasRecordId,force:hasSObjectName">
+    <aura:attribute type="String" name="taskId" />
+    <aura:attribute type="String" name="selectedDisposition" />
+    <aura:attribute type="String" name="caseclose" />
+    <aura:attribute type="String" name="comments" />
+    <aura:attribute type="String" name="caseStatus" default="Closed" />
+    <aura:attribute type="String" name="errorMessage" />
+    <aura:attribute type="Boolean" name="isError" default="false" />
+    <aura:attribute type="List" name="callDispList" />
+    <aura:attribute type="List" name="caseClosureList" />
+    <aura:attribute type="Boolean" name="showCaseFeedback" default="false"/>
+    <aura:attribute type="Boolean" name="showWorkOrderFeedback" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    <aura:if isTrue="{!v.isError}">
+     {!v.errorMessage}
+    <aura:set attribute="else">
+        
+        <h1><b>Calling...</b></h1>
+            <lightning:combobox value="{!v.selectedDisposition}" label="Call Disposition" options="{!v.callDispList}"  dropdownAlignment="left" variant="standard"></lightning:combobox>
+            
+            <br/>
+            <lightning:textarea name="input1" label="Comments" value="{!v.comments}"/>
+            <br/>   
+         <aura:if isTrue="{!v.showCaseFeedback}">   
+                <lightning:combobox value="{!v.caseclose}" label="Do you want to close the CASE?" options="{!v.caseClosureList}"  dropdownAlignment="left" variant="standard" onchange="{!c.handleChange}"></lightning:combobox>
+         </aura:if> 
+            
+        <!-- Modal for case closure-->
+                        <div id="calendar" class="anyCalendar"></div>
+                        <div aura:id="modal" class="slds-modal">
+                            <div class="slds-modal__container">
+                                <div class="slds-modal__header">
+                                    <lightning:buttonIcon size="large" iconName="utility:close" variant="bare" onclick="{!c.closeModal}" alternativeText="Close window." class="slds-modal__close" />
+                                    <h2 id="header43" class="slds-text-heading--medium">Case Closure</h2>
+                                </div>
+                                
+                                
+                                <div class="slds-modal__content slds-p-around--medium">
+                                    
+                                    <div class="slds-form--stacked">
+                                       <lightning:recordEditForm objectApiName="Case"  recordId="{!v.recordId}" onsubmit="{!c.onSubmit}" onsuccess="{!c.onSuccess}">
+            	
+                    <lightning:inputField aura:id ="status" fieldName="Status" value="Closed"/>
+                    <lightning:inputField aura:id ="closeresaon" fieldName="Closed_Reason__c"  />
+                    <lightning:inputField aura:id ="reason" fieldName="Reason__c" />
+                    <lightning:inputField aura:id ="iscomplaint" fieldName="Is_your_complaint__c" value="Yes" />
+                    <lightning:inputField aura:id ="rate" fieldName="How_will_you_rate_o__c" />
+                    <lightning:inputField aura:id ="behavior" fieldName="How_will_you_rate_behavior_of_our_expert__c" />
+                    
+        <center>
+                <lightning:button variant="brand" type="submit" label="Save" title="Brand action" />
+       </center>
+             
+    	</lightning:recordEditForm> 
+                                    </div>
+                                </div> 
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="slds-backdrop" aura:id="backdrop"></div>
+                        <!--End Modal for case closure-->
+
+       <!-- For CASE 
+     <aura:if isTrue="{! and(v.showCaseFeedback,v.caseclose=='YES')}">
+         <lightning:recordEditForm objectApiName="Case"  recordId="{!v.recordId}" onsubmit="{!c.onSubmit}">
+            	<h1><b>Case Closure</b></h1>
+                    <lightning:inputField fieldName="Status" value="Closed"/>
+                    <lightning:inputField fieldName="Closed_Reason__c" />
+                    <lightning:inputField fieldName="Reason__c" />
+                    <lightning:inputField fieldName="Is_your_complaint__c" />
+                    <lightning:inputField fieldName="How_will_you_rate_o__c" />
+                    <lightning:inputField fieldName="How_will_you_rate_behavior_of_our_expert__c" />
+                    
+        <center>
+                <lightning:button variant="brand" type="submit" label="Save" title="Brand action" />
+       </center>
+             
+    	</lightning:recordEditForm>
+      </aura:if>-->
+        <br/><br/>
+        <center>
+                <lightning:button variant="brand" type="submit" label="Save" title="Brand action" onclick="{! c.handleClick }" />
+       </center>
+        
+    </aura:set>
+  </aura:if>    
+</aura:component>

@@ -1,0 +1,167 @@
+<apex:page standardController="Visit__c">
+<script>function setFocusOnLoad(){}</script>
+<apex:form >
+<!--- First Block ---->          
+<apex:pageBlock title="Visit Details">
+<apex:messages />
+    <apex:pageBlockButtons >
+        <apex:commandButton value="Edit" action="{!edit}"/>
+        <apex:commandButton value="Delete" action="{!delete}" rendered="{!IF($UserRole.Name=='Director', TRUE, FALSE)}"/>
+     </apex:pageBlockButtons>
+
+     <apex:pageBlockSection >
+        <apex:outputfield value="{!Visit__c.Date__c}"/>
+        <apex:outputfield value="{!Visit__c.Ownerid}"/>
+        <apex:outputfield value="{!Visit__c.Type__c}"/>
+     </apex:pageBlockSection>
+
+<!--- Non Visit Information ----> 
+
+
+
+                     
+        <apex:pageBlockSection id="view1" title="Non Visit Information" rendered="{!(Visit__c.Type__c == 'Non Visit'  && $User.TL__c != TRUE) }" columns="2">
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Reason for Non Visit"/>
+          <apex:outputfield value="{!Visit__c.Reason_for_Non_Visit__c}"/>
+          </apex:pageBlockSectionItem>
+          <apex:outputfield value="{!Visit__c.Remarks__c}"/>
+           <apex:outputField value="{!Visit__c.Call_Completed__c}"/>
+           <apex:outputField value="{!Visit__c.Status__c}"/>  
+        </apex:pageBlockSection>        
+         
+               <!--TeamLeadNonVisit Information-->
+               
+         <!--<apex:pageBlockSection id="view2" title="Non Visit Information" rendered="{!(Visit__c.Type__c == 'Non Visit' && ($UserRole.Name == 'TeamLeadNorthIndia' || $UserRole.Name =='Darshak' || $UserRole.Name == 'Sandeep' || $UserRole.Name == 'Suresh' || $UserRole.Name == 'Joseph' || $UserRole.Name == 'Dhilip' || $UserRole.Name == 'PRANAY_SHARMA'))}" columns="2">
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Reason for Non Visit"/>
+          <apex:outputField value="{!Visit__c.Reason_for_Non_Visit__c}">
+              <apex:actionSupport event="onchange" reRender="form1"/>                  
+          </apex:outputField>
+          </apex:pageBlockSectionItem>
+          <apex:outputField value="{!Visit__c.Remarks__c}"/>
+          <apex:outputField value="{!Visit__c.CityText__c}" />
+          <apex:outputField value="{!Visit__c.State__c}" />
+           <apex:outputField value="{!Visit__c.Report_to_Management__c}"/>
+           </apex:pageBlockSection>-->    
+       
+           
+
+<!--- Visit Information ---->  
+
+
+
+                            
+        <apex:pageBlockSection id="view3" title="Visit Information" rendered="{!(Visit__c.Type__c == 'Visit' && $User.TL__c != TRUE )}" columns="2">
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Whom are you going to visit"/>
+          <apex:outputfield value="{!Visit__c.Visit_To__c}"/>
+          </apex:pageBlockSectionItem>
+       
+          <apex:outputfield value="{!Visit__c.Distributor_Dealer__c}" rendered="{!(Visit__c.Visit_To__c == 'Distributor' && $User.TL__c != TRUE)}"/>
+          <apex:outputfield value="{!Visit__c.Distributor_Dealer__c}" rendered="{!(Visit__c.Visit_To__c == 'Dealer' && $User.TL__c != TRUE)}"/>          
+          <apex:outputfield value="{!Visit__c.Contacts__c}" rendered="{!(Visit__c.Visit_To__c == 'Contact' && $User.TL__c != TRUE)}"/>
+          <apex:outputfield value="{!Visit__c.Project_Name__c}" rendered="{!(Visit__c.Visit_To__c == 'Project' && $User.TL__c != TRUE)}"/>
+          <apex:outputfield value="{!Visit__c.Del_Nature_of_Visit__c}"/>
+          <apex:outputfield value="{!Visit__c.Purpose_of_Visit__c}"/>
+          <!-- <apex:outputfield value="{!Visit__c.Order_Value__c}"/> -->
+          <apex:outputfield value="{!Visit__c.Date_of_Next_Visit__c}"/>
+         
+            <apex:outputfield value="{!Visit__c.CityText__c}"/>
+             <apex:outputfield value="{!Visit__c.State__c}"/>
+              <apex:outputfield value="{!Visit__c.Competitor__c}"/>
+             <apex:outputfield value="{!Visit__c.Feedback__c}"/>
+              <apex:outputfield value="{!Visit__c.Remarks__c}"/> 
+                                               
+        </apex:pageBlockSection> 
+        <apex:pageBlockSection id="com9" title="Call Response" rendered="{!(Visit__c.Type__c == 'Visit' && $User.HO__c == TRUE )}" columns="2">
+            <apex:outputField value="{!Visit__c.Status__c}" />
+            <apex:outputField value="{!Visit__c.Call_Completed__c}"/>
+           <!--<apex:outputField value="{!Visit__c.Status__c}"/>-->  
+            <apex:outputField value="{!Visit__c.Suggestions__c}"/>  
+            <apex:outputField value="{!Visit__c.Raised_Complaint__c}"/>
+              <apex:outputField value="{!Visit__c.Suggestion_Remarks__c}"/>              
+            <apex:outputField value="{!Visit__c.Complaints__c}"/>
+          
+            <apex:inputHidden value="{!Visit__c.Complaint_Remarks__c}" />
+             <apex:outputField value="{!Visit__c.Complaint_Remarks__c}"/>
+            
+            
+        </apex:pageBlockSection>
+        <!--TeamLeadVisit Information--->
+         <apex:pageBlockSection id="view5" title="Visit Information" rendered="{!(Visit__c.Type__c == 'Visit' &&  $User.TL__c == TRUE)}" columns="2">
+          
+          <apex:outputfield value="{!Visit__c.Worked_with__c}"/>
+          <apex:outputfield value="{!Visit__c.CityText__c}"/>
+          <apex:outputfield value="{!Visit__c.State__c}"/>
+          </apex:pageBlockSection>  
+           <apex:pageBlockSection id="view6" rendered="{!(Visit__c.Type__c == 'Visit' && $User.TL__c == TRUE )}" columns="2">
+         
+        
+            <apex:outputField value="{!Visit__c.Report_to_Management__c}"/>
+          <apex:outputField value="{!Visit__c.Feedback__c}"/> 
+              <apex:outputField value="{!Visit__c.Party_Name__c}"/>
+              <apex:outputField value="{!Visit__c.Distributors_Dealers_Status__c}"/>
+                  <apex:outputField value="{!Visit__c.Contact_Person__c}"/>
+                      <apex:outputField value="{!Visit__c.Competitor__c}"/>
+                     <apex:outputField value="{! Visit__c.Mobile_No__c}"/>
+                      <apex:outputField value="{!Visit__c.Phone_No__c}"/>
+                      <apex:outputField value="{!Visit__c.City__c}"/>
+                      <apex:outputField value="{!Visit__c.Remarks__c}"/>
+                      <apex:outputField value="{!Visit__c.Purpose_of_Visit__c}"/>
+                      <apex:outputField value="{!Visit__c.Reason_for_Non_Visit__c}"/>
+          </apex:pageBlockSection>
+          <apex:pageBlockSection id="com10" title="Complaints" rendered="{!(Visit__c.Type__c == 'Visit' && $User.HO__c == TRUE )}" columns="2">
+           <apex:outputField value="{!Visit__c.Raised_Complaint__c}"/> 
+            <apex:outputField value="{!Visit__c.Complaints__c}"/>
+               <apex:outputField value="{!Visit__c.Suggestions__c}"/>               
+        </apex:pageBlockSection>
+         <!--TeamLeadPromotionalVisit Information--->
+          <apex:pageBlockSection title="Promotional Activity Report" columns="2" rendered="{!((Visit__c.Type__c == 'Promotional Activity report') && ($User.TL__c == TRUE))}">
+            <apex:outputfield value="{!Visit__c.PromotionalType__c}"/>
+            <apex:outputfield value="{!Visit__c.Total_no_of_attendees__c}" />
+            <apex:outputfield value="{!Visit__c.Date__c}" /><br/>
+           
+          
+           <apex:outputfield value="{!Visit__c.Ashirvad_Representative1__c}"/><br/>
+       
+           <apex:outputfield value="{!Visit__c.Ashirvad_Representative2__c}"/><br/>
+        
+           <apex:outputfield value="{!Visit__c.Ashirvad_Representative3__c}"/><br/>
+          
+           <apex:outputfield value="{!Visit__c.Ashirvad_Representative4__c}"/><br/>
+          
+           <apex:outputfield value="{!Visit__c.Ashirvad_Representative5__c}"/><br/>
+           
+           <apex:outputfield value="{!Visit__c.CityText__c}" /><br/>
+           <apex:outputfield value="{!Visit__c.Suggestions__c}"/>
+            <apex:outputfield value="{!Visit__c.Report__c}" />
+          
+        </apex:pageBlockSection>
+        
+        <!--TeamLead Visit Information-->
+           <!--<apex:pageBlockSection id="visit" title="Visit Information" rendered="{!Visit__c.Type__c == 'Visit'}" columns="2">
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Whom are you going to visit"/>
+          <apex:outputfield value="{!Visit__c.Visit_To__c}"/>
+          </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>            
+
+        <apex:pageBlockSection rendered="{!(Visit__c.Type__c == 'Visit')} && {!IF($UserRole.Name=='AshirvadHO', TRUE, FALSE)}">
+          <apex:outputfield value="{!Visit__c.Distributor_Dealer__c}" rendered="{!Visit__c.Visit_To__c == 'Distributor'}"/>
+          <apex:outputfield value="{!Visit__c.Distributor_Dealer__c}" rendered="{!Visit__c.Visit_To__c == 'Dealer'}"/>          
+          <apex:outputfield value="{!Visit__c.Contacts__c}" rendered="{!Visit__c.Visit_To__c == 'Contact'}"/>
+          <apex:outputfield value="{!Visit__c.Project_Name__c}" rendered="{!Visit__c.Visit_To__c == 'Project'}"/>
+          <apex:outputfield value="{!Visit__c.Del_Nature_of_Visit__c}"/>
+          <apex:outputfield value="{!Visit__c.Purpose_of_Visit__c}"/>
+          
+          <apex:outputfield value="{!Visit__c.Date_of_Next_Visit__c}"/>
+          <apex:outputfield value="{!Visit__c.Remarks__c}"/>                                      
+        </apex:pageBlockSection> -->            
+      </apex:pageBlock>
+    </apex:form>
+    
+    <apex:relatedList List="Order_Bookings__r" rendered="{!Visit__c.Purpose_of_Visit__c = "New Order Booking"}"/>
+ <apex:relatedList title="Open Activities" subject="{!Visit__c}" list="OpenActivities" />
+ <apex:relatedList title="Activity History" subject="{!Visit__c}" list="ActivityHistories" /> 
+</apex:page>

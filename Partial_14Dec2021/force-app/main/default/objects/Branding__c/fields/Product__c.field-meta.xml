@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product__c</fullName>
+    <externalId>false</externalId>
+    <label>Product</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aqua Life</fullName>
+                <default>false</default>
+                <label>Aqua Life</label>
+            </value>
+            <value>
+                <fullName>Column Pipes</fullName>
+                <default>false</default>
+                <label>Column Pipes</label>
+            </value>
+            <value>
+                <fullName>CPVC</fullName>
+                <default>false</default>
+                <label>CPVC</label>
+            </value>
+            <value>
+                <fullName>SWR</fullName>
+                <default>false</default>
+                <label>SWR</label>
+            </value>
+            <value>
+                <fullName>WC PAN Connector</fullName>
+                <default>false</default>
+                <label>WC PAN Connector</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

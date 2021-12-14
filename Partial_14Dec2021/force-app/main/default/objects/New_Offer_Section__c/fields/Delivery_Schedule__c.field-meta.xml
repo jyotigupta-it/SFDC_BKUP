@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Schedule__c</fullName>
+    <externalId>false</externalId>
+    <label>Delivery Schedule</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Full Qty</fullName>
+                <default>false</default>
+                <label>Full Qty</label>
+            </value>
+            <value>
+                <fullName>1 LOT</fullName>
+                <default>false</default>
+                <label>1 LOT</label>
+            </value>
+            <value>
+                <fullName>2 LOTS</fullName>
+                <default>false</default>
+                <label>2 LOTS</label>
+            </value>
+            <value>
+                <fullName>3 LOTS</fullName>
+                <default>false</default>
+                <label>3 LOTS</label>
+            </value>
+            <value>
+                <fullName>4 LOTS</fullName>
+                <default>false</default>
+                <label>4 LOTS</label>
+            </value>
+            <value>
+                <fullName>5 LOTS</fullName>
+                <default>false</default>
+                <label>5 LOTS</label>
+            </value>
+            <value>
+                <fullName>6 LOTS</fullName>
+                <default>false</default>
+                <label>6 LOTS</label>
+            </value>
+            <value>
+                <fullName>7 LOTS</fullName>
+                <default>false</default>
+                <label>7 LOTS</label>
+            </value>
+            <value>
+                <fullName>8 LOTS</fullName>
+                <default>false</default>
+                <label>8 LOTS</label>
+            </value>
+            <value>
+                <fullName>9 LOTS</fullName>
+                <default>false</default>
+                <label>9 LOTS</label>
+            </value>
+            <value>
+                <fullName>10 LOTS</fullName>
+                <default>false</default>
+                <label>10 LOTS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

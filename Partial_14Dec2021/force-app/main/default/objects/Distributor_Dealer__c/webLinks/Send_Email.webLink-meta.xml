@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_Email</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Send Email</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/16.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/16.0/apex.js&quot;)} 
+var e1=&apos;{!Distributor_Dealer__c.Email__c}&apos;; 
+window.open (&apos;https://na1.salesforce.com/_ui/core/email/author/EmailAuthor?p3_lkid={!Distributor_Dealer__c.Id}&amp;rtype=00Q&amp;retURL={!Distributor_Dealer__c.Id}&amp;p24={!Distributor_Dealer__c.Email__c}&apos;,&apos;_self&apos;,false)</url>
+</WebLink>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Area_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Area Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sandy</fullName>
+                <default>false</default>
+                <label>Sandy</label>
+            </value>
+            <value>
+                <fullName>Rocky/Boulder</fullName>
+                <default>false</default>
+                <label>Rocky/Boulder</label>
+            </value>
+            <value>
+                <fullName>Clay Soil</fullName>
+                <default>false</default>
+                <label>Clay Soil</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

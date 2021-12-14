@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restricting_to_enter_values_in_Record</fullName>
+    <active>false</active>
+    <description>Values in the fields are not allowed to add when the call status is RNR, Busy, Person not available, Not Reachable and Wrong/Invalid Number.</description>
+    <errorConditionFormula>AND(OR(ISPICKVAL( Call_Status__c , &apos;RNR&apos;),ISPICKVAL( Call_Status__c , &apos;Person not available&apos;),ISPICKVAL( Call_Status__c , &apos;Busy&apos;),ISPICKVAL( Call_Status__c , &apos;Wrong/Invalid Number&apos;),ISPICKVAL( Call_Status__c , &apos;Not Reachable&apos;)),  OR(Call_Center_Remarks__c != &apos;&apos; ,  Verified__c  = TRUE , NOT(ISBLANK(   Verification_Status__c )) ,  NOT(ISBLANK(Suggestion__c)) , NOT( ISBLANK(Complaints__c )) , NOT( ISPICKVAL( How_was_the_Promotion__c , &apos;&apos;)) ,  Did_you_receive_any_gifts__c = True ,  Would_you_Consider_Purchasing_from_us__c = True ,  Remarks__c != &apos;&apos; ,  Type1__c != &apos;&apos; ,  Manager_Email__c != &apos;&apos; , NOT( ISPICKVAL(  Type_of_Promotion_Member__c , &apos;&apos;)) , NOT( ISPICKVAL( Product__c   , &apos;&apos;)) , NOT( ISPICKVAL(  Availability__c  , &apos;&apos;)) , NOT( ISPICKVAL(  Service_Support__c  , &apos;&apos;)) , NOT( ISPICKVAL(  Branding__c  , &apos;&apos;)) ,  Please_give_suggestion_for_improvement__c != &apos;&apos; ,  How_did_you_like_Ashirvad_till_now__c != &apos;&apos;))</errorConditionFormula>
+    <errorMessage>Please do not enter any details when the Call Status is RNR, Busy, Not Reachable, Person not available or Wrong/Invalid number.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,129 @@
+<apex:page standardController="Tour_Program__c" extensions="UpdateIncomeClass" Sidebar="false" showHeader="false"  Action="{!AutoRun}" applyHtmlTag="false" >
+ <head> 
+      <style type="text/css">
+body {
+background-color:#538ED5;}
+#table1 {
+border:0px solid #000;
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+margin:20px auto;
+background-color:#F2F2F2;
+
+
+}
+</style>  
+</head><br/>  
+<apex:form >
+    <table width="50%" align="center" id="table1">
+        <tr>
+            <td align="center"><apex:image id="theImage" value="{!$Resource.AshirvadLogo}" width="100" height="50"/>
+                
+                       
+                        <table width="100%"  border="0" cellspacing="0" bgcolor="#F2F2F2" >
+                            <tr>
+                                <td Style="font-size:20px;font-family:Monospace ;" align="center">
+                                    <b>TOUR PLAN DETAILS</b>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                          
+                        <table  width="100%" border="0" cellspacing="0"  >
+                            <tr>
+                                <td Style="font-size:20px" align="center">
+                                </td>
+                            </tr>
+                        </table><br/>
+                        
+                       <table Style="font-size:12px;color:white;"  border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF">
+                            <tr>  
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Date</b>
+                                </td>
+                            <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Day</b>
+                                 </td>
+                                 
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Visit Type</b>
+                                 </td> 
+                                 <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>BD - User1</b>
+                                 </td>
+                               
+                                 <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>BD - Tour Plan1</b>
+                                 </td> 
+                                 
+                                  <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>State</b>
+                                 </td>
+                                  <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>District</b>
+                                 </td>
+                                  <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Location</b>
+                                 </td>
+                                 <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>BD - User2</b>
+                                 </td>
+                                 <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>BD - User3</b>
+                                 </td>                            
+                            </tr>
+                        <apex:repeat value="{!plans}" var="m">
+                            <tr >  
+                                <td  align="center" width="10%">
+                                    <b><apex:outputText value="{0,date,dd/MM/yyyy}">
+    <apex:param value="{!m.Date__c}"/>
+</apex:outputText></b>
+                                </td>  
+                                 <td  align="center" width="10%">
+                                    <b><apex:outputText value="{0,date,EEEE }">
+    <apex:param value="{!m.Date__c}"/>
+</apex:outputText></b>
+                                </td>   
+                               
+                                 <td width="1%" align="center">
+                                <apex:inputField value="{!m.Visit_Type__c}" />
+                                </td> 
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.User__c}"/>
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.BD_Tour_Plans_1__c}"/>
+                                </td>
+                                 
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.State__c}" required="true"/>
+                                </td>  
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.District__c}" required="true"/>
+                                </td> 
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.Location__c}" required="true" />
+                                </td>        
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.User_2__c}"/>
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.User_3__c}"/>
+                                </td>
+                               
+                            </tr>
+                        </apex:repeat>
+                        </table>
+                                    
+                                    
+                    <table width="100%" border="0" cellspacing="0" > <td align="center">
+                          <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><apex:commandButton value="Save" action="{!UpdateRecords}"/>
+                          &nbsp;&nbsp;&nbsp;&nbsp;<apex:commandButton value="Cancel" action="{!Cancel}"/></td>
+                    </table>
+                
+            </td>
+        </tr>
+    </table>
+    </apex:form>
+</apex:page>

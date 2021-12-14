@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Value</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Purpose_of_Visit__c, &apos;New Order Booking&apos;) &amp;&amp; (Order_Value__c  &lt; 5000)&amp;&amp; $User.TL__c !=TRUE</errorConditionFormula>
+    <errorDisplayField>Order_Value__c</errorDisplayField>
+    <errorMessage>Order value cannot be less than 5000</errorMessage>
+</ValidationRule>

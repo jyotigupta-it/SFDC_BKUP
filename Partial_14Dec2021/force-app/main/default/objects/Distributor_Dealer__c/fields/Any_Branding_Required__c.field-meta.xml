@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Any_Branding_Required__c</fullName>
+    <externalId>false</externalId>
+    <label>Any Branding Required</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Is_Branding_Done__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Only Outside Required</fullName>
+                <default>false</default>
+                <label>Only Outside Required</label>
+            </value>
+            <value>
+                <fullName>Full Shop Required</fullName>
+                <default>false</default>
+                <label>Full Shop Required</label>
+            </value>
+            <value>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+                <label>Not Required</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Only Outside</controllingFieldValue>
+            <controllingFieldValue>Not Done</controllingFieldValue>
+            <valueName>Full Shop Required</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Only Outside</controllingFieldValue>
+            <controllingFieldValue>Not Done</controllingFieldValue>
+            <valueName>Not Required</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Done</controllingFieldValue>
+            <valueName>Only Outside Required</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

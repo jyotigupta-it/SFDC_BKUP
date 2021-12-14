@@ -1,0 +1,232 @@
+<apex:page showHeader="false" controller="PlumberClaimPageController" docType="html-5.0">
+    <apex:slds />
+    <apex:includeScript value="{!$Resource.html5qrcode}"/>
+    
+    <div class="slds-grid slds-wrap slds-m-horizontal_small" >
+        <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1">
+            <apex:form id="mainForm">
+                <div class="slds-page-header" style="border-bottom: ridge;">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_10-of-12">
+                            <div class="slds-media">
+                                <div class="respImageContainer">
+                                    <apex:image url="{!$Resource.Ashirvad_Logo_for_Site}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </apex:form>
+        </div>
+    </div>
+    <apex:form id="Form_1" rendered="{!formFlag_1 && checkActiveSession}">
+        <apex:pageBlock >
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-6 slds-large-size_10-of-12">
+                    <div class="slds-box slds-theme--shade ">
+                        <apex:pageBlockSection rendered="{!inputValidateFlag}">
+                            <font color="red">{!inputValidateMessage}</font>
+                        </apex:pageBlockSection>
+                    </div>
+                    <div class="slds-box slds-theme--shade ">
+                        <apex:pageBlockSection >
+                            Select Scheme:<font color="red">*</font>&nbsp;
+                            <apex:selectList value="{!selectedScheme}" size="1" multiselect="false"  >
+                                <apex:selectOptions value="{!Schemes}" />
+                            </apex:selectList>
+                            <br/>
+                            Dealer Name:&nbsp;
+                            <apex:input type="text" value="{!dealerName}" id="dNameId"/>
+                            <br/>
+                            Pin Code:<font color="red">*</font>&nbsp;
+                            <apex:input type="text" value="{!pinCode}" id="pinCodeId" onchange="setPinCode(this.value)"/>
+                            <br/>
+                            City Name:&nbsp;
+                            <apex:input type="text" value="{!cityName}" id="cityNameId" disabled="true"/>
+                            <br/>
+                            Date Of Purchase:<font color="red">*</font>&nbsp;
+                            <apex:input type="date" value="{!purchaseDate}" id="dPurchaseId"/>
+                            <br/>
+                            Bill Amount:<font color="red">*</font>&nbsp;
+                            <apex:input type="number" value="{!billAmount}" id="billAmountId"/>
+                            <br/>
+                            Quantity:<font color="red">*</font>&nbsp;
+                            <apex:input type="number" value="{!quantity}" id="qunatityId"/>
+                            <div align="center" draggable="false" >
+                                <apex:commandButton value="Next" action="{!next_1}"/>
+                            </div>
+                            <apex:actionFunction action="{!fetchCityName}" name="setPinCode">
+                                <apex:param name="pinCode_1" value="" assignTo="{!pinCode}"/>
+                            </apex:actionFunction>
+                        </apex:pageBlockSection>
+                    </div>
+                </div>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:form id="Form_2" rendered="{!formFlag_2}">
+        <apex:pageBlock >
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-6 slds-large-size_10-of-12">
+                    <div class="slds-box slds-theme--shade ">
+                        <apex:pageBlockSection >
+                            
+                            Upload Bill Copy: &nbsp;
+                            <apex:inputFile value="{!billBody}" filename="{!billName}"/>
+                                <apex:commandButton value="Previous" action="{!prev_2}"/>
+                                <apex:commandButton value="Next" action="{!next_2}"/>
+                        </apex:pageBlockSection>
+                    </div>
+                </div>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:form id="Form_3" rendered="{!formFlag_3}">
+        <apex:pageBlock >
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-6 slds-large-size_10-of-12">
+                    <div class="slds-box slds-theme--shade ">
+                        <apex:pageBlockSection rendered="{!NOT(successFlag)}">
+                            Scan QR Code: &nbsp;
+                            <apex:variable value="{!1}" var="rowNum"/>
+                            
+                            <apex:repeat value="{!repeatValue}" var="repVar" id="theRepeat">
+                                <div id="reader_{!repVar}"></div>
+                                <input type="file" id="file_{!repVar}" accept="image/*" capture = "user" onchange="readqrCode({!repVar},{!rowNum})"/>
+                                Select Capacity:&nbsp;
+                                <apex:selectList value="{!selectedCapacity}" size="1" multiselect="false" onchange="setValue(this.value,{!rowNum})" >
+                                    <apex:selectOptions value="{!Capacity}"/>
+                                </apex:selectList>
+                                <br/>
+                                
+                                <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                            </apex:repeat>
+                            <apex:actionFunction action="{!saveCapacty}" name="setValue" reRender="selectedValue">
+                                <apex:param name="capVar_1" value="" assignTo="{!selectedCapacity}"/>
+                                <apex:param name="capVar_2" value="" assignTo="{!rowCountCapacity}"/>
+                            </apex:actionFunction>
+                            <div align="center" draggable="false" >
+                                <apex:commandButton value="Previous" action="{!prev_3}"/>
+                                <apex:commandButton value="Submit Claim" action="{!saveClaim}"/>
+                            </div>
+                        </apex:pageBlockSection>
+                    </div>
+                    <div class="slds-box slds-theme--shade ">
+                        <apex:pageBlockSection rendered="{!claimCheckFlag}">
+                            {!errorMessage}<br/>
+                            {!qrCodeList}
+                        </apex:pageBlockSection>
+                    </div>
+                    <div class="slds-box slds-theme--shade ">
+                        <apex:pageBlockSection rendered="{!successFlag}">
+                            <apex:outputPanel styleClass="custPopup" layout="block">
+                                Claim {!claimId} has been Submitted successfully.
+                                <div align="center" draggable="false" >
+                                    <apex:commandButton value="Go back to WhatsApp!" action="{!navigateToWhatsApp}" reRender="none"/>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:pageBlockSection>
+                    </div>
+                </div>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:form id="qrActionForm">
+        <apex:actionFunction action="{!saveQRCode}" name="saveQRCodeFunction" reRender="qrActionForm">
+            <apex:param value="" name="inpval" assignTo="{!qrCodeScanned}"/>
+            <apex:param value="" name="inpval_1" assignTo="{!qrCodeScannedCount}"/>
+        </apex:actionFunction>
+    </apex:form>
+    <apex:form id="inactiveSessionForm" rendered="{!NOT(checkActiveSession)}">
+        <apex:outputPanel id="tstpopup">
+            <apex:outputPanel styleClass="custPopup" layout="block">
+                <div class="slds-box slds-theme--shade ">
+                    <div class="slds-grid slds-wrap">
+                        <article class="slds-card">
+                            <div class="slds-card__header slds-grid">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title"><u>Ashirvad Claim Process</u></h2>
+                                </div>
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner">Yor Session Expired has been Expired, please initiate the Process in WhatsApp</div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-6 slds-large-size_10-of-12">
+                                <div align="center" draggable="false" >
+                                    <apex:commandButton value="Go back to WhatsApp!" action="{!navigateToWhatsApp}" reRender="none"/>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:form>
+    <script type="text/javascript">
+    function storeQRCode(qrCodeMessage,count){
+        saveQRCodeFunction(qrCodeMessage,count);
+    }
+    function readqrCode(idVal,count){
+        const html5QrCode = new Html5Qrcode('reader_'+idVal);
+        const fileinput = document.getElementById('file_'+idVal);
+        const imageFile = fileinput.files[0];
+        html5QrCode.scanFile(imageFile,true)
+        .then(qrCodeMessage => {
+            console.log(qrCodeMessage);
+            //alert(qrCodeMessage);
+            storeQRCode(qrCodeMessage,count);
+            html5QrCode.clear();
+        })
+            .catch(err => {
+            console.log(`Error scanning file. Reason: ${err}`)
+        alert(`${err}`);
+        html5QrCode.clear();
+    });
+    }
+    </script>
+    <style>
+        .respImageContainer{
+        width:150px;
+        padding-top:10px;]
+        }
+        
+        @media ( min-width: 768px ) {
+        .respImageContainer
+        {
+        width:250px;
+        }
+        }
+        
+        @media ( min-width: 1024px ) {
+        .respImageContainer
+        {
+        width:150px;
+        }
+        }
+        .custPopup{
+        background-color: white;
+        border-width: 2px;
+        border-style: solid;
+        z-index: 9999;
+        left: 50%;
+        padding:10px;
+        position: absolute;
+        /* These are the 3 css properties you will need to change so the popup
+        displays in the center of the screen. First set the width. Then set
+        margin-left to negative half of what the width is. You can add
+        the height property for a fixed size pop up if you want.*/
+        width: 500px;
+        margin-left: -250px;
+        top:100px;
+        }
+        .popupBackground{
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+        }
+    </style>
+</apex:page>

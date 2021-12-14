@@ -1,0 +1,370 @@
+<apex:page controller="VendorPageController" showHeader="false" sidebar="false" applyBodyTag="false" standardStylesheets="false">
+<apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_js)}"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_UI_js)}"/>
+<link href="{!URLFOR($Resource.Ashd_jquery_UI_css)}" rel="stylesheet"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_css)}" rel="stylesheet"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_theme_css)}" rel="stylesheet"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_js)}"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_angular_js)}"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_select_css)}" rel="stylesheet"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_select_js)}"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- for city-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" />
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+<style>
+ body{font-family: Calibri!important;}
+.navbar-inverse{background-color:#19a8db !important;background-image: -webkit-linear-gradient(top,#19a8db,#0ebdf7 100%); color:#FFF !important; border-radius:0px !important;padding:7px; }
+.navbar-nav{float:right;}
+.navbar-inverse .navbar-nav>li>a{color:#FFF !important;}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{border-color:#0ebdf7 !important;}
+.navbar{margin-bottom:0px !important;border:0px #FFF none}
+.jumbotron{margin:0px 0px !important; padding:10px !important}
+ .nav-mn{color:#FFF !important; font-size:16px !important;padding-right:10px;margin-top:17px;}
+ .nav-mn a {color:#FFF !important;}
+ .nav-mn a:hover{text-decoration:none}
+
+<!--body{
+    background-color:#ebebe0!important;
+}-->
+    ::-webkit-scrollbar { 
+    display: none; 
+}
+thead{
+    background-color:#ebebe0!important;
+}
+.bbc{
+padding:10px;
+    background-color:#ffffff!important;
+}
+.bodyy{
+    width:100%;
+   
+    
+}
+.tablebody,tr,{
+    background-color:#ffffff!important;
+    height:100%!important;
+    width:100%!important;
+}
+.mainBlock{
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:1;
+    background-color:#000000;
+    opacity:.3;
+}
+.main{
+    z-index:1!important;
+    background-color:#ffffff!important;
+    height:500px!important;
+    top:10%!important;
+    border:2px solid #19a8db !important;
+    border-radius:2px!important;
+    padding:0px!important;
+    
+}
+
+.blockwindow{
+    height:100%!important;
+    width:100%!important;
+    left:0!important;
+    top:0!important;
+    position:fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+}
+.ImageWindow{
+    
+    
+    position:fixed!important;
+    top:15%!important;
+    z-index:1!important;
+    background-color:#ffffff!important;
+    
+                    
+                    margin-bottom:10%;
+                   
+                    
+                    border-radius: 5px;
+                    padding: 0;
+                min-width:450px!important;
+}
+.ImageBar{
+    background-color:#2471A3!important;
+    height:25px!important;
+}
+</style>
+<script>
+ 
+            $(document).ready(function()
+            {
+                $('body').keyup(function(event){
+                    if(event.keyCode==27){
+                     $('.blockwindow').remove();
+                    $('.ImageWindow').remove();
+                    }
+                });
+                   
+           });
+
+            function displayPic(evt){
+             //console.log('zuzuzuzu');
+                $(document).ready(function(){
+                    $('#ban').prop('src',evt.target.src);
+                    
+                    
+                });
+            }
+
+    var app=angular.module('myApp',[]);
+app.factory('Ashirwad_Fact',function($q,$log){
+    var tt={};
+    
+    tt.getVendor=function(){
+        var defer=$q.defer();
+        VendorPageController.collectVendorBrand(function(res,evt){
+            if(evt.status){
+                
+                defer.resolve(res);
+            }else{
+                $log.error(evt.Message);
+                defer.reject(event.Message);
+            }
+             
+            },{ buffer: true, escape: false, timeout: 30000 }
+            );
+            
+        
+        return(defer.promise);
+    }
+    
+    return tt;
+});
+    app.controller('ctrl',function($scope,Ashirwad_Fact){
+           
+           Ashirwad_Fact.getVendor().then(function(resp){
+                console.log(resp);
+                $scope.data=[];
+                for(var i=0;i<resp.length;i++){
+                
+                    var temp=new Object();
+                    temp.id=resp[i].Id;
+                    temp.shopname=resp[i].Shop_Name__r.Name;
+                    temp.vtype=resp[i].Vertical_type__c;
+                    temp.type=resp[i].Type__c;
+                    temp.rtype=resp[i].Request_Type__c;
+                    temp.btype=resp[i].Branding_Type__c;
+                    temp.mtype=resp[i].Media_Type__c;
+                    temp.cname=resp[i].Shop_Name__r.Primary_Contact_Person_Name__c;
+                    temp.mob=resp[i].Shop_Name__r.Contact_Number_Mobile__c;
+                    temp.phone=resp[i].Shop_Name__r.Contact_Number_Phone__c;
+                     temp.address=resp[i].Shop_Name__r.Street_Address__c+','+resp[i].Shop_Name__r.City__c+','+resp[i].Shop_Name__r.District__c+','+resp[i].Shop_Name__r.State__c+','+resp[i].Shop_Name__r.PIN_Code__c;
+                    
+                    
+               /**********************Added ********************/     
+                    temp.vstatus=resp[i].Branding_Approved_Rejected__c;
+                    temp.status='';
+                       
+                    if(temp.vstatus=='Vendor Assigned-Rework'){
+                        temp.status='Rework';
+                    }else if(temp.vstatus=='Vendor Assigned'){
+                                     
+                        temp.status='Open';
+                        
+                    }else if(temp.vstatus=='Request Completed and Submitted'){
+                        temp.status='Submitted';
+                      }
+                       else if(temp.vstatus=='Completed'){
+                        temp.status='Completed';
+                       }
+                                   
+                   
+               /**********************Added ********************/ 
+                    
+                    var dt=new Date(resp[i].Vendor_Submitted_Date__c);  // Bug ABR-74
+                   temp.createdDate=''+dt.getDate()+'/'+(dt.getMonth()+1)+'/'+dt.getFullYear();
+                  
+                  if(resp[i].Vendor_Submitted_Date__c != undefined){
+                    temp.createdDate=''+dt.getDate()+'/'+(dt.getMonth()+1)+'/'+dt.getFullYear();
+                    }else{
+                         temp.createdDate='';
+                    }
+                    
+                    
+                    temp.docafter='';
+                    temp.docbefore='';
+                    temp.Attachments=[];
+                 
+                    
+                    temp.Attachments=resp[i].Attachments;
+                    if(temp.Attachments==undefined){
+                        temp.docafter='';
+                        temp.docbefore='';
+                    }else if(temp.Attachments.length==1){
+                    //console.log('zuzu');
+                        var a;
+                        if(temp.Attachments[0]!=undefined){
+                            a=temp.Attachments[0].Name.toLowerCase();
+                            //console.log(a);
+                            if(a.search('before')!=-1){
+                                temp.docbefore=temp.Attachments[0].Id;
+                            }else{
+                                temp.docafter=temp.Attachments[0].Id;
+                            }
+                        }
+                        
+                    }else if(temp.Attachments.length==2){
+                        var a;
+                        if(temp.Attachments[0]!=undefined){
+                            a=temp.Attachments[0].Name.toLowerCase();
+                            //console.log(a);
+                            if(a.search('before')!=-1){
+                                temp.docbefore=temp.Attachments[0].Id;
+                                temp.docafter=temp.Attachments[1].Id;
+                            }else{
+                                temp.docafter=temp.Attachments[0].Id;
+                                temp.docbefore=temp.Attachments[1].Id;
+                            }
+                        }
+                    }
+                    
+                    //console.log(temp.Attachments);
+                    
+                    
+                    temp.tk=false;
+                    
+                    $scope.data.push(temp);
+                }
+                //console.log($scope.data);
+           });
+           
+           function blockWindow(obj){
+                $(document).ready(function(){
+                
+                var ImageURL="{!$Label.AttachmentURL}";
+                console.log(ImageURL);
+                 
+                 /*using label*/
+                    $('body').append('<div class="blockwindow"></div> <div class="ImageWindow col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor:pointer" class="glyphicon glyphicon-remove appcnc"></span> <span style="float:left;font-weight: bold;font-size: 16px;">Image Window</span> </div> </div> <div style="width:100%;padding: 5px 10px;text-align:center;"> <h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">'+obj.shopname+'</h4> <div align="center" style="width:30%;float:left;vertical-align: bottom;bottom: 30px;position: absolute;"margin-bottom:10px;> <div style="float:left;width:50%;"> Before <img alt="Not Uploaded" onmouseover="displayPic(event)" src="'+ImageURL+obj.docbefore+'" style="height:50px;width:100%;border:1px solid #000000;border-radius:2px;margin:2px;"/> </div> <div style="float:right;width:50%;"> After <img alt="Not Uploaded" onmouseover="displayPic(event)" src="'+ImageURL+obj.docafter+'" style="height:50px;width:100%;border-radius:2px;margin:2px;border:1px solid #000000;"/> </div> </div> <div style="width: 70%;height: 80%;float:right;margin-right: -2%;margin-bottom:30px;"> <img alt="Not Uploaded" id="ban" src="'+ImageURL+obj.docbefore+'" style="width: 80%;border-radius:2px;margin:2px;border:1px solid #000000;height: 260px;" /> </div> </div> </div>');   
+                   
+                 
+                 
+                   $('.appcnc').click(function(){
+                
+                    $('.blockwindow').remove();
+                    $('.ImageWindow').remove();
+                    
+                });    
+               });
+            }
+            
+           
+           
+           $scope.view=function(obj){
+               blockWindow(obj);
+           };
+          
+    
+    });
+    $(document).ready(function(){
+     $('#printId').click(function(){
+                
+                    $('#hidecol').hide();
+                      $('.hideFunc').hide();
+                       $('#printId').hide();
+                        $('#logoPic').show();
+                    window.print();
+                     $('#hidecol').show();
+                      $('.hideFunc').show();
+                        $('#printId').show();
+                         $('#logoPic').hide();
+     });
+   }); 
+   
+  function logoo(){
+  $('#logoPic').hide();
+  }
+   
+</script>
+
+<body ng-app="myApp" ng-controller="ctrl" onload="logoo()" >
+<div class="bs-example" data-example-id="inverted-navbar" > 
+<nav class="navbar navbar-inverse"> 
+<div class="container-fluid"> 
+<div class="navbar-header"><img src="{!$Resource.AshirvadTranspaarentLogo}" height="56px" width="143px" /></div> 
+ 
+   
+ <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9"> 
+        <ul class="nav navbar-nav"> 
+             <!--<li ><a style="font-weight:bolder;" href="/apex/BrandingList">List View</a></li>-->
+             <li id="li2" class="nav-mn">
+                <span class="glyphicon glyphicon-plus">
+                    <a id="link1" style="font-family:Calibri !important;" href="/apex/VendorBranding">Vendor Branding</a>
+                </span>
+            </li>
+             <li class="nav-mn">
+                  <span class="glyphicon glyphicon-home">
+                  <a style="font-family: Calibri!important;" href="/home/home.jsp">Home</a>
+                  </span>
+             </li> 
+
+        </ul>
+        <div   style="font-family:Calibri !important;margin-top:15px;width:90%;color:#FFF;font-size:20px;text-align:center;">Vendor List </div>
+
+ </div>
+  </div> 
+  </nav>
+  
+   </div>
+   <div style="width:98%;margin-left:1%;background-color:#ffffff;height:88%;overflow:auto;position:absolute">
+       
+ <div class="bodyy bbc" align="right" height="100px">
+      
+       <label id="printId" style="padding-right:10px;font-size:15px;font-weight:normal;cursor:pointer;font-family: Calibri!important;" ><span class="glyphicon glyphicon-print"></span> Print</label> 
+       </div>
+       <div class="bodyy">
+       <img id="logoPic" src="{!$Resource.AshirvadTranspaarentLogo}" height="56px" width="143px" />
+<table class="table">
+    <thead>
+      
+        <th>Shop Name</th><th>Branding Type</th><th>Request Type</th><th>Vertical Type</th><th>Media Type</th><th>Product Type</th><th>Shop Address</th><th>Contact Name</th><th>Contact Number</th><th>Status</th><th colspan="2"  class="hideFunc">Shop Image</th><th></th>
+      
+    </thead>
+    <tbody id="tablebody">
+      <tr ng-repeat="p in data" id="{{p.id}}">
+          <td style="width:15%;">{{p.shopname}}</td>
+          <td style="width:10%;" >{{p.btype}}</td>
+          <td style="width:10%;" >{{p.rtype}}</td>
+          <td style="width:10%;" >{{p.vtype}}</td>
+          <td style="width:15%;" >{{p.mtype}}</td>
+          <td style="width:15%;" >{{p.type}}</td>
+          <td style="width:30%;">{{p.address}}</td>
+          <td style="width:15%;">{{p.cname}}</td>
+          <td style="width:10%;">{{p.mob}}</td>
+          <td style="width:10%;"><div>{{p.status}}<br/>{{p.createdDate}}</div></td>
+          <td class="hidecol" style="width:7%;"><input type="button" class="btn btn-default " value="View Image" onclick="this.blur();"  ng-click="view(p)" /></td>
+          <td style="width=3%;"></td> 
+      </tr>
+    
+    </tbody>
+  
+</table>
+</div>
+   </div>
+
+</body>
+
+</apex:page>

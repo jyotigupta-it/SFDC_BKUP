@@ -1,0 +1,34 @@
+<apex:page controller="MassEditProjectTracker">
+  <apex:form >
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!projectTrackerList}" var="projectTracker">
+                <apex:column width="35%">
+                    <apex:facet name="header">Question</apex:facet>
+                    <apex:outputField value="{!projectTracker.Question__c}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Response</apex:facet>
+                    <apex:inputField value="{!projectTracker.Response__c}" required="true"/>
+                </apex:column>
+           <!--     <apex:column >
+                    <apex:facet name="header">Current Status</apex:facet>
+                    <apex:inputField value="{!projectTracker.Remarks__c}" required="true"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Action Plan</apex:facet>
+                    <apex:inputField value="{!projectTracker.Action_Plan__c}" required="true"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Action Date</apex:facet>
+                    <apex:inputField value="{!projectTracker.Action_Date__c}" required="true"/>
+                </apex:column> -->
+            </apex:pageBlockTable>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!updateProjectTracker}" />
+                <apex:commandButton value="Cancel" onclick="window.top.location='/{!projectId}'; return false"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,253 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global" 
+                controller="AddingDealerInBeatController">
+    <!-- call doInit method on component load -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!-- aura attributes to store data/values --> 
+    <aura:attribute name="listOfAllAccounts" type="list"/> 
+    <aura:attribute name="PaginationList" type="list"/> 
+    <aura:attribute name="selectedCount" type="integer" default="0"
+                    description="selected Records Count"/>
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer"/>
+    <aura:attribute name="totalRecordsCount" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"
+                    description="number of records to be display on per page"/>
+    <aura:attribute name="currentPage" type="integer" default="1"/>
+    <aura:attribute name="totalPagesCount" type="integer"/>
+    <aura:attribute name="bNoRecordsFound" type="boolean"/>
+    <aura:attribute name="sTemp" type="String"/>
+    <aura:attribute name="allSelected" type="List"/>
+    <aura:attribute name="filterlist" type="List"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="access" type="boolean" default="true"/>
+    <aura:attribute name="loaded" type="boolean" default="true"/>
+    
+    
+    <aura:if isTrue="{!v.access}">
+        <aura:if isTrue="{! v.loaded }">
+            <div class="Spinner">
+                <lightning:spinner alternativeText="Loading" size="medium" variant="brand"/>
+            </div>
+        </aura:if>
+        
+        <lightning:card footer="Card Footer" title="-" variant="Narrow">
+            
+            <img src="https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1489022473000/AshirvadLogo?" style="width:100px;height:42px;position: absolute;
+                                                                                                                                    top: 0;
+                                                                                                                                    right: 20;"/>
+            <aura:renderIf isTrue="{!v.selectedCount>0 }">
+                
+                <div class="slds-align_absolute-center">         
+                    
+                    <span class="slds-badge slds-badge_lightest"
+                          style="margin-right: 10px;margin-left: -20px;margin-top: -54px;">
+                        Dealer selected {!v.selectedCount}
+                    </span>
+                </div>
+            </aura:renderIf>
+            <aura:if isTrue="{!v.bNoRecordsFound}">
+                <!--display error message if there is no records available -->
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>No Dealers are assigned to the logged in User.</h2>
+                </div>
+                <aura:set attribute="else">
+                    
+                    <!-- lightning:button to get selected rows data -->
+                    <!-- <div class="slds-clearfix slds-m-around_small">
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <lightning:button variant="destructive"
+                                              label="Get Selected Records"
+                                              onclick="{! c.getSelectedRecords }"
+                                              disabled="{!v.selectedCount == 0}"/>
+                        </div>
+                    </div>
+                </div>-->
+                    <!-- display total record and selected record count -->    
+                    <!--  <p class="slds-m-around_small">
+                    <span class="slds-badge slds-badge_lightest" style="display:inline-block">
+                        Total Records : {!v.selectedCount > 0 ? v.selectedCount + '/' : ''} {!v.totalRecordsCount} 
+                    </span>
+                </p>-->
+                    <div class="slds-grid slds-wrap" >
+                        
+                        
+                        <div class="slds-size--1-of-1 slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1 slds-p-around_x-small">    
+                            <lightning:input onchange="{!c.searchTable}" type="search" value="{!v.sTemp}" label="Searh" variant="label-hidden" placeholder="Enter search term" aura:id="SearchBox"/>
+                        </div>
+                    </div><!-- data table start-->  
+                    <div class="slds-m-top_x-small container">
+                        
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <!--header checkbox for select all-->
+                                    <th style="width:3.25rem;" class="slds-text-align_right">
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <label class="slds-checkbox">
+                                                    <ui:inputCheckbox disabled="{!v.totalRecordsCount == 0}"
+                                                                      aura:id="selectAllId"
+                                                                      change="{!c.selectAllCheckbox}"/>
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <span class="slds-form-element__label"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Name">Name</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Phone">Location</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Phone">Phone</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Type">Sparsh Code</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Type">State</div>
+                                    </th>
+                                    
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Type">District</div>
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.PaginationList}" var="obj">
+                                    <tr>
+                                        <th scope="row" class="slds-text-align_right" style="width:3.25rem;">
+                                            <div class="slds-form-element">
+                                                <div class="slds-form-element__control">
+                                                    <label class="slds-checkbox">
+                                                        <ui:inputCheckbox text="{!obj.objAccount.Id}"
+                                                                          value="{!obj.isChecked}"
+                                                                          change="{!c.checkboxSelect}"/>
+                                                        <span class="slds-checkbox_faux"></span>
+                                                        <span class="slds-form-element__label text"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!obj.objAccount.Name}">
+                                                {!obj.objAccount.Name}
+                                            </div>
+                                        </th> 
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!obj.objAccount.City__c}">
+                                                {!obj.objAccount.City__c}
+                                            </div>
+                                        </th> 
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!obj.objAccount.Contact_Number_Mobile__c}">
+                                                <lightning:formattedPhone value="{!obj.objAccount.Contact_Number_Mobile__c}"/>
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!obj.objAccount.Sparsh_Code__c}">
+                                                {!obj.objAccount.Sparsh_Code__c}
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!obj.objAccount.Sparsh_Code__c}">
+                                                {!obj.objAccount.State__c}
+                                            </div>
+                                        </th>
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!obj.objAccount.Sparsh_Code__c}">
+                                                {!obj.objAccount.District__c}
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- DataTable End -->
+                    <!--  Pagination Buttons Start -->
+                    
+                </aura:set> 
+            </aura:if>
+            <aura:set attribute="actions">
+                <lightning:button label="Add To Beat" onclick="{! c.openModel }" disabled ="{!v.bNoRecordsFound}"/>
+            </aura:set>
+            <aura:set attribute="footer">
+                
+                <aura:renderIf isTrue="{!(!v.bNoRecordsFound)}">
+                    
+                    <div class="slds-align_absolute-center">         
+                        <lightning:button label="Previous"
+                                          disabled="{!v.startPage == 0}"  
+                                          onclick="{!c.navigation}"
+                                          variant="brand"
+                                          iconName="utility:back"
+                                          name="previous"/>
+                        
+                        <span class="slds-badge slds-badge_lightest"
+                              style="margin-right: 10px;margin-left: 10px;">
+                            Page {!v.currentPage} out of {!v.totalPagesCount}
+                        </span>
+                        
+                        <lightning:button label="Next"
+                                          disabled="{!(v.endPage + 1) >= v.totalRecordsCount}" 
+                                          onclick="{!c.navigation}"
+                                          variant="brand"
+                                          iconName="utility:forward"
+                                          iconPosition="right"
+                                          name="next"/>
+                    </div>  
+                </aura:renderIf>
+                
+                <!--  Pagination Buttons End -->        </aura:set>
+            <aura:if isTrue="{!v.isModalOpen}">
+                
+                <!-- Modal/Popup Box starts here-->
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box Header Starts here-->
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModel }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select Beat</h2>
+                        </header>
+                        <!--Modal/Popup Box Body Starts here-->
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <c:BeatSelecttion aura:id="childComp"/>
+                        </div>
+                        <!--Modal/Popup Box Footer Starts here-->
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral"
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{! c.closeModel }"/>
+                            <lightning:button variant="brand"
+                                              label="OK"
+                                              title="OK"
+                                              onclick="{!c.submitDetails}"/>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </aura:if>
+            
+        </lightning:card>
+        <aura:set attribute="else">
+            <ui:message title="Information" severity="info" closable="false">
+                Beyond the date
+            </ui:message>
+        </aura:set>
+        
+    </aura:if>
+    
+</aura:component>

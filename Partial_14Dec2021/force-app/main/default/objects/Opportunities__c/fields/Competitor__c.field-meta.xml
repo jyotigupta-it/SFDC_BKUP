@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Competitor__c</fullName>
+    <externalId>false</externalId>
+    <label>Competitor</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>GF</fullName>
+                <default>false</default>
+                <label>GF</label>
+            </value>
+            <value>
+                <fullName>ASTRAL</fullName>
+                <default>false</default>
+                <label>ASTRAL</label>
+            </value>
+            <value>
+                <fullName>Cepex</fullName>
+                <default>false</default>
+                <label>Cepex</label>
+            </value>
+            <value>
+                <fullName>Asahi</fullName>
+                <default>false</default>
+                <label>Asahi</label>
+            </value>
+            <value>
+                <fullName>Coraplex</fullName>
+                <default>false</default>
+                <label>Coraplex</label>
+            </value>
+            <value>
+                <fullName>Praher</fullName>
+                <default>false</default>
+                <label>Praher</label>
+            </value>
+            <value>
+                <fullName>UNP Polyvalves</fullName>
+                <default>false</default>
+                <label>UNP Polyvalves</label>
+            </value>
+            <value>
+                <fullName>Gemu</fullName>
+                <default>false</default>
+                <label>Gemu</label>
+            </value>
+            <value>
+                <fullName>Dinesh plastic products</fullName>
+                <default>false</default>
+                <label>Dinesh plastic products</label>
+            </value>
+            <value>
+                <fullName>Parth plastics</fullName>
+                <default>false</default>
+                <label>Parth plastics</label>
+            </value>
+            <value>
+                <fullName>Hitech Applicator</fullName>
+                <default>false</default>
+                <label>Hitech Applicator</label>
+            </value>
+            <value>
+                <fullName>Xomox</fullName>
+                <default>false</default>
+                <label>Xomox</label>
+            </value>
+            <value>
+                <fullName>BDK</fullName>
+                <default>false</default>
+                <label>BDK</label>
+            </value>
+            <value>
+                <fullName>Certikin</fullName>
+                <default>false</default>
+                <label>Certikin</label>
+            </value>
+            <value>
+                <fullName>Fischer rosemount</fullName>
+                <default>false</default>
+                <label>Fischer rosemount</label>
+            </value>
+            <value>
+                <fullName>Forbes Marshall</fullName>
+                <default>false</default>
+                <label>Forbes Marshall</label>
+            </value>
+            <value>
+                <fullName>Endress &amp; Hauser</fullName>
+                <default>false</default>
+                <label>Endress &amp; Hauser</label>
+            </value>
+            <value>
+                <fullName>Yokogawa</fullName>
+                <default>false</default>
+                <label>Yokogawa</label>
+            </value>
+            <value>
+                <fullName>Burkert</fullName>
+                <default>false</default>
+                <label>Burkert</label>
+            </value>
+            <value>
+                <fullName>Azud</fullName>
+                <default>false</default>
+                <label>Azud</label>
+            </value>
+            <value>
+                <fullName>Arkal</fullName>
+                <default>false</default>
+                <label>Arkal</label>
+            </value>
+            <value>
+                <fullName>ARI Valves</fullName>
+                <default>false</default>
+                <label>ARI Valves</label>
+            </value>
+            <value>
+                <fullName>Unirain</fullName>
+                <default>false</default>
+                <label>Unirain</label>
+            </value>
+            <value>
+                <fullName>Dorot</fullName>
+                <default>false</default>
+                <label>Dorot</label>
+            </value>
+            <value>
+                <fullName>Automat PTV</fullName>
+                <default>false</default>
+                <label>Automat PTV</label>
+            </value>
+            <value>
+                <fullName>Simona</fullName>
+                <default>false</default>
+                <label>Simona</label>
+            </value>
+            <value>
+                <fullName>Kimplas</fullName>
+                <default>false</default>
+                <label>Kimplas</label>
+            </value>
+            <value>
+                <fullName>Al-aziz</fullName>
+                <default>false</default>
+                <label>Al-aziz</label>
+            </value>
+            <value>
+                <fullName>Bentlay</fullName>
+                <default>false</default>
+                <label>Bentlay</label>
+            </value>
+            <value>
+                <fullName>Sangir</fullName>
+                <default>false</default>
+                <label>Sangir</label>
+            </value>
+            <value>
+                <fullName>NORMA</fullName>
+                <default>false</default>
+                <label>NORMA</label>
+            </value>
+            <value>
+                <fullName>Teekay</fullName>
+                <default>false</default>
+                <label>Teekay</label>
+            </value>
+            <value>
+                <fullName>Victaulic</fullName>
+                <default>false</default>
+                <label>Victaulic</label>
+            </value>
+            <value>
+                <fullName>Viking Johnson</fullName>
+                <default>false</default>
+                <label>Viking Johnson</label>
+            </value>
+            <value>
+                <fullName>Uni-coupling</fullName>
+                <default>false</default>
+                <label>Uni-coupling</label>
+            </value>
+            <value>
+                <fullName>Jeeongwoo</fullName>
+                <default>false</default>
+                <label>Jeeongwoo</label>
+            </value>
+            <value>
+                <fullName>Krausz</fullName>
+                <default>false</default>
+                <label>Krausz</label>
+            </value>
+            <value>
+                <fullName>Young Nam metal</fullName>
+                <default>false</default>
+                <label>Young Nam metal</label>
+            </value>
+            <value>
+                <fullName>Spears</fullName>
+                <default>false</default>
+                <label>Spears</label>
+            </value>
+            <value>
+                <fullName>ABB</fullName>
+                <default>false</default>
+                <label>ABB</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

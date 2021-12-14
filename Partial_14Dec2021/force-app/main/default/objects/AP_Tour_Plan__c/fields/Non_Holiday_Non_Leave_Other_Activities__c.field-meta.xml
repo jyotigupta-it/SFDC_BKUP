@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_Holiday_Non_Leave_Other_Activities__c</fullName>
+    <description>Non-Holiday/Non Leave Other Activities</description>
+    <externalId>false</externalId>
+    <label>Non-Holiday/Non Leave Other Activities</label>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Other Activities</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Othet_Activities__c</field>
+        <operation>equals</operation>
+        <value>Meeting, Promotional Activity, Training, Post Visit Order</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AP_Site_Visit__c.AP_Tour_Plan__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

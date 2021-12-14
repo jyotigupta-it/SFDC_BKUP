@@ -1,0 +1,199 @@
+<apex:page standardController="Account" extensions="DistributorPdfController" renderAs="pdf"  showHeader="false"  sidebar="false" applyHtmlTag="false" applyBodyTag="false"  >
+ 
+    <head>
+        <style>
+            .columnHeader{
+            border:1px solid black;
+            text-align:center;
+            color:black;
+            font-size:15px;
+            font-weight:bold;
+            height:15px;
+            }
+            
+            .columnData{
+            border:1px solid black;
+            text-align:center;
+            color:black;
+            font-size:13px;
+            height:15px;
+            width:15%;
+            padding:7px;
+            overflow-wrap: break-word;
+            word-break: break-all;
+            }
+            
+            .columnDataLineItem{
+            border:1px solid black;
+            text-align:center;
+            color:black;
+            font-size:13px;
+            height:15px;
+            margin:0px;
+            overflow-wrap: break-word;
+            word-break: break-all;
+            }
+            
+            .tableheader
+            {
+            	border:1px solid black;
+            	text-align:center;
+            	color:black;
+            	font-size:15px;
+            	font-weight:bold;
+            	background-color:#a6a6a6 ;
+            	height:15px;
+            }
+            .rowgap
+            {
+            	border:1px solid black;
+            	text-align:center;
+            	color:black;
+            	font-size:15px;
+            	font-weight:bold;
+            	height:15px;
+            }
+            
+            table{
+            border-collapse:collapse; 
+            table-layout:auto;
+            border:1px solid black;
+            }
+            
+            .tsofieldName{
+            	border:1px solid black;
+            	text-align:center;
+            	color:black;
+            	font-size:15px;
+            	font-weight:bold;
+            	background-color:#a6a6a6 ;
+            	width:30%;
+            	height:15px;
+            }
+            
+            .tsofieldValues{
+            border:1px solid black;
+            text-align:center;
+            color:black;
+            font-size:15px;
+            width:70%;
+            height:15px;
+            }
+            
+            .logo{
+            border:1px solid black;
+            text-align:center;
+            font-size:20px; 
+            width:220px;
+            padding:10px;
+            }
+        </style>
+    </head>
+    
+    <div style="text-align:center;font-weight:bold;" >
+         Confidential 
+    </div>
+    <br/>
+    
+ 
+    
+    
+    <table width="100%" >
+        <tr>
+            <td class="logo"  rowspan="6" ><apex:image width="200" height="120" url="{!$Resource.Ashirvd_pipes_logo}"  alt="Description of image here"/></td> 
+            <td style="border:1px solid black;text-align:center;color:black;font-size:25px;font-weight:bold;padding:10px;color:Red ;" colspan="2"  > Ashirvad Pipes Pvt Ltd.</td>
+            
+        </tr>
+        <tr>
+            <td style="border:1px solid black;text-align:center;color:black;font-size:15px;font-weight:bold;background-color:#a6a6a6 ;padding:10px;" colspan="2" > Dealer Direct Order</td>
+        </tr>
+        <tr>
+            <td class="tsofieldName" >Distributor Name</td>
+            <td class="tsofieldValues" >
+                {!distributor.Name}
+            </td>
+        </tr>
+        <tr>
+            <td class="tsofieldName">Distributor Phone Number</td>
+            <td class="tsofieldValues">
+                {!distributor.Contact_Number_Mobile__c}
+            
+            </td>
+        </tr>
+        <tr>
+            
+            <td class="tsofieldName">Created Date</td>
+            <td class="tsofieldValues">
+                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                    <apex:param value="{!TODAY()}" />
+                    </apex:outputText>
+            </td>	
+        </tr>
+        <tr>
+			  <td class="rowgap" colspan="2">   </td>      
+        </tr>
+        
+        </table>
+    
+    
+        <table width="100%"  >
+        <tr>
+        	<td class="tableheader"  colspan="7">  </td>
+        </tr>
+
+        <tr>
+        	<td class="columnHeader"> Order No</td>
+            <td class="columnHeader"> Dealer</td>
+            <td class="columnHeader"> Phone Number</td>
+            <td class="columnHeader"> Product Family</td>
+            <td class="columnHeader"> Product Code</td>
+            <td class="columnHeader"> Product</td>
+            <td class="columnHeader"> Quantity</td>
+            
+            
+            
+            
+        </tr>
+            
+            <apex:repeat value="{!tsoOrderList}" var="order" rendered="{!tsoOrderList.size>0}">
+                <apex:variable value="{!0}" var="rowSpanVal" />
+                <apex:repeat value="{!tsoOrderLineItemMap[ order.Id ]}" var="orderLine"  >
+                    <apex:variable value="{!rowSpanVal+1}" var="rowSpanVal"/>
+                </apex:repeat>
+                <apex:variable value="{!1}" var="count" />
+                    <apex:repeat value="{!tsoOrderLineItemMap[ order.Id ]}" var="orderLine"> 
+                        <tr>
+                            
+                            <apex:outputPanel layout="none" rendered="{!count==1}">
+                            <td class="columnData" rowspan="{!rowSpanVal}"> {!order.OrderNumber} </td>
+                            <td class="columnData" rowspan="{!rowSpanVal}"> {!order.Account.Name} </td>
+                            <td class="columnData" rowspan="{!rowSpanVal}"> {!order.Account.Contact_Number_Mobile__c}</td>
+                            </apex:outputPanel>
+                            
+                            <td class="columnData" rowspan="">      
+                                {!orderLine.Product__r.Family}
+                            </td>
+                            
+                            <td class="columnData" rowspan="">      
+                                {!orderLine.Product__r.ProductCode}
+                            </td>
+                            
+                            <td class="columnData" rowspan="">      
+                                {!orderLine.Product__r.Name}
+                            </td>
+                            
+                            <td class="columnData"> 
+                                {! floor(orderLine.Quantity__c) } 
+                            </td>
+                            
+                            
+                            
+                            
+                            
+                            <apex:variable value="{!count+1}" var="count"/>
+                        </tr>
+                    </apex:repeat>
+            </apex:repeat>
+    </table>
+
+</apex:page>

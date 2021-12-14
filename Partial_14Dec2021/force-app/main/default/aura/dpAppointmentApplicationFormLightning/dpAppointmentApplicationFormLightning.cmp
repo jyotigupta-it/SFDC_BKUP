@@ -1,0 +1,805 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable" access="global" controller="dpAppointmentApplicationFormController">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="wrapperObject" type="Object"/>
+    <aura:attribute name="accountRecord" type="String"/>
+    <aura:attribute name="accountObj" type="Account"/>
+    <aura:attribute name="businessLineOptions" type="list"/>
+    <aura:attribute name="partyTypeOptions" type="list"/>
+    <aura:attribute name="gstValidated" type="boolean" default="false"/>
+    <aura:handler name="change" value="{!v.wrapperObject.accountRef.VAT_CST_Number__c}" action="{!c.gstChanged}"/>
+    
+    <!-- Map of RecordTypeName and Id -->
+    <aura:attribute name="mapOfRecordTypeNameANDId" type="Map"/>
+    
+    <!--- Details for Partner Detail Object -->
+    <aura:handler name="AddRowEvt" event="c:AddNewRowEvtDistributionDetails" action="{!c.handleAddDistributionPartnerClick}"/>
+    <aura:handler name="DeleteRowEvt" event="c:DeleteRowEvtDistributionDetails" action="{!c.handleRemoveDistributionPartnerClick}"/>
+    
+    <!--- Details for Distribution Partner Record Type-->
+    <aura:attribute name="listPartnerDetailsObject" type="Partner_Detail__c[]"/>
+    <aura:attribute name="distributionPartnerRequired" type="boolean" default="false"/>
+    
+    <!--- Details for Project Partner Record Type-->
+    <aura:attribute name="listProjectPartnerDetailsObject" type="Partner_Detail__c[]"/>
+    <aura:attribute name="projectPartnerRequired" type="boolean" default="false"/>
+    
+    <!-- Details of Proprietor / Partners / Directors -->
+    <aura:attribute name="listProprietorPartnersDirectors" type="Contact[]"/>
+    <aura:attribute name="moreThanOneProprietor" type="boolean" default="false"/>
+    
+    <!-- Current Business Activity / Business History -->
+    <aura:attribute name="listBusinessActivityAndHistory" type="Business_Activity_History__c[]"/>
+    
+    <!--- Total Turnover for Past 3 Years -->
+    <aura:attribute name="totalTurnOverDP" type="DP_Detail__c"/>
+    
+    <!--- Sister Concerns: If Any With Annual Details (In Lacs)-->
+    <aura:attribute name="listSisterConcerns" type="Partner_Detail__c[]"/>
+    
+    <!--- In which area you are currently dong business and Staff Details -->
+    <aura:attribute name="businessAreaAndStaffDetailsDP" type="DP_Detail__c"/>
+    
+    <!--- Bank Details - Financial and Loan Details -->
+    <aura:attribute name="financialDetailDP" type="Bank_Details__c"/>    
+    <aura:attribute name="loanDetails" type="Bank_Details__c[]"/>   
+    <aura:attribute name="activeSections" type="List" default="['Financial Details','Loan Details']" />
+    
+    <!-- Business Proposal Questionnarie -->
+    <aura:attribute name="businessProposalQuestionsDP" type="DP_Detail__c"/>
+    
+    <!-- Billing Commitment -->
+    <aura:attribute name="billingCommitmentDP" type="Sales_Projection__c"/>
+
+    <!-- Dealer Network Addition -->
+    <aura:attribute name="dealerNetworkAdditionDP" type="Sales_Projection__c"/>
+
+    <!--- Sales Projection -->
+    <aura:attribute name="salesProjectionInstanceDP" type="Sales_Projection__c[]"/>
+    
+    <!--- Details of Self and Family Members -->
+    <aura:attribute name="detailsOfSelfandFamily" type="Contact[]"/>
+    <aura:attribute name="moreThanOneFamilyMember" type="boolean" default="false"/>
+    <aura:attribute name="activeSectionsForTab" type="List" default="['A','B']"/>
+    <aura:attribute name="upload_One_passport_Size" type="boolean" default="false"/>
+    <aura:attribute name="copyOfPanCard" type="boolean" default="false"/>
+    <aura:attribute name="copyOfSalesTax" type="boolean" default="false"/>
+    <aura:attribute name="copyOfShopLicense" type="boolean" default="false"/>
+    <aura:attribute name="fourPhotographOfEstablishment" type="boolean" default="false"/>
+    <aura:attribute name="copyOfLasttwoYearsAudited" type="boolean" default="false"/>
+    <aura:attribute name="copyOfLastTwoYearsIncome" type="boolean" default="false"/>
+    <aura:attribute name="lastOneYearBank" type="boolean" default="false"/>
+    <aura:attribute name="visitingCard" type="boolean" default="false"/>
+    <aura:attribute name="securityCheques" type="boolean" default="false"/>
+
+    <!-- Handle Form Validation Event -->
+    <aura:attribute name="formHasError" type="boolean[]" />
+    <aura:attribute name="validationStatus" type="boolean" default="true"/>
+    <aura:handler name="returnFormValidation" event="c:returnFormValidationStatus" action="{!c.handlereturnFormValidation}"/>
+    
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <div class="slds-page-header" style="background: white" role="banner">
+        <div class="slds-grid slds-grid_align-spread" >
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_2-of-12 logoClass">
+                    <img src="{!$Resource.Ashirvad_Logo_For_DP_Application}"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12 slds-large-size_8-of-12" 
+                     style="text-align: center; font-weight:bold; font-size: 16px; text-decoration-line: underline;">
+                    <h2>ASHIRVAD PIPES PVT.LTD.</h2>
+                    <h2>CHANNEL PARTNERSHIP APPLICATION PROGRAM</h2>
+                </div> 
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_2-of-12" style="text-align:right;">
+                    <aura:if isTrue="{!v.validationStatus}">
+                        <lightning:button variant="brand-outline" label="Validate Form" 
+                        title="Validate Form" onclick="{! c.handleValidateForm }" />
+                        <aura:set attribute="else">
+                            <lightning:button variant="brand-outline" label="Submit Application Form" 
+                            title="Submit Application Form" onclick="{! c.submitApplicationForm }" />
+                        </aura:set>
+                    </aura:if>
+                </div>
+
+        </div>
+    </div>
+    <div class="c-container">
+        <lightning:layout multipleRows="true">
+            <!-- <lightning:layoutItem padding="around-small" size="12">
+                <div class="logoClass">
+                    <img src="{!$Resource.Ashirvad_Logo_For_DP_Application}"/>
+                </div>
+                <div class="page-section page-header">
+                    <h2>ASHIRVAD PIPES PVT.LTD.</h2>
+                    <h2>CHANNEL PARTNERSHIP APPLICATION PROGRAM</h2>
+                </div> 
+            </lightning:layoutItem> -->
+            
+            
+            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                <div class="page-section page-main">
+                    <lightning:tabset selectedTabId="one" onselect="{! c.handleSelect }">
+                        <lightning:tab label="Details of Business" id="one">
+                                   <h3 class="slds-section__title slds-theme_shade">
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                                                    <span class="slds-truncate slds-p-horizontal_small" title="GST Details">GST Details</span>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12" style="text-align:right;">
+                                                    <lightning:button variant="brand-outline" label="Validate GST" 
+                                                    title="Validate GST Number" onclick="{! c.callValidateGST }" disabled="{!v.gstValidated}"/>
+                                                </div>
+                                   </h3> 
+                            <!--   GST -->
+                               <lightning:recordEditForm aura:id="recordForm" objectApiName="Account" recordId="{!v.accountRecord}"  >
+                                                    <lightning:messages />
+                                                    <div class="slds-grid slds-wrap">  
+                                                        <div class="slds-col slds-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:input label="GST number" required="true" aura:id="accountGSTNumber" maxlength="15" messageWhenTooLong="You have exceeded the limit of 15 characters" fieldName="VAT_CST_Number__c" value="{!v.wrapperObject.accountRef.VAT_CST_Number__c}" />  
+                                                            <!-- <div class="sp_1">
+                                                                   <lightning:spinner alternativeText="Loading" size="small" />
+                                                             </div>   -->                                                         
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:inputField readonly="true" aura:id="gst_legal__c" fieldName="gst_legal__c" value="{!v.wrapperObject.accountRef.gst_legal__c}"  />  
+                                                        </div>
+                                                    </div>
+                                </lightning:recordEditForm> 
+                            
+                            <!-- Business Line and partner Category -->  
+                             <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title=" Business Line | Partner Category">  Business Line | Partner Category</span>
+                                   </h3>
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="slds-grid slds-wrap">                                                                              
+                                        <div class="slds-col slds-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+                                            <!-- Business Line -->
+                                            <lightning:combobox name="businessLine" label="Business Line" value="{!v.wrapperObject.accountRef.Business_Line__c}" 
+                                                                options="{! v.businessLineOptions }" required="true" aura:id="businessLine" readonly="{!!v.gstValidated}"/>
+                                        </div> 
+                                        <div class="slds-col slds-size_1-of-2 slds-p-left_medium slds-p-right_medium"> 
+                                            <!-- Partner Category -->
+                                            <lightning:combobox onchange="{!c.handlePartnerCategory}" name="partyType" label="Partner Category" value="{!v.wrapperObject.accountRef.Type_of_Partner__c}" 
+                                                                options="{! v.partyTypeOptions }" required="true" aura:id="partyType" readonly="{!!v.gstValidated}"/>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!--- Details for Distribution Partner --> 
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="If Distribution Partner: Give details of distribution (Provide the List)">If Distribution Partner: Give details of distribution (Provide the List)</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listPartnerDetailsObject}" var="distribution" indexVar="index">
+                                                    <c:distributionPartnerDetails aura:id="distributionPartnerEditForm" makeRequired="{!v.distributionPartnerRequired}" distributionDetailsInstance="{!distribution}" rowIndex="{!index}" makeReadOnly="{!!v.gstValidated}"/>
+                                                </aura:iteration>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!--- Details for Project Partner -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="If Project Partner: Give details of Project (Provide the List)">If Project Partner: Give details of Project (Provide the List)</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <lightning:recordEditForm aura:id="recordForm" objectApiName="Account" recordId="{!v.accountRecord}"  >
+                                                    <lightning:messages />
+                                                    <div class="slds-grid slds-wrap">  
+                                                        <div class="slds-col slds-size_2-of-2 slds-p-left_small slds-p-right_small">
+                                                            <!-- <label class="slds-form-element__label slds-no-flex" for="accountName">No of Projects Handled</label> -->
+                                                            <lightning:inputField aura:id="accountName" fieldName="No_of_Projects_Handled__c" value="{!v.wrapperObject.accountRef.No_of_Projects_Handled__c}" required="{!v.projectPartnerRequired}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                    </div>
+                                                </lightning:recordEditForm>
+                                                <aura:iteration items="{!v.wrapperObject.listProjectPartnerDetailsObject}" var="project" indexVar="index">
+                                                    <c:projectPartnerDetails aura:id="projectPartnerEditForm" makeRequired="{!v.projectPartnerRequired}" projectPartnerInstance="{!project}" rowIndex="{!index}" makeReadOnly="{!!v.gstValidated}"/>
+                                                </aura:iteration>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!--- Ownership Details -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="slds-section slds-is-open">
+                                        <h3 class="slds-section__title slds-theme_shade">
+                                            <span class="slds-truncate slds-p-horizontal_small" title="Ownership Details">Ownership Details</span>
+                                        </h3> 
+                                        
+                                        <div aria-hidden="false" class="slds-section__content">
+                                            
+                                            <lightning:recordEditForm aura:id="recordForm" objectApiName="Account" recordId="{!v.accountRecord}"  >
+                                                <lightning:messages />
+                                                <div class="slds-grid slds-wrap">  
+                                                    <div class="slds-col slds-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+                                                        <label required="true" class="slds-form-element__label slds-no-flex" for="accountEmailId"><abbr class="slds-required" title="required">*</abbr>Name of The Firm {In Bold Latters}:</label>
+                                                        <lightning:input required="true" aura:id="accountEmailId" fieldName="Name" variant="label-hidden" value="{!v.wrapperObject.accountRef.Name}" disabled="{!!v.gstValidated}"/>
+                                                        <label class="slds-form-element__label slds-no-flex" for="accountEmailId"><abbr class="slds-required" title="required">*</abbr>Telephone No. (With STD Code)</label>
+                                                        <lightning:input required="true" aura:id="accountEmailId" fieldName="Contact_Number_Phone__c" value="{!v.wrapperObject.accountRef.Contact_Number_Phone__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        <label class="slds-form-element__label slds-no-flex" for="accountEmailId"><abbr class="slds-required" title="required">*</abbr>Contact Person Name</label>
+                                                        <lightning:input required="true" aura:id="accountEmailId" fieldName="Primary_Contact_Person_Name__c" value="{!v.wrapperObject.accountRef.Primary_Contact_Person_Name__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        <label class="slds-form-element__label slds-no-flex" for="accountEmailId"><abbr class="slds-required" title="required">*</abbr>Mobile No.</label>
+                                                        <lightning:input required="true" aura:id="accountEmailId" fieldName="Contact_Number_Mobile__c" value="{!v.wrapperObject.accountRef.Contact_Number_Mobile__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        <label class="slds-form-element__label slds-no-flex" for="accountEmailId"><abbr class="slds-required" title="required">*</abbr>Email Id</label>
+                                                        <lightning:input required="true" aura:id="accountEmailId" fieldName="Contact_Email__c" value="{!v.wrapperObject.accountRef.Contact_Email__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        
+                                                        <br/>
+                                                            <lightning:badge label="Location Where Distributorship is Required"/>
+                                                        <br/> 
+                                                        <div class="slds-grid">
+                                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3  slds-p-right_medium">
+                                                                <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>City</label>
+                                                                <lightning:input required="true" aura:id="accountEmailId" fieldName="City_for_Distributorship__c" value="{!v.wrapperObject.accountRef.City_for_Distributorship__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                            </div>
+                                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-p-left_medium ">
+                                                                <label class="slds-form-element__label slds-no-flex" for="accountDistributorTownlId"><abbr class="slds-required" title="required">*</abbr>Town</label>
+                                                                <lightning:input required="true" aura:id="accountEmailId" fieldName="Town_for_Distributorship__c" value="{!v.wrapperObject.accountRef.Town_for_Distributorship__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                            </div>
+                                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-p-left_medium ">
+                                                                <label class="slds-form-element__label slds-no-flex" for="accountDistributorTownlId"><abbr class="slds-required" title="required">*</abbr>Cluster</label>
+                                                                <lightning:input required="true" aura:id="accountEmailId" fieldName="Cluster_for_Distributorship__c" value="{!v.wrapperObject.accountRef.Cluster_for_Distributorship__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                            </div>
+                                                        </div>    
+
+                                                        <br/>
+                                                        <lightning:badge label="Address of Godown (If other than above)"/>
+                                                        <br/> 
+                                                        <div class="slds-grid">
+                                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3  slds-p-right_medium">
+                                                                <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>City</label>
+                                                                <lightning:input required="true" aura:id="accountEmailId" fieldName="City_for_Godown__c" value="{!v.wrapperObject.accountRef.City_for_Godown__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                            </div>
+                                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 ">
+                                                                <label class="slds-form-element__label slds-no-flex" for="accountDistributorTownlId"><abbr class="slds-required" title="required">*</abbr>Town</label>
+                                                                <lightning:input required="true" aura:id="accountEmailId" fieldName="Town_for_Godown__c" value="{!v.wrapperObject.accountRef.Town_for_Godown__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                            </div>
+                                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 slds-p-left_medium">
+                                                                <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>Pin Code</label>
+                                                                <lightning:input required="true" aura:id="accountEmailId" fieldName="Pin_Code_for_Godown__c" value="{!v.wrapperObject.accountRef.Pin_Code_for_Godown__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-col slds-size_1-of-2 slds-var-p-left_medium slds-var-p-right_medium"> 
+                                                        <!-- <lightning:inputField fieldName="BillingAddress" value="{!v.wrapperObject.accountRef.BillingAddress}"/> -->
+                                                        <lightning:inputAddress
+                                                                                required="true"
+                                                                                aura:id="accountEmailId"
+                                                                                addressLabel="Address "
+                                                                                streetLabel="Street"
+                                                                                cityLabel="City"
+                                                                                countryLabel="Country"
+                                                                                provinceLabel="Province/State"
+                                                                                postalCodeLabel="PostalCode"
+                                                                                street="{!v.wrapperObject.accountRef.BillingStreet}"
+                                                                                city="{!v.wrapperObject.accountRef.BillingCity}"
+                                                                                country="{!v.wrapperObject.accountRef.BillingCountry}"
+                                                                                province="{!v.wrapperObject.accountRef.BillingState}"
+                                                                                postalCode="{!v.wrapperObject.accountRef.BillingPostalCode}"
+                                                                                showAddressLookup="true" 
+                                                                                disabled="{!!v.gstValidated}"/>
+                                                        <!-- <label class="slds-form-element__label slds-no-flex" for="accountDistrict">District</label>
+                                                        <lightning:inputField aura:id="accountDistrict" fieldName="District__c" variant="label-hidden"/>-->
+                                                        <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>Constitution of Firm</label>
+                                                        <lightning:input required="true" aura:id="accountEmailId" fieldName="Constitution_of_Firm__c" value="{!v.wrapperObject.accountRef.Constitution_of_Firm__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </lightning:recordEditForm>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!--- Details of Proprietor / Partners / Directors -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Details of Proprietor / Partners / Directors">
+                                                    Details of Proprietor / Partners / Directors</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <div class="slds-grid slds-wrap">
+                                                    <aura:iteration items="{!v.wrapperObject.listProprietorPartnersDirector}" var="project" indexVar="index">
+                                                        <div class="{!v.moreThanOneProprietor==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}">   
+                                                            <c:details_of_Proprietor_Partners_Directors contactInstance="{!project}" rowIndex="{!index}" makeReadOnly="{!!v.gstValidated}"/>
+                                                        </div>
+                                                    </aura:iteration>
+                                                </div></div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!-- Current Business Activity / Business History -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Current Business Activity / Business History">
+                                                    Current Business Activity / Business History</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listBusinessActivityAndHistory}" var="project" indexVar="index">
+                                                    <c:currentBusinessActivityAndHistory businessInstance="{!project}" rowIndex="{!index}" makeReadOnly="{!!v.gstValidated}"/>
+                                                </aura:iteration>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        
+                        <lightning:tab label="Ownership Details" id="two">
+                            <!--- Total Turnover for Past 3 Years -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Total Turnover for past 3 Years (In Lacs)">Total Turnover for past 3 Years (In Lacs)</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_Detail__c" recordId="{!v.wrapperObject.totalTurnOver.Id}">
+                                                    <!-- Error message -->
+                                                    <lightning:messages />
+                                                    <!-- Fields -->
+                                                    <div class="slds-grid slds-wrap"> 
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:inputfield required="true" aura:id="totalTurnOver" fieldName="Year_1__c" value="{!v.wrapperObject.totalTurnOver.Year_1__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:inputfield required="true" aura:id="totalTurnOver" fieldName="Year_2__c" value="{!v.wrapperObject.totalTurnOver.Year_2__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:inputfield required="true" aura:id="totalTurnOver" fieldName="Year_3__c" value="{!v.wrapperObject.totalTurnOver.Year_3__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                    </div>
+                                                </lightning:recordEditForm>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!--- Sister Concerns: If Any With Annual Details (In Lacs)  -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Sister Concerns: If Any With Annual Details (In Lacs)">Sister Concerns: If Any With Annual Details (In Lacs)</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <div aria-hidden="false" class="slds-section__content">
+                                                    <aura:iteration items="{!v.wrapperObject.listSisterConcerns}" var="project" indexVar="index">
+                                                        <c:sisterConcernDetails sisterConcernInstance="{!project}" rowIndex="{!index}" makeReadOnly="{!!v.gstValidated}"/>
+                                                    </aura:iteration>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            
+                            <!--- Area In Which You Are Currently Doing Business  -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Area In Which You Are Currently Doing Business">Area In Which You Are Currently Doing Business</span>
+                                            </h3> 
+
+                                                <lightning:recordEditForm aura:id="recordForm" objectApiName="Account" recordId="{!v.accountRecord}"  >
+                                                    <lightning:messages />
+                                                    <div class="slds-grid slds-wrap">  
+                                                        <div class="slds-col slds-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+                                                            <!-- <br/>
+                                                            <lightning:badge label="Area in Which You are Currently Doing Business"/>
+                                                            <br/> -->
+                                                            <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>City</label>
+                                                            <lightning:input aura:id="accountEmailId" required="true" fieldName="City_for_Current_Business__c" value="{!v.wrapperObject.accountRef.City_for_Current_Business__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+                                                            <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>Town</label>
+                                                            <lightning:input aura:id="accountEmailId" required="true" fieldName="Town_for_Current_Business__c" value="{!v.wrapperObject.accountRef.Town_for_Current_Business__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+                                                            <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>District</label>
+                                                            <lightning:input aura:id="accountEmailId" required="true" fieldName="District_for_Current_Business__c" value="{!v.wrapperObject.accountRef.District_for_Current_Business__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-left_medium slds-p-right_medium">    
+                                                            <label class="slds-form-element__label slds-no-flex" for="accountDistributorCityId"><abbr class="slds-required" title="required">*</abbr>State</label>
+                                                            <lightning:input aura:id="accountEmailId" required="true" fieldName="State_for_Current_Business__c" value="{!v.wrapperObject.accountRef.State_for_Current_Business__c}" variant="label-hidden" disabled="{!!v.gstValidated}"/>
+                                                        </div> 
+                                                    </div>   
+                                                </lightning:recordEditForm>   
+                                                <div aria-hidden="false" class="slds-section__content">
+                                                    <c:businessAreaAndStaffDetail businessAreaAndStaffDetailsInstance="{!v.wrapperObject.businessAreaAndStaffDetails}" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div> 
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!-- Bank Details - Financial Details and Loan Details --> 
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Bank Details">Bank Details</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <div aria-hidden="false" class="slds-section__content">
+                                                    <lightning:accordion aura:id="accordion" activeSectionName="{!v.activeSections}" allowMultipleSectionsOpen="true">
+                                                        <lightning:accordionSection name="Financial Details" label="Financial Details">
+                                                            <c:financialDetails financialDetails="{!v.wrapperObject.financialDetail}" makeReadOnly="{!!v.gstValidated}"/>
+                                                        </lightning:accordionSection>
+                                                        <lightning:accordionSection name="Loan Details" label="Loan Details">
+                                                            <aura:iteration items="{!v.wrapperObject.loanDetails}" var="project" indexVar="index">
+                                                                <c:loanDetails loanInstance="{!project}" rowIndex="{!index}" makeReadOnly="{!!v.gstValidated}"/>
+                                                            </aura:iteration>
+                                                        </lightning:accordionSection>
+                                                    </lightning:accordion>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        
+                        <lightning:tab label="Statutory and Business Propesal Questionnaire" id="three" >
+                            <!--- Statutory Details -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Statutory Details">Statutory Details</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <lightning:recordEditForm aura:id="recordForm" objectApiName="Account" recordId="{!v.accountRecord}" >
+                                                    <!-- Error message -->
+                                                    <lightning:messages />
+                                                    <!-- Fields -->
+                                                    <div class="slds-grid slds-wrap"> 
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            
+                                                            <lightning:input required="true" label="PAN Number" aura:id="accountEmailId" fieldName="PAN_Number__c" value="{!v.wrapperObject.accountRef.PAN_Number__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                       <!-- <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:inputField aura:id="VAT_CST_Number__c" fieldName="VAT_CST_Number__c" value="{!v.wrapperObject.accountRef.VAT_CST_Number__c}"/>
+                                                        </div> -->
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:inputField aura:id="Professional_Tax_Registration_No__c" fieldName="Professional_Tax_Registration_No__c" value="{!v.wrapperObject.accountRef.Professional_Tax_Registration_No__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            <lightning:inputField aura:id="Shop_Establishment_Regn_No__c" fieldName="Shop_Establishment_Regn_No__c" value="{!v.wrapperObject.accountRef.Shop_Establishment_Regn_No__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            
+                                                            <lightning:input required="true" type="checkbox" label="Is Your Company Account Audited?" aura:id="accountEmailId" fieldName="Is_Your_Company_Account_Audited__c" value="{!v.wrapperObject.accountRef.Is_Your_Company_Account_Audited__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            
+                                                            <lightning:input required="true" label="Name of Auditor" aura:id="accountEmailId" fieldName="Name_of_Auditor__c" value="{!v.wrapperObject.accountRef.Name_of_Auditor__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                                            
+                                                            <lightning:input required="true" label="Address of Auditor" aura:id="accountEmailId" fieldName="Address_of_Auditer__c" value="{!v.wrapperObject.accountRef.Address_of_Auditer__c}" disabled="{!!v.gstValidated}"/>
+                                                        </div>
+                                                    </div>
+                                                </lightning:recordEditForm>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!--- Business Proposal Questionnaire -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Business Proposal Questionnaire">Business Proposal Questionnaire</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <c:businessProposalQuestionnaries businessProposalInstance="{!v.wrapperObject.businessProposalQuestions}" projectedSales="{!v.wrapperObject.listBusinessActivityAndHistory}" billingCommitmentSales="{!v.wrapperObject.billingCommitmentSales}" dealerNetworkAdditionSales="{!v.wrapperObject.dealerNetworkAdditionSales}" calledFromBusinessProposal="true" makeReadOnly="{!!v.gstValidated}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            <!--- Sales Projection -->
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Sales Projection">Sales Projection</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.salesProjectionInstance}" var="project" indexVar="index">
+                                                    <c:salesProjection salesProjections="{!project}" rowIndex="{!index}" makeReadOnly="{!!v.gstValidated}"/>
+                                                </aura:iteration>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        
+                        <lightning:tab label="Upload Documents and Personal Data" id="four" >
+                            
+                            <!-- Upload Documents and Personal Data -->
+                            <lightning:layout> 
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <lightning:accordion aura:id="accordion" activeSectionName="{!v.activeSectionsForTab}" allowMultipleSectionsOpen="true">
+                                        
+                                        <lightning:accordionSection name="A" label="Required Documents">
+                                            <c:documentsToBeEnclosedWithApplication recordId="{!v.recordId}" showUploadDocuments="true" upload_One_passport_Size="{!v.upload_One_passport_Size}"
+                                            copyOfPanCard="{!v.copyOfPanCard}"
+                                            copyOfSalesTax="{!v.copyOfSalesTax}"
+                                            copyOfShopLicense="{!v.copyOfShopLicense}"
+                                            fourPhotographOfEstablishment="{!v.fourPhotographOfEstablishment}"
+                                            copyOfLasttwoYearsAudited="{!v.copyOfLasttwoYearsAudited}"
+                                            copyOfLastTwoYearsIncome="{!v.copyOfLastTwoYearsIncome}"
+                                            lastOneYearBank="{!v.lastOneYearBank}"
+                                            visitingCard="{!v.visitingCard}"
+                                            securityCheques="{!v.securityCheques}" makeReadOnly="{!!v.gstValidated}"/>
+                                        </lightning:accordionSection>  
+                                        
+                                        <lightning:accordionSection name="B" label="Personal Data of Self and Family Members">
+                                            <div class="slds-grid slds-wrap">
+                                                <aura:iteration items="{!v.wrapperObject.detailsOfSelfandFamily}" var="project" indexVar="index">
+                                                    <div class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}">
+                                                        <c:documentsToBeEnclosedWithApplication selfAndFamilyMemberinstance="{!project}" rowIndex="{!index}" showSelfAndFamily="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                    </div>
+                                                </aura:iteration>
+                                            </div>
+                                        </lightning:accordionSection>
+                                    </lightning:accordion>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+
+                        <!-- Tab for SAP Team to fill DP - SAP Foreign Key Masters -->
+                        <aura:if isTrue="{!v.wrapperObject.sapTeamUser}">
+                            <lightning:tab label="DP - SAP Foreign Key Masters" id="five">
+                                <lightning:layout>
+                                <lightning:layoutItem padding="around-small" flexibility="auto" size="12">
+                                    <div class="detailsOfDistribution">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Account Assignment Group">Account Assignment Group</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listAccountAssignmentGroup}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listAccountAssignmentGroupInstance="{!project}" rowIndex="{!index}" showlistAccountAssignmentGroup="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Credit Control Area">Credit Control Area</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listCreditControlArea}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listCreditControlAreaInstance="{!project}" rowIndex="{!index}" showlistCreditControlArea="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Customer Group">Customer Group</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listCusGroup}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listCusGroupInstance="{!project}" rowIndex="{!index}" showlistCusGroup="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Customer Pricing Procedure">Customer Pricing Procedure</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listCusPricingProcedure}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listCusPricingProcedureInstance="{!project}" rowIndex="{!index}" showlistCusPricingProcedure="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Delivering Plant">Delivering Plant</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listDeliveringPlant}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listDeliveringPlantInstance="{!project}" rowIndex="{!index}" showlistDeliveringPlant="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Delivery Priority">Delivery Priority</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listDeliveryPriority}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listDeliveryPriorityInstance="{!project}" rowIndex="{!index}" showlistDeliveryPriority="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Distributor Channel">Distributor Channel</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listDistributorChannel}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listDistributorChannelInstance="{!project}" rowIndex="{!index}" showlistDistributorChannel="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Divison">Divison</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listDivison}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listDivisonInstance="{!project}" rowIndex="{!index}" showlistDivison="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Incoterm">Incoterm</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listIncoterms}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listIncotermsInstance="{!project}" rowIndex="{!index}" showlistIncoterms="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Payment Terms">Payment Terms</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listPaymentTerms}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listPaymentTermsInstance="{!project}" rowIndex="{!index}" showlistPaymentTerms="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Price Group">Price Group</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listPriceGroup}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listPriceGroupInstance="{!project}" rowIndex="{!index}" showlistPriceGroup="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Sales Group">Sales Group</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listSalesGroup}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listSalesGroupInstance="{!project}" rowIndex="{!index}" showlistSalesGroup="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Sales Office">Sales Office</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listSalesOffice}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listSalesOfficeInstance="{!project}" rowIndex="{!index}" showlistSalesOffice="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Sales Organization">Sales Organization</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listSalesOrg}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listSalesOrgInstance="{!project}" rowIndex="{!index}" showlistSalesOrg="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="Shipping Condition">Shipping Condition</span>
+                                            </h3> 
+                                            <div aria-hidden="false" class="slds-section__content">
+                                                <aura:iteration items="{!v.wrapperObject.listSalesCondition}" var="project" indexVar="index">
+                                                <div><!--class="{!v.moreThanOneFamilyMember==true? 'slds-col slds-size_2-of-4  slds-p-around_x-small': 'slds-col slds-size_4-of-4  slds-p-around_x-small'}"-->
+                                                    <c:dp_sap_foreignKeyMasters listSalesConditionInstance="{!project}" rowIndex="{!index}" showlistSalesCondition="true" makeReadOnly="{!!v.gstValidated}"/>
+                                                </div>
+                                            </aura:iteration>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            </lightning:tab>
+                        </aura:if>
+                    </lightning:tabset>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

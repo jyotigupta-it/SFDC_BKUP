@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_on_submission</fullName>
+        <description>Email on submission</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Notification_Template_For_Record_Owner</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_owner_if_rejected</fullName>
+        <description>Email to owner if rejected</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Unique_SPR_Rejected1</template>
+    </alerts>
+    <alerts>
+        <fullName>Mail_to_record_owner_when_approved</fullName>
+        <description>Mail to record owner when approved</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Unique_SPR_Approved1</template>
+    </alerts>
+    <alerts>
+        <fullName>copy_of_email</fullName>
+        <ccEmails>retail.projects@ashirvad.com</ccEmails>
+        <ccEmails>akhil.kapali@kvpcorp.com</ccEmails>
+        <ccEmails>suryapriya.s@kvpcorp.com</ccEmails>
+        <description>copy of email</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Appr_RejDate</fullName>
+        <field>Approved_Rejected_Date_WF__c</field>
+        <formula>TODAY()</formula>
+        <name>Appr/RejDate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Appr_RejDate2</fullName>
+        <field>Approved_Rejected_Date_WF__c</field>
+        <formula>TODAY()</formula>
+        <name>Appr/RejDate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approv_reject_date_update</fullName>
+        <field>Approved_Rejected_Date_WF__c</field>
+        <formula>TODAY()</formula>
+        <name>Approv/reject date update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Current_approver_step_1</fullName>
+        <field>Current_approver__c</field>
+        <formula>L1_Approver__r.FirstName+L1_Approver__r.LastName</formula>
+        <name>Current approver step 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Current_approver_step_2</fullName>
+        <field>Current_approver__c</field>
+        <formula>L2_Approver__r.FirstName+L2_Approver__r.LastName</formula>
+        <name>Current approver step 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected_date</fullName>
+        <field>Approval_date__c</field>
+        <formula>TODAY()</formula>
+        <name>Rejected date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Update Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Pending</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Update Status Pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Rejected</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Update Status Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approval_date</fullName>
+        <field>Approval_date__c</field>
+        <formula>TODAY()</formula>
+        <name>approval date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>current_rejector</fullName>
+        <field>Current_approver__c</field>
+        <formula>L1_Approver__r.FirstName+L1_Approver__r.LastName</formula>
+        <name>current rejector</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>current_rejector2</fullName>
+        <field>Current_approver__c</field>
+        <formula>L2_Approver__r.FirstName+L2_Approver__r.LastName</formula>
+        <name>current rejector2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Approved date update1</fullName>
+        <actions>
+            <name>Approv_reject_date_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>IF(  ISCHANGED(Approval_Status__c)  &amp;&amp;  ( ISPICKVAL( Approval_Status__c ,&apos;Approved&apos;)  ||   ISPICKVAL( Approval_Status__c ,&apos;Rejected&apos;) ) , true, false)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

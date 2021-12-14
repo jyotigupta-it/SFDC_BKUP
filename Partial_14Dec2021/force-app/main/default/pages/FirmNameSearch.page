@@ -1,0 +1,35 @@
+<apex:page controller="firmSearchClass" >
+
+
+ <apex:form id="formId" >
+     
+ <apex:pageBlock title="Firm Name Search" id="pgblk" >
+ <apex:pageMessages ></apex:pageMessages>
+<apex:pageBlockSection id="pbsec1" >
+ <apex:inputField value="{!accField.Firm_Name__c}"  id="fm" />
+ 
+</apex:pageBlockSection>
+
+ <apex:pageBlockButtons >
+ <apex:commandButton value="Search" action="{!searchFirm}"   /> 
+ </apex:pageBlockButtons>
+  <apex:pageBlockSection id="pbsec2" >
+  
+  <apex:pageBlockTable value="{!accList}" id="pbt" var="acc" rendered="{!displayTable}" >
+  <apex:column value="{!acc.Name}"/> 
+  
+  <apex:column headerValue="Account Name">
+  
+   <apex:commandLink action="{!URLFOR($Action.Account.View,acc.Party_Name__r.Id)}" value="{!acc.Party_Name__r.Name}" target="_blank" immediate="true"/>
+ <!-- <apex:outputlink value="/{!acc.Party_Name__r.id}" ></apex:outputlink> -->
+  </apex:column>
+   <apex:column value="{!acc.Target_Vertical__c}"  /> 
+   <apex:column value="{!acc.Party_Type__c }"  /> 
+   <apex:column value="{!acc.Party_Name__r.Firm_Name__c}"  /> 
+ 
+  </apex:pageBlockTable>
+  
+  </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,43 @@
+<apex:page standardController="Notice__c" showHeader="false">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<apex:slds />
+<style>
+label {
+     font-weight:bold!important;
+     }
+</style>
+     <apex:form >
+     <div class="slds-page-header">
+                                  <div class="slds-media">
+                                    <div class="slds-media__body">
+                                        <h1  class="slds-page-header__title slds-truncate slds-align-middle  ws_mobile slds-p-left_small">
+                                          {!Notice__c.Name}</h1><p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                                </div>
+                                </div>
+                                <apex:outputPanel title="Notice Edit">
+                               
+                                    <div class="slds-grid slds-wrap slds-p-around_small">
+                <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                <label>Notice Name</label><br/>
+                  <apex:outputField value="{!Notice__c.Name}"/></div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                <label>Created By</label><br/>
+                   <apex:outputText value="{!Notice__c.CreatedBy.Name}"/></div>
+ 
+           <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                <label>Created Date</label><br/>
+                    <apex:outputText value="{!Notice__c.Notice_Date__c}"/></div>
+                     <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                <label>Content</label><br/>
+                    <apex:outputField value="{!Notice__c.Content__c}"/></div></div>
+                    <center>
+                     <div class="slds-p-around_small">
+                     <apex:commandButton value="Edit" action="{!edit}" rendered="{!IF($UserRole.Name=='ADMIN', TRUE, FALSE)}"  styleClass="slds-button slds-button_brand"/>
+                      <apex:commandButton value="Delete" action="{!delete}" rendered="{!IF($UserRole.Name=='ADMIN', TRUE, FALSE)}"  styleClass="slds-button slds-button_neutral"/>
+                     </div></center>
+                                </apex:outputPanel>
+   
+      
+  </apex:form>
+</apex:page>

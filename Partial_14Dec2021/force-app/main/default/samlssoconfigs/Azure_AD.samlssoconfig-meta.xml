@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SamlSsoConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <identityLocation>SubjectNameId</identityLocation>
+    <identityMapping>Username</identityMapping>
+    <issuer>https://sts.windows.net/9c3fef72-411d-4360-94a9-6f130f788f92/</issuer>
+    <loginUrl>https://login.microsoftonline.com/9c3fef72-411d-4360-94a9-6f130f788f92/saml2</loginUrl>
+    <name>Ashirvad Email ID &amp; PWD</name>
+    <oauthTokenEndpoint>https://appl-ashirvadpipes--partial.my.salesforce.com/services/oauth2/token?so=00D6u000000Gybt</oauthTokenEndpoint>
+    <redirectBinding>true</redirectBinding>
+    <requestSignatureMethod>1</requestSignatureMethod>
+    <requestSigningCertId>0P13A000000TQPr</requestSigningCertId>
+    <salesforceLoginUrl>https://appl-ashirvadpipes--partial.my.salesforce.com?so=00D6u000000Gybt</salesforceLoginUrl>
+    <samlEntityId>https://appl-ashirvadpipes.my.salesforce.com</samlEntityId>
+    <samlVersion>SAML2_0</samlVersion>
+    <singleLogoutBinding>RedirectBinding</singleLogoutBinding>
+    <singleLogoutUrl>https://login.microsoftonline.com/9c3fef72-411d-4360-94a9-6f130f788f92/saml2</singleLogoutUrl>
+    <useConfigRequestMethod>false</useConfigRequestMethod>
+    <userProvisioning>false</userProvisioning>
+    <validationCert>MIIC8DCCAdigAwIBAgIQGmoqIcyDZrpLWdFduUiTDDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZpY2F0ZTAeFw0xOTA2MjEwNjM5MjRaFw0yMjA2MjEwNjM5MjRaMDQxMjAwBgNVBAMTKU1pY3Jvc29mdCBBenVyZSBGZWRlcmF0ZWQgU1NPIENlcnRpZmljYXRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjDToMC+9tWUPG7oPvcRasRpObTomS45uJmuyLfH9XmLq25zqZY65d94BsxTGoLZqgxmjUTnBlRR+ymymyCd4f26e4LjlvCv6FTNJZpDCmoX0nxOP1lkH4IWjrSoi3SvxycO3dst8xkYyONbcBNIkqPQK6k2g06A6nt0szvYs5JSgGPOLTowfno5ORkXv7ceWKjtLl9Okay8PB+tjnbWxqhXB49TAG//iULV8vc/VZnFDOyTJZQhnGm+YJ05W0sj/bo8GdP/Qe5+IlWMi//KJvTBl4fdGKB+RjCmPgbpEH6O/KrKAaDk0RzATIuDgEA71rraz1aC4xRCVjJtTjfwrJwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAKUZshKoR6qc3a0E3kDaOuw2LdHwufZ41MNrRARcaEENxXrJluj5ig6/mdtkS/D+NuoF5cxHaiLLFJW57K08ll4DiFh2iAp6tVp6670ydcciaDsqstvWzQsW17eZvVBJJS47tTtHyWxRAJALVhbHHj95JKWk7wis6rNIx++HQrDLFiFGu5xo1mi8FxgtLK2eJN8QmVBoyWABKyz57WnxYwkNK4aBw4a4x8a01Q3ZFAvTDJAolv/BeYQ+pEDzM4BGqnp5vhUQUNwGS9Wno69fr+JhasDLuLte+R7eEp3SkIaPW40Dk8iJISn6SlG1zRjUKKKO40N1Osw8gxWJn4Tss7</validationCert>
+</SamlSsoConfig>

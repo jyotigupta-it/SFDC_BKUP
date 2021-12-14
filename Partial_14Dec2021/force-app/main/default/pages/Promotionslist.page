@@ -1,0 +1,42 @@
+<apex:page standardcontroller="Promotions__c"  showHeader="false" sidebar="false" recordSetVar="Pr" >
+
+<div class="homeTab">
+    <apex:ListViews type="Promotions__c">
+     <apex:facet name="header">
+                            &nbsp;
+                            </apex:facet>
+    </apex:ListViews>
+</div>
+    <!--<apex:form >
+        <apex:pageBlock title="Promotions" >
+            <apex:pageBlockTable value="{!Pr}" var="PRO">
+                <apex:column rendered="{!PRO.Date_Created__c== Today() -1}">
+                    <apex:facet name="header">Promotion No</apex:facet>
+                        <a href="https://c.na1.visual.force.com/{!PRO.id}" target="blank"><apex:outputText value="{!PRO.Name}"/></a>
+                </apex:column>
+                <apex:column rendered="{!PRO.Date_Created__c== Today() -1}">
+                    <apex:facet name="header">Distributor/Dealer</apex:facet>
+                       <apex:outputText value="{!PRO.Distributor_Dealer__r.Name}"/>
+                </apex:column>
+               <apex:column rendered="{!PRO.Date_Created__c== Today() -1}">
+                    <apex:facet name="header">Type</apex:facet>
+                       <apex:outputText value="{!PRO.Type__c}"/>
+                </apex:column>
+               
+                 <apex:column rendered="{!PRO.Date_Created__c== Today() -1}">
+                    <apex:facet name="header">Total Expenses</apex:facet>
+                     <apex:outputText value="{!PRO.Total_Expenses__c}"/>
+                </apex:column>
+                 <apex:column rendered="{!PRO.Date_Created__c== Today() -1}" >
+                    <apex:facet name="header">Total No:of Attendees</apex:facet>
+                     <apex:outputText value="{!PRO.Total_no_of_attendees__c}"/>
+                </apex:column>
+                 <apex:column rendered="{!PRO.Date_Created__c== Today() -1}">
+                    <apex:facet name="header">Verified</apex:facet>
+                     <apex:outputField value="{!PRO.Verified__c}"/>
+                </apex:column>
+                
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>-->
+</apex:page>

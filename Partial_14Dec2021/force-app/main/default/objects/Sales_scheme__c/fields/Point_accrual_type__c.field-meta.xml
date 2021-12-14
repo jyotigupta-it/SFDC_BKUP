@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Point_accrual_type__c</fullName>
+    <externalId>false</externalId>
+    <label>Point accrual type</label>
+    <required>true</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PRODUCT_VALUE</fullName>
+                <default>false</default>
+                <label>PRODUCT_VALUE</label>
+            </value>
+            <value>
+                <fullName>PER_PRODUCT</fullName>
+                <default>false</default>
+                <label>PER_PRODUCT</label>
+            </value>
+            <value>
+                <fullName>TOTAL_BILL</fullName>
+                <default>false</default>
+                <label>TOTAL_BILL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

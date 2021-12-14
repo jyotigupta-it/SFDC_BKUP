@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Missing_Project</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Visit_To__c, &apos;Project&apos;) &amp;&amp; ISBLANK(Project_Name__c) &amp;&amp; $User.TL__c !=TRUE</errorConditionFormula>
+    <errorDisplayField>Project_Name__c</errorDisplayField>
+    <errorMessage>Please Enter Project Name</errorMessage>
+</ValidationRule>

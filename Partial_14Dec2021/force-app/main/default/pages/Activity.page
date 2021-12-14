@@ -1,0 +1,5 @@
+<apex:page sidebar="false"  applyBodyTag="false"  docType="html-5.0">
+
+<apex:enhancedList type="Activity" height="600"   />
+
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>point_comment_mandatory_on_point_change</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND ( 
+OR (
+ISCHANGED( Total_point__c ),
+ISCHANGED( Current_point__c  )
+), 
+NOT( ISCHANGED( Point_change_comment__c  )) 
+)</errorConditionFormula>
+    <errorMessage>Manual changes to points must be avoided. Please mention the reason for the change.</errorMessage>
+</ValidationRule>

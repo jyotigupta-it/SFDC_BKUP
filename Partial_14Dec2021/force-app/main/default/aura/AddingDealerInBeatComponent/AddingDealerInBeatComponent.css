@@ -1,0 +1,11 @@
+.THIS table {
+    display: block;
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: auto;    /* Trigger vertical scroll    */
+    border-collapse: collapse;
+    
+}
+.THIS thead {
+    background-color: #3f87a6;
+    color: #fff;
+}

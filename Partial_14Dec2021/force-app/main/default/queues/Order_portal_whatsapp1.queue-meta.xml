@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Order portal whatsapp1</name>
+    <queueMembers>
+        <users>
+            <user>dhananjaya.hs@ashirvad.com</user>
+            <user>sfdc.support@ashirvad.com</user>
+        </users>
+    </queueMembers>
+    <queueRoutingConfig>WhatsApp_Config1</queueRoutingConfig>
+    <queueSobject>
+        <sobjectType>MessagingEndUser</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>MessagingSession</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,0 +1,33 @@
+<apex:page extensions="GenerateExpensePDFRedirectController" Standardcontroller="Target__c">
+<apex:slds />
+<br/><br/>
+    <div style="font-size:17px;color:blue;text-align:center">Redirecting....</div>
+    <apex:form >
+         <apex:actionFunction name="generateExpPdf" action="{!sendGenerateExpPdf}"/>
+     </apex:form>
+<br/><br/>
+     
+     
+     <script type="Text/javascript">
+    
+      //  var projectIdDummy = '006g000000GbYhaAAF';  
+        var projectId = '{!oppId}'; 
+        console.log('ffffffff ' + {!userAgentCheck});
+            
+                 if((typeof sforce != 'undefined') && (sforce != null)) {    
+                   if({!userAgentCheck} == false) {
+                            console.log('iiiiiiiiiiiffffffff ');
+                            // Request from Desktop(Salesforce Lightning version)
+                            window.open('/apex/APPL_EXPENSE_SHEET?id='+ projectId, "_self");
+                        } else {
+                            console.log('eeeeeeeelllllllsseeeee ');
+                            // Request from Mobile(Salesforce one app)
+                            // window.open('/apex/APPL_EXPENSE_SHEET_CLONE?id='+ projectId, "_self");
+                            generateExpPdf();
+                        }
+                 } else {
+                     // Request from Desktop(Salesforce classic version)
+                      window.open('/apex/APPL_EXPENSE_SHEET?id='+ projectId, "_self");
+                 } 
+     </script>
+</apex:page>

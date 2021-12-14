@@ -1,0 +1,74 @@
+<!--SampleComponent.cmp-->
+<aura:component controller="ChangeBeatController" implements="flexipage:availableForAllPageTypes,force:appHostable" access="global">
+    <!--Aura Method-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="variable1" type="boolean" default="false"/>
+    <aura:attribute name="minDate" type="Date"/>
+    <aura:attribute name="maxDate" type="Date"/>
+    <aura:attribute name="selDate" type="Date"/>
+    <aura:attribute name="popUp" type="String" default="Please Select Date"/>
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    <aura:attribute name="beatData" type="List"/>
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE"/>
+    <aura:attribute name="tourPlanIds" type="String"/>
+    <aura:attribute name="dateValidationError" type="boolean" />
+    <aura:attribute name="loaded1" type="Boolean" default="false" />
+    <aura:attribute name="btnDisable" type="Boolean" default="true" />
+    
+    
+    
+    
+    
+    <!--Declare Attributes-->	
+    <aura:if isTrue="{!v.variable1}">
+        
+        <ui:message title="Confirmation" severity="confirm" closable="true">
+            Change Beat Approval has been sent to Manager
+        </ui:message>
+        <aura:set attribute="else">
+            <ui:message title="Information" severity="confirm" closable="true">
+                {!v.popUp}
+            </ui:message>
+            
+            <div class="slds-grid slds-wrap" >
+                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 slds-p-around_x-small">
+                    
+                    <lightning:input class="{! v.dateValidationError ? 'slds-has-error' : ''}"
+                                     type="date" name="input1" label="Select Date" value="{!v.selDate}" onchange="{!c.onSelectOfDate}"/>
+                    <aura:if isTrue="{!v.dateValidationError}">
+                        <div class="slds-text-color_error slds-p-left_x-small">
+                            Date must be in present or in future..
+                        </div>
+                    </aura:if>   
+                    
+                </div>
+                
+                
+                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 slds-p-around_x-small">
+                    <lightning:select name="beatSelect" label="Select a Beat:" aura:id="beatSelect" value="{!v.selectedValue}">
+                        <aura:iteration items="{!v.options}" var="option">
+                            <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                        </aura:iteration>
+                    </lightning:select></div>
+                <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 slds-p-around_x-small">
+                    <lightning:button name="btnData" variant="brand" label="Save" title="Brand action" onclick="{! c.handleClick }"	disabled="{!v.btnDisable}"/>
+                    <lightning:button label="Cancel" title="Neutral action" onclick="{! c.onCancel }"/>
+                    
+                </div>
+                
+            </div>
+            <aura:if isTrue="{! v.loaded1}">
+                <div class="Spinner">
+                    <lightning:spinner alternativeText="Loading" size="medium" variant="brand"/>
+                </div>
+            </aura:if>
+        </aura:set>
+        
+    </aura:if>
+    
+    
+    
+    <!--Component Start-->
+    
+    <!--Component End-->
+</aura:component>

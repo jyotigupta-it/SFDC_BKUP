@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>Sfdc.support@ashirvad.com</contactEmail>
+    <label>SamlTest</label>
+    <samlConfig>
+        <acsUrl>https://login.microsoftonline.com/9c3fef72-411d-4360-94a9-6f130f788f92/saml2</acsUrl>
+        <encryptionType>AES_128</encryptionType>
+        <entityUrl>https://appl-ashirvadpipes.my.salesforce.com</entityUrl>
+        <samlIdpSLOBindingEnum>RedirectBinding</samlIdpSLOBindingEnum>
+        <samlNameIdFormat>Unspecified</samlNameIdFormat>
+        <samlSigningAlgoType>SHA1</samlSigningAlgoType>
+        <samlSloUrl>https://login.microsoftonline.com/9c3fef72-411d-4360-94a9-6f130f788f92/saml2</samlSloUrl>
+        <samlSubjectType>Username</samlSubjectType>
+    </samlConfig>
+    <startUrl>https://appl-ashirvadpipes.my.salesforce.com</startUrl>
+</ConnectedApp>

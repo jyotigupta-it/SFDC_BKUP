@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_Alert_to_State_Head_to_still_not_assigned_any_distributor</fullName>
+        <ccEmails>jayaprakash.n@ashirvad.com,harshitha.manjunath@ashirvad.com</ccEmails>
+        <description>Email Alert to State Head to still not assigned any distributor</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Email_template_to_State_Head_to_Still_not_assigned_any_distributor</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_for_TGM_when_order_has_been_created</fullName>
+        <ccEmails>harshitha.manjunath@ashirvad.com</ccEmails>
+        <description>Email alert for TGM when order has been created</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Email_template_for_TGM_that_order_has_been_inserted</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>skyvia_record_count</fullName>
+        <field>skyvia_record_count__c</field>
+        <literalValue>1</literalValue>
+        <name>skyvia record count</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_actual_created_date</fullName>
+        <field>Actual_Created_date__c</field>
+        <formula>CreatedDate</formula>
+        <name>update actual created date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_actual_lastmodfied</fullName>
+        <field>Actual_Lastmodified_date__c</field>
+        <formula>LastModifiedDate</formula>
+        <name>update actual lastmodfied</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Send email to TGM by notifying that Order has been created</fullName>
+        <actions>
+            <name>Email_alert_for_TGM_when_order_has_been_created</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Send email to TGM by notifying that Order has been created</description>
+        <formula>ISPICKVAL(Status  ,&apos;none&apos;)  || ISPICKVAL( Status  ,&apos;Submitted&apos;)||  TEXT(Status )= null</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>update created %26 lastmodfied date of order to other fields</fullName>
+        <actions>
+            <name>skyvia_record_count</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>update_actual_created_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>update_actual_lastmodfied</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Skyvia_Data__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

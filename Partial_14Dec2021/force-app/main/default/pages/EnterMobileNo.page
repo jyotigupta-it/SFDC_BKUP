@@ -1,0 +1,23 @@
+<apex:page standardController="Promotion__c" readonly="true" showHeader="false" extensions="CreatePromotionMemberClass1" applyHtmlTag="false" sidebar="false">
+      <apex:form >
+        <apex:pageBlock >
+            
+            <apex:pageBlockSection id="div">                   
+                <apex:inputText value="{!num}" style="width:50px"/>&nbsp;
+                <apex:commandButton value="Add rows" action="{!add_rows}" id="div"/>      
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection >    
+                <apex:pageBlockTable value="{!contacts}" var="c">               
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!c.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                   
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:commandButton value="Save" action="{!Save2}"/>
+        <apex:commandButton value="Cancel" action="{!Cancel}"/>
+       </apex:form>    
+</apex:page>

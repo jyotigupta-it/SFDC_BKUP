@@ -1,0 +1,34 @@
+<apex:page StandardController="Promotion__c" sidebar="true" Extensions="NewPromotionMemberClass" >
+<apex:form id="form2">
+  
+    <apex:pageBlock title="New Promotion member" id="test">
+   
+    <apex:pageBlockTable value="{!wrappers}" var="wrapper" id="wtable">
+        <!--<apex:column headerValue="Type of Promotion Member">
+        <apex:actionRegion >
+        <apex:inputField value="{!wrapper.tsk.Type_of_Promotion_Member__c}">
+      <apex:actionSupport event="onchange" reRender="test"/>
+      </apex:inputfield>
+       </apex:actionRegion>
+        </apex:column> -->
+        
+     <apex:inputHidden value="{!wrapper.tsk.Type1__c}">
+     <apex:actionSupport event="onclick" reRender="test"/>
+     </apex:inputHidden>
+        
+        <apex:column headerValue="Party name">
+       <apex:inputField value="{!wrapper.tsk.Dealer__c}" rendered="{!wrapper.tsk.Type1__c=='Dealers Meet'}"/>
+           <apex:inputField value="{!wrapper.tsk.Contacts__c}" rendered="{!wrapper.tsk.Type1__c!='Dealers Meet'}"/>
+        </apex:column>
+ 
+ 
+    </apex:pageBlockTable>
+ 
+    <apex:commandButton value="Add Promotionmember" action="{!addRows}" rerender="wtable">
+    <apex:param name="addCount" value="1" assignTo="{!addCount}"/>
+    </apex:commandButton>
+    
+    <apex:commandButton value="Save" action="{!save}"/>
+       </apex:pageBlock>
+</apex:form>
+</apex:page>

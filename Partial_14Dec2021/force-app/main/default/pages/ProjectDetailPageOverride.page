@@ -1,0 +1,1080 @@
+<!--************XXX*********************
+
+Developer       :Mohd.Numaan Ahmed
+Page Name       :ProjectDetailPageOverride
+version         :1.0
+Date            :22-Jan-2015
+Modified By   :  Subhajit Ghosh,Samarth Nadig,Surya Priya
+Description     :
+
+****************XXX**********************-->
+<apex:page id="pageId" showHeader="true" sidebar="false" Standardcontroller="Opportunity" extensions="ProjDetailOverride_Controller" tabStyle="Opportunity" >
+    <apex:includeScript value="{!URLFOR($Resource.JQuery,'jquery-ui-1.10.3.custom/js/jquery-1.9.1.js')}"/>
+    <apex:slds />
+    <apex:includeLightning />
+    
+    <style>
+        .scroll .pbSubsection {
+        width:100%!important;
+        overflow-y:scroll!important;
+        }
+        .tabledesign th {
+        background: #e5e5e5!important;
+        font-weight: bold!important;
+        }
+        th {
+        white-space:normal!important;
+        }
+        
+        
+    </style>
+    <script language="javascript" type="text/javascript">
+    function emaildpclicked(){
+    if(emailalert==true)
+    alert("Email Sent to DP");
+    }
+    
+    
+    var $j = jQuery.noConflict();
+    console.log("### {!delflag}");
+    
+    //$j('input[type="submit"]').parent().css('text-align','center');    
+    $j( document ).ready(function() {
+        // var d = "{!Opportunity.Probability_New__c}";
+        //console.log("{!Opportunity.Probability_New__c}");
+        //console.log(d);
+        
+        
+        /*if(d =="" || d== null){
+    
+    $j('#newprob').hide();
+    
+    }
+    else{
+    
+    document.getElementById('oldprob').style.display='block';
+    }*/
+        
+        $j("input[name='piSubmit']").hide();
+        var dd="{!delflag}";
+        console.log(dd);
+        if(dd=="false"){
+            $j("[id$=de]").show();
+            console.log('falseeeeee');
+        }
+        if(dd=="true"){
+            $j("[id$=de]").hide();
+            console.log('truuuuuue');
+        }
+        
+    });
+    function navigateToPdf(idVal){
+        
+        var url="/apex/SPR_PdfReview?id="+idVal+"&SPRpdfReview";
+        
+        window.open(url);
+    }
+    function navigateToOfferPdf(idVal){
+        
+        var url="/apex/OfferForClientPDF?id="+idVal+"&OfferForClientPDF";
+        window.open(url);
+    }
+    function fetchCheck(){
+        //alert('fetchCheck');
+        // alert(event.currentTarget.id);
+        document.getElementById('pageId:formId:inputHidden').value=event.currentTarget.id;
+        paraFunction();
+        
+    }
+    
+    function callLightningCmp(){
+      
+        console.log('heree val');
+        // Here 'VfApp' Is Lightning Application Name
+        $Lightning.use("c:TestCmpCall", function() {
+            /* 'LcForVf' is Lightning Component Name which we are Displaying In Vf Page 
+       * syntax for create lightning component dynamically :
+       * $Lightning.createComponent(String type, Object attributes, String locator, function callback) */
+            $Lightning.createComponent("c:Show_Approved_Records_SPR",
+                                       { 
+                                           // Set Lightning Component Attributes Property before creating Lightning Component In Visualforce page 
+                                           textColor : "Red",
+                                           //  currentUserName : '{!$User.FirstName} {!$User.LastName}' 
+                                       },
+                                       "LcDisplayid1",
+                                       function(component) {
+                                           // create component Callback, Lightning Component has been Created,
+                                           // Now you can set more lightning Component attributes here,
+                                           // and do more cool stuff here
+                                           component.set("v.ProjectRecordId" , '{!$CurrentPage.parameters.recId}');
+                                       });
+        });
+    }
+    </script>
+    
+  <!-- <button type="button" onclick ="callLightningCmp()" target="_blank">Click</button> -->
+    <!--<script>
+var $j = jQuery.noConflict();
+//$j('input[type="submit"]').parent().css('text-align','center');    
+alert(hi);    
+</script>-->
+    
+    <!-- <script type="text/javascript">
+alert(hi);
+var newWin=null;
+function OpenEmailPage(oppId) {
+    alert(oppId);
+    var url="/_ui/core/email/author/EmailAuthor?&retURL="+oppId;
+    newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+}
+function createTask(oppId) {
+    
+    var url="/00T/e?&what_id="oppId;
+    newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+}
+
+</script> -->
+  <!--  <div id="LcDisplayid1">
+    </div>
+   -->
+        
+        
+        <apex:form id="formId">
+            <apex:inputHidden id="inputHidden" value="{!uniqueSprOfferId}"/>
+            <apex:actionFunction name="paraFunction" action="{!UniuesprIdMethod}" reRender="view" status="status"/>     
+            <apex:inputHidden id="distributorId" value="{!Opportunity.Distributor__c}"/>
+            
+            
+            <apex:actionStatus id="status">
+                <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                        &nbsp;
+                    </div>
+                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 30% 50%">
+                        <img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />
+                    </div>
+                </apex:facet>
+            </apex:actionStatus>
+            
+            <!-- <apex:pageMessages ></apex:pageMessages>-->
+            <apex:pageBlock mode="mainDetail" tabStyle="Account">
+                
+                <apex:pageBlockButtons location="top">
+                    
+                    <apex:commandButton action="{!URLFOR($Action.Opportunity.Edit, Id)}" value="Edit" disabled="{!Opportunity.Approval_Status__c =='Pending'}" />
+                    
+                    <apex:commandButton id="de" action="{!URLFOR($Action.Opportunity.Delete, Id)}" value="Delete"/>
+                    <apex:commandButton action="{!URLFOR($Action.Opportunity.Share, Id)}" value="Share"/>
+                 <!--  <apex:commandButton action="{!URLFOR($Action.Opportunity.GSTIN_Validator, Id)}" value="Validate GSTIN"/> -->
+                </apex:pageBlockButtons>    
+                
+                
+                
+                <apex:pageBlockSection title="Project Details" collapsible="false" columns="2">
+                    *<apex:pageMessages ></apex:pageMessages>
+                    
+                    <apex:outputPanel >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="labelCol vfLabelColTextWrap">Project Owner</span> &nbsp;&nbsp;&nbsp;
+                        <apex:outputLink value="/{!Opportunity.Owner.Id}">{!Opportunity.Owner.Name}</apex:outputLink>
+                        
+                        
+                        <a href="/{!Opportunity.Id}/a?retURL=%2F{!Opportunity.Id}" >[Change]</a>
+                        
+                    </apex:outputPanel>
+                    <!--<apex:pageBlockSectionItem ></apex:pageBlockSectionItem>-->
+                    <apex:outputField value="{!Opportunity.Project_Number__c}" />           
+                    <apex:outputField value="{!Opportunity.Name}" />
+                    <apex:outputField value="{!Opportunity.CloseDate}" />   
+                    <!--<apex:outputfield id="amnt" value="{!Opportunity.Approximate_Project_Value__c}"/>-->
+                    <apex:outputField value="{!opportunity.Priority__c}"/> 
+                    <apex:outputField value="{!opportunity.Category__c}"/> 
+                    
+                    <apex:outputtext value="{!Opportunity.Others_Project_Category__c}" label="Project Category (Others)" rendered="{!IF(opportunity.Category__c == 'Others',true,false)}" />
+                    
+                    <apex:outputField value="{!opportunity.Source_of_Lead__c}"/>
+                    <apex:outputField value="{!opportunity.Others_Source_Of_Lead__c}" rendered="{!IF(opportunity.Source_of_Lead__c == 'Other',true,false)}" />
+                    <apex:outputField value="{!opportunity.Lead_Status__c}"/>
+                    <!--  <apex:outputField value="{!opportunity.Manager_Email__c}"/> -->
+                    <apex:outputField value="{!Opportunity.Project_By__c}" />               
+                    
+                    <apex:outputField value="{!Opportunity.Distributor__c}" />
+                    <apex:outputField value="{!Opportunity.Project_Type__c}" />
+                    <apex:outputField value="{!Opportunity.Mixed_Type__c}" />
+                    
+                    <apex:outputtext value="{!Opportunity.Others__c}" label="Mixed Type (Others)" rendered="{!IF(opportunity.Mixed_Type__c == 'Others',true,false)}" />
+                    
+                    
+                    
+                    <apex:outputField value="{!Opportunity.Project_Stage_Status__c}"/>
+                    
+                    <!--     <apex:outputField value="{!Opportunity.Project_Status_Flag_Value__c}"/>
+<apex:outputField value="{!Opportunity.Project_Stage_Last_Modified_Date__c}"/>-->
+                    
+                    <apex:outputField value="{!opportunity.Project_URL__c}"/>
+                    <!--  <apex:outputField value="{!opportunity.Project_Owner_Manager_Email__c}"/>-->
+                    <!--  <apex:outputField value="{!opportunity.L1_approver_Id__c}"/>-->
+                    
+                    <apex:outputField value="{!Opportunity.StageName}" />
+                    
+                    <!--   <apex:outputField value="{!Opportunity.Initial_Approver_Email__c}" />-->
+                    <apex:outputField value="{!Opportunity.Project_Location__c}" />
+                     
+                    <!--<apex:outputField value="{!Opportunity.Probability__c}" rendered="{!IF(Opportunity.Probability_New__c='',true,false)}" /> -->  <!-- rendered="{IF(displayNew!='true',false,true)}"   {!IF(Opportunity.Probability_New__c=='null',true,false)}-->
+                    <!--    <apex:outputField id="displayNew" value="{!Opportunity.Probability_New__c}" rendered="{!IF(Opportunity.Probability_New__c!='',true,false)}" /> -->
+                    <!--  <apex:outputField value="{!Opportunity.Approval_Status__c}" />-->
+                    <apex:outputField value="{!Opportunity.Street_Address__c}" />
+                    <!--  <apex:outputField value="{!opportunity.Probability_New__c}"/>-->
+                    <!--  <apex:outputField value="{!Opportunity.Project_State__c}" /> -->
+                    <!-- <apex:outputField value="{!Opportunity.Reason_for_Order_Loss__c}"/>-->
+                    
+                    <!--     <apex:outputField value="{!Opportunity.Amount}" /> -->
+                    <apex:outputtext />
+                    <apex:outputField value="{!Opportunity.Taluk__c}" />
+                    <apex:outputtext />
+                  
+                    <!--   <apex:outputField value="{!Opportunity.State__c}" id="state"/>
+<apex:outputField value="{!Opportunity.Cluster__c}" id="cluster"/>
+<apex:outputField value="{!Opportunity.District__c}" id="district"/>-->
+                    <apex:outputtext value="{!Opportunity.State_Auto_Populate__c}" label="State"/>
+                    <apex:outputtext value="{!Opportunity.District_Auto_Populate__c}" label="District"/>
+                    <apex:outputtext value="{!Opportunity.Cluster_Auto_Populate__c}" label="Cluster"/>
+                    <apex:outputField value="{!Opportunity.Pincode__c}" />
+                    <apex:outputtext />
+                    <apex:outputtext value="{!Opportunity.City_Auto_Populate__c}" label="City"/>
+                    <apex:outputtext value="{!Opportunity.GSTN__c}" label="GSTN(Ship to party GST Number)"/>
+                    <apex:outputField value="{!Opportunity.Standard_ORC__c}"/>
+                    <!--   <apex:outputField value="{!Opportunity.Project_District__c}" /> -->
+                           
+                    <apex:outputtext value="{!Opportunity.Average_Discount_Provided__c}" label="Average Discount" />
+                     <apex:outputtext value="{!Opportunity.CreatedDate}" label="Project Created Date" />
+                    <!--<apex:outputtext value="{!Opportunity.SAP_ID__c}" label="SAP ID" /> -->
+                    
+                    <apex:outputLink title="Search functionality based on Firm name" value="{!'/apex/FirmNameSearch'}" target="_blank" style="float:right;color:blue;">Firm Name search 
+                        
+                    </apex:outputLink>
+                    
+                    
+                </apex:pageBlockSection> 
+               <apex:pageBlockSection title="GSTN Details" collapsible="false" columns="2">
+                   <apex:outputField value="{!Opportunity.GST_Trade_Name__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_Entity_type__c}"/>
+                   <apex:outputField value="{!Opportunity.GST_Legal_Name__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_Bname__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_dealer_type__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_ad_floor__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_ad_street__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_ad_bno__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_ad_location__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_ad_city__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_ad_state__c}"/>
+                   <apex:outputField value="{!Opportunity.gst_ad_pincode__c}"/>
+                   
+                </apex:pageBlockSection> 
+                
+                <apex:pageBlockSection title="Other Details" collapsible="false" columns="2">
+                    <apex:outputField value="{!Opportunity.Number_of_towers__c}"/>
+                    <apex:outputField value="{!Opportunity.No_of_Floors__c}" />
+                    <apex:outputField value="{!Opportunity.No_of_Bathrooms__c}" />
+                    <apex:outputField value="{!Opportunity.Number_of_kitchens__c}"/>
+                    
+                    <!--<apex:outputField value="{!Opportunity.Total_Project_Area__c}"/> -->
+                    <apex:outputText value="{!Opportunity.Project_Area__c}" label="Total Project Area (sq mts)" />
+                    <apex:outputField value="{!Opportunity.Material_of_Stack__c}"/>
+                    <apex:outputField value="{!Opportunity.Project_Premiumness__c}"/>
+                    <apex:outputField value="{!Opportunity.Dimension_of_the_stack__c}"/>
+                    
+                    
+                    <apex:outputField value="{!Opportunity.Internal_Plumbing_Mix__c}"/>
+                    <apex:outputField value="{!Opportunity.SWR_system_to_be_deployed__c}" />
+                    <apex:outputField value="{!Opportunity.No_of_Mini_Vent__c}" rendered="{!Opportunity.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V'}"/>
+                    <apex:outputField value="{!Opportunity.No_of_Maxi_Vent__c}" rendered="{!Opportunity.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V'}"/>
+                    <apex:outputField value="{!Opportunity.No_of_Maxi_Filtra_Catridge__c}" rendered="{!Opportunity.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V'}"/>
+                    <apex:outputField value="{!Opportunity.No_of_P_A_P_A__c}" rendered="{!Opportunity.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V'}"/>
+                    <apex:outputField value="{!Opportunity.No_of_Maxi_Filtra__c}" rendered="{!Opportunity.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V'}"/>
+                    <apex:outputField value="{!Opportunity.No_of_Aluminum_cap_for_Maxi_Vent_Filtra__c}" rendered="{!Opportunity.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V'}"/>
+                    <apex:outputField value="{!Opportunity.BlazeMaster__c}" />
+                    <apex:outputField value="{!Opportunity.Average_Flat_Area_in_sq_metres__c}" rendered="{!Opportunity.BlazeMaster__c=='Yes'}"/>
+                    <apex:outputField value="{!Opportunity.No_of_flats_per_floor__c}" rendered="{!Opportunity.BlazeMaster__c=='Yes'}"/>
+                     <apex:outputField value="{!Opportunity.HDPE__c}" />
+                    <apex:outputField value="{!Opportunity.Length_of_Pipeline_Meters__c}" rendered="{!Opportunity.HDPE__c=='Yes'}"/>
+                    <apex:outputField value="{!Opportunity.Water_Tank__c}" />
+                    <apex:outputField value="{!Opportunity.Quantity__c}" rendered="{!Opportunity.Water_Tank__c=='Yes'}"/>
+                    <apex:outputField value="{!Opportunity.Grease_Interceptors__c}" />
+                    <apex:outputField value="{!Opportunity.Quantit_y__c}" rendered="{!Opportunity.Grease_Interceptors__c=='Yes'}"/>
+                </apex:pageBlockSection>
+                
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title">
+                        <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                            <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                            </svg>
+                            <span class="slds-truncate" title="Influencer Details">Influencer Details</span>
+                            
+                            <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                            </div>
+                        </button>
+                    </h3>
+                    
+                    <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th>Influencer Type</th>
+                                <th>Source</th>
+                                <th>Account </th>
+                                <th>Firm Name</th>
+                                <th>Last Visit Date</th>
+                                <th>Update of Last Visit </th>
+                            </tr>   
+                        </thead>
+                        <tbody>       
+                            <apex:repeat value="{!InfluencerList}" var="influencer">
+                                
+                                
+                                
+                                <tr class="slds-hint-parent">
+                                    <td data-label="Influencer Type" >
+                                        <div class="slds-truncate" title="Influencer Type">  <apex:outputField value="{!influencer.Influencer_Type__c}" /></div>
+                                    </td>
+                                    <td data-label="Source">
+                                        <div class="slds-truncate" title="Source">   <apex:outputField value="{!influencer.Source__c}"/></div>
+                                    </td>
+                                    <td data-label="Account">
+                                        <div class="slds-truncate" title="Account"> <apex:outputField value="{!influencer.Account__c}"/></div>
+                                    </td>
+                                    <td data-label="Firm Name">
+                                        <div class="slds-truncate" title="Account"> <apex:outputField value="{!influencer.Account__r.Firm_Name__c}"/></div>
+                                    </td>
+                                    <td data-label="Last Visit Date">
+                                        <div class="slds-truncate" title="Account"> <apex:outputField value="{!influencer.Last_Visit_Date__c}"/></div>
+                                    </td>
+                                    <td data-label="Update of Last Visit">
+                                        <div class="slds-truncate" title="Account"> <apex:outputField value="{!influencer.Update_of_Last_Visit__c}"/></div>
+                                    </td>
+                                </tr>
+                                
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <!--    <apex:commandButton value="Edit" action="{!editInfluencer}" disabled="{!Opportunity.Approval_Status__c =='Pending'}" styleClass="eButton slds-button slds-button_brand" />-->
+                </div>
+                
+                <apex:pageBlockSection title="Project Inputs" columns="1"  rendered="{IF(!$user.Vertical_Type__c == 'Projects',false, true)}">
+                    
+                    <apex:pageBlockTable value="{!ProjectTrackerList}" var="projectTracker">
+                        
+                        <apex:column width="35%">
+                            <apex:facet name="header">Question</apex:facet>
+                            <apex:outputField value="{!projectTracker.Question__c}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                            <apex:facet name="header">Response</apex:facet>
+                            <apex:outputField value="{!projectTracker.Response__c}"/>
+                        </apex:column>
+                        
+                        <!--      <apex:column >
+<apex:facet name="header">Current Status</apex:facet>
+<apex:outputField value="{!projectTracker.Remarks__c}"/>
+</apex:column>
+
+<apex:column >
+<apex:facet name="header">Action Plan</apex:facet>
+<apex:outputField value="{!projectTracker.Action_Plan__c}"/>
+</apex:column>
+
+<apex:column >
+<apex:facet name="header">Action Date</apex:facet>
+<apex:outputField value="{!projectTracker.Action_Date__c}"/>
+</apex:column>
+<apex:column >
+<apex:facet name="header">Create Task</apex:facet>
+<apex:commandButton value="Create Task" onclick="window.top.location='/00T/e?what_id={!oppId}&retURL={!oppId}'; return false;"/>
+</apex:column> -->
+                        
+                    </apex:pageBlockTable>
+                    <apex:pageBlockSectionItem >
+                        <apex:commandButton value="Edit" action="{!editProjectTrack}" styleClass="eButton"/>
+                        
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>    
+                
+                
+                
+                
+                <!-- New Offer Section -->
+                <div>
+                    
+                    <div class="slds-page-header"> <div class="slds-page-header__row"> 
+                        <div class="slds-page-header__col-title"> <div class="slds-media"> 
+                            <div class="slds-media__body"> <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title"> <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="" >Indicative product fitment list </span> </h1>
+                                </div> </div> </div>
+                            </div> </div> 
+                        </div> </div> 
+                    <apex:pageBlockSection collapsible="false" columns="1">
+                        <!--   <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal white_space">
+
+<!-- My section -->
+                        
+                        <apex:pageBlockTable value="{!newOfferSectlist}" var="newOffer" rendered="{!newOfferSectlist.size!=null}" >
+                            <apex:column >
+                                <apex:facet name="header">Product</apex:facet>
+                                <apex:outputField value="{!newOffer.Product_Name__c}"/>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Total Rate MRP</apex:facet>
+                                <apex:outputField value="{!newOffer.MRP_Value__c}"/>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Project Value</apex:facet>
+                                <apex:outputField value="{!newOffer.Project_Value__c}"/>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Std. APPL Discount</apex:facet>
+                                
+                                <apex:outputField value="{!newOffer.APPL__c}" styleClass="slds-input" />
+                                
+                                
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Net of Std. APPL Discount</apex:facet>
+                                <apex:outputField value="{!newOffer.MRP_Post_Discount__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Special Project Discount</apex:facet>
+                                <apex:outputField value="{!newOffer.Extra_Discount__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Invoice Value</apex:facet>
+                                <apex:outputField value="{!newOffer.Discounted_Price__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">ORC/ MARGIN TO DLR/DIST</apex:facet>
+                                <apex:outputField value="{!newOffer.ORC_MARGIN_TO_DLR_DIST__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Net Invoice Value from APPL</apex:facet>
+                                <apex:outputField value="{!newOffer.Net_Invoice_Value_from_APPL__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">CTC</apex:facet>
+                                <apex:outputField value="{!newOffer.CTC__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Additional Disc on APPL disc</apex:facet>
+                                <apex:outputField value="{!newOffer.Additional_Disc_on_APPL_disc__c}"/><apex:outputLabel rendered="{!newOffer.Additional_Disc_on_APPL_disc__c!=null}" >%</apex:outputLabel>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Delivery Start Date</apex:facet>
+                                <apex:outputField value="{!newOffer.Delivery_Start_Date__c}"/>
+                            </apex:column>
+                            <!--     <apex:column >
+<apex:facet name="header">Delivery End Date</apex:facet>
+<apex:outputField value="{!newOffer.Delivery_End_Date__c}"/>
+</apex:column>
+-->
+                            <apex:column >
+                                <apex:facet name="header">Competitor Name</apex:facet>
+                                <apex:outputField value="{!newOffer.Competitors_name__c}"/>
+                            </apex:column>
+                            <!-- <apex:column >
+<apex:facet name="header">Distributor Name</apex:facet>
+<apex:outputField value="{!newOffer.Distributor__c}"/>
+</apex:column>-->
+                            <apex:column >
+                                <apex:facet name="header">Product Specified</apex:facet>
+                                <apex:outputField value="{!newOffer.Product_Specified__c}"/>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Delivery Schedule</apex:facet>
+                                <apex:outputField value="{!newOffer.Delivery_Schedule__c}" />
+                            </apex:column>
+                            <!--   <apex:column >
+<apex:facet name="header">Why Additional Discount?</apex:facet>
+<apex:outputField value="{!newOffer.Why_Additional_Discount__c}"/>
+</apex:column>-->
+                            <apex:column >
+                                <apex:facet name="header">Validity for The Price</apex:facet>
+                                <apex:outputField value="{!newOffer.Validity_for_the_Price__c}" />
+                            </apex:column>
+                            
+                            
+                            <apex:column >
+                                <apex:facet name="header">Product Status</apex:facet>
+                                <apex:outputField value="{!newOffer.Product_Status__c}"/>
+                            </apex:column>
+                            
+                            
+                          
+                        </apex:pageBlockTable> 
+                        
+                        
+                        <!-- my sectn ends -->
+                        <!-- newly Added By SUBHAJIT TO TEST____ -->
+                        
+                     
+                        
+                        <!--newly Added By SUBHAJIT TO TES ends -->
+                        <apex:pageBlockSectionItem >
+                            <apex:outputpanel >
+                                <apex:commandButton value="Special Price Request" onclick="window.top.location='/apex/SPR_NewOffer?id={!oppId}&applType=offerType'; return false;" disabled="{!If(newOfferSectlist.size <= 0 || Opportunity.StageName!='Order Receipt',true, false)}" styleClass="slds-button slds-button_brand" />&nbsp;&nbsp;
+                                <apex:commandButton value="Edit" onclick="window.top.location='/apex/EditAllNewOfferSection?id={!oppId}&applType=offerType&fromPage=detailPage'; return false;" styleClass="eButton slds-button slds-button_brand" disabled="{!Opportunity.Approval_Status__c =='Pending'}"/>&nbsp;&nbsp;
+                                <apex:commandButton value="Send Email" onclick="window.top.location='/_ui/core/email/author/EmailAuthor?p3_lkid={!oppId}&retURL={!oppId}'; return false;" styleClass="slds-button slds-button_brand" /> &nbsp;&nbsp; 
+                                <!--   <apex:commandButton value="Create Offer for  Client" onclick="navigateToOfferPdf('{!oppId}')" styleClass="eButton slds-button slds-button_brand" />&nbsp;&nbsp;
+<apex:commandButton value="SPR PDF Review" onclick="navigateToPdf('{!oppId}')" styleClass="eButton slds-button slds-button_brand" />&nbsp;&nbsp;
+
+<apex:commandButton action="{!URLFOR($Action.Opportunity.Submit, Id)}" value="Submit for Approval" styleClass="slds-button slds-button_brand" />
+-->
+                                
+                            </apex:outputpanel>
+                        </apex:pageBlockSectionItem>
+                        
+                    </apex:pageBlockSection>
+                    
+                </div>
+                
+                <!-- Approval Details and History for Revamp structure --ADDED BY: SUBHAJIT GHOSH -->
+                
+                <div class="slds-page-header"> <div class="slds-page-header__row"> 
+                    <div class="slds-page-header__col-title"> <div class="slds-media"> 
+                        <div class="slds-media__body"> <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title"> <h1>
+                                <span class="slds-page-header__title slds-truncate" title="">Special Price Request </span> </h1>
+                            </div> </div> </div>
+                        </div> </div> 
+                    </div> </div>  
+                
+                <apex:outputPanel rendered="{!sprWrapperList !=null &&  sprWrapperList.size != 0}" >
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered tabledesign" style="margin-top=-130px">
+                        <thead>
+                            <tr>
+                                <th>Edit</th>
+                                <th>Name</th>
+                                <th>Product</th>
+                                <th>Total Rate<br/> On MRP</th> 
+                                <th>Project Value</th>
+                                <th>Std. APPL Disc</th>
+                                <th>Special Project Discount</th>
+                                <th>Invoice Value<br/> To Customer</th>
+                                <th>ORC/MARGIN to<br/> DIST/DLR</th>
+                                <th>Price Validity</th>
+                                <th>Net Invoice <br/>Value From APPL</th>
+                                <th>CTC</th>
+                                <th style="white-space:nowrap!important;">Add Disc on<br/> APPL Disc %</th>
+                                <th>Delivery Start Date</th>
+                                <th>Competitor's Name</th>
+                                <th>Remarks</th>
+                                <!-- <th>App date</th>-->
+                                <th>Approver Comments</th>
+                                <!--<th>Payment Terms</th>-->
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!sprWrapperList}" var="sprWrap">
+                                <apex:variable value="{!1}" var="rowNum"/>
+                                <apex:repeat value="{!sprWrap.pendingSprList}" var="sprchild">
+                                    <tr> 
+                                        <apex:outputPanel rendered="{!IF((rowNum == 1),true,false)}">
+                                            <td><apex:outputLink onclick="window.top.location='/apex/EditSprByManager?id={!sprWrap.Id}&projectId={!oppId}'; return false;" disabled="{!IF(approverIdMap[sprWrap.Id]!=0,false,true)}">Edit</apex:outputLink> </td>
+                                            <td><apex:commandButton value="Approve/Reject" action="{!approvalActions}" styleClass="slds-button slds-button_brand" reRender="formId" disabled="{!IF(approverIdMap[sprWrap.Id]==1,false,true)}">
+                                                <apex:param name="recordId" value="{!sprWrap.Id}" assignTo="{!unsprId}"/> </apex:commandButton> <b>{!sprWrap.uniqueName}</b>
+                                            </td>   
+                                            
+                                            
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!IF(rowNum >1,true,false)}">
+                                            <td></td>
+                                            <td></td>
+                                        </apex:outputPanel>
+                                        
+                                        <td>{!sprchild.Product_name__c}</td>
+                                        <td>{!sprchild.MRP_Value__c}</td>
+                                        <td>{!sprchild.Project_Value__c}
+                                        <apex:outputPanel rendered="{!sprchild.Project_Value__c != NULL}"></apex:outputPanel>
+                                         </td>
+                                        <td>{!sprchild.APPL__c}
+                                         <apex:outputPanel rendered="{!sprchild.APPL__c != NULL}">%</apex:outputPanel>
+                                        </td>
+                                        
+                                         <td>{!sprchild.Extra_Discount__c}
+                                        <apex:outputPanel rendered="{!sprchild.Extra_Discount__c != NULL}">%</apex:outputPanel>
+                                         </td>
+                                       
+                                         <td>{!sprchild.Discounted_Price2__c}</td>
+                                         <td>{!sprchild.ORC_MARGIN_TO_DLR_DIST__c}
+                                         <apex:outputPanel rendered="{!sprchild.ORC_MARGIN_TO_DLR_DIST__c != NULL}">%</apex:outputPanel>
+                                        </td>
+                                         <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!sprchild.Validity_for_the_Price__c}" /></apex:outputText></td>
+                                         <td>{!sprchild.Net_Invoice_Value_from_APPL2__c}</td>
+                                        <td>{!sprchild.CTC_Value__c}
+                                         <apex:outputPanel rendered="{!sprchild.CTC_Value__c != NULL}">%</apex:outputPanel>
+                                        </td>
+                                         <td>{!sprchild.Additional_Disc_on_APPL_disc2__c}
+                                         <apex:outputPanel rendered="{!sprchild.CTC_Value__c != NULL}">%</apex:outputPanel>
+                                        </td>
+                                        <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"><apex:param value="{!sprchild.Delivery_Start_Date__c}"/></apex:outputText></td>
+                                        <td>{!sprchild.Competitors_name__c}</td>
+                                        
+                                        <td>{!sprWrap.RemarksValue}</td>
+                                       
+                                        
+                                        <!-- <td>{!sprchild.Approval_Rejection_Date__c}</td>-->
+                                        <apex:outputPanel rendered="{!IF((rowNum == 1),true,false)}">
+                                            <td style="white-space:normal;"><b>{!sprWrap.ApproverComment}&nbsp;(Status-&nbsp;{!sprWrap.ApprovalStatus})&nbsp;(Approver/Rejecter-&nbsp;{!sprWrap.CurrentApprover})&nbsp;( Date-&nbsp;<apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!sprWrap.Approvaldate}" /> </apex:outputText>)</b></td>   
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!IF(rowNum >1,true,false)}">
+                                            
+                                        </apex:outputPanel>
+                                        <!--<td>{!sprWrap.PaymentTerms}</td> --> 
+                                    </tr> 
+                                    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                                </apex:repeat>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Average Discount</b></td>
+                                    <td><b>{!sprWrap.averagePercent}%</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> <b>Net Invoice Value</b></td>
+                                    <td><b>{!sprWrap.netInvoiceValue}</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <!--td>{!sprWrap.PaymentTerms}</td-->
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                    
+                </apex:outputPanel> 
+                
+                <apex:outputPanel rendered="{!sprWrapperList ==null || sprWrapperList.size == 0}">
+               <b> No SPR are made till date under this project</b>
+                </apex:outputPanel>
+                
+                <!-- OFFER SECTION FOR THE REVAMP MODULE-- ADDED BY: SUBHAJIT GHOSH -->
+                
+                <div id="offerId1" class="slds-page-header"> <div class="slds-page-header__row"> 
+                    <div class="slds-page-header__col-title"> <div class="slds-media"> 
+                        <div class="slds-media__body"> <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title"> <h1>
+                                <span class="slds-page-header__title slds-truncate" title="">Offers</span> </h1>
+                            </div> </div> </div>
+                        </div> </div> 
+                    </div> </div> 
+                <apex:pageMessages id="showmsg"></apex:pageMessages>
+                <apex:outputPanel rendered="{!offSectionParentList != null && offSectionParentList.size > 0}" >
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered tabledesign" style="margin-top=-130px">
+                        <thead>
+                            <tr>
+                                <th>Edit</th>
+                                <th>Name(Select All)</th>
+                                <!-- <th>Select</th>-->
+                                <th>Product</th>
+                                <th>Offer MRP</th>
+                                <th>ORC/MARGIN</th>
+                                <th>Tentative Order Date</th>
+                                <th>Disc Offered</th>
+                                <th>Competitors Name</th>
+                                <th>Delivery Date</th>
+                                <th>Price List Date</th>
+                                <th>Price Validity</th>
+                                <th>Offer Probability </th>
+                                <th>Reason</th>
+                                <th>Distributor</th>
+                                <th>Email DP</th>
+                               <!-- <th>Email Customer</th>--->
+                                <th>Payment Terms</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!offSectionParentList}" var="sprWrap1">
+                                <apex:variable value="{!1}" var="rowNum"/>
+                                <apex:repeat value="{!sprWrap1.newsprList2}" var="sprchild">
+                                    <tr> 
+                                        <apex:outputPanel rendered="{!IF((rowNum == 1),true,false)}">
+                                            <td><apex:outputLink onclick="window.top.location='/apex/EditOfferRevampSection?id={!sprWrap1.Ids}&projectId={!oppId}'; return false;">Edit</apex:outputLink> </td>  
+                                            <td><input type="checkbox" value="{!sprWrap1.isSelectParent}" id="{!sprWrap1.Ids}" onchange="fetchCheck()" />{!sprWrap1.uniqueName}</td>
+                                            <!--  <td><apex:inputCheckbox id="selectParentId" value="{!sprWrap1.isSelectParent}" />{!sprWrap1.uniqueName}</td> --> 
+                                            
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!IF(rowNum >1,true,false)}">
+                                            <td></td>
+                                            <td></td>
+                                        </apex:outputPanel>
+                                        <td >{!sprchild.Product_name__c}</td>
+                                        <td>{!sprchild.MRP_Value__c}</td>
+                                        <td>{!sprchild.ORC_MARGIN_TO_DLR_DIST__c}
+                                         <apex:outputPanel rendered="{!sprchild.ORC_MARGIN_TO_DLR_DIST__c != NULL}">%</apex:outputPanel>
+                                        </td>
+                                        <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!sprchild.Tentative_Order_Date__c}" /></apex:outputText></td>
+                                        <td>{!sprchild.Extra_Discount__c}
+                                         <apex:outputPanel rendered="{!sprchild.Extra_Discount__c != NULL}">%</apex:outputPanel>
+                                        </td>
+                                        <td>{!sprchild.Competitors_name__c}</td>
+                                        <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!sprchild.Delivery_Start_Date__c}" /></apex:outputText></td>
+                                        <!--td>{!sprchild.Delivery_Start_Date__c}</td-->
+                                        <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!sprchild.Price_List_Date__c}" /></apex:outputText></td>
+                                        <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!sprchild.Validity_for_the_Price__c}" /></apex:outputText></td>
+                                        <td>{!sprchild.Offer_Probability__c}</td>
+                                        <td >{!sprchild.Reason__c}</td>
+                                        <td>{!sprchild.Distributor__c}</td>
+                                        <apex:outputPanel rendered="{!IF((rowNum == 1),true,false)}">
+                                            <td><apex:commandButton value="Email DP" action="{!emailDP}"  reRender="showmsg" >
+                                                <apex:param name="recordId" value="{!sprWrap1.Ids}" assignTo="{!unsprId}"/> </apex:commandButton>
+                                            </td> 
+                                            <!--<td><apex:commandButton value="Email Customer" action="{!emailCustomer}"  reRender="showmsg" >
+                                                <apex:param name="recordId" value="{!sprWrap1.Ids}" assignTo="{!unsprId}"/> </apex:commandButton>
+                                            </td>--->
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!IF(rowNum >1,true,false)}">
+                                            <td></td>
+                                            <td></td>
+                                        </apex:outputPanel>
+                                        <td >{!sprchild.Payment_Term__c}</td>
+                                    </tr> 
+                                    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                                </apex:repeat>
+                                
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                    <apex:commandButton value="Generate Offer" onclick="window.top.location='/apex/OfferForProject?id={!oppId}&applType=offerType&fromPage=detailPage'; return false;" styleClass="eButton slds-button slds-button_brand"/> 
+                    <apex:commandButton value="Generate Order" styleClass="slds-button slds-button_brand" action="{!generateOrder}" reRender="offerId1,offerNew,nullOrdermsg" status="pageStatus" /> 
+                </apex:outputPanel> 
+                <apex:outputPanel rendered="{!offSectionParentList == null || offSectionParentList.size == 0}">
+                <b>No offers have been made under this project till date</b>
+                </apex:outputPanel>
+                <apex:pageMessages id="nullOrdermsg"></apex:pageMessages>
+                
+                <!--  ends here SPR  <c:new_SPR />-->
+                <!--Order Section New Added By Subhajit Ghosh- KVP-->
+                <div id="offerId1" class="slds-page-header"> <div class="slds-page-header__row"> 
+                    <div class="slds-page-header__col-title"> <div class="slds-media"> 
+                        <div class="slds-media__body"> <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title"> <h1>
+                                <span class="slds-page-header__title slds-truncate" title="">Orders</span> </h1>
+                            </div> </div> </div>
+                        </div> </div> 
+                    </div> </div> 
+                 <apex:outputPanel rendered="{!orderList1.size >0 && orderList1 !=NULL}">
+                <table id="orderNew" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered tabledesign">
+                    <tr>
+                        
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Product</th>
+                        <th>Order Value</th>
+                        <th>ORC/MARGIN</th>
+                        <th>Supply Start Date</th>
+                        <th>Supply End date</th>
+                        <th>Validity for The Price</th>
+                        <th>Payment Terms</th>
+                        <th>Competitor Name</th>
+                        <th>Distributor Name</th>
+                        <!--<th>ORC Markup</th>
+                        <th>ORC Status</th-->
+                        
+                    </tr>
+                    
+                    <apex:repeat value="{!orderList1}" var="order">
+                        <!--apex:repeat value="{!newsprList3}" var="nsl3"-->
+                        <apex:variable value="{!1}" var="rowNum"/>
+                        
+                        <tr>
+                            
+                            <!--apex:outputPanel rendered="{!IF(nsl3=order.orderId,true,false)}">
+<td> <apex:inputCheckbox value=" {!order.generateSupplyOnClick}"/></td>
+<td>{!nsl3}</td> 
+</apex:outputPanel-->
+                            
+                            <apex:outputPanel rendered="{!IF((rowNum == 1),true,false)}">
+                                <td> <apex:inputCheckbox value=" {!order.generateSupplyOnClick}"/></td>
+                                <td>{!order.orderName}</td> 
+                            </apex:outputPanel>
+                            
+                            <!--td>{!order.orderId}</td-->
+                            <td>{!order.productName}</td>
+                            <td>{!order.orderValue}</td>
+                            <td>{!order.ORC}
+                             <apex:outputPanel rendered="{!order.ORC != NULL}">%</apex:outputPanel>
+                            </td>
+                            <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!order.supplyStartDate}" /></apex:outputText></td>
+                            <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!order.supplyEndDate}" /></apex:outputText></td>
+                            <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!order.priceValidity}" /></apex:outputText></td>
+                            <td>{!order.paymentTerms}</td>
+                            <td>{!order.competitorsName}</td>
+                            <td>{!order.distributor}</td>
+                            <!--<td>{!order.orcMarkup}</td>
+                            <td>{!order.orcStatus}</td-->
+                        </tr>
+                        <!--/apex:repeat-->
+                    </apex:repeat>
+                </table>
+                
+                <apex:commandButton value="Edit" onclick="window.top.location='/apex/EditOrderPage2?id={!oppId}&applType=offerType&fromPage=detailPage'; return false;" styleClass="eButton slds-button slds-button_brand" rendered="{!orderList1.size >0 && orderList1 !=NULL}" /> 
+                <apex:commandButton value="Generate Supply" styleClass="slds-button slds-button_brand" action="{!generateSupply}" reRender="nullSupplymsg,offerId1,offerNew" rendered="{!orderList1.size >0 && orderList1 !=NULL}"/> 
+                </apex:outputPanel> 
+               <apex:outputPanel rendered="{!orderList1.size ==0 || orderList1 ==NULL}">
+                <b>No products have been ordered under this project till date</b>
+                </apex:outputPanel>
+                  <apex:pageMessages id="nullSupplymsg"></apex:pageMessages>
+                
+                <!-- Supply Section- Modified By Subhajit Ghosh- KVP-->
+                
+                  <div id="offerId1" class="slds-page-header"> <div class="slds-page-header__row"> 
+                    <div class="slds-page-header__col-title"> <div class="slds-media"> 
+                        <div class="slds-media__body"> <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title"> <h1>
+                                <span class="slds-page-header__title slds-truncate" title="">Supply</span> </h1>
+                            </div> </div> </div>
+                        </div> </div> 
+                    </div> </div> 
+              
+                 <apex:outputPanel rendered="{!SupplyListPro !=NULL}">
+                <table id="orderNew" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered tabledesign">
+                    <tr>
+                        
+                    <!--    <th>Order No.</th>-->
+                        <th>Product</th>
+                        <th>Invoice Value</th>
+                        <th>Invoice Date</th>
+                        <th>Payment and Terms</th>
+                        <th>ORC/Markup</th>
+                        <th>ORC Status</th>
+                        <th>Supply Status</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!SupplyListPro}" var="supply">
+                        <!--apex:repeat value="{!newsprList3}" var="nsl3"-->
+                        <apex:variable value="{!1}" var="rowNum"/>
+                        
+                        <tr>
+                         
+                        
+                          <!--  <td>{!supply.SupplyDetails__r.New_Order__r.Name}</td>-->
+                            <td>{!supply.Product_name__c}</td>
+                            <td>{!supply.Order_Value__c}</td>
+                            <td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!supply.Invoice_Date__c}" /></apex:outputText></td>
+                            <td>{!supply.Payment_Terms__c}</td>
+                            <td>{!supply.ORC_Markup__c}
+                            <apex:outputPanel rendered="{!supply.ORC_Markup__c != NULL}">%</apex:outputPanel>
+                            </td>
+                            <td>{!supply.ORC_Status__c}</td>
+                           <td>{!supply.Supply_Status__c}</td>
+                         
+                        </tr>
+                        <!--/apex:repeat-->
+                    </apex:repeat>
+                      </table>
+                             <apex:commandButton value="Edit" styleClass="slds-button slds-button_brand" onclick="window.top.location='/apex/SupplyEditSectionVF?id={!oppId}&applType=supplyType'; return false;" rendered="{!SupplyListPro != null && !SupplyListPro.empty}"/> 
+                   
+                </apex:outputPanel>
+                     <apex:outputPanel rendered="{!SupplyListPro ==NULL || SupplyListPro.size ==0}">
+                                
+                     <b>  No products in supply section</b>
+                    </apex:outputPanel>
+              
+              
+               <!-- Order Loss Section- Modified By Subhajit Ghosh- KVP-->
+              
+                  <div id="offerId1" class="slds-page-header"> <div class="slds-page-header__row"> 
+                    <div class="slds-page-header__col-title"> <div class="slds-media"> 
+                        <div class="slds-media__body"> <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title"> <h1>
+                                <span class="slds-page-header__title slds-truncate" title="">Order Loss</span> </h1>
+                            </div> </div> </div>
+                        </div> </div> 
+                    </div> </div> 
+                  <apex:outputPanel rendered="{!OrderLossProducts.size !=null}">
+                <table id="orderNew" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered tabledesign">
+                    <tr>
+                        
+                   
+                        <th>Product</th>
+                        <th>Offer MRP</th>
+                        <th>Discount to Customer</th>
+                        <th>Discounted Price</th>
+                        <th>Lost To Brand</th>
+                        <th>Reason of Lost Sales</th>
+                        <th>Others(Reason)</th>
+                    </tr>
+                    
+                    <apex:repeat value="{!OrderLossProducts}" var="loss">
+                     
+                        <apex:variable value="{!1}" var="rowNum"/>
+                        
+                        <tr>
+                         
+                        
+                    
+                            <td>{!loss.productName}</td>
+                            <td>{!loss.mrpValue}</td>
+                            <td>{!loss.ExtraDiscount}
+                            <apex:outputPanel rendered="{!loss.ExtraDiscount != NULL}">%</apex:outputPanel>
+                            </td>
+                            <td>{!loss.DiscountedPrice}</td>
+                            <td>{!loss.LostToBrand}</td>
+                            <td>{!loss.ReasonofLostSales}</td>
+                           <td>{!loss.otherReason}</td>
+                         
+                        </tr>
+                       
+                    </apex:repeat>
+                      </table>
+                </apex:outputPanel>
+                            <apex:outputPanel rendered="{!OrderLossProducts.size ==NULL}">
+                                
+                     <b> No products in order loss section</b>
+                    </apex:outputPanel>
+              
+                    
+                   
+              
+                
+                <!-- APPL Supply section-->
+              <!--  <apex:pageBlockSection title="SUPPLY" collapsible="false" columns="1">
+                    <apex:pageBlockTable value="{!SupplyListPro}" var="supply" >
+                        <apex:column >
+                            <apex:facet name="header">Order No.</apex:facet>
+                            <apex:outputField value="{!supply.SupplyDetails__r.New_Order__r.Name}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                            <apex:facet name="header">Product</apex:facet>
+                            <apex:outputField value="{!supply.Product_name__c}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                            <apex:facet name="header">Unit</apex:facet>
+                            <apex:outputField value="{!supply.Unit__c}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Invoice Value</apex:facet>
+                            <apex:outputField value="{!supply.Order_Value__c}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Invoice Date</apex:facet>
+                            <apex:outputField value="{!supply.Invoice_Date__c}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Payment and Terms</apex:facet>
+                            <apex:outputField value="{!supply.Payment_Terms__c}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                            <apex:facet name="header">ORC/Markup</apex:facet>
+                            <apex:outputField value="{!supply.ORC_Markup__c}" styleClass="fieldMSize"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">ORC Status</apex:facet>
+                            <apex:outputField value="{!supply.ORC_Status__c}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Supply Status</apex:facet>
+                            <apex:outputField value="{!supply.Supply_Status__c}"/>
+                        </apex:column>-->
+                        <!--apex:column >
+<apex:facet name="header">ORC Status</apex:facet>
+<apex:outputField value="{!supply.ORC_Status__c}"/>
+</apex:column
+                    </apex:pageBlockTable> 
+                    <apex:pageBlockSectionItem >
+                        
+                        <apex:commandButton value="Add" onclick="window.top.location='/apex/Product_Page_v2?id={!oppId}&applType=supplyType'; return false;" styleClass="eButton" rendered="{!SupplyListPro == null}"/>
+                        
+                        <apex:commandButton value="Edit" onclick="window.top.location='/apex/Product_Page_EditAll?id={!oppId}&applType=supplyType'; return false;" rendered="{!SupplyListPro != null && !SupplyListPro.empty}"/>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                -->
+                
+                
+                <!-- Order Loss --Subhajit Ghosh 
+                <apex:pageBlockSection title="Order Loss" collapsible="false" columns="1">
+                    
+                    
+                    <apex:pageBlockTable value="{!OrderLossProducts}" var="loss" rendered="{!OrderLossProducts.size!=null}"  >
+                        <apex:column >
+                            <apex:facet name="header">Product</apex:facet>
+                            <apex:outputLabel value="{!loss.productName}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                            <apex:facet name="header">Offer MRP</apex:facet>
+                            <apex:outputLabel value="{!loss.mrpValue}"/>
+                        </apex:column>
+                        
+                        
+                        <apex:column >
+                            <apex:facet name="header">Discount to Customer</apex:facet>
+                            <apex:outputLabel value="{!loss.ExtraDiscount}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Discounted Price</apex:facet>
+                            <apex:outputLabel value="{!loss.DiscountedPrice}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Lost To Brand</apex:facet>
+                            <apex:outputLabel value="{!loss.LostToBrand}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Reason of Lost Sales</apex:facet>
+                            <apex:outputLabel value="{!loss.ReasonofLostSales}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Others(Reason)</apex:facet>
+                            <apex:outputLabel value="{!loss.otherReason}"/>
+                        </apex:column>
+                        
+                        
+                    </apex:pageBlockTable> 
+                    
+                    <apex:outputPanel rendered="{!OrderLossProducts.size ==null}">
+                        There are no products in order loss section
+                    </apex:outputPanel>
+                </apex:pageBlockSection>
+                
+                -->
+                
+                <apex:pageBlockSection title="Terms and Conditions" collapsible="false" columns="2" >
+                    
+                    <apex:outputField value="{!Opportunity.Freight__c}" />
+                    <apex:outputField value="{!Opportunity.Delivery__c}" />
+                    <apex:outputField value="{!Opportunity.Price_Basis__c}" />
+                    <apex:outputField value="{!Opportunity.Delivery_Lots__c}" />
+                    <apex:outputField value="{!Opportunity.Taxes__c}" />
+                    <apex:outputField value="{!Opportunity.Offer_Valid_Till__c}" />
+                    <apex:outputField value="{!Opportunity.Payment_Term__c}" />
+                    <apex:outputField value="{!Opportunity.Delivery_Conditions_Gurantee__c}" />
+                    <apex:outputField value="{!Opportunity.Order_Placement__c}" />
+                    
+                </apex:pageBlockSection>    
+            </apex:pageBlock>
+            
+        </apex:form>
+        
+        <apex:relatedList list="OpenActivities" />
+        <apex:relatedList list="ProcessSteps" />
+        
+        <apex:relatedList list="AP_Site_Visits__r"/>
+        <apex:relatedList list="Cases__r"/>
+        
+    
+    <!--<apex:relatedList list="OpportunityLineItems" />
+-->
+</apex:page>

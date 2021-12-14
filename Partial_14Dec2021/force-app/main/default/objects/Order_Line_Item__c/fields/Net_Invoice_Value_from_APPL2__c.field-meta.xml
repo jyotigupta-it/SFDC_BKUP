@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Net_Invoice_Value_from_APPL2__c</fullName>
+    <externalId>false</externalId>
+    <formula>If( ISBLANK(ORC_MARGIN_TO_DLR_DIST__c ), Discounted_Price2__c , ABS(((100 - (ORC_MARGIN_TO_DLR_DIST__c * 100))/100) * Discounted_Price2__c))</formula>
+    <label>Net Invoice Value from APPL2</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

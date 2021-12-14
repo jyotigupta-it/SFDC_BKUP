@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Description__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Description</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Product__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>LEAFLETS</fullName>
+                <default>false</default>
+                <label>LEAFLETS</label>
+            </value>
+            <value>
+                <fullName>HAND BILL</fullName>
+                <default>false</default>
+                <label>HAND BILL</label>
+            </value>
+            <value>
+                <fullName>STICKERS</fullName>
+                <default>false</default>
+                <label>STICKERS</label>
+            </value>
+            <value>
+                <fullName>BANNERS</fullName>
+                <default>false</default>
+                <label>BANNERS</label>
+            </value>
+            <value>
+                <fullName>SCROLL 3&apos;x2&apos;</fullName>
+                <default>false</default>
+                <label>SCROLL 3&apos;x2&apos;</label>
+            </value>
+            <value>
+                <fullName>STALL TENT</fullName>
+                <default>false</default>
+                <label>STALL TENT</label>
+            </value>
+            <value>
+                <fullName>FLEX BOARD 6&apos; x 3&apos;</fullName>
+                <default>false</default>
+                <label>FLEX BOARD 6&apos; x 3&apos;</label>
+            </value>
+            <value>
+                <fullName>FLEX BOARD 8&apos; x 4&apos;</fullName>
+                <default>false</default>
+                <label>FLEX BOARD 8&apos; x 4&apos;</label>
+            </value>
+            <value>
+                <fullName>POP BOARDS</fullName>
+                <default>false</default>
+                <label>POP BOARDS</label>
+            </value>
+            <value>
+                <fullName>TECHNICAL MANUAL</fullName>
+                <default>false</default>
+                <label>TECHNICAL MANUAL</label>
+            </value>
+            <value>
+                <fullName>PRICELIST - ALL INDIA</fullName>
+                <default>false</default>
+                <label>PRICELIST - ALL INDIA</label>
+            </value>
+            <value>
+                <fullName>PRICELIST - TAMILNADU</fullName>
+                <default>false</default>
+                <label>PRICELIST - TAMILNADU</label>
+            </value>
+            <value>
+                <fullName>PIPE SELECTION BOOK</fullName>
+                <default>false</default>
+                <label>PIPE SELECTION BOOK</label>
+            </value>
+            <value>
+                <fullName>THERMOFOAM BOARD</fullName>
+                <default>false</default>
+                <label>THERMOFOAM BOARD</label>
+            </value>
+            <value>
+                <fullName>PRICELIST FOLDERS</fullName>
+                <default>false</default>
+                <label>PRICELIST FOLDERS</label>
+            </value>
+            <value>
+                <fullName>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</fullName>
+                <default>false</default>
+                <label>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</label>
+            </value>
+            <value>
+                <fullName>APPLICATION FORM (CHANNEL PARTNERSHIP)</fullName>
+                <default>false</default>
+                <label>APPLICATION FORM (CHANNEL PARTNERSHIP)</label>
+            </value>
+            <value>
+                <fullName>CORPORATE  LEAFLETS</fullName>
+                <default>false</default>
+                <label>CORPORATE  LEAFLETS</label>
+            </value>
+            <value>
+                <fullName>BLUE TAPE (SHELF STICKERS)</fullName>
+                <default>false</default>
+                <label>BLUE TAPE (SHELF STICKERS)</label>
+            </value>
+            <value>
+                <fullName>WHITE FOLDER</fullName>
+                <default>false</default>
+                <label>WHITE FOLDER</label>
+            </value>
+            <value>
+                <fullName>STANDEES</fullName>
+                <default>false</default>
+                <label>STANDEES</label>
+            </value>
+            <value>
+                <fullName>ALL PRODUCT CLUSTER_STANDEES</fullName>
+                <default>false</default>
+                <label>ALL PRODUCT CLUSTER_STANDEES</label>
+            </value>
+            <value>
+                <fullName>MULTI USE KNIFE</fullName>
+                <default>false</default>
+                <label>MULTI USE KNIFE</label>
+            </value>
+            <value>
+                <fullName>TORCHE_EVEREADY</fullName>
+                <default>false</default>
+                <label>TORCHE_EVEREADY</label>
+            </value>
+            <value>
+                <fullName>TORCH_NIPPO</fullName>
+                <default>false</default>
+                <label>TORCH_NIPPO</label>
+            </value>
+            <value>
+                <fullName>UMBRELLA</fullName>
+                <default>false</default>
+                <label>UMBRELLA</label>
+            </value>
+            <value>
+                <fullName>ASHIRVAD KEY CHAIN -  ENGLISH</fullName>
+                <default>false</default>
+                <label>ASHIRVAD KEY CHAIN -  ENGLISH</label>
+            </value>
+            <value>
+                <fullName>LEATHER  KEY CHAIN</fullName>
+                <default>false</default>
+                <label>LEATHER  KEY CHAIN</label>
+            </value>
+            <value>
+                <fullName>LEATHERITE PURSE</fullName>
+                <default>false</default>
+                <label>LEATHERITE PURSE</label>
+            </value>
+            <value>
+                <fullName>LUNCH BOX_TRAVEL MATE</fullName>
+                <default>false</default>
+                <label>LUNCH BOX_TRAVEL MATE</label>
+            </value>
+            <value>
+                <fullName>WRIST WATCHES</fullName>
+                <default>false</default>
+                <label>WRIST WATCHES</label>
+            </value>
+            <value>
+                <fullName>MEASURING TAPE (5  Mtr)</fullName>
+                <default>false</default>
+                <label>MEASURING TAPE (5  Mtr)</label>
+            </value>
+            <value>
+                <fullName>PENS - ASHIRVAD (ONLY RED)</fullName>
+                <default>false</default>
+                <label>PENS - ASHIRVAD (ONLY RED)</label>
+            </value>
+            <value>
+                <fullName>CAPS</fullName>
+                <default>false</default>
+                <label>CAPS</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS RED - &apos;S&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS RED - &apos;S&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS RED - &apos;M&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS RED - &apos;M&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS RED - &apos;L&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS RED - &apos;L&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS RED - &apos;XL&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS RED - &apos;XL&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS BLUE -  &apos;S&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS BLUE -  &apos;S&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS BLUE - &apos;M&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS BLUE - &apos;M&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS BLUE - &apos;L&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS BLUE - &apos;L&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS BLUE - &apos;XL&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS BLUE - &apos;XL&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRT ROUND NECK RED - &apos;S&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRT ROUND NECK RED - &apos;S&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRT ROUND NECK RED - &apos;M&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRT ROUND NECK RED - &apos;M&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRT ROUND NECK RED - &apos;L&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRT ROUND NECK RED - &apos;L&apos;</label>
+            </value>
+            <value>
+                <fullName>T - SHIRT ROUND NECK RED - &apos;XL&apos;</fullName>
+                <default>false</default>
+                <label>T - SHIRT ROUND NECK RED - &apos;XL&apos;</label>
+            </value>
+            <value>
+                <fullName>PACKING BOX_SMALL</fullName>
+                <default>false</default>
+                <label>PACKING BOX_SMALL</label>
+            </value>
+            <value>
+                <fullName>PACKING BOX_MEDIUM</fullName>
+                <default>false</default>
+                <label>PACKING BOX_MEDIUM</label>
+            </value>
+            <value>
+                <fullName>PACKING BOX_BIG</fullName>
+                <default>false</default>
+                <label>PACKING BOX_BIG</label>
+            </value>
+            <value>
+                <fullName>PACKING STRIP</fullName>
+                <default>false</default>
+                <label>PACKING STRIP</label>
+            </value>
+            <value>
+                <fullName>PACKING TAPE</fullName>
+                <default>false</default>
+                <label>PACKING TAPE</label>
+            </value>
+            <value>
+                <fullName>POLYTHENE COVER_SMALL</fullName>
+                <default>false</default>
+                <label>POLYTHENE COVER_SMALL</label>
+            </value>
+            <value>
+                <fullName>POLYTHENE COVER_MEDIUM</fullName>
+                <default>false</default>
+                <label>POLYTHENE COVER_MEDIUM</label>
+            </value>
+            <value>
+                <fullName>POLYTHENE COVER_BIG</fullName>
+                <default>false</default>
+                <label>POLYTHENE COVER_BIG</label>
+            </value>
+            <value>
+                <fullName>V4 12.5 (BELL TYPE)</fullName>
+                <default>false</default>
+                <label>V4 12.5 (BELL TYPE)</label>
+            </value>
+            <value>
+                <fullName>V4 12.5 (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>V4 12.5 (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>V4 15 (BELL TYPE)</fullName>
+                <default>false</default>
+                <label>V4 15 (BELL TYPE)</label>
+            </value>
+            <value>
+                <fullName>V4 15 (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>V4 15 (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>CRYSTAL (BELL TYPE)</fullName>
+                <default>false</default>
+                <label>CRYSTAL (BELL TYPE)</label>
+            </value>
+            <value>
+                <fullName>CRYSTAL (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>CRYSTAL (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>STANDARD (BELL TYPE)</fullName>
+                <default>false</default>
+                <label>STANDARD (BELL TYPE)</label>
+            </value>
+            <value>
+                <fullName>STANDARD (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>STANDARD (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>STANDARD PLUS (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>STANDARD PLUS (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>HEAVY (BELL TYPE)</fullName>
+                <default>false</default>
+                <label>HEAVY (BELL TYPE)</label>
+            </value>
+            <value>
+                <fullName>HEAVY (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>HEAVY (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>HEAVY PLUS (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>HEAVY PLUS (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>SUPER HEAVY (BELL TYPE)</fullName>
+                <default>false</default>
+                <label>SUPER HEAVY (BELL TYPE)</label>
+            </value>
+            <value>
+                <fullName>SUPER HEAVY (COUPLER TYPE)</fullName>
+                <default>false</default>
+                <label>SUPER HEAVY (COUPLER TYPE)</label>
+            </value>
+            <value>
+                <fullName>CPVC PIPE SAMPLES (SDR 11)</fullName>
+                <default>false</default>
+                <label>CPVC PIPE SAMPLES (SDR 11)</label>
+            </value>
+            <value>
+                <fullName>CPVC PIPE SAMPLES (SDR 13.5)</fullName>
+                <default>false</default>
+                <label>CPVC PIPE SAMPLES (SDR 13.5)</label>
+            </value>
+            <value>
+                <fullName>CPVC FITTINGS</fullName>
+                <default>false</default>
+                <label>CPVC FITTINGS</label>
+            </value>
+            <value>
+                <fullName>AQUALIFE PIPE SAMPLES (SCH 40)</fullName>
+                <default>false</default>
+                <label>AQUALIFE PIPE SAMPLES (SCH 40)</label>
+            </value>
+            <value>
+                <fullName>AQUALIFE PIPE SAMPLES (SCH 80)</fullName>
+                <default>false</default>
+                <label>AQUALIFE PIPE SAMPLES (SCH 80)</label>
+            </value>
+            <value>
+                <fullName>AQUALIFE FITTINGS</fullName>
+                <default>false</default>
+                <label>AQUALIFE FITTINGS</label>
+            </value>
+            <value>
+                <fullName>SWR PIPES PUSHFIT</fullName>
+                <default>false</default>
+                <label>SWR PIPES PUSHFIT</label>
+            </value>
+            <value>
+                <fullName>SWR PIPES SOLFIT</fullName>
+                <default>false</default>
+                <label>SWR PIPES SOLFIT</label>
+            </value>
+            <value>
+                <fullName>SWR FITTINGS PUSHFIT</fullName>
+                <default>false</default>
+                <label>SWR FITTINGS PUSHFIT</label>
+            </value>
+            <value>
+                <fullName>SWR FITTINGS SOLFIT</fullName>
+                <default>false</default>
+                <label>SWR FITTINGS SOLFIT</label>
+            </value>
+            <value>
+                <fullName>SILENT PIPES</fullName>
+                <default>false</default>
+                <label>SILENT PIPES</label>
+            </value>
+            <value>
+                <fullName>SILENT FITTINGS</fullName>
+                <default>false</default>
+                <label>SILENT FITTINGS</label>
+            </value>
+            <value>
+                <fullName>SILENT PLUS PIPES</fullName>
+                <default>false</default>
+                <label>SILENT PLUS PIPES</label>
+            </value>
+            <value>
+                <fullName>SILENT PLUS FITTINGS</fullName>
+                <default>false</default>
+                <label>SILENT PLUS FITTINGS</label>
+            </value>
+            <value>
+                <fullName>UNDERGROUND PIPES SN4</fullName>
+                <default>false</default>
+                <label>UNDERGROUND PIPES SN4</label>
+            </value>
+            <value>
+                <fullName>UNDERGROUND PIPES SN8</fullName>
+                <default>false</default>
+                <label>UNDERGROUND PIPES SN8</label>
+            </value>
+            <value>
+                <fullName>UNDERGROUND FITTINGS</fullName>
+                <default>false</default>
+                <label>UNDERGROUND FITTINGS</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>FI</controllingFieldValue>
+            <controllingFieldValue>GI</controllingFieldValue>
+            <controllingFieldValue>SI</controllingFieldValue>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <controllingFieldValue>CASING</controllingFieldValue>
+            <controllingFieldValue>V4</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <controllingFieldValue>PAN CONNECTORS</controllingFieldValue>
+            <controllingFieldValue>SILENT SWR</controllingFieldValue>
+            <controllingFieldValue>UNDER GROUND</controllingFieldValue>
+            <controllingFieldValue>AAV</controllingFieldValue>
+            <valueName>LEAFLETS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR SILENT PLUS</controllingFieldValue>
+            <valueName>SILENT PLUS PIPES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR SILENT PLUS</controllingFieldValue>
+            <valueName>SILENT PLUS FITTINGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>UNDERGROUND</controllingFieldValue>
+            <valueName>UNDERGROUND PIPES SN4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>UNDERGROUND</controllingFieldValue>
+            <valueName>UNDERGROUND PIPES SN8</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>UNDERGROUND</controllingFieldValue>
+            <valueName>UNDERGROUND FITTINGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OTHERS</controllingFieldValue>
+            <valueName>PACKING STRIP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OTHERS</controllingFieldValue>
+            <valueName>PACKING TAPE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SILENT PLUS</controllingFieldValue>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <controllingFieldValue>SILENT SWR</controllingFieldValue>
+            <controllingFieldValue>UNDER GROUND</controllingFieldValue>
+            <valueName>POP BOARDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ALL</controllingFieldValue>
+            <valueName>PRICELIST FOLDERS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ALL</controllingFieldValue>
+            <valueName>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ALL</controllingFieldValue>
+            <valueName>APPLICATION FORM (CHANNEL PARTNERSHIP)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ALL</controllingFieldValue>
+            <valueName>CORPORATE  LEAFLETS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ALL</controllingFieldValue>
+            <valueName>BLUE TAPE (SHELF STICKERS)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ALL</controllingFieldValue>
+            <valueName>WHITE FOLDER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ALL</controllingFieldValue>
+            <valueName>ALL PRODUCT CLUSTER_STANDEES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PLUMBING</controllingFieldValue>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>FLEX BOARD 6&apos; x 3&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PLUMBING</controllingFieldValue>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>FLEX BOARD 8&apos; x 4&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>MULTI USE KNIFE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>TORCH_NIPPO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>UMBRELLA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>ASHIRVAD KEY CHAIN -  ENGLISH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>LEATHER  KEY CHAIN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>LEATHERITE PURSE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>WRIST WATCHES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>MEASURING TAPE (5  Mtr)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>PENS - ASHIRVAD (ONLY RED)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>CAPS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRT ROUND NECK RED - &apos;S&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRT ROUND NECK RED - &apos;M&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRT ROUND NECK RED - &apos;L&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MINI</controllingFieldValue>
+            <valueName>T - SHIRT ROUND NECK RED - &apos;XL&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>TORCHE_EVEREADY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>LUNCH BOX_TRAVEL MATE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS RED - &apos;S&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS RED - &apos;M&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS RED - &apos;L&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS RED - &apos;XL&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS BLUE -  &apos;S&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS BLUE - &apos;M&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS BLUE - &apos;L&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MEGA</controllingFieldValue>
+            <valueName>T - SHIRTS BLUE - &apos;XL&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR_PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR_SOLFIT</controllingFieldValue>
+            <valueName>PACKING BOX_SMALL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR_PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR_SOLFIT</controllingFieldValue>
+            <valueName>PACKING BOX_MEDIUM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR_PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR_SOLFIT</controllingFieldValue>
+            <valueName>PACKING BOX_BIG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>HAND BILL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <controllingFieldValue>SILENT SWR</controllingFieldValue>
+            <controllingFieldValue>UNDER GROUND</controllingFieldValue>
+            <valueName>STICKERS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <controllingFieldValue>SILENT SWR</controllingFieldValue>
+            <controllingFieldValue>UNDER GROUND</controllingFieldValue>
+            <valueName>BANNERS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>SCROLL 3&apos;x2&apos;</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>STALL TENT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <controllingFieldValue>SILENT SWR</controllingFieldValue>
+            <controllingFieldValue>UNDER GROUND</controllingFieldValue>
+            <valueName>TECHNICAL MANUAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>PRICELIST - ALL INDIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>PRICELIST - TAMILNADU</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>PIPE SELECTION BOOK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>V4 12.5 (BELL TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>V4 12.5 (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>V4 15 (BELL TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>V4 15 (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>CRYSTAL (BELL TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>CRYSTAL (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>STANDARD (BELL TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>STANDARD (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>STANDARD PLUS (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>HEAVY (BELL TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>HEAVY (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>HEAVY PLUS (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>SUPER HEAVY (BELL TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLUMN</controllingFieldValue>
+            <valueName>SUPER HEAVY (COUPLER TYPE)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <valueName>POLYTHENE COVER_SMALL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <valueName>POLYTHENE COVER_MEDIUM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <valueName>POLYTHENE COVER_BIG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <valueName>CPVC PIPE SAMPLES (SDR 11)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <valueName>CPVC PIPE SAMPLES (SDR 13.5)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPVC</controllingFieldValue>
+            <valueName>CPVC FITTINGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <valueName>AQUALIFE PIPE SAMPLES (SCH 40)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <valueName>AQUALIFE PIPE SAMPLES (SCH 80)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AQUALIFE</controllingFieldValue>
+            <valueName>AQUALIFE FITTINGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <valueName>THERMOFOAM BOARD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <valueName>SWR PIPES PUSHFIT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <valueName>SWR PIPES SOLFIT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <valueName>SWR FITTINGS PUSHFIT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR</controllingFieldValue>
+            <valueName>SWR FITTINGS SOLFIT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SILENT SWR</controllingFieldValue>
+            <controllingFieldValue>UNDER GROUND</controllingFieldValue>
+            <valueName>STANDEES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR SILENT</controllingFieldValue>
+            <valueName>SILENT PIPES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SWR SILENT</controllingFieldValue>
+            <valueName>SILENT FITTINGS</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

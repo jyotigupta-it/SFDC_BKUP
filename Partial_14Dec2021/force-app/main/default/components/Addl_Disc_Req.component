@@ -1,0 +1,153 @@
+<!--************XXX*********************
+
+    Developer       :Mohd.Numaan Ahmed
+    Page Name       :Addl_Disc_Req
+    version         :1.0
+    Date            :13-Jan-2015
+    Modified Date   :17 Feb-2015
+    Description     :Component used in Additional Discount Request Email Template
+     
+****************XXX**********************-->
+<apex:component access="global" controller="Addl_Disc_Component_Controller" >
+    <apex:attribute name="opporId" type="Id" description="Id of the opportunity" assignTo="{!oppId}"/> 
+     
+    <html>
+        <head>
+             <style>
+                table {
+                    border-collapse: collapse;
+                     Padding: 10px;
+                     font-family: arial;
+                }
+                table, th, td {
+                    border: 1px solid black;
+                    
+                }
+                
+                td {
+                
+                    text-align:right;
+                }
+                #total {
+                    background: #FF3333;
+                }
+                .trHead {
+                    background: #C2C2A3;
+                }
+                .blueClass {
+                    background: #85D6FF;
+
+                }
+                .blueDClass {
+                    background: #5CADFF;
+
+                }
+                .trHead2 th{
+                    background: #C2C2A3;
+                    text-align: left;
+                }
+                .trCenter {
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+            <P align="right">
+                <apex:image id="logo" value="{!$Resource.AshirvadLogo}" width="100" height="60"/> <br/>
+            </P>
+            <center>
+                <h3 style="font-family: Arial Unicode MS;"><u>Request for Additional Discount</u></h3>
+            </center>
+            <p align="right" style="font-family: Arial Unicode MS; font-size: 12px; ">Date:<b>{!DAY(TODAY())}-{!MONTH(TODAY())}-{!YEAR(TODAY())}</b></p>
+            <apex:repeat value="{!OppDetails}" var="op">
+            <h4 style="font-family: Arial Unicode MS;"><b>Project Details:</b></h4>
+            <table class="trHead2"  style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr><th>Project Name</th><td><b>{!op.opp.Name}</b></td></tr>
+                <tr><th>Project Number</th><td>{!op.opp.Project_Number__c}</td></tr>
+                <tr><th>Project By</th><td>{!op.opp.Project_By__r.Name}</td></tr>
+                <tr><th>Project Location</th><td>{!op.opp.Project_Location__c}, {!op.opp.Street_Address__c}, {!op.opp.Project_State__c}, {!op.opp.Project_District__c}</td></tr>
+                <tr><th>Project Type</th><td>{!op.opp.Project_Type__c}</td></tr>
+                <tr><th>Close Date</th><td><apex:outputText value="{0,date,MM/dd/yy}"><apex:param value="{!op.opp.CloseDate}" /> </apex:outputText></td></tr>
+                <tr><th>Who is the buyer? Developer or Contractor</th><td>{!op.opp.Order_Placement__c}</td></tr>  
+                <tr><th>If Contractor..Name Location</th><td></td></tr>  
+                <tr><th>No. of Bathrooms</th><td>{!op.opp.No_of_Bathrooms__c}</td></tr> 
+                <tr><th>No. of Floors</th><td>{!op.opp.No_of_Bathrooms__c}</td></tr>  
+                <tr><th>Probability</th><td>{!op.opp.Probability__c}%</td></tr>                
+            </table>
+            <br/>
+         
+            <h4  style="font-family: Arial Unicode MS;"><b>Pricing Details:</b></h4>
+            <table  style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>MRP</th><th>APPL STD Disc %</th><th class="blueClass">Discount to customer on MRP %</th><th>Invoice Value to customer</th><th>ORC %</th><th>Price Validity</th><th>NET Invoice value from APPL</th><th class="blueDClass">CTC</th><th>Additonal Disc on APPL Disc %</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Offer_MRP__c}</td>
+                    <td>{!pro.APPL_STD_Discount__c}</td>
+                    <td class="blueClass">{!pro.Addl_Discount_Required__c}</td>
+                   
+                    <td>{!pro.Invoice_Value_to_Customer__c}</td>
+                    <td>{!pro.ORC_Margin_to_Dlr_Dist__c}</td>
+                    <td>&nbsp;<apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Validity_for_the_Price__c}" /> </apex:outputText>&nbsp;</td>
+                    <td>{!pro.NET_Invoice_Value_to_Distributer__c}</td>
+                    <td class="blueDClass">{!pro.Total_Discount_on_MRP__c}</td>
+                    <td>{!pro.Additional_Discount_on_APPL_Discount__c}</td>
+                </tr>        
+                </apex:repeat>
+                <tr class="blueDClass">
+                    <th colspan="9" align="right" >Average Disc % for All Products</th>
+                    <td >{!op.averageOfPro}</td>
+                </tr>
+                <tr id="total">
+                    <th colspan="9" align="right">Invoice Value from APPL</th>
+                    <!-- <td >{!op.opp.Total_Value__c}</td> -->
+                    <td >{!op.opp.Special_Pricing_Request_Offer__c}</td>
+                </tr>
+            </table>
+
+            <h4 style="font-family: Arial Unicode MS;"><b>Supply Details:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>Tentative Order Date</th><th>Delivery Start Date</th><th>Delivery End Date</th><th>Competitor Name</th><th>Supply Value/lot</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Tentative_Date__c}</td>
+                    <td><apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Delivery_Start_Date__c}" /> </apex:outputText></td>
+                    <td><apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Delivery_End_Date__c}" /> </apex:outputText></td>
+                    <td>{!pro.Competitor_name_Offer__c}</td>
+                    <td>{!pro.Delivery_Schedule__c}</td>
+                </tr>        
+                </apex:repeat>
+            </table>
+            
+
+            <h4 style="font-family: Arial Unicode MS; "><b>Payment Terms:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px;">
+                
+                <tr class="trHead">
+                    <th>Products</th><th>Payment Terms</th><th>Reason</th><th>Why Additional Discount?</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td class="trCenter"><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Payment_Terms__c}</td>
+                    <td>{!pro.Reason__c}</td>
+                    <td>{!pro.Why_Additional_Discount__c}</td>
+                </tr>        
+                </apex:repeat>
+            </table>
+
+            </apex:repeat>
+        </body>
+    </html>
+   </apex:component>

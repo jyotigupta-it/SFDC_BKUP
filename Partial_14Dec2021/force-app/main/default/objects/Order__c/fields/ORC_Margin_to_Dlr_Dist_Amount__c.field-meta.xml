@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ORC_Margin_to_Dlr_Dist_Amount__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF((Disc_to_Customer_on_MRP_Amount__c&gt;0),
+((Order_Value__c - Disc_to_Customer_on_MRP_Amount__c) * ORC_Margin_to_Dlr_Dist__c),
+((Order_Value__c -  APPL_Std_Discount_Amount__c ) * ORC_Margin_to_Dlr_Dist__c)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>ORC/Margin to Dlr/Dist Amount</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

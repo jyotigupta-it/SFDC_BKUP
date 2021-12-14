@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>IEP Influencer</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>IEP Influencers</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>point_comment_mandatory_on_point_change</name>
+    </validationRules>
+</CustomObjectTranslation>

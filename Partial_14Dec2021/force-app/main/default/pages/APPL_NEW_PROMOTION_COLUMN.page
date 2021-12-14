@@ -1,0 +1,1116 @@
+<apex:page sidebar="false" showHeader="false" applyBodyTag="false" controller="APPL_NEW_PROMOTION_CTRL">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+  <link rel='stylesheet' href="{!URLFOR($Resource.PromotionResource, '/jquery-ui.css')}" />
+  <link rel='stylesheet' href="{!URLFOR($Resource.PromotionResource, '/bootstrap.min.css')}" />
+  <script src="{!URLFOR($Resource.PromotionResource, '/jquery-1.10.2.js')}"></script>
+  <script src="{!URLFOR($Resource.PromotionResource, '/jquery-ui.js')}"></script>
+  <script src="{!URLFOR($Resource.PromotionResource, '/bootstrap.js')}"></script>
+
+    <title>New Promotion and Add Members</title>
+    <style type="text/css">
+.ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+    }
+    /* IE 6 doesn't support max-height
+     * we use height instead, but this forces the menu to always be this tall
+     */
+    * html .ui-autocomplete {
+        height: 100px;
+    }
+        .lookupInput a {
+                        display:block;
+                        position:absolute;
+                        top:0px;
+                        }
+
+        .lookupInput img{
+            float:right;
+        }
+        span.lookupInput {
+            position:relative;
+            display : inherit;
+        }
+        .lookupInput a, .lookupInput a{
+            border:none !important;
+           background: none !important;
+        }
+    .astriskStyle{
+            color:#FF0000;
+            font-size: 20px;
+            line-height: 8px;
+            margin-left: -7px;
+        }
+    .dateOnlyInput input {
+        width: 100% !important;
+        }
+    .lookupIcon{
+         margin-left: 125px !important;     
+        }
+.row {
+   margin-right: 0px !important; 
+   margin-left: 0px !important; 
+}
+    </style>
+
+    <script type="text/javascript">
+
+     var j$ = jQuery.noConflict();
+     var resultFound = false;
+    var mobileNumSet = new Set();
+    var promoId = "{!$CurrentPage.parameters.promoId}";//var promoId = getParameter('promotionId');
+    var proName =  ''; 
+     var urlVertical = '';
+
+      j$(document).ready(function() {
+
+        urlVertical = "{!$CurrentPage.parameters.vertical}";
+        var promotionDate = getParameter('promoDate');
+        console.log(promotionDate);
+
+        j$("[id$=promoDateId]").val(promotionDate);
+        j$("[id$=vertiId]").val(urlVertical);
+        j$("[id$=vertiId]").prop('disabled', true);
+      
+      });
+
+  function getParameter(theParameter) { 
+      var params = window.location.search.substr(1).split('&');
+     
+      for (var i = 0; i < params.length; i++) {
+        var p=params[i].split('=');
+        if (p[0] == theParameter) {
+          return decodeURIComponent(p[1]);
+        }
+      }
+      return false;
+    }
+
+
+    function closePopUp () {
+        //alert('Promotion Saved !');
+        window.self.close();
+    }
+
+
+    function showMobileNo(tags,noResult) {
+        console.log('Show Mobile No.');
+        var mobId = "#"+tags;
+        console.log(tags);
+        j$("[id$="+tags+"]").autocomplete({
+        minLength: 3,
+        source: function (request, response) {
+        
+        console.log(request.term);
+        //Call Remoting 
+        //APPL_NEW_PROMOTION_CTRL.getCustomer(request.term)     
+         APPL_NEW_PROMOTION_CTRL.getCustomer(request.term, function(result,event) {
+                if(event.status) {
+                    
+                    var data = [];
+                    var customer = [];
+                    j$.each(result,function(key, record) {
+                        console.log(record);
+                        customer.push(result[key].Contact_Number_Mobile__c);
+                    });
+                    //return the dataa
+                    console.log(customer);
+                   // response(customer);
+                   var results = j$.ui.autocomplete.filter(customer, request.term);
+        
+                    if (!results.length) {
+                       // j$("#no-results").text("No results found!");
+                       document.getElementById(noResult).innerHTML = "No results found!";
+                       resultFound = false;
+                    } else {
+                       document.getElementById(noResult).innerHTML = "";
+                       resultFound = true;
+                        
+                    }
+                    response(results);
+
+                } else if(event.type == 'exception') {
+                   console.log(event.message);
+                }
+                if(event.type == 'rpc') {
+                    //j$("#el_loading").hide();
+                   console.log(event.type);
+                }
+            },{escape:true});
+   
+    }
+    });
+}
+
+function callActionJs (mobNumber,rowIndex) {
+    // body...
+    var mobileNumber = document.getElementById(mobNumber).value;
+    //alert('Call Action function');
+     if(mobileNumber.length == 10 && resultFound == true && mobileNumSet.has(mobileNumber) == false){
+      //alert(mobileNumber);
+      mobileNumSet.add(mobileNumber);
+      console.log(mobileNumSet);
+      copyAccountRow(mobileNumber,rowIndex);
+     // alert(mobileNumSet.has(mobileNumber));
+    }else if(mobileNumSet.has(mobileNumber) == true){
+      alert('Mobile Number already in the List');
+      document.getElementById(mobNumber).style.borderColor = "red";
+      document.getElementById(mobNumber).focus();
+    // }
+    // if(mobileNumber.length == 10 && resultFound == true){
+    //     console.log('Call Js Action function ..Mobile Number is 10 Digits..');
+    //     copyAccountRow(mobileNumber,rowIndex);
+    }else{
+        console.log('Mobile Number is not 10 Digits..');
+        //document.getElementById(mobNumber).focus();
+    }
+}
+
+function setProducts(selectId,proId) {
+  console.log(proId);
+  var selectProducts  = document.getElementById(selectId);
+  var selectedPros    = [];
+
+  for (var i = 0; i < selectProducts.length; i++) {
+        if (selectProducts.options[i].selected) selectedPros.push(selectProducts.options[i].value);
+    }
+    console.log(selectedPros);
+
+    var proArray = selectedPros.toString();
+    var finalProductsVal = proArray.replace(/,/g , ";");
+    console.log(finalProductsVal);
+    
+    document.getElementById(proId).value = finalProductsVal;
+   
+}
+//Validation Check
+function ValidatePromotion() {
+    console.log('This is Validate Method for Promotion..');
+
+     // body...
+    j$('.Error').text( "" );
+    var countError = 0;
+
+    j$('.required').each(function(){
+
+       var fieldVal = j$(this).val();
+       if(fieldVal == '' || fieldVal == null){
+          j$(this).next('.Error').text( "Required field." );
+           countError += 1;
+         // return false;
+         }else{
+            countError -= 1;
+         }
+    });
+
+   
+   if(countError >= 0){
+      alert('Please fill all the (*)Requried fields');
+   }else{
+       console.log('Call Save Method..');
+       //jsCallSaveVisits(tourPlanId,tourDate);
+       jsSaveVisits(tourPlanId,tourDate);
+   }
+}
+
+function showActivities (typeId) {
+	var typeValue = document.getElementById(typeId).value;;
+	console.log(typeValue);
+	if(typeValue == 'Jeep Campaign' || typeValue== 'Tractor Show' || typeValue== 'Shandy Show'){
+		 j$("#numActivityId").css('display', 'block');
+	}else{
+ 		 j$("#numActivityId").css('display', 'none');
+	}
+}
+
+function showFPE(typeId) {
+  var typeValue = document.getElementById(typeId).value;;
+  console.log(typeValue);
+  if(typeValue == 'Jeep Campaign' || typeValue== 'Tractor Show' || typeValue== 'Shandy Show'){
+     j$("#fpePannel").css('display', 'block');
+     //alert('Show..');
+  }else{
+    j$("#fpePannel").css('display', 'none');
+    // alert('Dont Show..');
+
+  }
+}
+
+ function post_value(){
+        var promoId = "{!$CurrentPage.parameters.promoId}";
+        var proName =  j$("[id$=promoName]").val();
+        console.log(proName+'Promo Name');
+        window.opener.document.getElementById(promoId).value = proName;
+        alert('Members added successfully.');
+        self.close();
+        }
+
+  //addStyleClass
+  function coypToApex(htmlId,expId){
+    var htmlVal = document.getElementById(htmlId).value;
+    document.getElementById(expId).value = htmlVal;
+  }
+
+  /*Check for the Dealer,Project or Distributor
+  function checkDPD(dealId,proId,disId){
+   return true;
+  }
+*/
+ function saveProMembers(){
+    console.log('Call Save Promotion..');
+    savePromoAcc();
+    console.log('Save Promotion Done..');
+  }
+
+   function blockVertcal() {
+                  j$("[id$=vertiId]").prop('disabled', true);
+                   var proName = j$("[id$=promoName]").val();
+                   //alert('promotionName ='+proName);
+                  if(proName != '' && proName != undefined) {
+                  window.opener.document.getElementById(promoId).value = proName;
+                }
+            }
+
+    </script>
+    
+</head>
+<body></body>
+
+     <apex:actionstatus id="as1">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;z-index: 115;overflow:hidden;position:fixed;"> 
+                  <div class="waitingHolder" >
+                    <img class="waitingImage" src= "{!$Resource.Redcircle}" style="width: 90%;height: 40%;" title="Please Wait..." />
+                  </div>
+                </div>
+            </apex:facet>
+      </apex:actionstatus>
+
+<div class="panel panel-info" style="margin-bottom: 20px;background-color: #ffffff; border: 2px solid rgba(80, 135, 173, 0.06); border-radius: 4px;-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);">
+
+     <div class="alert alert-info">
+        <h3>Create New Promotion &amp; Add Memebers</h3>
+      </div>
+
+      <div class="panel-body">
+
+      <apex:form styleClass="form-horizontal" id="proForm">
+         <apex:pageMessages id="errMsg"/>
+        <apex:actionFunction name="copyAccountRow" action="{!getAccoutRow}" immediate="true"  reRender="proForm,architectsBuilderEngineers,boarersMeet,dealersMeet,farmersMeet,salesmanMeetFactoryVisit,TractorShow,plumberMechanic,Shandy" status="as1">
+                  <apex:param id="cusMobileId" name="cusMobile" value="" />
+                  <apex:param id="rowIndexId" name="rowIndex" value="" />
+            </apex:actionFunction>
+
+            <apex:outputPanel id="newPromation" rendered="{!showPromotion}">
+            	<div class="panel panel-info">
+				        <div class="panel-heading">
+				            <h3 class="panel-title">Promotion Creation</h3>
+				        </div>
+                <apex:inputHidden value="{!newpromotion.Date__c}" id="promoDateId"/>
+                <div class="row">
+                      <div class="form-group col-xs-5">
+                       <label class="control-label" for="Name">Vertical Type<sub class="astriskStyle"> * </sub></label>
+                       <apex:inputField value="{!newpromotion.Vertical__c}" id="vertiId" styleClass="form-control"/>
+                      </div>
+                      <div class="form-group col-xs-2">
+                      </div>
+                      <div class="form-group col-xs-5 pull-right">
+                     <label class="control-label" for="TotalExpenses">Promotion Type<sub class="astriskStyle"> * </sub></label>
+                      <!--     <input type="number" Class="form-control" id="totalExp" onblur="coypToApex(this.id,'{!$Component.totalExpApex}');" />
+                      <apex:inputHidden value="{!newpromotion.Total_Expenses__c}" id="totalExpApex"/> -->
+                      <div class="form-control">
+                       <apex:inputField value="{!newpromotion.Type__c}" styleClass="form-control" id="typeId" required="true"  style="width: 300px;"/>
+                      </div>
+                       <!-- <apex:inputField value="{!newpromotion.Total_Expenses__c}" styleClass="form-control" required="true" /> -->
+                      </div>
+              </div>
+
+           <div class="row">
+                      <div class="form-group col-xs-5">
+                      <label class="control-label" for="Name">Total Expenses<sub class="astriskStyle"> * </sub></label>
+                        <!-- <input type="number" Class="form-control" id="totalAtt" onblur="coypToApex(this.id,'{!$Component.totalAttApex}');" /> -->
+                      <!-- <apex:inputHidden value="{!newpromotion.Total_no_of_attendees__c}" id="totalAttApex"/> -->
+
+                       <apex:inputField value="{!newpromotion.Total_Expenses__c}" styleClass="form-control" id="totalExpense" required="true"/>
+                      </div>
+                      <div class="form-group col-xs-2">
+                      </div>
+                      <div class="form-group col-xs-5 pull-right">
+                       <label class="control-label" for="Distributor">Total No. Of Attendees<sub class="astriskStyle"> * </sub></label>
+                       <apex:inputField value="{!newpromotion.Total_no_of_attendees__c}" styleClass="form-control" required="true"/>
+                      </div>
+              </div>
+
+                  <div class="row">
+                      <div class="form-group col-xs-5">
+                       <label class="control-label" for="Projects">Distributor</label>
+                       <apex:inputField value="{!newpromotion.Distributor__c}" styleClass="form-control" />
+                      </div>
+                      <div class="form-group col-xs-2">
+                      </div>
+                      <div class="form-group col-xs-5 pull-right">
+                       <label class="control-label" for="Dealer">Projects</label>
+                       <apex:inputField value="{!newpromotion.Project__c}" styleClass="form-control"/>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="form-group col-xs-5">
+                       <label class="control-label" for="State">Dealer</label>
+                       <apex:inputField value="{!newpromotion.Dealer1__c}" styleClass="form-control"/>
+                      </div>
+                      <div class="form-group col-xs-2">
+                      </div>
+                      <div class="form-group col-xs-5 pull-right">
+                       <label class="control-label" for="District">State<sub class="astriskStyle"> * </sub></label>
+                       
+                       <apex:inputField value="{!newpromotion.State__c}" styleClass="form-control" required="true"/>
+                       <!-- </div> -->
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="form-group col-xs-5">
+                        <label class="control-label" for="Location">District<sub class="astriskStyle"> * </sub></label>
+                          <div class="form-control">
+                           <apex:inputField value="{!newpromotion.District__c}" styleClass="form-control" id="disId" required="true"/>
+                          </div> 
+                       </div>
+                      <div class="form-group col-xs-2">
+                      </div>
+                      <div class="form-group col-xs-5 pull-right">
+                       <label class="control-label" for="Giftsgiven">Location</label>
+                       <apex:inputField value="{!newpromotion.Location__c}" styleClass="form-control"/>
+                      </div>
+                  </div>
+
+                   <div class="row">
+                      <div class="form-group col-xs-5">
+                       <label class="control-label" for="Report">Gifts given Report<sub class="astriskStyle"> * </sub></label>
+                       <apex:inputField value="{!newpromotion.Gifts_given__c}" styleClass="form-control" required="true"/>
+                      </div>
+                      <div class="form-group col-xs-2">
+                      </div>
+                      <div class="form-group col-xs-5 pull-right">
+                       <label class="control-label" for="Report">Report</label>
+                       <apex:inputField value="{!newpromotion.Report_c__c}" styleClass="form-control" />
+                      </div>
+                  </div>
+                <div class="panel panel-info" style="display:Block;" id="fpePannel">
+				        <div class="panel-heading">
+				            <h3 class="panel-title">FPE REPORTING</h3>
+				        </div>
+
+				        <div class="panel-body">
+
+			        	<div class="row">
+	                      <div class="form-group col-xs-3">
+		                        <label class="control-label" for="Location">Vehical Number</label>
+		                         <apex:inputField value="{!newpromotion.Vehicle_No__c}" styleClass="form-control"  />
+	                       </div>
+	                       <div class="form-group col-xs-2">
+	                       </div>
+	                      <div class="form-group col-xs-3">
+	                      	<label class="control-label" for="Location">Starting (KMS)</label>
+	                        <apex:inputField value="{!newpromotion.Starting_Kms__c}" styleClass="form-control" />
+	                      </div>
+
+	                      <div class="form-group col-xs-3 pull-right">
+	                       <label class="control-label" for="Giftsgiven">Ending (KMS)</label>
+	                       		<apex:inputField value="{!newpromotion.Ending_Kms__c}" styleClass="form-control" />
+	                      </div>
+		                  </div>
+
+		                  <div class="row">
+	                     <!--  <div class="form-group col-xs-5">
+	                        <label class="control-label" for="Location">Type Of Activity<sub class="astriskStyle"> * </sub></label>
+	                        <apex:inputField value="{!newpromotion.Type_Of_Activity__c}" styleClass="form-control" id="typeOfActvities" required="true" onblur="showActivities(this.id)"/>
+	                       </div> -->
+<!-- 
+	                     	<div class="form-group col-xs-2">
+	                      	</div> -->
+
+	                      <div class="form-group col-xs-5" id="numActivityId">
+	                       <label class="control-label" for="Giftsgiven">Total Activities</label>
+	                       	<!-- 	<apex:inputField value="{!newpromotion.No_Of_Activities__c}" styleClass="form-control"/> -->
+
+                          <input type="number" Class="form-control" id="totalAct" onblur="coypToApex(this.id,'{!$Component.totalActApex}');" />
+                      <apex:inputHidden value="{!newpromotion.No_Of_Activities__c}" id="totalActApex"/>
+	                      </div>
+		                  </div>
+
+				        </div>
+			    	</div>
+
+
+            <!-- Button (Double) onclick="checkDPD('{!$Component.dealerId}','{!$Component.proId}','{!$Component.distId}'){return};" -->
+            <div class="control-group">
+              <div class="controls">
+              <center>
+
+                  <apex:commandButton value="Save Promotion & Add Members" action="{!CreatePromotion}" styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" reRender="proForm" status="as1"  oncomplete="blockVertcal();"/>
+                
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <button id="closeAccId" name="closeAcc" onclick="closePopUp()">Close</button>
+                </center>
+              </div>
+            </div>
+            </div>
+            </apex:outputPanel>
+
+            <apex:outputPanel id="promotionMemebers" rendered="{!NOT(showPromotion)}">
+            <apex:actionFunction action="{!addMember}" name="addMember" immediate="true" reRender="proForm,boarersMeet,architectsBuilderEngineers,dealersMeet,farmersMeet,salesmanMeetFactoryVisit,TractorShow,plumberMechanic,Shandy" status="as1"/>
+                <legend>Add Members to Promotion - {!promotionName}</legend>
+                <apex:inputHidden id="promoName" value="{!promotionName}"/>
+                
+                <apex:outputPanel id="architectsBuilderEngineers" rendered="{!(newpromotion.Type__c=='Architects Meet' || newpromotion.Type__c=='Builders Meet' || newpromotion.Type__c=='Engineers Meet')}">
+                
+                <div class="table-responsive">
+                          <div id="newVisit">
+                             <table class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                        <th>
+                                        <!-- <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" title="Add New Member" /> -->
+                                        Sl.No</th>
+                                        <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                        <th>Name<sub class="astriskStyle"> * </sub></th>
+                                        <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                        <th>Dealer</th>
+                                        <th>Distributor</th>
+                                        <!-- <th>Firm Name<sub class="astriskStyle"> * </sub></th> -->
+                                        <th>State<sub class="astriskStyle"> * </sub></th>
+                                        <th>District<sub class="astriskStyle"> * </sub></th>
+                                        <th>Location</th>
+                                        <!-- <th>Phone</th> -->
+                                        <!-- <th>Status<sub class="astriskStyle"> * </sub></th> -->
+                                        <!-- <th>Email</th> -->
+                                        <!-- <th>PIN<sub class="astriskStyle"> * </sub></th> -->
+                                        <!-- <th>Visit Type<sub class="astriskStyle"> * </sub></th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <apex:variable value="{!1}" var="archCount"/>
+                                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                                    <tr>
+                                    <td style="TEXT-ALIGN: CENTER;">{!archCount}</td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsArchi','no-results-{!archCount}');" id="tagsArchi" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!archCount}'); return false;" style="width:125px" styleClass="tagsArchiClass"/>
+                                <span id="no-results-{!archCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" />
+                                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                        <td>
+                                            <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                            <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td>
+                                      <td>
+                                      <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                         <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                     <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                         <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td>
+                                      <!--  <td>
+                                         <apex:inputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id==null}"  />
+                                         <apex:outputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td> -->
+                                       <td>
+                                         <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  required="true"/>
+                                         <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td>
+                                       <td>
+                                         <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true" />
+                                         <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td>
+                                       <td>
+                                         <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}"  />
+                                         <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td>
+                                      <!--  <td>
+                                         <apex:inputField value="{!newAcct.Contact_Number_Phone__c}" rendered="{!newAcct.id==null}" />
+                                         <apex:outputField value="{!newAcct.Contact_Number_Phone__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td> -->
+                                       <!-- <td>
+                                         <apex:inputField value="{!newAcct.Status__c}" rendered="{!newAcct.id==null}"  />
+                                         <apex:outputField value="{!newAcct.Status__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td> -->
+                                     <!--   <td>
+                                         <apex:inputField value="{!newAcct.Email__c}" rendered="{!newAcct.id==null}"  />
+                                         <apex:outputField value="{!newAcct.Email__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td> -->
+                                      <!--  <td>
+                                         <apex:inputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id==null}"  />
+                                         <apex:outputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td>
+                                       <td>
+                                         <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" />
+                                         <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}"/> 
+                                      </td> -->
+                                    </tr>
+                                    <apex:variable value="{!archCount+1}" var="archCount"/>
+                                    </apex:repeat>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+        <apex:outputPanel id="boarersMeet" rendered="{!newpromotion.Type__c=='Boarers Meet'}">
+    
+            <div class="table-responsive">
+              <div id="newVisit">
+             
+                     <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                                <th>
+                                <!-- <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" title="Add New Member" /> -->
+                                Sl.No</th>
+                                <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                <th>Name<sub class="astriskStyle"> * </sub></th>
+                                <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                <th>Dealer</th>
+                                <th>Distributor</th>
+                                <th>State<sub class="astriskStyle"> * </sub></th>
+                                <th>District<sub class="astriskStyle"> * </sub></th>
+                                <th>Location</th>
+                                <!-- <th>Visit Type</th> -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                           <apex:variable value="{!1}" var="boarerCount"/>
+                            <apex:repeat value="{!proAccounts}" var="newAcct">
+                            <tr>
+                                
+                                <td style="TEXT-ALIGN: CENTER;">{!boarerCount}</td>
+                              <td>
+                                <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" onkeyup="showMobileNo('tagsBoarer','no-results-{!boarerCount}');" id="tagsBoarer" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!boarerCount}'); return false;" style="width:125px"/>
+                                <span id="no-results-{!boarerCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" style="width:100px" rendered="{!newAcct.id!=null}" />
+                              </td>
+                              <td>
+                                <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" style="width:100px" />
+                                <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                              </td>
+                               <td>
+                                <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                              </td>
+                              <td>
+                                 <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" style="width:100px" />
+                                 <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                              </td>
+                              <td>
+                                 <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" style="width:100px" />
+                                 <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" style="width:100px" /> 
+                              </td>
+                          <td>
+                            <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  style="width:100px" required="true"/>
+                            <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                              </td>
+                              <td>
+                                 <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                 <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                              </td>
+                              <td>
+                                <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                              </td>
+                              <!-- <td>
+                                <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                              </td> -->
+                            </tr>
+                             <apex:variable value="{!boarerCount+1}" var="boarerCount"/>
+                           </apex:repeat>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </apex:outputPanel>
+
+                <apex:outputPanel id="dealersMeet" rendered="{!(newpromotion.Type__c=='Dealers Meet')}">
+                <div class="table-responsive">
+                          <div id="newVisit">
+                             <table class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                        <th>
+                                        <!-- <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" title="Add New Member" /> -->
+                                        Sl.No</th>
+                                        <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                        <th>Name<sub class="astriskStyle"> * </sub></th>
+                                        <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                        <th>Primary Contact Person Name</th>
+                                        <th>Products</th>
+                                        <th>State<sub class="astriskStyle"> * </sub></th>
+                                        <th>District<sub class="astriskStyle"> * </sub></th>
+                                        <th>Location</th>
+                                        <!-- <th>Visit Type<sub class="astriskStyle"> * </sub></th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  <apex:variable value="{!1}" var="dealerCount"/>
+                                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                                    <tr>
+                                      <td style="TEXT-ALIGN: CENTER;">{!dealerCount}</td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsDealer','no-results-{!dealerCount}');" id="tagsDealer" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!dealerCount}'); return false;" style="width:125px"/>
+                                <span id="no-results-{!dealerCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" style="width:100px" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" style="width:100px" />
+                                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                      </td>
+                                        <td>
+                                            <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                            <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td>
+                                       <td>
+                                         <apex:inputField value="{!newAcct.Primary_Contact_Person_Name__c}" rendered="{!newAcct.id==null}" style="width:100px" />
+                                         <apex:outputField value="{!newAcct.Primary_Contact_Person_Name__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                      </td>
+                                      <td>
+                                      <select class="form-control multSel" id="visProList" multiple="true" size="3" style="width:170px" onblur="setProducts('visProList','{!$Component.accPro}')">
+                                               <apex:repeat value="{!productList}" var="pro">
+                                                  <Option value="{!pro}">{!pro}</Option>
+                                                </apex:repeat>
+                                            </select>
+                                         <apex:inputHidden value="{!newAcct.Products__c}" rendered="{!newAcct.id==null}"  id="accPro"/>
+                                         <apex:outputField value="{!newAcct.Products__c}" rendered="{!newAcct.id!=null}" style="width:100px"/> 
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td>
+                                          <td>
+                                          <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                                            <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" style="width:100px" />
+                                          </td>
+                                          <td>
+                                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td>
+                                          <!-- <td>
+                                          <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                            <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td> -->
+                                    </tr>
+                                    <apex:variable value="{!dealerCount+1}" var="dealerCount"/>
+                                    </apex:repeat>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+                     <apex:outputPanel id="farmersMeet" rendered="{!(newpromotion.Type__c=='Farmers Meet' || newpromotion.Type__c=='Mechanic Meet' || newpromotion.Type__c=='Plumber Meet' || newpromotion.Type__c=='Mechanic Visit')}">
+                <div class="table-responsive">
+                          <div id="newVisit">
+                             <table class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                        <th>
+                                        <!-- <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" title="Add New Member" /> -->
+                                        Sl.No</th>
+                                        <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                        <th>Name<sub class="astriskStyle"> * </sub></th>
+                                        <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                        <th>Dealer</th>
+                                        <th>Distributor</th>
+                                        <th>State<sub class="astriskStyle"> * </sub></th>
+                                        <th>District<sub class="astriskStyle"> * </sub></th>
+                                        <th>Location</th>
+                                        <!-- <th>Visit Type<sub class="astriskStyle"> * </sub></th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <apex:variable value="{!1}" var="farmerCount"/>
+                                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                                    <tr>
+                                      <td style="TEXT-ALIGN: CENTER;"> {!farmerCount}</td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsFarmer','no-results-{!farmerCount}');" id="tagsFarmer" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!farmerCount}'); return false;" style="width:125px"/>
+                                <span id="no-results-{!farmerCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" style="width:100px" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                      <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                      </td>
+                                       <td>
+                                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                       <td>
+                                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                          <td>
+                                         <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                         <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                          <td>
+                                          <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                            <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                       <!--    <td>
+                                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                                          </td> -->
+                                    </tr>
+                                    <apex:variable value="{!farmerCount+1}" var="farmerCount"/>
+                                    </apex:repeat>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+               <apex:outputPanel id="salesmanMeetFactoryVisit" rendered="{!(newpromotion.Type__c=='Dealers Salesman Meet'|| newpromotion.Type__c='Dealers Factory Visit')}"> 
+                <div class="table-responsive">
+                          <div id="newVisit">
+                             <table class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                        <th>
+                                        <!-- <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" /> -->
+                                        Sl.No</th>
+                                        <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                        <th>Name<sub class="astriskStyle"> * </sub></th>
+                                        <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                        <th>Distributor</th>
+                                        <th>State<sub class="astriskStyle"> * </sub></th>
+                                        <th>District<sub class="astriskStyle"> * </sub></th>
+                                        <th>Location</th>
+                                        <!-- <th>Visit Type<sub class="astriskStyle"> * </sub></th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                     <apex:variable value="{!1}" var="factoryCount"/>
+                                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                                    <tr>
+                                      <td style="TEXT-ALIGN: CENTER;">{!factoryCount}</td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsFactory','no-results-{!factoryCount}');" id="tagsFactory" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!factoryCount}'); return false;" style="width:125px"/>
+                                <span id="no-results-{!factoryCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" style="width:100px" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" />
+                                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                       <td>
+                                        <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                      <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" style="width:100px" />
+                                      <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td>
+                                     <td>
+                                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                          <td>
+                                            <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                            <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                          <td>
+                                          <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                          <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                          <!-- <td>
+                                            <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                            <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                                          </td> -->
+                                    </tr>
+                                    <apex:variable value="{!factoryCount+1}" var="factoryCount"/>
+                                    </apex:repeat>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+
+              <apex:outputPanel id="TractorShow" rendered="{!(newpromotion.Type__c=='Tractor Show' || newpromotion.Type__c=='Jeep Campaign') }"> 
+                <div class="table-responsive">
+                          <div id="newVisit">
+                             <table class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                        <th>
+                                        <!-- <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" title="Add New Member" /> -->
+                                        Sl.No</th>
+                                        <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                        <th>Name<sub class="astriskStyle"> * </sub></th>
+                                        <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                        <!-- <th>Firm Name<sub class="astriskStyle"> * </sub></th> -->
+                                        <th>Dealer</th>
+                                        <th>Distributor</th>
+                                        <th>State<sub class="astriskStyle"> * </sub></th>
+                                        <th>District<sub class="astriskStyle"> * </sub></th>
+                                        <th>Location</th>
+                                        <!-- <th>Visit Type<sub class="astriskStyle"> * </sub></th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      <apex:variable value="{!1}" var="jeepCount"/>
+                                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                                    <tr>
+                                      <td style="TEXT-ALIGN: CENTER;">{!jeepCount}</td>
+                                     <td>
+                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsJeep','no-results-{!jeepCount}');" id="tagsJeep" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!jeepCount}'); return false;" style="width:125px"/>
+                                <span id="no-results-{!jeepCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" style="width:100px" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                       <td>
+                                        <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                       <!-- <td>
+                                        <apex:inputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id!=null}" />
+                                      </td> -->
+                                       <td>
+                                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                       <td>
+                                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                         <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                         <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                     <!--  <td>
+                                      <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" />
+                                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                                      </td> -->
+                                    </tr>
+                                    <apex:variable value="{!jeepCount+1}" var="jeepCount"/>
+                                    </apex:repeat>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+                    <!--  -->
+                <apex:outputPanel id="plumberMechanic" rendered="{!(newpromotion.Type__c=='Exhibition' || newpromotion.Type__c=='Plumber/Mechanic/Engineers Factory Visit' || newpromotion.Type__c=='Group Activity') }">
+                <div class="table-responsive">
+                          <div id="newVisit">
+                             <table class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                        <th>
+                                        <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" title="Add New Member" />
+                                        Sl.No</th>
+                                        <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                        <th>Name<sub class="astriskStyle"> * </sub></th>
+                                        <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                        <th>Dealer</th>
+                                        <th>Distributor</th>
+                                        <!-- <th>Party Type<sub class="astriskStyle"> * </sub></th> -->
+                                        <!-- <th>Firm Name<sub class="astriskStyle"> * </sub></th> -->
+                                        <th>State<sub class="astriskStyle"> * </sub></th>
+                                        <th>District<sub class="astriskStyle"> * </sub></th>
+                                        <th>Location</th>
+                                        <!-- <th>Visit Type<sub class="astriskStyle"> * </sub></th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+
+                                     <apex:variable value="{!1}" var="exhibitionCount"/>
+                                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                                    <tr>
+                                      <td style="TEXT-ALIGN: CENTER;">{!exhibitionCount}</td>
+                                     <td>
+                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsExhibition','no-results-{!exhibitionCount}');" id="tagsExhibition" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!exhibitionCount}'); return false;" style="width:125px"/>
+                                <span id="no-results-{!exhibitionCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" style="width:100px" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                          </td>
+                                      <td>
+                                         <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                         <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                         <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                         <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td>
+                                     <!--  <td>
+                                         <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                         <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" />
+                                      </td> -->
+                                      <!-- <td>
+                                         <apex:inputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                         <apex:outputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td> -->
+                                      <td>
+                                      <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"   style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                          <td>
+                                          <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                          <td>
+                                          <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                          <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                                          </td>
+                                        <!--   <td>
+                                            <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                            <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                                          </td> -->
+                                    </tr>
+                                    <apex:variable value="{!exhibitionCount+1}" var="exhibitionCount"/>
+                                    </apex:repeat>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+
+                    <!--  -->
+                <apex:outputPanel id="Shandy" rendered="{!(newpromotion.Type__c=='Shandy Show' || newpromotion.Type__c=='Mini Meet') }">
+                <div class="table-responsive">
+                          <div id="newVisit">
+                             <table class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                        <th><apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" onclick="addMember();" title="Add New Member" />
+                                        Sl.No</th>
+                                        <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                        <th>Name<sub class="astriskStyle"> * </sub></th>
+                                        <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                        <!-- <th>PIN</th> -->
+                                        <!-- <th>Party Type<sub class="astriskStyle"> * </sub></th> -->
+                                        <th>Dealer</th>
+                                        <th>Distributor</th>
+                                        <th>State<sub class="astriskStyle"> * </sub></th>
+                                        <th>District<sub class="astriskStyle"> * </sub></th>
+                                        <th>Location</th>
+                                        <!-- <th>Visit Type<sub class="astriskStyle"> * </sub></th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+
+                                  <apex:variable value="{!1}" var="shandyCount"/>
+                                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                                    <tr>
+                                      <td style="TEXT-ALIGN: CENTER;">{!shandyCount}</td>
+                                     <td>
+                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsShandy','no-results-{!shandyCount}');" id="tagsShandy" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!shandyCount}'); return false;" style="width:125px"/>
+                                <span id="no-results-{!shandyCount}" style="color: chocolate;"></span>
+                                 <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" style="width:100px" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                        <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                      </td>
+                                     <!--   <td>
+                         <apex:inputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                         <apex:outputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                            <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                            <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td> -->
+                                      <td>
+                                 <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                 <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                 <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                 <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" /> 
+                                      </td>
+                                     <td>
+                                    <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  style="width:100px" required="true"/>
+                                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                 <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}"  style="width:100px" required="true"/>
+                                 <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                      <td>
+                                    <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                    <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                                      </td>
+                                     <!--  <td>
+                                <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                            <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                                      </td> -->
+                                    </tr>
+                                    <apex:variable value="{!shandyCount+1}" var="shandyCount"/>
+                                    </apex:repeat>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                       <center>
+
+                        <apex:actionFunction name="savePromoAcc" action="{!SavePromotionMembers}" immediate="false"  status="as1"> </apex:actionFunction>
+                         <!-- <apex:commandButton value="Save" action="{!SavePromotionMembers}" styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" reRender="proForm" status="as1" oncomplete="saveClosePopUp();"/> -->
+                         <apex:commandButton id="saveAccBtn" rendered="{!showMemberSaveBtn}" onclick="saveProMembers()" style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" value="Save" status="as1" reRender="proForm"></apex:commandButton>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <button id="closeAccId" name="closeAcc" onclick="closePopUp()">Close</button>
+
+                      </center>
+            </apex:outputPanel>
+
+        </apex:form>
+      </div>
+    </div>
+    
+</apex:page>

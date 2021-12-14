@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Suggestion__c</fullName>
+    <externalId>false</externalId>
+    <label>Suggestion</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Existing Product</fullName>
+                <default>false</default>
+                <label>Existing Product</label>
+            </value>
+            <value>
+                <fullName>New Product</fullName>
+                <default>false</default>
+                <label>New Product</label>
+            </value>
+            <value>
+                <fullName>Promotional Activity</fullName>
+                <default>false</default>
+                <label>Promotional Activity</label>
+            </value>
+            <value>
+                <fullName>Gift Request</fullName>
+                <default>false</default>
+                <label>Gift Request</label>
+            </value>
+            <value>
+                <fullName>Solvent Cement</fullName>
+                <default>false</default>
+                <label>Solvent Cement</label>
+            </value>
+            <value>
+                <fullName>Direct Dealership</fullName>
+                <default>false</default>
+                <label>Direct Dealership</label>
+            </value>
+            <value>
+                <fullName>Distributorship</fullName>
+                <default>false</default>
+                <label>Distributorship</label>
+            </value>
+            <value>
+                <fullName>Dealership</fullName>
+                <default>false</default>
+                <label>Dealership</label>
+            </value>
+            <value>
+                <fullName>Branding</fullName>
+                <default>false</default>
+                <label>Branding</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

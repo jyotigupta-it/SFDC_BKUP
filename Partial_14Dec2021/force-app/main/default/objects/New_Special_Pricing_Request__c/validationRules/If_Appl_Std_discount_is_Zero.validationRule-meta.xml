@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>If_Appl_Std_discount_is_Zero</fullName>
+    <active>true</active>
+    <errorConditionFormula>APPL__c ==0.00</errorConditionFormula>
+    <errorMessage>You Cannot add the products due to No Std Discount..!</errorMessage>
+</ValidationRule>

@@ -1,0 +1,83 @@
+<apex:page standardController="Account" extensions="CameraAccess" standardStylesheets="false" showHeader="false" id="pg">
+    
+    
+    <!--apex:pageMessage summary="** Please choose all the 4 images.." severity="warning" strength="3" id="one2"-->
+    <script>
+    
+    function getRemoteCamera() {
+      
+         var file1= document.getElementById('id1').value;
+         var file2=document.getElementById('id2').value;
+         var file3=document.getElementById('id3').value;
+         var file4 = document.getElementById('id4').value;
+         var AccountId = document.getElementById('hiddenAccId').value;
+        
+        var Files = [file1,file2,file3,file4,AccountId];
+        
+         if((file1=='' || file2=='' || file3=='' || file4=='')){
+               alert('Please choose all the 4 Images..!');
+             }
+      
+        else{
+            Visualforce.remoting.Manager.invokeAction(
+           
+            '{!$RemoteAction.CameraAccess.saveFile2}',
+             Files,
+            function(result, event){
+                alert('Successfully saved');
+                location.assign('/'+AccountId);
+               }               
+            ,
+            {escape: false, timeout:3000, buffer: false}
+        );
+            
+            }
+    }
+    </script>
+  
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="jumbotron">
+                    <h1> Camera function at Plumber Enrolment </h1>
+                    
+                </div>
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <HTML>
+                           
+                            <apex:pageMessages />
+                            <input type="hidden" id="hiddenAccId" name="custId" value="{!Account.Id}"/>
+                            
+                            <p>
+                                <h3>
+                                     Plumber Photo <font color="red">*</font>
+                                  <input id="id1" type="file" accept="image/*;capture=camera" /></h3>  
+                        
+                        </p>
+                        <p> 
+                            <h3>Plumber’s ID proof <font color="red">*</font>
+                                <input id="id2" type="file"  accept="image/*;capture=camera"  /></h3>
+                    </p>
+                    <p> 
+                        <h3> Page-1 of the physical form of Plumber Club Enrollment <font color="red">*</font>
+                            <input id="id3" type="file"   accept="image/*;capture=camera"   /></h3>
+                </p>
+                <p>
+                    <h3> Page-2 of the physical form of Plumber Club Enrollment <font color="red">*</font>
+                        <input id="id4" type="file" accept="image/*;capture=camera" /></h3>
+            </p>
+            
+            <p>
+                
+                <Button value="Save File"  onclick="getRemoteCamera()">Save File</button>
+            </p>
+            
+        </HTML>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+</apex:page>

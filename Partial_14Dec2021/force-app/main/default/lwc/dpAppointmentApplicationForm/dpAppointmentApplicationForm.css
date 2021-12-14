@@ -1,0 +1,29 @@
+.c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    background: #ffffff;
+}
+.page-section {
+    border: solid 1px #ccc;
+    padding: 1rem;
+}
+.page-header{
+    height: 70px;
+    text-align: center;
+    text-decoration-line: underline;
+    font-weight: bold;
+    font-size: medium;
+}
+.page-footer {
+    height: 70px;
+}
+.page-main {
+    background: #f8f8f8;
+}
+.page-left,
+.page-right {
+    background: #f0efef;
+}
+.preview-content{
+    background-color: #ffffff;
+}

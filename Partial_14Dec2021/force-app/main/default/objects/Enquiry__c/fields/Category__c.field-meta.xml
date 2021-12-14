@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Category(not used)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DEALERSHIP</fullName>
+                <default>false</default>
+                <label>DEALERSHIP</label>
+            </value>
+            <value>
+                <fullName>DISTRIBUTOSHIP</fullName>
+                <default>false</default>
+                <label>DISTRIBUTOSHIP</label>
+            </value>
+            <value>
+                <fullName>EXPANSION</fullName>
+                <default>false</default>
+                <label>EXPANSION</label>
+            </value>
+            <value>
+                <fullName>LOOP</fullName>
+                <default>false</default>
+                <label>LOOP</label>
+            </value>
+            <value>
+                <fullName>Need to give training to the plumbers</fullName>
+                <default>false</default>
+                <label>Need to give training to the plumbers</label>
+            </value>
+            <value>
+                <fullName>PRICE</fullName>
+                <default>false</default>
+                <label>PRICE</label>
+            </value>
+            <value>
+                <fullName>PRICE &amp; DEALERS</fullName>
+                <default>false</default>
+                <label>PRICE &amp; DEALERS</label>
+            </value>
+            <value>
+                <fullName>PRICE &amp; DISCOUNT</fullName>
+                <default>false</default>
+                <label>PRICE &amp; DISCOUNT</label>
+            </value>
+            <value>
+                <fullName>PRICE LIST &amp; TM</fullName>
+                <default>false</default>
+                <label>PRICE LIST &amp; TM</label>
+            </value>
+            <value>
+                <fullName>PRICELIST &amp; TM</fullName>
+                <default>false</default>
+                <label>PRICELIST &amp; TM</label>
+            </value>
+            <value>
+                <fullName>PRICELIST &amp;DEALER</fullName>
+                <default>false</default>
+                <label>PRICELIST &amp;DEALER</label>
+            </value>
+            <value>
+                <fullName>PRICELIST &amp;TM</fullName>
+                <default>false</default>
+                <label>PRICELIST &amp;TM</label>
+            </value>
+            <value>
+                <fullName>QUOTATION</fullName>
+                <default>false</default>
+                <label>QUOTATION</label>
+            </value>
+            <value>
+                <fullName>TECHNICAL</fullName>
+                <default>false</default>
+                <label>TECHNICAL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

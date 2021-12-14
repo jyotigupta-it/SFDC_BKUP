@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Record_count</fullName>
+        <field>Skyvia_record_count__c</field>
+        <literalValue>1</literalValue>
+        <name>Record count</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Actual_CreatedDate</fullName>
+        <field>Actual_Created_Date__c</field>
+        <formula>CreatedDate</formula>
+        <name>Update Actual CreatedDate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Actual_LastModifiedDate</fullName>
+        <field>Actual_LastModified_Date__c</field>
+        <formula>LastModifiedDate</formula>
+        <name>Update Actual LastModifiedDate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_Date_field</fullName>
+        <field>Date__c</field>
+        <formula>Leave_Date__c</formula>
+        <name>Update the Date field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_checkin_time</fullName>
+        <field>Check_in_Time__c</field>
+        <formula>CreatedDate</formula>
+        <name>update checkin time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>AP_Tour_Plan__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_checkout_time</fullName>
+        <field>Check_out_Time__c</field>
+        <formula>CreatedDate</formula>
+        <name>update checkout time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>AP_Tour_Plan__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_checkout_time_visit</fullName>
+        <field>Check_out_Time__c</field>
+        <formula>LastModifiedDate</formula>
+        <name>Update checkout time for visitvisit</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>AP_Tour_Plan__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_first_visit</fullName>
+        <field>First_Visit__c</field>
+        <literalValue>1</literalValue>
+        <name>update first visit</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>AP_Tour_Plan__c</targetObject>
+    </fieldUpdates>
+    <rules>
+        <fullName>Fill CreatedDate And ModifiedDate</fullName>
+        <actions>
+            <name>Record_count</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Actual_CreatedDate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Actual_LastModifiedDate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>AP_Site_Visit__c.Skyvia__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Leave date Updation</fullName>
+        <actions>
+            <name>Update_the_Date_field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>AP_Site_Visit__c.Othet_Activities__c</field>
+            <operation>equals</operation>
+            <value>Leave</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Today Report</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>AP_Site_Visit__c.Date__c</field>
+            <operation>notEqual</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update check in and out time</fullName>
+        <actions>
+            <name>update_checkin_time</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>update_checkout_time</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>update_first_visit</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>AP_Site_Visit__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Other Activities,Visits,Project Visit,brandingVist</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Site_Visit__c.Othet_Activities__c</field>
+            <operation>notEqual</operation>
+            <value>Holiday/ Market Closed,Leave</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.First_Visit__c</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update checkout time for site visit</fullName>
+        <actions>
+            <name>update_checkout_time_visit</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>AP_Site_Visit__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Other Activities,Visits,Project Visit,brandingVist</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Site_Visit__c.Othet_Activities__c</field>
+            <operation>notEqual</operation>
+            <value>Holiday/ Market Closed,Leave</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.First_Visit__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

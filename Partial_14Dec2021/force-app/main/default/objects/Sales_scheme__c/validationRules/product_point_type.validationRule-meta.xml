@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>product_point_type</fullName>
+    <active>true</active>
+    <description>Either district or state or city</description>
+    <errorConditionFormula>AND
+(
+OR( 
+ ISPICKVAL( Point_accrual_type__c , &apos;PRODUCT_VALUE&apos;),
+ ISPICKVAL( Point_accrual_type__c , &apos;PER_PRODUCT&apos;)
+),
+AND ( 
+  ISBLANK( Product__c ),
+  ISBLANK( Product_Category__c )
+))</errorConditionFormula>
+    <errorMessage>Please select either a product or product category for Point accrual type &apos;PER_PRODUCT&apos; or &apos;PRODUCT_VALUE&apos;</errorMessage>
+</ValidationRule>

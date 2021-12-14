@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>Order_Max_Percentage__c</field>
+        <field>No_of_Bathrooms__c</field>
+        <field>Total_Order_Quantity__c</field>
+        <field>Total_Order_Value__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Update_Spr_Status_as_Approved_by_Prj_hd</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>dilipkumar.cv@ashirvad.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>update order status as Approved By Dhilip</description>
+        <label>Projects Head Approval Status</label>
+        <name>update_order_status_as_Approved_By_Dhilip</name>
+        <rejectionActions>
+            <action>
+                <name>update_order_status_as_Rejected_Dhilip</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>This Approval is For Projects Head (Dilip)</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Account.Order_Status1__c</field>
+            <operation>notEqual</operation>
+            <value>Submitted,Approved,Approved by Projects Head,Approved by Director</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Order_Max_Percentage__c</field>
+            <operation>greaterThan</operation>
+            <value>3</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Email_for_TL_and_DilipKumar_Discount_Approval</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Spr_status_Submitted</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Approval for BD record by Projects Head</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <processOrder>2</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

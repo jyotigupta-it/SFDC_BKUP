@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Edit</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Sr.BDM/BDM/BDE[ASM1] - Plumbing - Siliguri12</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Sr.TGM/TGM/TGE[AGM1] - Plumbing - Siliguri2</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>AGM_Sr_AGM_4_Plumbing_West_Bengal</parentRole>
+</Role>

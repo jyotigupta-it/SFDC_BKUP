@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TL__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>TL</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <filterItems>
+            <field>User.Id</field>
+            <operation>equals</operation>
+            <valueField>$User.ManagerId</valueField>
+        </filterItems>
+        <filterItems>
+            <field>User.Id</field>
+            <operation>equals</operation>
+            <valueField>$User.Manager1__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>User.Id</field>
+            <operation>equals</operation>
+            <valueField>$User.Manager2__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Site_Visits2</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

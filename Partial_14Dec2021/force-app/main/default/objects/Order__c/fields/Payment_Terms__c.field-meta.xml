@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Terms__c</fullName>
+    <externalId>false</externalId>
+    <label>Payment Terms</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>20% advance with PO</fullName>
+                <default>false</default>
+                <label>20% advance with PO</label>
+            </value>
+            <value>
+                <fullName>30 Days credit with PO</fullName>
+                <default>false</default>
+                <label>30 Days credit with PO</label>
+            </value>
+            <value>
+                <fullName>90 Days credit with PO</fullName>
+                <default>false</default>
+                <label>90 Days credit with PO</label>
+            </value>
+            <value>
+                <fullName>100% Payment against Delivery</fullName>
+                <default>false</default>
+                <label>100% Payment against Delivery</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

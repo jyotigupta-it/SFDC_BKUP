@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cart_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Cart Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Order Given</fullName>
+                <default>false</default>
+                <label>Order Given</label>
+            </value>
+            <value>
+                <fullName>No order given</fullName>
+                <default>false</default>
+                <label>No order given</label>
+            </value>
+            <value>
+                <fullName>Call later</fullName>
+                <default>false</default>
+                <label>Call later</label>
+            </value>
+            <value>
+                <fullName>Invalid/Wrong Number</fullName>
+                <default>false</default>
+                <label>Invalid/Wrong Number</label>
+            </value>
+            <value>
+                <fullName>RNR/Busy/Call Divert</fullName>
+                <default>false</default>
+                <label>RNR/Busy/Call Divert</label>
+            </value>
+            <value>
+                <fullName>Not dealing with ashirvad</fullName>
+                <default>false</default>
+                <label>Not dealing with ashirvad</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

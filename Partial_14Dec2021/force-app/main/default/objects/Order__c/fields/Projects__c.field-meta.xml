@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Projects__c</fullName>
+    <externalId>false</externalId>
+    <label>Projects</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Special Pricing Requests</relationshipLabel>
+    <relationshipName>Special_Pricing_Requests</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retailing_days_Target_field_work__c</fullName>
+    <externalId>false</externalId>
+    <formula>Head_Quarter_No_of_Days__c + HEAD_QUARTER_METRO_No_Of_Days__c + Head_Quarter_State_Capital_No_of_days__c + Ex_Station_No_of_Days__c + Out_Station_No_of_Days__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Retailing days Target ( field work)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

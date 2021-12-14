@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Order Booking</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Order Bookings</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Order_Amount_Less_Than_5000</name>
+    </validationRules>
+</CustomObjectTranslation>

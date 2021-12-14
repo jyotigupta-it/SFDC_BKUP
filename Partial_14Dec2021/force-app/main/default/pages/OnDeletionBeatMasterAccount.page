@@ -1,0 +1,3 @@
+<apex:page StandardController="Beat_Master_Account__c"  action="{!submitForApproval}" extensions="OnDeletionBeatMasterAccountController">
+      <apex:pageMessages id="showmsg"></apex:pageMessages>
+</apex:page>

@@ -1,0 +1,197 @@
+<!--**************************************************************************************************************************
+Created By      :Subhajit Ghosh, KVP Business Soln
+Created Date    :1.10.2019
+Modified Date   :
+Description     : Whenever the email customer button is clicked on the project detail page the email with this template is fired to the customer
+
+
+***********************************************************************************************************************************-->
+
+<apex:page controller="EmailToDistributorandCustomerController">
+
+    <apex:stylesheet value="{!$Resource.DistCustCSS}" />
+    <!-- <P align="right">
+        <apex:image id="logo" value="{!$Resource.AshirvadLogoNew}" width="100" height="60"/> <br/>
+    </P>
+    
+    <center>
+        <h3 style="font-family: Arial Unicode MS;"><u>Offer From Ashirvad</u></h3>
+    </center>
+    <p align="right" style="font-family: Arial Unicode MS; font-size: 12px; ">Date:<b>{!DAY(TODAY())}-{!MONTH(TODAY())}-{!YEAR(TODAY())}</b></p>
+    <h4 style="font-family: Arial Unicode MS;"><b>Project Name: {!oppDetails.Name}</b></h4><br/>
+    <h5 style="font-family: Arial Unicode MS;"><b>To,<br/>{!oppDetails.Project_By__r.Name}</b><br/></h5>
+    
+     <p align="left" style="font-family: Arial Unicode MS; font-size: 12px;">
+            Kind Attn:<br/>
+            Dear Sir,<br/><br/>
+            Thanks for your interest in Ashirvad Products. As discussed, please find our offer as below.
+            </p> -->
+    
+    <!--   <table >
+<thead>
+<tr>
+
+<th>Name</th>
+<th>Product</th>
+<th>Offer MRP</th>
+<th>APPL Std. Disc(%)</th>
+<th>Net of Std. APPL Disc</th>
+<th>Disc on MRP(%)</th>
+<th>Invoice Value</th>
+<th>ORC Percent </th>
+<th>Validity Period</th>
+</tr>
+
+</thead>
+<tbody>
+<apex:repeat value="{!offSectionParentList}" var="sprWrap1">
+<apex:variable value="{!1}" var="rowNum"/>
+<apex:repeat value="{!sprWrap1.newsprList2}" var="sprchild">
+<tr> 
+<apex:outputPanel rendered="{!IF((rowNum == 1),true,false)}">
+<td>{!sprWrap1.uniqueName}</td>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!IF(rowNum >1,true,false)}">
+<td></td>
+</apex:outputPanel>
+<td>{!sprchild.Product_name__c}</td>
+<td>{!sprchild.MRP_Value__c}</td>
+<td>{!sprchild.MRP_Post_Discount__c}</td>    
+<td>{!sprchild.Extra_Discount__c}</td>
+<td>{!sprchild.Discounted_Price2__c}</td>
+<td>{!sprchild.ORC_MARGIN_TO_DLR_DIST__c}</td>
+
+<td><apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!sprchild.Validity_for_the_Price__c}" /></apex:outputText></td>
+
+</tr> 
+<apex:variable var="rowNum" value="{!rowNum + 1}"/>
+</apex:repeat>
+
+</apex:repeat>
+</tbody>
+</table>-->
+          <body>
+            <P align="right">
+                
+                <apex:image id="logo" value="{!$Resource.AshirvadLogoNew}" width="100" height="60"/> <br/>
+            </P>
+            <center>
+                <h3 style="font-family: Arial Unicode MS;"><u>Request for Additional Discount</u></h3>
+            </center>
+            <p align="right" style="font-family: Arial Unicode MS; font-size: 12px; ">Date:<b>{!DAY(TODAY())}-{!MONTH(TODAY())}-{!YEAR(TODAY())}</b></p>
+        
+            <h4 style="font-family: Arial Unicode MS;"><b>Project Details:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr>
+                    <th>Project Name</th>
+                    <th class="blueClass">{!OppDetails.Name}</th>
+                </tr>
+                <tr>
+                    <th>Project Number</th>
+                    <th class="blueClass">{!OppDetails.Project_Number__c}</th>
+                </tr>
+                <tr>
+                    <th>Project By</th>
+                    <th class="blueClass">{!OppDetails.Project_By__r.Name}</th>
+                </tr>
+                <tr>
+                    <th>Project Location</th>
+                    <th class="blueClass">{!OppDetails.Project_Location__c}</th>
+                </tr>
+                <tr>
+                    <th>Project State</th>
+                    <th class="blueClass">{!OppDetails.State_Auto_Populate__c}</th>
+                </tr>
+                <tr>
+                    <th>Project Type</th>
+                    <th class="blueClass">{!OppDetails.Project_Type__c}</th>
+                </tr>
+                <tr>
+                    <th>Project Close Date</th>
+                    <th class="blueClass">&nbsp;<apex:outputText value="{0,date,MM/dd/yy}"><apex:param value="{!OppDetails.CloseDate}" /> </apex:outputText>&nbsp;</th>
+                </tr>
+                <tr>
+                    <th>Distributor Name</th>
+                    <th class="blueClass">{!OppDetails.Distributor__r.Name}</th>
+                </tr>
+                 <tr>
+                    <th>No. of towers</th>
+                    <th class="blueClass">{!OppDetails.Number_of_towers__c}</th>
+                </tr>
+                <tr>
+                    <th>No. of floors</th>
+                    <th class="blueClass">{!OppDetails.No_of_Floors__c}</th>
+                </tr>
+                <tr>
+                    <th>No. of bathrooms</th>
+                    <th class="blueClass">{!OppDetails.No_of_Bathrooms__c}</th>
+                </tr>
+                <tr>
+                    <th>No. of Kitchens</th>
+                    <th class="blueClass">{!OppDetails.Number_of_kitchens__c}</th>
+                </tr>
+                <tr>
+                    <th>No. of Visits</th>
+                    <th class="blueClass">{!count}</th>
+                </tr>
+                
+                
+                
+            </table>
+            
+            <br/>
+             <br/>
+
+    <div>
+        <p>
+           <b>SPR NAME: {!uniqueSprName}</b>
+        </p>
+    </div>
+     <br/>
+    <apex:pageBlock >
+        
+        <apex:pageBlockTable value="{!approvedSprList}" var="newOffer" rendered="{!approvedSprList.size!=null}" >
+            <apex:column >
+                <apex:facet name="header">Product</apex:facet>
+                <apex:outputField value="{!newOffer.Product_name__c}"/>
+            </apex:column>
+            
+            <apex:column >
+                <apex:facet name="header">Offer MRP</apex:facet>
+                <apex:outputField value="{!newOffer.MRP_Value__c}"/>
+            </apex:column>
+            
+            <apex:column >
+                <apex:facet name="header">Disc on MRP(%)</apex:facet>
+                <apex:outputField value="{!newOffer.Extra_Discount__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Invoice Value</apex:facet>
+                <apex:outputField value="{!newOffer.Discounted_Price2__c}"/>
+            </apex:column>
+            
+            <apex:column >
+                <apex:facet name="header">Validity Period</apex:facet>
+                <apex:outputField value="{!newOffer.Validity_for_the_Price__c}"/>
+            </apex:column>
+            
+        </apex:pageBlockTable> 
+       
+    </apex:pageBlock>
+    
+           <br/> <br/>
+            <h4 style="font-family: Arial Unicode MS; "><b>Terms and Conditions</b></h4>            
+            
+            <p align="left" style="font-family: Arial Unicode MS; font-size: 12px;">
+                <b>1. Price basis:&nbsp; {!OppDetails.Price_Basis__c}</b><br/>
+                <b>2. Offer valid till:&nbsp; {!oppDetails.Offer_Valid_Till__c}</b><br/>
+                <b>3. Delivery Condition Guarantee: &nbsp;{!oppDetails.Delivery_Conditions_Gurantee__c}</b><br/>
+                <b>4. Taxes:&nbsp; {!oppDetails.Taxes__c}</b><br/>
+                <b>5. Payment Terms:&nbsp; {!oppDetails.Payment_Term__c}</b><br/>
+                <b>6. Delivery:&nbsp;{!oppDetails.Delivery__c}</b><br/>
+            </p>
+       
+    </body>
+   
+</apex:page>

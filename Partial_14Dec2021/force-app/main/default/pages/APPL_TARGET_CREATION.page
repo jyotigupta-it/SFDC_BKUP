@@ -1,0 +1,667 @@
+<!-- 
+Author: Satyanarayana
+Description : Target Allocation for the users in different column; Monthly wise by HO.
+Date : 13/04/2015    -->
+
+<apex:page showHeader="false" standardController="Target__c" extensions="APPL_Target_Create_Controller" standardStylesheets="false" docType="html-5.0" title="Target Creation Page">
+  <apex:slds />
+  <style>
+  .mt {
+  margin-top:27px;
+  }
+    @media only screen and (min-width: 250px) and (max-width: 770px) {
+    .mt {
+    margin-top:0px;
+    }
+    .ws_mobile {
+    white-space:normal!important;
+    }
+    }
+  </style>
+    <apex:pageMessages ></apex:pageMessages>
+    <c:AP_JQUERY_Component ></c:AP_JQUERY_Component>
+    <c:AP_DataTable > </c:AP_DataTable>
+   <!-- <c:AP_BootStrap_Component ></c:AP_BootStrap_Component>-->
+    <script >
+    
+    var activitySize = "{!val_x}";
+    var j$ = jQuery.noConflict();
+   
+    function valueDisabled(x, val) {
+        var mVal = j$(x).attr('class').substring(3);
+        if(val){
+            j$(".abc"+mVal).prop('checked',true);
+        }else{
+            j$(".abc"+mVal).prop('checked',false);
+        }
+        for(var i=1; i <= activitySize; i++) {
+            //var z = x +'-'+i
+            var z = mVal;
+            //alert(className);
+            if(val == false) {
+                j$('.'+z).attr('disabled', true);
+            } else if(val == true) {
+                j$('.'+z).attr('disabled', false);
+            }
+        }
+    }
+    
+    function executeRH() {
+        RegionalHead();
+    }
+    
+    function onlyNos(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+                else { return true; }
+            if (charCode > 31 && ((charCode < 48 || charCode > 57) && charCode != 46)) {
+                return false;
+            }
+            return true;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+    
+    function fixHeader() {
+     var h = parseInt(window.innerHeight);
+    var w = parseInt(window.innerWidth);
+    
+    if(w > 769) {
+      
+        var table = j$('#example1').DataTable({
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "bFilter":  false,
+            "scrollX":  "100%",
+            "scrollY": "350px",
+            "scrollCollapse": true
+           
+        });
+        new j$.fn.dataTable.FixedColumns (table, {
+            leftColumns: 4,
+            left: true
+        }); 
+        
+       }
+    }
+    
+    // if window resize call responsive function
+$(window).resize(function(e) {
+    fixHeader();
+    fixHeader2();
+});
+// call responsive function on default :)
+$(document).ready(function(e) {
+    fixHeader();
+    fixHeader2();
+});
+    
+    function fixHeader2() {
+      var h = parseInt(window.innerHeight);
+    var w = parseInt(window.innerWidth);
+    
+    if(w > 770) {
+        
+        var table = j$('#example2').DataTable({
+            "paging":   false,
+            "ordering": false,
+            "info":     false,
+            "bFilter":  false,
+            "scrollX":  "100%",
+            "scrollY": "350px",
+            "scrollCollapse": true
+        });
+        new j$.fn.dataTable.FixedColumns (table, {
+            leftColumns: 4,
+            left: true
+        });  
+        
+     }
+    }
+    </script>
+    <!-- CSS to hide the arrow for the Number Field. -->
+ <!--   <style>
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+        }     
+        
+        .waitingSearchDiv {
+        position: absolute;
+        text-align: center;
+        top: 0;
+        z-index: 80;
+        left: 0;
+        }
+        .waitingSearchDiv .waitingHolder, .waitingSearchDiv .waitingSearchHolder {
+        border: none;
+        background-color: transparent;
+        font-size: 1em;
+        font-weight: normal;
+        padding: 0;
+        }
+        .waitingSearchDiv .waitingHolder {
+        font-weight: bold;
+        font-size: 1.20em;
+        position: relative;
+        padding: .5em;
+        white-space: nowrap;
+        margin: auto;
+        width: 40%;
+        top: 45%;
+        }
+        
+    </style>-->
+    
+    
+    <body>
+        <title> APPL - Target Allocation</title>
+        <apex:form id="pbSection">
+        <div class="slds-page-header">
+                                  <div class="slds-media">
+                                    <div class="slds-media__body">
+                                     <div class="slds-clearfix">
+    <div class="slds-float_left">
+    <apex:image url="{!$Resource.Home}" width="22px" onclick="window.open('/{!keyPrefix}/o','_self')"/>
+          <span title="Target Home" class="glyphicon glyphicon-home" size="15px;" style="cursor:pointer;top:15px;font-weight: bold;font-size:25px; important!" onclick='window.open("/{!keyPrefix}/o","_self")'></span>
+           </div>
+               <div class="slds-float_left">
+               
+               <h1  class="slds-page-header__title slds-truncate slds-align-middle slds-align_absolute-center ws_mobile slds-p-left_small">Target Allocation - {!target.State__c} / {!target.Vertical__c} / {!SelectedMonth}</h1>
+                <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                                </div>
+                                </div>
+                                 </div>
+                                 </div>
+            
+            <apex:pageBlock >
+                <apex:pageBlockSection >
+                    <apex:messages style="color:red;"/>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            
+            <apex:outputPanel rendered="{!showOutputPanel}" >
+                
+                <!--<apex:pageBlock >       
+<apex:pageBlockSection id="pbSection"> -->
+                <div class="slds-grid slds-wrap">
+                          <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-around_small">
+                        <label>Vertical<span style="color:red;font-size:18px;">*</span></label>
+                        <apex:inputfield value="{!target.Vertical__c}"  styleclass="slds-input "/>
+                    </div>
+                    
+                   <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-around_small">
+                        <label>Month<span style="color:red;font-size:18px;">*</span></label>
+                        <apex:selectList Value="{!SelectedMonth}" size="1" label="Month" styleclass="slds-input">
+                            <apex:selectOptions Value="{!Months}"></apex:selectOptions>
+                        </apex:selectList> 
+                    </div>
+                    
+                  <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-around_small">
+                        <label>State<span style="color:red;font-size:18px;">*</span></label>
+                        <apex:inputField value="{!target.State__c}" label="State" styleclass="slds-input"/>
+                    </div>
+                    
+                    <!-- div class="col-md-4"  onchange="RegionalHead()">
+<label>Regional Head</label>
+<apex:selectList Value="{!selectedRegionalHead}" size="1" label="Regional Head" onchange="queryRSM()" styleclass="form-control" >
+<apex:selectOptions Value="{!RegionalHead}"></apex:selectOptions> 
+</apex:selectList> 
+</div>
+
+<div class="col-md-4">
+<label>RSM</label>
+<apex:selectList Value="{!selectedRSM}" size="1" label="RSM" styleclass="form-control">
+<apex:selectOptions Value="{!RSM}"></apex:selectOptions> 
+</apex:selectList> 
+</div> -->
+                    
+                    
+                    <!-- div class="col-md-4">
+<label>ASM</label>  onchange="queryASM()"
+<apex:selectList Value="{!selectedASM}" size="1" label="ASM" styleclass="form-control">
+<apex:selectOptions Value="{!ASM}"></apex:selectOptions> 
+</apex:selectList> 
+</div>
+
+<apex:selectList Value="{!BDM}" size="1" label="BDM">
+<apex:selectOptions Value="{!BDM}"></apex:selectOptions> 
+</apex:selectList> 
+</apex:pageblocksection> -->
+                </div> 
+                <!--  <apex:actionFunction action="{!queryRH}" name="RegionalHead" reRender="pbSection" status="as1"/>
+<apex:actionFunction action="{!queryRSM}" name="queryRSM" reRender="pbSection" status="as1"/>
+<apex:actionFunction action="{!queryASM}" name="queryASM" reRender="pbSection" status="as1"/> -->
+                <div class="slds-p-around_small">
+                  
+                        <apex:commandButton id="cmdbtn" action="{!ToContinue}" value="Continue..." reRender="pbSection" oncomplete="fixHeader();" status="as1" styleClass="slds-button slds-button_brand "/>
+                        
+                    
+                    <br/>
+                </div>
+            </apex:outputPanel>
+            <!-- </apex:pageblock> -->
+            
+            
+            <!-- <div class="container">
+<div class="row">
+<div class="content">
+<div class="panel-group" id="accordion">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+Influencer Engagement
+</a>
+</h4>
+</div>
+<div id="collapseOne" class="panel-collapse collapse in">
+<div class="panel-body">
+<apex:outputPanel id="pbsection21">
+<apex:outputPanel styleClass="table-responsive" rendered="{!showOutputPanel}">
+<script>
+activitySize = "{!val_x}";
+</script>
+<div class="panel-body,container" id="panelbody" style="padding-top: 10px;">
+<table border="0" class="table table-condensed table-striped" id="example1" cellspacing="0" width="100%">
+<thead>
+<tr>
+<apex:repeat value="{!promotionTypes}" var="pro">
+<th>{!pro}</th>
+</apex:repeat>
+</tr>
+</thead>
+<tbody>
+<apex:repeat value="{!promotionWrapperInstance}" var="wrap"  >
+<tr>
+<td>
+<!--<script>
+function completeFunc(x,y) {
+    {!wrap.targetCheck} = false;
+    console.log({!wrap.targetCheck});
+}
+</script> 
+<apex:inputCheckbox selected="{!wrap.targetCheck}" styleclass="abc{!wrap.userDetails.userId}" onchange="valueDisabled(this, this.checked);" value="{!wrap.targetCheck}" />
+</td>
+<td><b> {!wrap.userDetails.userName} </b></td>
+<apex:variable var="c" value="{!1}"/>
+<apex:repeat value="{!wrap.promotionValueInstance}" var="val">
+<td>
+<apex:input type="number" styleclass="form-control {!wrap.userDetails.userId}" onkeypress="return onlyNos(event,this);" value="{!val.promotionValue}"/> </td>
+<!--  <input type="number" min= "1" class="form-control" onkeypress="return onlyNos(event,this);" value="{!val.promotionValue}" id="{!wrap.userDetails.userId}-{!c}"/>
+<apex:variable var="c" value="{!c+1}"/>
+</apex:repeat>
+</tr>
+</apex:repeat>
+</tbody>
+</table>
+</div></apex:outputPanel></apex:outputPanel>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+Chevrolet
+</a>
+</h4>
+
+</div>
+<div id="collapseTwo" class="panel-collapse collapse">
+<div class="panel-body">
+<img src="http://www.wallsave.com/wallpapers/800x400/zl-camaro/65234/zl-camaro-chevrolet-carbon-concept-car-65234.jpg" />
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+Volvo
+</a>
+</h4>
+
+</div>
+<div id="collapseThree" class="panel-collapse collapse">
+<div class="panel-body">
+<img src="http://files.conceptcarz.com/img/Volvo/2009_Volvo_S60_Concept-Image-01-800.jpg" />
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>  -->
+            
+            
+            
+            
+            <apex:outputPanel id="pbsection2" layout="block">
+                <apex:outputPanel styleClass="table-responsive" rendered="{!showOutputPanel3}">
+                    
+                    <script>
+                    activitySize = "{!val_x}";
+                    
+                    var markVal = {!marketDevelopment};
+                    if(markVal == 0) {
+                        j$('#mark1').remove();
+                    }
+                    var promVal = {!promActivity};
+                    if(promVal == 0) {
+                        j$('#prom1').remove();
+                    }
+                    var primVal = {!primarySales};
+                    if(primVal == 0) {
+                        j$('#prim1').remove();
+                    }
+                    var retVal = {!retailing};
+                    if(retVal == 0) {
+                        j$('#ret1').remove();
+                    }
+                    
+                    </script>
+                    
+                    <div class="panel-body,container" id="panelbody" style="padding-top: 10px;">
+                        <table  class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal table table-striped" id="example1"  width="100%">
+                            <thead>
+                                <tr class="slds-text-title_caps"><th></th><th></th><th></th><th></th>
+                                 <th id="prom1" scope="col" colspan="{!promActivity}" class="danger" style="border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: brown;">
+                                    <!--div class="slds-truncate" title="PROMOTIONAL ACTIVITY"><center>PROMOTIONAL ACTIVITY</center></div></th>-->
+                                    <div class="slds-truncate" title="{!ActivityType}"><center>{!ActivityType}</center></div></th>
+                                     <!--  <th id="prom2" colspan="{!promActivity}" class="success" style="width: 1377px;border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: rgb(0, 100, 0);"><center>PROJECTS ACTIVITIES</center></th> -->
+                                 <th id="ind1" colspan="{!IndustrialVisits}" class="success" style="width: 304px;border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: rgb(0, 100, 0);"> 
+                                    <div class="slds-truncate" title="INDUSTRIAL VISITS"><center>INDUSTRIAL VISITS</center></div></th>
+                                 <th id="ret1" colspan="{!retailing}" class="success" style="width: 1377px;border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: rgb(0, 100, 0);">
+                                    <!--div class="slds-truncate" title="  RETAILING"><center> RETAILING</center></div></th>-->
+                                   <div class="slds-truncate" title="RetailingType"><center>{!RetailingType}</center></div></th>
+                                   
+                                    
+                                   
+                                    <th scope="col" id="mark1" colspan="{!marketDevelopment}" class="info" style="border-top-left-radius: 20px; border-top-right-radius: 20px; border: 2px solid rgb(197, 86, 242); width: 304px; background-color: rgb(228, 211, 235);">
+                                    <div class="slds-truncate" title="PromotionType"><center>{!PromotionType}</center></div></th>
+                                     <th scope="col" id="prim1" colspan="{!primarySales}" class="info" style="border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid rgb(101, 193, 239);">
+                                    <!--div class="slds-truncate" title="PRIMARY SALES : (In Lacs)"><center>PRIMARY SALES : (In Lacs)</center></div></th>--->
+                                    <div class="slds-truncate" title="Primarytype"><center>{!Primarytype}</center></div></th>
+                                    
+                                </tr>
+                                <tr>
+                                    <apex:repeat value="{!promotionTypes}" var="pro">
+                                        
+                                        <th style="width:100px;" class="warning">{!pro}</th>
+                                    </apex:repeat>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!promotionWrapperInstance}" var="wrap">
+                                    <tr class="slds-hint-parent">
+                                        <td data-label="Select"><div class="slds-truncate" title="Action">
+                                            <apex:inputCheckbox styleclass="abc{!wrap.userDetails.userId}" onchange="valueDisabled(this, this.checked);" value="{!wrap.targetCheck}"/>
+                                        </div></td>
+                                        
+                                        <td data-label="User"><div class="slds-truncate" title="Action"><b> {!wrap.userDetails.userName} </b></div></td>
+                                       
+                                        <td data-label="Role"><div class="slds-truncate" title="Action"><b> {!wrap.userDetails.userRole} </b></div></td>
+                                       <td data-label="Market type"><div class="slds-truncate" title="Action"><b> {!wrap.userDetails.Market_Type} </b></div></td>
+                                        
+                                       <apex:variable var="c" value="{!1}"/>
+                                        <apex:repeat value="{!wrap.promotionValueInstance}" var="val">
+                                           <td data-label="{!promotionTypes[c+2]}"><div class="slds-truncate" title="Action">
+                                                <apex:input type="number" styleclass="form-control {!wrap.userDetails.userId}" onkeypress="return onlyNos(event,this);" value="{!val.promotionValue}" style="width:65px;"/> </div></td>
+                                            <!--  <input type="number" min= "1" class="form-control" onkeypress="return onlyNos(event,this);" value="{!val.promotionValue}" id="{!wrap.userDetails.userId}-{!c}"/> --> 
+                                         <apex:variable var="c" value="{!c+1}"/>
+                                         
+                                        </apex:repeat>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    
+                    <div class="slds-p-around_large">
+                        <center>
+                            <!--  <a class="glyphicon glyphicon-floppy-save btn btn-success" onclick="">SAVE</a> ,pbsection3-->
+                            <apex:commandLink action="{!toSave}" value="Save"  styleClass="slds-button slds-button_brand "  rerender="pbsection2,pbsection3" oncomplete="fixHeader2()" status="as1"/>
+                            <apex:commandLink action="{!toCancel}" value="Cancel"  styleClass="slds-button slds-button_neutral slds-m-left_small"  />
+                        </center>
+                    </div>
+                    
+                </apex:OutPutPanel>
+            </apex:outputPanel>
+            
+            <apex:OutPutPanel id="pbsection3">
+                
+                <apex:OutPutPanel styleClass="table-responsive" rendered="{!showOutputPanel2}">
+                     <div class="slds-grid slds-wrap">
+                          <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-around_small">
+                        <label>Month<span style="color:red;font-size:18px;">*</span></label>
+                        <apex:selectList Value="{!SelectedMonth}" size="1" label="Month" styleclass="slds-input">
+                            <apex:selectOptions Value="{!Months}"></apex:selectOptions>
+                        </apex:selectList> 
+                    </div>
+                    
+                    <script>
+                    var markVal = {!marketDevelopment};
+                    if(markVal == 0) {
+                        j$('#mark2').remove();
+                    }
+                    var promVal = {!promActivity};
+                    if(promVal == 0) {
+                        j$('#prom2').remove();
+                    }
+                    var primVal = {!primarySales};
+                    if(primVal == 0) {
+                        j$('#prim2').remove();
+                    }
+                    var retVal = {!retailing};
+                    if(retVal == 0) {
+                        j$('#ret2').remove();
+                    }
+                    </script>
+                     <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-around_small">
+                        
+                        <apex:commandLink styleclass="slds-button slds-button_brand mt" value="Clone" action="{!clonebtn}" rerender="pbSection,pbsection2,pbsection3" oncomplete="fixHeader()" status="as1"/>
+                    </div>
+                    </div>
+                    <table border="0" class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal table" id="example2">
+                        <thead>
+                            <tr class="slds-text-title_caps"><th></th><th></th><th></th><th></th>
+                                
+                                    <th id="prom2" scope="col" colspan="{!promActivity}" class="danger" style="border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: brown;">
+                                    <!--div class="slds-truncate" title="PROMOTIONAL ACTIVITY"><center>PROMOTIONAL ACTIVITY</center></div></th>-->
+                                    <div class="slds-truncate" title="{!ActivityType}"><center>{!ActivityType}</center></div></th>
+                                    <!--  <th id="prom2" colspan="{!promActivity}" class="success" style="width: 1377px;border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: rgb(0, 100, 0);"><center>PROJECTS ACTIVITIES</center></th> -->
+                                    <th id="ind2" colspan="{!industrialVisits}" class="success" style="width: 304px;border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: rgb(0, 100, 0);">
+                                <div class="slds-truncate" title="INDUSTRIAL VISITS"><center>INDUSTRIAL VISITS</center></div></th>
+                                   <th id="ret2" colspan="{!retailing}" class="success" style="width: 1377px;border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid;border-color: rgb(0, 100, 0);">
+                                    <!--div class="slds-truncate" title="  RETAILING"><center> RETAILING</center></div></th>-->
+                                   <div class="slds-truncate" title="RetailingType"><center>{!RetailingType}</center></div></th>
+                                    <th scope="col" id="mark2" colspan="{!marketDevelopment}" class="info" style="border-top-left-radius: 20px; border-top-right-radius: 20px; border: 2px solid rgb(197, 86, 242); width: 304px; background-color: rgb(228, 211, 235);">
+                                    <div class="slds-truncate" title="PromotionType"><center>{!PromotionType}</center></div></th>
+                                     <th scope="col" id="prim2" colspan="{!primarySales}" class="info" style="border-top-left-radius: 20px;border-top-right-radius: 20px;border: 2px solid rgb(101, 193, 239);">
+                                    <!--div class="slds-truncate" title="PRIMARY SALES : (In Lacs)"><center>PRIMARY SALES : (In Lacs)</center></div></th>--->
+                                    <div class="slds-truncate" title="Primarytype"><center>{!Primarytype}</center></div></th>
+                            </tr>
+                            <tr>
+                                <apex:repeat value="{!promotionTypes}" var="pro">
+                                    
+                                    <th style="width:100px;" class="warning">{!pro}</th>
+                                </apex:repeat>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!promotionWrapperInstance}" var="wrap"  >
+                                <tr class="slds-hint-parent">
+                                    <td data-label="Select"><div class="slds-truncate" title="Action">
+                                        <!--<script>
+function completeFunc(x,y) {
+    {!wrap.targetCheck} = false;
+    console.log({!wrap.targetCheck});
+}selected="{!wrap.targetCheck}"
+</script> -->
+                                        
+                                        <apex:inputCheckbox disabled="true"  styleclass="abc{!wrap.userDetails.userId}" onchange="valueDisabled(this, this.checked);" value="{!wrap.targetCheck}" />
+                                    </div></td>
+                                    <td data-label="User"><div class="slds-truncate" title="Action">{!wrap.userDetails.userName} </div></td>
+                                    <td data-label="Role"><div class="slds-truncate" title="Action">{!wrap.userDetails.userRole} </div></td>
+                                    <td data-label="Role"><div class="slds-truncate" title="Action">{!wrap.userDetails.Market_Type} </div></td>
+                                    <apex:variable var="c" value="{!1}"/>
+                                    <apex:repeat value="{!wrap.promotionValueInstance}" var="val">
+                                        <td data-label="{!promotionTypes[c+2]}"><div class="slds-truncate" title="Action">
+                                            <apex:outPutText styleclass="form-control {!wrap.userDetails.userId}" value="{!val.promotionValue}"/> </div></td>
+                                        <!--  <input type="number" min= "1" class="form-control" onkeypress="return onlyNos(event,this);" value="{!val.promotionValue}" id="{!wrap.userDetails.userId}-{!c}"/> --> 
+                                   <apex:variable var="c" value="{!c+1}"/>
+                                    </apex:repeat>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                </apex:outPutPanel>
+            </apex:OutPutPanel>
+            
+            <apex:actionstatus id="as1">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.85;width:100%;"> 
+                        <div class="waitingHolder" style="top: 104.2px; width: 100px; right:50px;">
+                            <img class="waitingImage" src= "{!$Resource.Redcircle}" width="360" height="110"  title="Please Wait..." /><br/>
+                            <span class="waitingDescription">Loading...</span>
+                            
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+            
+            <!-- <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;display:none;" onclick="return false;" > 
+<div class="waitingHolder" style="center: 104.2px; width: 100px; right:50px;">
+<img class="waitingImage" src="/img/loading32.gif" title="Please Wait..." />
+<span class="waitingDescription">Loading...</span>
+</div>
+</div> -->
+        </apex:form>
+    </body>
+    
+    
+    <script>
+    var table;
+    j$(document).ready(function() {
+        j$("body").css("overflow", "auto");
+        
+        /* var table = j$('#example').DataTable({
+ /*"bInfo" : false,
+"bFilter" : false,
+"bProcessing" : false,
+"bServerSide" : false,
+"bPaginate" : false,
+"bSort" : false,
+"sScrollX": "100%",
+"sScrollXInner": "150%",
+"bAutoWidth" : true,
+"bScrollCollapse": true 
+ "paging":   false,
+  scrollY:   "300px"
+      });
+ 
+    new j$.fn.dataTable.FixedHeader(table, {
+        leftColumns: 4,
+        left: true
+        }); */
+    
+    /* table  = j$('#example1').DataTable({
+        paging:   false,
+         //scrollY:    "300px",
+        scrollX:        "100%",
+        scrollCollapse: true
+           });
+ 
+    new j$.fn.dataTable.FixedHeader(table, {
+        leftColumns: 4
+        //left: true
+     });*/
+});
+    
+    </script>
+  <!--  <style>
+        
+        /* th, td { white-space: nowrap; }
+        div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+        }*/
+        
+        /*div.container {
+        width: 80%;
+        }
+        
+        /*th, td { white-space: nowrap; }
+        div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+        } */
+        
+        /* html, body {
+        background-color:white;
+        }
+        .content {
+        width:960px;
+        height:0px;
+        margin-right: auto;
+        margin-left: auto;
+        }
+        .panel-group {
+        width:430px;
+        z-index: 100;
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateX(-100%) rotate(-90deg);
+        -webkit-transform-origin: right top;
+        -moz-transform: translateX(-100%) rotate(-90deg);
+        -moz-transform-origin: right top;
+        -o-transform: translateX(-100%) rotate(-90deg);
+        -o-transform-origin: right top;
+        transform: translateX(-100%) rotate(-90deg);
+        transform-origin: right top;
+        }
+        .panel-heading {
+        width: 430px;
+        }
+        .panel-title {
+        height:18px
+        }
+        .panel-title a {
+        float:right;
+        text-decoration:none;
+        padding: 10px 430px;
+        margin: -10px -430px;
+        }
+        .panel-body {
+        height:830px;
+        }
+        .panel-group img {
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateX(-100%) rotate(90deg);
+        -webkit-transform-origin: right top;
+        -moz-transform: translateX(-100%) rotate(90deg);
+        -moz-transform-origin: right top;
+        -o-transform: translateX(-100%) rotate(90deg);
+        -o-transform-origin: right top;
+        transform: translateX(-100%) rotate(90deg);
+        transform-origin: right top;
+        }
+        .panel-group .panel img {
+        margin-left:400px;
+        margin-top:800px;
+        position: absolute;
+        } */
+        
+    </style>-->
+</apex:page>

@@ -1,0 +1,200 @@
+<apex:page controller="EditOrderPage2Controller" docType="html-5.0" >
+    <apex:slds />
+    <style type="text/css">
+        .inp_fd {
+        position:relative;
+        }
+        .fieldSSize {
+        width: 60px;
+        }
+        .fieldMSize {
+        width: 120px;
+        }
+        .mand {
+        font-size: 20px!important;
+        color: red!important;    
+        }
+        .imgClass:hover {
+        cursor:pointer;
+        }
+        .look_pos  input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        
+        
+        .look_pos {
+        position:relative!important;
+        }
+        .look_pos a {
+        position:absolute!important;
+        right:0px;
+        top:3px;
+        }
+        body .bPageBlock .detailList tr th:last {
+        width:50%;
+        }
+        .form_inputs select {
+        width:100%!important;
+        }
+        .look_css {
+        position:relative;
+        }
+        .look_css a {
+        position:absolute;
+        right:5px;
+        top:6px;
+        }
+        .look_css input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .slds-input, .look_css input[type="text"] {
+        width:150px!important;
+        }
+        .look_pos  input[type="text"] {
+        width:200px!important;
+        }
+        
+        }
+        
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        z-index:999999;
+        }
+        
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+        
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        
+    </style>
+    
+    
+    <apex:form >
+        <apex:outputpanel >
+            <apex:actionstatus id="status">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                                                                         height: 100%;opacity:0.65;width:120%;"> 
+                        <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span class="waitingDescription">Loading...</span>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+        </apex:outputpanel>
+        <apex:pageBlock >
+            <apex:pageBlockSection Id="PageBlockSec" >
+                
+                <apex:pageBlockTable value="{!orderLineItemList}" var="newOffer" rendered="{!orderLineItemList.size!=null}" id="newOffId" >
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Product</apex:facet>
+                        <apex:outputField value="{!newOffer.Product_Name__c}" />
+                    </apex:column>
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Order Value</apex:facet>
+                        <apex:inputField value="{!newOffer.MRP_Value__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Supply Start Date</apex:facet>
+                        <apex:outputField value="{!newOffer.Supply_Start_Date__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Supply End Date</apex:facet>
+                        <apex:inputField value="{!newOffer.Supply_End_Date__c}" />
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Validity For The Price</apex:facet>
+                        <apex:outputField value="{!newOffer.Validity_for_the_Price__c}" />
+                    </apex:column>
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Payment Terms</apex:facet>
+                        
+                        <apex:outputField value="{!newOffer.Payment_Terms__c}"  />
+                        
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Competitors Name</apex:facet>
+                        <apex:outputField value="{!newOffer.Competitors_name__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">ORC Markup</apex:facet>
+                        <apex:inputField value="{!newOffer.ORC_MARGIN_TO_DLR_DIST__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">ORC Status</apex:facet>
+                        <apex:inputField value="{!newOffer.ORC_Status__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Order Status</apex:facet>
+                        <apex:inputField value="{!newOffer.Order_Status__c}" />
+                    </apex:column>
+                    
+                    
+                </apex:pageBlockTable> 
+                
+                
+            </apex:pageBlockSection>
+            
+            <div>
+                <apex:commandButton status="status" styleClass="slds-button slds-button_brand" value="Save"  action="{!onSave}" />
+                <apex:commandButton styleClass="slds-button slds-button_brand" value="Cancel" status="status" action="{!onCancel}"/>  
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

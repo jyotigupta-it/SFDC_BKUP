@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agri_fast_moving_Size_Inch__c</fullName>
+    <externalId>false</externalId>
+    <label>Agri fast moving Size( Inch)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>4 KG - 2 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 2 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 2½ Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 2½ Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 3 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 3 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 4 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 4 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 4½ Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 4½ Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 5 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 5 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 6 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 6 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 7 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 7 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 8 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 8 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 9 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 9 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 10 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 10 Inch</label>
+            </value>
+            <value>
+                <fullName>4 KG - 12 Inch</fullName>
+                <default>false</default>
+                <label>4 KG - 12 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 1¼ Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 1¼ Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 1½ Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 1½ Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 2 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 2 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 2½ Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 2½ Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 3 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 3 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 4 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 4 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 4½ Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 4½ Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 5 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 5 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 6 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 6 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 7 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 7 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 8 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 8 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 9 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 9 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 10 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 10 Inch</label>
+            </value>
+            <value>
+                <fullName>6 KG - 12 Inch</fullName>
+                <default>false</default>
+                <label>6 KG - 12 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 3 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 3 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 4 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 4 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 4½ Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 4½ Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 5 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 5 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 6 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 6 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 7 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 7 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 8 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 8 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 9 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 9 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 10 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 10 Inch</label>
+            </value>
+            <value>
+                <fullName>2.5 KG - 12 Inch</fullName>
+                <default>false</default>
+                <label>2.5 KG - 12 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - ¼ Inch</fullName>
+                <default>false</default>
+                <label>10 KG - ¼ Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - ½ Inch</fullName>
+                <default>false</default>
+                <label>10 KG - ½ Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 1 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 1 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 1¼ Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 1¼ Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 1½ Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 1½ Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 2 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 2 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 2½ Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 2½ Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 3 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 3 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 4 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 4 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 4½ Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 4½ Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 5 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 5 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 6 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 6 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 7 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 7 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 8 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 8 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 9 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 9 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 10 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 10 Inch</label>
+            </value>
+            <value>
+                <fullName>10 KG - 12 Inch</fullName>
+                <default>false</default>
+                <label>10 KG - 12 Inch</label>
+            </value>
+            <value>
+                <fullName>15 KG - ¼ Inch</fullName>
+                <default>false</default>
+                <label>15 KG - ¼ Inch</label>
+            </value>
+            <value>
+                <fullName>15 KG - ½ Inch</fullName>
+                <default>false</default>
+                <label>15 KG - ½ Inch</label>
+            </value>
+            <value>
+                <fullName>15 KG - 1 Inch</fullName>
+                <default>false</default>
+                <label>15 KG - 1 Inch</label>
+            </value>
+            <value>
+                <fullName>15 KG - 1¼ Inch</fullName>
+                <default>false</default>
+                <label>15 KG - 1¼ Inch</label>
+            </value>
+            <value>
+                <fullName>15 KG - 1½ Inch</fullName>
+                <default>false</default>
+                <label>15 KG - 1½ Inch</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

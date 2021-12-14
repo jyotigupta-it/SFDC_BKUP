@@ -1,0 +1,29 @@
+<apex:page extensions="TourProgramRedirectController" Standardcontroller="Tour_Program__c">
+<apex:slds />
+Redirecting to PDF.........
+     
+     <apex:form >
+             <apex:actionFunction name="sendPdfViewTourPlan" action="{!sendViewTourPlanPdf}"/>
+     </apex:form>
+     <script type="Text/javascript">
+     
+        var projectId = '{!oppId}'; 
+        console.log('ffffffff ' + {!userAgentCheck});
+            
+                 if((typeof sforce != 'undefined') && (sforce != null)) {    
+                   if({!userAgentCheck} == false) {
+                            console.log('iiiiiiiiiiiffffffff ');
+                            // Request from Desktop(Salesforce Lightning version)
+                            window.open('/apex/DisplayTourPlans?id='+ projectId, "_self");
+                        } else {
+                            console.log('eeeeeeeelllllllsseeeee ');
+                            // Request from Mobile(Salesforce one app)
+                           // window.open('/apex/DisplayTourPlans?id='+ projectId, "_self");
+                           sendPdfViewTourPlan();
+                        }
+                 } else {
+                     // Request from Desktop(Salesforce classic version)
+                      window.open('/apex/DisplayTourPlans?id='+ projectId, "_self");
+                 } 
+     </script>
+</apex:page>

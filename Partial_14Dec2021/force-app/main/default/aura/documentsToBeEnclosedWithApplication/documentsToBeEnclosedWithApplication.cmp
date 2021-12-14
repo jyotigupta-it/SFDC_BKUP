@@ -1,0 +1,135 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="selfAndFamilyMemberinstance" type="Contact"/>
+    <aura:attribute name="showUploadDocuments" type="boolean" default="false"/>
+    <aura:attribute name="showSelfAndFamily" type="boolean" default="false"/>
+    <aura:attribute name="rowIndex" type="string"/>
+    <aura:attribute name="upload_One_passport_Size" type="boolean" />
+    <aura:attribute name="copyOfPanCard" type="boolean" />
+    <aura:attribute name="copyOfSalesTax" type="boolean" />
+    <aura:attribute name="copyOfShopLicense" type="boolean" />
+    <aura:attribute name="fourPhotographOfEstablishment" type="boolean" />
+    <aura:attribute name="copyOfLasttwoYearsAudited" type="boolean" />
+    <aura:attribute name="copyOfLastTwoYearsIncome" type="boolean" />
+    <aura:attribute name="lastOneYearBank" type="boolean" />
+    <aura:attribute name="visitingCard" type="boolean" />
+    <aura:attribute name="securityCheques" type="boolean" />
+    <aura:attribute name="makeReadOnly" type="boolean"/>
+    
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+    <aura:if isTrue="{!v.showUploadDocuments}">
+        <lightning:input type="checkbox" label="Upload One Passport Size Photograph For Each Prop / Partner / Director" name="input2" checked="{!v.upload_One_passport_Size}" aura:id="check1" onchange="{!c.handleCheck1}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Copy of Pancard For Each" name="input2" checked="{!v.copyOfPanCard}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Copy of Sales Tax Certificate" name="input2" checked="{!v.copyOfSalesTax}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Copy of Shop Licence" name="input2" checked="{!v.copyOfShopLicense}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Four Photograph of Establishment - Front Elevation / Interiors etc." name="input2" checked="{!v.fourPhotographOfEstablishment}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Copy of Last 2 Years Audited Financial Statements" name="input2" checked="{!v.copyOfLasttwoYearsAudited}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Copy of Last 2 Years Income Tax Assessment Orders" name="input2" checked="{!v.copyOfLastTwoYearsIncome}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Last 1 Year Bank Statement" name="input2" checked="{!v.lastOneYearBank}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Visiting Card" name="input2" checked="{!v.visitingCard}" disabled="{!v.makeReadOnly}"/>
+        <lightning:input type="checkbox" label="Security Cheques 3 Nos (Bank Name, Cheque Nos and Branch Name)" name="input2" checked="{!v.visitingCard}" disabled="{!v.makeReadOnly}"/>
+
+        <!-- <lightning:fileUpload label="Upload One Passport Size Photograph For Each Prop / Partner / Director"
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Copy of Pancard For Each"
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Copy of Sales Tax Certificate"
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Copy of Shop Licence"
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Four Photograph of Establishment - Front Elevation / Interiors etc."
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Copy of Last 2 Years Audited Financial Statements"
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Copy of Last 2 Years Income Tax Assessment Orders"
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Last 1 Year Bank Statement"
+                              name="fileUploader"
+                              multiple="true"
+                              recordId="{!v.recordId}" />
+        
+        <lightning:fileUpload label="Visiting Card"
+                              name="fileUploader"
+                              multiple="true" 
+                              recordId="{!v.recordId}" /> -->
+    </aura:if>
+    <aura:if isTrue="{!v.showSelfAndFamily}">
+        <div class="slds-grid slds-wrap">
+            <lightning:card variant="Narrow" title="Personal Data of Self and Family Members" iconName="standard:contact">
+                <aura:set attribute="actions">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Row" />
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </aura:set>
+                <p class="slds-p-horizontal_small">
+                    <lightning:recordEditForm aura:id="recordForm" objectApiName="Contact" recordTypeId="{!v.selfAndFamilyMemberinstance.RecordTypeId}">
+                        <!-- Error message -->
+                        <lightning:messages />
+                        <!-- Fields -->
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                <lightning:inputField required="true" aura:id="Name" fieldName="Salutation" 
+                                                      value="{!v.selfAndFamilyMemberinstance.Salutation}" disabled="{!v.makeReadOnly}"/>
+                            </div>
+                            <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                <lightning:inputField required="true" aura:id="Name" fieldName="FirstName" 
+                                                      value="{!v.selfAndFamilyMemberinstance.FirstName}" disabled="{!v.makeReadOnly}"/>
+                            </div>
+                            <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                <lightning:inputField required="true" aura:id="Name" fieldName="LastName" 
+                                                      value="{!v.selfAndFamilyMemberinstance.LastName}" disabled="{!v.makeReadOnly}"/>
+                            </div>
+                            <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                <lightning:inputField aura:id="RelationShip__c" fieldName="RelationShip__c" 
+                                                      value="{!v.selfAndFamilyMemberinstance.RelationShip__c}" required="true" disabled="{!v.makeReadOnly}"/>
+                            </div>
+                            <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                <lightning:inputField required="true" aura:id="Education_Qualification__c" fieldName="Education_Qualification__c"
+                                                      value="{!v.selfAndFamilyMemberinstance.Education_Qualification__c}" disabled="{!v.makeReadOnly}"/>
+                            </div>
+                            <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                <lightning:inputField required="true" aura:id="Birthdate" fieldName="Birthdate" 
+                                                      value="{!v.selfAndFamilyMemberinstance.Birthdate}" disabled="{!v.makeReadOnly}"/>
+                            </div>
+                            <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                                <lightning:inputField required="true" aura:id="Date_of_Marriage__c" fieldName="Date_of_Marriage__c" 
+                                                      value="{!v.selfAndFamilyMemberinstance.Date_of_Marriage__c}" disabled="{!v.makeReadOnly}"/>
+                            </div>
+                        </div>
+                    </lightning:recordEditForm>
+                </p>
+            </lightning:card>
+        </div>
+    </aura:if>
+</aura:component>

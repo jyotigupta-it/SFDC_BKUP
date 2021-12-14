@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_No__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Visit_To__c, &apos;Distributor&apos;), IF( ISBLANK(Distributor_Dealer__r.Mobile__c),  Distributor_Dealer__r.Phone__c, Distributor_Dealer__r.Mobile__c),
+IF(ISPICKVAL(Visit_To__c, &apos;Dealer&apos;), IF( ISBLANK(Distributor_Dealer__r.Mobile__c),  Distributor_Dealer__r.Phone__c, Distributor_Dealer__r.Mobile__c),
+IF(ISPICKVAL(Visit_To__c, &apos;Contact&apos;), IF( ISBLANK(Contacts__r.Mobile__c), Contacts__r.Phone__c, Contacts__r.Mobile__c),
+IF(ISPICKVAL(Visit_To__c, &apos;Project&apos;), IF(ISBLANK(Project_Name__r.Contact_Name__r.Mobile__c),   Project_Name__r.Contact_Name__r.Phone__c, Project_Name__r.Contact_Name__r.Mobile__c),&apos; &apos;))))</formula>
+    <label>Contact No.</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

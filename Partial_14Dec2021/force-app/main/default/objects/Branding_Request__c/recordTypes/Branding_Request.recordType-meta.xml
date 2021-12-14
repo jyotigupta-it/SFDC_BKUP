@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Branding_Request</fullName>
+    <active>true</active>
+    <label>Branding Request</label>
+    <picklistValues>
+        <picklist>Branding_Approved_Rejected__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approved By Branding Head</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approved By Vendor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approved by RBM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approved by TL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalated by  Head Branding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalated by RBM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalated to Branding Head</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected By Branding Head</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected By Vendor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected by RBM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected by TL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request Completed and Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request Created</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted To Branding Head</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted To RBM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted To TL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted To Vendor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendor Assigned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendor Assigned-Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendor Assigned-Rework</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Branding_Installation__c</picklist>
+        <values>
+            <fullName>Installed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Installed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partially Installed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Branding_Products__c</picklist>
+        <values>
+            <fullName>All Products</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Column</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumbing</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Branding_Sub_Products__c</picklist>
+        <values>
+            <fullName>Aqua Life</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Column Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pan Connector</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silent SWR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UGD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>V4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Branding_Sub_Type__c</picklist>
+        <values>
+            <fullName>Back lit board %28GSB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Front lit Flex Board</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>One-way-Vision</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vehicle Branding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vinyl</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vinyl on Sunboard</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Branding_Type__c</picklist>
+        <values>
+            <fullName>Full Shop</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Shop</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outshop</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recce</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Call_Center_Feedback__c</picklist>
+        <values>
+            <fullName>Could not connect to Dealer%2FShop Owner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Excellent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Improper Installation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Improper Size</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mistake in Content</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partial Activation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Satisfactory</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Language__c</picklist>
+        <values>
+            <fullName>Assamese</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bengali</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>English</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>English %2B Hindi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gujarati</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hindi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kannada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Marathi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oriya</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Punjabi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tamil</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telugu</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Metro_Non_Metro__c</picklist>
+        <values>
+            <fullName>Metro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non Metro</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Request_Type__c</picklist>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Repair</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Shop_Description__c</picklist>
+        <values>
+            <fullName>Ashirvad Exclusive Dealer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Visibility Dealer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal Dealer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Shop_Type__c</picklist>
+        <values>
+            <fullName>Existing Dealer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Dealer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Repair%2FRework Dealer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

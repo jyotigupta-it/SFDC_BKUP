@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Used to identify question is mandatory or not</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If this checkbox is checked then this question will be mandatory on NPS feedback page else won&apos;t.</inlineHelpText>
+    <label>Mandatory</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

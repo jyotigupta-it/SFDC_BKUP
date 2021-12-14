@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>edit_tier</fullName>
+    <active>true</active>
+    <errorConditionFormula>(ISCHANGED( Start_point__c )  || ISCHANGED( Name )) &amp;&amp;  
+Is_active__c  &amp;&amp;  
+( Start_date__c  &lt;=  TODAY() )</errorConditionFormula>
+    <errorMessage>Start point and name cannot be changed for active tiers</errorMessage>
+</ValidationRule>

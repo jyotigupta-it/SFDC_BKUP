@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Length_of_Pipeline</fullName>
+    <active>true</active>
+    <label>Length of Pipeline</label>
+    <picklistValues>
+        <picklist>Dimension_of_Stack__c</picklist>
+        <values>
+            <fullName>110mm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>160mm</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Internal_Plumbing_Mix__c</picklist>
+        <values>
+            <fullName>Aqualife</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Combination</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Material__c</picklist>
+        <values>
+            <fullName>SWR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silent Plus</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silent and SWR</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Product_Category__c</picklist>
+        <values>
+            <fullName>2-LAYER WATER TANK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-LAYER WATER TANK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-LAYER WATER TANK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGRI FITTINGS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGRI PIPES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AIR ADMT VALVES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANGLE Valve</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AQUA FITTINGS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AQUA-PIPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AQUA-SOLVENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aqua WST Allied Product</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aqua-CP Valves %26 Accs%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aqua-Valves %26 Accs%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BlazeMaster-Fittings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BlazeMaster-Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BlazeMaster-Solvent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CASING PIPES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CISTERNS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COLUMN-ACESSORIES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COLUMN-CASING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC WST Allied Product</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC-CP Valves %26 Accs%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC-FITTINGS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC-PIPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC-SOLVENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC-Valves %26 Accs%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FIRE-COLLAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FLUSH VALVES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GREASE-INTERCEPTORS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HDPE Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HYGIENE PRODUCTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANHOLE Chambers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>P%2EA%2EP%2EA%2C Maxi%2FMini Vent AAV%27s</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAN-CONNECTORS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PROMOTIONAL-ADV%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SILENT-FITTINGS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SILENT-PIPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR-FITTINGS-PF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR-FITTINGS-SF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR-FT-COMMON</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR-FT-TRADING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR-PIPE-PF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR-PIPE-SF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR-SOLVENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UG-FITTINGS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UG-PIPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WASTE-N-TRAPS</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Property_Type__c</picklist>
+        <values>
+            <fullName>Commercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial Building</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hospitals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hotels</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Industrial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Infrastructure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mixed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Residential</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SWR_System_to_be_Deployed__c</picklist>
+        <values>
+            <fullName>Conventional</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Single Stack with P%2EA%2EP%2EA %26 A%2EA%2EV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Single Stack with Stack - Aerator</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Single Stack with Swept Tee</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

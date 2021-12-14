@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_plan_This_month__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF($User.UIThemeDisplayed=&quot;Theme4d&quot;,
+
+HYPERLINK(&quot;#/sObject/00O3A000009Lpqu/view?fv0=&quot; &amp;   Id  , &quot;My Tour Plan Report&quot; , &quot;_self&quot;), 
+
+HYPERLINK(&quot;/00O3A000009Lpqu?pv0=&quot; &amp; Id, &quot;My Tour Plan Report&quot; , &quot;_self&quot;)
+
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>To view your tour plan of this month.click on the link</inlineHelpText>
+    <label>My plan -This month</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

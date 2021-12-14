@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Remarks_for_Not_meeting_the_Visit_Targ__c</fullName>
+    <externalId>false</externalId>
+    <label>Remarks for Not meeting the Visit Targ</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

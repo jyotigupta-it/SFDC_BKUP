@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Target_Value_Projects__c</fullName>
+    <description>This field will calculate total secondary sales target value for Project vertical Users.</description>
+    <externalId>false</externalId>
+    <formula>SECONDARY_SALES_CPVC__c +  SECONDARY_SALES_UPVC__c +  SECONDARY_SALES_SWR__c +  SECONDARY_SALES_SILENT_SWR__c +  SECONDARY_SALES_COLUMN__c +  SECONDARY_SALES_V4__c +  SECONDARY_SALES_NEW_PRODUCT__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Target Value Projects</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

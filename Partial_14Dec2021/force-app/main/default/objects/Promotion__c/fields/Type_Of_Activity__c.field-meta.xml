@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_Of_Activity__c</fullName>
+    <externalId>false</externalId>
+    <label>Type Of Activity</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Jeep Campaign</fullName>
+                <default>false</default>
+                <label>Jeep Campaign</label>
+            </value>
+            <value>
+                <fullName>Tractor Show</fullName>
+                <default>false</default>
+                <label>Tractor Show</label>
+            </value>
+            <value>
+                <fullName>Shandy Show</fullName>
+                <default>false</default>
+                <label>Shandy Show</label>
+            </value>
+            <value>
+                <fullName>Farmer Meet</fullName>
+                <default>false</default>
+                <label>Farmer Meet</label>
+            </value>
+            <value>
+                <fullName>Mini Meet</fullName>
+                <default>false</default>
+                <label>Mini Meet</label>
+            </value>
+            <value>
+                <fullName>Mechanic Meet</fullName>
+                <default>false</default>
+                <label>Mechanic Meet</label>
+            </value>
+            <value>
+                <fullName>Exhibition</fullName>
+                <default>false</default>
+                <label>Exhibition</label>
+            </value>
+            <value>
+                <fullName>Mechanic VIsit</fullName>
+                <default>false</default>
+                <label>Mechanic VIsit</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

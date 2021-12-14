@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Secondary_Sales_Actual_Order_Value__c</fullName>
+    <externalId>false</externalId>
+    <label>Secondary Sales Actual(Order Value)</label>
+    <summarizedField>AP_Site_Visit__c.Order_Value__c</summarizedField>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Purpose_of_Visit__c</field>
+        <operation>equals</operation>
+        <value>New Order Booking,&apos;&apos;</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Party_Type__c</field>
+        <operation>notEqual</operation>
+        <value>Direct Dealer, Distributor</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AP_Site_Visit__c.Target__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

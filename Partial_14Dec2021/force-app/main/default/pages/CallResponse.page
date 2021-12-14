@@ -1,0 +1,89 @@
+<apex:page standardcontroller="Promotion_Members__c" showheader="false">
+
+<head>
+  <script>
+       function reloadLocation(){
+           location.reload();
+       }
+   </script>
+<!--<script type="text/javascript">
+function redirectBack(){
+window.open('https://c.na1.visual.force.com/apex/CallResponse','_self')
+}
+</script>-->
+<apex:sectionHeader title="Promotion member Edit" subtitle="New Promotion member"/>
+   <apex:actionStatus id="saveProgress"
+                       startText="Saving. Please Wait..."
+                       stopText=""
+                       startStyleClass="progressStyle">
+   </apex:actionStatus>
+   <br/>
+   
+</head>
+<apex:form id="form1">
+    
+   <!-- <apex:actionFunction name="saveActionFunc" action="{!Save}" oncomplete="redirectBack();" rerender="theBlock"/>-->
+    <apex:pageBlock title="Promotion-Member Edit" id="theBlock">
+        <apex:pageBlockButtons >
+         <apex:commandButton value="Save" action="{!save}"/>
+         <apex:commandButton value="Save & New" action="{!quicksave}" status="saveProgress"  oncomplete="reloadLocation()"/>
+         <apex:commandButton value="Cancel" action="{!Cancel}"/>
+        </apex:pageBlockButtons>        
+    <apex:pageBlockSection title="Information" id="form2">
+        <apex:inputfield value="{!Promotion_Members__c.Promotions__c}"/>
+        
+          <apex:inputfield value="{!Promotion_Members__c.Type_of_Promotion_Member__c}" rendered="{!($User.HO__c != TRUE)}"> 
+         
+           <apex:actionSupport event="onchange" reRender="form1"/>
+           
+           </apex:inputfield>
+           <apex:inputfield value="{!Promotion_Members__c.Remarks__c}" rendered="{!($User.HO__c == TRUE)}"/>
+           </apex:pageBlockSection> 
+         
+    <apex:pageBlockSection id="form3"  rendered="{!(Promotion_Members__c.Type_of_Promotion_Member__c == 'Distributors/Dealers' && $User.HO__c != TRUE)}">
+    <apex:inputfield value="{!Promotion_Members__c.Distributor_Dealer__c}">
+  
+     <apex:actionSupport event="onchange" reRender="form1"/>   
+      </apex:inputField>
+        <apex:inputfield value="{!Promotion_Members__c.Remarks__c}">
+         <apex:actionSupport event="onchange" reRender="form1"/>   
+      </apex:inputField>
+    </apex:pageBlockSection>
+    
+      <apex:pageBlockSection id="form4"  rendered="{!(Promotion_Members__c.Type_of_Promotion_Member__c == 'Contacts' && $User.HO__c != TRUE)}">
+    <apex:inputfield value="{!Promotion_Members__c.Contacts__c}">
+   
+     <apex:actionSupport event="onchange" reRender="form1"/>    
+    </apex:inputField>
+     <apex:inputfield value="{!Promotion_Members__c.Remarks__c}">
+         <apex:actionSupport event="onchange" reRender="form1"/>   
+      </apex:inputField>
+    </apex:pageBlockSection>
+    
+    
+  
+    <apex:pageBlockSection title="Call Response" rendered="{!($User.HO__c == TRUE || $UserRole.Name =='Director')}">
+        <apex:inputfield value="{!Promotion_Members__c.Raised_Complaint__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.Complaints__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.Promotion_Status__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.Complaint_Remarks__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.How_was_the_Promotion__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.Did_you_get_any_gifts__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.Will_you_recommend__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.Suggestion__c}"/>
+        <apex:inputfield value="{!Promotion_Members__c.Suggestion_Remarks__c}"/>
+    </apex:pageBlockSection>
+    <!--<apex:pageBlockSection id="id18" title="Call Response" rendered="{!($User.HO__c != TRUE && $UserRole.Name != 'Director')}">
+        <apex:outputfield value="{!Promotion_Members__c.Raised_Complaint__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.Complaints__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.Promotion_Status__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.Complaint_Remarks__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.How_was_the_Promotion__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.Did_you_get_any_gifts__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.Will_you_recommend__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.Suggestion__c}"/>
+        <apex:outputfield value="{!Promotion_Members__c.Suggestion_Remarks__c}"/>
+    </apex:pageBlockSection>-->
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_visit_Actual_Borer__c</fullName>
+    <description>roll up from ap_site_visit where party type is Borer</description>
+    <externalId>false</externalId>
+    <label>Contact_visit_Actual_Borer</label>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Party_Type__c</field>
+        <operation>equals</operation>
+        <value>Borer</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AP_Site_Visit__c.Target__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

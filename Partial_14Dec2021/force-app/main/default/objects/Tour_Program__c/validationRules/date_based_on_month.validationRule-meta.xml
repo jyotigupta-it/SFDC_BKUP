@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>date_based_on_month</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+          AND(
+               MONTH(To_Date__c) == 2,
+               DAY (DATE(YEAR(Today()),3,1)- 1)== 28,
+               DAY(To_Date__c) &lt;&gt; 28,DAY(To_Date__c) &lt;&gt; 15,DAY(To_Date__c) &lt;&gt; 29),
+          
+          AND(
+               MONTH(To_Date__c) == 2,
+               DAY (DATE(YEAR(Today()),3,1 )- 1)== 29,
+               DAY(To_Date__c ) &lt;&gt; 29, DAY(To_Date__c ) &lt;&gt; 28 ,DAY(To_Date__c ) &lt;&gt; 15),
+          
+          AND(
+               OR(
+                     MONTH(To_Date__c) == 4,
+                     MONTH(To_Date__c) == 6,
+                     MONTH(To_Date__c) == 9,
+                     MONTH(To_Date__c) == 11
+               ),
+               DAY(To_Date__c) &lt;&gt; 30, DAY(To_Date__c) &lt;&gt; 15 
+          ),
+          AND(
+               OR(
+                     MONTH(To_Date__c)== 1,
+                     MONTH(To_Date__c)== 3,
+                     MONTH(To_Date__c)== 5,
+                     MONTH(To_Date__c)== 7,
+                     MONTH(To_Date__c)== 8,
+                     MONTH(To_Date__c)== 10,
+                     MONTH(To_Date__c)== 12
+               ),
+               DAY(To_Date__c) &lt;&gt; 15,DAY(To_Date__c)&lt;&gt;31
+          )
+     )</errorConditionFormula>
+    <errorMessage>To Date should be 15,28,29,30 or 31st (Based on Month)</errorMessage>
+</ValidationRule>

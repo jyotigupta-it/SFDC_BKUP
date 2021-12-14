@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Center_Feedback__c</fullName>
+    <externalId>false</externalId>
+    <label>Call Center Feedback</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Partial Activation</fullName>
+                <default>false</default>
+                <label>Partial Activation</label>
+            </value>
+            <value>
+                <fullName>Improper Size</fullName>
+                <default>false</default>
+                <label>Improper Size</label>
+            </value>
+            <value>
+                <fullName>Improper Installation</fullName>
+                <default>false</default>
+                <label>Improper Installation</label>
+            </value>
+            <value>
+                <fullName>Mistake in Content</fullName>
+                <default>false</default>
+                <label>Mistake in Content</label>
+            </value>
+            <value>
+                <fullName>Could not connect to Dealer/Shop Owner</fullName>
+                <default>false</default>
+                <label>Could not connect to Dealer/Shop Owner</label>
+            </value>
+            <value>
+                <fullName>Excellent</fullName>
+                <default>false</default>
+                <label>Excellent</label>
+            </value>
+            <value>
+                <fullName>Satisfactory</fullName>
+                <default>false</default>
+                <label>Satisfactory</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

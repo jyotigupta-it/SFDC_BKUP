@@ -1,0 +1,14 @@
+.THIS.slds-box {
+    
+    background: rgba(0, 128, 0, 0.3); 
+    font-size: 200%;
+    position: fixed;
+    top: 35%;
+    left: 30%;
+    margin-top: -50px;
+    margin-left: -100px;
+    
+}
+.THIS .slds-file-selector__dropzone .slds-file-selector__text{
+    display: none;
+}

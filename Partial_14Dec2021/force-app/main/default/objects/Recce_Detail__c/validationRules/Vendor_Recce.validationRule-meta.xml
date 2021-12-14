@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vendor_Recce</fullName>
+    <active>true</active>
+    <description>Related vendor can edit Recce fields only if status is &apos;Approved by branding team&apos;.</description>
+    <errorConditionFormula>AND($User.Id = Branding_Request__r.Vendor__c, TEXT(Branding_Request__r.Status) &lt;&gt; &apos;Approved by Regional Branding Manager&apos;,(ISCHANGED(Branding_Type__c) || ISCHANGED(Height_in_Inches__c)||ISCHANGED(Width_in_Inches__c)||ISCHANGED(Job_Type__c)))</errorConditionFormula>
+    <errorMessage>You do not have the permissions to edit the record at this stage.</errorMessage>
+</ValidationRule>

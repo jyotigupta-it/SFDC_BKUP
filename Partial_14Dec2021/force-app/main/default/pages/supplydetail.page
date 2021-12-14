@@ -1,0 +1,109 @@
+<apex:page sidebar="false" Extensions="Addsupplydetail" standardController="Account">
+    <apex:slds />
+    <style>
+    .lookupIcon {
+   background-image: url(/img/func_icons/util/lookup20.gif);
+   background-position: 0 0;
+   width: 20px;
+   height: 20px;
+   background-position: top left;
+}
+    </style>
+<apex:form >
+    
+    <apex:pageMessages >
+    
+    </apex:pageMessages>
+    
+    <apex:outputPanel id="addrowsupply" > 
+                  
+        <div >
+        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+            <thead><tr  class="slds-text-title_caps">
+                <th>Products</th>
+                <th>Invoice Number</th>
+                <th>Date</th>
+                <th><abbr class="slds-required" title="required">*</abbr>Invoice Value</th>
+                <th>Supply Quantity</th>
+                <th>Distributor</th>
+            </tr></thead>
+            <tbody>
+            <apex:repeat value="{!supplyList}" var="add">
+                <tr class="slds-hint-parent">
+                    <td data-label="Products">
+                        <div class="slds-truncate" title="Products">
+                        <apex:inputField value="{!add.Products__c}" styleClass="slds-input"/>
+                        </div>
+                    </td>
+                    <td data-label="Invoice Number">
+                        <div class="slds-truncate" title="Invoice Number">
+                        <apex:inputField value="{!add.Name}" styleClass="slds-input"/>
+                        </div>
+                    </td>
+                    <td data-label="Date">
+                        <div class="slds-truncate" title="Date">
+                        <apex:inputField value="{!add.Date__c}" styleClass="slds-input"/>
+                        </div>
+                    </td>
+                    <td data-label="Invoice Value">
+                        <div class="slds-truncate" title="Invoice Value">
+                        <apex:inputField value="{!add.Invoice_Value__c}" required="True" styleClass="slds-input"/><!-- Need to show red line for field -->
+                        </div>
+                    </td>
+                    <td data-label="Supply Quantity">
+                        <div class="slds-truncate" title="Supply Quantity">
+                        <apex:inputField value="{!add.Supply_Quantity__c}" styleClass="slds-input"/>
+                        </div>
+                    </td>
+                    <td data-label="Distributor">
+                        <div class="slds-truncate" title="Distributor">
+                        <apex:inputField value="{!add.Distributor__c}" />
+                        </div>
+                    </td>
+                </tr>
+            </apex:repeat>
+            </tbody> 
+        </table>
+            <br/><apex:commandLink value="Add Row" action="{!AddRow}" reRender="addrowsupply"/>        
+        </div>
+                
+        <div><center><div class="slds-p-around_small">
+                <apex:commandButton value="Save" action="{!savesupplydetail}" styleClass="slds-button slds-button_brand"/>
+                <apex:commandButton value="Cancel" action="{!cancelsupplydetail}" styleClass="slds-button slds-button_neutral"/>        
+        </div></center></div>
+    </apex:outputPanel>
+    
+    <!--<apex:pageBlock id="addrowsupply" > 
+                  
+        <apex:pageblockSection >
+            <apex:pageBlockTable value="{!supplyList}" var="add">
+                <apex:column headerValue="Products">
+                    <apex:inputField value="{!add.Products__c}"/>
+                </apex:column>
+                <apex:column headerValue="Invoice Number">
+                    <apex:inputField value="{!add.Name}"/>
+                </apex:column>
+                <apex:column headerValue="Date">
+                    <apex:inputField value="{!add.Date__c}"/>
+                </apex:column>
+                <apex:column headerValue="Invoice Value">
+                    <apex:inputField value="{!add.Invoice_Value__c}" required="True"/>
+                </apex:column>
+                <apex:column headerValue="Supply Quantity">
+                    <apex:inputField value="{!add.Supply_Quantity__c}"/>
+                </apex:column>
+                <apex:column headerValue="Distributor">
+                    <apex:inputField value="{!add.Distributor__c}"/>
+                </apex:column>
+            </apex:pageBlockTable> 
+            <br/><apex:commandLink value="Add Row" action="{!AddRow}" reRender="addrowsupply"/>        
+        </apex:pageblockSection>        
+        <apex:pageblockSection columns="1" >
+            <apex:pageblockSectionItem >
+                <apex:commandButton value="Save" action="{!savesupplydetail}" />
+                <apex:commandButton value="Cancel" action="{!cancelsupplydetail}" />
+            </apex:pageblockSectionItem>         
+        </apex:pageblockSection>
+    </apex:pageBlock> -->
+</apex:form>
+</apex:page>

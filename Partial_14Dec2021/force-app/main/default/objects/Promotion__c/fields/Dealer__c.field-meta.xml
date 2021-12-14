@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dealer__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Dealer(o)</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Distributor_Dealer__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Dealer</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Distributor_Dealer__c</referenceTo>
+    <relationshipLabel>Promotions</relationshipLabel>
+    <relationshipName>Promotions1</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product__c</fullName>
+    <externalId>false</externalId>
+    <label>Product</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>COLUMN</fullName>
+                <default>false</default>
+                <label>COLUMN</label>
+            </value>
+            <value>
+                <fullName>CASING</fullName>
+                <default>false</default>
+                <label>CASING</label>
+            </value>
+            <value>
+                <fullName>V4</fullName>
+                <default>false</default>
+                <label>V4</label>
+            </value>
+            <value>
+                <fullName>CPVC</fullName>
+                <default>false</default>
+                <label>CPVC</label>
+            </value>
+            <value>
+                <fullName>AQUALIFE</fullName>
+                <default>false</default>
+                <label>AQUALIFE</label>
+            </value>
+            <value>
+                <fullName>SWR</fullName>
+                <default>false</default>
+                <label>SWR</label>
+            </value>
+            <value>
+                <fullName>PAN CONNECTORS</fullName>
+                <default>false</default>
+                <label>PAN CONNECTORS</label>
+            </value>
+            <value>
+                <fullName>SILENT SWR</fullName>
+                <default>false</default>
+                <label>SILENT SWR</label>
+            </value>
+            <value>
+                <fullName>UNDER GROUND</fullName>
+                <default>false</default>
+                <label>UNDER GROUND</label>
+            </value>
+            <value>
+                <fullName>AAV</fullName>
+                <default>false</default>
+                <label>AAV</label>
+            </value>
+            <value>
+                <fullName>FI</fullName>
+                <default>false</default>
+                <label>FI</label>
+            </value>
+            <value>
+                <fullName>GI</fullName>
+                <default>false</default>
+                <label>GI</label>
+            </value>
+            <value>
+                <fullName>SI</fullName>
+                <default>false</default>
+                <label>SI</label>
+            </value>
+            <value>
+                <fullName>SILENT PLUS</fullName>
+                <default>false</default>
+                <label>SILENT PLUS</label>
+            </value>
+            <value>
+                <fullName>ALL</fullName>
+                <default>false</default>
+                <label>ALL</label>
+            </value>
+            <value>
+                <fullName>PLUMBING</fullName>
+                <default>false</default>
+                <label>PLUMBING</label>
+            </value>
+            <value>
+                <fullName>MINI</fullName>
+                <default>false</default>
+                <label>MINI</label>
+            </value>
+            <value>
+                <fullName>MEGA</fullName>
+                <default>false</default>
+                <label>MEGA</label>
+            </value>
+            <value>
+                <fullName>SWR_PUSHFIT</fullName>
+                <default>false</default>
+                <label>SWR_PUSHFIT</label>
+            </value>
+            <value>
+                <fullName>SWR_SOLFIT</fullName>
+                <default>false</default>
+                <label>SWR_SOLFIT</label>
+            </value>
+            <value>
+                <fullName>SWR SILENT</fullName>
+                <default>false</default>
+                <label>SWR SILENT</label>
+            </value>
+            <value>
+                <fullName>SWR SILENT PLUS</fullName>
+                <default>false</default>
+                <label>SWR SILENT PLUS</label>
+            </value>
+            <value>
+                <fullName>UNDERGROUND</fullName>
+                <default>false</default>
+                <label>UNDERGROUND</label>
+            </value>
+            <value>
+                <fullName>OTHERS</fullName>
+                <default>false</default>
+                <label>OTHERS</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <controllingFieldValue>SAMPLES</controllingFieldValue>
+            <valueName>COLUMN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>CASING</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>V4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <controllingFieldValue>PACKING MATERIALS</controllingFieldValue>
+            <controllingFieldValue>SAMPLES</controllingFieldValue>
+            <valueName>CPVC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <controllingFieldValue>PACKING MATERIALS</controllingFieldValue>
+            <controllingFieldValue>SAMPLES</controllingFieldValue>
+            <valueName>AQUALIFE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <controllingFieldValue>SAMPLES</controllingFieldValue>
+            <valueName>SWR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>PAN CONNECTORS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>SILENT SWR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>UNDER GROUND</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>AAV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>FI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>GI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>SI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>SILENT PLUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>ALL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUCT COLLATERALS</controllingFieldValue>
+            <valueName>PLUMBING</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GIFT ITEMS</controllingFieldValue>
+            <valueName>MINI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GIFT ITEMS</controllingFieldValue>
+            <valueName>MEGA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PACKING MATERIALS</controllingFieldValue>
+            <valueName>SWR_PUSHFIT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PACKING MATERIALS</controllingFieldValue>
+            <valueName>SWR_SOLFIT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PACKING MATERIALS</controllingFieldValue>
+            <valueName>OTHERS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SAMPLES</controllingFieldValue>
+            <valueName>SWR SILENT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SAMPLES</controllingFieldValue>
+            <valueName>SWR SILENT PLUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SAMPLES</controllingFieldValue>
+            <valueName>UNDERGROUND</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

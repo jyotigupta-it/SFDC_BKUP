@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Won_Lost__c</fullName>
+    <externalId>false</externalId>
+    <label>Won/Lost</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Stage__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Order Lost</fullName>
+                <default>false</default>
+                <label>Order Lost</label>
+            </value>
+            <value>
+                <fullName>Order Receipt</fullName>
+                <default>false</default>
+                <label>Order Receipt</label>
+            </value>
+            <value>
+                <fullName>Data sheet &amp; Drawing submittal</fullName>
+                <default>false</default>
+                <label>Data sheet &amp; Drawing submittal</label>
+            </value>
+            <value>
+                <fullName>Manufacturing Clearance receipt</fullName>
+                <default>false</default>
+                <label>Manufacturing Clearance receipt</label>
+            </value>
+            <value>
+                <fullName>Supply</fullName>
+                <default>false</default>
+                <label>Supply</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Lost</controllingFieldValue>
+            <valueName>Order Lost</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Won</controllingFieldValue>
+            <valueName>Order Receipt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Won</controllingFieldValue>
+            <valueName>Data sheet &amp; Drawing submittal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Won</controllingFieldValue>
+            <valueName>Manufacturing Clearance receipt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Won</controllingFieldValue>
+            <valueName>Supply</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

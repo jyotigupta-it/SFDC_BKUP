@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agriculture_Senior</fullName>
+    <active>true</active>
+    <description>Quiz Question for Agriculture Senior catagory</description>
+    <label>Agriculture Senior</label>
+    <picklistValues>
+        <picklist>Currect_Answer__c</picklist>
+        <values>
+            <fullName>Option 1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 5</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

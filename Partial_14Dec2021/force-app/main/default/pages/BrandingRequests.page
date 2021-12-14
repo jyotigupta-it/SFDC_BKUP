@@ -1,0 +1,35 @@
+<apex:page standardController="Account" extensions="ctrlBrandingRequest">
+<apex:form >
+<head>
+<style type="text/css">
+.divScroll{
+    overflow: scroll; 
+    height: 140px; 
+    width: 100%;
+}
+.btnSave{
+    margin-left: 500px !important;
+    width: 100px;
+}
+</style >
+</head>
+<body>
+<apex:pageBlock ><br/>
+    <apex:commandLink target="_top" action="{!newRequest}"   value="New Branding Request" styleClass="btn" style="text-decoration:none;padding:4px;margin-left: 500px !important;width: 100px;" /><br/><br/>
+        <div class="divScroll">
+            <apex:pageBlockTable var="requests" value="{!brandingRequests}"   >
+                <apex:column headerValue="Request Number">
+                <apex:outputLink value="/{!requests.Branding_Request__c}" target="_blank">{!requests.Branding_Request__r.CaseNumber}</apex:outputLink>
+                </apex:column> 
+                <apex:column headerValue="Shop Type" value="{!requests.Shop_Type__c}">
+                </apex:column>
+                <apex:column headerValue="Status" value="{!requests.Branding_Request__r.status}">
+                </apex:column>
+                <apex:column headerValue="Case Owner" value="{!requests.Branding_Request__r.owner.name}">
+                </apex:column>
+            </apex:pageBlockTable>
+        </div>
+    </apex:pageblock>
+</body>
+</apex:form>
+</apex:page>

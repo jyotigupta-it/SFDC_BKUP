@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KAM_Feedback_Master__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>KAM Feedback Master</label>
+    <referenceTo>KAM_Feedback_Master__c</referenceTo>
+    <relationshipLabel>KAM Feedbacks</relationshipLabel>
+    <relationshipName>KAM_Feedbacks</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

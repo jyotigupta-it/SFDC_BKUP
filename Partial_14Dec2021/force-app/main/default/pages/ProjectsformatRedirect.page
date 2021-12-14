@@ -1,0 +1,32 @@
+<apex:page extensions="AccountPdfTestRedirectController" Standardcontroller="Account">
+<apex:slds />
+<br/><br/>
+    <div style="font-size:17px;color:blue;text-align:center">Redirecting....</div>
+   <apex:form >
+         <apex:actionFunction name="projectFormatPdf" action="{!sendprojectFormatPdf}"/>
+     </apex:form>
+<br/><br/>
+     
+     <script type="Text/javascript">
+      
+        var projectId = '{!oppId}'; 
+        console.log('ffffffff ' + {!userAgentCheck});
+            
+                 if((typeof sforce != 'undefined') && (sforce != null)) {    
+                   if({!userAgentCheck} == false) {
+                            console.log('iiiiiiiiiiiffffffff ');
+                            // Request from Desktop(Salesforce Lightning version)
+                            window.open('/apex/Projectsformat?id='+ projectId, "_self");
+                        } else {
+                            console.log('eeeeeeeelllllllsseeeee ');
+                            // Request from Mobile(Salesforce one app)
+                           // window.open('/apex/ProjectsformatMobile?id='+ projectId, "_self");
+                            projectFormatPdf();
+                        }
+                 } else {
+                     // Request from Desktop(Salesforce classic version)
+                      window.open('/apex/Projectsformat?id='+ projectId, "_self");
+                    
+                 } 
+     </script>
+</apex:page>

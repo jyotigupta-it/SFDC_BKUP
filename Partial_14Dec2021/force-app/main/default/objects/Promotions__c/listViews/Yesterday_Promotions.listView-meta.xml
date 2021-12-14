@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Yesterday_Promotions</fullName>
+    <booleanFilter>1 OR 2</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Verified__c</columns>
+    <columns>Distributor_Dealer__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Type__c</columns>
+    <columns>Promotion_Status__c</columns>
+    <columns>Remarks__c</columns>
+    <columns>Total_Expenses__c</columns>
+    <columns>Total_no_of_attendees__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>YESTERDAY</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>Yesterday Promotions</label>
+</ListView>

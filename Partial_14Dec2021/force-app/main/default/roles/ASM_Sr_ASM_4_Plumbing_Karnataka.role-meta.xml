@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Edit</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>ASM_Sr_ASM_4_Plumbing_Karnataka</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>AGM/Sr.AGM[4] - Plumbing - Karnataka</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>Regional_Head_Plumbing_Rest_of_Karnataka</parentRole>
+</Role>

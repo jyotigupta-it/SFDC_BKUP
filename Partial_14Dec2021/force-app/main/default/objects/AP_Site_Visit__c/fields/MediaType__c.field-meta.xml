@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MediaType__c</fullName>
+    <externalId>false</externalId>
+    <label>MediaType</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>4x2</fullName>
+                <default>false</default>
+                <label>4x2</label>
+            </value>
+            <value>
+                <fullName>6x3</fullName>
+                <default>false</default>
+                <label>6x3</label>
+            </value>
+            <value>
+                <fullName>8x3</fullName>
+                <default>false</default>
+                <label>8x3</label>
+            </value>
+            <value>
+                <fullName>8x4</fullName>
+                <default>false</default>
+                <label>8x4</label>
+            </value>
+            <value>
+                <fullName>PoP Boards</fullName>
+                <default>false</default>
+                <label>PoP Boards</label>
+            </value>
+            <value>
+                <fullName>Hanging Boards</fullName>
+                <default>false</default>
+                <label>Hanging Boards</label>
+            </value>
+            <value>
+                <fullName>Shelf Stickers</fullName>
+                <default>false</default>
+                <label>Shelf Stickers</label>
+            </value>
+            <value>
+                <fullName>Product Stickers</fullName>
+                <default>false</default>
+                <label>Product Stickers</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

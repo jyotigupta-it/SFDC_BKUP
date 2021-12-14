@@ -1,0 +1,78 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="contactInstance" type="Contact"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="salutationOptions" type="List" default="[
+                                                                  {'label': 'Mr.', 'value': 'Mr.'},
+                                                                  {'label': 'Ms.', 'value': 'Ms.'},
+                                                                  {'label': 'Mrs.', 'value': 'Mrs.'},
+                                                                  {'label': 'Dr.', 'value': 'Dr.'},
+                                                                  {'label': 'Prof.', 'value': 'Prof.'},
+                                                                  ]"/>
+    <aura:attribute name="makeReadOnly" type="boolean"/>
+
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+    <div class="slds-grid slds-wrap">
+        <lightning:card variant="Narrow" title="Details of Proprietor / Partners / Directors" iconName="standard:contact">
+            <aura:set attribute="actions">
+                <aura:if isTrue="{!!v.makeReadOnly}">
+                    <aura:if isTrue="{!v.rowIndex == 0}">
+                        <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Row" />
+                        <aura:set attribute="else">
+                            <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}">
+                                <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove" />
+                            </a> 
+                        </aura:set>
+                    </aura:if>
+                </aura:if>
+            </aura:set>
+            <p class="slds-p-horizontal_small">
+                <lightning:recordEditForm aura:id="recordForm" objectApiName="Contact" recordTypeId="{!v.contactInstance.RecordTypeId}">
+                    <!-- Error message -->
+                    <lightning:messages />
+                    <!-- Fields -->
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                            <lightning:inputField aura:id="Name" fieldName="Salutation" required="true" value="{!v.contactInstance.Salutation}" disabled="{!v.makeReadOnly}"/>
+                        </div>
+                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                            <lightning:inputField aura:id="Name" fieldName="FirstName" required="true" value="{!v.contactInstance.FirstName}" disabled="{!v.makeReadOnly}"/>
+                        </div>
+                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                            <lightning:inputField aura:id="Name" required="true" fieldName="LastName" value="{!v.contactInstance.LastName}" disabled="{!v.makeReadOnly}"/>
+                        </div>
+                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                            <lightning:inputField aura:id="Contact_Type__c" fieldName="Contact_Type__c" required="true" value="{!v.contactInstance.Contact_Type__c}" disabled="{!v.makeReadOnly}"/>
+                        </div>
+                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                            <lightning:inputField aura:id="Age__c" fieldName="Age__c" required="true" value="{!v.contactInstance.Age__c}" disabled="{!v.makeReadOnly}"/>
+                        </div>
+                        <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                            <lightning:inputField aura:id="Education_Qualification__c" required="true" fieldName="Education_Qualification__c" value="{!v.contactInstance.Education_Qualification__c}" disabled="{!v.makeReadOnly}"/>
+                        </div>
+                        <div class="slds-col slds-size_7-of-7 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-left_medium slds-p-right_medium">
+                            <lightning:inputAddress
+                                                    aura:id="myaddress"
+                                                    addressLabel="Address "
+                                                    streetLabel="Street"
+                                                    cityLabel="City"
+                                                    countryLabel="Country"
+                                                    provinceLabel="Province/State"
+                                                    postalCodeLabel="PostalCode"
+                                                    street="{!v.contactInstance.MailingStreet}"
+                                                    city="{!v.contactInstance.MailingCity}"
+                                                    country="{!v.contactInstance.MailingCountry}"
+                                                    province="{!v.contactInstance.MailingState}"
+                                                    postalCode="{!v.contactInstance.MailingPostalCode}"
+                                                    showAddressLookup="true" 
+                                                    required="true"
+                                                    disabled="{!v.makeReadOnly}"/>
+                        </div>
+                    </div>
+                </lightning:recordEditForm>
+            </p>
+        </lightning:card>
+    </div>
+</aura:component>

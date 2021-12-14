@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_for_Non_Visit__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason for Other Activity</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Attending a Complaint</fullName>
+                <default>false</default>
+                <label>Attending a Complaint</label>
+            </value>
+            <value>
+                <fullName>Exhibition/Shows</fullName>
+                <default>false</default>
+                <label>Exhibition/Shows</label>
+            </value>
+            <value>
+                <fullName>Depot meet/Office meet</fullName>
+                <default>false</default>
+                <label>Depot meet/Office meet</label>
+            </value>
+            <value>
+                <fullName>Holiday / Market Closed</fullName>
+                <default>false</default>
+                <label>Holiday / Market Closed</label>
+            </value>
+            <value>
+                <fullName>Leave</fullName>
+                <default>false</default>
+                <label>Leave</label>
+            </value>
+            <value>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+                <label>Meeting</label>
+            </value>
+            <value>
+                <fullName>Promotional Activity</fullName>
+                <default>false</default>
+                <label>Promotional Activity</label>
+            </value>
+            <value>
+                <fullName>Market Survey</fullName>
+                <default>false</default>
+                <label>Market Survey</label>
+            </value>
+            <value>
+                <fullName>Compensatory Leave</fullName>
+                <default>false</default>
+                <label>Compensatory Leave</label>
+            </value>
+            <value>
+                <fullName>Jeep Maintenance</fullName>
+                <default>false</default>
+                <label>Jeep Maintenance</label>
+            </value>
+            <value>
+                <fullName>Post Visit order</fullName>
+                <default>false</default>
+                <label>Post Visit order</label>
+            </value>
+            <value>
+                <fullName>Training</fullName>
+                <default>false</default>
+                <label>Training</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,12 @@
+<apex:component >
+  
+  <apex:includeScript value="{!URLFOR($Resource.AP_JqueryDatatable, 'DataTables-1.10.6/media/js/jquery.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.AP_JqueryDatatable, 'DataTables-1.10.6/media/js/jquery.dataTables.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.AP_JqueryDatatable, 'DataTables-1.10.6/extensions/FixedHeader/js/dataTables.fixedHeader.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.AP_JqueryDatatable, 'DataTables-1.10.6/extensions/FixedColumns/js/dataTables.fixedColumns.js')}"/>
+  
+  
+  <apex:stylesheet value="{!URLFOR($Resource.AP_JqueryDatatable, 'DataTables-1.10.6/media/css/jquery.dataTables.css')}"/>
+ <apex:stylesheet value="{!URLFOR($Resource.AP_JqueryDatatable, 'DataTables-1.10.6/extensions/FixedHeader/css/dataTables.fixedHeader.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.AP_JqueryDatatable, 'DataTables-1.10.6/extensions/FixedColumns/css/dataTables.fixedColumns.css')}"/>
+</apex:component>

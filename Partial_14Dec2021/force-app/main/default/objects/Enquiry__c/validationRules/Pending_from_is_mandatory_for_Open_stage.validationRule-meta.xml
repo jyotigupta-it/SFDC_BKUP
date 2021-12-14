@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending_from_is_mandatory_for_Open_stage</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPICKVAL(Enquiry_Status__c,&apos;Open&apos;), ISPICKVAL(Pending_From__c,&apos;&apos;))</errorConditionFormula>
+    <errorDisplayField>Pending_From__c</errorDisplayField>
+    <errorMessage>If Enquiry Stage is Open then Pending from is Mandatory</errorMessage>
+</ValidationRule>

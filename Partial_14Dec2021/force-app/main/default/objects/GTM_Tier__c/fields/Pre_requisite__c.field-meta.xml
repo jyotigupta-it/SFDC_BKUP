@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pre_requisite__c</fullName>
+    <description>Pre requisite</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Define the pre requisite of tier if any, this will be shown to influencer as text</inlineHelpText>
+    <label>Pre requisite</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

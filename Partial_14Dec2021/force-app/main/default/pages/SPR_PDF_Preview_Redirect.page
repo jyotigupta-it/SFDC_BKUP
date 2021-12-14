@@ -1,0 +1,38 @@
+<apex:page extensions="SPRPDFPreviewRedirectController" Standardcontroller="Opportunity" >
+<apex:slds />
+
+<br/><br/>
+    <div style="font-size:17px;color:blue;text-align:center">Redirecting....</div>
+    <apex:form >
+         <apex:actionFunction name="sendPdfac" action="{!sendPdf}"/>
+     </apex:form>
+<br/><br/>
+     
+     <script type="Text/javascript">
+    
+        var projectId = '{!oppId}'; 
+        console.log('ffffffff ' + {!userAgentCheck});
+            
+                 if((typeof sforce != 'undefined') && (sforce != null)) {   
+                       console.log('Salesforce Lightning version 11111111111111');
+                         // Request from Desktop(Salesforce Lightning version) 
+                       window.open('/apex/ProjectDetails_PDF?opporId='+ projectId, "_self");
+                       
+                 } else {
+                      if({!userAgentCheck} == false) {
+                            console.log('Salesforce classic version 2222222222222');
+                            // Request from Desktop(Salesforce classic version)
+                            window.open('/apex/ProjectDetails_PDF?opporId='+ projectId, "_self");
+                            
+                        } else {
+                            console.log('Salesforce mobile version 33333333333');
+                            // Request from Mobile(Salesforce one app)
+                          //  window.open('/apex/ProjectDetails_PDF_Mobile?opporId='+ projectId, "_self");
+                            sendPdfac();
+                        }
+                 } 
+                 
+                              
+     </script>
+     
+</apex:page>

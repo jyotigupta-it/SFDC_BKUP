@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actual_visited_dealers__c</fullName>
+    <externalId>false</externalId>
+    <label>Count of Actual visited dealers</label>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Remarks__c</field>
+        <operation>notEqual</operation>
+        <value></value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Purpose_of_Visit__c</field>
+        <operation>notEqual</operation>
+        <value></value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Party_Type__c</field>
+        <operation>equals</operation>
+        <value>Dealer</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AP_Site_Visit__c.AP_Tour_Plan__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

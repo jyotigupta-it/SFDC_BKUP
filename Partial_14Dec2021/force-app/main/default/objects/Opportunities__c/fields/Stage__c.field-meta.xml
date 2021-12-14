@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stage__c</fullName>
+    <externalId>false</externalId>
+    <label>Stage</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Opportunity_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Qualification</fullName>
+                <default>false</default>
+                <label>Qualification</label>
+            </value>
+            <value>
+                <fullName>Firm Enquiry</fullName>
+                <default>false</default>
+                <label>Firm Enquiry</label>
+            </value>
+            <value>
+                <fullName>Quotation Sent</fullName>
+                <default>false</default>
+                <label>Quotation Sent</label>
+            </value>
+            <value>
+                <fullName>Postponed</fullName>
+                <default>false</default>
+                <label>Postponed</label>
+            </value>
+            <value>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+                <label>Negotiation</label>
+            </value>
+            <value>
+                <fullName>Closed Won</fullName>
+                <default>false</default>
+                <label>Closed Won</label>
+            </value>
+            <value>
+                <fullName>Closed Lost</fullName>
+                <default>false</default>
+                <label>Closed Lost</label>
+            </value>
+            <value>
+                <fullName>Invitation to Tender</fullName>
+                <default>false</default>
+                <label>Invitation to Tender</label>
+            </value>
+            <value>
+                <fullName>Technical Bid</fullName>
+                <default>false</default>
+                <label>Technical Bid</label>
+            </value>
+            <value>
+                <fullName>Technical Clearance</fullName>
+                <default>false</default>
+                <label>Technical Clearance</label>
+            </value>
+            <value>
+                <fullName>Commercial Bid</fullName>
+                <default>false</default>
+                <label>Commercial Bid</label>
+            </value>
+            <value>
+                <fullName>Technical Pre-Bid</fullName>
+                <default>false</default>
+                <label>Technical Pre-Bid</label>
+            </value>
+            <value>
+                <fullName>Bid Qualification</fullName>
+                <default>false</default>
+                <label>Bid Qualification</label>
+            </value>
+            <value>
+                <fullName>Technical</fullName>
+                <default>false</default>
+                <label>Technical</label>
+            </value>
+            <value>
+                <fullName>Commercial</fullName>
+                <default>false</default>
+                <label>Commercial</label>
+            </value>
+            <value>
+                <fullName>LOI Receipt</fullName>
+                <default>false</default>
+                <label>LOI Receipt</label>
+            </value>
+            <value>
+                <fullName>BG Submission</fullName>
+                <default>false</default>
+                <label>BG Submission</label>
+            </value>
+            <value>
+                <fullName>RFQ</fullName>
+                <default>false</default>
+                <label>RFQ</label>
+            </value>
+            <value>
+                <fullName>RFQ Validation &amp; Recommendation</fullName>
+                <default>false</default>
+                <label>RFQ Validation &amp; Recommendation</label>
+            </value>
+            <value>
+                <fullName>Product Team/Pricing Team</fullName>
+                <default>false</default>
+                <label>Product Team/Pricing Team</label>
+            </value>
+            <value>
+                <fullName>Offer Mailed</fullName>
+                <default>false</default>
+                <label>Offer Mailed</label>
+            </value>
+            <value>
+                <fullName>Final Order</fullName>
+                <default>false</default>
+                <label>Final Order</label>
+            </value>
+            <value>
+                <fullName>Technical Discussion</fullName>
+                <default>false</default>
+                <label>Technical Discussion</label>
+            </value>
+            <value>
+                <fullName>Technical Acceptance by customer</fullName>
+                <default>false</default>
+                <label>Technical Acceptance by customer</label>
+            </value>
+            <value>
+                <fullName>Offer Submission</fullName>
+                <default>false</default>
+                <label>Offer Submission</label>
+            </value>
+            <value>
+                <fullName>Submission of Tech Docs / Drawings</fullName>
+                <default>false</default>
+                <label>Submission of Tech Docs / Drawings</label>
+            </value>
+            <value>
+                <fullName>Manufacturing Clearance</fullName>
+                <default>false</default>
+                <label>Manufacturing Clearance</label>
+            </value>
+            <value>
+                <fullName>Production / Import</fullName>
+                <default>false</default>
+                <label>Production / Import</label>
+            </value>
+            <value>
+                <fullName>Order Won</fullName>
+                <default>false</default>
+                <label>Order Won</label>
+            </value>
+            <value>
+                <fullName>Order Lost</fullName>
+                <default>false</default>
+                <label>Order Lost</label>
+            </value>
+            <value>
+                <fullName>Lead</fullName>
+                <default>false</default>
+                <label>Lead</label>
+            </value>
+            <value>
+                <fullName>Designing</fullName>
+                <default>false</default>
+                <label>Designing</label>
+            </value>
+            <value>
+                <fullName>Tendering</fullName>
+                <default>false</default>
+                <label>Tendering</label>
+            </value>
+            <value>
+                <fullName>Tender awarded to Contractor</fullName>
+                <default>false</default>
+                <label>Tender awarded to Contractor</label>
+            </value>
+            <value>
+                <fullName>Offer Submitted</fullName>
+                <default>false</default>
+                <label>Offer Submitted</label>
+            </value>
+            <value>
+                <fullName>Negotiations</fullName>
+                <default>false</default>
+                <label>Negotiations</label>
+            </value>
+            <value>
+                <fullName>PO Receipt</fullName>
+                <default>false</default>
+                <label>PO Receipt</label>
+            </value>
+            <value>
+                <fullName>Project Shelved</fullName>
+                <default>false</default>
+                <label>Project Shelved</label>
+            </value>
+            <value>
+                <fullName>Won</fullName>
+                <default>false</default>
+                <label>Won</label>
+            </value>
+            <value>
+                <fullName>Lost</fullName>
+                <default>false</default>
+                <label>Lost</label>
+            </value>
+            <value>
+                <fullName>Lead Designing</fullName>
+                <default>false</default>
+                <label>Lead Designing</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <valueName>Invitation to Tender</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <valueName>Technical Bid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <valueName>Technical Clearance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <valueName>Commercial Bid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <valueName>LOI Receipt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Project Shelved</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Won</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Lost</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Lead</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Designing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Tender awarded to Contractor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Offer Submitted</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>Negotiations</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Private</controllingFieldValue>
+            <valueName>PO Receipt</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

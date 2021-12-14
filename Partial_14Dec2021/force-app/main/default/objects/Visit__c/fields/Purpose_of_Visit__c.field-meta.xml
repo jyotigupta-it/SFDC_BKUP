@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purpose_of_Visit__c</fullName>
+    <externalId>false</externalId>
+    <label>Purpose of Visit</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Visit_To__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Approval for Ashirvad Brand</fullName>
+                <default>false</default>
+                <label>Approval for Ashirvad Brand</label>
+            </value>
+            <value>
+                <fullName>Building Relationship</fullName>
+                <default>false</default>
+                <label>Building Relationship</label>
+            </value>
+            <value>
+                <fullName>Complaints - Aqua</fullName>
+                <default>false</default>
+                <label>Complaints - Aqua</label>
+            </value>
+            <value>
+                <fullName>Complaints - Column</fullName>
+                <default>false</default>
+                <label>Complaints - Column</label>
+            </value>
+            <value>
+                <fullName>Complaints - CPVC</fullName>
+                <default>false</default>
+                <label>Complaints - CPVC</label>
+            </value>
+            <value>
+                <fullName>Complaints - SWR</fullName>
+                <default>false</default>
+                <label>Complaints - SWR</label>
+            </value>
+            <value>
+                <fullName>Dispatch</fullName>
+                <default>false</default>
+                <label>Dispatch</label>
+            </value>
+            <value>
+                <fullName>Enquiry</fullName>
+                <default>false</default>
+                <label>Enquiry</label>
+            </value>
+            <value>
+                <fullName>Enquiry follow Up</fullName>
+                <default>false</default>
+                <label>Enquiry follow Up</label>
+            </value>
+            <value>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+                <label>Meeting</label>
+            </value>
+            <value>
+                <fullName>New Order Booking</fullName>
+                <default>false</default>
+                <label>New Order Booking</label>
+            </value>
+            <value>
+                <fullName>Order Follow up</fullName>
+                <default>false</default>
+                <label>Order Follow up</label>
+            </value>
+            <value>
+                <fullName>Payment Follow up</fullName>
+                <default>false</default>
+                <label>Payment Follow up</label>
+            </value>
+            <value>
+                <fullName>Product Presentation</fullName>
+                <default>false</default>
+                <label>Product Presentation</label>
+            </value>
+            <value>
+                <fullName>Promotional Activities</fullName>
+                <default>false</default>
+                <label>Promotional Activities</label>
+            </value>
+            <value>
+                <fullName>Survey</fullName>
+                <default>false</default>
+                <label>Survey</label>
+            </value>
+            <value>
+                <fullName>Market Survey</fullName>
+                <default>false</default>
+                <label>Market Survey</label>
+            </value>
+            <value>
+                <fullName>Lead Follow Up</fullName>
+                <default>false</default>
+                <label>Lead Follow Up</label>
+            </value>
+            <value>
+                <fullName>New Order Booking -SWR</fullName>
+                <default>false</default>
+                <label>New Order Booking -SWR</label>
+            </value>
+            <value>
+                <fullName>New Order Booking - Column</fullName>
+                <default>false</default>
+                <label>New Order Booking - Column</label>
+            </value>
+            <value>
+                <fullName>New Order Booking - CPVC</fullName>
+                <default>false</default>
+                <label>New Order Booking - CPVC</label>
+            </value>
+            <value>
+                <fullName>Project Order follow up</fullName>
+                <default>false</default>
+                <label>Project Order follow up</label>
+            </value>
+            <value>
+                <fullName>Approval</fullName>
+                <default>false</default>
+                <label>Approval</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>Project</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <valueName>Enquiry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>Project</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <valueName>New Order Booking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <valueName>Order Follow up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <valueName>Payment Follow up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Project</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <valueName>Promotional Activities</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <valueName>Market Survey</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>Project</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <valueName>Lead Follow Up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>Project</controllingFieldValue>
+            <valueName>Approval for Ashirvad Brand</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Building Relationship</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Complaints - Aqua</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Complaints - Column</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Complaints - CPVC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Complaints - SWR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Dispatch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Meeting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <controllingFieldValue>Project</controllingFieldValue>
+            <valueName>Product Presentation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contact</controllingFieldValue>
+            <valueName>Survey</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Project</controllingFieldValue>
+            <valueName>Project Order follow up</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

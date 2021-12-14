@@ -1,0 +1,418 @@
+   /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+                .navbar {
+                    margin-bottom: 10px;
+                    border-radius: 0;
+                }
+            
+            /* Remove the jumbotron's default bottom margin */ 
+            .jumbotron {
+                margin-bottom: 0;
+            }
+            
+            /* Add a gray background color and some padding to the footer */
+            footer {
+                background-color: #f2f2f2;
+                padding: 25px;
+            }
+            
+            
+            .navbar-toggle {
+                float: left;
+                border-color: white;
+            }
+            .navbar-inverse .navbar-toggle .icon-bar {
+                background-color: white;
+            }
+            
+            .affix {
+                top: 0;
+                width: 100%;
+                z-index: 9999 !important;
+            }
+            
+            .affix + .container-fluid {
+                padding-top: 70px;
+            }
+            .navbar-inverse {
+                background-color: #101010;
+                border-color: #101010;
+            }
+            .searc {
+                width: 85%;
+                margin: auto;
+            }
+            
+            .add_cart {
+                background: maroon;
+                color: white;
+                border: none;
+                padding: 11px 10px;
+                float: right;
+            }
+            .remove_cart{
+                background: rgb(202, 60, 60);
+                color: white;
+                border: none;
+                padding: 3px 6px;
+                float: right;
+                margin-top: -15 px;
+                
+                
+            }
+            .clear_button
+            
+            {
+                background: rgb(202, 60, 60);
+                color: white;
+                border: none;
+                padding: 4px 6px;
+                margin-top: -15 px;
+                margin-left: 190px;
+                margin-bottom: 10px;
+                
+                
+            }
+            
+            page{
+                background: cornflowerblue;
+                color: white;
+                border: none;
+                padding: 11px 10px;
+                
+            }
+            .centerAll{
+                margin-right: -1000px;
+                
+                
+            }
+            #filterId{
+            margin-top: 17px;
+            
+            
+            }
+            .namepanel{
+                
+                height: 60px;
+                
+            }
+            
+            
+            @media (min-width: 576px) {
+                .modal-dialog { max-width: none; }
+            }
+            
+            .modal-dialog {
+                width: 98%;
+                height: auto;
+                padding: 0;
+            }
+            
+            .modal-content {
+                height: auto;
+            }
+            .inputQuantity{
+                width: 70px;
+                
+            }
+            .modal-backdrop {
+                z-index: 100000 !important;
+            }
+            
+            .modal {
+                z-index: 100001 !important;
+            }
+            
+            
+            #cartLink{
+            color: #eef1f3;
+            margin-top: -55px;
+                margin-right: 4px;
+
+            float: right;
+            
+            
+            }
+            
+            #cartValue{
+            margin-top: -20px;
+            background-color: #e11313
+            }
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+            }
+            
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+            
+            .sidenav a:hover {
+                color: #f1f1f1;
+            }
+            
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+            
+            #main {
+            transition: margin-left .5s;
+            padding: 16px;
+            }
+            
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+            
+            
+            /* -- quantity box -- */
+            
+            .quantity {
+                display: inline-block; }
+            
+            .quantity .input-text.qty {
+                width: 45px;
+                height: 39px;
+                padding: 0 5px;
+                text-align: center;
+                background-color: transparent;
+                border: 1px solid #efefef;
+            }
+            
+            .quantity.buttons_added {
+                text-align: left;
+                position: relative;
+                white-space: nowrap;
+                vertical-align: top; }
+            
+            .quantity.buttons_added input {
+                display: inline-block;
+                margin: 0;
+                vertical-align: top;
+                box-shadow: none;
+            }
+            
+            .quantity.buttons_added .minus,
+                .quantity.buttons_added .plus {
+                    padding: 7px 10px 8px;
+                    height: 41px;
+                    background-color: #ffffff;
+                    border: 1px solid #efefef;
+                    cursor:pointer;}
+            
+            .quantity.buttons_added .minus {
+                border-right: 0; }
+            
+            .quantity.buttons_added .plus {
+                border-left: 0; }
+            
+            .quantity.buttons_added .minus:hover,
+                .quantity.buttons_added .plus:hover {
+                    background: #eeeeee; }
+                    
+                    .quantity input::-webkit-outer-spin-button,
+                        .quantity input::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            margin: 0; }
+                    
+                    .quantity.buttons_added .minus:focus,
+                        .quantity.buttons_added .plus:focus {
+                            outline: none; 
+                        }
+                    .button-success,
+                        .button-error,
+                            .button-warning,
+                                .button-secondary {
+                                    color: white;
+                                    border-radius: 4px;
+                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                                }
+                    
+                    .button-success {
+                        background: rgb(28, 184, 65);
+                        /* this is a green */
+                    }
+                    
+                    .button-error {
+                        background: rgb(202, 60, 60);
+                        /* this is a maroon */
+                    }
+                    
+                    .button-warning {
+                        background: rgb(223, 117, 20);
+                        /* this is an orange */
+                    }
+                    
+                    .button-secondary {
+                        background: rgb(66, 184, 221);
+                        /* this is a light blue */
+                    }
+                    .headingPage{
+                        
+                        color: white;
+                        text-align: center;
+                        margin-bottom: 5px;
+                        margin-top: -23px;
+                    
+                    
+                }
+                    
+                    #snackbar {
+                visibility: hidden;
+                
+                z-index: 100001 !important;
+                min-width: 250px;
+                margin-left: -125px;
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                border-radius: 2px;
+                padding: 16px;
+                position: fixed;
+                z-index: 1;
+                left: 50%;
+                top: 30px;
+                font-size: 17px;
+                background-color: darkred;
+                
+                }
+                
+                #snackbar.show {
+                visibility: visible;
+                -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                }
+                
+                @-webkit-keyframes fadein {
+                from {top: 0; opacity: 0;} 
+                to {top: 30px; opacity: 1;}
+                }
+                
+                @keyframes fadein {
+                from {top: 0; opacity: 0;}
+                to {top: 30px; opacity: 1;}
+                }
+                
+                @-webkit-keyframes fadeout {
+                from {top: 30px; opacity: 1;} 
+                to {top: 0; opacity: 0;}
+                }
+                
+                @keyframes fadeout {
+                from {top: 30px; opacity: 1;}
+                to {top: 0; opacity: 0;}
+                }
+            
+            .company_logo{
+                width : 120px!important;
+                height : 90px!important; 
+                margin-top: -60px;
+                margin-left: 40px;
+                
+                
+                }
+            
+            .span_open{
+                font-size:30px;
+                cursor:pointer;
+                color:white;
+                background-black: white;
+                
+                
+                }
+            
+            .searchDiv{
+                padding-left: 40px;
+                }
+            .tableClass{
+                margin-top: 50px;
+                
+                }
+            
+            #containerDiv{
+            margin-top: 80px;
+            }
+            
+            .inputGroup{
+                
+                margin-top: 0px;
+                padding-left: 60px;
+                padding-right: 60px;
+                padding-bottom: 10px;
+                    
+                    
+               }   
+            
+            .affixLogo{
+                width :90px!important;
+                height :80px!important; 
+                margin-top: -11px;
+                margin-left: 10px;
+                }
+                    
+            #familyId{
+          		margin-left:40px;
+            }
+                    
+            #familySearcher{
+            
+            width : 210px;
+            }
+            
+            
+				
+				 .popupBackground {
+                    /* Background color */
+                    background-color:black;
+                    opacity: 0.20;
+                    filter: alpha(opacity = 20);
+                    
+                    /* Dimensions */
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    z-index: 100004;
+                    position: absolute;
+                    
+                    /* Mouse */
+                    cursor:wait;
+                }
+            
+            /* This is for the message DIV */
+            .PopupPanel {
+                /* Background color */
+                border: solid 2px blue;
+                background-color: white;
+                
+                /* Dimensions */
+                left: 50%;
+                width: 300px;
+                margin-left: -150px;
+                top: 50%;
+                height: 50px;
+                margin-top: -25px;
+                z-index: 100004;
+                position: fixed;
+                
+                /* Mouse */
+                cursor:pointer;
+            }

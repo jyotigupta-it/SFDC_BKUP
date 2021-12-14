@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submedia__c</fullName>
+    <externalId>false</externalId>
+    <label>Submedia</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Media__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Oneway vision / Glass branding</fullName>
+                <default>false</default>
+                <label>Oneway vision / Glass branding</label>
+            </value>
+            <value>
+                <fullName>Sunboard</fullName>
+                <default>false</default>
+                <label>Sunboard</label>
+            </value>
+            <value>
+                <fullName>Glow Sign Board</fullName>
+                <default>false</default>
+                <label>Glow Sign Board</label>
+            </value>
+            <value>
+                <fullName>Flex Board</fullName>
+                <default>false</default>
+                <label>Flex Board</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>In Shop</controllingFieldValue>
+            <valueName>Oneway vision / Glass branding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>In Shop</controllingFieldValue>
+            <valueName>Sunboard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outshop</controllingFieldValue>
+            <valueName>Glow Sign Board</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outshop</controllingFieldValue>
+            <valueName>Flex Board</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

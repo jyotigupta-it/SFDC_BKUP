@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>AQUA-PIPE</fullName>
+        <default>false</default>
+        <label>AQUA-PIPE</label>
+    </customValue>
+    <customValue>
+        <fullName>AQUA FITTINGS</fullName>
+        <default>false</default>
+        <label>AQUA FITTINGS</label>
+    </customValue>
+    <customValue>
+        <fullName>AQUA-SOLVENT</fullName>
+        <default>false</default>
+        <label>AQUA-SOLVENT</label>
+    </customValue>
+    <customValue>
+        <fullName>CPVC-PIPE</fullName>
+        <default>false</default>
+        <label>CPVC-PIPE</label>
+    </customValue>
+    <customValue>
+        <fullName>CPVC-FITTINGS</fullName>
+        <default>false</default>
+        <label>CPVC-FITTINGS</label>
+    </customValue>
+    <customValue>
+        <fullName>CPVC-SOLVENT</fullName>
+        <default>false</default>
+        <label>CPVC-SOLVENT</label>
+    </customValue>
+    <customValue>
+        <fullName>MANHOLE Chambers</fullName>
+        <default>false</default>
+        <label>MANHOLE Chambers</label>
+    </customValue>
+    <customValue>
+        <fullName>UG-PIPE</fullName>
+        <default>false</default>
+        <label>UG-PIPE</label>
+    </customValue>
+    <customValue>
+        <fullName>UG-FITTINGS</fullName>
+        <default>false</default>
+        <label>UG-FITTINGS</label>
+    </customValue>
+    <customValue>
+        <fullName>AGRI FITTINGS</fullName>
+        <default>false</default>
+        <label>AGRI FITTINGS</label>
+    </customValue>
+    <customValue>
+        <fullName>AGRI PIPES</fullName>
+        <default>false</default>
+        <label>AGRI PIPES</label>
+    </customValue>
+    <customValue>
+        <fullName>AIR ADMT VALVES</fullName>
+        <default>false</default>
+        <label>AIR ADMT VALVES</label>
+    </customValue>
+    <customValue>
+        <fullName>BlazeMaster-Fittings</fullName>
+        <default>false</default>
+        <label>BlazeMaster-Fittings</label>
+    </customValue>
+    <customValue>
+        <fullName>BlazeMaster-Pipes</fullName>
+        <default>false</default>
+        <label>BlazeMaster-Pipes</label>
+    </customValue>
+    <customValue>
+        <fullName>BlazeMaster-Solvent</fullName>
+        <default>false</default>
+        <label>BlazeMaster-Solvent</label>
+    </customValue>
+    <customValue>
+        <fullName>FIRE-COLLAR</fullName>
+        <default>false</default>
+        <label>FIRE-COLLAR</label>
+    </customValue>
+    <customValue>
+        <fullName>GREASE-INTERCEPTORS</fullName>
+        <default>false</default>
+        <label>GREASE-INTERCEPTORS</label>
+    </customValue>
+    <customValue>
+        <fullName>P.A.P.A, Maxi/Mini Vent AAV&apos;s</fullName>
+        <default>false</default>
+        <label>P.A.P.A, Maxi/Mini Vent AAV&apos;s</label>
+    </customValue>
+    <customValue>
+        <fullName>WASTE-N-TRAPS</fullName>
+        <default>false</default>
+        <label>WASTE-N-TRAPS</label>
+    </customValue>
+    <customValue>
+        <fullName>PAN-CONNECTORS</fullName>
+        <default>false</default>
+        <label>PAN-CONNECTORS</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR-FITTINGS-PF</fullName>
+        <default>false</default>
+        <label>SWR-FITTINGS-PF</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR-SOLVENT</fullName>
+        <default>false</default>
+        <label>SWR-SOLVENT</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR-PIPE-PF</fullName>
+        <default>false</default>
+        <label>SWR-PIPE-PF</label>
+    </customValue>
+    <customValue>
+        <fullName>SILENT-PIPE</fullName>
+        <default>false</default>
+        <label>SILENT-PIPE</label>
+    </customValue>
+    <customValue>
+        <fullName>CISTERNS</fullName>
+        <default>false</default>
+        <label>CISTERNS</label>
+    </customValue>
+    <customValue>
+        <fullName>ANGLE Valve</fullName>
+        <default>false</default>
+        <label>ANGLE Valve</label>
+    </customValue>
+    <customValue>
+        <fullName>HDPE Pipes</fullName>
+        <default>false</default>
+        <label>HDPE Pipes</label>
+    </customValue>
+    <customValue>
+        <fullName>SILENT-FITTINGS</fullName>
+        <default>false</default>
+        <label>SILENT-FITTINGS</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR-FITTINGS-SF</fullName>
+        <default>false</default>
+        <label>SWR-FITTINGS-SF</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR-FT-COMMON</fullName>
+        <default>false</default>
+        <label>SWR-FT-COMMON</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR-FT-TRADING</fullName>
+        <default>false</default>
+        <label>SWR-FT-TRADING</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR-PIPE-SF</fullName>
+        <default>false</default>
+        <label>SWR-PIPE-SF</label>
+    </customValue>
+    <customValue>
+        <fullName>Aqua-CP Valves &amp; Accs.</fullName>
+        <default>false</default>
+        <label>Aqua-CP Valves &amp; Accs.</label>
+    </customValue>
+    <customValue>
+        <fullName>Aqua-Valves &amp; Accs.</fullName>
+        <default>false</default>
+        <label>Aqua-Valves &amp; Accs.</label>
+    </customValue>
+    <customValue>
+        <fullName>COLUMN-ACESSORIES</fullName>
+        <default>false</default>
+        <label>COLUMN-ACESSORIES</label>
+    </customValue>
+    <customValue>
+        <fullName>COLUMN-CASING</fullName>
+        <default>false</default>
+        <label>COLUMN-CASING</label>
+    </customValue>
+    <customValue>
+        <fullName>CPVC-CP Valves &amp; Accs.</fullName>
+        <default>false</default>
+        <label>CPVC-CP Valves &amp; Accs.</label>
+    </customValue>
+    <customValue>
+        <fullName>CPVC-Valves &amp; Accs.</fullName>
+        <default>false</default>
+        <label>CPVC-Valves &amp; Accs.</label>
+    </customValue>
+    <customValue>
+        <fullName>PROMOTIONAL-ADV.</fullName>
+        <default>false</default>
+        <label>PROMOTIONAL-ADV.</label>
+    </customValue>
+    <customValue>
+        <fullName>COMMON Clamps</fullName>
+        <default>false</default>
+        <label>COMMON Clamps</label>
+    </customValue>
+    <customValue>
+        <fullName>SANITIZER Products</fullName>
+        <default>false</default>
+        <label>SANITIZER Products</label>
+    </customValue>
+    <customValue>
+        <fullName>COLUMN Pipes</fullName>
+        <default>false</default>
+        <label>COLUMN Pipes</label>
+    </customValue>
+    <customValue>
+        <fullName>3-LAYER WATER TANK</fullName>
+        <default>false</default>
+        <label>3-LAYER WATER TANK</label>
+    </customValue>
+    <customValue>
+        <fullName>4-LAYER WATER TANK</fullName>
+        <default>false</default>
+        <label>4-LAYER WATER TANK</label>
+    </customValue>
+    <customValue>
+        <fullName>2-LAYER WATER TANK</fullName>
+        <default>false</default>
+        <label>2-LAYER WATER TANK</label>
+    </customValue>
+    <customValue>
+        <fullName>CPVC WST Allied Product</fullName>
+        <default>false</default>
+        <label>CPVC WST Allied Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Aqua WST Allied Product</fullName>
+        <default>false</default>
+        <label>Aqua WST Allied Product</label>
+    </customValue>
+    <customValue>
+        <fullName>HYGIENE PRODUCTS</fullName>
+        <default>false</default>
+        <label>HYGIENE PRODUCTS</label>
+    </customValue>
+    <customValue>
+        <fullName>CASING PIPES</fullName>
+        <default>false</default>
+        <label>CASING PIPES</label>
+    </customValue>
+    <customValue>
+        <fullName>FLUSH VALVES</fullName>
+        <default>false</default>
+        <label>FLUSH VALVES</label>
+    </customValue>
+    <customValue>
+        <fullName>WATER Tank</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>WATER Tank</label>
+    </customValue>
+    <customValue>
+        <fullName>Aqualife Reclaim Fittings</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Aqualife Reclaim Fittings</label>
+    </customValue>
+    <customValue>
+        <fullName>Maxi-Filtra Cartridge</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Maxi-Filtra Cartridge</label>
+    </customValue>
+    <customValue>
+        <fullName>P.A.P.A</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>P.A.P.A</label>
+    </customValue>
+    <customValue>
+        <fullName>Alumn cap for Maxi-Vent-Filtra</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Alumn cap for Maxi-Vent-Filtra</label>
+    </customValue>
+    <customValue>
+        <fullName>Max-Filtra</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Max-Filtra</label>
+    </customValue>
+    <customValue>
+        <fullName>Maxi-Vent</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Maxi-Vent</label>
+    </customValue>
+    <customValue>
+        <fullName>Silent+</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Silent+</label>
+    </customValue>
+    <customValue>
+        <fullName>SWR</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SWR</label>
+    </customValue>
+    <customValue>
+        <fullName>Aqualife Valves</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Aqualife Valves</label>
+    </customValue>
+    <customValue>
+        <fullName>Silent</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Silent</label>
+    </customValue>
+    <customValue>
+        <fullName>Inspection Chambers</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Inspection Chambers</label>
+    </customValue>
+    <customValue>
+        <fullName>CPVC Brass Fittings</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CPVC Brass Fittings</label>
+    </customValue>
+    <customValue>
+        <fullName>Concealed Valves</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Concealed Valves</label>
+    </customValue>
+    <customValue>
+        <fullName>Concealed Diverters</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Concealed Diverters</label>
+    </customValue>
+    <customValue>
+        <fullName>Aqualife Brass Fittings</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Aqualife Brass Fittings</label>
+    </customValue>
+    <customValue>
+        <fullName>Grease Interceptors</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Grease Interceptors</label>
+    </customValue>
+    <customValue>
+        <fullName>Silent+ Pipes</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Silent+ Pipes</label>
+    </customValue>
+    <customValue>
+        <fullName>Slotted Clamps</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Slotted Clamps</label>
+    </customValue>
+    <customValue>
+        <fullName>Silent Fittings</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Silent Fittings</label>
+    </customValue>
+    <customValue>
+        <fullName>HDPE PE 100</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>HDPE PE 100</label>
+    </customValue>
+    <customValue>
+        <fullName>HDPE PE 80</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>HDPE PE 80</label>
+    </customValue>
+    <customValue>
+        <fullName>Waste Couplings</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Waste Couplings</label>
+    </customValue>
+    <customValue>
+        <fullName>Bottle Traps</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Bottle Traps</label>
+    </customValue>
+    <customValue>
+        <fullName>Aqualife Reclaim</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Aqualife Reclaim</label>
+    </customValue>
+    <customValue>
+        <fullName>Mini-Vent</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Mini-Vent</label>
+    </customValue>
+    <masterLabel>Products Global Set</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

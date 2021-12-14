@@ -1,0 +1,84 @@
+<!--
+Created by : Deepak Singh
+Created date : 1/08/2020
+-->
+
+<apex:page lightningStylesheets="true" showHeader="false" sidebar="false">
+    
+    <html lang="en">
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <title>Thank you!</title>
+            <apex:stylesheet value="{!URLFOR($Resource.BootStrap_D)}" />
+            <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_v4_5_3)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_v4_5_3)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.Bootstrap_v4_5_3)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.succcessfulsignUpcss)}"/>
+            <style>
+                
+                @media (min-width: 1025px) {
+                #respImageContainer {
+                background-size: 100% auto;
+                background-repeat: no-repeat;        
+                background-image: url('{!URLFOR($Resource.DekstopOPBackGround)}');
+                }
+                #thankId{
+                font-size: 80px; !IMPORTANT
+                }
+                #thankId1{
+                font-size: 55px; !IMPORTANT
+                }
+                }
+                @media (max-width: 1024px) and (min-width: 500px){
+                #respImageContainer {
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                background-image: url('{!URLFOR($Resource.TabOPbackground)}');
+                }
+                #thankId{
+                font-size: 70px; !IMPORTANT
+                }
+                #thankId1{
+                font-size: 45px; !IMPORTANT
+                }
+                }
+                @media (max-width: 499px) {
+                #respImageContainer {
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                background-image: url('{!URLFOR($Resource.MobileOPbackground)}');
+                }
+                #thankId{
+                font-size: 45px; !IMPORTANT
+                }
+                #thankId1{
+                font-size: 30px; !IMPORTANT
+                }
+                }
+            </style>
+            
+            
+        </head>
+        <body id="respImageContainer">
+            
+            <br/>
+            
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="alignCenter">
+                <h1 id="thankId">Thank You !</h1>
+                <br/>
+                <h2 id="thankId1">We have received your request. </h2>
+            </div>
+            
+        </body>
+    </html>
+    
+</apex:page>

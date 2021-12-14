@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actual_Site_Visit_District__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(!ISBLANK( Party_Name__c ), TEXT(Party_Name__r.District__c) , 
+IF(!ISBLANK( Contacts__c ), TEXT(Contacts__r.District__c) , 
+IF(!ISBLANK( Distributor_Dealer__c ), TEXT( Distributor_Dealer__r.District__c) , 
+TEXT(District__c) )))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Actual Site Visit District</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

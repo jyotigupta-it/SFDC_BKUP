@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>total_bill_point_type_product_empty</fullName>
+    <active>true</active>
+    <description>Product should be enpty for total bill point accrual</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Point_accrual_type__c, &apos;TOTAL_BILL&apos;),
+OR (
+ ISPICKVAL(Product_filter_type__c, &apos;PRODUCT&apos;),
+ ISPICKVAL(Product_filter_type__c, &apos;PRODUCT_CATEGORY&apos;),
+ NOT( ISBLANK( Product_Category__c )),
+ NOT( ISBLANK(  Product__c  ))  
+)
+)</errorConditionFormula>
+    <errorDisplayField>Product_filter_type__c</errorDisplayField>
+    <errorMessage>Product filter type, product and product category should be empty for point accrual on total bill</errorMessage>
+</ValidationRule>

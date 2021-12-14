@@ -1,0 +1,46 @@
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}
+.THIS.c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    background: #ffffff;
+}
+.THIS.sp_1{
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+.THIS .logoClass{
+    height: 0px;
+    width: 130px;
+}
+.THIS .page-section {
+    padding: 1rem;
+    background: border-box;
+}
+.THIS .page-header{
+    height: 70px;
+}
+.THIS .page-footer {
+    height: 70px;
+}
+.THIS .page-main {
+    background: #f8f8f8;
+    background: border-box;
+}
+.THIS .page-left,
+.THIS .page-right {
+    background: #f0efef;
+}
+.THIS .preview-content{
+    background-color: #ffffff;
+}
+.THIS .detailsOfDistribution{
+    margin-top:10px
+}
+.THIS .slds-form-element__icon{
+    display:none;
+}

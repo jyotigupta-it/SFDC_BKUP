@@ -1,0 +1,172 @@
+<aura:component controller="NpsFeedbackController"
+    implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:attribute name="masterQuestionList" type="object" />
+    <aura:attribute name="noneAttribute" type="String" default="--None--" />
+    <aura:attribute name="searchAccountName" type="String" />
+    <aura:attribute name="displayNextQuestion" type="Integer" />
+    <aura:attribute name="selectedLookupValueDisplay" type="List" />
+    <aura:attribute name="captureReasonForEachBrand" type="List" />
+    <aura:attribute name="selectedBrandLabelWithValue" type="List" />
+    <aura:attribute name="ratingList" type="List" />
+    <aura:attribute name="npsId" type="String" />
+
+    <aura:attribute name="ratingForTopBrand" type="Integer" />
+    <aura:attribute name="ratingForAshirvadBrand" type="Integer" />
+    <aura:attribute name="topBrandName" type="String" />
+    <aura:attribute name="secondTopBrandName" type="String" />
+
+    <div class="slds-box slds-theme_default">
+        <aura:iteration items="{!v.masterQuestionList}" var="questions" indexVar="loopIndex"
+            end="{!v.masterQuestionList.length}">
+            <aura:if isTrue="{!v.displayNextQuestion == questions.questionOrder}">
+                <aura:if isTrue="{! and(questions.Type == 'Custom', questions.Options == '001')}">
+                    <aura:text value="{!questions.QuestionName}" />
+                    <aura:iteration items="{!questions.lookupEntry}" var="indexValue" indexVar="accountIndex">
+                        <c:customLookup objectAPIName="Competitor__c" IconName="standard:Account"
+                            label="{! concat('Competitor-', accountIndex + 1) }" selectedRecord="{!indexValue.value}"
+                            SearchKeyWord="{!v.searchAccountName}" />
+                    </aura:iteration>
+                </aura:if>
+
+                <aura:if isTrue="{! and(questions.Type == 'Custom', questions.Options == '002')}">
+                    <aura:text value="{!questions.QuestionName}" /><!-- To display 2nd question-->
+                    <aura:iteration items="{!v.selectedLookupValueDisplay}" var="displayValue">
+                        <aura:if isTrue="{! not(empty(displayValue.label))}">
+                            <lightning:card>
+                                <aura:text value="{!displayValue.label}" />
+                                <lightning:select name="rating" value="{! displayValue.secondQuesResponse }"
+                                    label="Choose Rating">
+                                    <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                                    <aura:iteration items="{!v.ratingList}" var="val">
+                                        <option value="{!val.value}">{!val.label}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </lightning:card>
+                        </aura:if>
+                    </aura:iteration>
+                </aura:if>
+
+                <aura:if isTrue="{! and(questions.Type == 'Custom', questions.Options == '004')}">
+                    <aura:text value="{!questions.QuestionName}" /><!-- To display 3rd question-->
+                    <aura:iteration items="{!v.captureReasonForEachBrand}" var="displayValue">
+                        <aura:if isTrue="{! not(empty(displayValue.label))}">
+                            <lightning:card>
+                                <lightning:textarea name="{!questions.recordId}"
+                                    value="{!displayValue.thirdQuesResponse}" label="{!displayValue.label}"
+                                    maxlength="300" />
+                            </lightning:card>
+                        </aura:if>
+                    </aura:iteration>
+                </aura:if>
+
+                <aura:if isTrue="{! and(questions.Type == 'Custom', questions.Options == '003')}">
+                    <aura:text value="{!questions.QuestionName}" />
+                    <aura:iteration items="{! questions.subQuestionList}" var="subQuesList" indexVar="subQuesIdsex">
+                        <lightning:card>
+                            <!-- if block to show 2 rating fields(For Ashirvad and top Brand) for each subquestion -->
+                            <aura:if isTrue="{!equals(v.topBrandName, $Label.c.Ashirvad_Top_Brand)}">
+                                <aura:if
+                                    isTrue="{! and(notequals(subQuesIdsex, (questions.subQuestionList.length - 1)), notequals(subQuesIdsex, (questions.subQuestionList.length - 2))) }">
+                                    <!-- length-2 because we donot want to display last 2 condition based question directly -->
+                                    <aura:text value="{! subQuesList.label }" />
+                                    <lightning:select name="rating" label="Choose Rating for Ashirvad" value="{! subQuesList.subQuesRating }">
+                                        <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                                        <aura:iteration items="{!v.ratingList}" var="val">
+                                            <option value="{!val.value}">{!val.label}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                    <lightning:select name="rating" label="{! concat('Choose Rating for: ', v.secondTopBrandName) }" value="{! subQuesList.subQuesTopBrandRating }">
+                                        <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                                        <aura:iteration items="{!v.ratingList}" var="val">
+                                            <option value="{!val.value}">{!val.label}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </aura:if>
+                                <!-- else block to show single rating fields(For top Brand other than Ashirvad) for each subquestion -->
+                                <aura:set attribute="else">
+                                    <aura:if
+                                        isTrue="{! and(notequals(subQuesIdsex, (questions.subQuestionList.length - 1)), notequals(subQuesIdsex, (questions.subQuestionList.length - 2))) }">
+                                        <!-- length-2 because we donot want to display last 2 condition based question directly -->
+                                        <aura:text value="{! subQuesList.label }" />
+                                        <lightning:select name="rating" label="{! concat('Choose Rating for: ', v.topBrandName) }"
+                                            value="{! subQuesList.subQuesRating }">
+                                            <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                                            <aura:iteration items="{!v.ratingList}" var="val">
+                                                <option value="{!val.value}">{!val.label}</option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                    </aura:if>
+                                </aura:set>
+                            </aura:if>
+
+
+                            <!-- If block to display condition based question based on rating of 2nd question, starts from here -->
+                            <!-- If Ashirvad is not present in selected value then display this text box in 4th question. -->
+                            <aura:if isTrue="{! and(equals(subQuesIdsex, questions.subQuestionList.length - 2), 
+                                    notequals(v.topBrandName, $Label.c.Ashirvad_Top_Brand)) }">
+                                <lightning:card>
+                                    <lightning:input aura:id="whyNotAshirvad" name="{! subQuesList.label }"
+                                        value="{! subQuesList.subQuesRating }" label="{! subQuesList.label }"
+                                        type="String" required="true" />
+                                </lightning:card>
+                            </aura:if>
+                            <!-- If block to display condition based question based on rating of 2nd question, end here -->
+
+
+                            <!-- If block to display condition based question based on rating of 2nd question, starts from here -->
+                            <!-- If Rating of Ashirvad is less than 8 then display this text box in 4th question. -->
+                            <aura:if
+                                isTrue="{! and(equals(subQuesIdsex, questions.subQuestionList.length - 1), 
+                                                lessthan(v.ratingForAshirvadBrand, $Label.c.Display_field_based_on_rating)) }">
+                                <lightning:card>
+                                    <lightning:input aura:id="conditionBasedQues" name="{! subQuesList.label }"
+                                        value="{! subQuesList.subQuesRating }" label="{! subQuesList.label }"
+                                        type="String" required="true" />
+                                </lightning:card>
+                            </aura:if>
+                            <!-- If block to display condition based question based on rating of 2nd question, end here -->
+
+                        </lightning:card>
+                    </aura:iteration>
+
+                </aura:if>
+
+                <aura:if isTrue="{!questions.Type == 'Text'}">
+                    <lightning:input name="{!questions.recordId}" value="{!questions.Response}"
+                        label="{!questions.QuestionName}" type="String" required="{! questions.mandatory}" />
+                </aura:if>
+
+                <aura:if isTrue="{!questions.Type == 'Picklist'}">
+                    <lightning:combobox name="{!questions.recordId}" label="{!questions.QuestionName}"
+                        value="{!questions.Response}" placeholder="Select Progress" options="{! questions.OptionsVal }"
+                        required="{! questions.mandatory}" />
+                </aura:if>
+
+                <aura:if isTrue="{!questions.Type == 'Number'}">
+                    <lightning:input type="number" label="{!questions.QuestionName}" name="{!questions.recordId}"
+                        value="{!questions.Response}" required="{! questions.mandatory}" />
+                </aura:if>
+
+                <aura:if isTrue="{!questions.Type == 'TextArea'}">
+                    <lightning:textarea name="{!questions.recordId}" value="{!questions.Response}"
+                        label="{!questions.QuestionName}" maxlength="300" required="{! questions.mandatory}" />
+                </aura:if>
+                <lightning:buttonGroup class="slds-m-top_medium">
+                    <lightning:button label="Previous" name="previous" onclick="{!c.showPreviousQuestion}"
+                        disabled="{! equals(loopIndex, 0)}" />
+                    <lightning:button label="Next" name="next" onclick="{!c.showNextQuestion}"
+                        disabled="{! equals(loopIndex + 1, v.masterQuestionList.length)}" />
+                    <lightning:button label="Save" name="save" onclick="{!c.saveMasterQuestion}"
+                        disabled="{! notequals(loopIndex + 1, v.masterQuestionList.length)}" />
+                </lightning:buttonGroup>
+
+            </aura:if>
+        </aura:iteration>
+
+    </div>
+
+</aura:component>

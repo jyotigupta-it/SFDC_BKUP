@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Attendee_Name_Mobile__c</columns>
+    <columns>Percentage__c</columns>
+    <columns>Quiz_Attendee__c</columns>
+    <columns>Quiz_Catagory__c</columns>
+    <columns>Quiz_Month__c</columns>
+    <columns>Time_of_submission__c</columns>
+    <columns>CorrectAnswerCollect__c</columns>
+    <columns>Correct_answers__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Quiz_Month__c</field>
+        <operation>equals</operation>
+        <value>December - 2017</value>
+    </filters>
+    <label>All</label>
+</ListView>

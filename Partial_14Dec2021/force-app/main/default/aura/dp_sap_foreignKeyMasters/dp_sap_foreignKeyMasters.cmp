@@ -1,0 +1,475 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="listAccountAssignmentGroupInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistAccountAssignmentGroup" type="boolean" default="false"/>
+
+    <aura:attribute name="listCreditControlAreaInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistCreditControlArea" type="boolean" default="false"/>
+
+    <aura:attribute name="listCusGroupInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistCusGroup" type="boolean" default="false"/>
+
+    <aura:attribute name="listCusPricingProcedureInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistCusPricingProcedure" type="boolean" default="false"/>
+
+    <aura:attribute name="listDeliveringPlantInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistDeliveringPlant" type="boolean" default="false"/>
+
+    <aura:attribute name="listDeliveryPriorityInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistDeliveryPriority" type="boolean" default="false"/>
+
+    <aura:attribute name="listDistributorChannelInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistDistributorChannel" type="boolean" default="false"/>
+
+    <aura:attribute name="listDivisonInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistDivison" type="boolean" default="false"/>
+
+    <aura:attribute name="listIncotermsInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistIncoterms" type="boolean" default="false"/>
+
+    <aura:attribute name="listPaymentTermsInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistPaymentTerms" type="boolean" default="false"/>
+
+    <aura:attribute name="listPriceGroupInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistPriceGroup" type="boolean" default="false"/>
+
+    <aura:attribute name="listSalesGroupInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistSalesGroup" type="boolean" default="false"/>
+
+    <aura:attribute name="listSalesOfficeInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistSalesOffice" type="boolean" default="false"/>
+
+    <aura:attribute name="listSalesOrgInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistSalesOrg" type="boolean" default="false"/>
+
+    <aura:attribute name="listSalesConditionInstance" type="DP_SAP_Foreign_Key__c"/>
+    <aura:attribute name="showlistSalesCondition" type="boolean" default="false"/>
+
+    <aura:attribute name="rowIndex" type="string"/>
+    <aura:attribute name="makeReadOnly" type="boolean"/>
+    
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+    <!-- Account_Assignment_Group__c -->
+    <aura:if isTrue="{!v.showlistAccountAssignmentGroup}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listAccountAssignmentGroupInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Account_Assignment_Group__c" 
+                                            value="{!v.listAccountAssignmentGroupInstance.Account_Assignment_Group__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Account Assignment" aura:id="Add Account Assignment"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Account Assignment">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Account Assignment" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Credit_Control_Area__c -->
+    <aura:if isTrue="{!v.showlistCreditControlArea}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listCreditControlAreaInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Credit_Control_Area__c" 
+                                            value="{!v.listCreditControlAreaInstance.Credit_Control_Area__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Credit Control" aura:id="Add Credit Control"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Credit Control">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Credit Control" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Cus_Group__c -->
+    <aura:if isTrue="{!v.showlistCusGroup}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listCusGroupInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Cus_Group__c" 
+                                            value="{!v.listCusGroupInstance.Cus_Group__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Customer Group" aura:id="Add Customer Group"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Customer Group">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Customer Group" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Cus_Pricing_Procedure__c -->
+    <aura:if isTrue="{!v.showlistCusPricingProcedure}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listCusPricingProcedureInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Cus_Pricing_Procedure__c" 
+                                            value="{!v.listCusPricingProcedureInstance.Cus_Pricing_Procedure__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Customer Pricing" aura:id="Add Customer Pricing"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Customer Pricing">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Customer Pricing" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Delivering_Plant__c -->
+    <aura:if isTrue="{!v.showlistDeliveringPlant}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listDeliveringPlantInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Delivering_Plant__c" 
+                                            value="{!v.listDeliveringPlantInstance.Delivering_Plant__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Delivery Plant" aura:id="Add Delivery Plant"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Delivery Plant">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Delivery Plant" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Delivery_Priority__c -->
+    <aura:if isTrue="{!v.showlistDeliveryPriority}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listDeliveryPriorityInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Delivery_Priority__c" 
+                                            value="{!v.listDeliveryPriorityInstance.Delivery_Priority__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Delivery Priority" aura:id="Add Delivery Priority"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Delivery Priority">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Delivery Priority" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Distributor_Channel__c -->
+    <aura:if isTrue="{!v.showlistDistributorChannel}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listDistributorChannelInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Distributor_Channel__c" 
+                                            value="{!v.listDistributorChannelInstance.Distributor_Channel__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Distributor Channel" aura:id="Add Distributor Channel"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Distributor Channel">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Distributor Channel" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+     <!-- Division__c -->
+     <aura:if isTrue="{!v.showlistDivison}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listDivisonInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Division__c" 
+                                            value="{!v.listDivisonInstance.Division__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Divison" aura:id="Add Divison"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Divison">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Divison" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Incoterms__c -->
+    <aura:if isTrue="{!v.showlistIncoterms}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listIncotermsInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Incoterms__c" 
+                                            value="{!v.listIncotermsInstance.Incoterms__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Incoterms" aura:id="Add Incoterms"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Incoterms">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Incoterms" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Payment_Terms__c -->
+    <aura:if isTrue="{!v.showlistPaymentTerms}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listPaymentTermsInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Payment_Terms__c" 
+                                            value="{!v.listPaymentTermsInstance.Payment_Terms__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Payment Terms" aura:id="Add Payment Terms"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Payment Terms">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Payment Terms" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Price_Group__c -->
+    <aura:if isTrue="{!v.showlistPriceGroup}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listPriceGroupInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Price_Group__c" 
+                                            value="{!v.listPriceGroupInstance.Price_Group__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Price Group" aura:id="Add Price Group"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Price Group">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Price Group" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Sales_Group__c -->
+    <aura:if isTrue="{!v.showlistSalesGroup}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listSalesGroupInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Sales_Group__c" 
+                                            value="{!v.listSalesGroupInstance.Sales_Group__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Sales Group" aura:id="Add Sales Group"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Sales Group">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Sales Group" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Sales_Office__c -->
+    <aura:if isTrue="{!v.showlistSalesOffice}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listSalesOfficeInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Sales_Office__c" 
+                                            value="{!v.listSalesOfficeInstance.Sales_Office__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Sales Office" aura:id="Add Sales Office"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Sales Office">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Sales Office" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Sales_Organization__c -->
+    <aura:if isTrue="{!v.showlistSalesOrg}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listSalesOrgInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Sales_Organization__c" 
+                                            value="{!v.listSalesOrgInstance.Sales_Organization__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Sales Organization" aura:id="Add Sales Organization"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Sales Organization">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Sales Organization" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+
+    <!-- Shipping_Condition__c -->
+    <aura:if isTrue="{!v.showlistSalesCondition}">
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="DP_SAP_Foreign_Key__c" recordTypeId="{!v.listSalesConditionInstance.RecordTypeId}">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name" fieldName="Shipping_Condition__c" 
+                                            value="{!v.listSalesConditionInstance.Shipping_Condition__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-7  slds-large-size_1-of-7  slds-p-left_medium slds-p-right_medium"
+                     title="Action" style="text-align: right;margin-top: 25px;">
+                    <aura:if isTrue="{!!v.makeReadOnly}">
+                        <aura:if isTrue="{!v.rowIndex == 0}">
+                            <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Shipping Condition" aura:id="Add Shipping Condition"/>
+                            <aura:set attribute="else">
+                                <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}" id="Remove Shipping Condition">
+                                    <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove Shipping Condition" />
+                                </a> 
+                            </aura:set>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+    
+</aura:component>

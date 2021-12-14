@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Combination_for_calculation__c</fullName>
+    <description>this combination is used for automatic calculation of products when we enter a project. This field calculation is used in coding</description>
+    <externalId>false</externalId>
+    <formula>Text(Property_Type__c) +&apos;-&apos;+  text(SWR_System_to_be_Deployed__c) +&apos;-&apos;+  text(Dimension_of_Stack__c) +&apos;-&apos;+  text(Material__c) +&apos;-&apos;+ text(Number_of_Floors_Min__c)  +&apos;-&apos;+ text(Number_of_Floors_Max__c)</formula>
+    <label>Combination for calculation</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

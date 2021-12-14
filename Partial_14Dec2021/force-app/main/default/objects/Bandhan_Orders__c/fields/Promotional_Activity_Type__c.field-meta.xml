@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Promotional_Activity_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Promotional Activity Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Vertical_type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Promtional_Activity_Type</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Architects / Engineers / Consultants Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Architects Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Builders Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Engineers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Exhibition / Construction Fairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Group Activity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Inshop Plumber Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Mega Plumbers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Naaka Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Onsite Plumber Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbers Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbing Dealer / Distributor Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbing Dealers Factory Visits</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbing DSM Meet/Training</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Done</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>RNR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Boarers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Column Dealer / Distributor Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Column Distributors / Dealers Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Column DSM Meet / Training</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Exhibition / Agri Fairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Inshop Boarers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Inshop Mechanic Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Jeep Campaign</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mechanics Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mega Farmer Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mega Mechanic Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mini Farmer Meet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Shandy Shows</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Tractor Show</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

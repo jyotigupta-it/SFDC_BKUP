@@ -1,0 +1,75 @@
+<apex:page showHeader="false" sidebar="false" controller="APPL_EXPENSE_ATTACHMENT_CTRL" >
+
+<style type="text/css">
+    .pbSubheader {
+      background-color: #26ADE4 !important;
+    }
+</style>
+
+<apex:outputPanel >
+ <apex:actionstatus id="as1">
+    <apex:facet name="start">
+        <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;"> 
+            <div class="waitingHolder" >
+                <img class="waitingImage" src= "{!$Resource.Redcircle}" width="360" height="110"  title="Please Wait..." />
+            </div>
+        </div>
+    </apex:facet>
+</apex:actionstatus>
+</apex:outputPanel>
+
+     <apex:form id="theForm">
+       
+        <apex:pageBlock title="Upload Attachment to Expense">
+            
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Upload"  action="{!SaveAttachments}" />
+                <apex:commandButton value="Close"  onclick="closeExpWindow();" />
+            </apex:pageBlockButtons>
+            
+            <apex:pageMessages id="MSG"/>
+            <apex:actionFunction name="ChangeCount" action="{!ChangeCount}" />
+            
+            <apex:pageblocksection columns="2" id="block1" rendered="{!IF(FileCount != null && FileCount != '', false , true)}">
+                            
+                <apex:pageBlockSectionItem >
+                          <apex:outputLabel value="Expense on Date" for="expenseDate"/>
+                          <apex:outputText value="{!$CurrentPage.parameters.expDate}" id="expenseDateId"/>
+                    </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="How many files you want to upload?"/>
+                    <apex:selectList onchange="jsChangeCount(this.id) ;" multiselect="false" size="1" value="{!FileCount}" id="num">
+                        <apex:selectOption itemLabel="--None--" itemValue=""/>
+                        <apex:selectOptions value="{!filesCountList}"/>
+                    </apex:selectList>
+                 </apex:pageBlockSectionItem>
+                    
+               
+                 </apex:pageblocksection>
+
+            
+            <apex:pageBlockSection title="Select Files" rendered="{!IF(FileCount != null && FileCount != '', true , false)}">
+                <apex:repeat value="{!allFileList}" var="AFL">
+                    <apex:inputfile value="{!AFL.body}" filename="{!AFL.Name}" />
+                </apex:repeat>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form>
+    
+    <script type="text/javascript">
+    
+
+           function closeExpWindow(){
+            window.self.close();
+           }
+
+           function jsChangeCount(numId){
+                //alert(numId);
+                //document.getElementById(numId).disabled = true;
+            ChangeCount();
+           }
+        
+    </script>
+</apex:page>

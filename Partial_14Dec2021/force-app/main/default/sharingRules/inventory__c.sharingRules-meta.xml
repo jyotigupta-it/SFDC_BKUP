@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Agra_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Agra User Inventory Sharing</label>
+        <sharedTo>
+            <group>Agra_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Agra_Depot_Users</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Ahmedabad_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Ahmedabad User Inventory Sharing</label>
+        <sharedTo>
+            <group>Ahmedabad_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Ahmedabad_Depot_users</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Bangalore_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Bangalore User Inventory Sharing</label>
+        <sharedTo>
+            <group>Bangalore_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Bangalore_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Bhuvaneshwar_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Bhuvaneshwar User Inventory Sharing</label>
+        <sharedTo>
+            <group>Bhuvaneshwar_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Bhuvaneshwar_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Chittoor_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Chittoor User Inventory Sharing</label>
+        <sharedTo>
+            <group>Chittoor_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Chittoor_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Ghaziabad_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Ghaziabad User Inventory Sharing</label>
+        <sharedTo>
+            <group>Ghaziabad_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Ghaziabad_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Guwahati_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Guwahati User Inventory Sharing</label>
+        <sharedTo>
+            <group>Guwahati_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Guwahati_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Hosur_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Hosur User Inventory Sharing</label>
+        <sharedTo>
+            <group>Hosur_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Hosur_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Hyderabad_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Hyderabad User Inventory Sharing</label>
+        <sharedTo>
+            <group>Hyderabad_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Hyderabad_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Indore_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Indore User Inventory Sharing</label>
+        <sharedTo>
+            <group>Indore_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Indore_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Jaipur_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Jaipur User Inventory Sharing</label>
+        <sharedTo>
+            <group>Jaipur_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Jaipur_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Karnal_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Karnal User Inventory Sharing</label>
+        <sharedTo>
+            <group>Karnal_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Karnal_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Kolkata_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Kolkata User Inventory Sharing</label>
+        <sharedTo>
+            <group>Kolkata_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Kolkata_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Lucknow_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Lucknow User Inventory Sharing</label>
+        <sharedTo>
+            <group>Lucknow_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Lucknow_Depot_Users</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Ludhiana_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Ludhiana User Inventory Sharing</label>
+        <sharedTo>
+            <group>Ludhiana_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Ludhiana_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Nagpur_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Nagpur User Inventory Sharing</label>
+        <sharedTo>
+            <group>Nagpur_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Nagpur_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Patna_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Patna User Inventory Sharing</label>
+        <sharedTo>
+            <group>Patna_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Patna_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Pune_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Pune User Inventory Sharing</label>
+        <sharedTo>
+            <group>Pune_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Pune_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Raipur_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Raipur User Inventory Sharing</label>
+        <sharedTo>
+            <group>Raipur_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Raipur_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Vijayawada_User_Inventory_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Vijayawada User Inventory Sharing</label>
+        <sharedTo>
+            <group>Vijayawada_Depot</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Vijayawada_Depot_User</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

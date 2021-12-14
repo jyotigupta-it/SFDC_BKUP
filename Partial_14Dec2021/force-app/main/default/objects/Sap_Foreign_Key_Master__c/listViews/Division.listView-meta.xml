@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Division</fullName>
+    <columns>NAME</columns>
+    <columns>Description__c</columns>
+    <columns>Distributor_Channel__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Sap_Foreign_Key_Master__c.Division</value>
+    </filters>
+    <label>Division</label>
+</ListView>

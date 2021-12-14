@@ -1,0 +1,398 @@
+<apex:page Id="Page" controller="EditAllNewOfferSection_Controller" docType="html-5.0" >
+    <apex:slds />
+    <apex:includeScript value="//code.jquery.com/jquery-2.2.4.min.js"/>
+    <script type="text/javascript">
+    /*$(document).ready( function () {
+    debugger;
+    var table=	document.getElementById('Page:theForm:PageBlock:PageBlockSec:newOffId');
+    var rowLength = table.rows.length;
+    alert(rowLength);
+    var oCells = table.rows.item(1).cells;
+    //alert(table.rows[1].cells[1].innertext);
+   
+    for(var i=1;i<rowLength;i++){
+		 	 var rowDate=table.rows[i].cells[1].innerText.replace("₹","");
+             while(rowDate.includes(",")){
+                rowDate=rowDate.replace(",","");
+                }
+             var nunData=Number(rowDate);
+        alert(nunData);
+    }
+    
+} );*/
+    function onchangemethod(){
+        
+        var table=	document.getElementById('Page:theForm:PageBlock:PageBlockSec:newOffId');
+        var rowLength = table.rows.length;
+        //alert(rowLength);
+        // var oCells = table.rows.item(1).cells;
+        //alert(table.rows[1].cells[1].innertext);
+        debugger;
+        for(var i=1;i<rowLength;i++){
+            var rowDate=table.rows[i].cells[1].innerText.replace("₹","");
+            while(rowDate.includes(",")){
+                rowDate=rowDate.replace(",","");
+            }
+            var mrpValue=Number(rowDate);
+            var applDisc=Number(table.rows[i].cells[2].children[0].value);
+            var mrpPostDisc=((mrpValue)-(mrpValue*(applDisc/100)));
+            var orcValue=Number(table.rows[i].cells[6].children[0].value);//takes the orc value
+            //table.rows[i].cells[3].innerText=""+mrpPostDisc;
+            var extraDisc=Number(table.rows[i].cells[4].children[0].value);
+            var extraDisPrice=((mrpValue)-(mrpValue*(extraDisc/100))); 
+            
+            
+            table.rows[i].cells[5].innerText=""+extraDisPrice.toFixed(2);
+            table.rows[i].cells[5].style.color="black";
+            
+            var netInvoiceFromAPPL=((100-orcValue)/100)* extraDisPrice;     
+            table.rows[i].cells[7].innerText=""+netInvoiceFromAPPL.toFixed(2);
+            
+        }
+    }
+    
+    function onselectDate(){
+        
+        var table=	document.getElementById('Page:theForm:PageBlock:PageBlockSec:newOffId');
+        alert('date change');
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        alert(today);
+        
+        /*    var rowLength2 = table.rows.length;
+       for(var i=1;i<rowLength2;i++){
+        var validityOfPrice=Date(table.rows[i].cells[8].children[0].value);
+       alert(validityOfPrice);
+       }*/
+       
+   }     
+    
+    
+    function makeEditable(statusId){
+        debugger;
+        var status=document.getElementById(statusId);
+        alert(status);   
+    }
+    </script>
+    <style type="text/css">
+        .inp_fd {
+        position:relative;
+        }
+        .fieldSSize {
+        width: 60px;
+        }
+        .fieldMSize {
+        width: 120px;
+        }
+        .mand {
+        font-size: 20px!important;
+        color: red!important;    
+        }
+        .imgClass:hover {
+        cursor:pointer;
+        }
+        .look_pos  input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        
+        
+        .look_pos {
+        position:relative!important;
+        }
+        .look_pos a {
+        position:absolute!important;
+        right:0px;
+        top:3px;
+        }
+        body .bPageBlock .detailList tr th:last {
+        width:50%;
+        }
+        .form_inputs select {
+        width:100%!important;
+        }
+        .look_css {
+        position:relative;
+        }
+        .look_css a {
+        position:absolute;
+        right:5px;
+        top:6px;
+        }
+        .look_css input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .slds-input, .look_css input[type="text"] {
+        width:150px!important;
+        }
+        .look_pos  input[type="text"] {
+        width:200px!important;
+        }
+        
+        }
+        
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        z-index:999999;
+        }
+        
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+        
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        
+    </style>
+    <apex:outputpanel >
+        <apex:actionstatus id="actStatusId">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                                                                     height: 800%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Saving...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+    
+    
+    
+    
+    
+    
+    <apex:form id="theForm">
+        <apex:pageMessages id="theErrorMessage" />
+        <apex:variable value="{!1}" var="SN2" />
+        <apex:variable value="{!0}" var="SN" />
+        <apex:pageBlock Id="PageBlock" > 
+            <apex:pageBlockSection Id="PageBlockSec" >
+                <!--   <apex:param name="test" value="{!SN}"/> -->
+                <apex:pageBlockTable value="{!newOfferSectlist}" var="newOffer" rendered="{!newOfferSectlist.size!=null}" id="newOffId" >
+                    
+                    <!-- <apex:column >
+<apex:facet name="header">Serial Number</apex:facet>
+<apex:outputText value="{!SN}"/>
+<apex:variable var="SN" value="{!SN+1}"/>
+</apex:column> -->
+                    <apex:column >
+                        <apex:facet name="header">Product</apex:facet>
+                        <apex:outputField value="{!newOffer.Product_Name__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Offer MRP</apex:facet>
+                        <apex:outputField value="{!newOffer.MRP_Value__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Std. APPL Discount</apex:facet>
+                        <!--    <apex:param name="test" value="{!SN+1}"/> -->
+                        <apex:inputField value="{!newOffer.APPL__c}" styleClass="slds-input" onkeyup="onchangemethod()" html-disabled="true" />
+                        
+                        
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">MRP Post Discount</apex:facet>
+                        <apex:outputField value="{!newOffer.MRP_Post_Discount__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Project Value</apex:facet>
+                        <apex:inputField value="{!newOffer.Project_Value__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Discount to Customer</apex:facet>
+                        <apex:inputField value="{!newOffer.Extra_Discount__c}" onkeyup="onchangemethod()" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Discounted Price</apex:facet>
+                        
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">ORC/ MARGIN TO DLR/DIST</apex:facet>
+                        <apex:inputField value="{!newOffer.ORC_MARGIN_TO_DLR_DIST__c}" onkeyup="onchangemethod()" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Net Invoice Value from APPL</apex:facet>
+                        
+                    </apex:column>
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Delivery Start Date</apex:facet>
+                        <apex:inputField value="{!newOffer.Delivery_Start_Date__c}" onchange=""/>
+                    </apex:column>
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Competitor Name</apex:facet>
+                        <apex:inputField value="{!newOffer.Competitors_name__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Product Specified</apex:facet>
+                        <apex:inputField value="{!newOffer.Product_Specified__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Delivery Schedule</apex:facet>
+                        <apex:inputField value="{!newOffer.Delivery_Schedule__c}" />
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Validity For The Price</apex:facet>
+                        <apex:inputField value="{!newOffer.Validity_for_the_Price__c}" />
+                    </apex:column>
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Product Status</apex:facet>
+                        <div id="lost_{!SN+1}" >
+                            <apex:inputField value="{!newOffer.Product_Status__c}" />
+                            
+                        </div>
+                        
+                        
+                        <apex:variable var="SN" value="{!SN+1}"/> 
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Lost to brand</apex:facet>
+                        
+                        <apex:inputField value="{!newOffer.Lost_to_brand__c}"  />
+                        
+                        
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Reason of lost sales</apex:facet>
+                        
+                        <apex:inputField value="{!newOffer.Reason_of_lost_sales__c}" />
+                        
+                    </apex:column>
+                    <apex:column >
+                        
+                        <apex:facet name="header">Others (Reason)</apex:facet>
+                        
+                        
+                        <apex:inputField value="{!newOffer.Others_Lost_Sales__c}" /> 
+                        
+                        
+                        
+                        
+                    </apex:column>
+                    
+                    
+                </apex:pageBlockTable> 
+                
+                
+            </apex:pageBlockSection> 
+            <div>
+                
+                
+                <apex:pageBlockSection title="Terms and Conditions" rendered="{!newOfferSectlist.size!=null}" collapsible="false">
+                    
+                   
+                    <apex:outputpanel title="Terms and Conditions" rendered="{!newOfferSectlist.size!=null}">
+                        
+                        <div class="slds-p-around_small form_inputs">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Freight</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Freight__c}" styleClass="slds-input"/>
+                                </div>
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Delivery</b></label> <sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Delivery__c}" styleClass="slds-input"/>
+                                </div>
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Price Basis</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Price_Basis__c}"  styleClass="slds-input"/>
+                                </div>
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Delivery Lots</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Delivery_Lots__c}" styleClass="slds-input"/>
+                                </div>
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Taxes</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Taxes__c}"  styleClass="slds-input"/>
+                                </div>
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Offer Valid Till</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Offer_Valid_Till__c}"  styleClass="slds-input"/>
+                                </div>
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Payment Term</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Payment_Term__c}"  styleClass="slds-input"/>
+                                </div> 
+                                
+                                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Order Placement</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Order_Placement__c}" styleClass="slds-input"/>
+                                </div>
+                                <div  class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                                    <label><b>Delivery Conditions &amp; Gurantee</b></label><sub class="mand">*</sub>
+                                    <apex:inputField value="{!oppTC.Delivery_Conditions_Gurantee__c}" styleClass="slds-input"/>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputpanel>
+                    
+                    
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="bottom">
+           
+                    <apex:commandButton value="Save"  action="{!saveUpdatedOffers}" rerender="shwMsg" styleClass="slds-button slds-button_brand" reRender="theErrorMessage" status="actStatusId" />
+                    <apex:commandButton value="Cancel"  action="{!cancelEdit}" status="status" rerender="shwMsg" styleClass="slds-button slds-button_brand" />
+                </apex:pageBlockButtons>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

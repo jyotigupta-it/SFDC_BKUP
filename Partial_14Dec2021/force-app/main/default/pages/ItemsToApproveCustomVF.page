@@ -1,0 +1,6 @@
+<apex:page >
+    <!--<c:SPR_SubmitEmail ></c:SPR_SubmitEmail>
+    <c:SpecialPricingRequestComp ></c:SpecialPricingRequestComp>-->
+    
+    <c:ItemToApproveCustomVFComp ></c:ItemToApproveCustomVFComp>
+</apex:page>

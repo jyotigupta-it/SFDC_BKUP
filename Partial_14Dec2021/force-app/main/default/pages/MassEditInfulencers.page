@@ -1,0 +1,355 @@
+<apex:page controller="MassEditInfulencers" showHeader="false"  docType="html-5.0" id="thepage">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<apex:slds />
+<style>
+             .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                z-index:999999;
+            }
+            
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+            
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            
+ 
+ .look_css input[type="text"] {
+            background-color: #fff;
+    color: #16325c;
+    border: 1px solid #d8dde6;
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+}
+.look_css {
+    position:relative;
+}
+        .look_css a {
+            position:absolute;
+            right:4px;
+            top:6px;
+        }
+        .inf_table .slds-truncate { 
+        white-space:normal!important;
+        }
+        .inf_table th { 
+        white-space:normal!important;
+        }
+        
+        @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .slds-input,.look_css input[type="text"] {
+            width:150px!important;
+        }
+         }
+</style>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+        $j=jQuery.noConflict();
+        var newWin=null;
+        function openAccountPopup(partyId) {
+            //alert('Hi');
+            var url="/001/e?RecordType={!recordTypeId}&ent=Account&00N3000000BjlZy="+partyId;
+            newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+        }
+    </script>
+    <apex:form id="theform">
+        <apex:pageMessages ></apex:pageMessages>
+          <!--------------------------------------Influencer Details--------------------------------------------  -->
+                                  
+          <div id="myModalInSrch" class="modal">    
+                   <div class="modal-content" >
+                    <span class="close">&times;</span>
+                    
+                      <apex:outputpanel id="lookupPanelInSrch"  styleclass="outpanel">   
+                     
+                     
+                         <div class="slds-page-header">
+                              <div clss="slds-media">
+                                <div class="slds-media__body">
+                                 <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                 <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                              </div>
+                          </div>
+                        
+                        <div class="slds-p-around_x-small">
+                            <p>Please enter the search term below and click the 'Go' button.  This will
+                               execute a search across all text fields</p>
+                            <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>   
+                            <apex:input value="{!orderquery}" id="queryInSrch" disabled="false" type="text"/> 
+                            <span><apex:commandButton value="Go" action="{!runOrderQuery}" rerender="lookupPanelInSrch,dptableInSrch"/></span>
+                            
+                        </div>
+                        
+                      <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal inf_table" id="dptableInSrch">
+                          <thead>
+                            <tr class="slds-text-title_caps">
+                                <th>Name</th>
+                                <th>Primary Contact Person Name</th>
+                                <th>Party Type</th>
+                                <th>Contact Number (Mobile)</th>
+                                <th>State</th>
+                                <th>District</th>
+                                <th>Location</th>
+                                <!--<th>Status</th>
+                                <th>Street Address</th>
+                                <th>Ramco ID</th>-->
+                            </tr>   
+                          </thead>
+                          <tbody id="myTableInSrch">   
+                              
+                              <apex:repeat value="{!orderAccounts}" var="account">       
+                                          <tr class="slds-hint-parent">
+                                              <td data-label="Name" >
+                                                  <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                                  <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction3('{!account.Id}')">{!account.Name}</apex:outputLink>  </div>
+                                              </td>
+                                              <td data-label="Primary Contact Person Name ">
+                                                  <div class="slds-truncate" title="Primary Contact Person Name"><apex:outputText value="{!account.Primary_Contact_Person_Name__c}" /></div>
+                                              </td>
+                                              <td data-label="Party Type">
+                                                  <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                              </td>
+                                              <td data-label="Contact Number (Mobile)">
+                                                  <div class="slds-truncate" title="Contact Number (Mobile)"><apex:outputText value="{!account.Contact_Number_Mobile__c}" /></div>
+                                              </td>
+                                              <td data-label="State ">
+                                                  <div class="slds-truncate" title="State"><apex:outputText value="{!account.State__c}" /></div>
+                                              </td>
+                                              <td data-label="District ">
+                                                  <div class="slds-truncate" title="District"><apex:outputText value="{!account.District__c}" /></div>
+                                              </td>
+                                              <td data-label="Location ">
+                                                  <div class="slds-truncate" title="Location"><apex:outputText value="{!account.City__c}" /></div>
+                                              </td>
+                                              <!--<td data-label="Status ">
+                                                  <div class="slds-truncate" title="Status "><apex:outputText value="{!account.Status__c}" /></div>
+                                              </td>
+                                              <td data-label="Street Address">
+                                                  <div class="slds-truncate" title="Street Address"><apex:outputText value="{!account.Street_Address__c}" /></div>
+                                              </td>
+                                              <td data-label="Ramco ID">
+                                                  <div class="slds-truncate" title="Ramco ID"><apex:outputText value="{!account.Ramco_ID__c}" /></div>
+                                              </td>-->
+                                          </tr>
+                                         <input id="closebtn" type="hidden" />
+                              </apex:repeat>
+                          </tbody>
+                      </table> 
+                      
+                      
+                      
+                      </apex:outputpanel>
+                      </div></div> 
+                  
+              <!--------------------------------------Influencer Details End----------------------------------------  -->
+        <apex:outputpanel >               <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                <div class="slds-media__figure">
+              
+                
+                 <h1 class="slds-truncate" title="Influencer Details">Influencer Details </h1>
+  
+               
+                </div>
+                </div>
+                </div>
+                </div></div>
+
+               <div id="InfluencersSection">
+              <apex:variable var="i" value="{!0}" />
+                <apex:variable var="j" value="{!1}" />
+       <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="influencer">
+          <thead>
+            <tr class="slds-text-title_caps">
+               <th>Influencer Type</th>
+                <th>Source</th>
+                <th>Account </th>
+                <th>Create Account </th>
+                <th>Firm Name</th>
+                <th>Last Visit Date</th>
+                <th>Update of Last Visit </th>
+            </tr>   
+          </thead>
+          <tbody>       
+              <apex:repeat value="{!InfluencerList}" var="influencer">
+                      
+                      
+                                      
+                          <tr class="slds-hint-parent">
+                              <td data-label="Influencer Type" >
+                                  <div class="slds-truncate" title="Influencer Type">  <apex:outputField value="{!influencer.Influencer_Type__c}" /></div>
+                              </td>
+                              <td data-label="Source">
+                                  <div class="slds-truncate" title="Source">   <apex:inputField value="{!influencer.Source__c}" styleClass="slds-input"/></div>
+                              </td>
+                              
+                              <td data-label="Account ">
+                                 <div class="{!j}I">
+                                     <div class="{!j}B"></div>
+                                     <div class="tg-il5c">
+                                         <label>Account</label> <sub>*</sub>
+                                         <div class="tg-733k look_css">
+                                             <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account">
+                                             <apex:inputText value="{!influencer.Account__c}" id="targetId" styleClass="targetfield{!j}" style="display:none"/>
+                                             <input type="text" size="20" id="targetName{!j}" value="{!influencer.Account__r.Name}" Class="slds-input" onchange="getFirmName({!j}); return false;"/>
+                                             <a href="#" id="myBtn" class="lk" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="Myfunction(targetName{!j},{!j})"/> </a>
+                                             </apex:outputPanel>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </td>
+                                
+                              <td data-lable="create Account">
+                               <apex:image id="theImage" styleClass="imgClass" value="{!$Resource.AddIcon}" width="25" height="25" onclick="openAccountPopup('{!influencer.Influencer_Type__c}'); return false;" />
+                              </td>
+                               <td data-label="Firm name">
+                                  <div class="slds-truncate" title="Firm name"  id="AccFirm"> <apex:outputField value="{!influencer.Account__r.Firm_Name__c}"/></div>
+                              </td>
+                               <td data-label="LastVisit Date">
+                                  <div class="slds-truncate" title="LastVisit Date"> <apex:outputField value="{!influencer.Last_Visit_Date__c}"/></div>
+                              </td>
+                               <td data-label="Update of Last Visit ">
+                                  <div class="slds-truncate" title="Update of Last Visit "> <apex:outputField value="{!influencer.Update_of_Last_Visit__c}"/></div>
+                                  <apex:variable var="i" value="{!i+1}" />
+ 
+                              </td>
+                          </tr>
+                          <apex:variable var="j" value="{!j+1}" />
+ 
+              </apex:repeat>
+          </tbody>
+      </table>
+     </div>
+     <center>
+     <div class="slds-p-around_small">
+       <apex:commandButton value="Save" action="{!updateInfluencers}" oncomplete="window.top.location='/{!projectId}'; return false" styleClass="slds-button slds-button_brand" />
+                <apex:commandButton value="Cancel" action="{!cancel}" styleClass="slds-button slds-button_neutral"/>
+     </div>
+     </center>
+             <script>
+               function getFirmName(iValue) {
+
+            //console.log($j("[id$=infulenceAccount]").val());
+            //console.log(iValue);
+            //alert();
+            //
+
+            
+          var idvalue= "thePage:theForm:InfluencersSection:influencer:" +
+                iValue + ":infulenceAccount";
+            //console.log(idValue);
+            console.log(document.getElementById(idValue).value);
+            var accName = document.getElementById(idValue).value;
+            var accFirm =
+                "thePage:theForm:InfluencersSection:influencer:" +
+                iValue + ":AccFirm";
+
+            CaptureProjectDetails.getAccountInfo(accName, function(result,
+                event) {
+
+                if (event.status) {
+                    console.log(result);
+                    document.getElementById(accFirm).value = result;
+                    calRender();
+                }
+            });
+
+
+
+        }
+
+                    var j$ = jQuery.noConflict();
+                                        
+                    // Get the modal
+                    var modal = document.getElementById('myModalInSrch');
+                    var elm;                    
+                    var fld;
+                     
+                     // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+                    
+                    // When the user clicks the button, open the modal 
+                    function Myfunction(elid, fldid) {
+                        var modal2 = document.getElementById('myModalInSrch');
+                        elm = elid.id;  
+                        fld = 'targetfield' + fldid; 
+                        console.log('fld='+fld);                    
+                        modal2.style.display = "block";
+                    }
+                    
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
+                    
+                     // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                        if (event.target == modal) {   
+                            modal.style.display = "none";
+                        }
+                    }
+                    
+                    function myFunction3(acctId) { 
+                        var nameElementId = 'acctName'+acctId;
+                        console.log(acctId);
+                        var val = document.getElementById(nameElementId).value;
+                        var aid = acctId; 
+                       
+                        document.getElementById("thepage:theform:queryInSrch").value =val; //fetch searched string
+                        document.getElementById(elm).value = val;    //assign to Account input field
+                        document.getElementsByClassName(fld)[0].value = aid;
+                        modal.style.display = "none";
+                    }
+                    
+                    j$(document).ready(function(){
+                      j$("#myInput").on("keyup", function() {
+                        var value = j$(this).val().toLowerCase();
+                        j$("#myTable tr").filter(function() {
+                          j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                      });
+                    });
+                    j$('#myModalInSrch').find('#myInput').focus();
+                </script>
+ 
+     </apex:outputpanel>
+     
+     
+    </apex:form>
+</apex:page>

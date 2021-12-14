@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Jeep_Campaign_Actual__c</fullName>
+    <externalId>false</externalId>
+    <label>Jeep Campaign (Actual)</label>
+    <summarizedField>AP_Site_Visit__c.No_Of_Activities__c</summarizedField>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Other Activities</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Othet_Activities__c</field>
+        <operation>equals</operation>
+        <value>Promotional Activity</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Promotion_Type__c</field>
+        <operation>equals</operation>
+        <value>Jeep Campaign</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AP_Site_Visit__c.Target__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

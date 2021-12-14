@@ -1,0 +1,125 @@
+<apex:page showHeader="false" standardStylesheets="false" applyHtmlTag="false" docType="html-5.0" standardController="Account" extensions="AccountGeocodeUpdateController">
+    <script src="https://maps.googleapis.com/maps/api/js?key={!$Setup.Google_Geo_Location__c.Google_Map_API_Key__c}&sensor=false&callback=initMap" async="true" defer="true">
+    </script>
+    
+    <script type="text/javascript">
+    
+    function initMap() {
+        if(navigator.geolocation){
+            //browser support geolocation
+            navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError,{enableHighAccuracy:true,timeout:8000});
+        } else{
+            alert('Location is not captured.');
+        }
+    }
+    
+    function geocode_address(lat,lng){
+        
+        var geocoder  = new google.maps.Geocoder();             
+        var location  = new google.maps.LatLng(lat, lng);     
+        var street_addr_val = "";
+        var country_val = "";
+        var pincode_val = "";
+        var city_val="";
+        var state_val="";
+        geocoder.geocode({'latLng': location}, function (results, status) {
+            //alert('Inside geocoder');
+            
+            //var account_geo_details = [];
+            var account_geo_details = {};
+            account_geo_details['LATITUDE'] = lat;
+            account_geo_details['LONGITUDE'] = lng;
+            if(status == google.maps.GeocoderStatus.OK) {           
+                
+                var add = results[0].formatted_address;        
+                var addressType = '';
+                console.log("converted address:" + add);
+                
+                for (var i = 0; i < results[0].address_components.length; i++) {
+                    
+                    addressType = results[0].address_components[i].types[0];
+                    if(addressType=="country"){
+                        country_val = results[0].address_components[i].long_name;
+                        account_geo_details['COUNTRY'] = results[0].address_components[i].long_name;
+                        //alert('country_val  = '+country_val);   
+                    }
+                    if(addressType=="street_number" || addressType=="sublocality_level_3" || addressType=="sublocality_level_2" || addressType=="sublocality_level_1" || addressType=="route"){
+                        street_addr_val += results[0].address_components[i].long_name + ",";
+                        account_geo_details['STREET'] = results[0].address_components[i].long_name;
+                        //alert('street_addr_val  = '+street_addr_val);   
+                    }
+                    
+                    if(addressType=="postal_code"){
+                        pincode_val = results[0].address_components[i].long_name;
+                        account_geo_details['POSTAL_CODE'] = results[0].address_components[i].long_name;
+                        //alert('pincode_val = '+pincode_val);    
+                    }
+                    if(addressType=="administrative_area_level_1"){
+                        state_val = results[0].address_components[i].long_name;
+                        account_geo_details['STATE'] = results[0].address_components[i].long_name;
+                        //alert('state_val = '+state_val);  
+                    }
+                    
+                    if(addressType=="locality" || addressType=="administrative_area_level_2" ){
+                        city_val += results[0].address_components[i].long_name + ",";
+                        account_geo_details['CITY'] = results[0].address_components[i].long_name;
+                        //alert('city_val = '+city_val );   
+                    }
+                }   
+                
+                //alert('ADDRESS:'+JSON.stringify(account_geo_details));
+                //alert('{!acct.Id}');
+                Visualforce.remoting.Manager.invokeAction(  
+                    '{!$RemoteAction.AccountGeocodeUpdateController.updateAccountGeoDetails}',  '{!acct.Id}', JSON.stringify(account_geo_details),
+                    function(result, event){
+                        if (event.status) {
+                            alert('Location successfully captured.');
+                        } else if (event.type === 'exception') {
+                            alert(event.message);
+                        } else {
+                            alert(event.message);
+                        }
+                        if(typeof sforce !== "undefined" && sforce && sforce.one) {
+                            //sforce.one.navigateToURL('/{!acct.Id}', true);
+                            sforce.one.back(true);
+                            //sforce.one.navigateToSObject('{!acct.Id}', 'detail');
+                        } else {
+                            window.top.location = '/{!acct.Id}'; 
+                        }
+                    },  
+                    {escape: false}  
+                ); 
+            }
+        });
+    }
+    
+    function callbackSuccess(position) {
+        
+        //get latitude and longitude
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        
+        geocode_address(lat,lon);
+    }
+    
+    function callbackError(error) {
+        switch(error.code) {
+            case error.UNKNOWN_ERROR:
+                alert("Error in capturing location");
+                break;
+            case error.PERMISSION_DENIED:
+                alert("Permission is denied.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Position not available.");
+                break;
+            case error.TIMEOUT:
+                alert("Timeout.");
+                break;
+        }
+    }
+    </script>
+    <h4>
+        Please wait...we are capturing your location
+    </h4>
+</apex:page>

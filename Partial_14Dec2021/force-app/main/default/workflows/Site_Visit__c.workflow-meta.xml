@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Complaint_email</fullName>
+        <description>Complaint email</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Complaint_mailforsitevisit</template>
+    </alerts>
+    <alerts>
+        <fullName>Complaint_on_Site_Visit</fullName>
+        <description>Complaint on Site Visit</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_manager__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Complaint_mailforsitevisit1</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_to_BDM</fullName>
+        <description>Email Alert to BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Suggestion_mailforSitevisits</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_to_TL</fullName>
+        <description>Email Alert to TL</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_manager__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Suggestion_mailforSitevisits1</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalate_to_TL_HO</fullName>
+        <description>Escalate to TL / HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_manager__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Escalate_To_TL_HO</template>
+    </alerts>
+    <alerts>
+        <fullName>Others_Mail_to_BD</fullName>
+        <description>Others Mail to BD</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Other_Mail_for_Site_Visit1</template>
+    </alerts>
+    <alerts>
+        <fullName>Others_Mail_to_TL_and_HO</fullName>
+        <description>Others Mail to TL and HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_manager__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>zzz_fa20319d-c7d8-4313-9451-813357c4181c@deleted.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Other_Mail_for_Site_Visit</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Comp_off_utilized_field_to_update</fullName>
+        <field>Comp_Off_Utilized__c</field>
+        <literalValue>1</literalValue>
+        <name>Comp off utilized field to update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Tour_Plan1__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Manager_EmailId</fullName>
+        <field>Email_manager__c</field>
+        <formula>CreatedBy.Manager.Email</formula>
+        <name>Update Manager EmailId</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Comp off utilized to be checked when comp off is saved</fullName>
+        <actions>
+            <name>Comp_off_utilized_field_to_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Site_Visit__c.Reason_for_Non_Visit__c</field>
+            <operation>equals</operation>
+            <value>Comp Off</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Complaint Mail for sitevisit</fullName>
+        <actions>
+            <name>Complaint_email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Complaint_on_Site_Visit</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Site_Visit__c.Verified__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Site_Visit__c.Verification_Type__c</field>
+            <operation>equals</operation>
+            <value>Complaint</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Escalate To TL%2FHO</fullName>
+        <actions>
+            <name>Escalate_to_TL_HO</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Site_Visit__c.Escalate_To_TL_HO__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Others Mail for Site Visit</fullName>
+        <actions>
+            <name>Others_Mail_to_BD</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Others_Mail_to_TL_and_HO</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Site_Visit__c.Verification_Type__c</field>
+            <operation>equals</operation>
+            <value>Others</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Site_Visit__c.Verified__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Suggestion mail To TL and BD</fullName>
+        <actions>
+            <name>Email_Alert_to_BDM</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Email_Alert_to_TL</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Site_Visit__c.Verified__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Site_Visit__c.Verification_Type__c</field>
+            <operation>equals</operation>
+            <value>Suggestion</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Manager EmailId</fullName>
+        <actions>
+            <name>Update_Manager_EmailId</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>true</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Manager EmailId1</fullName>
+        <active>false</active>
+        <formula>True</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Complaint_Mail</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>true</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Complaint Mail</subject>
+    </tasks>
+    <tasks>
+        <fullName>Suggestion_Mail</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>true</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Suggestion Mail</subject>
+    </tasks>
+</Workflow>

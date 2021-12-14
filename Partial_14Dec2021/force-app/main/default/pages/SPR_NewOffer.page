@@ -1,0 +1,374 @@
+<!--**************************************************************************************************************************
+Created By      :Subhajit Ghosh
+Created Date    :21-August-2019
+Company         :KVP Business Solutions
+Modified Date   :
+Description     : To select those products which to be sent for approval. These selected products will be displayed in the pdf 
+that will be generated when project goes for the approval
+
+
+***********************************************************************************************************************************-->
+
+<apex:page controller="SPR_NewOfferController" docType="html-5.0">
+    <script>
+    function selectedproducts(){
+        if()
+            alert('please select ...');
+    }
+    </script>
+    <style>
+    .custom1 {
+    color: red !important;
+}
+    #Commentsid
+    {
+    color:black;
+    }
+    </style>
+    <apex:slds />  
+    <apex:outputpanel >
+        <apex:actionstatus id="actStatusId">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                                                                     height: 500%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 94.2px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Saving...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+    
+    
+    <apex:form id="formId">
+        <apex:pageMessages id="theErrorMessage" />
+        <apex:pageBlock > 
+            <apex:pageBlockSection >
+                <apex:pageBlockTable value="{!newOfferSectlist}" var="newOffer" rendered="{!newOfferSectlist.size>0}">
+                    <apex:column >
+                        <apex:facet name="header">Send for SPR</apex:facet>
+                        <apex:inputfield value="{!newOffer.Send_for_SPR__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Product</apex:facet>
+                        <apex:outputField value="{!newOffer.Product_Name__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Offer MRP</apex:facet>
+                        <apex:outputField value="{!newOffer.MRP_Value__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">APPL Discount</apex:facet>
+                        <apex:outputField value="{!newOffer.APPL__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">MRP Post Discount</apex:facet>
+                        <apex:outputField value="{!newOffer.MRP_Post_Discount__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Discount to Customer</apex:facet>
+                        <apex:outputField value="{!newOffer.Extra_Discount__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Discounted Price</apex:facet>
+                        <apex:outputField value="{!newOffer.Discounted_Price__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">ORC/ MARGIN TO DLR/DIST</apex:facet>
+                        <apex:outputField value="{!newOffer.ORC_MARGIN_TO_DLR_DIST__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Tentative Order Date</apex:facet>
+                        <apex:outputField value="{!newOffer.Tentative_Order_Date__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Delivery Start Date</apex:facet>
+                        <apex:outputField value="{!newOffer.Delivery_Start_Date__c}"/>
+                    </apex:column>
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Competitor Name</apex:facet>
+                        <apex:outputField value="{!newOffer.Competitors_name__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Product Specified</apex:facet>
+                        <apex:outputField value="{!newOffer.Product_Specified__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Delivery Schedule</apex:facet>
+                        <apex:outputField value="{!newOffer.Delivery_Schedule__c}" />
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Validity For The Price</apex:facet>
+                        <apex:outputField value="{!newOffer.Validity_for_the_Price__c}" />
+                    </apex:column>
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Product Status</apex:facet>
+                        <apex:outputField value="{!newOffer.Product_Status__c}"/>
+                    </apex:column>
+                    
+                    
+                </apex:pageBlockTable> 
+                
+                
+            </apex:pageBlockSection>   
+            <apex:pageBlockButtons location="bottom" rendered="{!newOfferSectlist.size>0}" >
+                <apex:commandButton styleClass="slds-button slds-button_brand" value="Edit" onclick="window.top.location='/apex/EditAllNewOfferSection?id={!oppProId}&applType=offerType&fromPage=SPRPage'; return false;"/>&nbsp;&nbsp;
+                <apex:commandButton styleClass="slds-button slds-button_brand" value="Select For SPR" action="{!giveUniqueName}" reRender="theErrorMessage,pagenameSection,formId,newsection" status="actStatusId" />
+                <apex:commandButton styleClass="slds-button slds-button_brand" value="Cancel" action="{!cancelProcess}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection rendered="{!newOfferSectlist.size == 0}" >    
+                All the offers are sent for SPR. Contact your manager for more details.
+            </apex:pageBlockSection>  
+        </apex:pageBlock>
+        
+        
+        <apex:outputPanel id="pagenameSection">
+            
+            <apex:outputPanel id="nameSection"  rendered="{!sprCheckSection}">
+                <apex:pageMessages id="pbErrorMessage" />
+                <apex:pageBlock id="newsection" title="Products you selected for special pricing request" >
+                    <apex:pageBlockSection >
+                        <!--  <apex:inputText value="{!uniquename}" id="theTextInput" label="Give Unique Name"  />-->
+                        
+                        <apex:pageBlockTable value="{!newOffSectUniqueList}" var="sprCheck" rendered="{!newOffSectUniqueList.size>0}">
+                            
+                            <apex:column >
+                                <apex:facet name="header">Remove Row </apex:facet>
+                                <apex:inputfield value="{!sprCheck.Send_for_SPR__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Product</apex:facet>
+                                <apex:outputField value="{!sprCheck.Product_Name__c}"/>
+                            </apex:column>
+                            
+                            
+                            <apex:column >
+                                <apex:facet name="header">Offer MRP</apex:facet>
+                                <apex:outputField value="{!sprCheck.MRP_Value__c}"/>
+                                
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">APPL Discount</apex:facet>
+                                <apex:outputField value="{!sprCheck.APPL__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">MRP Post Discount</apex:facet>
+                                <apex:outputField value="{!sprCheck.MRP_Post_Discount__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Special Project Discount</apex:facet>
+                                <apex:outputField value="{!sprCheck.Extra_Discount__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Discounted Price</apex:facet>
+                                <apex:outputField value="{!sprCheck.Discounted_Price__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">ORC/ MARGIN TO DLR/DIST</apex:facet>
+                                <apex:outputField value="{!sprCheck.ORC_MARGIN_TO_DLR_DIST__c}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">Tentative Order Date</apex:facet>
+                                <apex:outputField value="{!sprCheck.Tentative_Order_Date__c}"/>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Delivery Start Date</apex:facet>
+                                <apex:outputField value="{!sprCheck.Delivery_Start_Date__c}"/>
+                            </apex:column>
+                            
+                            
+                            <apex:column >
+                                <apex:facet name="header">Competitor Name</apex:facet>
+                                <apex:outputField value="{!sprCheck.Competitors_name__c}"/>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Product Specified</apex:facet>
+                                <apex:outputField value="{!sprCheck.Product_Specified__c}"/>
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Delivery Schedule</apex:facet>
+                                <apex:outputField value="{!sprCheck.Delivery_Schedule__c}" />
+                            </apex:column>
+                            
+                            <apex:column >
+                                <apex:facet name="header">Validity For The Price</apex:facet>
+                                <apex:outputField value="{!sprCheck.Validity_for_the_Price__c}" />
+                            </apex:column>
+                            
+                        </apex:pageBlockTable> 
+                        
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection >
+                        <div align="">
+                            <p align="Center"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Avg Discount:{!AverageDiscount}</p><br/>
+                            <p align="Right"><apex:outputText value="{0, number, currency}">
+                                Net Invoice Value: <apex:param value="{!netInvoiceValue}" />
+                                </apex:outputText></p>
+                        </div>
+                    </apex:pageBlockSection>
+                     <!--<apex:outputPanel layout="block" styleClass="custom1">-->
+                     <apex:pageBlockSection id="Commentsid"  title="Comments or Remarks section"  collapsible="false"  >
+                      
+                           <apex:inputTextarea label="Remarks/Comment" value="{!commentOrRemarks}" rows="3" cols="40"/>
+                       
+                    </apex:pageBlockSection>
+                   <apex:outputPanel >
+   <script>colorPageBlock(document.getElementById("{!$Component.Commentsid}"), "black");</script>
+</apex:outputPanel>
+                   
+                    <div>
+                        <apex:commandButton styleClass="slds-button slds-button_brand" value="Remove selected rows" action="{!removeSelectedRow}" reRender="pagenameSection" />
+                        <apex:commandButton styleClass="slds-button slds-button_brand" value="Save Record" action="{!submitApproval}" reRender="pagenameSection,theErrorMessage,pbErrorMessage" status="actStatusId"/>  
+                    </div>
+                </apex:pageBlock>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        
+        <!-- ************************************* -->
+        <!--    <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+<thead>
+<tr class="slds-text-title_caps">
+<th>Product</th>
+<th>Offer MRP</th>
+<th>APPL Discount</th>
+<th>MRP Post Discount</th>
+<th>Extra Discount</th>
+<th>Discounted Price</th>
+<th>ORC/ MARGIN TO DLR/DIST</th>
+<th>Tentative Order Date</th>
+<th>Offer Probability</th>
+<th>Delivery Start Date</th>
+<th>Delivery End Date</th>
+<th>Competitor Name</th>
+<th>Distributor Name</th>
+<th>Product Specified</th>
+<th>Payment Terms</th>
+<th>Delivery Schedule</th>
+<th>Why Additional Discount?</th>
+<th>Validity For The Price</th>
+<th>Product Status</th>
+</tr>   
+</thead>
+<tbody>   
+<apex:repeat value="{!newOfferSectlist}" var="newOffer" id="sprTable" rendered="{!newOfferSectlist.size!=null}">
+
+<tr class="slds-hint-parent">
+<td data-label="Offer Check" >
+<div class="slds-truncate" title="Offer Check">
+<apex:inputCheckbox value="{!oppOffer.Offer_Check__c}"/>
+</div>
+</td> 
+
+<td data-label="Product" >
+<div class="slds-truncate" title="Product">
+<apex:outputField value="{!newOffer.Product_Name__c}"/>
+</div>
+</td> 
+<td data-label="Offer MRP" >
+<div class="slds-truncate" title="Offer MRP">
+<apex:outputField value="{!newOffer.MRP_Value__c}"/>
+</div>
+</td> 
+<td data-label="APPL Discount" >
+<div class="slds-truncate" title="APPL Discount">
+<apex:outputField value="{!newOffer.APPL__c}"/>
+</div>
+</td>  <td data-label="MRP Post Discount" >
+<div class="slds-truncate" title="MRP Post Discount">
+
+</div>
+</td>  <td data-label="Extra Discount" >
+<div class="slds-truncate" title="Extra Discount">
+<apex:outputField value="{!newOffer.Extra_Discount__c}"/>
+</div>
+</td>  <td data-label="Discounted Price" >
+<div class="slds-truncate" title="Discounted Price">
+
+</div>
+</td>  <td data-label="ORC/ MARGIN TO DLR/DIST" >
+<div class="slds-truncate" title="ORC/ MARGIN TO DLR/DIST">
+<apex:outputField value="{!newOffer.ORC_MARGIN_TO_DLR_DIST__c}"/>
+</div>
+</td>  <td data-label="Tentative Order Date" >
+<div class="slds-truncate" title="Tentative Order Date">
+<apex:outputField value="{!newOffer.Tentative_Order_Date__c}"/>
+</div>
+</td>  <td data-label="Offer Probability" >
+<div class="slds-truncate" title="Offer Probability">
+<apex:outputField value="{!newOffer.Offer_Probability__c}"/>
+</div>
+</td>  <td data-label="Delivery Start Date" >
+<div class="slds-truncate" title="Delivery Start Date">
+<apex:outputField value="{!newOffer.Delivery_Start_Date__c}"/>
+</div>
+</td> 
+<td data-label="Delivery End Date" >
+<div class="slds-truncate" title="Delivery End Date">
+<apex:outputField value="{!newOffer.Delivery_End_Date__c}"/>
+</div>
+</td>
+<td data-label="Competitor Name" >
+<div class="slds-truncate" title="Competitor Name">
+<apex:outputField value="{!newOffer.Competitors_name__c}"/>
+</div>
+</td> 
+<td data-label="Distributor Name" >
+<div class="slds-truncate" title="Distributor Name">
+<apex:outputField value="{!newOffer.Distributor__c}"/>
+</div>
+</td> 
+<td data-label="Product Specified" >
+<div class="slds-truncate" title="Product Specified">
+<apex:outputField value="{!newOffer.Product_Specified__c}"/>
+</div>
+</td>  <td data-label="Payment Terms" >
+<div class="slds-truncate" title="Payment Terms">
+<apex:outputField value="{!newOffer.Payment_terms__c}"/>
+</div>
+</td> 
+<td data-label="Delivery Schedule" >
+<div class="slds-truncate" title="Delivery Schedule">
+<apex:outputField value="{!newOffer.Delivery_Schedule__c}" />
+</div>
+</td> 
+<td data-label="Why Additional Discount?" >
+<div class="slds-truncate" title="Why Additional Discount?">
+<apex:outputField value="{!newOffer.Why_Additional_Discount__c}"/>
+</div>
+</td> 
+<td data-label="Validity For The Price" >
+<div class="slds-truncate" title="Validity For The Price">
+<apex:outputField value="{!newOffer.Validity_for_the_Price__c}" />
+</div>
+</td>
+
+
+
+
+<td data-label="Product Status" >
+<div class="slds-truncate" title="Product Status">
+<apex:inputField value="{!newOffer.Product_Status__c}"/>
+</div>
+</td>    
+
+</tr>
+</apex:repeat>
+</tbody>
+</table> -->
+        
+    </apex:form>
+</apex:page>

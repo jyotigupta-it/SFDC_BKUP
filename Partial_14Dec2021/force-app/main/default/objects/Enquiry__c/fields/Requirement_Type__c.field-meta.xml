@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requirement_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Requirement Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Accounts</fullName>
+                <default>false</default>
+                <label>Accounts</label>
+            </value>
+            <value>
+                <fullName>Advertisement</fullName>
+                <default>false</default>
+                <label>Advertisement</label>
+            </value>
+            <value>
+                <fullName>Branding</fullName>
+                <default>false</default>
+                <label>Branding</label>
+            </value>
+            <value>
+                <fullName>brochure</fullName>
+                <default>false</default>
+                <label>brochure</label>
+            </value>
+            <value>
+                <fullName>Brochure &amp; Pricelist</fullName>
+                <default>false</default>
+                <label>Brochure &amp; Pricelist</label>
+            </value>
+            <value>
+                <fullName>Catalogue</fullName>
+                <default>false</default>
+                <label>Catalogue</label>
+            </value>
+            <value>
+                <fullName>Compliants</fullName>
+                <default>false</default>
+                <label>Compliants</label>
+            </value>
+            <value>
+                <fullName>Dealer Details</fullName>
+                <default>false</default>
+                <label>Dealer Details</label>
+            </value>
+            <value>
+                <fullName>Dealership</fullName>
+                <default>false</default>
+                <label>Dealership</label>
+            </value>
+            <value>
+                <fullName>Discounts</fullName>
+                <default>false</default>
+                <label>Discounts</label>
+            </value>
+            <value>
+                <fullName>Distributoship</fullName>
+                <default>false</default>
+                <label>Distributorship</label>
+            </value>
+            <value>
+                <fullName>Exhibition</fullName>
+                <default>false</default>
+                <label>Exhibition</label>
+            </value>
+            <value>
+                <fullName>HR</fullName>
+                <default>false</default>
+                <label>HR</label>
+            </value>
+            <value>
+                <fullName>IT</fullName>
+                <default>false</default>
+                <label>IT</label>
+            </value>
+            <value>
+                <fullName>Job Opportunity</fullName>
+                <default>false</default>
+                <label>Job Opportunity</label>
+            </value>
+            <value>
+                <fullName>Logistics</fullName>
+                <default>false</default>
+                <label>Logistics</label>
+            </value>
+            <value>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+                <label>Marketing</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Price &amp; discounts</fullName>
+                <default>false</default>
+                <label>Price &amp; discounts</label>
+            </value>
+            <value>
+                <fullName>Pricelist</fullName>
+                <default>false</default>
+                <label>Pricelist</label>
+            </value>
+            <value>
+                <fullName>Purchase Dept.</fullName>
+                <default>false</default>
+                <label>Purchase Dept.</label>
+            </value>
+            <value>
+                <fullName>Quotation</fullName>
+                <default>false</default>
+                <label>Quotation</label>
+            </value>
+            <value>
+                <fullName>Samples</fullName>
+                <default>false</default>
+                <label>Samples</label>
+            </value>
+            <value>
+                <fullName>Solvent</fullName>
+                <default>false</default>
+                <label>Solvent</label>
+            </value>
+            <value>
+                <fullName>Technical Manual</fullName>
+                <default>false</default>
+                <label>Technical Manual</label>
+            </value>
+            <value>
+                <fullName>Technical Details</fullName>
+                <default>false</default>
+                <label>Technical Details</label>
+            </value>
+            <value>
+                <fullName>Distributor Details</fullName>
+                <default>false</default>
+                <label>Distributor Details</label>
+            </value>
+            <value>
+                <fullName>Scheme</fullName>
+                <default>false</default>
+                <label>Scheme</label>
+            </value>
+            <value>
+                <fullName>Gift</fullName>
+                <default>false</default>
+                <label>Gift</label>
+            </value>
+            <value>
+                <fullName>Admin</fullName>
+                <default>false</default>
+                <label>Admin</label>
+            </value>
+            <value>
+                <fullName>Maintenance</fullName>
+                <default>false</default>
+                <label>Maintenance</label>
+            </value>
+            <value>
+                <fullName>Safety</fullName>
+                <default>false</default>
+                <label>Safety</label>
+            </value>
+            <value>
+                <fullName>International</fullName>
+                <default>false</default>
+                <label>International</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

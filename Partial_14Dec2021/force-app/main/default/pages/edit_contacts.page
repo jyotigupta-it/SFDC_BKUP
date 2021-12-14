@@ -1,0 +1,37 @@
+<apex:page standardController="Contacts__c">
+<apex:form >
+<apex:pageblock title="Contact Details" mode="edit" >
+<apex:pageBlockButtons >
+<apex:commandButton value="Update" action="{!save}"/>
+<apex:commandButton value="Cancel" action="{!cancel}"/>
+</apex:pageBlockButtons> 
+<apex:pageblockSection >
+<apex:inputField value="{!Contacts__c.Type__c}">
+<apex:actionSupport event="onchange"/>
+</apex:inputField>
+<apex:inputfield value="{!Contacts__c.Ownerid}"/>
+<apex:inputField value="{!Contacts__c.Name}"/>
+<apex:inputField value="{!Contacts__c.City__c}"/>
+<apex:inputField value="{!Contacts__c.Mobile__c}"/>
+<apex:inputfield value="{!Contacts__c.Visit_Type__c}" required="true"/>
+<apex:inputField required="true" value="{!Contacts__c.Status__c}" rendered="{!OR(Contacts__c.Type__c == 'Plumber',Contacts__c.Type__c == 'Farmer',Contacts__c.Type__c == 'Mechanic')}"/>
+</apex:pageblockSection>
+<apex:pageblockSection title="Additional Details" rendered="{!AND(Contacts__c.Type__c != '',Contacts__c.Type__c != 'Plumber',Contacts__c.Type__c != 'Farmer',Contacts__c.Type__c != 'Mechanic')}">
+<apex:inputField value="{!Contacts__c.Firm_Name__c}"/>
+<apex:inputField value="{!Contacts__c.Distributor__c}"/>
+<apex:inputField required="true" value="{!Contacts__c.Status__c}"/>
+<apex:inputField value="{!Contacts__c.Street__c}"/>
+<apex:inputField value="{!Contacts__c.Area__c}"/>
+<apex:inputField value="{!Contacts__c.State__c}"/>
+<apex:inputField value="{!Contacts__c.District__c}"/>
+<apex:inputField value="{!Contacts__c.Pin_Code__c}"/>
+<apex:inputField required="true" value="{!Contacts__c.Phone__c}"/>
+<apex:inputField required="true" value="{!Contacts__c.Email__c}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection rendered="{!AND(Contacts__c.Type__c != '',Contacts__c.Type__c != 'Plumber',Contacts__c.Type__c != 'Farmer',Contacts__c.Type__c != 'Mechanic')}">
+<apex:inputField value="{!Contacts__c.Birthdate__c}"/>
+<apex:inputField value="{!Contacts__c.Anniversary_Date__c}"/>
+</apex:pageblockSection>
+</apex:pageblock>
+</apex:form>
+</apex:page>

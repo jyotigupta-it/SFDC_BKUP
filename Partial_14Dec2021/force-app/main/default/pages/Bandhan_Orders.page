@@ -1,0 +1,358 @@
+<!--******************************************************************************************************************************
+
+    Developer             :Bhargav Surapaneni
+    Page Name             :Bandhan_Orders
+    version               :2.0
+    Date                  :06-April-2017
+    Modified Date         :22-August-2017
+    Modified by           :Bhargav Surapaneni
+    Modification Comments :Rendering the page based on the cart status
+    Description           :For Bandhan Customers only(if bandhan customer is true in dealer accounts
+     
+********************************************************************************************************************************-->
+
+
+<apex:page showHeader="False" sidebar="False" standardController="Bandhan_Orders__c" extensions="Bandhan_Order_Controller"  >
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <apex:slds />
+    <style>
+        .multi_pick_css select {
+            background-color: #fff;
+    color: #16325c;
+    border: 1px solid #d8dde6;
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    
+        }
+        .wid80 {
+            width:80%!important;
+        }
+        .multiSelectPicklistCell a img {
+        height:20px!important;
+        }
+    </style>
+   <apex:form id="theform">
+       <div class="borderClass" >
+       
+           <div class="slds-page-header">
+              <div class="slds-media">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-opportunity" title="Bandhan Orders">
+                    <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
+                      <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#opportunity" xmlns:xlink="http://www.w3.org/1999/xlink" />
+                    </svg>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">Bandhan Orders</h1>
+                </div>
+              </div>
+            </div>
+            
+            <apex:outputPanel id="pb">          
+                <div class="slds-panel slds-panel_docked slds-panel_docked-left slds-is-directional slds-is-open" aria-hidden="false">
+                  
+                  <div class="slds-panel__body slds-p-around_large">
+                  <div class="slds-form slds-form_compound">
+                  <apex:actionRegion >
+                        <fieldset class="slds-form-element">
+                          <!--<legend class="slds-form-element__label slds-form-element__legend slds-text-title_caps">Bandhan Order Section</legend>-->
+                          <h2 class="slds-section__title slds-theme_shade">
+                            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Bandhan Order Section</span>
+                          </h2>
+                          <div class="slds-form-element__group">
+                                <div class="slds-grid slds-wrap">
+                                      <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                                        <label class="slds-form-element__label" for="select-01">Round</label>
+                                        <div class="slds-form-element__control ">
+                                          <div class="slds-select_container">
+                                            <apex:inputField required="false" value="{!bandhanOBJ.Round__c}" styleClass="slds-select"/>
+                                          </div>
+                                        </div>
+                                           </div>
+                                        <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                                        <label class="slds-form-element__label" for="select-01"><abbr class="slds-required" title="required">*</abbr>Call Person Name</label>
+                                        <div class="slds-form-element__control ">
+                                          <div class="slds-select_container">
+                                            <apex:inputField required="true" value="{!bandhanOBJ.Call_Center_Person_Name__c}" styleClass="slds-select"/>
+                                          </div>
+                                        </div>
+                                      </div>
+                                   
+                                      <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                                        
+                                        <label class="slds-form-element__label " for="select-01"><abbr class="slds-required" title="required">*</abbr>Cart Status</label>
+                                        <div class="slds-form-element__control ">
+                                          <div class="slds-select_container">
+                                            <apex:inputField required="true" value="{!bandhanOBJ.Cart_Status__c}" styleClass="slds-select">
+                                            <apex:actionSupport event="onchange" rerender="pb" /></apex:inputField>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                          </div>
+                        </fieldset>
+                    </apex:actionRegion>  
+
+                    <fieldset class="slds-form-element">
+                        <apex:outputPanel id="pbs2" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given'||bandhanOBJ.Cart_Status__c ='No order given',true,false)}" title="Details">
+                            <h2 class="slds-section__title slds-theme_shade">
+                                <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Details</span>
+                            </h2>
+                            <div class="slds-grid slds-wrap">
+                                      <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Order Date</label>
+                            <apex:inputField value="{!bandhanOBJ.Order_Date__c}" rendered="true" required="{!IF(bandhanOBJ.Cart_Status__c='Order Given',true,false)}" styleClass="slds-input wid80"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Vertical type</label>
+                            <apex:inputField value="{!bandhanOBJ.Vertical_type__c}" rendered="true" required="true" styleClass="slds-select"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Promotional Activity Type</label>
+                            <apex:inputField value="{!bandhanOBJ.Promotional_Activity_Type__c}" rendered="true" required="true" styleClass="slds-select"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Branding</label>
+                            <apex:inputField value="{!bandhanOBJ.Branding__c}" rendered="true" required="true" styleClass="slds-select"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small multi_pick_css">
+                            <label>BDM Support</label>
+                            <apex:inputField value="{!bandhanOBJ.BDM_Support__c}" rendered="true" required="true" styleClass=""/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small multi_pick_css">
+                            <label>Distributor Support</label>
+                            <apex:inputField value="{!bandhanOBJ.Distributor_Support__c}" rendered="true" required="true" styleClass=""/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small multi_pick_css">
+                            <label>Suggestions</label>
+                            <apex:inputField value="{!bandhanOBJ.Suggestions__c}" rendered="true" required="true" styleClass=""/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small multi_pick_css">
+                            <label>Complaints</label>
+                            <apex:inputField value="{!bandhanOBJ.Complaints__c}" rendered="true" required="true" styleClass=""/> 
+                            </div>
+                            </div>
+                        </apex:outputPanel>
+                    </fieldset>
+               
+                    
+                    <fieldset class="slds-form-element">
+                        <apex:outputPanel id="pbs3" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given',true,false)}" title="Plumbing Products">
+                            <h2 class="slds-section__title slds-theme_shade">
+                                <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Plumbing Products</span>
+                            </h2>
+                            <div class="slds-grid slds-wrap">
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Aqualife</label>
+                            <apex:inputField value="{!bandhanOBJ.Aqualife__c}" rendered="true" styleClass="slds-input"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>CPVC</label>
+                            <apex:inputField value="{!bandhanOBJ.CPVC__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>SWR</label>
+                            <apex:inputField value="{!bandhanOBJ.SWR__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            </div>
+                        </apex:outputPanel>
+                    </fieldset>
+                    
+                    <fieldset class="slds-form-element">
+                        <apex:outputPanel id="pbs4" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given',true,false)}" title="Agriculture Products">
+                            <h2 class="slds-section__title slds-theme_shade">
+                                <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Agriculture Products</span>
+                            </h2>
+                            <div class="slds-grid slds-wrap">
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Column Pipe</label>
+                            <apex:inputField value="{!bandhanOBJ.Column_Pipe__c}" rendered="true" styleClass="slds-input"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>V4</label>
+                            <apex:inputField value="{!bandhanOBJ.V4__c}" rendered="true" styleClass="slds-input"/>
+                            </div>
+                            </div>
+                        </apex:outputPanel>
+                    </fieldset>
+                    
+                    <fieldset class="slds-form-element">
+                        <apex:outputPanel id="pbs5" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given',true,false)}" title="New Products" > <!--columns="3"-->
+                            <h2 class="slds-section__title slds-theme_shade">
+                                <span class="slds-truncate slds-p-horizontal_small" title="Section Title">New Products</span>
+                            </h2>
+                            <div class="slds-grid slds-wrap">
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Air Admittance Valve</label>
+                            <apex:inputField value="{!bandhanOBJ.Air_Admittance_Valve__c}" rendered="true" styleClass="slds-input"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Ball Valves</label>
+                            <apex:inputField value="{!bandhanOBJ.Ball_Valves__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Butterfly Valves</label>
+                            <apex:inputField value="{!bandhanOBJ.Butterfly_Valves__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Concealed Cisterns</label>
+                            <apex:inputField value="{!bandhanOBJ.Concealed_Cisterns__c}" rendered="true" styleClass="slds-input"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Concealed Valves</label>
+                            <apex:inputField value="{!bandhanOBJ.Concealed_Valves__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Fire Collars</label>
+                            <apex:inputField value="{!bandhanOBJ.Fire_Collars__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Grease Seperator</label>
+                            <apex:inputField value="{!bandhanOBJ.Grease_Seperator__c}" rendered="true" styleClass="slds-input"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>IS 4985</label>
+                            <apex:inputField value="{!bandhanOBJ.IS_4985__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Silent Plus SWR</label>
+                            <apex:inputField value="{!bandhanOBJ.Silent_Plus_SWR__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Silent SWR</label>
+                            <apex:inputField value="{!bandhanOBJ.Silent_SWR__c}" rendered="true" styleClass="slds-input"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Surface Drainage</label>
+                            <apex:inputField value="{!bandhanOBJ.Surface_Drainage__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>U/G Drainage</label>
+                            <apex:inputField value="{!bandhanOBJ.U_G_Drainage__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Velocity Breaker</label>
+                            <apex:inputField value="{!bandhanOBJ.Velocity_Breaker__c}" rendered="true" styleClass="slds-input"/>  
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>Waste &amp; Traps</label>
+                            <apex:inputField value="{!bandhanOBJ.Waste_Traps__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-around_x-small">
+                            <label>WC PAN Connector</label>
+                            <apex:inputField value="{!bandhanOBJ.WC_PAN_Connector__c}" rendered="true" styleClass="slds-input"/> 
+                            </div>
+                            </div>
+                       </apex:outputPanel>
+                    </fieldset>
+                    
+                    <fieldset class="slds-form-element">
+                    
+                    </fieldset>
+                                        
+                                        
+                        <fieldset class="slds-form-element">
+                          <!--<legend class="slds-form-element__label slds-text-title_caps">Remarks</legend>-->
+                          <h2 class="slds-section__title slds-theme_shade">
+                            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Remarks Section</span>
+                          </h2>
+                          <div class="slds-form-element__group">
+                            <div class="slds-form-element__row">
+                              <div class="slds-form-element slds-size_1-of-1">
+                                <label class="slds-form-element__label" for="textarea-id-01">Remarks</label>
+                                <div class="slds-form-element__control slds-p-bottom_large">
+                                  <textarea id="textarea-id-01" class="slds-textarea" placeholder="Placeholder Text"></textarea>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                  </div>
+                <center>
+                        <div class="slds-p-around_x-small">
+                        <!--button class="slds-button slds-button_brand" >Save</button-->
+                          <apex:commandButton styleClass="slds-button slds-button--brand slds-m-right_x-small" action="{!save}" value="Save" />
+                          <apex:commandButton styleClass="slds-button slds-button_neutral" action="{!saveAndNew}" value="Save & New" />
+                  <!--button class="slds-button slds-button_neutral">Save and New</button>-->
+                
+                  </div>
+                      
+                   </center>
+                    
+                </div>
+            </div>    
+        </apex:outputPanel>
+        
+       
+     
+      <!-- <apex:sectionHeader title="Bandhan Orders" />     
+       <apex:pageBlock mode="edit" id="dpb">
+           <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/> 
+                <apex:commandButton action="{!saveAndNew}" value="Save & New"/>                
+           </apex:pageBlockButtons>
+           
+           <apex:actionRegion >
+           <apex:pageBlockSection id="dpbs1" title="Bandhan Order Section">
+            
+               <apex:inputField required="false" value="{!bandhanOBJ.Round__c}"/> 
+              
+               <apex:inputField required="true" value="{!bandhanOBJ.Call_Center_Person_Name__c}"/>
+               <apex:inputField required="true" value="{!bandhanOBJ.Cart_Status__c}"><apex:actionSupport event="onchange" rerender="dpb" /></apex:inputField>               
+           
+           </apex:pageBlockSection>     
+           </apex:actionRegion>
+           
+           <apex:pageBlockSection id="dpbs2" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given'||bandhanOBJ.Cart_Status__c ='No order given',true,false)}" title="Details">
+           <apex:inputField value="{!bandhanOBJ.Order_Date__c}" rendered="true" required="{!IF(bandhanOBJ.Cart_Status__c='Order Given',true,false)}"/>  
+           <apex:inputField value="{!bandhanOBJ.Vertical_type__c}" rendered="true" required="true"/>  
+           <apex:inputField value="{!bandhanOBJ.Promotional_Activity_Type__c}" rendered="true" required="true"/>  
+           <apex:inputField value="{!bandhanOBJ.Branding__c}" rendered="true" required="true"/>  
+           <apex:inputField value="{!bandhanOBJ.BDM_Support__c}" rendered="true" required="true"/>  
+           <apex:inputField value="{!bandhanOBJ.Distributor_Support__c}" rendered="true" required="true"/>  
+           <apex:inputField value="{!bandhanOBJ.Suggestions__c}" rendered="true" required="true"/>  
+           <apex:inputField value="{!bandhanOBJ.Complaints__c}" rendered="true" required="true"/>  
+          
+
+           </apex:pageBlockSection>
+           
+           <apex:pageBlockSection id="dpbs3" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given',true,false)}" title="Plumbing Products">
+            <apex:inputField value="{!bandhanOBJ.Aqualife__c}" rendered="true"/>  
+            <apex:inputField value="{!bandhanOBJ.CPVC__c}" rendered="true" /> 
+            <apex:inputField value="{!bandhanOBJ.SWR__c}" rendered="true" /> 
+           </apex:pageBlockSection>
+           
+           <apex:pageBlockSection id="dpbs4" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given',true,false)}" title="Agriculture Products">
+            <apex:inputField value="{!bandhanOBJ.Column_Pipe__c}" rendered="true" />  
+            <apex:inputField value="{!bandhanOBJ.V4__c}" rendered="true" />
+           </apex:pageBlockSection>
+           
+           <apex:pageBlockSection id="dpbs5" rendered="{!IF(bandhanOBJ.Cart_Status__c ='Order Given',true,false)}" title="New Products" columns="3">
+            <apex:inputField value="{!bandhanOBJ.Air_Admittance_Valve__c}" rendered="true"/>  
+            <apex:inputField value="{!bandhanOBJ.Ball_Valves__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.Butterfly_Valves__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.Concealed_Cisterns__c}" rendered="true"/>  
+            <apex:inputField value="{!bandhanOBJ.Concealed_Valves__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.Fire_Collars__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.Grease_Seperator__c}" rendered="true"/>  
+            <apex:inputField value="{!bandhanOBJ.IS_4985__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.Silent_Plus_SWR__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.Silent_SWR__c}" rendered="true"/>  
+            <apex:inputField value="{!bandhanOBJ.Surface_Drainage__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.U_G_Drainage__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.Velocity_Breaker__c}" rendered="true"/>  
+            <apex:inputField value="{!bandhanOBJ.Waste_Traps__c}" rendered="true"/> 
+            <apex:inputField value="{!bandhanOBJ.WC_PAN_Connector__c}" rendered="true" /> 
+           </apex:pageBlockSection>
+           
+           <apex:pageBlockSection title="Remarks" rendered="true">
+           <apex:inputField value="{!bandhanOBJ.Remarks__c}" rendered="true" /> 
+           </apex:pageBlockSection>
+           
+           </apex:pageBlock>-->
+       </div>
+   </apex:form> 
+  
+</apex:page>

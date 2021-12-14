@@ -1,0 +1,13 @@
+<apex:page standardController="Promotions__c">
+<apex:form >
+<apex:pageBlock title="Visit Details" >
+<apex:pageBlockButtons >
+           
+          </apex:pageBlockButtons>  
+          <apex:pageBlockSection >  
+<apex:inputtext value="{!Promotions__c.Name}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+
+  </apex:form>
+</apex:page>

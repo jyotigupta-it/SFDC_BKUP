@@ -1,0 +1,478 @@
+<apex:page controller="APPL_SMART_KRA_REPORT_CONTROLLER" title="SMART KRA REPORT" tabStyle="Smart_KRA__tab" standardStylesheets="false">
+    
+    <c:AP_JQUERY_Component ></c:AP_JQUERY_Component>
+    <style type="text/css">
+        table.gridtable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+        }
+        
+        table.gridtable th {
+        border-width: 1px;
+        padding: 5px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #dedede;
+        }
+        
+        table.gridtable td .customcss{
+        border-width: 1px;
+        padding: 5px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #dedede;
+        font-style:50px;
+        }
+        
+        table.gridtable td {
+        border-width: 1px;
+        padding: 4px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ffffff;
+        }
+        
+        .waitingSearchDiv {
+        position: absolute;
+        text-align: center;
+        top: 0;
+        z-index: 80;
+        left: 0;
+        }
+        .waitingSearchDiv .waitingHolder, .waitingSearchDiv .waitingSearchHolder {
+        border: none;
+        background-color: transparent;
+        font-size: 1em;
+        font-weight: normal;
+        padding: 0;
+        }
+        .waitingSearchDiv .waitingHolder {
+        font-weight: bold;
+        font-size: 1.20em;
+        position: relative;
+        padding: .5em;
+        white-space: nowrap;
+        margin: auto;
+        width: 40%;
+        top: 45%;
+        }
+        .customBtn{
+            cursor:pointer;
+            padding-top: 4px;
+            padding-right: 3px;
+            padding-bottom: 4px;
+            padding-left: 3px;
+            color: #333;
+            margin: 1px;
+            padding: 4px 3px;
+            border: 1px solid #b5b5b5;
+            border-bottom-color: #7f7f7f;
+            background: #e8e8e9 url('/img/alohaSkin/btn_sprite.png') repeat-x right top;
+            font-weight: bold;
+            font-size: .9em;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            text-decoration:none;
+        }
+        
+    </style>
+    <!--<script type="text/javascript">
+
+alert('hi');
+$('table tr').each(function(){
+alert('hi2');
+$(this).children('td').each(function(){
+alert('hi3');
+$('td.plumbingsection').each(function(){
+    alert('hi1');
+   // var $this = $(this);
+    var value = $(this).text();
+alert(value);
+   
+        if (value >= 85 && value <= 99) {
+            $(this).addclass('yellow');
+        }
+        else if (value <= 84 ) {
+            $(this).addclass('red');
+        }
+        else if (value >= 100 ) {
+            $(this).addclass('green');
+        }
+    })
+    })
+    });
+</script>-->
+
+    <!--  script>
+    function exportToExcel(){
+    
+        /*var blob = new Blob([document.getElementById('resultTable').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        saveAs(blob, "_StackReport.xls");*/
+        var excelFile = document.getElementById('resultTable').innerHTML;
+        var base64data = "base64," + $.base64.encode(excelFile);
+                    //window.open(�data:application/vnd.ms-�+defaults.type+�;filename=exportData.doc;� + base64data);
+        
+        
+       window.open('data:application/vnd.ms-excel,' + base64data);
+    //e.preventDefault();  $('#resultTable').html()
+    }
+    </script-->
+    
+    <script type="text/javascript">
+    var X_fileName = '';
+    var tableToExcel = (function() {
+    var uri = 'data:application/vnd.ms-excel;base64,'
+    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+  return function(table, name) {
+    if (!table.nodeType) table = document.getElementById(table)
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+
+    
+    var downloadLink = document.createElement("a");
+    downloadLink.href = uri + base64(format(template, ctx));
+    //downloadLink.download = $('#selectUniitFilter').val()+".xls";
+    downloadLink.download = X_fileName+".xls";
+    downloadLink.click();
+     //window.open(uri + base64(format(template, ctx)) );
+  }
+})()
+function exportDetails(){
+    //var unitvar=$j("[id$=selectUniitFilter]").val();
+    //var tym=$j("[id$=selecttimeframe]").val();
+    //var excelname=unitvar+"-"+tym;
+   
+    console.log(X_fileName); 
+    tableToExcel('resultTable', X_fileName);
+    
+}
+</script>
+    
+    <apex:form id="frm">
+        <apex:pageMessages id="errorMsg" escape="false"/>
+        <apex:pageBlock >
+            <apex:pageBlockSection showHeader="true" title="Select Month and Year" columns="6" collapsible="false">
+            <apex:selectList value="{!targetUserId}" size="1" label="Select User:" rendered="{!if(profileName == 'System Administrator' || profileName == 'HO NEW' || profileName == 'Customer Support Team', false, true)}" required="true">
+            <apex:selectOptions value="{!UsersList}"/>
+        </apex:selectList>
+                <apex:inputField value="{!target.Target_User__c}" label="User" required="true" rendered="{!if(profileName == 'System Administrator' || profileName == 'HO NEW' || profileName == 'Customer Support Team', true, false)}"/>
+                <apex:inputCheckbox value="{!SelectSubordinates}">Include Subordinates</apex:inputCheckbox>
+                <apex:selectList Value="{!SelectedMonth}" size="1" label="Month" required="true">
+                    <apex:selectOptions Value="{!Months}"></apex:selectOptions>
+                </apex:selectList> 
+                
+                <apex:selectList Value="{!SelectedYear}" size="1" label="Year" required="true">
+                    <apex:selectOptions Value="{!Years}"></apex:selectOptions>
+                </apex:selectList> 
+                 
+                <apex:commandButton action="{!rertieveKRAData}" value="Show Report" title="Show Report" reRender="frm,errorMsg,panel_plumbing,panel_column,panel_project,pg1" status="as1"/>
+                
+                <input type="button" onClick="exportDetails()" title="Export to Excel" style="cursor:pointer;display:none;" value="Export to Excel" class="customBtn" id="btn"/>
+            </apex:pageBlockSection>
+            
+            <apex:outputPanel id="panel_plumbing" rendered="{!plumbingflag}">
+            <script>
+            X_fileName = 'Smart KRA_{!targetVertical}-{!targetUser}_{!selectedMonth}/{!selectedYear}';
+            $(".customBtn").show();
+            </script>
+            <strong> <apex:variable value="true" var="retailcount"/></strong> 
+            <strong> <apex:variable value="true" var="retailcount2"/></strong> 
+            <strong> <apex:variable value="true" var="retailcount3"/></strong> 
+
+                <table border="1" class="gridtable" id="resultTable">
+                <thead>
+                    <tr><td colspan="7" style="background-color:#FFFF00"><center><h1>
+                        
+                        PERFORMANCE APPRAISAL- QUANTITATIVE : {!targetVertical} - {!targetUser}</h1></center> </td></tr>
+                    <tr>
+                        <td style="background-color:#FFC000"><b> KRA(To be decided by the employee and suprevisor at the beginning of Qtr)</b></td> 
+                        <td style="width:150px;background-color:#FFC000"><center><b>TARGET</b></center></td>
+                        <td style="width:150px;background-color:#FFC000"><center><b>ACTUAL</b></center></td>    
+                        <td style="width:150px;background-color:#FFC000"><center><b>% ACHVD</b></center></td>   
+                        <td style="width:150px;background-color:#FFC000"><center><b>WEIGHTAGE</b></center></td>
+                        <td style="width:150px;background-color:#FFC000"><center><b>SCORE</b></center></td>
+                        <td style="width:150px;background-color:#FFC000"><center><b>ENTITLEMENT</b></center></td>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <tr><td colspan="7" style="background-color:#C2D69B"><center><h1>RETAILING</h1></center></td></tr>
+                    <apex:repeat value="{!Retailing_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Actual}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Achvd}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Weightage}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center> </td>
+                            
+                            <td rowspan="4" style="{!retailcount};{!IF(retailPercent >= 100,'background-color:#9f9;',if(retailPercent >= 85 && retailPercent <= 99, 'background-color:#ff9;','background-color:#f99;'))}"><center><apex:outputText value="{!retailPercent}"/>%</center></td>
+                        </tr>
+                        <strong><apex:variable var="retailcount" value="display:none;"/></strong>
+                    </apex:repeat> 
+                    
+                    
+<!--<tr>
+<th>
+Retailing days ( field work)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>No.of visits ( total visits)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>Contacts visit ( Plumbers etc)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>Key influencers contact( Arch/consultant)</th><td></td><td></td><td></td><td></td><td</td></tr>-->
+                    
+                    
+                    
+                    <!--apex:outputPanel id="pg1" rendered="{!flag}"-->
+                    <tr><td colspan="7" style="background-color:#C2D69B"><center><h1>PROMOTIONAL ACTIVITY</h1></center></td></tr>
+                    <apex:repeat value="{!Promotional_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                            <td rowspan="2" style="{!retailcount2};{!IF(promotionalPercent >= 100,'background-color:#9f9;',if(promotionalPercent>= 85 && promotionalPercent <= 99, 'background-color:#ff9;','background-color:#f99;'))}"><center><apex:outputText value="{!promotionalPercent}"/>%</center></td>
+
+                        </tr>
+                        <strong><apex:variable var="retailcount2" value="display:none;"/></strong>
+                       
+                    </apex:repeat> 
+                    
+                    
+                    <tr><td colspan="7" style="background-color:#C2D69B"><center><h1>NETWORK DEVELOPMENT</h1></center></td></tr>
+                    <apex:repeat value="{!Market_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                            <td rowspan="1" style="{!IF(networkPercent >= 100,'background-color:#9f9;',if(networkPercent >= 85 && networkPercent <= 99, 'background-color:#ff9;','background-color:#f99;'))}"><center><apex:outputText value="{!networkPercent}"/>%</center></td>
+                        </tr>
+                    </apex:repeat> 
+                    
+                    <tr><td colspan="7" style="background-color:#C2D69B"><center><h1>BRANDING</h1></center></td></tr>
+                    <apex:repeat value="{!branding_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                            <td rowspan="1" style="{!IF(brandingPercent>= 100,'background-color:#9f9;',if(brandingPercent>= 85 && brandingPercent<= 99, 'background-color:#ff9;','background-color:#f99;'))}"><center><apex:outputText value="{!brandingPercent}"/></center></td>
+
+                        </tr>
+                    </apex:repeat> 
+                    
+                    <tr><td colspan="7" style="background-color:#C2D69B"><center><h1>SALES VOLUME</h1></center></td></tr>
+                    <apex:repeat value="{!Sales_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                             <td rowspan="4" style="{!retailcount3};{!IF(salesPercent >= 100,'background-color:#9f9;',if(salesPercent >= 85 && salesPercent<= 99, 'background-color:#ff9;','background-color:#f99;'))}"><center><apex:outputText value="{!salesPercent}"/>%</center></td>
+                           
+                        </tr>
+                        <strong><apex:variable var="retailcount3" value="display:none;"/></strong>
+                    </apex:repeat> 
+                    </tbody>
+                </table>
+                
+            </apex:outputPanel>
+            
+            
+            
+            <apex:outputPanel id="panel_column" rendered="{!columnflag}">
+                
+                <script>
+            X_fileName = 'Smart KRA_{!targetVertical}-{!targetUser}_{!selectedMonth}/{!selectedYear}';
+             $(".customBtn").show();
+            </script>
+            
+                <table border="1" class="gridtable" id="resultTable">
+                    <tr><td colspan="6" style="background-color:#FFFF00"><center><h1>
+                        PERFORMANCE APPRAISAL- QUANTITATIVE : {!target.Vertical__c} - {!targetUser}</h1></center> </td></tr>
+                    <tr>
+                        <td style="background-color:#FFC000"><b> KRA(To be decided by the employee and suprevisor at the beginning of Qtr)</b></td> 
+                        <td style="width:150px;background-color:#FFC000"><center><b>TARGET</b></center></td>
+                        <td style="width:150px;background-color:#FFC000"><center><b>ACTUAL</b></center></td>    
+                        <td style="width:150px;background-color:#FFC000"><center><b>% ACHVD</b></center></td>   
+                        <td style="width:150px;background-color:#FFC000"><center><b>WEIGHTAGE</b></center></td>
+                        <td style="width:150px;background-color:#FFC000"><center><b>SCORE</b></center></td>
+                    </tr>
+                    
+                    
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>RETAILING</h1></center></td></tr>
+                    <apex:repeat value="{!Retailing_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Actual}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Achvd}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Weightage}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Score}"/></center> </td>
+                        </tr>
+                    </apex:repeat> 
+                    <!--  
+<tr>
+<th>
+Retailing days ( field work)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>No.of visits ( total visits)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>Contacts visit ( Plumbers etc)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>Key influencers contact( Arch/consultant)</th><td></td><td></td><td></td><td></td><td</td></tr>-->
+                    
+                    
+                    
+                    <!--apex:outputPanel id="pg1" rendered="{!flag}"-->
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>PROMOTIONAL ACTIVITY</h1></center></td></tr>
+                    <apex:repeat value="{!Promotional_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                        </tr>
+                    </apex:repeat> 
+                    
+                    
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>BRANDING</h1></center></td></tr>
+                    <apex:repeat value="{!Market_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                        </tr>
+                    </apex:repeat> 
+                    
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>SALES VOLUME</h1></center></td></tr>
+                    <apex:repeat value="{!Sales_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                        </tr>
+                    </apex:repeat> 
+                </table>
+                
+            </apex:outputPanel>
+            
+            
+            <apex:outputPanel id="panel_project" rendered="{!projectflag}">
+                
+                <script>
+            X_fileName = 'Smart KRA_{!targetVertical}-{!targetUser}_{!selectedMonth}/{!selectedYear}';
+             $(".customBtn").show();
+            </script>
+            
+                <table border="1" class="gridtable" id="resultTable">
+                    <tr><td colspan="6" style="background-color:#FFFF00"><center><h1>
+                        
+                        PERFORMANCE APPRAISAL- QUANTITATIVE : {!target.Vertical__c}</h1></center> </td></tr>
+                    <tr>
+                        <td style="background-color:#FFC000"><b> KRA(To be decided by the employee and suprevisor at the beginning of Qtr)</b></td> 
+                        <td style="width:150px;background-color:#FFC000"><center><b>TARGET</b></center></td>
+                        <td style="width:150px;background-color:#FFC000"><center><b>ACTUAL</b></center></td>    
+                        <td style="width:150px;background-color:#FFC000"><center><b>% ACHVD</b></center></td>   
+                        <td style="width:150px;background-color:#FFC000"><center><b>WEIGHTAGE</b></center></td>
+                        <td style="width:150px;background-color:#FFC000"><center><b>SCORE</b></center></td>
+                    </tr>
+                    
+                    
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>RETAILING</h1></center></td></tr>
+                    <apex:repeat value="{!Retailing_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Actual}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Achvd}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Weightage}"/></center> </td>
+                            <td> <center><apex:outputText value="{!pro.Score}"/></center> </td>
+                        </tr>
+                    </apex:repeat> 
+                    <!--  
+<tr>
+<th>
+Retailing days ( field work)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>No.of visits ( total visits)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>Contacts visit ( Plumbers etc)</th><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>Key influencers contact( Arch/consultant)</th><td></td><td></td><td></td><td></td><td</td></tr>-->
+                    
+                    
+                    
+                    <!--apex:outputPanel id="pg1" rendered="{!flag}"-->
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>PROMOTIONAL ACTIVITY</h1></center></td></tr>
+                    <apex:repeat value="{!Promotional_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                        </tr>
+                    </apex:repeat> 
+                    
+                    
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>PROJECT DEVELOPMENT</h1></center></td></tr>
+                    <apex:repeat value="{!Market_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                        </tr>
+                    </apex:repeat> 
+                    
+                    <tr><td colspan="6" style="background-color:#C2D69B"><center><h1>SALES VOLUME</h1></center></td></tr>
+                    <apex:repeat value="{!Sales_WrapperList}" var="pro">
+                        <tr>
+                            <th><apex:outputText value="{!pro.promotionalActivity}"/></th>
+                            <td><center><apex:outputText value="{!pro.Target}"/></center> </td>
+                            <td><center><apex:outputText value="{!pro.Actual}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Achvd}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Weightage}"/></center></td>
+                            <td><center><apex:outputText value="{!pro.Score}"/></center></td>
+                        </tr>
+                    </apex:repeat> 
+                </table>
+                
+            </apex:outputPanel>
+            
+        </apex:pageBlock>
+        <apex:actionstatus id="as1">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.85;width:100%;"> 
+                    <div class="waitingHolder" style="top: 104.2px; width: 100px; right:50px;">
+                        <img class="waitingImage" src= "{!$Resource.Redcircle}" width="360" height="110"  title="Please Wait..." /><br/>
+                        <span class="waitingDescription">Loading...</span>
+                        
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:form>
+    
+</apex:page>

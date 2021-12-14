@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product__c</fullName>
+    <externalId>false</externalId>
+    <label>Products Interested</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CPVC</fullName>
+                <default>false</default>
+                <label>CPVC</label>
+            </value>
+            <value>
+                <fullName>UPVC</fullName>
+                <default>false</default>
+                <label>UPVC</label>
+            </value>
+            <value>
+                <fullName>Aqua Life</fullName>
+                <default>false</default>
+                <label>Aqua Life</label>
+            </value>
+            <value>
+                <fullName>SWR</fullName>
+                <default>false</default>
+                <label>SWR</label>
+            </value>
+            <value>
+                <fullName>Column Pipes</fullName>
+                <default>false</default>
+                <label>Column Pipes</label>
+            </value>
+            <value>
+                <fullName>IS 4985</fullName>
+                <default>false</default>
+                <label>IS 4985</label>
+            </value>
+            <value>
+                <fullName>Grease Seperator</fullName>
+                <default>false</default>
+                <label>Grease Seperator</label>
+            </value>
+            <value>
+                <fullName>Underground Drainage Pipes</fullName>
+                <default>false</default>
+                <label>Underground Drainage Pipes</label>
+            </value>
+            <value>
+                <fullName>Adoptors</fullName>
+                <default>false</default>
+                <label>Adoptors</label>
+            </value>
+            <value>
+                <fullName>Aerator</fullName>
+                <default>false</default>
+                <label>Aerator</label>
+            </value>
+            <value>
+                <fullName>Air Admittance Valve</fullName>
+                <default>false</default>
+                <label>Air Admittance Valve</label>
+            </value>
+            <value>
+                <fullName>Ball Valves</fullName>
+                <default>false</default>
+                <label>Ball Valves</label>
+            </value>
+            <value>
+                <fullName>Collapsible Connectors</fullName>
+                <default>false</default>
+                <label>Collapsible Connectors</label>
+            </value>
+            <value>
+                <fullName>Concealed Cisterns</fullName>
+                <default>false</default>
+                <label>Concealed Cisterns</label>
+            </value>
+            <value>
+                <fullName>Concealed Valves</fullName>
+                <default>false</default>
+                <label>Concealed Valves</label>
+            </value>
+            <value>
+                <fullName>External Drainage</fullName>
+                <default>false</default>
+                <label>External Drainage</label>
+            </value>
+            <value>
+                <fullName>Fire Collars</fullName>
+                <default>false</default>
+                <label>Fire Collars</label>
+            </value>
+            <value>
+                <fullName>Inspection Chambers</fullName>
+                <default>false</default>
+                <label>Inspection Chambers</label>
+            </value>
+            <value>
+                <fullName>Manhole</fullName>
+                <default>false</default>
+                <label>Manhole</label>
+            </value>
+            <value>
+                <fullName>Multiquick</fullName>
+                <default>false</default>
+                <label>Multiquick</label>
+            </value>
+            <value>
+                <fullName>Non-return Valves</fullName>
+                <default>false</default>
+                <label>Non-return Valves</label>
+            </value>
+            <value>
+                <fullName>Sanitary System</fullName>
+                <default>false</default>
+                <label>Sanitary System</label>
+            </value>
+            <value>
+                <fullName>Silent SWR</fullName>
+                <default>false</default>
+                <label>Silent SWR</label>
+            </value>
+            <value>
+                <fullName>Solvent Cement</fullName>
+                <default>false</default>
+                <label>Solvent Cement</label>
+            </value>
+            <value>
+                <fullName>V4</fullName>
+                <default>false</default>
+                <label>V4</label>
+            </value>
+            <value>
+                <fullName>Valves (BUV &amp; BFV)</fullName>
+                <default>false</default>
+                <label>Valves (BUV &amp; BFV)</label>
+            </value>
+            <value>
+                <fullName>Waste &amp; Traps</fullName>
+                <default>false</default>
+                <label>Waste &amp; Traps</label>
+            </value>
+            <value>
+                <fullName>WC PAN Connector</fullName>
+                <default>false</default>
+                <label>WC PAN Connector</label>
+            </value>
+            <value>
+                <fullName>Divertor</fullName>
+                <default>false</default>
+                <label>Divertor</label>
+            </value>
+            <value>
+                <fullName>Flanges</fullName>
+                <default>false</default>
+                <label>Flanges</label>
+            </value>
+            <value>
+                <fullName>Blaze Master</fullName>
+                <default>false</default>
+                <label>Blaze Master</label>
+            </value>
+            <value>
+                <fullName>Casing Pipes</fullName>
+                <default>false</default>
+                <label>Casing Pipes</label>
+            </value>
+            <value>
+                <fullName>Bottle Trap</fullName>
+                <default>false</default>
+                <label>Bottle Trap</label>
+            </value>
+            <value>
+                <fullName>Flush Valve</fullName>
+                <default>false</default>
+                <label>Flush Valve</label>
+            </value>
+            <value>
+                <fullName>Water hammer Arrestor</fullName>
+                <default>false</default>
+                <label>Water hammer Arrestor</label>
+            </value>
+            <value>
+                <fullName>Sanitizer</fullName>
+                <default>false</default>
+                <label>Sanitizer</label>
+            </value>
+            <value>
+                <fullName>HDPE Pipes</fullName>
+                <default>false</default>
+                <label>HDPE Pipes</label>
+            </value>
+            <value>
+                <fullName>Sanitap</fullName>
+                <default>false</default>
+                <label>Sanitap</label>
+            </value>
+            <value>
+                <fullName>Water Tank</fullName>
+                <default>false</default>
+                <label>Water Tank</label>
+            </value>
+            <value>
+                <fullName>Y STRAINER</fullName>
+                <default>false</default>
+                <label>Y STRAINER</label>
+            </value>
+            <value>
+                <fullName>NRV Flap</fullName>
+                <default>false</default>
+                <label>NRV Flap</label>
+            </value>
+            <value>
+                <fullName>angle valve</fullName>
+                <default>false</default>
+                <label>angle valve</label>
+            </value>
+            <value>
+                <fullName>Sanit spare Parts</fullName>
+                <default>false</default>
+                <label>Sanit spare Parts</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

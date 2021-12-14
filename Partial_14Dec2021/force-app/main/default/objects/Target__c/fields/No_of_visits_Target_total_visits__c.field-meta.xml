@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_visits_Target_total_visits__c</fullName>
+    <externalId>false</externalId>
+    <formula>Head_Quarter_Daily_Calls__c +  HEAD_QUARTER_METRO_Daily_Calls__c + Head_Quarter_State_Capital_Daily_Calls__c + Out_Station_Daily_Calls__c + Ex_Station_Daily_Calls__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>No.of visits Target ( total visits)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

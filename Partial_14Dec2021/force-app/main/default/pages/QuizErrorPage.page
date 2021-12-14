@@ -1,0 +1,58 @@
+<apex:page sidebar="false" showHeader="false">
+<apex:slds />
+  <style type="text/css">
+            .forms{ 
+            color: #003399;
+            font-family: georgia;
+            font-style: normal;
+            }
+            .bPageBlock {
+            background-color: white !important;
+            }
+    </style>
+     <div width="100%" ID="Table1" style="margin: 0px;">
+            <div class="slds-page-header">
+                                  <div class="slds-media">
+                                    <div class="slds-media__body">
+                                    <div class="slds-clearfix">
+                                    <div class="slds-float_left">
+       
+            <img src="{!$Resource.newLogo}"  width="100"/>
+             </div>
+    <div class="slds-float_right">
+    <div class="slds-p-top_small ws">
+            
+            
+           
+           
+            
+            <apex:outputText value="Date: {0, date, MMMM d','  yyyy}" styleClass="forms">
+             <apex:param value="{!NOW()}" />
+            </apex:outputText>
+
+           </div>
+            </div>
+            </div>
+             <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                                </div>
+                                 </div>
+
+        </div>
+        
+        
+        <div class="slds-text-heading_medium">
+ <div class="slds-p-around_small">
+  <apex:outputText value="Quiz Application for BDM" /><br/>
+            
+            
+            <apex:outputText value="The Quiz is to evaluate How much you understand" />
+            </div>
+            </div>
+    
+
+   <apex:form id="form1">
+  <br></br>
+ <br></br> <center><font color="red"><b><div style="font-size:18px">Please Note this application will work only between 4th and 6th of every month.</div></b></font></center>
+</apex:form>
+  </apex:page>

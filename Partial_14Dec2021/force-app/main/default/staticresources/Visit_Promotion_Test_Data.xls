@@ -1,0 +1,96 @@
+Promotion_Type__c,KRA_Name__c,Name,Retailing_Activities__c,Sort_Order__c,Target_API__c,Vertical__c
+Exhibition / Construction Fairs,PROMOTIONAL ACTIVITY,5,,3,Exhibition__c,Plumbing
+Plumbing DSM Meet/Training,PROMOTIONAL ACTIVITY,9,,4,Plumbing_DSM_Meet_Training__c,Plumbing
+Engineers Meets,PROMOTIONAL ACTIVITY,4,,10,Engineers_Meet__c,Plumbing
+Onsite Plumber Meets,PROMOTIONAL ACTIVITY,20,,7,Onsite_Plumber_Meet__c,Plumbing
+Boarers Meet,,30,,2,Boarers_Meet__c,All Products
+Engineers Meet,,35,,7,Engineers_Meet__c,All Products
+Tractor Show,,39,,11,Tractor_Show__c,All Products
+Mechanics Meet,,44,,16,Mechanics_Meet__c,All Products
+Mechanics Factory Visit,,50,,22,Mechanics_Factory_Visit__c,All Products
+Dealers Factory Visit,,33,,5,Dealers_Factory_Visit__c,All Products
+Naaka Meets,PROMOTIONAL ACTIVITY,16,,8,Naaka_Meet__c,Plumbing
+Architects Meets,PROMOTIONAL ACTIVITY,3,,9,Architects_Meet__c,Plumbing
+Mega Plumbers Meets,PROMOTIONAL ACTIVITY,6,,2,Mega_Plumbers_Meet__c,Plumbing
+Jeep Campaign,,37,,9,Jeep_Campaign__c,All Products
+Plumbing Dealers Factory Visits,PROMOTIONAL ACTIVITY,18,,11,Plumbing_Dealers_Factory_Visit__c,Plumbing
+Mega Plumbers Meet,,41,,13,Mega_Plumbers_Meet__c,All Products
+Dealers Salesman Meet,,34,,6,Dealers_Salesman_Meet__c,All Products
+Shandy Show,,40,,12,Shandy_Show__c,All Products
+Architects Meet,,29,,1,Architects_Meet__c,All Products
+Dealers Meet,,32,,4,Dealers_Meet__c,All Products
+Inshop Mechanic Meet,,49,,21,InShop_Mechanic_Meet__c,All Products
+Farmers Meet,,38,,10,Farmers_Meet__c,All Products
+Column Dealers Factory Visit,,47,,19,Column_Dealers_Factory_Visit__c,All Products
+Inshop Plumber meet,,43,,15,InSHOP_Plumber_meet__c,All Products
+Architects / Engineers / Consultants Factory Visit,PROMOTIONAL ACTIVITY,15,,6,Architects_Engineers_Consultants_Factory__c,Plumbing
+Head Quarter - Metro,RETAILING,14,No. Of Days,12,HEAD_QUARTER_METRO_No_Of_Days__c,Plumbing
+Onsite Plumber Meet,,51,,23,Onsite_Plumber_Meet__c,All Products
+Head Quarter - State Capital,RETAILING,7,No. Of Days,13,Head_Quarter_State_Capital_No_of_days__c,Plumbing
+Head Quarter,RETAILING,10,No. Of Days,14,Head_Quarter_No_of_Days__c,Plumbing
+Plumbing Factory Visit,PROMOTIONAL ACTIVITY,8,,5,Plumber_Factory_Visit__c,Plumbing
+Column Dealers Salesman Meet,,48,,20,Column_Dealers_Salesman_Meet__c,All Products
+Out Station,RETAILING,12,No. Of Days,16,Out_Station_No_of_Days__c,Plumbing
+Column Dealer Meet,,46,,18,Column_Dealer_Meet__c,All Products
+Ex-Station,RETAILING,21,No. Of Days,15,Ex_Station_No_of_Days__c,Plumbing
+New Markets Opened,MARKET DEVELOPMENT,11,,17,New_markets_opened__c,Plumbing
+New Dealers Activation,MARKET DEVELOPMENT,23,,18,New_dealers_activation__c,Plumbing
+Engineers/Consultant Factory Visit,,42,,14,Engineers_Consultant_Factory_Visit__c,All Products
+New Distributor Activation,MARKET DEVELOPMENT,22,,19,New_distributer_activation__c,Plumbing
+UPVC,PRIMARY SALES : (In Lacs),13,,20,PRIMARY_SALES_UPVC__c,Plumbing
+CPVC,PRIMARY SALES : (In Lacs),17,,21,PRIMARY_SALES_CPVC__c,Plumbing
+Group Activity,,52,,24,Group_Activity__c,All Products
+Builders Meet,,31,,3,Builders_Meet__c,All Products
+Exhibition,,36,,8,Exhibition__c,All Products
+Plumber Factory Visit,,45,,17,Plumber_Factory_Visit__c,All Products
+SWR,PRIMARY SALES : (In Lacs),19,,22,PRIMARY_SALES_SWR__c,Plumbing
+Inshop Mechanic Meets,PROMOTIONAL ACTIVITY,57,,1,InShop_Mechanic_Meet__c,Column
+Inshop Borers Meets,PROMOTIONAL ACTIVITY,70,,2,Inshop_Boarers_Meet__c,Column
+Tractor Show,PROMOTIONAL ACTIVITY,64,,3,Tractor_Show__c,Column
+Jeep Campaign,PROMOTIONAL ACTIVITY,55,,4,Jeep_Campaign__c,Column
+Mega Mechanic Meets,PROMOTIONAL ACTIVITY,59,,5,Mega_Mechanic_Meet__c,Column
+Mega Farmers Meets,PROMOTIONAL ACTIVITY,60,,6,Mega_Farmers_Meet__c,Column
+Exhibition / Agri Fairs,PROMOTIONAL ACTIVITY,66,,7,Exhibition__c,Column
+Shandy Shows,PROMOTIONAL ACTIVITY,54,,8,Shandy_Show__c,Column
+Column Dealers Meets,PROMOTIONAL ACTIVITY,58,,9,Column_Dealer_Meet__c,Column
+Column Distributors / Dealers / Mechanic Factory Visit,PROMOTIONAL ACTIVITY,71,,10,Column_Distributors_Dealers_Mechanic_Fac__c,Column
+Column DSM Meet / Training,PROMOTIONAL ACTIVITY,63,,11,Column_DSM_Meet_Training__c,Column
+Group Activity,PROMOTIONAL ACTIVITY,56,,12,Group_Activity__c,Column
+Head Quarter,RETAILING,61,No. Of Days,13,Head_Quarter_No_of_Days__c,Column
+Ex-Station,RETAILING,53,No. Of Days,14,Ex_Station_No_of_Days__c,Column
+Out Station,RETAILING,69,No. Of Days,15,Out_Station_No_of_Days__c,Column
+Column,PRIMARY SALES : (In Lacs),68,,22,PRIMARY_SALES_COLUMN__c,Column
+V4,PRIMARY SALES : (In Lacs),65,,23,PRIMARY_SALES_V4__c,Column
+Inshop Plumber Meets,PROMOTIONAL ACTIVITY,1,,1,InSHOP_Plumber_meet__c,Plumbing
+Silent SWR,PRIMARY SALES : (In Lacs),2,,23,PRIMARY_SALES_SILENT_SWR__c,Plumbing
+Exhibition / construction Fairs,PROMOTIONAL ACTIVITY,87,,4,Exhibition__c,Projects
+Engineers Meets,PROMOTIONAL ACTIVITY,85,,2,Engineers_Meet__c,Projects
+V4,PRIMARY SALES : (In Lacs),82,,17,PRIMARY_SALES_V4__c,Projects
+Out Station,RETAILING,94,,11,Out_Station_No_of_Days__c,Projects
+New Product,PRIMARY SALES : (In Lacs),83,,18,PRIMARY_SALES_NEW_PRODUCT__c,Projects
+Builders Meets,PROMOTIONAL ACTIVITY,86,,3,Builders_Meet__c,Projects
+Column,PRIMARY SALES : (In Lacs),81,,16,PRIMARY_SALES_COLUMN__c,Projects
+Architects Meets,PROMOTIONAL ACTIVITY,84,,1,Architects_Meet__c,Projects
+Group Activity,PROMOTIONAL ACTIVITY,91,,8,Group_Activity__c,Projects
+Consultants Factory Visit,PROMOTIONAL ACTIVITY,89,,6,Consultants_Factory_Visit__c,Projects
+Projects DSM Meet/Training,PROMOTIONAL ACTIVITY,88,,5,Projects_DSM_Meet_Training__c,Projects
+Onsite Plumber Meets,PROJECT DEVELOPMENT,90,,7,Onsite_Plumber_Meet__c,Projects
+Ex-Station,RETAILING,93,,10,Ex_Station_No_of_Days__c,Projects
+UPVC,PRIMARY SALES : (In Lacs),77,,12,PRIMARY_SALES_UPVC__c,Projects
+Head Quarter,RETAILING,92,,9,Head_Quarter_No_of_Days__c,Projects
+Silent SWR,PRIMARY SALES : (In Lacs),80,,15,PRIMARY_SALES_SILENT_SWR__c,Projects
+CPVC,PRIMARY SALES : (In Lacs),78,,13,PRIMARY_SALES_CPVC__c,Projects
+SWR,PRIMARY SALES : (In Lacs),79,,14,PRIMARY_SALES_SWR__c,Projects
+Column,PRIMARY SALES : (In Lacs),74,,24,PRIMARY_SALES_COLUMN__c,Plumbing
+V4,PRIMARY SALES : (In Lacs),75,,25,PRIMARY_SALES_V4__c,Plumbing
+New Product,PRIMARY SALES : (In Lacs),76,,26,PRIMARY_SALES_NEW_PRODUCT__c,Plumbing
+Secondary Sales Data Collection,MARKET DEVELOPMENT,100,,21,SECONDARY_SALES_DATA_COLLECTION__c,Column
+Activation Of InActive Distributor,MARKET DEVELOPMENT,98,,19,Activation_Of_Inactive_Distributor__c,Column
+Activation of Inactive Direct Dealer,MARKET DEVELOPMENT,96,,17,Activation_Of_Inactive_Direct_Dealer__c,Column
+Sub Dealer Development,MARKET DEVELOPMENT,99,,20,SUB_DEALER_DEVELOPMENT__c,Column
+New Direct Dealer To Depot,MARKET DEVELOPMENT,95,,16,NEW_DIRECT_DEALER_TO_DEPOT__c,Column
+New Distributor,MARKET DEVELOPMENT,97,,18,NEW_DISTRIBUTOR__c,Column
+Factory Visits,PROJECT DEVELOPMENT,104,,22,Factory_Visits__c,Projects
+Approvals& OrdersWith Top Builders,PROJECT DEVELOPMENT,101,,19,Approvals_Orders_With_Top_Builders__c,Projects
+Project Reference PPT Every QTR - 4 Per Year,PROJECT DEVELOPMENT,102,,20,Project_Reference_PPT_Every_QTR_4_Per_Yr__c,Projects
+Project Funnel 2016-17,PROJECT DEVELOPMENT,103,,21,Project_Funnel_2016_2017__c,Projects

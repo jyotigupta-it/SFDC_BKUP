@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Visit</fullName>
+    <active>true</active>
+    <label>Visit</label>
+    <picklistValues>
+        <picklist>Competitor__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Complaints__c</picklist>
+        <values>
+            <fullName>BDM Response Poor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Attended</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Service Poor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supply not in Time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical Issues</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wrong%2FInvalid Number</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Del_Nature_of_Visit__c</picklist>
+        <values>
+            <fullName>Ex-Station</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Head Quarter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out Station</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PromotionalType__c</picklist>
+        <values>
+            <fullName>Architects Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boarers Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Builders Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dealers Factory Visit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dealers Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dealers Salesman Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engineers Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exhibition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Farmers Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jeep Campaign</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mechanic Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mini Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumber Meet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plumber%2FMechanic%2FEngineers Factory Visit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shandy Show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tractor Show</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Purpose_of_Visit__c</picklist>
+        <values>
+            <fullName>Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approval for Ashirvad Brand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Building Relationship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complaints - Aqua</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complaints - CPVC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complaints - Column</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complaints - SWR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dispatch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enquiry follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lead Follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Market Survey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Order Booking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Order Booking - CPVC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Order Booking - Column</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Order Booking -SWR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Order Follow up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment Follow up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Product Presentation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Project Order follow up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promotional Activities</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Survey</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason_for_Non_Visit__c</picklist>
+        <values>
+            <fullName>Attending a Complaint</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exhibition%2FShows</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Held up at Depot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Held up at Distributor%2FDealer%2FContact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Holiday %2F Market Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jeep Maintenance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Market Survey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting at HO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting with Team Leader</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mentoring</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promotional Activity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Traveling Outstation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>State__c</picklist>
+        <values>
+            <fullName>Andhra Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arunachal Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bihar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chhattisgarh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delhi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Goa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gujarat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Haryana</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Himachal Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jammu and Kashmir</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jharkhand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Karnataka</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kerala</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Madhya Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maharashtra</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manipur</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meghalaya</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mizoram</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nagaland</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orissa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pondcherry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Punjab</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rajasthan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sikkim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tamil Nadu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tripura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Uttar Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Uttarakhand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>West Bengal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Call Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Reachable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Non Visit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promotional Activity report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Visit</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Visit_To__c</picklist>
+        <values>
+            <fullName>Contact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dealer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distributor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Project</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Visit_Type__c</picklist>
+        <values>
+            <fullName>Ex-Station</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Head Quarter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out Station</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

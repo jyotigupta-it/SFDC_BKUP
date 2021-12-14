@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actual_Site_visit_Location__c</fullName>
+    <externalId>false</externalId>
+    <formula>/*IF(!ISBLANK( Party_Name__c ), Party_Name__r.Street_Address__c +  Party_Name__r.City__c, 
+IF(!ISBLANK( Contacts__c ), Contacts__r.Street__c , 
+IF(!ISBLANK( Distributor_Dealer__c ),  Distributor_Dealer__r.Address__c + Distributor_Dealer__r.City__c, 
+Party_Name__r.Street_Address__c + Party_Name__r.City__c ))) */
+
+IF(!ISBLANK( Party_Name__c ),Party_Name__r.City__c, 
+IF(!ISBLANK( Contacts__c ), Contacts__r.Street__c , 
+IF(!ISBLANK( Distributor_Dealer__c ),Distributor_Dealer__r.City__c, 
+Party_Name__r.City__c )))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Actual Site visit Location</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

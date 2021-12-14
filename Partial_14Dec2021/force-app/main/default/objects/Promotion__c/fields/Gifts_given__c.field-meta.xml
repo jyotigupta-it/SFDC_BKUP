@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gifts_given__c</fullName>
+    <externalId>false</externalId>
+    <label>Gifts given</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>caps</fullName>
+                <default>false</default>
+                <label>caps</label>
+            </value>
+            <value>
+                <fullName>carrybags</fullName>
+                <default>false</default>
+                <label>carrybags</label>
+            </value>
+            <value>
+                <fullName>keychains</fullName>
+                <default>false</default>
+                <label>keychains</label>
+            </value>
+            <value>
+                <fullName>lunchboxes</fullName>
+                <default>false</default>
+                <label>lunchboxes</label>
+            </value>
+            <value>
+                <fullName>measuring tapes</fullName>
+                <default>false</default>
+                <label>measuring tapes</label>
+            </value>
+            <value>
+                <fullName>pens</fullName>
+                <default>false</default>
+                <label>pens</label>
+            </value>
+            <value>
+                <fullName>pigeon kitchen sets</fullName>
+                <default>false</default>
+                <label>pigeon kitchen sets</label>
+            </value>
+            <value>
+                <fullName>stationary kits</fullName>
+                <default>false</default>
+                <label>stationary kits</label>
+            </value>
+            <value>
+                <fullName>table tops</fullName>
+                <default>false</default>
+                <label>table tops</label>
+            </value>
+            <value>
+                <fullName>Tools Kit</fullName>
+                <default>false</default>
+                <label>Tools Kit</label>
+            </value>
+            <value>
+                <fullName>Torches</fullName>
+                <default>false</default>
+                <label>Torches</label>
+            </value>
+            <value>
+                <fullName>t-shirts</fullName>
+                <default>false</default>
+                <label>t-shirts</label>
+            </value>
+            <value>
+                <fullName>umbrellas</fullName>
+                <default>false</default>
+                <label>umbrellas</label>
+            </value>
+            <value>
+                <fullName>wallets</fullName>
+                <default>false</default>
+                <label>wallets</label>
+            </value>
+            <value>
+                <fullName>wind cheaters</fullName>
+                <default>false</default>
+                <label>wind cheaters</label>
+            </value>
+            <value>
+                <fullName>wrist watches</fullName>
+                <default>false</default>
+                <label>wrist watches</label>
+            </value>
+            <value>
+                <fullName>No gifts given</fullName>
+                <default>false</default>
+                <label>No gifts given</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

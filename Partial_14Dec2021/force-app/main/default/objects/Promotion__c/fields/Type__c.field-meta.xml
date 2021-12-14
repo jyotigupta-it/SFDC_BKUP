@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Vertical__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Architects / Engineers / Consultants Factory Visit</fullName>
+                <default>false</default>
+                <label>Architects / Engineers / Consultants Factory Visit</label>
+            </value>
+            <value>
+                <fullName>Architects Meets</fullName>
+                <default>false</default>
+                <label>Architects Meets</label>
+            </value>
+            <value>
+                <fullName>Boarers Meets</fullName>
+                <default>false</default>
+                <label>Boarers Meets</label>
+            </value>
+            <value>
+                <fullName>Builders Meets</fullName>
+                <default>false</default>
+                <label>Builders Meets</label>
+            </value>
+            <value>
+                <fullName>Column Dealer / Distributor Meets</fullName>
+                <default>false</default>
+                <label>Column Dealer / Distributor Meets</label>
+            </value>
+            <value>
+                <fullName>Column Distributors / Dealers Factory Visit</fullName>
+                <default>false</default>
+                <label>Column Distributors / Dealers Factory Visit</label>
+            </value>
+            <value>
+                <fullName>Column DSM Meet / Training</fullName>
+                <default>false</default>
+                <label>Column DSM Meet / Training</label>
+            </value>
+            <value>
+                <fullName>Engineers Meets</fullName>
+                <default>false</default>
+                <label>Engineers Meets</label>
+            </value>
+            <value>
+                <fullName>Exhibition / Agri Fairs</fullName>
+                <default>false</default>
+                <label>Exhibition / Agri Fairs</label>
+            </value>
+            <value>
+                <fullName>Exhibition / Construction Fairs</fullName>
+                <default>false</default>
+                <label>Exhibition / Construction Fairs</label>
+            </value>
+            <value>
+                <fullName>Group Activity</fullName>
+                <default>false</default>
+                <label>Group Activity</label>
+            </value>
+            <value>
+                <fullName>Inshop Boarers Meets</fullName>
+                <default>false</default>
+                <label>Inshop Boarers Meets</label>
+            </value>
+            <value>
+                <fullName>Inshop Mechanic Meets</fullName>
+                <default>false</default>
+                <label>Inshop Mechanic Meets</label>
+            </value>
+            <value>
+                <fullName>Inshop Plumber Meets</fullName>
+                <default>false</default>
+                <label>Inshop Plumber Meets</label>
+            </value>
+            <value>
+                <fullName>Jeep Campaign</fullName>
+                <default>false</default>
+                <label>Jeep Campaign</label>
+            </value>
+            <value>
+                <fullName>Mechanics Factory Visit</fullName>
+                <default>false</default>
+                <label>Mechanics Factory Visit</label>
+            </value>
+            <value>
+                <fullName>Mega Farmer Meets</fullName>
+                <default>false</default>
+                <label>Mega Farmer Meets</label>
+            </value>
+            <value>
+                <fullName>Mega Mechanic Meets</fullName>
+                <default>false</default>
+                <label>Mega Mechanic Meets</label>
+            </value>
+            <value>
+                <fullName>Mega Plumbers Meets</fullName>
+                <default>false</default>
+                <label>Mega Plumbers Meets</label>
+            </value>
+            <value>
+                <fullName>Mini Farmer Meet</fullName>
+                <default>false</default>
+                <label>Mini Farmer Meet</label>
+            </value>
+            <value>
+                <fullName>Naaka Meets</fullName>
+                <default>false</default>
+                <label>Naaka Meets</label>
+            </value>
+            <value>
+                <fullName>Onsite Plumber Meets</fullName>
+                <default>false</default>
+                <label>Onsite Plumber Meets</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Plumbers Factory Visit</fullName>
+                <default>false</default>
+                <label>Plumbers Factory Visit</label>
+            </value>
+            <value>
+                <fullName>Plumbing Dealer / Distributor Meets</fullName>
+                <default>false</default>
+                <label>Plumbing Dealer / Distributor Meets</label>
+            </value>
+            <value>
+                <fullName>Plumbing Dealers Factory Visits</fullName>
+                <default>false</default>
+                <label>Plumbing Dealers Factory Visits</label>
+            </value>
+            <value>
+                <fullName>Plumbing DSM Meet/Training</fullName>
+                <default>false</default>
+                <label>Plumbing DSM Meet/Training</label>
+            </value>
+            <value>
+                <fullName>Product Presentation</fullName>
+                <default>false</default>
+                <label>Product Presentation</label>
+            </value>
+            <value>
+                <fullName>Projects DSM Meet / Training</fullName>
+                <default>false</default>
+                <label>Projects DSM Meet / Training</label>
+            </value>
+            <value>
+                <fullName>Shandy Shows</fullName>
+                <default>false</default>
+                <label>Shandy Shows</label>
+            </value>
+            <value>
+                <fullName>Tractor Show</fullName>
+                <default>false</default>
+                <label>Tractor Show</label>
+            </value>
+            <value>
+                <fullName>Bombarding</fullName>
+                <default>false</default>
+                <label>Bombarding</label>
+            </value>
+            <value>
+                <fullName>Gold Coin Delivery</fullName>
+                <default>false</default>
+                <label>Gold Coin Delivery</label>
+            </value>
+            <value>
+                <fullName>Shop Anniversary Dinner</fullName>
+                <default>false</default>
+                <label>Shop Anniversary Dinner</label>
+            </value>
+            <value>
+                <fullName>Rupay card delivery</fullName>
+                <default>false</default>
+                <label>Rupay card delivery</label>
+            </value>
+            <value>
+                <fullName>Plumbers’ Club_Welcome meeting</fullName>
+                <default>false</default>
+                <label>Plumbers’ Club_Welcome meeting</label>
+            </value>
+            <value>
+                <fullName>Plumbers’ Club_Health checkup</fullName>
+                <default>false</default>
+                <label>Plumbers’ Club_Health checkup</label>
+            </value>
+            <value>
+                <fullName>Dining Experience - Rupay Card</fullName>
+                <default>false</default>
+                <label>Dining Experience - Rupay Card</label>
+            </value>
+            <value>
+                <fullName>Plumbers&apos; club_Kite &amp; Sweets distribution</fullName>
+                <default>false</default>
+                <label>Plumbers&apos; club_Kite &amp; Sweets distribution</label>
+            </value>
+            <value>
+                <fullName>Plumbers&apos; club_Holi Celebration</fullName>
+                <default>false</default>
+                <label>Plumbers&apos; club_Holi Celebration</label>
+            </value>
+            <value>
+                <fullName>Virtual Plumber Meet</fullName>
+                <default>false</default>
+                <label>Virtual Plumber Meet</label>
+            </value>
+            <value>
+                <fullName>Virtual Mechanic Meet</fullName>
+                <default>false</default>
+                <label>Virtual Mechanic Meet</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Boarers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Column Dealer / Distributor Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Column Distributors / Dealers Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Column DSM Meet / Training</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Exhibition / Agri Fairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Group Activity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Inshop Boarers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Inshop Mechanic Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Jeep Campaign</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mechanics Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mega Farmer Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mega Mechanic Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Mini Farmer Meet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Shandy Shows</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Tractor Show</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Bombarding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Gold Coin Delivery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Shop Anniversary Dinner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Rupay card delivery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Dining Experience - Rupay Card</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <valueName>Virtual Mechanic Meet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Architects / Engineers / Consultants Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Architects Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Builders Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Engineers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Exhibition / Construction Fairs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Inshop Plumber Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Mega Plumbers Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Naaka Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Onsite Plumber Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbers Factory Visit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbing Dealer / Distributor Meets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbing Dealers Factory Visits</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbing DSM Meet/Training</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbers’ Club_Welcome meeting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbers’ Club_Health checkup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Plumbers&apos; club_Kite &amp; Sweets distribution</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Plumbers&apos; club_Holi Celebration</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Virtual Plumber Meet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Product Presentation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Projects DSM Meet / Training</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Branding</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

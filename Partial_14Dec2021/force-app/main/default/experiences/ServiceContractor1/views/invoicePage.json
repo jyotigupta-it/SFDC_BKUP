@@ -1,0 +1,45 @@
+{
+  "appPageId" : "1ebe3d6c-fce7-4267-a468-981ddc7ea1d2",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "id" : "331f9fe6-5bee-4de8-b757-0cb7f03d2d89",
+  "label" : "InvoicePage",
+  "regions" : [ {
+    "id" : "5391ab4f-96bc-42c7-94a1-1139a0fae5c3",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : { },
+      "componentName" : "c:GenerateInvoice",
+      "id" : "b9a3db65-488e-4405-acf0-b7b8a662b33c",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "612bf134-bf98-4740-b00b-501bdadc4ca2",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "97403024-aecc-4f04-9e4c-4805eec10365",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "InvoicePage"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "c4fb6773-b87b-40ce-a169-a239899f78d9",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "912d2202-be02-4ded-8883-f34e9665fdd3",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-invoicepage"
+}

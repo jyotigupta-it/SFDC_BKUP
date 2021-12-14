@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>IEP app</label>
+    <navType>Standard</navType>
+    <tabs>Meetings__c</tabs>
+    <tabs>Meeting_Atendee__c</tabs>
+    <tabs>Attendee_Survey_Form__c</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>GTM_Tier__c</tabs>
+    <tabs>Enterprise_scheme__c</tabs>
+    <tabs>Pincode__c</tabs>
+    <tabs>Product_Category__c</tabs>
+    <tabs>iep_influencer__c</tabs>
+    <tabs>State__c</tabs>
+    <tabs>City__c</tabs>
+    <tabs>District__c</tabs>
+    <tabs>Product_price__c</tabs>
+    <tabs>Transaction__c</tabs>
+    <tabs>Sales_scheme__c</tabs>
+    <tabs>Transaction_Status__c</tabs>
+    <tabs>sales_accrual__c</tabs>
+    <tabs>bill_product__c</tabs>
+    <tabs>Bill_item__c</tabs>
+    <tabs>Bill_breakup__c</tabs>
+    <tabs>Point__c</tabs>
+    <tabs>Redemption__c</tabs>
+    <tabs>Redemption_Order__c</tabs>
+    <tabs>Distributor_sap__c</tabs>
+    <tabs>Redemption_Product__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>IEP_Product__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Meeting_UtilityBar</utilityBar>
+</CustomApplication>

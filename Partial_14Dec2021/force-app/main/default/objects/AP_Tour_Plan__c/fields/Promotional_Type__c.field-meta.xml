@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Promotional_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Promotional Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Boarers Meet</fullName>
+                <default>false</default>
+                <label>Boarers Meet</label>
+            </value>
+            <value>
+                <fullName>Exhibition</fullName>
+                <default>false</default>
+                <label>Exhibition</label>
+            </value>
+            <value>
+                <fullName>Jeep Campaign</fullName>
+                <default>false</default>
+                <label>Jeep Campaign</label>
+            </value>
+            <value>
+                <fullName>Farmers Meet</fullName>
+                <default>false</default>
+                <label>Farmers Meet</label>
+            </value>
+            <value>
+                <fullName>Tractor Show</fullName>
+                <default>false</default>
+                <label>Tractor Show</label>
+            </value>
+            <value>
+                <fullName>Shandy Show</fullName>
+                <default>false</default>
+                <label>Shandy Show</label>
+            </value>
+            <value>
+                <fullName>Mechanics Meet</fullName>
+                <default>false</default>
+                <label>Mechanics Meet</label>
+            </value>
+            <value>
+                <fullName>Column Dealer Meet</fullName>
+                <default>false</default>
+                <label>Column Dealer Meet</label>
+            </value>
+            <value>
+                <fullName>Column Dealers Factory Visit</fullName>
+                <default>false</default>
+                <label>Column Dealers Factory Visit</label>
+            </value>
+            <value>
+                <fullName>Column Dealers Salesman Meet</fullName>
+                <default>false</default>
+                <label>Column Dealers Salesman Meet</label>
+            </value>
+            <value>
+                <fullName>InShop Mechanic Meet</fullName>
+                <default>false</default>
+                <label>InShop Mechanic Meet</label>
+            </value>
+            <value>
+                <fullName>Mechanics Factory Visit</fullName>
+                <default>false</default>
+                <label>Mechanics Factory Visit</label>
+            </value>
+            <value>
+                <fullName>Onsite Plumber Meet</fullName>
+                <default>false</default>
+                <label>Onsite Plumber Meet</label>
+            </value>
+            <value>
+                <fullName>Plumbing DSM Meet / Training</fullName>
+                <default>false</default>
+                <label>Plumbing DSM Meet / Training</label>
+            </value>
+            <value>
+                <fullName>Engineers Meets</fullName>
+                <default>false</default>
+                <label>Engineers Meets</label>
+            </value>
+            <value>
+                <fullName>Onsite Plumber Meets</fullName>
+                <default>false</default>
+                <label>Onsite Plumber Meets</label>
+            </value>
+            <value>
+                <fullName>Naaka Meets</fullName>
+                <default>false</default>
+                <label>Naaka Meets</label>
+            </value>
+            <value>
+                <fullName>Architects Meets</fullName>
+                <default>false</default>
+                <label>Architects Meets</label>
+            </value>
+            <value>
+                <fullName>Mega Plumbers Meets</fullName>
+                <default>false</default>
+                <label>Mega Plumbers Meets</label>
+            </value>
+            <value>
+                <fullName>Plumbing Dealers Factory Visits</fullName>
+                <default>false</default>
+                <label>Plumbing Dealers Factory Visits</label>
+            </value>
+            <value>
+                <fullName>Architects</fullName>
+                <default>false</default>
+                <label>Architects</label>
+            </value>
+            <value>
+                <fullName>Engineers</fullName>
+                <default>false</default>
+                <label>Engineers</label>
+            </value>
+            <value>
+                <fullName>Consultants Factory Visits</fullName>
+                <default>false</default>
+                <label>Consultants Factory Visits</label>
+            </value>
+            <value>
+                <fullName>Plumbing factory Visits</fullName>
+                <default>false</default>
+                <label>Plumbing factory Visits</label>
+            </value>
+            <value>
+                <fullName>Inshop Plumber Meets</fullName>
+                <default>false</default>
+                <label>Inshop Plumber Meets</label>
+            </value>
+            <value>
+                <fullName>Exhibition / Construction Fairs</fullName>
+                <default>false</default>
+                <label>Exhibition / Construction Fairs</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

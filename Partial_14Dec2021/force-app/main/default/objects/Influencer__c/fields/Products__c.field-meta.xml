@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Products__c</fullName>
+    <description>This field captures value from related Account&apos;s Products</description>
+    <externalId>false</externalId>
+    <formula>IF(INCLUDES( Account__r.Products__c,&quot;WC PAN Connector&quot;),&quot;WC PAN Connector ; &quot;,NULL) &amp; 
+IF(INCLUDES(Account__r.Products__c,&quot;Aqua Life&quot;),&quot;Aqua Life ; &quot;,NULL) &amp; 
+IF(INCLUDES(Account__r.Products__c,&quot;Column Pipes&quot;),&quot;Column Pipes ; &quot;,NULL)&amp;
+IF(INCLUDES( Account__r.Products__c , &quot;CPVC&quot;), &quot;CPVC ; &quot;,NULL)&amp;
+IF(INCLUDES( Account__r.Products__c , &quot;SWR&quot;), &quot;SWR ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;UPVC&quot;), &quot;UPVC ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;COLUMN&quot;), &quot;COLUMN ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Sanitary System&quot;), &quot;Sanitary System ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;External Drainage&quot;), &quot;External Drainage ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;V4&quot;), &quot;V4 ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Concealed Cisterns&quot;), &quot;Concealed Cisterns ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Silent SWR&quot;), &quot;Silent SWR; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Air Admittance Valve&quot;), &quot;Air Admittance Valve ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Waste &amp; Traps&quot;), &quot;Waste &amp; Traps ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Valves (BUV &amp; BFV)&quot;), &quot;Valves (BUV &amp; BFV); &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Grease Seperator&quot;), &quot;Grease Seperator ; &quot;,NULL)&amp; 
+IF(INCLUDES( Account__r.Products__c , &quot;Multiquick&quot;), &quot;Multiquick ; &quot;,NULL)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Products</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

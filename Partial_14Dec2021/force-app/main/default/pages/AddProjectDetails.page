@@ -1,0 +1,2000 @@
+<!--**************************************************************************************************************************
+Created By      :
+Created Date    :
+Modified Date   :
+Modified By     : Subhajit Ghosh,Surya Priya (KVP Business Soln.)
+version         : 2.0
+Description     : In case of creating and editing a project
+
+
+***********************************************************************************************************************************-->
+<apex:page StandardController="Opportunity" extensions="CaptureProjectDetails,CustomLookupForProject" showHeader="false" sidebar="false" id="thePage" docType="html-5.0">
+    <apex:slds />
+    <meta name="viewport" contentType="application/x-JavaScript; charset=utf-8" content="width=device-width, initial-scale=1" />
+    
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type='text/javascript' src='/canvas/sdk/js/publisher.js'/>
+    <apex:slds />
+        
+        <style type="text/css">
+            th {
+                white-space:normal!important;
+            }
+    td .slds-truncate {
+        white-space:normal!important;
+    }
+    SolutionDesignDocumentTest        .imgClass:hover {
+        cursor: pointer;
+    }
+    
+    .look_css input[type="text"] {
+        background-color: #fff;
+        color: #16325c;
+        border: 1px solid #d8dde6;
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear, background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem+ (1px * 2));
+    }
+    
+    .look_css {
+        position: relative;
+    }
+    
+    .look_css a {
+        position: absolute;
+        right: 5px;
+        top: 6px;
+    }
+    
+    .wid80 {
+        width: 82%!important;
+    }
+    
+    @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .wid150 .slds-input,
+            .wid150 .look_css input[type="text"] {
+                width: 150px!important;
+            }
+    }
+    
+    .imgClass:hover {
+        cursor: pointer;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        z-index:999999;
+    }
+    
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    .mand {
+        font-size: 20px!important;
+        color: red!important;    
+    }
+    
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    /* The Close Button */
+    .closeprojbyEditId {
+        color: #aaaaaa;
+        float: right;myInput
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .closedistribEditId {
+        color: #aaaaaa;
+        float: right;myDistInput
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    .customPopup{
+        background-color: white;
+        border-width: 2px;
+        border-style: solid;
+        z-index: 9999;
+        left: 50%;
+        padding:10px;
+        position: absolute;        
+        width: 300px;
+        margin-left: -250px;
+        top:100px;
+    }
+    .popupBackground{
+        // background-color:black;
+        opacity: 0.8;
+        filter: alpha(opacity = 0);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    }
+    
+    </style>
+    
+    
+    <script> 
+        
+        
+        
+        function amountValue() {
+        <!--  alert("Inside js"); -->
+            var amnt = document.getElementById(
+                "{!$Component.theForm.thePageBlock.projectInfo.amnt}").value;
+        <!-- alert("Amount= "+amnt); -->
+            amountValueAction(amnt);
+        
+    }
+    
+    
+    function getFirmName(iValue) {
+        
+        //console.log($j("[id$=infulenceAccount]").val());
+        //console.log(iValue);
+        //alert();
+        //
+        
+        var idValue =
+            "thePage:theForm:thePageBlock:InfluencersSection:influencer:" +
+            iValue + ":infulenceAccount";
+        //console.log(idValue);
+        console.log(document.getElementById(idValue).value);"{!$Component.theForm.thePageBlock.projectInfo.amnt}").value;
+        var accName = document.getElementById(idValue).value;
+        var accFirm =
+            "thePage:theForm:thePageBlock:InfluencersSection:influencer:" +
+            iValue + ":AccFirm";
+        
+        CaptureProjectDetails.getAccountInfo(accName, function(result,
+                                                               event) {
+            
+            if (event.status) {
+                console.log(result);
+                document.getElementById(accFirm).value = result;
+                calRender();
+            }
+        });
+        
+        
+        
+    }
+    
+    </script>
+    
+    <apex:form id="popupForm">
+        <!--this script tag is used to display the account popup.Because of the rerender issue the script is used inside form-->
+        <script>
+        $j = jQuery.noConflict();
+        var newWin = null;
+        
+        function openAccountPopup(partyId) {
+            //alert('Hi');
+            var url =
+                "/001/e?RecordType={!recordTypeId}&ent=Account&00N3000000BjlZy=" +
+                partyId;
+            newWin = window.open(url, 'Popup',
+                                 'height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no'
+                                );
+        }
+        </script>
+        <!---------------------------------------Project by popup------------------------------------- -->
+        <div id="myModal" class="modal">    
+            <div class="modal-content" >
+                <span class="closeprojbyEditId">&times;</span>
+                
+                <apex:outputpanel id="lookupPanel"  styleclass="outpanel">   
+                    
+                    
+                    <div class="slds-page-header">
+                        <div clss="slds-media">
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                <p class="slds-text-body_small slds-line-height_reset"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-around_x-small">
+                        <p>Please enter the search term below and click the 'Go' button.  This will
+                            execute a search across all text fields</p>
+                        <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>    
+                        
+                        
+                        
+                        <apex:input value="{!ProjectQuery}" id="query" disabled="false" type="text"/> 
+                        <span><apex:commandButton value="Go" action="{!runProjectQuery}" rerender="lookupPanel,dptable"/></span>
+                        
+                    </div>
+                    
+                    <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptable">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th>Name</th>
+                                <th>Party Type</th>
+                                <th>Mobile No.</th>
+                                <th>Status </th>
+                                <th>State </th>
+                                <th>District</th>
+                                <th>Location</th>
+                            </tr>   
+                        </thead>
+                        <tbody id="myTable">   
+                            
+                            <apex:repeat value="{!ProjectAccounts}" var="account">
+                                
+                                
+                                
+                                <tr class="slds-hint-parent">
+                                    <td data-label="Name" >
+                                        <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                        <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2('{!account.Id}')">{!account.Name}</apex:outputLink>  </div>
+                                    </td>
+                                    <td data-label="Party Type">
+                                        <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                    </td>
+                                    <td data-label="Mobile No.">
+                                        <div class="slds-truncate" title="Mobile No."> <apex:outputText value="{!account.Contact_Number_Mobile__c}" /></div>
+                                    </td>
+                                    <td data-label="Status ">
+                                        <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Status__c}" /></div>
+                                    </td>
+                                    <td data-label="State ">
+                                        <div class="slds-truncate" title="State "><apex:outputField value="{!account.State__c}" /></div>
+                                    </td>
+                                    <td data-label="District ">
+                                        <div class="slds-truncate" title="District "><apex:outputField value="{!account.District__c}" /></div>
+                                    </td>
+                                    <td data-label="Location">
+                                        <div class="slds-truncate" title="Location"><apex:outputField value="{!account.City__c}" /></div>
+                                    </td>
+                                </tr>
+                                
+                                
+                                <input id="closebtn" type="hidden" />
+                            </apex:repeat>
+                        </tbody>
+                    </table>                       
+                    
+                </apex:outputpanel>
+            </div></div> 
+        
+        
+        
+        
+        
+        
+        <!--------------------------------------Project by popup end-----------------------------------------  -->
+        
+        <!-- Distributor lookup by subhajit ghosh-------------------->
+        
+        <div id="myModalDist" class="modal">    
+            <div class="modal-content" >
+                <span class="closedistribEditId">&times;</span>
+                
+                <apex:outputpanel id="distlookupPanel"  styleclass="outpanel">   
+                    
+                    
+                    <div class="slds-page-header">
+                        <div clss="slds-media">
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                <p class="slds-text-body_small slds-line-height_reset"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-around_x-small">
+                        <p>Please enter the search term below and click the 'Go' button.  This will
+                            execute a search across all text fields</p>
+                        <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>    
+                        
+                        
+                        
+                        <apex:input value="{!DistributorQuery}" id="distquery" disabled="false" type="text"/> 
+                        <span><apex:commandButton value="Go" action="{!runDistributorQuery}" rerender="distlookupPanel,distdptable"/></span>
+                        
+                    </div>
+                    
+                    <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="distdptable">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th>Name</th>
+                                <!--      <th>Party Type</th>-->
+                                <th>Mobile No.</th>
+                                <th>Status </th>
+                                <th>State </th>
+                                <th>District</th>
+                                <th>Location</th>
+                            </tr>   
+                        </thead>
+                        <tbody id="myTableDist">   
+                            
+                            <apex:repeat value="{!DistributorAccounts}" var="distributor">
+                                
+                                
+                                
+                                <tr class="slds-hint-parent">
+                                    <td data-label="Name" >
+                                        <input type="hidden" id="acctName{!distributor.Id}" value="{!distributor.Name}" />
+                                        <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunctionDist('{!distributor.Id}')">{!distributor.Name}</apex:outputLink>  </div>
+                                    </td>
+                                    <!--    <td data-label="Party Type">
+<div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+</td>-->
+                                    <td data-label="Mobile No.">
+                                        <div class="slds-truncate" title="Mobile No."> <apex:outputText value="{!distributor.Contact_Number_Mobile__c}" /></div>
+                                    </td>
+                                    <td data-label="Status ">
+                                        <div class="slds-truncate" title="Status "><apex:outputField value="{!distributor.Status__c}" /></div>
+                                    </td>
+                                    <td data-label="State ">
+                                        <div class="slds-truncate" title="State "><apex:outputField value="{!distributor.State__c}" /></div>
+                                    </td>
+                                    <td data-label="District ">
+                                        <div class="slds-truncate" title="District "><apex:outputField value="{!distributor.District__c}" /></div>
+                                    </td>
+                                    <td data-label="Location">
+                                        <div class="slds-truncate" title="Location"><apex:outputField value="{!distributor.City__c}" /></div>
+                                    </td>
+                                </tr>
+                                
+                                
+                                <input id="closebtn" type="hidden" />
+                            </apex:repeat>
+                        </tbody>
+                    </table>                       
+                    
+                </apex:outputpanel>
+            </div></div> 
+        
+        
+        
+        <!----------------------------------------TalukMaster popup------------------------------------- -->
+        <div id="myModalTaluk" class="modal">    
+            <div class="modal-content" >
+                <span class="closetaluk close">&times;</span>
+                
+                <apex:outputpanel id="lookupPanelForTaluk"  styleclass="outpanelTaluk">   
+                    
+                    
+                    <div class="slds-page-header">
+                        <div clss="slds-media">
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                <p class="slds-text-body_small slds-line-height_reset"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-around_x-small">
+                        <p>Please enter the search term below and click the 'Go' button.  This will
+                            execute a search across all text fields</p>
+                        <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>    
+                        
+                        
+                        
+                        <apex:input value="{!Talukquery}" id="CustomLookupForProject" disabled="false" type="text"/> 
+                        <span><apex:commandButton value="Go" action="{!Searchqueryfortaluk}" rerender="lookupPanelForTaluk,dptableTaluk"/></span>
+                        
+                    </div>
+                    
+                    <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableTaluk">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th>TalukName</th>
+                                <th>State </th>
+                                <th>District</th>
+                                <th>Cluster</th>
+                                
+                                
+                            </tr>   
+                        </thead>
+                        <tbody id="myTableForTaluk">   
+                            
+                            <apex:repeat value="{!TalukList}" var="Taluk">
+                                
+                                
+                                
+                                <tr class="slds-hint-parent">
+                                    <td data-label="TalukName" >
+                                        <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2Taluk('{!Taluk.Name}','{!Taluk.id}')">{!Taluk.Name}</apex:outputLink>  </div>
+                                    </td>
+                                    
+                                    <td data-label="State ">
+                                        <div class="slds-truncate" title="State "><apex:outputField value="{!Taluk.State__c}" /></div>
+                                    </td>
+                                    <td data-label="District ">
+                                        <div class="slds-truncate" title="District "><apex:outputField value="{!Taluk.District__c}" /></div>
+                                    </td>
+                                    <td data-label="Cluster ">
+                                        <div class="slds-truncate" title="Cluster "><apex:outputField value="{!Taluk.Cluster__c}" /></div>
+                                    </td>
+                                </tr>
+                                
+                                
+                                <input id="closebtn" type="hidden" />
+                            </apex:repeat>
+                        </tbody>
+                    </table> 
+                    
+                    
+                    
+                </apex:outputpanel>
+            </div></div> 
+        
+        <!--------------------------------------TalukMaster popup end-----------------------------------------  -->
+        <!----------------------------------------Pincode popup------------------------------------- -->
+        <div id="myModalPincode" class="modal">    
+            <div class="modal-content" >
+                <span class="closepin close">&times;</span>
+                
+                <apex:outputpanel id="lookupPanelForPincode"  styleclass="outpanelPincode">   
+                    
+                    
+                    <div class="slds-page-header">
+                        <div clss="slds-media">
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                <p class="slds-text-body_small slds-line-height_reset"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-around_x-small">
+                        <p>Please enter the search term below and click the 'Go' button.  This will
+                            execute a search across all text fields</p>
+                        <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>    
+                        
+                        
+                        
+                        <apex:input value="{!Pincodequery}" id="pinquery" disabled="false" type="text"/> 
+                        <span><apex:commandButton value="Go" action="{!Searchqueryforpincode}" rerender="lookupPanelForPincode,dptablePincode"/></span>
+                        
+                    </div>
+                    
+                    <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptablePincode">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th>Pincode</th>
+                                <th>State </th>
+                                <th>District</th>
+                                <th>City</th>
+                                
+                                
+                            </tr>   
+                        </thead>
+                        <tbody id="myTableForPincode">   
+                            
+                            <apex:repeat value="{!PincodeList}" var="Pincode">
+                                
+                                
+                                
+                                <tr class="slds-hint-parent">
+                                    <td data-label="Pincode" >
+                                        <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2Pincode('{!Pincode.Name}','{!Pincode.id}')">{!Pincode.Name}</apex:outputLink>  </div>
+                                    </td>
+                                    
+                                    <td data-label="State ">
+                                        <div class="slds-truncate" title="State "><apex:outputField value="{!Pincode.State__c}" /></div>
+                                    </td>
+                                    <td data-label="District ">
+                                        <div class="slds-truncate" title="District "><apex:outputField value="{!Pincode.District__c}" /></div>
+                                    </td>
+                                    <td data-label="Cluster ">
+                                        <div class="slds-truncate" title="City "><apex:outputField value="{!Pincode.City__c}" /></div>
+                                    </td>
+                                </tr>
+                                
+                                
+                                <input id="closebtn" type="hidden" />
+                            </apex:repeat>
+                        </tbody>
+                    </table> 
+                    
+                    
+                    
+                </apex:outputpanel>
+            </div></div> 
+        
+        <!--------------------------------------Pincode popup end-----------------------------------------  -->
+        <!--------------------------------------Influencer Details--------------------------------------------  -->
+        
+        <div id="myModalInSrch" class="modal">    
+            <div class="modal-content" >
+                <span class="closeinflu close">&times;</span>
+                
+                <apex:outputpanel id="lookupPanelInSrch"  styleclass="outpanel">   
+                    
+                    
+                    <div class="slds-page-header">
+                        <div clss="slds-media">
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                <p class="slds-text-body_small slds-line-height_reset"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-p-around_x-small">
+                        <p>Please enter the search term below and click the 'Go' button.  This will
+                            execute a search across all text fields</p>
+                        <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>   
+                        <apex:input value="{!orderQuery}" id="queryInSrch" disabled="false" type="text"/> 
+                        <span><apex:commandButton value="Go" action="{!runOrderQueryinfluencer}" rerender="lookupPanelInSrch,dptableInSrch"/></span>
+                        
+                    </div>
+                    
+                    <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableInSrch">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th>Name</th>
+                                <th>Primary Contact Person Name</th>
+                                <th>Party Type</th>
+                                <th>Contact Number (Mobile)</th>
+                                <th>State</th>
+                                <th>District</th>
+                                <th>Location</th>
+                                <!--<th>Status</th>
+<th>Street Address</th>
+<th>Ramco ID</th>-->
+                            </tr>   
+                        </thead>
+                        <tbody id="myTableInSrch">   
+                            
+                            <apex:repeat value="{!orderAccounts}" var="account">       
+                                <tr class="slds-hint-parent">
+                                    <td data-label="Name" >
+                                        <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                        <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction3('{!account.Id}')">{!account.Name}</apex:outputLink>  </div>
+                                    </td>
+                                    <td data-label="Primary Contact Person Name ">
+                                        <div class="slds-truncate" title="Primary Contact Person Name"><apex:outputText value="{!account.Primary_Contact_Person_Name__c}" /></div>
+                                    </td>
+                                    <td data-label="Party Type">
+                                        <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                    </td>
+                                    <td data-label="Contact Number (Mobile)">
+                                        <div class="slds-truncate" title="Contact Number (Mobile)"><apex:outputText value="{!account.Contact_Number_Mobile__c}" /></div>
+                                    </td>
+                                    <td data-label="State ">
+                                        <div class="slds-truncate" title="State"><apex:outputText value="{!account.State__c}" /></div>
+                                    </td>
+                                    <td data-label="District ">
+                                        <div class="slds-truncate" title="District"><apex:outputText value="{!account.District__c}" /></div>
+                                    </td>
+                                    <td data-label="Location ">
+                                        <div class="slds-truncate" title="Location"><apex:outputText value="{!account.City__c}" /></div>
+                                    </td>
+                                    <!--<td data-label="Status ">
+<div class="slds-truncate" title="Status "><apex:outputText value="{!account.Status__c}" /></div>
+</td>
+<td data-label="Street Address">
+<div class="slds-truncate" title="Street Address"><apex:outputText value="{!account.Street_Address__c}" /></div>
+</td>
+<td data-label="Ramco ID">
+<div class="slds-truncate" title="Ramco ID"><apex:outputText value="{!account.Ramco_ID__c}" /></div>
+</td>-->
+                                </tr>
+                                <input id="closebtn" type="hidden" />
+                            </apex:repeat>
+                        </tbody>
+                    </table> 
+                    
+                    
+                    
+                </apex:outputpanel>
+            </div></div> 
+        
+        <!--------------------------------------Influencer Details End----------------------------------------  -->
+    </apex:form>
+    
+    
+    
+    <apex:pageMessages id="theErrorMessage" />
+    <apex:form id="theForm">
+        
+        <apex:inputHidden id="hiddenfld" value="{!stageName}"/>
+        <apex:inputHidden id="hiddenfldprev" value="{!previousStageName}"/>
+        <apex:actionfunction name="param1" action="{!stageBasedInfluencerDetails}" reRender="mainInfluenceSectionId">
+        </apex:actionfunction>
+        <!--  <apex:actionFunction name="saveEditProject" action="{!saveProject}" reRender="a" />-->
+        <apex:outputpanel >
+            
+            <apex:actionstatus id="WaitingStatus">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                                                                         height: 100%;opacity:0.65;width:100%;">
+                        <div class="waitingHolder" style="top: 350px; width: 91px;">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span class="waitingDescription">Loading...</span>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+        </apex:outputpanel>
+        
+        <!--<apex:actionFunction name="amountValueAction" reRender="pc" action="{!projectCategoryVal}"
+immediate="true">
+<apex:param name="firstParam" value="" /> 
+
+</apex:actionFunction>-->
+        <apex:actionFunction name="TalukValueAction" reRender="state,cluster,district" action="{!getTalukDetails}"
+                             immediate="true">
+        </apex:actionFunction>
+
+        <div id="thePageBlock">
+            <div class="slds-page-header">
+                <div class="slds-media">
+                    <div class="slds-media__body">
+                        <h1 class="slds-page-header__title slds-truncate slds-align-middle  ws_mobile slds-p-left_small">
+                            Project Details</h1>
+                        <p class="slds-text-body_small slds-line-height_reset"></p>
+                    </div>
+                </div>
+            </div>
+            <div id="projectInfo" title="Project Details">
+                <div class="slds-grid slds-wrap slds-p-around_small">
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project Name</label><sub class="mand">*</sub><br/>
+                        
+                        <apex:inputField value="{!opportunityRecord.Name}"  styleClass="slds-input" rendered="{!IF(opportunityRecord.Name==NULL,True,false)}"  id="inputProjectNameId" onchange="textCaseFormatter('thePage:theForm:inputProjectNameId')"/>
+                        <apex:outputField value="{!opportunityRecord.Name}"  styleClass="slds-output"  rendered="{!IF(opportunityRecord.Name!=NULL,True,false)}"/>
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project Close Date</label> <sub class="mand">*</sub><br/>
+                        <apex:inputField value="{!opportunityRecord.CloseDate}" styleClass="slds-input wid80"
+                                         rendered="{!IF(opportunityRecord.CloseDate==NULL,True,false)}"   />
+                        <apex:outputField value="{!opportunityRecord.CloseDate}" styleClass="slds-output wid80"
+                                          rendered="{!IF(opportunityRecord.CloseDate!=NULL,True,false)}"   />
+                        <!--    <apex:inputfield id="amnt" value="{!opportunityRecord.Amount}" onblur="amountValue();" /> -->
+                    </div>
+                    <!--<div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+<label>Approximate Project Value</label> 
+<apex:inputfield id="amnt" value="{!opportunityRecord.Approximate_Project_Value__c}"
+onchange="amountValue();" styleClass="slds-input" 
+/>
+<apex:outputtext />-->
+                    <!--      <apex:inputField value="{!opportunityRecord.Project_Number__c}" /> Project Number Updaet by Workflow -->
+                    <!--</div>-->
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project Category</label><br/>
+                        
+                        <apex:inputField value="{!opportunityRecord.Category__c}" id="pcatg" styleClass="slds-input" onchange="otherFieldShowHide('thePage:theForm:pcatg')"
+                                         rendered="{!IF(opportunityRecord.Category__c==NULL,True,false)}"   />
+                        <apex:outputField value="{!opportunityRecord.Category__c}" styleClass="slds-output wid80"
+                                          rendered="{!IF(opportunityRecord.Category__c!=NULL,True,false)}"   />
+                        
+                    </div>
+                    <div id="OtherProjs" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Others (Required if the value chosen in Project Category is others)</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.Others_Project_Category__c}" styleClass="slds-input"
+                                         id="projectOthers"     />
+                    </div> 
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Lead Status</label>
+                        <apex:inputfield value="{!opportunityRecord.Lead_Status__c}" styleClass="slds-input"
+                                         />
+                    </div>
+                    <!--  <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+<label>stge last chngd</label>
+<apex:inputfield value="{!opportunityRecord.Project_Stage_Last_Modified_Date__c}" styleClass="slds-input"
+/>
+</div>-->
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Source Of Lead</label><br/>
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.Source_of_Lead__c==NULL,True,false)}">
+                            <apex:inputfield value="{!opportunityRecord.Source_of_Lead__c}" id="lsorc" styleClass="slds-input"  onchange="otherFieldShowHide('thePage:theForm:lsorc')"
+                                             />
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.Source_of_Lead__c!=NULL,True,false)}">
+                            <apex:outputfield value="{!opportunityRecord.Source_of_Lead__c}" />
+                            
+                        </apex:outputPanel>
+                    </div>
+                    <div id="SourceOthers" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Others (Required if the value chosen in Source Of Lead is others)</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.Others_Source_Of_Lead__c}" styleClass="slds-input"  />
+                    </div>
+                    <!--
+<div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+<label>Test Date Change for flags</label>
+<apex:inputfield value="{!opportunityRecord.Project_Stage_Last_Modified_Date__c}" id="pc1" styleClass="slds-input wid80"
+/>
+</div>-->
+                    <!--Dist field bny subhajit ghosh -->
+                    <apex:variable var="t" value="{!1}" />
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small  tg-il5c">
+                        <label>Distributor</label> <sub class="mand">*</sub>
+                        
+                        <div class="look_css  tg-733k relative_pos">
+                            
+                            <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx1_account" rendered="{!IF(opportunityRecord.Distributor_Name__c == NULL,true, false)}" >
+                                <apex:inputText value="{!opportunityRecord.Distributor__c}" id="distargetId" styleClass="targetfieldDist{!t}" style="display:none"   />
+                                <input type="text" size="20" id="targetNameDist{!t}" value="{!opportunityRecord.Distributor_Name__c}" styleClass="slds-input"  />
+                                <a href="#" id="myBtn" class="lk"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionDist(targetNameDist{!t},{!t})" /> </a>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel layout="inline" style="vertical-align:middle" rendered="{!IF(opportunityRecord.Distributor_Name__c != NULL,true, false)}">
+                                
+                                <!--<apex:inputfield id="distri" value="{!opportunityRecord.Distributor_Name__c}" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}"/>--->
+                                <apex:outputfield value="{!opportunityRecord.Distributor_Name__c }" /> <!-- rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />--->
+                            </apex:outputPanel>
+                            
+                        </div>
+                    </div>
+                    <!-- -->
+                    
+                    <apex:variable var="j" value="{!1}" />
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small  tg-il5c">
+                        <label>Builder/Developer</label> <sub class="mand">*</sub>
+                        
+                        <div class="look_css  tg-733k relative_pos">
+                            
+                            <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account" rendered="{!IF(opportunityRecord.ProjectBy_Name__c == NULL,true, false)}">
+                                <apex:inputText value="{!opportunityRecord.Project_By__c}" id="targetId" styleClass="targetfield{!j}" style="display:none" />
+                                <input type="text" size="20" id="targetName{!j}" value="{!opportunityRecord.ProjectBy_Name__c}" styleClass="slds-input"/>
+                                <a href="#" id="myBtn" class="lk" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="Myfunction(targetName{!j},{!j})" /> </a>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="inline" style="vertical-align:middle" rendered="{!IF(opportunityRecord.ProjectBy_Name__c != NULL,true, false)}" >
+                                <apex:outputfield value="{!opportunityRecord.ProjectBy_Name__c }" /> 
+                            </apex:outputPanel>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project Type</label><sub class="mand">*</sub>
+                        
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.Project_Type__c == NULL,true, false)}">
+                            <apex:inputField value="{!opportunityRecord.Project_Type__c}"  
+                                             styleClass="slds-input" />
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.Project_Type__c != NULL,true, false)}"><br/>
+                            
+                            
+                            
+                            <apex:inputfield value="{!opportunityRecord.Project_Type__c}" />
+                            
+                        </apex:outputPanel>
+                        
+                    </div>
+                    <div  class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Mixed Type</label> <sub class="mand">*</sub>
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.Mixed_Type__c == NULL ,true, false)}">
+                            <apex:inputField id="mxType" value="{!opportunityRecord.Mixed_Type__c}"  
+                                             styleClass="slds-input"  onchange="otherFieldShowHide('thePage:theForm:mxType')"/>
+                        </apex:outputPanel>
+                        
+                        
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.Mixed_Type__c !=NULL,true, false)}"><br/>
+                            
+                            <apex:outputfield value="{!opportunityRecord.Mixed_Type__c}"/> 
+                        </apex:outputPanel>
+                    </div>
+                    
+                    <!--        <apex:variable var="prevStage" value="{!previousStageName}" id="prevStageId"/> -->
+                    <!--     <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+<label>Stage</label><sub>*</sub>
+<apex:inputField value="{!opportunityRecord.StageName}" styleClass="slds-input" id="staging" onchange="stageBasedInfluencerDetails1()">
+</apex:inputField>
+
+</div> -->
+                    
+                    <div id="mixedOthers" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Others (Required if the value chosen in mixed-type is others)</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.Others__c}" styleClass="slds-input" />
+                    </div>
+                    
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Towers</label><sub class="mand">*</sub>
+                        <apex:outputPanel ><!--</apex:out>rendered="{!IF(opportunityRecord.Number_of_towers__c == NULL,true, false)}">-->
+                            <apex:inputField value="{!opportunityRecord.Number_of_towers__c}"  
+                                             styleClass="slds-input" />
+                        </apex:outputPanel>
+                        <!--<apex:outputPanel rendered="{!IF(opportunityRecord.Number_of_towers__c != NULL,true, false)}"><br/>
+<apex:inputfield value="{!opportunityRecord.Number_of_towers__c }" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.Number_of_towers__c }"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel>-->
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No of Floors</label><sub class="mand">*</sub>
+                        <apex:outputPanel ><!--rendered="{!IF(opportunityRecord.No_of_Floors__c == NULL,true, false)}">-->
+                            <apex:inputField value="{!opportunityRecord.No_of_Floors__c}"  
+                                             styleClass="slds-input" />
+                        </apex:outputPanel>
+                        <!-- <apex:outputPanel rendered="{!IF(opportunityRecord.No_of_Floors__c != NULL,true, false)}"><br/>
+<apex:inputfield value="{!opportunityRecord.No_of_Floors__c}" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.No_of_Floors__c}"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel>-->
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Bathrooms</label><sub class="mand">*</sub>
+                        <apex:outputPanel > <!--rendered="{!IF(opportunityRecord.No_of_Bathrooms__c == NULL,true, false)}"-->
+                            <apex:inputField value="{!opportunityRecord.No_of_Bathrooms__c}"  
+                                             styleClass="slds-input" />
+                        </apex:outputPanel>
+                        <!--apex:outputPanel rendered="{!IF(opportunityRecord.No_of_Bathrooms__c != NULL,true, false)}"><br/>
+<apex:inputfield value="{!opportunityRecord.No_of_Bathrooms__c}" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.No_of_Bathrooms__c}"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel-->
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Kitchens</label><sub class="mand">*</sub>
+                        <apex:outputPanel > 
+                            <apex:inputField value="{!opportunityRecord.Number_of_kitchens__c}" type="number"
+                                             styleClass="slds-input" />
+                        </apex:outputPanel>
+                        <!--apex:outputPanel rendered="{!IF(opportunityRecord.Number_of_kitchens__c != NULL,true, false)}"><br/>
+<apex:inputfield value="{!opportunityRecord.Number_of_kitchens__c }" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.Number_of_kitchens__c }"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel-->
+                    </div>
+                    
+                    
+                    <!--<div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+<label>Total Project Area (sq mts)</label><sub class="mand">*</sub>
+<apex:inputField value="{!opportunityRecord.Total_Project_Area__c}" styleClass="slds-input" type="number"
+/> 
+</div>-->
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Total Project Area (sq mts)</label><sub class="mand">*</sub>
+                        <apex:outputPanel > <!--rendered="{!IF(opportunityRecord.Project_Area__c == NULL,true, false)}"-->
+                            <apex:inputField value="{!opportunityRecord.Project_Area__c}" styleClass="slds-input" />
+                        </apex:outputPanel>
+                        <!--<apex:outputPanel rendered="{!IF(opportunityRecord.Project_Area__c != NULL,true, false)}"><br/>
+
+<apex:inputfield value="{!opportunityRecord.Project_Area__c }" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.Project_Area__c }"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel>-->
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Internal Plumbing Mix</label><sub class="mand">*</sub>
+                        <apex:outputPanel > <!--rendered="{!IF(opportunityRecord.Internal_Plumbing_Mix__c == NULL,true, false)}"-->
+                            <apex:inputField value="{!opportunityRecord.Internal_Plumbing_Mix__c}" styleClass="slds-input" />
+                        </apex:outputPanel>
+                        
+                        <!--<apex:outputPanel rendered="{!IF(opportunityRecord.Internal_Plumbing_Mix__c != NULL,true, false)}"><br/>
+<apex:inputtext value="{!opportunityRecord.Internal_Plumbing_Mix__c}" styleClass="slds-input" disabled="{!enableinput}" />
+<apex:inputfield value="{!opportunityRecord.Internal_Plumbing_Mix__c}" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.Internal_Plumbing_Mix__c}"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel>-->
+                    </div>
+                    
+                    
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Drainage System to be Deployed</label><sub class="mand">*</sub>
+                        <apex:outputPanel ><!--rendered="{!IF(opportunityRecord.SWR_system_to_be_deployed__c == NULL,true, false)}"-->
+                            <apex:inputField value="{!opportunityRecord.SWR_system_to_be_deployed__c}" id="SWRtoDeployed" styleClass="slds-input" onchange="SWRtoBeSelectedisPAPA('thePage:theForm:SWRtoDeployed')" />
+                        </apex:outputPanel>
+                        <!--<apex:outputPanel rendered="{!IF(opportunityRecord.SWR_system_to_be_deployed__c != NULL,true, false)}"><br/>
+<apex:inputfield id="SWRtoDeployed2" value="{!opportunityRecord.SWR_system_to_be_deployed__c}" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" 
+onchange="SWRtoBeSelectedisPAPA('thePage:theForm:SWRtoDeployed2')" />
+<apex:outputfield value="{!opportunityRecord.SWR_system_to_be_deployed__c}"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+
+</apex:outputPanel>-->
+                        
+                    </div>
+                    <div id="MiniVent" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Mini-Vent </label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.No_of_Mini_Vent__c}" styleClass="slds-input"  >
+                        </apex:inputField>   
+                    </div>
+                    <!--<div  class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+<apex:outputPanel rendered="{!IF(opportunityRecord.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V',True,false)}" >
+<label>No. of Mini-Vent </label><sub class="mand">*</sub>
+<apex:inputField value="{!opportunityRecord.No_of_Mini_Vent__c}" styleClass="slds-input" rendered="{!IF(opportunityRecord.SWR_system_to_be_deployed__c=='Single Stack with P.A.P.A & A.A.V',True,false)}" />
+</apex:outputPanel>  
+</div>-->
+                    
+                    <div id="MaxiVent" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Maxi-Vent </label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.No_of_Maxi_Vent__c}" styleClass="slds-input"  >
+                        </apex:inputField>
+                        
+                        
+                    </div> 
+                    <div id="Papa" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of P.A.P.A.</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.No_of_P_A_P_A__c}" styleClass="slds-input"  >
+                        </apex:inputField>
+                        
+                        
+                    </div> 
+                    <div id="FiltraMaxi" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Maxi-Filtra</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.No_of_Maxi_Filtra__c}" styleClass="slds-input"  >
+                        </apex:inputField>
+                        
+                        
+                    </div> 
+                    <div id="Catridge" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Maxi-Filtra Cartridge</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.No_of_Maxi_Filtra_Catridge__c}" styleClass="slds-input"  >
+                        </apex:inputField>
+                        
+                        
+                    </div> 
+                    <div id="AlumCap" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of Aluminum cap for Maxi-Vent and Maxi-Filtra</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.No_of_Aluminum_cap_for_Maxi_Vent_Filtra__c}" styleClass="slds-input"  >
+                        </apex:inputField>
+                        
+                        
+                    </div> 
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Dimesion of Stack (in millimeteres)</label><sub class="mand">*</sub>
+                        
+                        <apex:outputPanel >
+                            <apex:inputField value="{!opportunityRecord.Dimension_of_the_stack__c}" styleClass="slds-input" />
+                        </apex:outputPanel>
+                        
+                        <!--apex:outputPanel rendered="{!IF(opportunityRecord.Dimension_of_the_stack__c != NULL,true, false)}"><br/>
+
+<apex:inputfield value="{!opportunityRecord.Dimension_of_the_stack__c}" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.Dimension_of_the_stack__c}"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel-->
+                        
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Material of Stack</label><sub class="mand">*</sub>
+                        
+                        <apex:outputPanel > <!--rendered="{!IF(opportunityRecord.Material_of_Stack__c == NULL,true, false)}"-->
+                            <apex:inputField value="{!opportunityRecord.Material_of_Stack__c}" styleClass="slds-input" />
+                        </apex:outputPanel>
+                        
+                        <!-- <apex:outputPanel rendered="{!IF(opportunityRecord.Material_of_Stack__c != NULL,true, false)}"><br/>
+<apex:inputfield value="{!opportunityRecord.Material_of_Stack__c}" styleClass="slds-input"
+rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+
+<apex:outputfield value="{!opportunityRecord.Material_of_Stack__c}" 
+rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}"/>
+</apex:outputPanel>-->
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project URL</label>
+                        <apex:inputField value="{!opportunityRecord.Project_URL__c}" styleClass="slds-input"
+                                         />
+                    </div>
+                    
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project Premiumness</label>
+                        <apex:inputField value="{!opportunityRecord.Project_Premiumness__c}" styleClass="slds-input"
+                                         />
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project Priority</label>
+                        <apex:inputField value="{!opportunityRecord.Priority__c}" styleClass="slds-input"
+                                         />
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Standard ORC %</label><sub class="mand">*</sub>
+                        <apex:outputPanel > <!--rendered="{!IF(opportunityRecord.Standard_ORC__c == NULL,true, false)}"-->
+                            <apex:inputField value="{!opportunityRecord.Standard_ORC__c}" styleClass="slds-input"
+                                             />
+                        </apex:outputPanel>
+                        <!--<apex:outputPanel rendered="{!IF(opportunityRecord.Standard_ORC__c != NULL,true, false)}"><br/>
+<apex:inputfield value="{!opportunityRecord.Standard_ORC__c }" styleClass="slds-input" rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),true,false)}" />
+<apex:outputfield value="{!opportunityRecord.Standard_ORC__c }"  rendered="{!IF((opportunityRecord.NEW_SPR_COUNT__c==0),false,true)}" />
+</apex:outputPanel>-->
+                        
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Project Location</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.Project_Location__c}" styleClass="slds-input" id="inputProjLocationId" onchange="textCaseFormatter('thePage:theForm:inputProjLocationId')"/>
+                    </div>
+                    <!--    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+<label>Special Pricing Request Approval</label><sub>*</sub>
+<apex:inputField value="{!opportunityRecord.Special_Pricing_Request_Approval__c}"
+styleClass="slds-input" />
+</div>-->
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Street Address</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.Street_Address__c}" styleClass="slds-input" id="inputStAddId" onchange="textCaseFormatter('thePage:theForm:inputStAddId')"/>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        
+                        <apex:outputtext />
+                        <div>
+                            <apex:outputLabel value="Please Select the Taluk" style="color:#333;" />
+                            <apex:actionregion >
+                                <apex:outputPanel >
+                                    <apex:outputtext />
+                                    <div class="look_css  tg-il5c">
+                                        <div class=" tg-733k relative_pos">
+                                            <apex:variable var="j" value="{!1}" />
+                                            <apex:outputPanel layout="inline" style="vertical-align:middle" id="panelId">
+                                                <apex:inputText value="{!opportunityRecord.Taluk__c}" id="talukId" styleClass="targetfieldTaluk{!j}" style="display:none">
+                                                    <apex:actionSupport event="onchange" action="{!getTalukDetails}" rerender="state,cluster,district"/></apex:inputText>
+                                                
+                                                <input type="text" size="20" id="targetNameTaluk{!j}" value="{!opportunityRecord.Taluk_Name__c}" styleClass="slds-input"/>
+                                                <a href="#" id="myBtnfortaluk" class="lk" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionTaluk(targetNameTaluk{!j},{!j})"/> </a>
+                                            </apex:outputPanel>
+                                            
+                                        </div>
+                                    </div>              
+                                    
+                                </apex:outputPanel>
+                                
+                            </apex:actionregion>
+                        </div>
+                        <apex:outputtext />
+                        
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        
+                        <apex:outputtext />     
+                        
+                        <div>
+                            <apex:outputLabel value="Pincode" style="color:#333;" />
+                            <apex:actionregion >
+                                <apex:outputPanel >
+                                    <apex:outputtext />
+                                    <div class="look_css  tg-il5c">
+                                        <div class=" tg-733k relative_pos">
+                                            <apex:variable var="j" value="{!1}" />
+                                            <apex:outputPanel layout="inline" style="vertical-align:middle" id="codeId">
+                                                <apex:inputText value="{!opportunityRecord.Pincode__c}" id="pincodeId" styleClass="targetfieldPincode{!j}" style="display:none">
+                                                    <apex:actionSupport event="onchange" action="{!getPincodeDetails}" rerender="city"/></apex:inputText>
+                                                
+                                                <input type="text" size="20" id="targetNamePincode{!j}" value="{!opportunityRecord.Pincode_Name__c}" styleClass="slds-input"/>
+                                                <a href="#" id="myBtnforpincode" class="lk" > <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionPincode(targetNamePincode{!j},{!j})"/> </a>
+                                            </apex:outputPanel>
+                                            
+                                        </div>
+                                    </div>              
+                                    
+                                </apex:outputPanel>
+                                
+                            </apex:actionregion>
+                        </div>
+                        <apex:outputtext />
+                        
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>GSTN</label><sub class="mand">*</sub><label>(Ship to party GST Number)</label>
+                        <apex:outputPanel >
+                            <apex:inputField value="{!opportunityRecord.GSTN__c}" styleClass="slds-input" />
+                        </apex:outputPanel>
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>HDPE</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.HDPE__c}" styleClass="slds-input" id="HDPE" onchange="hDPEYes('thePage:theForm:HDPE')">
+                        </apex:inputField>
+                        
+                        
+                    </div> 
+                    <div   id="Lengthofpipeline" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label> Length of Pipeline (Meters)</label><sub class="mand">*</sub>
+                        <apex:outputPanel >
+                            <apex:inputField value="{!opportunityRecord.Length_of_Pipeline_Meters__c}" styleClass="slds-input"   >
+                            </apex:inputField>
+                        </apex:outputPanel>
+                        
+                    </div> 
+                    <div id="Lengthofpipeline" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.HDPE__c=='Yes',True,false)}">
+                            <label> Length of Pipeline (Meters)</label><sub class="mand">*</sub>
+                            <apex:inputField Label="Average Flat Area(sq mts)" value="{!opportunityRecord.Length_of_Pipeline_Meters__c}" styleClass="slds-input" rendered="{!IF(opportunityRecord.HDPE__c=='Yes',True,false)}" />
+                        </apex:outputPanel>
+                    </div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>BlazeMaster</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.BlazeMaster__c}" styleClass="slds-input" id="blazeMaster" onchange="blazeMasterYes('thePage:theForm:blazeMaster')">
+                        </apex:inputField>
+                        
+                    </div>
+                    
+                    <div   id="AvgFlatArea" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Average Flat Area(sq mts)</label><sub class="mand">*</sub>
+                        <apex:outputPanel >
+                            <apex:inputField value="{!opportunityRecord.Average_Flat_Area_in_sq_metres__c}" styleClass="slds-input"   >
+                            </apex:inputField>
+                        </apex:outputPanel>
+                        
+                    </div> 
+                    <div id="AvgFlatArea" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.BlazeMaster__c=='Yes',True,false)}">
+                            <label>Average Flat Area(sq mts)</label><sub class="mand">*</sub>
+                            <apex:inputField Label="Average Flat Area(sq mts)" value="{!opportunityRecord.Average_Flat_Area_in_sq_metres__c}" styleClass="slds-input" rendered="{!IF(opportunityRecord.BlazeMaster__c=='Yes',True,false)}" />
+                        </apex:outputPanel></div>
+                    
+                    <div id="noFlatsPerFloor" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>No. of flats per floor</label><sub class="mand">*</sub>
+                        <apex:outputPanel >
+                            <apex:inputField value="{!opportunityRecord.No_of_flats_per_floor__c}" styleClass="slds-input"  >
+                            </apex:inputField>
+                        </apex:outputPanel>
+                        
+                    </div> 
+                    <div id="noFlatsPerFloor" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <apex:outputPanel rendered="{!IF(opportunityRecord.BlazeMaster__c=='Yes',True,false)}">
+                            <label>No. of flats per floor</label><sub class="mand">*</sub>
+                            <apex:inputField label="No. of flats per floor" value="{!opportunityRecord.No_of_flats_per_floor__c}" styleClass="slds-input"  rendered="{!IF(opportunityRecord.BlazeMaster__c=='Yes',True,false)}" />
+                        </apex:outputPanel></div>
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <apex:outputPanel >
+                            <label>Water Storage Tank</label><sub class="mand">*</sub>
+                            <apex:inputField value="{!opportunityRecord.Water_Tank__c}" styleClass="slds-input" id="waterTank" onchange="watertankYes('thePage:theForm:waterTank')">
+                            </apex:inputField>
+                        </apex:outputPanel>
+                        
+                    </div>
+                    
+                    <div id='quantity' class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label> Volume required (in liters)</label><sub class="mand">*</sub>
+                        <apex:outputPanel >
+                            <apex:inputField value="{!opportunityRecord.Quantity__c}" styleClass="slds-input"   >
+                            </apex:inputField>
+                        </apex:outputPanel>
+                    </div>                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <apex:outputPanel >
+                            <label>Grease Interceptors</label><sub class="mand">*</sub>
+                            <apex:inputField value="{!opportunityRecord.Grease_Interceptors__c}" styleClass="slds-input" id="grease" onchange="greaseYes('thePage:theForm:grease')">
+                            </apex:inputField>
+                        </apex:outputPanel>
+                        
+                    </div>
+                    
+                    <div id='quantity_c' class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Quantity (Grease Interceptors)</label><sub class="mand">*</sub>
+                        <apex:outputPanel >
+                            <apex:inputField value="{!opportunityRecord.Quantit_y__c}" styleClass="slds-input"   >
+                            </apex:inputField>
+                        </apex:outputPanel>
+                    </div>       
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label>Stage</label><sub class="mand">*</sub>
+                        <apex:inputField value="{!opportunityRecord.StageName}" styleClass="slds-input" id="staging" onchange="stageBasedInfluencerDetails1()">
+                        </apex:inputField>
+                        
+                    </div> 
+                    
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="slds-page-header">
+                <apex:outputPanel id="errorId">
+                    <div class="slds-media">
+                        <div class="slds-media__body">
+                            
+                            <h1 class="slds-page-header__title slds-truncate slds-align-middle  ws_mobile slds-p-left_small">
+                                Influencer Details</h1>
+                            <p class="slds-text-body_small slds-line-height_reset"></p>
+                        </div>
+                        
+                    </div>
+                    <apex:outputPanel rendered="{!dispErrDivInf}" style="color:#de0f0f;font-size: 14px;font-weight: bold;padding-left:11px;">
+                        ERROR : {!dispErrInfMsg}.
+                    </apex:outputPanel>
+                    
+                </apex:outputPanel>
+            </div>
+            
+            
+            <apex:outputPanel id="mainInfluenceSectionId" >
+                <div id="InfluencersSection" title="Influencer Details">
+                    <apex:outputPanel rendered="{!WrapInfBool}" id="ashirwaad12">
+                        <!-- title=" PROBABILITY" -->
+                        
+                        <apex:variable var="i" value="{!0}" />
+                        <apex:variable var="j" value="{!1}" />
+                        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal wid150"
+                               id="influencer" title="Influencers">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th>Influencer Type</th>
+                                    <th>Source</th>
+                                    <th>Account</th>
+                                    <th>Create Account</th>
+                                    <!-- <th>Firm Name</th>
+<th>Last Visit Date</th>
+<th>Update of Last Visit</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!wrapInfuList}" var="inf" id="influIds">
+                                    <tr class="slds-hint-parent">
+                                        <td data-label="Influencer Type">
+                                            <div class="slds-truncate" title="{!inf.influ.Influencer_Type__c}">
+                                                <apex:outputField value="{!inf.influ.Influencer_Type__c}" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <apex:selectList value="{!inf.influ.Source__c}" multiselect="false" size="1" >                                         
+                                                <apex:selectOptions value="{!inf.sourceInf}" />                                         
+                                            </apex:selectList>
+                                            
+                                        </td>
+                                        
+                                        <td data-label="Account">
+                                            <div class="slds-truncate look_css" title="Name">
+                                                <div class="{!j}I">
+                                                    <div class="{!j}B"></div>
+                                                    
+                                                    <div class="slds-grid slds-wrap ">
+                                                        <span style="color:red"></span>
+                                                        <div class=" tg-733k relative_pos" style="width:100%">
+                                                            
+                                                            <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account">
+                                                                <apex:inputText value="{!inf.influ.Account__c}" id="infulenceAccount" styleClass="targetfieldAcc{!j}" style="display:none"/>
+                                                                <input type="text" size="20" id="targetNameAcc{!j}" value="{!inf.influ.Account__r.Name}" styleClass="slds-input" onchange="getFirmName({!i}); return false;"/>
+                                                                <a href="#" id="myBtn" class="lk"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionAcc(targetNameAcc{!j},{!j})"/> </a>
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                        <td data-label="Create Account">
+                                            <apex:image id="theImage" styleClass="imgClass" value="{!$Resource.AddIcon}" width="25" height="25" onclick="openAccountPopup('{!inf.influ.Influencer_Type__c}'); return false;" />
+                                        </td>
+                                        <!--<td data-label="Firm Name">
+<div class="slds-truncate" title="">
+
+<apex:inputText value="{!inf.firmName}" id="AccFirm" styleClass="slds-input" />
+</div>
+</td>
+<td data-label="Last Visit Date">
+<div class="slds-truncate" title="">
+
+<apex:inputField value="{!inf.influ.Last_Visit_Date__c}" styleClass="slds-input"
+/>
+</div>
+</td>
+<td data-label="Update of Last Visit">
+<div class="slds-truncate" title="">
+
+<apex:inputField value="{!inf.influ.Update_of_Last_Visit__c}" styleClass="slds-input"
+/>-->
+                                        <apex:variable var="i" value="{!i+1}" />
+                                        <!--</div>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <apex:variable var="j" value="{!j+1}" />
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                        <apex:actionFunction name="calRender" action="{!calRender}" rerender="InfluencersSection"/> 
+                        
+                    </apex:outputPanel>
+                    
+                </div>
+            </apex:outputPanel>   
+            
+            
+            <div class="slds-p-around_small">
+                <center>
+                    
+                    <apex:commandButton value="Save" reRender="theErrorMessage,errorId,swgmsg,gstMsgId" status="WaitingStatus"
+                                        styleClass="slds-button slds-button_brand" action="{!saveProject}"  />
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="slds-button slds-button_neutral"
+                                        />
+                    <apex:commandButton action="{!validateGSTIN}" reRender="gstMsgId,gstresponseId" value="Validate GSTIN" styleClass="slds-button slds-button_neutral"/>
+                    <apex:outputPanel id="swgmsg" rendered="{!dispErrDivInf}" style="color:#de0f0f;font-size: 14px;font-weight: bold;padding-left:11px;">
+                        ERROR : {!dispErrInfMsg}.
+                    </apex:outputPanel>
+                    
+                </center>
+            </div>
+            
+        </div>
+        <apex:outputpanel id="gstMsgId">
+            <apex:outputPanel rendered="{!gstValidationFlag}" style="color:#de0f0f;font-size: 14px;font-weight: bold;padding-left:11px;">
+                {!gstValidationMessage}
+            </apex:outputPanel>
+        </apex:outputpanel>
+        
+        <apex:outputpanel id="gstresponseId">
+            <apex:outputPanel rendered="{!NOT(gstValidationFlag)}" style="color:#de0f0f;font-size: 14px;font-weight: bold;padding-left:11px;">
+                {!gstResponseMessage}
+            </apex:outputPanel>
+        </apex:outputpanel>
+        
+        <script>
+        
+        // Get the modal for project by field which fetches account
+        var modalAcc = document.getElementById('myModalInSrch');
+        var elmAcc;
+        var fldAcc;
+        
+        
+        // Get the <span> element that closes the modal
+        var spanAcc = document.getElementsByClassName("closeinflu")[0];
+        
+        // When the user clicks the button, open the modal 
+        function MyfunctionAcc(elid, fldid) {                    
+            //alert('--elid--'+elid.id + '--'+fldid);
+            var modal2Acc = document.getElementById('myModalInSrch');
+            elmAcc = elid.id;  
+            fldAcc = 'targetfieldAcc' + fldid; 
+            console.log('fld='+fldAcc);                    
+            modal2Acc.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        spanAcc.onclick = function() {
+            modalAcc.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modalAcc) {
+                modalAcc.style.display = "none";
+            }
+        }
+        
+        
+        function myFunction3(acctId) {
+            var nameElementId = 'acctName'+acctId;
+            console.log(acctId);
+            var val = document.getElementById(nameElementId).value;
+            var aid = acctId; 
+            // console.log("myFunction3");
+            // console.log("myFunction3 id with no. " + elmAcc);
+            //console.log("myFunction3 selected value " + val);
+            //console.log("myFunction3 selected value " + aid);
+            //console.log("myFunction3 styleclass id " + fldAcc);
+            //var x = event.target;
+            document.getElementById("thePage:popupForm:queryInSrch").value =  val; //fetch searched string
+            document.getElementById(elmAcc).value =  val;    //assign to Project by input field
+            document.getElementsByClassName(fldAcc)[0].value = aid;
+            modalAcc.style.display = "none";
+        }  
+        
+        
+        var j$ = jQuery.noConflict();
+        j$(document).ready(function(){
+            j$("#myInput").on("keyup", function() {
+                var value = j$(this).val().toLowerCase();
+                j$("#myTable tr").filter(function() {
+                    j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+        
+        j$('#myModalInSrch').find('#myInput').focus();
+        </script>
+    </apex:form>
+    <style>
+        
+        table.responsive-table {
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+        }
+        .custombadge {
+        display: inline-block;
+        min-width: 10px;
+        padding: 3px 7px;
+        padding-top: 3px;
+        padding-right: 7px;
+        padding-bottom: 3px;
+        padding-left: 7px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 10px;
+        }
+        
+        .checkdropdown {
+        height: 75px!important;
+        }
+        
+        .checkdropdown1 {
+        height: 190px!important;
+        }
+        
+        .fc-other-month .fc-day-number { display:none;}
+        .ui-accordion .ui-accordion-content {padding:0px!important;}
+        <!--    .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;width:100%;height:100%}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.tg .tg-733k{font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+.tg .tg-il5c{background-color:#D2E4FC;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;  text-align: -webkit-center}-->
+        .fc-first {
+        border-left: 1px solid #ddd!important;
+        border-top: 1px solid #ddd!important;
+        }
+        .fc-day-header{background: #fafaf9!important;border-top: 1px solid #ddd!important;border-right: 1px solid #ddd!important;}
+        .fc-past, .fc-future {background: none;}
+        .ui-widget-header{font-family: "Salesforce Sans",Arial,sans-serif!important; text-transform: uppercase!important;color: #54698d;line-height: 1.25;font-size:15px!important;}
+        
+        .ui-widget-content,.ui-widget-header{background-color:#fff;}
+        .ui-widget-overlay{background-color: #000;opacity: 0.5;background-image: none;}
+        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{ background:none;}
+        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{color: #676767;}
+        .slds-table thead th {background: #fafaf9;}
+        .ui-widget-header{background:none;font-weight: normal!important;border: none;
+        border-radius: 0;}
+        table.fc-border-separate {border-collapse: collapse;}
+        .ui-widget-overlay {
+        background-color: #000;
+        opacity: 0.5;
+        background-image: none;
+        }
+        
+        label {  font-family: "Salesforce Sans",Arial,sans-serif!important; }
+        .ui-accordion-header {
+        background: #fafaf9!important;
+        border: 1px solid #ddd!important;
+        color: #6f6f6f!important;
+        }
+        .relative_pos {
+        position:relative;
+        }
+        .abs_pos {
+        position:absolute;
+        top: 5px;
+        right: 16px;
+        }
+        .ui-dialog-buttonpane .ui-button-text {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #0070d2;
+        border: 1px solid #0070d2;
+        color: #fff;
+        font-weight:normal!important;
+        font-size: .75rem;
+        }
+        .ui-state-active, 
+        .ui-widget-content .ui-state-active, 
+        .ui-widget-header .ui-state-active,
+        .ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default{ border: 1px solid #ddd;
+        font-weight:normal;
+        }
+        .fc-header-right {
+        text-align: right!important;
+        font-size:12px;
+        }
+        .fc-header-left {
+        font-size:12px;
+        }
+        .fc-header-center {
+        text-align: center!important;
+        }
+        @media only screen and (min-width: 250px) and (max-width: 770px)
+        {
+        .ui-dialog {
+        width:90%!important;}
+        #button {
+        padding:0px!important;
+        }
+        .tpr {
+        display:block!important;
+        width:146px!important;
+        margin-left:0px!important;
+        margin-top:5px!important;
+        }
+        .slds-truncate {
+        white-space:normal!important;
+        }
+        .fc-header-center {
+        font-size:12px;
+        }
+        #button {
+        margin:0px!important;
+        }
+        
+        }
+        #OtherProjs{
+        display: none ;
+        }
+        #mixedOthers{
+        display: none;
+        }
+        #SourceOthers{
+        display: none;
+        }
+        #AvgFlatArea{
+        display: none;
+        }
+        #Lengthofpipeline{
+        display: none;
+        }
+        #noFlatsPerFloor{
+        display: none;
+        }
+        #Papa{
+        display: none;
+        }
+        #MiniVent{
+        display: none;
+        }
+        #MaxiVent{
+        display: none;
+        }
+        #Catridge{
+        display: none;
+        }
+        #FiltraMaxi{
+        display: none;
+        }
+        #AlumCap{
+        display: none;
+        }
+        
+    </style>
+    
+    
+    <script>
+    debugger;
+    // Get the modal for project by field which fetches account
+    var modal = document.getElementById('myModal');
+    var elm;
+    var fld;
+    
+    
+    // Get the <span> element that closes the modal
+    debugger;
+    var span = document.getElementsByClassName("closeprojbyEditId")[0];
+    
+    function textCaseFormatter(elementId){
+        var elemValue = document.getElementById(elementId).value;
+        elemValue = elemValue.replace(/^(.)|\s+(.)/g, c => c.toUpperCase());
+        document.getElementById(elementId).value = elemValue;
+    }
+    
+    // When the user clicks the button, open the modal 
+    function Myfunction(elid, fldid) {                    
+        //  alert('--elid--'+elid.id + '--'+fldid);
+        var modal2 = document.getElementById('myModal');
+        elm = elid.id;  
+        fld = 'targetfield' + fldid; 
+        console.log('fld='+fld);                    
+        modal2.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+    
+    function myFunction2(acctId) { 
+        var nameElementId = 'acctName'+acctId;
+        console.log(acctId);
+        var val = document.getElementById(nameElementId).value;
+        var aid = acctId;
+        console.log(elm);
+        console.log(val);
+        console.log(aid);
+        //var x = event.target;
+        
+        document.getElementById("thePage:popupForm:query").value =  val; //fetch searched string
+        document.getElementById(elm).value =  val;    //assign to Project by input field
+        document.getElementsByClassName(fld)[0].value = aid;
+        modal.style.display = "none";
+    }  
+    
+    
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function(){
+        j$("#myInput").on("keyup", function() {
+            var value = j$(this).val().toLowerCase();
+            j$("#myTable tr").filter(function() {
+                j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
+    j$('#myModal').find('#myInput').focus();
+    </script>
+    
+    <script>
+    // Get the modal for Taluk field which fetches account
+    var modalTaluk = document.getElementById('myModalTaluk');
+    var elmTaluk;
+    var fldTaluk;
+    
+    
+    // Get the <span> element that closes the modal
+    var spanTaluk = document.getElementsByClassName("closetaluk")[0];
+    
+    // When the user clicks the button, open the modal 
+    function MyfunctionTaluk(elid, fldid) {     
+        var modal2Taluk = document.getElementById('myModalTaluk');
+        elmTaluk = elid.id;  
+        fldTaluk = 'targetfieldTaluk' + fldid;           
+        modal2Taluk.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    spanTaluk.onclick = function() {
+        modalTaluk.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modalTaluk) {
+            modalTaluk.style.display = "none";
+        }
+    }
+    
+    
+    function myFunction2Taluk(val,aid) { 
+        console.log("myFunction2Taluk");
+        console.log(elm);
+        console.log(val);
+        console.log(aid);
+        //var x = event.target;
+        document.getElementById("thePage:popupForm:CustomLookupForProject").value =  val; //fetch searched string
+        document.getElementById(elmTaluk).value =  val;    //assign to Project by input field
+        document.getElementsByClassName(fldTaluk)[0].value = aid;
+        modalTaluk.style.display = "none";
+    }  
+    
+    
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function(){
+        j$("#myInput").on("keyup", function() {
+            var value = j$(this).val().toLowerCase();
+            j$("#myTable tr").filter(function() {
+                j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
+    j$('#myModalTaluk').find('#myInput').focus();
+    debugger;
+    
+    
+    function stageBasedInfluencerDetails1(){
+        debugger;
+        //Map with stageName and values
+        var errorCounter=0;
+        var stageMap = new Map(); 
+        stageMap.put('Designing',1);
+        stageMap.put('Tendering',2);
+        stageMap.put('Order issue to contractor',3);
+        stageMap.put('Mockup Process',4);
+        stageMap.put('Offer Submitted',5);
+        stageMap.put('Order Receipt',6);
+        // var prevStageName=document.getElementById("prevStageId").value;
+        var stageName=document.getElementById("thePage:theForm:staging").value;//current selected stage
+        
+        document.getElementById("thePage:theForm:hiddenfld").value=stageName;
+        var prevStage=document.getElementById("thePage:theForm:hiddenfldprev").value;
+        // alert(prevStage);
+        //alert('After apex method in javascript@@!!--'+stageName) ;
+        if(stageMap.get(stageName) < stageMap.get(prevStage)){
+            errorCounter++;
+            
+        }
+        
+        if(errorCounter > 0){
+            alert('You cannot choose Previous stages!!');
+            document.getElementById("thePage:theForm:staging").value = prevStage;
+            
+        }
+        else{
+            //alert('After apex method in javascript@@11!!--'+event.currentTarget.id) ;
+            param1();
+        }
+        
+        
+        
+    }
+    function otherFieldShowHide(elementId){
+        debugger;
+        //alert('Otherfield method called :: '+elementId);
+        var elemValue = document.getElementById(elementId).value;
+        if(elemValue !=undefined && elemValue =='Others' && elementId.includes('pcatg')){
+            // alert('ptag others');
+            document.getElementById('OtherProjs').style.display ='block';
+        }
+        else if(elemValue !=undefined && elemValue =='Others' && elementId.includes('mxType')){
+            //alert('mxd type others');
+            document.getElementById('mixedOthers').style.display ='block';
+            
+        }
+            else if(elemValue !=undefined && elemValue =='Other' && elementId.includes('lsorc')){
+                // alert('ld src');
+                document.getElementById('SourceOthers').style.display ='block';
+                
+            }
+                else if(elemValue !=undefined && elemValue !='Others' && elementId.includes('pcatg')){
+                    // alert('ld src');
+                    document.getElementById('OtherProjs').style.display ='none';
+                    
+                }
+                    else if(elemValue !=undefined && elemValue !='Others' && elementId.includes('mxType')){
+                        // alert('ld src');
+                        document.getElementById('mixedOthers').style.display ='none';
+                        
+                    }
+                        else if(elemValue !=undefined && elemValue !='Other' && elementId.includes('lsorc')){
+                            // alert('ld src');
+                            document.getElementById('SourceOthers').style.display ='none';
+                            
+                        }
+        
+        /* else{
+            document.getElementById('OtherProjs').style.display ='none';
+            document.getElementById('mixedOthers').style.display ='none';
+            document.getElementById('SourceOthers').style.display ='none';
+        }*/
+        
+    }
+    
+    function blazeMasterYes(elementId){
+        var elemValue = document.getElementById(elementId).value;
+        if(elemValue !=undefined && elemValue =='Yes' && elementId.includes('blazeMaster')){
+            document.getElementById('AvgFlatArea').style.display ='block';
+            document.getElementById('noFlatsPerFloor').style.display ='block';
+        }
+        
+        
+        
+        
+        else{
+            //alert('Please make sure to delete the dependent field values before changing the field value to No');
+            //document.getElementById('AvgFlatArea').value =0;
+            //document.getElementById('noFlatsPerFloor').value =0;
+            document.getElementById('AvgFlatArea').style.display ='none';
+            document.getElementById('noFlatsPerFloor').style.display ='none';
+            
+        }
+        
+    }
+    function hDPEYes(elementId){
+        var elemValue = document.getElementById(elementId).value;
+        if(elemValue !=undefined && elemValue =='Yes' && elementId.includes('HDPE')){
+            document.getElementById('Lengthofpipeline').style.display ='block';
+            
+        }
+        
+        else{
+            //alert('Please make sure to delete the dependent field values before changing the field value to No');
+            
+            document.getElementById('Lengthofpipeline').style.display ='none';
+            
+        }
+        
+    }
+    function watertankYes(elementId){
+        var elemValue = document.getElementById(elementId).value;
+        if(elemValue !=undefined && elemValue =='Yes' && elementId.includes('waterTank')){
+            document.getElementById('quantity').style.display ='block';
+            
+        }
+        
+        else{
+            //alert('Please make sure to delete the dependent field values before changing the field value to No');
+            
+            document.getElementById('quantity').style.display ='none';
+            
+        }
+        
+    }
+    function greaseYes(elementId){
+        var elemValue = document.getElementById(elementId).value;
+        if(elemValue !=undefined && elemValue =='Yes' && elementId.includes('grease')){
+            document.getElementById('quantity_c').style.display ='block';
+            
+        }
+        
+        else{
+            //alert('Please make sure to delete the dependent field values before changing the field value to No');
+            
+            document.getElementById('quantity_c').style.display ='none';
+            
+        }
+        
+    }
+    
+    function SWRtoBeSelectedisPAPA(elementId){
+        var elemValue = document.getElementById(elementId).value;
+        if(elemValue !=undefined && elemValue =='Single Stack with P.A.P.A & A.A.V' && elementId.includes('SWRtoDeployed')){
+            document.getElementById('Papa').style.display ='block';
+            document.getElementById('MiniVent').style.display ='block';
+            document.getElementById('MaxiVent').style.display ='block';
+            document.getElementById('Catridge').style.display ='block';
+            document.getElementById('FiltraMaxi').style.display ='block';
+            document.getElementById('AlumCap').style.display ='block';
+        }
+        
+        else{
+            
+            document.getElementById('Papa').style.display ='none';
+            document.getElementById('MiniVent').style.display ='none';
+            document.getElementById('MaxiVent').style.display ='none';
+            document.getElementById('Catridge').style.display ='none';
+            document.getElementById('FiltraMaxi').style.display ='none';
+            document.getElementById('AlumCap').style.display ='none';
+            
+        }
+        
+    }
+    
+    function categoryValue(){
+        // alert('category');
+    }
+    
+    
+    </script>      
+    <!--Script tag by Subhajit Ghosh--KVP --> 
+    <script>
+    
+    // Get the modal for project by field which fetches account
+    var modalDistAcc = document.getElementById('myModalDist');
+    var elmDist;
+    var fldDist;
+    
+    
+    // Get the <spanDist> element that closes the modal
+    
+    var spanDist = document.getElementsByClassName("closedistribEditId")[0];
+    
+    // When the user clicks the button, open the modal 
+    function MyfunctionDist(elid, fldid) {                    
+        //  alert('--elid--'+elid.id + '--'+fldid);
+        var modal2dist = document.getElementById('myModalDist');
+        elmDist = elid.id;  
+        fldDist = 'targetfieldDist' + fldid; 
+        console.log('fld='+fld);                    
+        modal2dist.style.display = "block";
+    }
+    
+    // When the user clicks on <spanDist> (x), close the modal
+    spanDist.onclick = function() {
+        modalDistAcc.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modalDistAcc) {
+            modalDistAcc.style.display = "none";
+        }
+    }
+    
+    
+    function myFunctionDist(acctId) { 
+        var nameElementId = 'acctName'+acctId;
+        console.log(acctId);
+        var val = document.getElementById(nameElementId).value;
+        var aid = acctId;
+        
+        //var x = event.target;
+        
+        document.getElementById("thePage:popupForm:distquery").value =  val; //fetch searched string
+        document.getElementById(elmDist).value =  val;    //assign to Project by input field
+        document.getElementsByClassName(fldDist)[0].value = aid;
+        modalDistAcc.style.display = "none";
+    }  
+    
+    
+    var k$ = jQuery.noConflict();
+    k$(document).ready(function(){
+        k$("#myDistInput").on("keyup", function() {
+            var value = k$(this).val().toLowerCase();
+            k$("#myTableDist tr").filter(function() {
+                k$(this).toggle(k$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
+    k$('#myModalDist').find('#myDistInput').focus();
+    </script>
+    <script>                        
+    // Get the modal for Pincode field 
+    var modalPincode = document.getElementById('myModalPincode');
+    var elmPincode;
+    var fldPincode;
+    
+    
+    // Get the <span> element that closes the modal
+    var spanPincode = document.getElementsByClassName("closepin")[0];
+    
+    // When the user clicks the button, open the modal 
+    function MyfunctionPincode(elid, fldid) {     
+        var modal2Pincode = document.getElementById('myModalPincode');
+        elmPincode = elid.id;  
+        fldPincode = 'targetfieldPincode' + fldid;           
+        modal2Pincode.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    spanPincode.onclick = function() {
+        modalPincode.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modalPincode) {
+            modalPincode.style.display = "none";
+        }
+    }
+    
+    
+    function myFunction2Pincode(val,aid) { 
+        console.log("myFunction2Pincode");
+        console.log(elm);
+        console.log(val);
+        console.log(aid);
+        //var x = event.target;
+        document.getElementById("thePage:popupForm:pinquery").value =  val; //fetch searched string
+        document.getElementById(elmPincode).value =  val;    //assign to Project by input field
+        document.getElementsByClassName(fldPincode)[0].value = aid;
+        modalPincode.style.display = "none";
+    }  
+    
+    
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function(){
+        j$("#myInput").on("keyup", function() {
+            var value = j$(this).val().toLowerCase();
+            j$("#myTable tr").filter(function() {
+                j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
+    j$('#myModalPincode').find('#myInput').focus();
+    
+    </script>       
+    
+</apex:page>

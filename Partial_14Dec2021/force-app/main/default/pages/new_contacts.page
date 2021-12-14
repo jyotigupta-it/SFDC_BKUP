@@ -1,0 +1,56 @@
+<apex:page standardController="Contacts__c" id="contacts" >
+<head>
+ <script>
+       function reloadLocation1(){
+           location.reload();
+       }
+   </script>
+   <apex:sectionHeader title="Contact Edit" subtitle="New Contact"/>
+   <apex:actionStatus id="saveProgress"
+                       startText="Saving. Please Wait..."
+                       stopText=""
+                       startStyleClass="progressStyle">
+   </apex:actionStatus>
+   <br/>
+   
+</head>
+<apex:form id="form1">
+<apex:pageblock title="Contact Details" mode="edit" >
+<apex:pageBlockButtons rendered="{!(Contacts__c.Type__c != '')}">
+<apex:commandButton value="Save" action="{!save}"/>
+<apex:commandButton value="Save & New" action="{!quicksave}" status="saveProgress"  oncomplete="reloadLocation1()"/>
+<apex:commandButton value="Cancel" action="{!cancel}"/>
+</apex:pageBlockButtons> 
+<apex:pageblockSection >
+<apex:inputField required="true" value="{!Contacts__c.Type__c}">
+<apex:actionSupport event="onchange" reRender="form1"/>
+</apex:inputField>
+</apex:pageblockSection>
+<apex:pageblockSection rendered="{!(Contacts__c.Type__c != '')}">
+<apex:inputField required="true" value="{!Contacts__c.Name}"/>
+<apex:inputField required="true" value="{!Contacts__c.City__c}"/>
+<apex:inputField required="true" value="{!Contacts__c.Mobile__c}"/>
+<apex:inputField value="{!Contacts__c.Area__c}" rendered="{!OR(Contacts__c.Type__c == 'Farmer',Contacts__c.Type__c == 'Plumber',Contacts__c.Type__c == 'Mechanic',Contacts__c.Type__c == 'Dealer Salesman',Contacts__c.Type__c == 'Borer')}"/>
+<apex:inputField value="{!Contacts__c.Distributor__c}" required="{!Contacts__c.Type__c == 'Dealers Salesman'}"/>
+<apex:inputField value="{!Contacts__c.Dealer__c}"/>
+<apex:inputField value="{!Contacts__c.Visit_Type__c}" required="true"/>
+<apex:inputField value="{!Contacts__c.Preference__c}" rendered="{!OR(Contacts__c.Type__c == 'Builder',Contacts__c.Type__c == 'Consultant')}" required="true"/>
+<apex:inputField value="{!Contacts__c.Builder_grading__c}" rendered="{!OR(Contacts__c.Type__c == 'Builder')}" required="true"/>
+</apex:pageblockSection>
+<apex:pageblockSection title="Additional Details" rendered="{!AND(Contacts__c.Type__c != '',Contacts__c.Type__c != 'Borer',Contacts__c.Type__c != 'Plumber',Contacts__c.Type__c != 'Farmer',Contacts__c.Type__c != 'Mechanic',Contacts__c.Type__c != 'Dealers Salesman')}">
+<apex:inputField value="{!Contacts__c.Firm_Name__c}"/>
+<apex:inputField required="true" value="{!Contacts__c.Status__c}"/>
+<apex:inputField required="true" value="{!Contacts__c.State__c}"/>
+<apex:inputField required="true" value="{!Contacts__c.District__c}"/>
+<apex:inputField value="{!Contacts__c.Street__c}"/>
+<apex:inputField required="{!IF(Contacts__c.Type__c != 'Customer',true,false)}" value="{!Contacts__c.Pin_Code__c}"/>
+<apex:inputField required="{!IF(Contacts__c.Type__c != 'Customer',true,false)}" value="{!Contacts__c.Phone__c}"/>
+<apex:inputField required="{!IF(Contacts__c.Type__c != 'Customer',true,false)}" value="{!Contacts__c.Email__c}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection rendered="{!AND(Contacts__c.Type__c != '',Contacts__c.Type__c != 'Plumber',Contacts__c.Type__c != 'Farmer',Contacts__c.Type__c != 'Mechanic',Contacts__c.Type__c != 'Dealers Salesman')}">
+<apex:inputField value="{!Contacts__c.Birthdate__c}"/>
+<apex:inputField value="{!Contacts__c.Anniversary_Date__c}"/>
+</apex:pageblockSection>
+</apex:pageblock>
+</apex:form>
+</apex:page>

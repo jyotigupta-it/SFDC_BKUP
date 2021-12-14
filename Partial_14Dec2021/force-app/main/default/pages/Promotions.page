@@ -1,0 +1,3 @@
+<apex:page standardController="Promotion__c" >
+<b><center><p style="color:red;font-size: 18px;">Promotions can be created only through Visit Entry page</p></center></b>
+</apex:page>

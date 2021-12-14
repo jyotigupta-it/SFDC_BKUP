@@ -1,0 +1,51 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="projectPartnerInstance" type="Partner_Detail__c"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="makeRequired" type="boolean" default="false"/>
+    <aura:attribute name="makeReadOnly" type="Boolean"/>
+    
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+    <aura:method name="validationDR" action="{!c.eventInpValidation}">      
+    </aura:method>
+    <aura:method name="validationDRHide" action="{!c.eventInpValidationHide}">      
+    </aura:method>
+
+    <aura:registerEvent name="returnFormValidation" type="c:returnFormValidationStatus"/>
+    
+    <!-- Fields -->
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_5-of-12 slds-p-left_medium slds-p-right_medium">
+            <!--<lightning:inputField required="{!v.makeRequired}" aura:id="projectPartnerDetails" 
+                                  fieldName="Name_of_the_Project_Handled__c" 
+                                  value="{!v.projectPartnerInstance.Name_of_the_Project_Handled__c}"/>-->
+            <lightning:input aura:id="Name_of_the_Project_Handled__c" type="text" name="Name of the Project Handled" 
+                             label="Name of the Project Handled"
+                             value="{!v.projectPartnerInstance.Name_of_the_Project_Handled__c}"
+                             required="{!v.makeRequired}" disabled="{!v.makeReadOnly}"/>
+        </div>
+        <div class="slds-col slds-size_5-of-12 slds-p-left_medium slds-p-right_medium">
+            <!--<lightning:inputField required="{!v.makeRequired}" aura:id="projectPartnerDetails" 
+                                  fieldName="Value__c" 
+                                  value="{!v.projectPartnerInstance.Value__c}"/>-->
+            <lightning:input aura:id="Value__c" type="number" formatter="currency" name="Value" label="Value"
+                             value="{!v.projectPartnerInstance.Value__c}"
+                             required="{!v.makeRequired}" disabled="{!v.makeReadOnly}"/>
+        </div>
+        <div class="slds-col slds-size_2-of-12 slds-p-left_medium slds-p-right_medium slds-truncate" title="Action" style="text-align: right;margin-top: 25px;">
+            <aura:if isTrue="{!!v.makeReadOnly}">
+                <aura:if isTrue="{!v.rowIndex == 0}">
+                    <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Row" />
+                    <aura:set attribute="else">
+                        <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}">
+                            <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove" />
+                        </a> 
+                    </aura:set>
+                </aura:if>
+            </aura:if>
+        </div>
+    </div>
+    
+</aura:component>

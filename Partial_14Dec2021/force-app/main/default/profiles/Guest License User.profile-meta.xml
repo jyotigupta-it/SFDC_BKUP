@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <custom>false</custom>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Beat_Frequency_Approval</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Beat_Master_Account_Approval_for_deletion</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Branding_Request_Approval_Process</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Branding_Request_Approval_Process2</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Case_TAT_Calculation</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Change_Beat_Approval_Call</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Change_Owner_in_Supplies_as_Order_Owner_Changes</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Check_In</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>City_and_State_Auto_Populate</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Claim_Submission_Acknowledgement</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Copy_Meeting_Type</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Copy_of_email_to_retail_projects_ashirvad_com_when_project_is_approved_2</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Create_Contact_on_Account_Creation</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Date_auto_Update_for_task</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Escalation_for_state_head_to_assign_a_distributor</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>FSL_Basic_Details</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>FSL_CheckOut_3</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>FSL_Check_In_1</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>FSL_Checkout_1</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>FSL_Complete_Work</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>FSL_Update_Details</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>KYC_Upload_Acknowledgment</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Lead_to_Account_Convert</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Meeting_Attendee_Rejected</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Notification_to_the_contractor_if_the_product_is_less_than_3</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Notify_TGM_for_new_dealer_assigned</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Out_for_Service</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Outlet_Category_Update</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Plumber_notifications</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Product_Request</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>QuoteLineItem_Update</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Send_Email_Notifications_Escalations_To_State_Head</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Send_email_to_account_owner</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Send_notification_to_the_Contractor_for_work_order</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Service_appointment_Closed</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Status_of_work_order_should_change_when_the_task_is_completed</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Submit_prospect_dealer_for_approval</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Submit_tourplan_approval</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Transaction_Comment_and_Status_update</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Transaction_Escalation</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Transaction_Owner_s_manager</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Account_Status_Flag</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Case_Status</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_ServiceAppointment</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Taluka_Master</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Work_Order</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>cp_survey_form</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>customer_satisfaction</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>field_update_from_enquiry_to_task</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>net_promoter_score</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>test</flow>
+    </flowAccesses>
+    <layoutAssignments>
+        <layout>AP_Expenses__c-AP Expenses Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AP_Site_Visit__c-AP Site Visit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AP_Taluk_Master__c-AP Taluk Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AP_Tour_Plan__c-AP Tour Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AWS_S3__c-AWS S3 Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Account Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AccountBrand-Account BrandLayout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ActionPlan-Action Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ActionPlanTemplate-Action Plan Template Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ActionPlanTemplateItem-Action Plan Template Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ActionPlanTemplateItemValue-Action Plan Template Item Value Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ActionPlanTemplateVersion-Action Plan Template Version Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Address-Address Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Answer_Option__c-Answer Option Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Asset-Asset Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssignedResource-Assigned Resource Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssociatedLocation-Associated Location Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Attendance_Expense__c-Attendance Expense Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Attendance__c-Attendance Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Attendee_Survey_Form__c-Attendee Survey Form Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AuthorizationFormConsent-Authorization Form Consent Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AuthorizationFormDataUse-Authorization Form Data Use Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Bandhan_Orders__c-Bandhan Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Bank_Details__c-Bank Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Beat_Master_Account__c-Beat Master Account Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Beat_Master__c-Beat Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Beat_Plan_Account__c-Beat Plan Account Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Beat_Plan__c-Beat Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Bill_breakup__c-Bill breakup Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Bill_item__c-Bill scheme product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Branding_Request__c-Branding Request</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Branding__c-Branding Tab Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>BusinessBrand-Business Brand Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Business_Activity_History__c-Business Activity%2FHistory Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CallDetails__c-CallDetail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CallDetails_old__c-CallDetail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Campaign-Campaign Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CampaignMember-Campaign Member Page Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Case Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseClose-Close Case Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseMilestone-Case Milestone Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case_Products__c-Case Products Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Change_Requests__c-Change Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ChannelProgram-Channel Program Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ChannelProgramLevel-Channel Program Level Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ChannelProgramMember-Channel Program Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>City__c-City Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Claim_Line_Item__c-Claim Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Claim__c-Claim Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Club__c-club Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CollaborationGroup-Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Column_dealer_Survey__c-Agri pipes</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CommunityMemberLayout-Community Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Competitor__c-Competitor Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Complaints__c-Complaints Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-Contact Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContactPointAddress-Contact Point Address Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContactPointEmail-Contact Point Email Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContactPointPhone-Contact Point Phone Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contacts__c-Contacts Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContentVersion-General</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contract-Contract Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContractLineItem-Contract Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Customer-Customer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DP_Detail__c-Business Proposal Questionaries</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DP_SAP_Foreign_Key__c-DP SAP Foreign Key Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dealer_Order_line_item__c-Dealer Order Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DelegatedAccount-External Managed Account Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Discount_Master__c-Discount Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Distributor_Dealer__c-Distributor%2FDealer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Distributor_sap__c-Distributor Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>District__c-District Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DuplicateRecordItem-Duplicate Record Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DuplicateRecordSet-Duplicate Record Set Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>EmailMessage-Email Message Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Enquiry__c-Enquiry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Enterprise_scheme__c-Enterprise scheme Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Entitlement-Entitlement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>EntityMilestone-Object Milestone Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event-Event Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event_Member__c-Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Exception_Log__c-Exception Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Expense-Expense Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ExpenseReport-Expense Report Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ExpenseReportEntry-Expense Report Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FeedItem-Feed Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feedback_Line_Item__c-Feedback Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feedback_Master_Line_Item__c-Feedback Master Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feedback_Master__c-Feedback Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Feedback__c-Feedback Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FlowInterview-Flow Interview Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Follow_Up__c-Follow Up Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GTM_Tier__c-GTM Tier Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Geo_location_test__c-Geo location test Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Global-Global Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>IEP_Product__c-Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Idea-Idea Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Individual-Individual Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Influencer__c-Influencer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Institutional__c-Institutional Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Inventory_Gift_Request__c-Inventory_Gift_Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Inventory_Request__c-Inventory Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Invoice__c-Invoice Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>JobProfile-Job Profile Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>KAM_Feedback_Line_Item__c-KAM Feedback Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>KAM_Feedback_Master_Line_Item__c-KAM Feedback Master Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>KAM_Feedback_Master__c-KAM Feedback Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>KAM_Feedback__c-KAM Feedback Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Lead Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ListEmail-List Email Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>LiveAgentSession-Chat Session Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>LiveChatTranscript-Chat Transcript Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>LiveChatTranscriptActive-Chat Transcript %28In Progress%29 Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>LiveChatTranscriptEvent-Chat Transcript Event Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>LiveChatTranscriptWaiting-Chat Transcript %28Waiting%29 Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>LiveChatVisitor-Chat Visitor Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Location-Location Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Macro-Macro Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MaintenanceAsset-Maintenance Asset Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MaintenancePlan-Maintenance Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Master_Questions__c-Master Questions Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MeetingAttendeeFilter__mdt-MeetingAttendeeFilter Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Meeting_Atendee__c-Meeting Attendee Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Meetings__c-Meetings Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MessagingChannel-Messaging Channel Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MessagingEndUser-Messaging User Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MessagingSession-Messaging Session Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>NPS__c-NPS Dealers</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>NPTB__c-NPTB Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>New_Offer_Section__c-New Offer Section Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>New_Order__c-New Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>New_Special_Pricing_Request__c-New Special Pricing Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Notice__c-Notice Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ObjectTerritory2AssignmentRule-Object Territory Assignment Rule Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OperatingHours-Operating Hours Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunities__c-Opportunities Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-Opportunity Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OpportunityLineItem-Opportunity Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Order-Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OrderItem-Order Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Order_Booking__c-Order Booking Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Order_Line_Item__c-Order Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Order__c-Special Pricing Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PartnerFundAllocation-Partner Fund Allocation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PartnerFundClaim-Partner Fund Claim Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PartnerFundRequest-Partner Fund Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PartnerMarketingBudget-Partner Marketing Budget Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Partner_Detail__c-Distribution Partner</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Pincode__c-Pincode Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Plumber_Scheme_Relation__c-Plumber Scheme Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Plumber_club__c-Plumber club Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Point__c-Point Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Pricebook2-Price Book Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PricebookEntry-Price Book Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Probability_Master__c-Probability Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Problem__c-Problem Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProcessException-Process Exception Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Product2-Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductConsumed-Product Consumed Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductItem-Product Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductItemTransaction-Product Item Transaction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductRequest-Product Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductRequestLineItem-Product Request Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductRequired-Product Required Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductServiceCampaign-Product Service Campaign Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductServiceCampaignItem-Product Service Campaign Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProductTransfer-Product Transfer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Product_Category__c-Product Category Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Product_price__c-Product price Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Project_Tracker__c-Project Tracker Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Projects__c-Projects Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PromotionExpenseTable__c-PromotionExpenseTable Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Promotion_Member__c-Promotion Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Promotion_Members__c-Event-Contacts Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Promotion__c-Promotion Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Promotions__c-Promotions Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Question_Response__c-Question Response Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>QuickText-Quick Text Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Quiz_Attendee__c-Quiz Attendee Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Quiz_Question__c-Quiz Question Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>REST_API_Configuration__mdt-REST API Configuration Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Recce_Detail__c-Recce Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>RecordsetFilterCriteria-Recordset Filter Criteria Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>RecordsetFilterCriteriaRule-Recordset Filter Criteria Rule Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Redeem__c-Redeem Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Redemption_Order__c-Redemption Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Redemption_Product__c-Redemption Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Redemption__c-Redemption Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Reply_to_Comment_Object__c-Reply to Comment Object Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ResourceAbsence-Resource Absence Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ResourcePreference-Resource Preference Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ReturnOrder-Return Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ReturnOrderLineItem-Return Order Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Reward_Master__c-Reward Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SMSMetaData__mdt-SMSMetaData Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SMS_Log__c-SMS Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SMS_Template__c-SMS Template Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Data__c-Sales Data Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_Projection__c-Sales Planning</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sales_scheme__c-Geography scheme</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Sap_Foreign_Key_Master__c-Sap Foreign Key Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Scorecard-Scorecard Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ScorecardAssociation-Scorecard Association Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ScorecardMetric-Scorecard Metric Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Secondary_Sales_Order__c-Secondary Sales Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Seller-Seller Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceAppointment-Service Appointment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceContract-Service Contract Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceCrew-Service Crew Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceCrewMember-Service Crew Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceResource-Service Resource Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceResourceCapacity-Resource Capacity Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceResourceSkill-Service Resource Skill Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceTerritory-Service Territory Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceTerritoryLocation-Service Territory Location Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceTerritoryMember-Service Territory Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Service_Charge__c-Service Charge Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Share__c-Share Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Shift-Shift Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ShiftPattern-Shift Pattern Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ShiftPatternEntry-Shift Pattern Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ShiftTemplate-Shift Template Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Shipment-Shipment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Site_Visit__c-Site Visit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SkillRequirement-Skill Requirement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Solution-Solution Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>State__c-State Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SupplyLineItem__c-SupplyLineItem Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Supply_Detail__c-Supply Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Supply__c-Supply Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey-Survey Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SurveyInvitation-Survey Invitation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SurveyVersion-Survey Version Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Survey_Details__c-Survey Details Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Target__c-AP Target Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Targets__c-Targets Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Territory2-Territory Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Territory2Model-Territory Model Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Territory2Type-Territory Type Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Territory_Contractors__c-Territory Contractors Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>TimeSheet-Time Sheet Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>TimeSheetEntry-Time Sheet Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>TimeSlot-Time Slot Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Tour_Plan1__c-Tour Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Tour_Plan__c-Tour Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Tour_Program__c-Tour Object Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Town_Master__c-Town Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Transaction_Status__c-Transaction Status Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Transaction__c-Transaction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Unique_SPR__c-Unique SPR Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>User-User Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>UserAlt-User Profile Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>UserAppMenuItem-Application Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>UserProvisioningRequest-User Provisioning Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>UserTerritory2Association-User Territory Association Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>User_Taluk_Master_Junction__c-AP User Taluk Master Junction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Variable_cost__mdt-Variable cost Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Vendor_Details__c-Vendor Details Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Visit__c-Visit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WST_Dealer__c-WST-Dealer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WarrantyTerm-Warranty Term Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Warranty_Master__c-Warranty Master Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkOrder-Work Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkOrderLineItem-Work Order Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkPlan-Work Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkPlanSelectionRule-Work Plan Selection Rule Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkPlanTemplate-Work Plan Template Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkPlanTemplateEntry-Work Plan Template Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkStep-Work Step Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkStepTemplate-Work Step Template Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkType-Work Type Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkTypeGroup-Work Type Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>bill_product__c-Bill product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>iep_influencer__c-IEP Influencer Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>inventory__c-inventory Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>sales_accrual__c-Approval screen</layout>
+    </layoutAssignments>
+    <userLicense>Guest User License</userLicense>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ActivitiesAccess</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AddDirectMessageMembers</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AllowUniversalSearch</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ContentWorkspaces</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EnableCommunityAppLauncher</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EnableNotifications</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>PasswordNeverExpires</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>SelectFilesFromSalesforce</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ShowCompanyNameAsUserBadge</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>UseWebLink</name>
+    </userPermissions>
+</Profile>

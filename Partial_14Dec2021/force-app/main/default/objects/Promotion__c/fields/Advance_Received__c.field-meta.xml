@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Advance_Received__c</fullName>
+    <description>Advance received from Ashirvad in rupees</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Advance received from Ashirvad in rupees</inlineHelpText>
+    <label>Advance Received</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

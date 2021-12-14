@@ -1,0 +1,87 @@
+<apex:page standardController="Question_Response__c" sidebar="false" showHeader="false" tabstyle="Question_Response__c" extensions="Quizresult_controller" renderAs="pdf">
+<apex:slds />
+<apex:form >
+<script type="text/JavaScript">
+//courtesy of BoogieJack.com
+function killCopy(e){
+return false
+}
+function reEnable(){
+return true
+}
+document.onselectstart=new Function ("return false")
+if (window.sidebar){
+document.onmousedown=killCopy
+document.onclick=reEnable
+}
+</script>
+
+<script>
+        function onloads() {
+            var var1 = '{!check}';
+                 alert(var1);  <----this variable returns false even if the value of s1 is true
+            if(var1='true') {
+document.getElementById("ColorOption").style.backgroundColor="green";
+                
+            } 
+            
+        }
+    </script>
+    
+    <script type="text/javascript">    
+        window.onload=onloads; 
+    </script>
+
+     
+    <apex:pageBlock >
+ <table width="100%" ID="Table1" style="margin: 0px;">
+            <tr><td width="25%">
+            <img src="{!$Resource.AshirvadLogoNew}" height="100" width="200"/></td>
+            <td width="50%"><center><font size="5">
+            <apex:outputText value="Quiz Application for BDM" styleClass="forms"/>
+            </font></center></td></tr>
+            <tr><td width="25%"></td><td width="50%"><center><font size="3">
+            <apex:outputText value="The Quiz is to evaluate How much you understand" styleClass="forms"/>
+            </font></center></td><td width="25%"><center> <font size="4">
+            <apex:outputText value="Date: {0, date, MMMM d','  yyyy}" styleClass="forms">
+             <apex:param value="{!NOW()}" />
+            </apex:outputText>
+
+            </font> </center></td></tr>
+        </table>
+</apex:pageBlock>
+<apex:pageblock >
+<font size="3"><center>
+You attempted &nbsp; <apex:outputText escape="false" value="<b>{!marked}</b>"/>  questions out of &nbsp; <apex:outputText escape="false" value="<b>{!numberOfQuestions}</b>"/>.<br></br><br></br>
+You obtained &nbsp; <apex:outputText escape="false" value="<b>{!correctAnswer}</b>"/> correct answers out of &nbsp; <apex:outputText escape="false" value="<b>{!numberOfQuestions}</b>"/>.<br></br><br></br>
+
+
+Your aggregate percentage is &nbsp; <apex:outputText escape="false" value="<b>{!percentage}%</b>"/><br></br><br></br>
+<b>Result :&nbsp; <apex:outputText value="{!result}" style="color:green" rendered="{!flag}"/><apex:outputText value="{!result}" style="color:red" rendered="{!!flag}"/></b>
+</center>
+
+
+</font><center> 
+
+  
+<br></br><br></br><br></br><br></br><br></br> 
+
+</center>
+<font size='4'>
+<b><apex:outputText value="Questions :" styleClass="forms"/></b></font><br></br><br></br>
+<apex:repeat value="{!descriptionoption}" var="fieldKey">
+ <span style="font-size:120%">
+   <apex:outputField value="{!fieldKey.Question_Description__c}" /></span>
+   <apex:variable value="{!1}" var="rowNum"/>
+
+   <apex:repeat value="{!descriptionoption[fieldKey]}" var="sAnswers">                 
+    <br></br>
+ <apex:outputText value="{!FLOOR(rowNum)}"/> )  &nbsp; <apex:outputText value="{!sAnswers}" rendered="{!(NOT(CONTAINS(sAnswers,'Correct answer')) && (NOT(CONTAINS(sAnswers,'Your choice'))))}" style="font-size:120%;"/ > <apex:outputText value="{!sAnswers}" rendered="{!(NOT(CONTAINS(sAnswers,'Correct answer')) && (CONTAINS(sAnswers,'Your choice')))}" style="font-size:120%;color:blue;"/ > <apex:outputText value="{!sAnswers}" rendered="{!(CONTAINS(sAnswers,'Correct answer'))}" style="color:green;font-size:120%;"/ >
+  <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+ 
+     </apex:repeat>   <br/><br/><br/>
+</apex:repeat>
+
+</apex:pageblock>
+</apex:form>
+</apex:page>

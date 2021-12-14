@@ -1,0 +1,9 @@
+<apex:component >
+  
+        <link rel='stylesheet' href="{!URLFOR($Resource.AP_FullCalendar, '/cupertino/jquery-ui.min.css')}" />
+        <link href="{!URLFOR($Resource.AP_FullCalendar, 'fullcalendar.css')}" rel='stylesheet' />
+        <link href="{!URLFOR($Resource.AP_FullCalendar, 'fullcalendar.print.css')}" rel='stylesheet' media='print' />
+        <script src="{!URLFOR($Resource.AP_Jquery4Cal, 'jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.AP_Jquery4Cal, 'jquery-ui.custom.min.js')}"></script>
+        <script src="{!URLFOR($Resource.AP_FullCalendar, 'fullcalendar.min.js')}"></script>
+</apex:component>

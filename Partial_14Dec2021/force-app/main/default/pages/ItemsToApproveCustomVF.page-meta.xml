@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>46.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Display the items to be approved in the Lightning home page. It displays the Project name instead of the Unique SPR name. This is a quick link to go the project.</description>
+    <label>ItemsToApproveCustomVF</label>
+</ApexPage>

@@ -1,0 +1,288 @@
+<!--************XXX*********************
+
+    Developer       :Balagopal G.
+    Page Name       :New_Promotion_PDF
+    Modified Date   :22-Feb-2017
+    Description     :For Promotion Details from visit entry page in Target.
+     
+****************XXX**********************-->
+
+
+
+<apex:page renderAs="PDF" applyBodyTag="false" controller="NewPromotionPDFController"  standardStylesheets="false" applyHtmlTag="false" showHeader="false">
+  <!--<apex:attribute name="opporId" type="Id" description="Id of the opportunity" assignTo="{!oppId}"/> -->
+  <!--<apex:param value="{!$CurrentPage.parameters.opporId}" assignTo="{!oppId}" id="param1" name="opportyId"/> -->
+    <apex:form >  
+    <html>
+        <head>
+              
+        </head>
+        <body>
+        
+           <P align="right">
+                <apex:image id="logo" value="{!$Resource.AshirvadLogoNew}" width="100" height="60"/> <br/>
+            </P>
+            <center>
+                <h3 style="font-family: Arial Unicode MS;"><u><b>ASHIRVAD PIPES PRIVATE LIMITED-BENGALURU</b></u></h3>
+                <h4 style="font-family: Arial Unicode MS;"><u>PROMOTIONAL ACTIVITY CLAIM FORM</u></h4>
+            </center>
+            <br></br>          
+
+    <h4>
+    <apex:pageMessage summary="PDF cannot be generated since the actual number of attendees are below 70%"
+                      severity="warning"
+                      strength="3"
+                      rendered="{!showPDF =FALSE }">
+
+    </apex:pageMessage>
+    </h4>
+    <apex:outputPanel rendered="{!showPDF}"> 
+         <apex:outputPanel > 
+               <table class="tg" style=" width: 100%">
+                 <thead></thead>
+                 <tbody>
+                     <tr>  
+                        <td align="left" width="20%">Employee Id:&nbsp;<b>{!promorecord.Employee_Number__c}</b></td>
+                      
+                        <td align="right" width="10%">Date:&nbsp;<b>{!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())}</b></td>                                 
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel>
+        <br></br>  
+            
+          <apex:outputPanel > 
+               <table class="tg" style=" width: 100%">
+                 <thead></thead>
+                 <tbody>
+                     <tr>  
+                        <td align="left" width="20%">Claim Reference No.:&nbsp;{!promoRecord.Name}</td>
+                      
+                        <td align="left" width="12%">Activity Place:&nbsp;{!promoRecord.location__c},{!promoRecord.district__c},{!promoRecord.taluka__r.name}</td>                        
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel>
+<br></br>
+          
+<apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody>  
+                <tr>
+                <td align="left" width="20%">Promotional Type:&nbsp;{!promoRecord.Type__c}</td>
+                    <td align="left" width="14%">Date of Promotional Activity:&nbsp;{!DAY(promoRecord.date__c)}/{!MONTH(promoRecord.date__c)}/{!YEAR(promoRecord.date__c)}</td>
+                    
+                
+                </tr>
+            </tbody>
+          </table>
+          </apex:outputPanel>
+<br></br>
+         <apex:outputPanel > 
+               <table class="tg" style=" width: 100%">
+                 <thead></thead>
+                 <tbody>
+                     <tr>  
+                         
+                <td align="left" width="20%">No. of Guests Participants:&nbsp;{!promoRecord.Total_no_of_attendees__c}</td>
+                 
+                 <td align="left" width="15%"> No. of APPL  Participants:</td>        
+                
+                
+                 </tr>
+
+               
+                </tbody>
+          </table>
+          </apex:outputPanel>
+<br></br>
+<apex:outputPanel > 
+               <table class="tg" style=" width: 100%">
+                 <thead></thead>
+                 <tbody>
+                     <tr>  
+                         
+                                    
+                     
+                        <td align="left" width="20%">Sharing: &nbsp;&nbsp;&nbsp;Company Share %:&nbsp;{!promoRecord.Company_Share__c}</td>
+                      
+                    
+                        <td align="left" width="15%">Dealer/Dp Share %:&nbsp;{!promoRecord.Dealer_share__c}</td> 
+                                
+                                    
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel>
+
+
+<br></br>
+ <apex:outputPanel > 
+               <table class="tg" style="font-family: Arial Unicode MS; font-size: 12px; width: 100%; ">
+                 <thead >
+
+                     <tr>  
+
+                                     
+                                      <td style="  border:1px solid black;">Sl.No</td>
+                                      <td style="  border:1px solid black;">Nature of Expenditure</td>
+                                      <td style="  border:1px solid black;">Total Expenses </td>
+                                      <td style="  border:1px solid black;">Appl Share Rs.</td>
+                                      <td style="  border:1px solid black;">Dealer Share Rs.</td>
+                                      <td style="  border:1px solid black;">Remarks</td>
+                                    
+                </tr>
+                </thead>
+                <tbody >
+                <apex:variable value="{!1}" var="expListCount"/>
+                <apex:repeat value="{!promoExpenseTableRecords}" var="Tabl">
+                <tr>
+                <td style="  border:1px solid black;">{!expListCount}</td>
+                <td style="border:1px solid black;">{!Tabl.Nature_of_Expenditure__c}</td>
+                <td style=" border:1px solid black;">{!Tabl.Total_Expenses__c}</td>
+                <td style="  border:1px solid black;">{!Tabl.APPL_Share__c}</td>
+                <td style="  border:1px solid black;">{!Tabl.Dealer_share__c}</td>
+                <td style="  border:1px solid black;">{!Tabl.Remarks__c}</td>
+                </tr>
+                <apex:variable value="{!expListCount+1}" var="expListCount"/>
+                </apex:repeat>
+                </tbody>
+          </table>
+          </apex:outputPanel>
+          <br></br>
+            <apex:outputPanel > 
+               <table class="tg" style=" width: 100%">
+                 <thead></thead>
+                 <tbody>
+                <tr>
+                <td align="left" width="20%">Advance Received From Ashirvad:&nbsp;Rs{!promoRecord.Advance_Received__c}</td>
+               
+                <td align="left" width="15%">Amount Spent By Dealer:&nbsp;Rs{!promoRecord.Amount_spent_by_the_dealer__c}</td>
+            
+                </tr>
+              </tbody>
+          </table>
+          </apex:outputPanel>
+
+<br></br>
+
+
+      <apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody>  
+                <tr>
+                  <td align="left" width="20%">Credited Note Amount to Dealer:&nbsp;Rs{!promoRecord.Credit_Note__c}</td>
+               
+                
+                <td align="left" width="15%">Value:&nbsp;Rs&nbsp;
+               {!promoRecord.Total_Expenses__c}</td>
+                </tr>
+            </tbody>
+          </table>
+          </apex:outputPanel>
+
+<br></br>
+
+<apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody> 
+
+                 <tr>
+              
+                
+                <td align="left" width="20%">Dealer Name:&nbsp;{!promoRecord.Dealer1__r.name}</td>        
+             <td align="left" width="15%">Distributor Name:&nbsp;{!promoRecord.Distributor__r.name}</td>
+                                    
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel>
+
+<br></br>
+<apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody> 
+
+                 <tr>
+                <td align="left" width="20%">Name Of TGM / TGE:&nbsp;<b>{!promoRecord.Owner.Name}</b></td>
+                
+                <td align="left" width="15%">Signature of TGM/TGE:&nbsp;_______________</td>              
+                                    
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel>
+
+<br></br>
+ <apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody> 
+
+                 <tr>
+                  <td align="left" width="20%">Name Of TL/Manager:&nbsp;<b>{!promoRecord.Tl_Manager__c}</b></td>
+                <td align="left" width="15%">Signature of Team Leader:&nbsp;_________________</td>
+                
+                             
+                                    
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel>
+<br></br> 
+<apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody> 
+
+                 <tr>
+                <td align="left" width="20%">Credit Note No/Date:&nbsp;_______________</td>
+                
+                <td align="left" width="15%">Debit Note No/Date:&nbsp;_______________</td>              
+                                    
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel> 
+<br></br>   
+<apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody> 
+             <tr>                             
+                  <td align="left" width="20%">Approval By HO :&nbsp;_______________</td>                   
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel>   
+    <br></br> 
+<apex:outputPanel > 
+         <table class="tg" style=" width: 100%">
+             <thead></thead>
+             <tbody> 
+
+                 <tr>
+                <td align="left" width="20%">SFDC call verification:&nbsp;
+                <apex:outputText value="{!IF(promoRecord.Verified__c==False, 'Not Verified', 'Verified')}"/>
+                </td>
+                <td align="left" width="15%">Verification and  entry passed:&nbsp;
+                <apex:outputtext value="{!If(promoRecord.Call_Center_Person_Name__c=='','Not Verified',promoRecord.Call_Center_Person_Name__c)}"/></td> 
+                </tr>
+                </tbody>
+          </table>
+          </apex:outputPanel> 
+          <br></br>   
+
+
+<p><font size="12" style=" font-weight: bold;">NOTE:  </font>&nbsp;
+    Please enclose Pre Approval Communications if any, along with this claim Forms for all Audit as well as budgetory. Also enclose all original vouchers and photographs etc in support of the activity and claim.
+</p>
+</apex:outputPanel>
+        </body>
+            </html>
+            </apex:form>
+</apex:page>

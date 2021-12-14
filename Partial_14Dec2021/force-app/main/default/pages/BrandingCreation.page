@@ -1,0 +1,1985 @@
+<apex:page controller="BrandingRequestController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" >
+ <apex:slds />
+ <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--JavaScript-->
+    <apex:includeScript value="/support/console/27.0/integration.js"/>
+    <script type="text/javascript"> var __sfdcSessionId = '{!GETSESSIONID()}';</script>
+    <script src="../../soap/ajax/38.0/connection.js" type="text/javascript"></script>    
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_js)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_UI_js)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_angular_js)}"/>
+   <apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_js)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_select_js)}"/>
+
+    <!--StyleeSheet -->
+  <link href="{!URLFOR($Resource.Ashd_jquery_UI_css)}" rel="stylesheet"/>
+  <!--  <link  href="{!URLFOR($Resource.Ashd_bootstrap_css)}" rel="stylesheet"/>
+    <link  href="{!URLFOR($Resource.Ashd_bootstrap_theme_css)}" rel="stylesheet"/>
+    <link  href="{!URLFOR($Resource.Ashd_bootstrap_select_css)}" rel="stylesheet"/>-->
+
+
+    <!--Javascript Link
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+
+
+       stylesheet  for the page
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+           //  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+           // <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+           //  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" />
+    -->
+   <!-- <style>
+    .ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+  * html .ui-autocomplete {
+    height: 100px;
+  }
+    
+    
+        body{font-family:Calibri !important;}
+        .navbar-inverse{background-color:#19a8db !important;background-image: -webkit-linear-gradient(top,#19a8db,#0ebdf7 100%); color:#FFF !important; border-radius:0px !important;padding:7px; }
+        .navbar-nav{float:right;}
+        .navbar-inverse .navbar-nav>li>a{color:#FFF !important;}
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{border-color:#0ebdf7 !important;}
+        .navbar{margin-bottom:0px !important;border:0px #FFF none}
+        .jumbotron{margin:0px 0px !important; padding:10px 10px 2px 15px !important}
+        .noPadding-noMargin{padding:0px !important;margin:0px !important}
+
+        #addrError{display:none;}
+        #pin::-webkit-outer-spin-button,#pin::-webkit-inner-spin-button{-webkit-appearance: none;margin: 0;}
+        #pin{-moz-appearance: textfield;}
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{padding:3px 8px !important;}
+        .tr{ display:table;margin-bottom:1px;}
+        label{font-weight:normal !important;}
+        .btn-ashvd{background-color:#0ebdf7 !important;color:#FFF !important;padding:6px 15px !important;}
+        .btn-ashvd-submit{background-color:#24aa98 !important;color:#FFF !important;padding:6px 15px !important;}
+
+        .nav-mn{color:#FFF !important; font-size:16px !important;padding-right:10px; margin-top:17px;}
+        .nav-mn a {color:#FFF !important;}
+        .nav-mn a:hover{text-decoration:none}
+        .addressChange{top:10%!important; background-color:#ffffff!important; position :absolute!important;
+            border-radius:5px!important; border:2px solid ##e3e2e2!important; padding:10px 0px!important;
+            z-index:2!important; margin-bottom:50px!important;
+        }
+
+
+        .confirmBlock{
+            padding: 0px;
+            top: 30%;
+            background-color: #ffffff;
+            position: fixed;
+           // border: 2px solid #e3e2e2;
+            border-radius: 5px;
+            z-index: 2;
+        }
+
+        .circleBlock{
+            height:100%!important;
+            width:100%!important;
+            left:0!important;
+            top:0!important;
+            position:fixed!important;
+            background-color:#000000!important;
+            opacity:.5!important;
+        }
+        #circle{
+            border: 15px solid white!important;
+                border-radius: 50%!important;
+            width: 60px!important;
+            height: 60px!important;
+            position: fixed!important;
+            top: 40%!important;
+            left: 45%!important;
+            z-index: 1!important;
+            border-left-color:#19a8db!important;
+
+        }
+
+
+
+
+        .alertcontent{
+            padding:0px;
+                top: 30%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid #e3e2e2;
+                border-radius:5px;
+                z-index: 2;
+        }
+        .blockcontent{
+            background-color: #ffffff;
+            z-index: 1;
+            position: absolute;
+            height: 250px;
+            top: 30%;
+            left: 35%;
+            border: 2px solid #0f8fbb;
+            border-radius: 5px;
+            padding: 30px;
+        }
+        .brandTable{
+            margin-top:10px;
+        }
+
+        .alert{
+                height:50px!important;
+                color:#000000!important;
+                font-weight:bolder!important;
+                font-family:Verdana!important;
+                font-size:18px!important;
+                background-color:#eee!important;
+                opacity:1!important;
+                text-align:center!important;
+                bottom:40%!important;
+                position:fixed!important;
+                -webkit-animation-name: animationalert!important;
+                animation-name: animationalert!important;
+                animation-duration: 7s !important;
+            }
+            @-webkit-keyframes animationalert {
+                from {opacity: 1;}
+                to {opacity: 0
+            }
+            @keyframes animationalert {
+
+                from {opacity: 1}
+                to {opacity: 0;}
+            }
+            .grp{
+                margin-bottom: 5px!important;
+            }
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+            }
+            
+           
+  
+    </style>-->
+   
+   <style>
+   .navi li {
+        float:left;
+        margin-left:20px;
+    }
+   .text_alig td {
+   text-align:left!important;
+   }
+    .confirmBlock{
+            padding: 0px;
+            top: 30%;
+            background-color: #ffffff;
+            position: fixed;
+           // border: 2px solid #e3e2e2;
+            border-radius: 5px;
+            z-index: 9;
+            width:40%;
+            left:30%;
+        }
+         .addressChange{top:10%!important; background-color:#ffffff!important; position :absolute!important;
+            border-radius:5px!important; border:2px solid ##e3e2e2!important; padding:10px 0px!important;
+            z-index:9!important; margin-bottom:50px!important; width:40%;
+            left:30%;
+        }
+       .alertcontent{
+            padding:0px;
+                top: 30%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid #e3e2e2;
+                border-radius:5px;
+                z-index: 9;
+                 width:40%;
+            left:30%;
+        }
+        .slds-button_brand_btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgb(221, 219, 218);
+    transition: border .15s linear;
+    background-color: rgba(27, 82, 151, 1);
+    border-color: rgba(27, 82, 151, 1);
+    color: rgb(255, 255, 255);
+    padding: 5px 13px;
+    border-radius: 3px;
+    }
+    .slds_input_field {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+    }
+     @media only screen and (min-width: 250px) and (max-width: 640px) {
+     .confirmBlock{
+            padding: 0px;
+            top: 10%;
+            background-color: #ffffff;
+            position: fixed;
+           // border: 2px solid #e3e2e2;
+            border-radius: 5px;
+            z-index: 9;
+            width:90%;
+            left:5%;
+        }
+        .alertcontent{
+            padding:0px;
+                top: 10%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid #e3e2e2;
+                border-radius:5px;
+                z-index: 9;
+                 width:90%;
+            left:5%;
+        }
+        .addressChange{top:10%!important; background-color:#ffffff!important; position :absolute!important;
+            border-radius:5px!important; border:2px solid ##e3e2e2!important; padding:10px 0px!important;
+            z-index:9!important; margin-bottom:50px!important; width:90%;
+            left:5%;
+        }
+     }
+   </style>
+  
+    <script>
+    // Get dependent Picklist Values
+        //==============================
+        function getDependentOptions (objName, ctrlFieldName, depFieldName) {
+        console.log('objName'+objName);
+        console.log('Field'+ctrlFieldName);
+        console.log('Field'+depFieldName);
+        
+        // Isolate the Describe info for the relevant fields
+        var objDesc = sforce.connection.describeSObject(objName);
+        var ctrlFieldDesc, depFieldDesc;
+        var found = 0;
+            for (var i=0; i<objDesc.fields.length; i++) {
+                var f = objDesc.fields[i];
+                if (f.name == ctrlFieldName) {
+                    ctrlFieldDesc = f;
+                    found++;
+                } else if (f.name == depFieldName) {
+                    depFieldDesc = f;
+                    found++;
+                }
+                if (found==2) break; 
+            }
+
+            // Set up return object
+            var dependentOptions = {};
+            var ctrlValues = ctrlFieldDesc.picklistValues;
+            for (var i=0; i<ctrlValues.length; i++) {
+                dependentOptions[ctrlValues[i].label] = [];
+            }
+
+            var base64 = new sforce.Base64Binary("");
+            function testBit (validFor, pos) {
+                var byteToCheck = Math.floor(pos/8);
+                var bit = 7 - (pos % 8);
+                return ((Math.pow(2, bit) & validFor.charCodeAt(byteToCheck)) >> bit) == 1;
+            }
+    
+            // For each dependent value, check whether it is valid for each controlling value
+            var depValues = depFieldDesc.picklistValues;
+                for (var i=0; i<depValues.length; i++) {
+                    var thisOption = depValues[i];
+                    var validForDec = base64.decode(thisOption.validFor);
+                    for (var ctrlValue=0; ctrlValue<ctrlValues.length; ctrlValue++) {
+                        if (testBit(validForDec, ctrlValue)) {
+                            dependentOptions[ctrlValues[ctrlValue].label].push(thisOption.label);
+                        }
+                    }
+                }
+            return dependentOptions;
+        }
+  
+  var OBJ_NAME = "Account";
+        var CTRL_FIELD_NAME = "State__c";
+        var DEP_FIELD_NAME = "District__c";
+        var options = getDependentOptions(OBJ_NAME, CTRL_FIELD_NAME, DEP_FIELD_NAME);
+        console.log(options );
+        
+        
+    /*************************************************************** Added***************************/
+  
+
+
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)){
+            return false;
+        }
+        return true;
+    }
+
+
+
+    function highlight(rw){
+        $(document).ready(function(){
+            for(var i=0;i<rw.length;i++){
+                $('#row'+rw[i]).css({'border':'2px solid red','margin-bottom':'5px'});
+            }
+        });
+
+    }
+/*************************************************************** Added**********************************/
+
+    var alertbol=true;
+    /******JQUERY CODE***************/
+    var SelectedAccount={};
+    SelectedAccount.Name='';
+    SelectedAccount.Id='';
+    SelectedAccount.Owner='';
+        $(document).ready(function(){
+
+
+
+            $('#inputValidation').keyup(function(){
+            debugger;
+            console.log(document.getElementById('cluster').value);
+            if(document.getElementById('cluster').value=='string:Select Cluster'){
+                this.blur();
+                alertWindow('Please select appropriate cluster.','alert');
+                    document.getElementById('inputValidation').value='';
+                    return;
+            }
+
+                BrandingRequestController.collectAccount($('#inputValidation').val(),document.getElementById('cluster').value,function(res,evt){
+                //console.log(res);
+                //console.log(evt);
+                if(evt.status){
+                    var names=[];
+
+                    for(var i=0;i<res.length;i++){
+                    
+                        var jk=new Object();
+                       // jk.label=res[i].Name;  //commented on 10/4/2017
+                        jk.label=res[i].Name+" - "+res[i].Contact_Number_Mobile__c;   //Added on 10/4/2017 to populate Account Name + Mobile number
+                        jk.value=res[i].Name+" - "+res[i].Contact_Number_Mobile__c;
+                        jk.myValue=res[i].Id;
+                        jk.myOwner=res[i].OwnerId;
+                        jk.streetAddress=res[i].Street_Address__c;
+                        jk.city=res[i].City__c;
+                        jk.state=res[i].State__c;
+                        jk.district=res[i].District__c;
+                        jk.pinCode=res[i].PIN_Code__c;
+                        jk.name=res[i].Name;
+                        
+                        names.push(jk);
+                        
+                    }
+
+                    $('#inputValidation').autocomplete({
+                       minLength: 2,
+                       source: names,
+                       select:function(event,ui){
+                                
+                           console.log(ui.item);
+                           SelectedAccount.Name=ui.item.name;
+                           SelectedAccount.Id=ui.item.myValue;
+                           SelectedAccount.Owner=ui.item.myOwner;
+                           /*Added on 22-04-2017*/
+                           SelectedAccount.streetAddress=ui.item.streetAddress;
+                           SelectedAccount.city=ui.item.city;
+                           SelectedAccount.state=ui.item.state;
+                           SelectedAccount.district=ui.item.district;
+                           SelectedAccount.pinCode=ui.item.pinCode;
+                           
+                           //console.log(SelectedAccount);
+                           $('#inputValidation').val(SelectedAccount.Name);
+                           //console.log($('#inputValidation').val());
+                       },
+                   });
+                   
+              
+                      
+                     $('#inputValidation').keyup(function(){
+                         if ($('#inputValidation').val().length==0){
+                             SelectedAccount.Name='';
+                             SelectedAccount.Id='';
+                             SelectedAccount.Owner='';
+                              /*Added on 22-04-2017*/
+                             SelectedAccount.streetAddress='';
+                             SelectedAccount.city='';
+                             SelectedAccount.state='';
+                             SelectedAccount.district='';
+                             SelectedAccount.pinCode='';
+                         } 
+                     });
+                }
+                else{
+                }
+                
+            },{escape:false});
+
+
+        });
+      });
+ 
+
+/******************Added For Picklist Of District********************/
+    function getDistrict(stateKey,optionsMap){
+        //console.log(optionsMap);
+        var mappedDistrictValues=[];
+        $(document).ready(function(){
+            $.each(optionsMap,function(key,value){
+                if(key==stateKey){
+                //console.log(key);
+                //console.log(value);
+                 mappedDistrictValues=value;
+                 
+                 //console.log(mappedDistrictValues);
+                 return;
+                }
+            });
+            console.log(mappedDistrictValues);
+            return mappedDistrictValues;
+        });
+    }
+
+
+/******************Added For Picklist Of District Ends********************/
+
+          function addressWindow(obj){
+          $(document).ready(function(){
+            console.log(obj);
+         
+         
+         /***************************Added For Picklist*********************/   
+            var opthtml='';
+            $.each(obj.Options,function(it,val){
+               opthtml+='<option value="'+it+'">'+it+'</option>';
+            });
+         
+         /***************************Added For Picklist*********************/               
+           
+          var objFromData = obj;  // Added by Pooja
+             
+             
+             
+              var shpname;
+              for(var i=0;i<obj.acc.length;i++){
+                  if(obj.accc==obj.acc[i].Id){
+                      shpname=obj.acc[i].Name;
+                      break;
+                  }
+              }
+
+            
+ $('body').append('<div id="blocky" ng-controller="myctrl" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"> </div><div class="col-sm-4 col-sm-offset-4 addressChange"> <div style="border-bottom:1px solid rgba(0, 0, 0, 0.11);padding: 20px 20px 30px 20px;"> <label style="font-weight:bold;float:left;">'+shpname+'</label> <span class="glyphicon glyphicon-remove addcnc" style="float:right;cursor:pointer"></span> </div> <div style="margin-left:auto;margin-right:auto;padding-left:45px;"> <div style="float:left;clear:both;width:100%;"><span id="addrError" style="color:red;padding:10px;"></span><div style="float:left;width:100px;padding:10px;"> Street<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"><textarea class="slds_input_field" id="street" style="resize:none;" rows="3">'+obj.street+'</textarea></div></div><div style="float:left;clear:both;width:100%;"> <div style="float:left;width:100px;padding:10px;"> Location<span style="color:red;">*</span> </div><div style="float:left;padding:10px;"> <input type="text" id="city" value="'+obj.city+'" class="slds_input_field"/></div></div>  <div style="float:left;clear:both;width:100%;"> <div style="float:left;width:100px;padding:10px;"> State<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"><select class="slds_input_field" id="country">'+opthtml+'</select></div> </div>  <div style="float:left;clear:both;width:100%;"> <div style="float:left;width:100px;padding:10px;"> District <span style="color:red;">*</span></div>  <div style="float:left;padding:10px;"> <select id="districtt" class="slds_input_field"> </select></div>  </div> <div style="float:left;clear:both;width:100%;"> <div style="float:left;width:100px;padding:10px;"> Pincode <span style="color:red;">*</span></div><div style="float:left;padding:10px;"> <input type="text" maxlength="6" id="pin" onkeypress="return isNumber(event)" value="'+obj.pin+'"  class="slds_input_field"/></div></div>  <div style="float:left;clear:both;width:100%;"><!--<span style="color:red;font-size:15px;float:left;">*All fields are mandatory </span>--></div> <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;">&nbsp;</div> <div style="float:left;padding:10px;"><input type="button" value="Save Address" class="slds-button_brand_btn btn-ashvd" id="change"  /> &nbsp;&nbsp; <input type="button" value="Close" class="slds-button_brand_btn addcnc" /></div></div></div> ');
+      
+          // $('#country').val(obj.country);
+           $('#districtt').val(obj.district);
+         
+         /****************** Added For State, District Picklist*****************/
+           
+           $('#country').val(obj.state);
+            $.each(obj.Options,function(key,value){
+                    if(key==obj.state){
+                    //console.log(key);
+                    //console.log(value);
+                     mappedDistrictValues=value;
+                     var finalValueDistrict='';
+                     $.each(mappedDistrictValues,function(keyMap,valueMap){
+                        finalValueDistrict+='<option value="'+valueMap+'">'+valueMap+'</option>';
+                     });
+                     $('#districtt').html(finalValueDistrict);
+                    }
+                });
+                $('#districtt').val(obj.district);
+            $('body').keyup(function(evt){
+                if(evt.keyCode==27){
+                    $('#blocky').remove();
+                    $('.addressChange').remove();
+                }
+            });
+
+            $('#country').change(function(){
+                
+                $.each(obj.Options,function(key,value){
+                    if(key==$('#country').val()){
+                    //console.log(key);
+                    //console.log(value);
+                     mappedDistrictValues=value;
+                     var finalValueDistrict='';
+                     $.each(mappedDistrictValues,function(keyMap,valueMap){
+                        finalValueDistrict+='<option value="'+valueMap+'">'+valueMap+'</option>';
+                     });
+                     $('#districtt').html(finalValueDistrict);
+                    }
+                });
+                
+            });
+            
+                  /****************** Added For State, District Picklist Ends*****************/   
+            
+            
+            $('#change').click(function(){
+
+                  //console.log(obj);
+
+                  var  adrError=[];
+
+
+                if($('#street').val().trim().length==0){
+                  adrError.push(' Street');
+                }
+                  if($('#city').val().length==0){
+                      adrError.push(' City');
+                  }
+
+                   if($('#districtt').val().length==0){
+                      adrError.push(' District');
+                  }
+
+                  if($('#pin').val().length==0 || $('#pin').val().length>6 || $('#pin').val().length<=5 || (!$.isNumeric($('#pin').val()))){
+
+                      adrError.push(' Pincode');
+                  }
+
+                  if(adrError.length>0){
+                    $('#addrError').html('Please enter '+adrError);
+                    $('#addrError').css({'display':'block'});
+                    return;
+                  }else{
+                    $('#addrError').css({'display':'none'});
+                  }
+
+
+
+                  obj.street=''+$('#street').val();
+                  obj.city=''+$('#city').val();
+                  obj.state=''+$('#country').val();
+                  obj.district=''+$('#districtt').val();
+                  obj.pin=''+$('#pin').val();
+                    BrandingRequestController.changeAddress(obj.accc,obj.street,obj.city,obj.state,obj.district,obj.pin,function(ress,evtt){
+                            console.log(ress);
+                          if(ress){
+                          
+                              alertWindow('Address saved successfully','');
+                              $('#row'+obj.slno).css({'border':'none'});
+                          }else{
+                              alertWindow('Unable to save record','alert');
+                             obj.street='';      
+                             obj.city='';
+                             obj.state='';
+                             obj.district='';  
+                             obj.pin=''; 
+                              
+                        }
+                        $('#blocky').remove();
+                        $('.addressChange').remove();
+                  });
+
+
+              });
+
+              $('.addcnc').click(function(){
+                  $('#blocky').remove();
+                  $('.addressChange').remove();
+
+              });
+
+          });
+      }
+
+
+      function alertWindow(msg,pic){
+          var htmcode='';
+          var suc='';
+
+           if(pic=='alert'){
+               htmcode='<span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span><b style="font-family:Calibri !important;">Alert</b>';
+           }else {
+            htmcode='<span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span>';
+            suc='padding-bottom:20px;';
+           }
+           $(document).ready(function(){
+
+
+                $('#submit').blur();
+                $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);'+suc+'" >'+htmcode+'<span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left">'+msg+'</label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="slds-button slds-button_brand_btn acnc" value="Close" /></div></div>');
+                $('.acnc').click(function(){
+                    $('#block').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+                 });
+
+           });
+      }
+
+      function blockwindow(){
+            $(document).ready(function(){
+                $('#submit').blur();
+                $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div align="center" class="blockcontent"><span class="glyphicon glyphicon-thumbs-up" style="font-size:100px;color:#0ebdf7;"></span><br/><h5>Your Branding Request Successfully Submitted!!</h5></div>')                 
+                  setTimeout(function(){window.location.replace('/apex/BrandingListTGM');},3000);
+
+
+            });
+        }
+
+
+        $(document).ready(function(){
+            $('body').keyup(function(evt){
+                if(evt.keyCode==27){
+                    $('#block').remove();
+                    $('.addressChange').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+                    $('.confirmBlock').remove();
+                }
+
+            });
+
+        });
+
+
+
+ 
+    /******Angular CODE***************/
+        var app=angular.module('myapp',[]);
+        app.factory('Ashirwad_Fact',function($q,$log){
+            var factVar={};
+
+                factVar.getCluster=function(){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectCluster(function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                    );
+                    return(defer.promise);
+                };
+                factVar.getAccount=function(clusid){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectAccount1(clusid,function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(event.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                    );
+                    return(defer.promise);
+                };
+                factVar.getStoredRecord=function(){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectStoredBranding(function(res,evt){
+                        if(evt.status){
+
+                            defer.resolve(res);
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                    );
+                    return(defer.promise);
+                };
+                factVar.getVertical=function(){
+                    var defer=$q.defer();
+                    BrandingRequestController.collectVertical(function(res,evt){
+                        if(evt.status){
+
+                            defer.resolve(res);
+                        }else{
+                            $log.error(evt.Message);
+                            defer.reject(evt.Message);
+                        }
+                    },{buffer: true, escape: false, timeout: 30000}
+                    );
+                    return(defer.promise);
+                };
+                factVar.removeBrandingRequest=function(brandId){
+                 var defer=$q.defer();
+                 BrandingRequestController.deleteBrandingRequest(brandId,function(res,evt){
+                     if(evt.status){
+                         defer.resolve(res);
+                     }else{
+                         $log.error(evt.Message);
+                         defer.reject(evt.Message);
+                     }
+                 });
+                 return(defer.promise);
+                 
+               }
+            return factVar;
+           
+        });
+
+
+        app.controller('myctrl',function($scope,Ashirwad_Fact){
+            var count=0;
+            $scope.brdcount=0;
+            $scope.counter=false;
+
+            $scope.savShw=false;
+            $scope.addcount=0;
+
+            $scope.caseId='';
+            $scope.case=true;
+
+
+            $scope.count=0;
+            $scope.shwsubmit=true;
+            $scope.profile='';
+            $scope.cluster=[];
+            $scope.brandType=['None','Inshop','Outshop','Both'];
+            $scope.Standard=['None','4x2','6x3','8x3','8x4'];
+            $scope.None=['None'];
+            $scope.Language=['None','English','Hindi','Tamil','Telugu','Bengali','Kannada','Gujarati','Marathi','Assamese','Oriya','Punjabi','English + Hindi']
+            $scope.plumbing=['None','SAV on Sunboard','PoP Boards','Hanging Boards','Shelf Stickers','Product Stickers'];
+            $scope.column=['None','PoP Boards','Hanging Boards','Shelf Stickers','Product Stickers'];
+            var BRANDWRAPLIST=[];
+
+            $scope.media=[];
+
+            $scope.pbs=['None','Imperial','Classic','Royal','Premier','Regal','Non Club','Royal+','Regal+'];//['None','CPVC','UPVC','SWR','SSWR','UGD'];
+          
+            $scope.delData=[];
+
+            //$scope.sav=false;
+            Ashirwad_Fact.getVertical().then(function(resp){
+                $scope.profile=resp;
+                //console.log($scope.profile);
+
+
+            });
+
+            
+            $scope.cluster=[];
+            Ashirwad_Fact.getCluster().then(function(resp){
+            console.log(resp);
+              var temClus=resp;
+              $scope.cluster.push('Select Cluster');
+              angular.forEach(temClus,function(it,ind){
+                $scope.cluster.push(it);
+              });
+              $scope.clus=$scope.cluster[0];
+            });
+            
+
+            $scope.data=[];
+            Ashirwad_Fact.getStoredRecord().then(function(response){
+               console.log(response);
+
+               $scope.brdcount=response.length;
+               //$scope.addcount=response.length;
+                   
+                if($scope.brdcount>0 && $scope.brdcount<=10){//10
+                   $scope.counter=true;
+                  
+               }else{
+                   $scope.counter=false;
+               }
+
+
+                if(response.length>0){
+                    $scope.case=false;
+                    $scope.caseId=''+response[0].Branding_Request__r.Id;
+                }
+
+                for(var i=0;i<response.length;i++){
+
+console.log('response--------------->'+response);
+                    var temp=new Object();
+                    
+                    /***********Added ' options ' contains Map of State, District values**************/
+                    temp.Options=options;
+                    /*************************/
+                    temp.id=response[i].Id;
+                    temp.submitBy=response[i].Submitted_By__c;
+                    temp.slno=count;
+                    temp.blist=[];
+                    temp.blist.push(response[i].Branding_Type__c);
+                    temp.btype=temp.blist[0];
+
+                    temp.mtypebol=true;
+                    temp.mlist=[];
+                    if(response[i].Media_Type__c==undefined){
+                        temp.mtypebol=false;
+                        temp.mlist.push('None');
+                        temp.mtype=temp.mlist[0];
+                    }else{
+
+
+                        temp.mlist.push(''+response[i].Media_Type__c);
+                        temp.mtype=temp.mlist[0];
+                    }
+                    temp.mchildlist=[];
+
+                    if(response[i].Type__c==undefined){
+                        temp.mchildshw=false;
+                        temp.mchildlist.push('None');
+                        temp.mchild=temp.mchildlist[0];
+                    }else{
+                        temp.mchildlist.push(''+response[i].Type__c);
+                        temp.mchild=temp.mchildlist[0];
+                    }
+
+
+
+
+                    //temp.mchild='';
+                    temp.mchildshw=false;
+                    //temp.mchildlist=[];
+                    temp.langlist=[];
+                    temp.langlist.push(response[i].Language__c);
+                    temp.lang=temp.langlist[0];
+
+                    if(($scope.profile.toLowerCase()=='column') && (temp.mtype=='PoP Boards')){
+                        temp.mchildshw=true;
+                       
+                    }
+                   if(($scope.profile.toLowerCase()=='projects' || $scope.profile.toLowerCase()=='plumbing' ) && (temp.mtype=='PoP Boards' || temp.mtype=='Product Stickers') ){
+                        temp.mchildshw=true;
+                       
+                    }
+                    if(temp.btype=='Recce'){
+                        temp.mlist=$scope.None;
+                        temp.mtype=temp.mlist[0];
+                        //temp.mchildlist=$scope.None;
+                        //temp.mchild=temp.mchildlist[0];
+                        temp.mtypebol=false;
+
+                    }
+
+
+                    temp.ena=true;
+                    count++;
+                    $scope.count++;
+
+                    temp.cluster=''+response[i].Cluster__c;
+                    temp.brand=response[i].Branding_Request__r.Id;
+                    temp.acc=[];
+
+                    temp.acc.push(response[i].Shop_Name__r);
+                    //console.log(temp.acc[0]);
+                    temp.street='';
+                            temp.city='';
+                            temp.state='';
+                            temp.pin='';
+                          //  temp.country='';
+                            temp.district=''; /*Added by Pooja*/
+            
+                            
+                       /**************Added by Pooja*************/
+                              if(temp.acc[0].Street_Address__c!=undefined){
+                                temp.street=temp.acc[0].Street_Address__c;
+                            }
+                            if(temp.acc[0].City__c!=undefined){
+                                temp.city=temp.acc[0].City__c;
+                            }
+                            if(temp.acc[0].State__c!=undefined){
+                                temp.state=temp.acc[0].State__c;
+                            }
+                            if(temp.acc[0].District__c!=undefined){
+                                temp.district=temp.acc[0].District__c;
+                            }
+                            if(temp.acc[0].PIN_Code__c!=undefined){
+                                temp.pin=temp.acc[0].PIN_Code__c;
+                            }        
+
+                    //console.log('Account idddddd '+temp.acc);
+                    temp.accc=temp.acc[0].Id;
+                   
+                    temp.name=temp.acc[0].Name; //For stored Request account name
+
+                   $scope.data.push(temp);
+                   //BRANDWRAPLIST.push(bw);
+                }
+                if($scope.count>=5){
+                    $scope.shwsubmit=false;
+                }else{
+                    $scope.shwsubmit=true;
+                }
+                var constructorRec='{!rec}';
+                //console.log('************');
+                //console.log(constructorRec);
+                //console.log('************');
+                if(constructorRec=='true'){
+                   SelectedAccount.Name='{!nameAccount}';
+                   SelectedAccount.Id='{!idAccount}';
+                   SelectedAccount.pinCode='{!pinCode}';
+                   SelectedAccount.state='{!state}';
+                   SelectedAccount.district='{!district}';
+                   SelectedAccount.city='{!city}';
+                   SelectedAccount.streetAddress='{!streetAddress}';
+                   SelectedAccount.contactNumber='{!contactNumber}'; 
+                   
+                   $scope.clus='{!idCluster}';
+                   document.getElementById('inputValidation').value='{!nameAccount}'
+     
+                }
+                //console.log($scope.data);
+
+
+
+            });
+
+
+           $scope.updateMedia1=function(obj){
+               if(obj.btype=='None' || obj.btype=='Recce'){
+                   obj.mlist= $scope.None;
+                   obj.mtype='None';
+                   obj.mchildlist= $scope.None;
+                   obj.mchild='None';
+                   obj.mtypebol=false;
+                   obj.mchildshw=false;
+
+               }else if(obj.btype=='Inshop'){
+                   obj.mtypebol=true;
+                   obj.mchildshw=false;
+
+                   obj.mlist= $scope.plumbing;
+                   obj.mtype='None';
+                   obj.mchildlist= $scope.None;
+                   obj.mchild='None';
+
+
+               }else if(obj.btype=='Standard'){
+                   obj.mtypebol=true;
+                   obj.mchildshw=false;
+
+                   obj.mlist= $scope.Standard;
+                   obj.mtype='None';
+                   obj.mchildlist= $scope.None;
+                   obj.mchild='None';
+               }
+           }
+
+
+            $scope.updateMedia=function(obj){
+
+            //console.log(obj);
+                if(obj.btype=='None'){
+
+                   obj.mlist= $scope.None;
+                   obj.mtype=obj.mlist[0];
+                   obj.mchildlist= $scope.None;
+                   obj.mchild=obj.mchildlist[0];
+
+
+                   obj.mtypebol=false;
+                   obj.mchildshw=false;
+                   //obj.mchild='';
+                }
+                else if(obj.btype=='Inshop'){
+                    obj.mtypebol=true;
+                    if($scope.profile.toLowerCase()=='plumbing'){
+                        obj.mlist=$scope.plumbing;
+
+                        if(obj.mtype=='PoP Boards' || obj.mtype=='Product Stickers'){
+                            obj.mchildshw=true;
+                            obj.mchildlist=['None','Imperial','Royal','Premier','Regal','Non Club'];
+
+                            obj.mchild=obj.mchildlist[0];
+                        }else{
+                            obj.mchildshw=false;
+                            obj.mchildlist=$scope.None;
+                            obj.mchild=obj.mchildlist[0];
+                        }
+
+                    }else{
+                       obj.mlist=$scope.column;
+
+                       if(obj.mtype=='PoP Boards'){
+                           obj.mchildshw=true;
+                            obj.mchildlist=['Column'];
+                            obj.mchild=obj.mchildlist[0];
+                        }else{
+                            obj.mchildshw=false;
+                            //obj.mchild='';
+                            obj.mchildlist=$scope.None;
+                            obj.mchild=obj.mchildlist[0];
+                        }
+                   }
+                }
+                else if(obj.btype=='Standard'){
+                   obj.mtypebol=true;
+                   obj.mchildshw=false;
+                   obj.mlist= $scope.Standard;
+                   //obj.mtype=obj.mlist[0];
+                   obj.mchildlist=$scope.None;
+                   obj.mchild=obj.mchildlist[0];
+
+                }
+                if(obj.btype=='Recce'){
+                   obj.mchildshw=false;
+                   obj.mlist=$scope.None;
+                   obj.mtypebol=false;
+                   obj.mtype=obj.mlist[0];
+                   obj.mchildlist=$scope.None;
+                   obj.mchild=obj.mchildlist[0];
+
+                }
+                //console.log(obj);
+            };
+            
+            $scope.brdcount=count;         
+            $scope.addMore=function(){           
+             /** Added on 21/04/2017 **/ 
+             $(document).ready(function(){
+               var ci=1;
+               $('body').append('<div class="circleBlock"></div><div id="circle"></div>');
+               loadingCircle();
+               function loadingCircle(){
+               
+                   console.log('*********************** Entered the loading circle.************');
+                var cir=document.getElementById('circle');
+                    if(ci==360){
+                        ci=0;
+                    }
+
+                   // cir.style.transform='rotate('+ci+'deg)';
+                    ci++;
+
+                setTimeout(loadingCircle,1);
+              }
+           });    
+                     
+            console.log($scope.clus);
+             //console.log('case Bol '+$scope.case);
+            //console.log('case Id '+$scope.caseId);
+            bol=true;
+            /******************************Validation on Cluster******************************/
+                 if($scope.clus.split('&').length>1){
+                     if(!$scope.clus.includes('Jammu')){
+                    alertWindow('Please select appropriate cluster.','alert');
+                    document.getElementById('inputValidation').value='';
+                    return;
+                         }
+
+               }
+
+                if(document.getElementById('inputValidation').value.length==0){
+                    //alert('Please Enter Account Name');
+                    alertWindow('Please enter shop name in search bar.','alert');
+                    return;
+                }
+                if(SelectedAccount.Id==''){
+                    alertWindow('Selected Shop name does not exist.','alert'); // Show the shop name typed in the error message
+                    return;
+                }
+                $scope.addcount++;
+                //console.log(count);
+                console.log($scope.data);
+                var temp=new Object();
+                temp.accc=SelectedAccount.Id;
+                temp.name=SelectedAccount.Name; //gives account name and contact number            
+                temp.submitBy=SelectedAccount.Owner;
+                temp.btype='None';
+                temp.blist=$scope.brandType;
+                temp.dtype='None';//003
+                temp.dlist=$scope.pbs;//003
+                temp.mlist=[];
+                temp.mtype='';
+                temp.id='';
+                temp.slno=count;
+                temp.ena=false;
+                temp.brand='';
+                temp.clusIds=$scope.clus;
+                temp.mchild='';
+                temp.langlist=[];
+                temp.mtypebol=true;
+                temp.langlist=$scope.Language;
+                temp.lang=temp.langlist[0];
+                temp.mchildlist=[];
+                temp.mchildshw=false;
+                count++;
+                $scope.count++;$scope.brdcount++;
+                //temp.cluster=ctemp;
+              /*************************/
+                    temp.Options=options;
+              /*************************/
+                        
+                 temp.cluster=$scope.clus;
+                // temp.taluk='';
+                
+                $scope.updateMedia(temp);
+                
+                temp.acc=[];
+                var zu={};
+                zu.Name=SelectedAccount.Name;
+                zu.Id=SelectedAccount.Id;
+                temp.acc.push(zu);
+                            
+                            temp.street='';
+                            temp.city='';
+                            temp.state='';
+                            temp.pin='';
+                            temp.district='';        
+                             if(SelectedAccount.streetAddress!=undefined){
+                                temp.street=SelectedAccount.streetAddress;
+                            }
+                            if(SelectedAccount.city!=undefined){
+                                temp.city=SelectedAccount.city;
+                            }
+                            if(SelectedAccount.state!=undefined){
+                                temp.state=SelectedAccount.state;
+                            }
+                            if(SelectedAccount.district!=undefined){
+                                temp.district=SelectedAccount.district;
+                            }
+                            if(SelectedAccount.pinCode!=undefined){
+                                temp.pin=SelectedAccount.pinCode;
+                            }        
+                            $(document).ready(function() {
+                            $('.circleBlock').remove();
+                            $('#circle').remove();
+                            }); 
+
+                    $scope.data.push(temp);
+                  //console.log($scope.data);
+
+                if($scope.brdcount>0 && $scope.brdcount<=10){//10
+                       $scope.counter=true;
+                  }else{
+                      $scope.counter=false;
+                  }
+
+                if($scope.count>=1){//10
+                    $scope.shwsubmit=false;
+                }else{
+                    $scope.shwsubmit=true;
+                }
+                document.getElementById('inputValidation').value='';
+                    if($scope.addcount>0){
+                        $scope.savShw=true;
+
+                    }
+                SelectedAccount.Name='';
+                SelectedAccount.Id='';
+                SelectedAccount.Owner='';
+                
+     
+                
+           };
+           
+           /** Added on 21/04/2017 **/   
+           
+           $scope.delRow=function(rm){
+           console.log($scope.addcount);
+           if($scope.addcount!=0){
+                 $scope.addcount--;
+             }
+                        //$scope.addcount--;
+                        $scope.count--;
+                        $scope.brdcount--;
+                        var temp=[];
+                        var holdDelId;
+                        for(var i=0;i<$scope.data.length;i++){
+                            if($scope.data[i].slno==rm){
+                                if($scope.data[i].id!=''){
+                                    $scope.delData.push($scope.data[i]);
+                                }
+                            }else{
+                                temp.push($scope.data[i]);
+                            }
+                        }
+                        $(document).ready(function(){
+                            $('#row'+rm).remove();
+
+                        });
+                        
+                        if($scope.delData.length>0){
+                            holdDelId=$scope.delData[0].id;
+                            console.log(holdDelId);
+                            Ashirwad_Fact.removeBrandingRequest(holdDelId)
+                            .then(function(resp){
+                                if(resp){
+                                    $scope.delData=[];
+                                }
+                            });
+                        }
+                        $scope.data=[];
+                        $scope.data=temp;
+                        console.log($scope.addcount);
+                        $scope.$apply();
+                        $scope.refreshCount();
+                   }; 
+
+     /** Added on 21/04/2017 Ends**/   
+
+            /********************************************************************/
+            $scope.save=function() {
+
+
+            //console.log('case Bol '+$scope.case);
+            //console.log('case Id '+$scope.caseId);
+
+                  //console.log($scope.data);
+                        var DupArray=[];
+                       
+        for(var i=0;i<$scope.data.length;i++){
+            
+            var dupTemp=new Object();
+            dupTemp.id=$scope.data[i].accc;
+            dupTemp.name=$scope.data[i].name;
+            var countt=0;
+            for(var j=0;j<$scope.data.length;j++){
+               if($scope.data[i].accc==$scope.data[j].accc){
+                   countt++;
+               }
+            }
+            if(countt>1){
+                dupTemp.error=false;
+                if(DupArray.length==0){
+                    DupArray.push(dupTemp);
+                }else{
+                    var dupBol=true;
+                    for(var k=0;k<DupArray.length;k++){
+                        if(dupTemp.id==DupArray[k].id){
+                            dupBol=false;
+                            break;
+                        }
+                    }
+                    if(dupBol){
+                        DupArray.push(dupTemp);
+                    }
+                }
+            }
+        }
+
+        if(DupArray.length>0){
+            var ERROR='<h5><b>Please remove duplicate shop:</b></h5>';
+            for(var i=0;i<DupArray.length;i++){
+                ERROR+=''+DupArray[i].name+'<br/>';
+            }
+            alertWindow(ERROR,'alert');
+            return;
+        }
+
+                /*   var Defect=[];
+                   var reccecount=0;
+                    for(var i=0;i<$scope.data.length;i++){
+                        var dtemp=new Object();
+                        
+                        dtemp.accc=$scope.data[i].accc;
+                        dtemp.name=$scope.data[i].name;
+                        dtemp.defect=[];
+                        dtemp.btype=$scope.data[i].bytpe;
+                        dtemp.error=true;
+
+                        if($scope.data[i].btype=='None'){
+                            dtemp.defect.push(' Branding Type');
+                            dtemp.error=false;
+                        }
+                        if(dtemp.btype=='Recce'){
+                            $scope.reccecount++;
+                            }
+                        if($scope.data[i].lang=='None'){
+                            dtemp.defect.push(' Language');
+                            dtemp.error=false;
+                        }
+                        if($scope.data[i].mtypebol==true && ($scope.data[i].mtype=='None' || $scope.data[i].mtype=='')){
+                            dtemp.defect.push(' Media');
+                            dtemp.error=false;
+                        }
+                        if($scope.data[i].mchildshw==true && ($scope.data[i].mchild=='None' || $scope.data[i].mchild=='')){
+                            dtemp.defect.push(' Type');
+                            dtemp.error=false;
+                        }
+                        if(!dtemp.error){
+                            Defect.push(dtemp);
+                        }
+                    }
+                   
+                    
+                    if(Defect.length>0){
+                        var ERROR='<h5><b>Please enter the complete details for the following shop(s):</b></h5><table><tr> ';
+                        for(var i=0;i<Defect.length;i++){
+                            ERROR+='<td>'+Defect[i].name+'</td>'+'<td>-</td>'+'<td>'+ Defect[i].defect+'</td></tr>';
+                        }
+                        ERROR+='</table>';
+                        
+
+                        alertWindow(ERROR,'alert');
+                        return;
+                    }*/
+
+
+           //console.log('DATATATA');
+           //console.log($scope.data);
+          $scope.addData=[];
+          for(var i=0;i<$scope.data.length;i++){
+              if($scope.data[i].id==''){
+                  $scope.addData.push($scope.data[i]);
+              }
+          }
+          var addAccount=[];
+          var addBrandingType=[];
+          var addMediaType=[];
+          var delId=[];
+          var addBrand=[];
+          var addCluster=[];
+          var addClusterId=[];
+          var addmChild=[];
+          var addLang=[];
+                
+          for(var i=0;i<$scope.addData.length;i++){
+              addAccount.push($scope.addData[i].accc);
+              addBrandingType.push($scope.addData[i].btype);
+              addMediaType.push($scope.addData[i].mtype);
+              addCluster.push($scope.addData[i].cluster);
+              addBrand.push($scope.addData[i].brand);
+              addClusterId.push($scope.addData[i].clusIds);
+              addmChild.push($scope.addData[i].mchild);
+              addLang.push($scope.addData[i].lang);
+          }
+          for(var i=0;i<$scope.delData.length;i++){
+              delId.push($scope.delData[i].id);
+          }
+
+          if($scope.addData.length==0 && delId.length==0){
+              return;
+          }
+          var bolz=false;
+       
+       
+            BRANDWRAPLIST=[];
+
+          for(var i=0;i<$scope.data.length;i++){
+              var bw=new Object();
+              bw.updbol=true;
+              if($scope.data[i].id==''){
+                  bw.updbol=false;
+              }
+              bw.Id=$scope.data[i].id;
+              bw.Shop=$scope.data[i].accc;
+              bw.BrandType=$scope.data[i].btype;
+              bw.OwnerId=$scope.data[i].submitBy;
+
+              bw.MediaType=$scope.data[i].mtype;
+              if(bw.MediaType=='None'){
+                  bw.MediaType='';
+              }
+              bw.MediaChild=$scope.data[i].dtype;//mchild;
+              if(bw.MediaChild=='None'){
+                  bw.MediaChild='';
+              }
+              bw.Language=$scope.data[i].lang;
+              bw.Cluster=$scope.data[i].cluster;
+          
+              bw.mediabol=$scope.data[i].mtypebol;
+              bw.mchildbol=$scope.data[i].mchildshw;
+              BRANDWRAPLIST.push(bw);
+          }
+          
+          /**Added on 21-04-2017**/
+          var delIdList=[];
+                        console.log($scope.delData);
+                        angular.forEach($scope.delData,function(it,ind){
+                            delIdList.push(it.id);
+                        });
+                        
+          /**Added on 21-04-2017 Ends**/              
+
+          //console.log(addAccount);
+          //console.log(addBrandingType);
+          //console.log(addMediaType);
+          //console.log(addBrand);
+          //console.log(addCluster);
+          //console.log(delId);
+          //console.log(addmChild);
+         $(document).ready(function(){
+               var ci=1;
+               $('body').append('<div class="circleBlock"></div><div id="circle"></div>');
+               loadingCircle();
+               function loadingCircle(){
+                var cir=document.getElementById('circle');
+                    if(ci==360){
+                        ci=0;
+                    }
+
+                   //cir.style.transform='rotate('+ci+'deg)';
+                    ci++;
+
+                setTimeout(loadingCircle,1);
+              }
+           });
+
+          BrandingRequestController.saveReloaded(BRANDWRAPLIST,delIdList,$scope.case,$scope.caseId,function(res,evt){
+              //console.log(res);
+              //console.log(evt);
+             $(document).ready(function(){
+                           $('.circleBlock').remove();
+                           $('#circle').remove();
+              });
+              if(evt.status){
+                  if(res=='success'){
+                      $(document).ready(function(){
+                            $('#submit').blur();
+                            $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);padding-bottom:20px;" ><span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span><span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;">Saved Successfully!! </label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="btn btn-default acnc" value="Close" /></div></div>');
+
+                            $('.acnc').click(function(){
+                                $('#block').remove();
+                                $('.blockcontent').remove();
+                                $('.alertcontent').remove();
+                                window.location.replace('/apex/BrandingCreation');
+                                //window.location.reload();
+                                // window.location.href('/apex/BrandingRequestPage');
+                        });
+                        $('body').keyup(function(event){
+                            if(event.keyCode==27){
+                                 $('#block').remove();
+                                $('.blockcontent').remove();
+                                $('.alertcontent').remove();
+                                window.location.replace('/apex/BrandingCreation');
+                            }
+                        });
+
+
+                       });
+                      //alertWindow('Saved Successfully','');
+                      //window.location.reload();
+                 }else{
+                     alertWindow(JSON.stringify(res),'alert' );
+                 }
+              }else{
+                  alertWindow('Failed','alert' );
+              }
+          });
+
+      }
+
+$scope.delConfirmation=function(rm,obj){
+                        $(document).ready(function(){
+                            $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div> <div class="col-sm-4 col-sm-offset-4 confirmBlock"> <div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);"> <span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span> <b style="font-family:Calibri !important;">Remove '+obj.name+'</b> <span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span> </div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left"> <h5><b>Are you sure you want to Remove this Request ?</b></h5> </label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"> <input id="yes" type="button" class="slds-button_brand_btn acnc" value="Yes"> <input id="no" type="button" class="slds-button_brand_btn acnc" value="No"> </div> </div>');
+                            $('#yes').click(function(){
+                                this.blur();
+                                $('#block').remove();
+                                $('.confirmBlock').remove();
+                                $scope.delRow(rm);
+                                //return true;
+                            });
+                            $('.acnc').click(function(){
+                                this.blur();
+                                $('#block').remove();
+                                $('.confirmBlock').remove();
+                                //return false;
+                            });
+                            $('#no').click(function(){
+                                this.blur();
+                                $('#block').remove();
+                                $('.confirmBlock').remove();
+                                //return false;
+                            });
+                            $('body').keyup(function(evt){
+                                if(evt.keyCode==27){
+                                    $('#block').remove();
+                                    $('.confirmBlock').remove();
+                                }
+                                //return false;
+                            });
+                        });
+
+                    };
+/*Added on 21-04-2017*/
+
+    $scope.refreshCount=function(){
+        if($scope.count>=1){//10
+                    $scope.shwsubmit=false;
+                }else{
+                    $scope.shwsubmit=true;
+                }
+                var bol=false;
+                angular.forEach($scope.data,function(it,ind){
+                    if(it.id==''){
+                        bol=true;
+                        return;
+                    }
+                });
+                
+                
+                $scope.savShw=bol;
+
+        if($scope.brdcount>0 && $scope.brdcount<=10){//10
+                       $scope.counter=true;
+                  }else{
+                      $scope.counter=false;
+                  }
+                //console.log('addcount '+$scope.addcount);
+                //console.log('save  '+$scope.savShw);
+                //console.log('submit'+$scope.shwsubmit);
+                $scope.$apply();
+    };
+
+      $scope.submitConfirmation=function(){
+
+            //console.log('case Bol '+$scope.case);
+            //console.log('case Id '+$scope.caseId);
+
+          var addrLst=[];
+
+          var DupArray=[];
+          var reccecount=0;
+        for(var i=0;i<$scope.data.length;i++){
+            var dupTemp=new Object();
+            if($scope.data[i].btype=='Recce'){
+            reccecount++;    
+            }
+            
+            dupTemp.id=$scope.data[i].accc;
+            dupTemp.name=$scope.data[i].name;
+            var countt=0;
+            for(var j=0;j<$scope.data.length;j++){
+               if($scope.data[i].accc==$scope.data[j].accc){
+                   countt++;
+               }
+            }
+            if(countt>1){
+                dupTemp.error=false;
+                if(DupArray.length==0){
+                    DupArray.push(dupTemp);
+                }else{
+                    var dupBol=true;
+                    for(var k=0;k<DupArray.length;k++){
+                        if(dupTemp.id==DupArray[k].id){
+                            dupBol=false;
+                            break;
+                        }
+                    }
+                    if(dupBol){
+                        DupArray.push(dupTemp);
+                    }
+                }
+            }
+        }
+          if(((reccecount*100)/$scope.data.length)>40){
+               var ERROR='<h5><b>Recce requests should not exceed 40% of total requests:</b></h5>';
+               alertWindow(ERROR,'alert');
+               return;
+          }
+        if(DupArray.length>0){
+            var ERROR='<h5><b>Please remove duplicate shop:</b></h5>';
+            for(var i=0;i<DupArray.length;i++){
+                ERROR+=''+DupArray[i].name+'<br/>';
+            }
+            alertWindow(ERROR,'alert');
+            return;
+        }
+
+          /* var Defect=[];
+
+            for(var i=0;i<$scope.data.length;i++){
+                var dtemp=new Object();
+                dtemp.accc=$scope.data[i].accc;
+                dtemp.name=$scope.data[i].name;
+                dtemp.defect=[];
+                dtemp.error=true;
+
+                if($scope.data[i].btype=='None'){
+                    dtemp.defect.push(' Branding Type');
+                    dtemp.error=false;
+                }
+                if($scope.data[i].lang=='None'){
+                    dtemp.defect.push(' Language');
+                    dtemp.error=false;
+                }
+                if($scope.data[i].mtypebol==true && ($scope.data[i].mtype=='None' || $scope.data[i].mtype=='')){
+                    dtemp.defect.push(' Media Type');
+                    dtemp.error=false;
+                }
+                if($scope.data[i].mchildshw==true && ($scope.data[i].mchild=='None' || $scope.data[i].mchild=='')){
+                    dtemp.defect.push(' Type');
+                    dtemp.error=false;
+                }
+                if(!dtemp.error){
+                    Defect.push(dtemp);
+                }
+
+                 if($scope.data[i].street.length==0 || $scope.data[i].city.length==0 || $scope.data[i].state.length==0 || $scope.data[i].district.length==0 || $scope.data[i].pin.length==0){
+                    addrLst.push(''+i);
+                }
+            }
+
+            if(Defect.length>0){
+              var ERROR='<h5><b>Please enter the complete details for the following shop(s):</b></h5><table><tr> ';
+              for(var i=0;i<Defect.length;i++){
+                  ERROR+='<td>'+Defect[i].name+'</td>'+'<td>-</td>'+'<td>'+ Defect[i].defect+'</td></tr>';
+              }
+              ERROR+='</table>';
+
+              alertWindow(ERROR,'alert');
+              return;
+            }*/
+
+            if(addrLst.length>0){
+                alertWindow('Please provide address. ','alert');
+                highlight(addrLst);
+                return;
+            }
+
+        $(document).ready(function(){
+            $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div> <div class="col-sm-4 col-sm-offset-4 confirmBlock"> <div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);"> <span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span> <b style="font-family:Calibri !important;">Confirm Submission</b> <span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span> </div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left"> <h5><b>Are you sure you want to submit all Requests ?</b></h5> </label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"> <input id="yes" type="button" class="btn btn-default acnc" value="Yes"> <input id="no" type="button" class="btn btn-default acnc" value="No"> </div> </div>');
+
+            $('#yes').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+
+                $scope.submit();
+                //return true;
+            });
+            $('.acnc').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('#no').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('body').keyup(function(evt){
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+        });
+
+    };
+
+      $scope.submit=function(){
+           var updlst=[];
+
+           //console.log($scope.data);
+          $scope.addData=[];
+          for(var i=0;i<$scope.data.length;i++){
+              if($scope.data[i].id==''){
+                  $scope.addData.push($scope.data[i]);
+              }else{
+                  updlst.push($scope.data[i].id);
+              }
+          }
+          //console.log($scope.addData);
+          //console.log($scope.updlst);
+
+          var addAccount=[];
+          var addBrandingType=[];
+          var addMediaType=[];
+          var delId=[];
+          var addBrand=[];
+          var addCluster=[];
+          var addClusterId=[];
+          var addmChild=[];
+          var addLang=[];
+          for(var i=0;i<$scope.addData.length;i++){
+              addAccount.push($scope.addData[i].accc);
+              addBrandingType.push($scope.addData[i].btype);
+              addMediaType.push($scope.addData[i].mtype);
+              addCluster.push($scope.addData[i].cluster);
+              addBrand.push($scope.addData[i].brand);
+              addClusterId.push($scope.addData[i].clusIds);
+              addmChild.push($scope.addData[i].mchild);
+              addLang.push($scope.addData[i].lang);
+          }
+          for(var i=0;i<$scope.delData.length;i++){
+              delId.push($scope.delData[i].id);
+          }
+
+          //console.log(addAccount);
+          //console.log(addBrandingType);
+          //console.log(addMediaType);
+          //console.log(addBrand);
+          //console.log(addCluster);
+          //console.log(delId);
+          //console.log(addmChild);
+
+          BRANDWRAPLIST=[];
+
+          for(var i=0;i<$scope.data.length;i++){
+              var bw=new Object();
+              if($scope.data[i].id==''){
+                  bw.updbol=false;
+              }
+
+
+              bw.Id=$scope.data[i].id;
+              bw.Shop=$scope.data[i].accc;
+              bw.OwnerId=$scope.data[i].submitBy;
+              bw.BrandType=$scope.data[i].btype;
+              bw.MediaType=$scope.data[i].mtype;
+              if(bw.MediaType=='None'){
+                  bw.MediaType='';
+              }
+              bw.MediaChild=$scope.data[i].dtype;//mchild;
+              if(bw.MediaChild=='None'){
+                  bw.MediaChild='';
+              }
+              bw.Language=$scope.data[i].lang;
+              bw.Cluster=$scope.data[i].cluster;
+              bw.mediabol=$scope.data[i].mtypebol;
+              bw.mchildbol=$scope.data[i].mchildshw;
+              BRANDWRAPLIST.push(bw);
+          }
+          console.log("--------------------------"+BRANDWRAPLIST);
+         
+         /**Added on 21-04-2017 **/   
+            var delIdList=[];
+                console.log($scope.delData);
+                angular.forEach($scope.delData,function(it,ind){
+                    delIdList.push(it.id);
+                });
+        /**Added on 21-04-2017 **/   
+
+          $(document).ready(function(){
+               var ci=1;
+               $('body').append('<div class="circleBlock"></div><div id="circle"></div>');
+               loadingCircle();
+               function loadingCircle(){
+                var cir=document.getElementById('circle');
+                    if(ci==360){
+                        ci=0;
+                    }
+
+                   // cir.style.transform='rotate('+ci+'deg)';
+                    ci++;
+
+                setTimeout(loadingCircle,1);
+              }
+           });
+          BrandingRequestController.updateReloaded(BRANDWRAPLIST,delIdList,$scope.case,$scope.caseId,function(res,evt){ //Added on 21-04-2017
+
+              $(document).ready(function(){
+                           $('.circleBlock').remove();
+                           $('#circle').remove();
+              });
+              //console.log(evt);
+              //console.log(res);
+              if(evt.status){
+
+                  if(res=='success'){
+                      blockwindow();
+                      //alert('Submitted for Approval','alert');
+
+                  }else{
+
+                     alertWindow(JSON.stringify(res),'alert');
+
+                      //alertWindow('Submission failed contact your Administrator!!');
+                  }
+              }else{
+                  alertWindow('Error In Connection','alert');
+              }
+          });
+
+      };
+
+      $scope.shwaddr=function(obj){
+          addressWindow(obj)
+
+      };
+      /**********************************************Added For Picklist Values Angular ****************************************/
+      $scope.States=[];
+      var tempStates =[];    
+      
+      angular.forEach(options,function(key,value){
+         
+         console.log(key);
+         console.log(value);
+         tempStates.push(key);
+   });
+      console.log('******ISAAC******');
+      console.log(options);
+      $scope.States=tempStates;
+      console.log($scope.States);
+     
+  
+  /**********************************************Added For Picklist Values Ends ****************************************/
+      $scope.shopchange=function(obj){
+          //console.log(obj);
+          for(var i=0;i<obj.acc.length;i++){
+            if(obj.accc==obj.acc[i].Id){
+                obj.name=obj.acc[i].Name; 
+                obj.submitBy=obj.acc[i].OwnerId;
+
+                break;
+            }
+         }
+        obj.street='';
+        obj.city='';
+        obj.state='';
+        obj.pin='';
+        obj.district=''; 
+                              if(obj.acc[i].Street_Address__c!=undefined){
+                                obj.street=obj.acc[i].Street_Address__c;
+                            }
+                            if(obj.acc[i].City__c!=undefined){
+                                obj.city=obj.acc[i].City__c;
+                            }
+                            if(obj.acc[i].State__c!=undefined){
+                                obj.state=obj.acc[i].State__c;
+                            }
+                            if(obj.acc[i].District__c!=undefined){
+                                obj.district=obj.acc[i].District__c;
+                            }
+                            if(obj.acc[i].PIN_Code__c!=undefined){
+                                obj.pin=obj.acc[i].PIN_Code__c;
+                            }        
+                         
+      };
+
+        $scope.blankSearch=function(){
+            document.getElementById('inputValidation').value='';
+            SelectedAccount.Name='';
+            SelectedAccount.Id='';
+            SelectedAccount.Owner='';
+        };
+
+ 
+        });
+    </script>
+    <body ng-app="myapp" ng-controller="myctrl" class="ng-cloak" >
+<div class="slds-scope">
+        <div  data-example-id="inverted-navbar">
+           <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="" style="float:left">
+                    <img src="{!$Resource.AshirvadLogoNew}"  width="130px" />
+                   </h1>
+                 <div  id="bs-example-navbar-collapse-9" style="float:right;margin-top:22px;">
+                     <ul class="navi">
+                         <li class="nav-mn">
+                         <span class="glyphicon glyphicon-list">
+                         <a style="font-family:Calibri !important;" href="/apex/BrandingListTGM" >List View</a>
+                         </span>
+                         </li>
+                         <li class="nav-mn">
+                         <span class="glyphicon glyphicon-home">
+                         <a style="font-family:Calibri !important;" href="/home/home.jsp" >Home</a>
+                         </span>
+                         </li>
+
+                     </ul>
+                   
+                   </div>
+  
+               </div>
+            </div>
+        </div>
+
+              
+
+               
+         
+       </div>
+
+
+
+<div class="slds-m-top_large slds-align_absolute-center">Branding Creation <span ng-show="counter" class="badge">{{brdcount}}/10</span></div>
+
+     
+        <div class="slds-grid slds-wrap">
+        
+           <div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_small" >
+              <!-- <select id="cluster" class="form-control " ng-change="blankSearch()" ng-model="clus" ng-options="item.Id as item.Name for item in cluster"> -->
+
+               <select id="cluster" class="slds-input " ng-change="blankSearch()" ng-model="clus" ng-options="item as item for item in cluster">
+               
+                </select>
+            </div>
+           <div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_small">
+                <div class="form-group has-feedback ui-widget" >
+              
+                 <input type="text" class="slds-input"  id="inputValidation" placeholder="Search" />
+               
+                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+            </div>
+             <div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_small">
+               <div style="float:left"> <input class="slds-button slds-button_brand btn-ashvd"  type="button" value="Add more" ng-click="addMore()"/></div>
+            </div>
+       
+        </div>
+       
+
+
+       
+       <table class="table slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_col-bordered text_alig">
+
+           <tr class="tr" id="row{{p.slno}}" ng-repeat="p in data" ng-disabled="p.ena">
+               <td  >
+               <div class="slds-truncate" title="">
+                        <label>Shop Name</label><br/>
+                       <select class="slds-select" ng-change="shopchange(p)"   ng-model="p.accc" ng-options="acco.Id as acco.Name for acco in p.acc"> </select> 
+                  <!-- <select class="form-control" ng-model="p.accc"   ng-options="acco.Id as acco.Name for acco"> </select> -->
+                 </div>
+               </td>
+               <td >
+               <div class="slds-truncate" title="">
+                  <label> Branding Type</label><br/>
+                       <select class="slds-select" ng-change="updateMedia1(p)"   ng-model="p.btype" ng-options="btype for btype in p.blist"></select>
+               </div>
+               </td>
+             <!--  <td  >
+               <div class="slds-truncate" title="">
+                  <label>Media</label><br/>
+                 <select class="slds-select" ng-change="updateMedia(p)"   ng-model="p.mtype" ng-options="mtype for mtype in p.mlist"></select>
+               </div>
+               </td> -->
+               <td  >
+               <div class="slds-truncate" title="">
+                    <label>Dealer category</label><br/>
+                    <select class="slds-select"   ng-model="p.dtype" ng-options="mc for mc in p.dlist"></select>
+               </div>
+                 </td>
+             <!-- <td  >
+              <div class="slds-truncate" title="">
+                 <label>Language</label><br/>
+                 <select class="slds-select"   ng-model="p.lang" ng-options="lg for lg in p.langlist"></select>
+               </div>
+               </td>-->
+              <td  >
+              <div class="slds-truncate" title="">
+              <label>&nbsp;</label>
+              <a href="#" class="btn btn-ashvd" onclick="this.blur();"  ng-click="shwaddr(p)">View Address</a>
+             </div>
+              </td>
+               <td >
+               <div class="slds-truncate" title="">
+               <label>&nbsp;</label>
+                 <input type="button" Value="Remove"  ng-click="delConfirmation(p.slno,p)" class="slds-button slds-button_brand"/>
+            </div>
+              </td>
+
+
+
+           </tr>
+       </table>
+       <div align="right">
+
+          <!-- <input  class="slds-button slds-button_brand btn-ashvd slds-m-around_medium" id="brdSave" type="button" onclick="this.blur()" ng-show="savShw" ng-click="save()" value="Save" />-->
+           <input  class="slds-button slds-button_brand btn-ashvd-submit slds-m-around_medium" id="brdSubmit" type="button" onclick="this.blur()"  ng-hide="shwsubmit" ng-click="submitConfirmation()" value="Submit" />
+       </div>
+  
+  </div>  
+</body>
+ </apex:page>

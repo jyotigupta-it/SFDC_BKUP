@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nature_of_Expenditure__c</fullName>
+    <externalId>false</externalId>
+    <label>Nature of Expenditure</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cocktail Expenses</fullName>
+                <default>false</default>
+                <label>Cocktail Expenses</label>
+            </value>
+            <value>
+                <fullName>Event Manager</fullName>
+                <default>false</default>
+                <label>Event Manager</label>
+            </value>
+            <value>
+                <fullName>Food Expenses</fullName>
+                <default>false</default>
+                <label>Food Expenses</label>
+            </value>
+            <value>
+                <fullName>Gift Expenses</fullName>
+                <default>false</default>
+                <label>Gift Expenses</label>
+            </value>
+            <value>
+                <fullName>Hall Rent Expenses</fullName>
+                <default>false</default>
+                <label>Hall Rent Expenses</label>
+            </value>
+            <value>
+                <fullName>Hotel Expenses</fullName>
+                <default>false</default>
+                <label>Hotel Expenses</label>
+            </value>
+            <value>
+                <fullName>Invitation Card &amp; Printing and stationary</fullName>
+                <default>false</default>
+                <label>Invitation Card &amp; Printing and stationary</label>
+            </value>
+            <value>
+                <fullName>Projector and Sound system</fullName>
+                <default>false</default>
+                <label>Projector and Sound system</label>
+            </value>
+            <value>
+                <fullName>Travels expenses</fullName>
+                <default>false</default>
+                <label>Travels expenses</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

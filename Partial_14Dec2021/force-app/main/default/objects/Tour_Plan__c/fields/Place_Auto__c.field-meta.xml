@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Place_Auto__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Visit_to__c, &apos;Contact&apos;),  Contacts__r.City__c,  Distributor_Dealer__r.City__c)</formula>
+    <label>Place Auto</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

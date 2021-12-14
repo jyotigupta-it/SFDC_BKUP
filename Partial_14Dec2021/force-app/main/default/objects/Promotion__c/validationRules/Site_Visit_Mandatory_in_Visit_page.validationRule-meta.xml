@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Site_Visit_Mandatory_in_Visit_page</fullName>
+    <active>false</active>
+    <errorConditionFormula>ISBLANK( Site_Visit__c )</errorConditionFormula>
+    <errorMessage>You should not create Promotions directly Please create from Visit Entry ..!!</errorMessage>
+</ValidationRule>

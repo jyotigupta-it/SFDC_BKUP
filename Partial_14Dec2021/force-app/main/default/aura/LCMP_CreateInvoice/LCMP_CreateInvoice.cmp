@@ -1,0 +1,60 @@
+<aura:component implements="lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="LCC_CreateInvoice">
+    <aura:attribute name="listofServiceChargesids" type="List" />
+    <aura:attribute name="listofServiceCharges" type="List" />
+    <aura:attribute name="columns" type="List"/>
+    <lightning:navigation aura:id="navService"/>
+    <aura:attribute name="totalamt" type="Decimal" />
+     <aura:attribute name="Servicetotalamt" type="Decimal" />
+     <aura:attribute name="Fixesamt" type="Decimal" />
+    <aura:handler name="init" value="{!this}" action="{!c.doint}"/>
+    <!--aura:handler name="change" value="{!v.pageReference}" action="{!c.doint}" /-->
+    <aura:attribute name="showcmp" type="boolean" default="False"/>
+    <aura:attribute name="accountid" type="string" />
+    
+    <aura:if isTrue="{!v.showcmp}">
+        <lightning:card title="Invoice">
+            <lightning:recordEditForm aura:id="recordEditForm"
+                                      objectApiName="Invoice__c" onsuccess="{!c.success}">
+                <lightning:messages />
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_6-of-12">  
+                        <lightning:inputField fieldName="Account__c" value="{!v.accountid}"  disabled="true"/>
+                    </div>
+                     <div class="slds-col slds-size_6-of-12"> 
+                         <ui:inputCurrency aura:id="amount" label="Total Service Amount" class="field" value="{!v.Servicetotalamt}" updateOn="keyup"  disabled="true"/>
+                    </div>
+                     <div class="slds-col slds-size_6-of-12"> 
+                        <lightning:inputField fieldName="Status__c" value="Generated" disabled="true" />
+                    </div>
+                     <div class="slds-col slds-size_6-of-12"> 
+                         <ui:inputCurrency aura:id="amount" label="Fixed Amount" class="field" value="{!v.Fixesamt}" updateOn="keyup" disabled="true" />
+                    </div>
+                    <div class="slds-col slds-size_6-of-12"> 
+                        <lightning:inputField fieldName="Invoice_Date__c" required="true"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12"> 
+                        <lightning:inputField fieldName="Invoice_Amount__c" value="{!v.totalamt}"  disabled="true"/>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12"> 
+                        <lightning:inputField fieldName="Docket_Number__c" required="true" />
+                    </div>
+                </div>
+                <div align="Center">
+                    <lightning:buttonGroup>           
+                        <lightning:button class="slds-m-top_small" variant="brand" type="submit" label="Create Invoice" />
+                        <lightning:button class="slds-m-top_small"  onclick="{! c.handleClick }" label="Cancel" />
+                    </lightning:buttonGroup>
+                </div>
+            </lightning:recordEditForm>
+        </lightning:card>
+        <lightning:card title="Service Charges Selected"> 
+            <lightning:datatable
+                                 keyField="id"
+                                 data="{! v.listofServiceCharges }"
+                                 columns="{! v.columns }"
+                                 hideCheckboxColumn="true"
+                                 showRowNumberColumn="true"/>
+            
+        </lightning:card>
+    </aura:if>
+</aura:component>

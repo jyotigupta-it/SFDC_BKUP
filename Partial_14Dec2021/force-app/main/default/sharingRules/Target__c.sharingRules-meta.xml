@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>APPL_targets_siddharth</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>APPL targets-siddharth</label>
+        <sharedTo>
+            <group>Siddharth_industrial</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Vertical__c</field>
+            <operation>equals</operation>
+            <value>Industrial</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Prasad_devassy_target_access_industrial</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Prasad devassy-target access-industrial</label>
+        <sharedTo>
+            <group>Prasad_Target_access</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Vertical__c</field>
+            <operation>equals</operation>
+            <value>Industrial</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+</SharingRules>

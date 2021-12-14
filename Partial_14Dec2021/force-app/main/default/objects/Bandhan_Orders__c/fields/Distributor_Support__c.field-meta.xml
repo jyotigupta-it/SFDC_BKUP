@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distributor_Support__c</fullName>
+    <externalId>false</externalId>
+    <label>Distributor Support</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Yes</fullName>
+                <default>false</default>
+                <label>Yes</label>
+            </value>
+            <value>
+                <fullName>RNR</fullName>
+                <default>false</default>
+                <label>RNR</label>
+            </value>
+            <value>
+                <fullName>Credit note</fullName>
+                <default>false</default>
+                <label>Credit note</label>
+            </value>
+            <value>
+                <fullName>Schemes</fullName>
+                <default>false</default>
+                <label>Schemes</label>
+            </value>
+            <value>
+                <fullName>Delay in dispatch</fullName>
+                <default>false</default>
+                <label>Delay in dispatch</label>
+            </value>
+            <value>
+                <fullName>Price  issue</fullName>
+                <default>false</default>
+                <label>Price  issue</label>
+            </value>
+            <value>
+                <fullName>DSM Support</fullName>
+                <default>false</default>
+                <label>DSM Support</label>
+            </value>
+            <value>
+                <fullName>Product requirement</fullName>
+                <default>false</default>
+                <label>Product requirement</label>
+            </value>
+            <value>
+                <fullName>Branding issue</fullName>
+                <default>false</default>
+                <label>Branding issue</label>
+            </value>
+            <value>
+                <fullName>Lack of material shortage</fullName>
+                <default>false</default>
+                <label>Lack of material shortage</label>
+            </value>
+            <value>
+                <fullName>Product complaint</fullName>
+                <default>false</default>
+                <label>Product complaint</label>
+            </value>
+            <value>
+                <fullName>Lack of activity</fullName>
+                <default>false</default>
+                <label>Lack of activity</label>
+            </value>
+            <value>
+                <fullName>Discount</fullName>
+                <default>false</default>
+                <label>Discount</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

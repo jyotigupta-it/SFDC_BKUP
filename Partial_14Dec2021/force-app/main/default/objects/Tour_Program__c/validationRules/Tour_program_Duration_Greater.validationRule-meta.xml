@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tour_program_Duration_Greater</fullName>
+    <active>true</active>
+    <errorConditionFormula>(To_Date__c - From_Date__c)&gt; 16</errorConditionFormula>
+    <errorDisplayField>Architects_Meet_Actuals__c</errorDisplayField>
+    <errorMessage>Duration to be for 15 days..!!</errorMessage>
+</ValidationRule>

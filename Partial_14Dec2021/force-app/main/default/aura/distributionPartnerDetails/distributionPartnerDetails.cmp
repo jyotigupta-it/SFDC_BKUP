@@ -1,0 +1,46 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="dpAppointmentApplicationFormController">
+    
+    <aura:attribute name="distributionDetailsInstance" type="Partner_Detail__c"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="makeRequired" type="boolean" default="false"/>
+    <aura:attribute name="selectedLookUpRecord" type="sObject" default="{}"/>
+    <aura:attribute name="makeReadOnly" type="boolean"/>
+    
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+    <aura:method name="validationDR" action="{!c.eventInpValidation}">      
+    </aura:method>
+    <aura:method name="validationDRHide" action="{!c.eventInpValidationHide}">      
+    </aura:method>
+    
+    <aura:registerEvent name="returnFormValidation" type="c:returnFormValidationStatus"/>
+
+    <!-- Fields -->
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_5-of-12 slds-p-left_medium slds-p-right_medium">
+            <c:customLookup aura:id="District__c" makeRequiredField="true" objectAPIName="District__c" IconName="custom:custom85"  
+                            label="District" districtId="{!v.distributionDetailsInstance.District__c}" makeDisabled="{!v.makeReadOnly}"/>
+        </div>
+        <div class="slds-col slds-size_5-of-12 slds-p-left_medium slds-p-right_medium">
+            <!-- <lightning:inputField required="{!v.makeRequired}" aura:id="distributionPartnerId" fieldName="No_of_Dealers__c" 
+                                      value="{!v.distributionDetailsInstance.No_of_Dealers__c}"/> -->
+            <lightning:input aura:id="No_of_Dealers__c" type="number" name="No of Dealers" label="No of Dealers"
+                             value="{!v.distributionDetailsInstance.No_of_Dealers__c}"
+                             required="true" disabled="{!v.makeReadOnly}"/>
+        </div>
+        <div class="slds-col slds-size_2-of-12 slds-p-left_medium slds-p-right_medium slds-truncate" title="Action" style="text-align: right;margin-top: 25px;">
+            <aura:if isTrue="{!!v.makeReadOnly}">
+                <aura:if isTrue="{!v.rowIndex == 0}">
+                    <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Row" />
+                    <aura:set attribute="else">
+                        <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}">
+                            <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove"/>
+                        </a> 
+                    </aura:set>
+                </aura:if>
+            </aura:if>
+        </div>
+    </div>
+    
+</aura:component>

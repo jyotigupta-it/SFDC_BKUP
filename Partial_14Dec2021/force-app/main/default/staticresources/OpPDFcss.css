@@ -1,0 +1,73 @@
+   .div4{
+                    display:block;
+                    overflow:scroll
+                    }
+                .div3{
+                    float: right;
+                    margin-top: 10px;
+                    }
+                .div2{
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    }
+                .div1{
+                    top: 100px; width: 91px;
+                    }
+                .body1{
+                    background-color: white;
+                    }
+                .ashiImage{
+                    margin-top: -11px;
+                    margin-left: 10px;
+                    }
+                .waiDiv{
+                background-color: #fbfbfb; 
+                height:100%;
+                opacity:0.65;
+                width:100%;    
+                }
+                .alignCenter{
+                text-align: center;
+                }
+                .bs-example{
+                    margin: 20px;
+                }
+            h1 { font-family: 'Enriqueta', arial, serif; line-height: 1.25; margin: 0 0 10px; font-size: 30px; font-weight: bold; }
+            .button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                background-color: #008CBA;
+                
+                th {
+                    display: table-cell;
+                    vertical-align: inherit;
+                    font-weight: bold;
+                    text-align: center;
+                }
+            }
+            
+            .button-success,
+                .button-error,
+                    .button-warning,
+                        .button-secondary {
+                            color: white;
+                            border-radius: 4px;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                        }
+            
+            .button-success {
+                background: rgb(202, 60, 60);
+                /* this is a green */
+            }
+            .button-error {
+                background: rgb(202, 60, 60);
+                /* this is a maroon */
+            }

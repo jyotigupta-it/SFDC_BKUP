@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_State__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c , &quot;Andhra Pradesh&quot;), &quot;Andhra Pradesh; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c , &quot;Arunachal Pradesh&quot;), &quot;Arunachal Pradesh; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Assam&quot;), &quot;Assam; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Bihar&quot;), &quot;Bihar; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Chandigarh&quot;), &quot;Chandigarh; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Chhatisgarh&quot;), &quot;Chhatisgarh; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Delhi&quot;), &quot;Delhi; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Goa&quot;), &quot;Goa; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Gujarat&quot;), &quot;Gujarat; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Haryana&quot;), &quot;Haryana; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Himachal Pradesh&quot;), &quot;Himachal Pradesh; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Jammu and Kashmir&quot;), &quot;Jammu and Kashmir; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Jharkhand&quot;), &quot;Jharkhand; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Karnataka&quot;), &quot;Karnataka; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Kerala&quot;), &quot;Kerala; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Madhya Pradesh&quot;), &quot;Madhya Pradesh; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Maharashtra&quot;), &quot;Maharashtra; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Manipur&quot;), &quot;Manipur&quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Meghalaya&quot;), &quot;Meghalaya; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Mizoram&quot;), &quot;Mizoram; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Nagaland&quot;), &quot;Nagaland; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;New Delhi&quot;), &quot;New Delhi; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Orissa&quot;), &quot;Orissa; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Pondicherry&quot;), &quot;Pondicherry; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Punjab&quot;), &quot;Punjab; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Rajasthan&quot;), &quot;Rajasthan; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Sikkim&quot;), &quot;Sikkim; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Tripura&quot;), &quot;Tripura; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Uttarakhand&quot;), &quot;Uttarakhand; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Uttar Pradesh&quot;), &quot;Uttar Pradesh; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;West Bengal&quot;), &quot;West Bengal; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Tamil Nadu&quot;), &quot;Tamil Nadu; &quot;, NULL) + 
+IF(INCLUDES(  SupplyDetails__r.Owner:User.Allocated_State__c, &quot;Telangana&quot;), &quot;Telangana; &quot;, NULL)</formula>
+    <label>User State</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

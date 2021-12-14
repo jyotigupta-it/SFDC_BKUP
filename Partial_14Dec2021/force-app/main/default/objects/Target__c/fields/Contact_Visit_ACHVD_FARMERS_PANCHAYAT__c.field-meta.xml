@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Visit_ACHVD_FARMERS_PANCHAYAT__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(Contact_Visits_Target_FARMERS_PANCHAYAT__c &gt; 0 &amp;&amp; Contact_Visits_Actual_FARMERS_PANCHAYAT__c &gt; 0,  Contact_Visits_Actual_FARMERS_PANCHAYAT__c / Contact_Visits_Target_FARMERS_PANCHAYAT__c, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Contact Visit %ACHVD (FARMERS/PANCHAYAT)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

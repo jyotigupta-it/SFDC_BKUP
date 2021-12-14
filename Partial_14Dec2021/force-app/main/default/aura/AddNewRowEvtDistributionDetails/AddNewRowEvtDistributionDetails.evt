@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Use For Add New Row">
+    <aura:attribute name="whichPartner" type="String" description="Use For get the name of Project artner/ Distribution details/ Sister concern" />
+</aura:event>

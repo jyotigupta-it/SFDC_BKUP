@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>product_filter</fullName>
+    <active>true</active>
+    <description>Either district or state or city</description>
+    <errorConditionFormula>AND (
+NOT (ISPICKVAL(Point_accrual_type__c, &apos;TOTAL_BILL&apos;)),
+OR (
+AND( 
+ ISPICKVAL(Product_filter_type__c, &apos;PRODUCT&apos;),
+ ISBLANK( Product__r.Name  )
+),
+
+AND( 
+ ISPICKVAL(Product_filter_type__c, &apos;PRODUCT&apos;),
+ NOT (ISBLANK(Product_Category__r.Name )) 
+),
+
+AND( 
+ ISPICKVAL(Product_filter_type__c, &apos;PRODUCT_CATEGORY&apos;),
+ ISBLANK(  Product_Category__r.Name  )
+),
+
+AND( 
+ ISPICKVAL(Product_filter_type__c, &apos;PRODUCT_CATEGORY&apos;),
+ NOT (ISBLANK(Product__r.Name ))
+)
+)
+)</errorConditionFormula>
+    <errorDisplayField>Product_filter_type__c</errorDisplayField>
+    <errorMessage>Please select either of product and product category based on Product filter type</errorMessage>
+</ValidationRule>

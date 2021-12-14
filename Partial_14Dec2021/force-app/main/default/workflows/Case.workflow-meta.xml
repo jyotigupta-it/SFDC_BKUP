@@ -1,0 +1,3531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Branding_Request_Email_to_branding_Team_that_request_is_approved_by_branding_mgr</fullName>
+        <description>Branding Request Email to branding Team that request is approved by branding mgr</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_to_branding_Team_that_request_is_approved_by_branding_mgr</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_Request_Email_to_notify_that_request_is_completed_by_BDM</fullName>
+        <description>Branding Request Email to notify that request is completed by BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_to_notify_that_request_is_completed_by_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_Request_Email_to_notify_that_request_is_completed_by_Customer_Support</fullName>
+        <description>Branding Request Email to notify that request is completed by Customer Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>reports.plumbing@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_to_notify_that_request_is_completed_by_Customer_Support</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_Request_Email_to_notify_vendor_that_request_is_completed_by_BDM</fullName>
+        <description>Branding Request Email to notify vendor that request is completed by BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_to_notify_vendor_that_request_is_completed_by_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_Request_Email_to_requestor_that_recce_is_submitted_by_vendor</fullName>
+        <description>Branding Request Email to requestor that recce is submitted by vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_requestor_that_recce_is_submitted_by_vendor</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_Request_Email_to_requestor_that_request_is_approved_by_branding_Mgr</fullName>
+        <description>Branding Request Email to requestor that request is approved by branding Mgr</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_to_requestor_that_request_is_approved_by_branding_team</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_to_Head_Branding_when_a_branding_request_has_been_rejected</fullName>
+        <description>Branding email sent to Head Branding when a branding request has been rejected.</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_to_RBM_when_a_branding_request_has_been_rejected</fullName>
+        <description>Branding email sent to RBM when a branding request has been rejected.</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_to_RBM_when_a_branding_request_has_been_rejected_by_head_bra</fullName>
+        <description>Branding email sent to RBM when a branding request has been rejected by head branding</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_to_Regional_Branding_Manager_when_a_branding_request_has_bee</fullName>
+        <description>Branding email sent to Regional Branding Manager when a branding request has been rejected.</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_to_TL_when_a_branding_request_has_been_rejected</fullName>
+        <description>Branding email sent to TL when a branding request has been rejected.</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_to_vendor_when_a_branding_request_has_been_rejected</fullName>
+        <description>Branding email sent to vendor when a branding request has been rejected.</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_to_vendor_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_to_vendor_when_a_branding_request_has_been_rejected_by_RBM</fullName>
+        <description>Branding email sent to vendor when a branding request has been rejected by RBM</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_to_vendor_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Branding_email_sent_when_a_branding_request_has_been_rejected</fullName>
+        <description>Branding email sent when a branding request has been rejected.</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Email_Template_for_Rejectection_of_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>Case_Completed</fullName>
+        <ccEmails>vijay.j@ashirvad.com</ccEmails>
+        <description>Case Completed</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Case_Completed</template>
+    </alerts>
+    <alerts>
+        <fullName>Corrected_dispatch_quantity_mail_to_BDM</fullName>
+        <description>Corrected dispatch quantity mail to BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/email_to_Dispatch_office_for_correction</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_to_Dispatcher</fullName>
+        <description>Email Alert to Dispatcher</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Rejection_Email_by_user</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_to_TL</fullName>
+        <description>Email Alert to TL</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_for_the_BDM_on_the_request_creation</fullName>
+        <description>Email alert for the BDM on the request creation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Request_raised_notification_Manual</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_to_requestor</fullName>
+        <description>Email alert to requestor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email_template_for_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_to_requestor_2nd_reminder</fullName>
+        <description>Email alert to requestor 2nd reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email_template_for_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_to_the_cart_team</fullName>
+        <ccEmails>vaishak.bhandary@ashirvad.com</ccEmails>
+        <ccEmails>hanumanthappa.vr@ashirvad.com</ccEmails>
+        <description>Email alert to the cart team to contact contractor</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Cart_team_to_contact_contractor</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_alert_to_the_cart_team_to_call_contractor_for_customer_call</fullName>
+        <ccEmails>hanumanthappa.vr@ashirvad.com</ccEmails>
+        <ccEmails>vaishak.bhandary@ashirvad.com</ccEmails>
+        <description>Email alert to the cart team to call contractor for customer call</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Cart_team_to_contact_contractor_for_customer</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_notification_to_BDM_on_collateral_dispatch</fullName>
+        <description>Email notification on collateral dispatch</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/email_to_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_sent_to_TL_when_a_branding_request_is_submitted_for_approval</fullName>
+        <description>Email sent to TL when a branding request is submitted for approval</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_notify_about_approval_request</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_sent_to_requestor_when_a_branding_request_is_submitted_for_approval</fullName>
+        <description>Email sent to requestor when a branding request is submitted for approval</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_requestor_to_notify_approval_submission</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_sent_to_vendor_when_a_branding_request_is_approved_by_Branding_Team</fullName>
+        <description>Email sent to vendor when a branding request is approved by Branding Team</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/BrandingEmail_to_vendor_when_branding_request_has_been_approved_by_Branding_Team</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_template_sent_to_requestor_when_a_branding_request_is_approved_by_TL</fullName>
+        <description>Email template sent to requestor when a branding request is approved by TL</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_requestor_to_notify_that_request_is_approved</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Branding_Team_to_process_vendor_payments_for_a_branding_request</fullName>
+        <description>Email to Branding Team to process vendor payments for a branding request</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_branding_team_to_process_payment</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Owner</fullName>
+        <description>Email to Owner</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Email_to_CSO_DEPO</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_PO_team_to_initiate_PO_for_a_branding_request</fullName>
+        <ccEmails>mohan.ganesh@ashirvad.com</ccEmails>
+        <description>Email to PO team to initiate PO for a branding request</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_PO_Team_to_initiate_PO</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Sales_Representative_to_notify_about_installation</fullName>
+        <description>Email to Sales Representative to notify about installation</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_sales_rep_regarding_installation</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_User</fullName>
+        <description>Email to User</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/email_to_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_vendor_to_initiate_branding_for_a_request</fullName>
+        <description>Email to vendor to initiate branding for a request</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Branding_Request_Email_Template_to_vendor_to_initiate_branding_job</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_Alert</fullName>
+        <description>Escalation Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_TL</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_alert_for_NE_to_HO</fullName>
+        <description>Escalation Email alert for NE to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_alert_to_HO_collateral</fullName>
+        <description>Escalation Email alert to HO - collateral</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_alert_to_HO_gifts</fullName>
+        <description>Escalation Email alert to HO - gifts</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_alert_to_HO_samples_and_package_materials</fullName>
+        <description>Escalation Email alert to HO - samples and package materials</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_alert_to_depo</fullName>
+        <description>Escalation Email alert to depo</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_for_South_alert_to_HO</fullName>
+        <description>Escalation Email for South alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_Email_for_West_alert_to_HO</fullName>
+        <description>Escalation Email for West alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_email_alert_to_requestor</fullName>
+        <description>Escalation email alert to requestor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email_template_for_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_BDM</fullName>
+        <description>Escalation for BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Sales_Representative</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_Depo</fullName>
+        <description>Escalation for Depo</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_Depo_1</fullName>
+        <description>Escalation for Depo 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_HO</fullName>
+        <description>Escalation for HO</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_HO_1</fullName>
+        <description>Escalation for HO 1</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>ramnath.misra@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_Requestor</fullName>
+        <description>Escalation for Requestor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_TL</fullName>
+        <description>Escalation for TL</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_for_the_requestor</fullName>
+        <description>Escalation for the requestor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Escalation_email_template_for_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Branding_Manager</fullName>
+        <ccEmails>aman.poddar@ashirvad.com</ccEmails>
+        <description>Escalation to Branding Manager</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Email_reminder_for_Branding_Manager</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Branding_Team</fullName>
+        <description>Escalation to Branding Team</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_to_Branding_Team</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Branding_Team_when_Recce_submitted</fullName>
+        <description>Escalation to Branding Team when Recce submitted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Branding_Team_when_Recce_submitted_for_Metro</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Branding_Team_when_Recce_submitted_for_Non_Metro</fullName>
+        <description>Escalation to Branding Team when Recce submitted for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Branding_Team_when_Recce_submitted_for_Non_Metro</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Branding_Team_when_completed_by_Vendor</fullName>
+        <description>Escalation to Branding Team when completed by Vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Branding_Team_when_completed_by_vendor</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Customer_Support</fullName>
+        <description>Escalation to Customer Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>reports.plumbing@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_for_Customer_Support</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Vendor_for_Non_Metro</fullName>
+        <description>Escalation to Vendor for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Vendor_Non_Metro</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_Vendor_to_initiate_branding_for_Non_Metro</fullName>
+        <description>Escalation to Vendor to initiate branding for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Vendor_to_initiate_Branding_for_Non_Metro</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_vendor</fullName>
+        <description>Escalation to vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Vendor</template>
+    </alerts>
+    <alerts>
+        <fullName>Escalation_to_vendor_to_initiate_the_recce</fullName>
+        <description>Escalation to vendor to initiate the recce</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Escalation_email_template_for_Vendor_to_initiate_Branding</template>
+    </alerts>
+    <alerts>
+        <fullName>First_Reminder_Email</fullName>
+        <description>First Reminder Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_TL_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>First_Reminder_email_alert_to_CSO</fullName>
+        <description>First Reminder email alert to CSO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>First_Reminder_email_alert_to_CSO_1</fullName>
+        <description>First Reminder email alert to CSO 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>First_Reminder_for_BDM</fullName>
+        <description>First Reminder for BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Sales_Representative_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>First_Reminder_to_Customer_Support</fullName>
+        <description>First Reminder to Customer Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>reports.plumbing@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Customer_Support_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>First_Reminder_to_vendor_to_initiate_the_recce</fullName>
+        <description>First Reminder to vendor to initiate the recce</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_to_initiate_Branding_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>First_email_alert_to_depo</fullName>
+        <description>First Reminder email alert to depo</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>First_reminder_for_the_requestor</fullName>
+        <description>First reminder for the requestor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email_template_for_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>First_reminder_to_Branding_Manager</fullName>
+        <description>First reminder to Branding Manager</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Branding_Manager_Remider_1</template>
+    </alerts>
+    <alerts>
+        <fullName>Fisrt_Reminder_to_Branding_Team</fullName>
+        <description>Fisrt Reminder to Branding Team</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Branding_Team_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>Fisrt_Reminder_to_Branding_Team_when_Recce_submitted</fullName>
+        <description>Fisrt Reminder to Branding Team when Recce submitted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_template_for_Branding_Team_when_Recce_submitted_for_Metro_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>Fisrt_Reminder_to_Branding_Team_when_Recce_submitted_for_Non_Metro</fullName>
+        <description>Fisrt Reminder to Branding Team when Recce submitted for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/email_template_for_Branding_Team_when_Recce_submitted_for_Non_Metro_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>Fisrt_Reminder_to_Branding_Team_when_completed_by_Vendor</fullName>
+        <description>Fisrt Reminder to Branding Team when completed by Vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Branding_Team_when_completed_by_vendor_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>Fisrt_Reminder_to_Vendor_for_Non_Metro</fullName>
+        <description>Fisrt Reminder to Vendor for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_Non_Metro_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>Fisrt_Reminder_to_Vendor_to_initiate_branding_for_Non_Metro</fullName>
+        <description>Fisrt Reminder to Vendor to initiate branding for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_to_initiate_Branding_for_Non_Metro_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>New_Case_Template</fullName>
+        <ccEmails>vijay.j@ashirvad.com</ccEmails>
+        <description>New Case Template</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/New_Case</template>
+    </alerts>
+    <alerts>
+        <fullName>Notification_BDM</fullName>
+        <description>Notification BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/email_to_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Notification_to_BDM</fullName>
+        <description>Notification to BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Approval_notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Rejection_Email</fullName>
+        <description>Rejection Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Rejection_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Rejection_by_Warehouse</fullName>
+        <description>Rejection by Warehouse</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Collateral_Email_Template_for_Rejectection_of_Case</template>
+    </alerts>
+    <alerts>
+        <fullName>Rejection_of_the_Collateral_Request</fullName>
+        <description>Rejection of the Collateral Request</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Rejection_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_email_alert_to_CSO</fullName>
+        <description>Second Reminder email alert to CSO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_email_alert_to_CSO_1</fullName>
+        <description>Second Reminder email alert to CSO 1</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_email_alert_to_depo</fullName>
+        <description>Second Reminder email alert to depo</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_for_BDM</fullName>
+        <description>Second Reminder for BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Sales_Representative_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_Branding_Team</fullName>
+        <description>Second Reminder to Branding Team</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Branding_Team_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_Branding_Team_when_Recce_submitted</fullName>
+        <description>Second Reminder to Branding Team when Recce submitted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_template_for_Branding_Team_when_Recce_submitted_for_Metro_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_Branding_Team_when_Recce_submitted_for_Non_Metro</fullName>
+        <description>Second Reminder to Branding Team when Recce submitted for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Reminder_2_email_template_Branding_Team_when_Recce_submitted_for_Non_Metro</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_Branding_Team_when_completed_by_Vendor</fullName>
+        <description>Second Reminder to Branding Team when completed by Vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Branding_Team_when_completed_by_vendor_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_Customer_Support</fullName>
+        <description>Second Reminder to Customer Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>reports.plumbing@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Customer_Support_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_Vendor_for_Non_Metro</fullName>
+        <description>Second Reminder to Vendor for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_Non_Metro_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_Vendor_to_initiate_branding_for_Non_Metro</fullName>
+        <description>Second Reminder to Vendor to initiate branding for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_to_initiate_Branding_for_Non_Metro_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_Reminder_to_vendor_to_initiate_the_recce</fullName>
+        <description>Second Reminder to vendor to initiate the recce</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_to_initiate_Branding_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_reminder_email</fullName>
+        <description>Second reminder email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_TL_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_reminder_for_the_requestor</fullName>
+        <description>Second reminder for the requestor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Request_Raised_By__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email_template_for_BDM</template>
+    </alerts>
+    <alerts>
+        <fullName>Second_reminder_to_Branding_Manager</fullName>
+        <description>Second reminder to Branding Manager</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Branding_Manager_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Email_Reminder</fullName>
+        <description>Third Email Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_TL_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_for_BDM</fullName>
+        <description>Third Reminder for BDM</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Sales_Representative_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_Branding_Team</fullName>
+        <description>Third Reminder to Branding Team</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Branding_Team_Reminder_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_Branding_Team_when_Recce_submitted</fullName>
+        <description>Third Reminder to Branding Team when Recce submitted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/email_template_for_Branding_Team_when_Recce_submitted_for_Metro_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_Branding_Team_when_Recce_submitted_for_Non_Metro</fullName>
+        <description>Third Reminder to Branding Team when Recce submitted for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Reminder_3_email_template_for_Branding_Team_when_Recce_submitted_for_Non_Metro</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_Branding_Team_when_completed_by_Vendor</fullName>
+        <description>Third Reminder to Branding Team when completed by Vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Team_Member__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Branding_Team_when_completed_by_vendor_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_Customer_Support</fullName>
+        <description>Third Reminder to Customer Support</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>reports.plumbing@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_Template_for_Customer_Support_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_Vendor_for_Non_Metro</fullName>
+        <description>Third Reminder to Vendor for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_Non_Metro_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_Vendor_to_initiate_branding_for_Non_Metro</fullName>
+        <description>Third Reminder to Vendor to initiate branding for Non Metro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_to_initiate_Branding_for_Non_Metro_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_Reminder_to_vendor_to_initiate_the_recce</fullName>
+        <description>Third Reminder to vendor to initiate the recce</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_to_initiate_Branding_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_reminder_to_Branding_Manager</fullName>
+        <description>Third reminder to Branding Manager</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Branding_Manager__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Branding_Manager_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>Third_reminder_to_vendor</fullName>
+        <description>Third reminder to vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_Reminder_3</template>
+    </alerts>
+    <alerts>
+        <fullName>X1_Reminder_Email_alert_to_HO</fullName>
+        <description>1 Reminder Email alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X1_Reminder_Email_alert_to_HO_collateral</fullName>
+        <description>1 Reminder Email alert to HO - collateral</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X1_Reminder_Email_alert_to_HO_gifts</fullName>
+        <description>1 Reminder Email alert to HO - gifts</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X1_Reminder_Email_alert_to_HO_samples_and_package_materials</fullName>
+        <description>1 Reminder Email alert to HO - samples and package materials</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X1_Reminder_Email_for_South_alert_to_HO</fullName>
+        <description>1 Reminder Email for South alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X1_Reminder_Email_for_West_alert_to_HO</fullName>
+        <description>1 Reminder Email for West alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_1_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2_Reminder_Email_alert_to_HO</fullName>
+        <description>2 Reminder Email alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2_Reminder_Email_alert_to_HO_collateral</fullName>
+        <description>2 Reminder Email alert to HO - collateral</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2_Reminder_Email_alert_to_HO_gifts</fullName>
+        <description>2 Reminder Email alert to HO - gifts</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2_Reminder_Email_alert_to_HO_samples_and_package_materials</fullName>
+        <description>2 Reminder Email alert to HO - samples and package materials</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2_Reminder_Email_for_South_alert_to_HO</fullName>
+        <description>2 Reminder Email for South alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2_Reminder_Email_for_West_alert_to_HO</fullName>
+        <description>2 Reminder Email for West alert to HO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Head_Office__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2nd_Email_alert_for_approval</fullName>
+        <description>2nd Email alert for approval</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Team_Lead__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>X2nd_Escalation_Email_alert_to_depo</fullName>
+        <description>2nd Escalation Email alert to depo</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depo__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Reminder_2_email</template>
+    </alerts>
+    <alerts>
+        <fullName>email_to_end_user</fullName>
+        <description>email to end user</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>collateral_Email_Templates/Email_to_end_user</template>
+    </alerts>
+    <alerts>
+        <fullName>first_reminder_to_vendor</fullName>
+        <description>first reminder to vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_Reminder_1</template>
+    </alerts>
+    <alerts>
+        <fullName>second_reminder_to_vendor</fullName>
+        <description>second reminder to vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Email_reminder_for_Vendor_Reminder_2</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approved_By_TL</fullName>
+        <field>Status</field>
+        <literalValue>Approved by Team Leader</literalValue>
+        <name>Approved By TL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Billing_Address</fullName>
+        <field>Billing_Address__c</field>
+        <formula>if(LEN(Request_Account__r.BillingStreet )&gt;0, Request_Account__r.BillingStreet&amp; &quot; &quot; , &quot;&quot; ) &amp; BR() &amp; 
+if(LEN(Request_Account__r.BillingCity )&gt;0, Request_Account__r.BillingCity&amp; &quot;, &quot; , &quot;&quot; )&amp; 
+if(LEN(Request_Account__r.BillingState )&gt;0, Request_Account__r.BillingState&amp; &quot; &quot; , &quot;&quot; )&amp; 
+if(LEN(Request_Account__r.BillingPostalCode )&gt;0, Request_Account__r.BillingPostalCode,&quot;&quot;) &amp; BR() &amp; 
+If(LEN(Request_Account__r.BillingCountry ) &gt;0, Request_Account__r.BillingCountry,&quot;&quot;)</formula>
+        <name>Billing Address</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Billing_Address_of_the_User</fullName>
+        <field>Billing_Address__c</field>
+        <name>Billing Address of the User</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Corrected_Dispatch_Status</fullName>
+        <field>Status</field>
+        <literalValue>Corrected Dispatch</literalValue>
+        <name>Corrected Dispatch Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Populate_the_address_from_account</fullName>
+        <field>Shipping_Address__c</field>
+        <formula>if(LEN(Account.BillingStreet )&gt;0, Account.BillingStreet&amp; &quot; &quot; , &quot;&quot; ) &amp; BR() &amp; 
+if(LEN( Account.BillingCity )&gt;0, Account.BillingCity&amp; &quot;, &quot; , &quot;&quot; )&amp; 
+if(LEN(Account.BillingState )&gt;0, Account.BillingState&amp; &quot; &quot; , &quot;&quot; )&amp; 
+if(LEN(Account.BillingPostalCode )&gt;0, Account.BillingPostalCode,&quot;&quot;) &amp; BR() &amp; 
+If(LEN( Account.BillingCountry ) &gt;0, Account.BillingCountry,&quot;&quot;)</formula>
+        <name>Populate the address from account</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reject_Check</fullName>
+        <field>Reject_Check__c</field>
+        <literalValue>True</literalValue>
+        <name>Reject Check</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected</fullName>
+        <field>Status</field>
+        <literalValue>Rejected</literalValue>
+        <name>Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected1</fullName>
+        <field>Status</field>
+        <literalValue>Rejected</literalValue>
+        <name>Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected_by_Depo</fullName>
+        <field>Status</field>
+        <literalValue>Rejected</literalValue>
+        <name>Rejected by Depo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected_by_User</fullName>
+        <field>Status</field>
+        <literalValue>Correction of Dispatch Quantity</literalValue>
+        <name>Rejected by User</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejection_status</fullName>
+        <field>Status</field>
+        <literalValue>Rejected</literalValue>
+        <name>Rejection status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Shipping_Address_from_User</fullName>
+        <field>Shipping_Address__c</field>
+        <formula>if(LEN(Request_Raised_By__r.Street )&gt;0, Request_Raised_By__r.Street&amp; &quot; &quot; , &quot;&quot; ) &amp; BR() &amp; 
+if(LEN( Request_Raised_By__r.City )&gt;0, Request_Raised_By__r.City&amp; &quot;, &quot; , &quot;&quot; )&amp; 
+if(LEN(Request_Raised_By__r.State )&gt;0, Request_Raised_By__r.State&amp; &quot; &quot; , &quot;&quot; )&amp; 
+if(LEN(Request_Raised_By__r.PostalCode )&gt;0, Request_Raised_By__r.PostalCode,&quot;&quot;) &amp; BR() &amp; 
+If(LEN(Request_Raised_By__r.Country ) &gt;0, Request_Raised_By__r.Country,&quot;&quot;)</formula>
+        <name>Shipping Address from User</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Shipping_address</fullName>
+        <field>Shipping_Address__c</field>
+        <formula>if(LEN(Request_Account__r.Street_Address__c )&gt;0, Request_Account__r.Street_Address__c &amp; &quot; &quot; , &quot;&quot; ) &amp; BR() &amp;  
+TEXT(Request_Account__r.District__c)&amp; &quot; &quot; &amp; 
+TEXT(Request_Account__r.State__c) &amp; BR() &amp; 
+If(LEN(Request_Account__r.PIN_Code__c) &gt;0, Request_Account__r.PIN_Code__c&amp; &quot; &quot;,&quot;&quot;)</formula>
+        <name>Shipping address</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>The_status_changed_to_dispatched</fullName>
+        <description>After approval from depo, the status changed to dispatched</description>
+        <field>Status</field>
+        <literalValue>Dispatched</literalValue>
+        <name>The status changed to dispatched</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approved_Check</fullName>
+        <description>Update Approved Check</description>
+        <field>Approve_Check__c</field>
+        <literalValue>True</literalValue>
+        <name>Update Approved Check</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approved_Check_False</fullName>
+        <description>Update Approved Check - False</description>
+        <field>Approve_Check__c</field>
+        <literalValue>False</literalValue>
+        <name>Update Approved Check - False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Expected_Date_of_Completion_for_M</fullName>
+        <description>Update Expected Date of Completion for M</description>
+        <field>Expected_Date_of_Completion__c</field>
+        <formula>TODAY() + 15</formula>
+        <name>Update Expected Date of Completion for M</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Expected_Date_of_Completion_for_N</fullName>
+        <description>Update Expected Date of Completion for N</description>
+        <field>Expected_Date_of_Completion__c</field>
+        <formula>TODAY() + 21</formula>
+        <name>Update Expected Date of Completion for N</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Reject_Check_False</fullName>
+        <description>Update Reject Check - False</description>
+        <field>Reject_Check__c</field>
+        <literalValue>False</literalValue>
+        <name>Update Reject Check - False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status</fullName>
+        <field>Status</field>
+        <literalValue>Completed</literalValue>
+        <name>Update Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Approved_Branding_Manager</fullName>
+        <description>Update Status-Approved-Branding Manager</description>
+        <field>Status</field>
+        <literalValue>Approved by Head Branding</literalValue>
+        <name>Update Status-Approved-Branding Manager</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Approved_by_Branding_Team</fullName>
+        <description>Update Status -Approved by Branding Team</description>
+        <field>Status</field>
+        <literalValue>Approved by Regional Branding Manager</literalValue>
+        <name>Update Status -Approved by Branding Team</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Branding_Team_Second_level</fullName>
+        <description>Update Status-Branding Team-Second level</description>
+        <field>Status</field>
+        <literalValue>Approved by Branding Team - Second level</literalValue>
+        <name>Update Status-Branding Team-Second level</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Branding_Team_Third_level</fullName>
+        <description>Update Status-Branding Team-Third level</description>
+        <field>Status</field>
+        <literalValue>Approved by Branding Team - Third level</literalValue>
+        <name>Update Status-Branding Team-Third level</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Completed</fullName>
+        <description>Update Status - Completed</description>
+        <field>Status</field>
+        <literalValue>Completed</literalValue>
+        <name>Update Status - Completed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Recce_approved</fullName>
+        <description>Update Status -Recce approved</description>
+        <field>Status</field>
+        <literalValue>Recce Approved-Regional Branding Manager</literalValue>
+        <name>Update Status -Recce approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Recee_Submitted</fullName>
+        <description>Update Status - Recee Submitted</description>
+        <field>Status</field>
+        <literalValue>Recce Submitted by Vendor</literalValue>
+        <name>Update Status - Recee Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_Recee_approved_Sales_Rep</fullName>
+        <description>Update Status - Recee approved Sales Rep</description>
+        <field>Status</field>
+        <literalValue>Recee approved by Sales Representative</literalValue>
+        <name>Update Status - Recee approved Sales Rep</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_flag_to_false</fullName>
+        <field>Is_In_Approval_Process__c</field>
+        <literalValue>0</literalValue>
+        <name>Update flag to false</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_COMPLETED_BY_BDM</fullName>
+        <description>Update status - COMPLETED BY BDM</description>
+        <field>Status</field>
+        <literalValue>Completed By BDM</literalValue>
+        <name>Update status - COMPLETED BY BDM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_COMPLETED_BY_Vendor</fullName>
+        <description>Update status - COMPLETED BY Vendor</description>
+        <field>Status</field>
+        <literalValue>Completed by Vendor</literalValue>
+        <name>Update status - COMPLETED BY Vendor</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_status_Completed_by_Branding_Team</fullName>
+        <description>Update status-Completed by Branding Team</description>
+        <field>Status</field>
+        <literalValue>Completed by Regional Branding Manager</literalValue>
+        <name>Update status-Completed by Branding Team</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_the_flag_Is_In_Approval_Process</fullName>
+        <field>Is_In_Approval_Process__c</field>
+        <literalValue>1</literalValue>
+        <name>Update the flag - Is_In_Approval_Process</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>When_request_is_cmpltd</fullName>
+        <field>Status</field>
+        <literalValue>Completed</literalValue>
+        <name>When request is cmpltd</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>approved_by_Head_office1</fullName>
+        <field>Status</field>
+        <literalValue>Dispatched</literalValue>
+        <name>approved by Head office</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>completed_by_Requestor</fullName>
+        <field>Status</field>
+        <literalValue>Completed</literalValue>
+        <name>completed by Requestor</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Case Completed</fullName>
+        <actions>
+            <name>Case_Completed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email alert to Depo for Inventory Request</fullName>
+        <active>false</active>
+        <booleanFilter>1 AND (2 OR 6 OR 7) AND 3 AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Check_Gifts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depo__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved for Bi-Monthly Batch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Correction of Dispatch Quantity</value>
+        </criteriaItems>
+        <description>Email alert to Depo for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_email_alert_to_depo</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_email_alert_to_depo</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_for_Depo</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email alert to HO for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 6 OR 7) AND 3 AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Check_Gifts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depo__c</field>
+            <operation>equals</operation>
+            <value>null</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved for Bi-Monthly Batch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Correction of Dispatch Quantity</value>
+        </criteriaItems>
+        <description>Email alert to HO  for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_Reminder_email_alert_to_CSO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_for_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_email_alert_to_CSO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email alert to Requestor for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 5) AND 3 AND 4 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Dispatched</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Self</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Corrected Dispatch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depo__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </criteriaItems>
+        <description>Email alert to Requestor for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_reminder_for_the_requestor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_reminder_for_the_requestor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_for_the_requestor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email alert to Requestor for Inventory Request from HO</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND (2 OR 5) AND 3 AND 4 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Dispatched</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Self</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Corrected Dispatch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depo__c</field>
+            <operation>equals</operation>
+            <value>null</value>
+        </criteriaItems>
+        <description>Email alert to Requestor for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_email_alert_to_requestor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Email_alert_to_requestor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Email_alert_to_requestor_2nd_reminder</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email alert to TL for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Check_Gifts__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Self</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>Requestor</value>
+        </criteriaItems>
+        <description>Email alert to TL for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_for_TL</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Email_Alert_to_TL</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2nd_Email_alert_for_approval</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Branding Manager</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Recce Approved-Regional Branding Manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Branding Manager approval</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_reminder_to_Branding_Manager</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_reminder_to_Branding_Manager</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Branding_Manager</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_reminder_to_Branding_Manager</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Branding Team</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Team Leader</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Branding Team approval</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fisrt_Reminder_to_Branding_Team</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Branding_Team</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_Branding_Team</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_Branding_Team</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Branding Team when Recce submitted for Metro</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Recce Submitted by Vendor</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Metro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Branding Team approval</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_Branding_Team_when_Recce_submitted</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_Branding_Team_when_Recce_submitted</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Branding_Team_when_Recce_submitted</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fisrt_Reminder_to_Branding_Team_when_Recce_submitted</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Branding Team when Recce submitted for Non Metro</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Recce Submitted by Vendor</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Non Metro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Branding Team approval</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_Branding_Team_when_Recce_submitted_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_Branding_Team_when_Recce_submitted_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Branding_Team_when_Recce_submitted_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>120</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fisrt_Reminder_to_Branding_Team_when_Recce_submitted_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Branding Team when completed by vendor</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Completed by Vendor</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Branding Team approval</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_Branding_Team_when_completed_by_Vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fisrt_Reminder_to_Branding_Team_when_completed_by_Vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Branding_Team_when_completed_by_Vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_Branding_Team_when_completed_by_Vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Customer Support</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Completed By BDM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Customer Support</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Customer_Support</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_Reminder_to_Customer_Support</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_Customer_Support</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_Customer_Support</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Sales Representative</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Completed by Regional Branding Manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Sales Representative</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_Reminder_for_BDM</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_for_BDM</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_for_BDM</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_for_BDM</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for TL</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for TL approval</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Email_Reminder</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_Reminder_Email</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_reminder_email</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Vendor</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Regional Branding Manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Metro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Vendor</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>first_reminder_to_vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>second_reminder_to_vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_reminder_to_vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>3</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_vendor</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>168</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Vendor Non Metro</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Regional Branding Manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Non Metro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Vendor</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fisrt_Reminder_to_Vendor_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_Vendor_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>192</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Vendor_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>216</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_Vendor_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>168</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Vendor to initiate Branding</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Head Branding</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Metro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Vendor to initiate Branding</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_vendor_to_initiate_the_recce</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>144</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_Reminder_to_vendor_to_initiate_the_recce</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_vendor_to_initiate_the_recce</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>120</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_vendor_to_initiate_the_recce</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>192</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Email reminder for Vendor to initiate Branding for Non Metro</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Head Branding</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Non Metro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Email reminder for Vendor to initiate Branding</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_to_Vendor_to_initiate_branding_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>240</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Fisrt_Reminder_to_Vendor_to_initiate_branding_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Third_Reminder_to_Vendor_to_initiate_branding_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>216</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_to_Vendor_to_initiate_branding_for_Non_Metro</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>192</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to Depo for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND   5</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Check_Gifts__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depo__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>Requestor</value>
+        </criteriaItems>
+        <description>Email alert to depo for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_alert_to_depo</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2nd_Escalation_Email_alert_to_depo</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_for_Depo_1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to HO for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND (5 OR 6 OR 8) AND 7</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Check_Gifts__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depo__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Team Leader</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved for Mini-Mega Meet</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>Requestor</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Correction of Dispatch Quantity</value>
+        </criteriaItems>
+        <description>Email alert to HO for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Second_Reminder_email_alert_to_CSO_1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>First_Reminder_email_alert_to_CSO_1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_for_HO_1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to HO for Inventory Request - Collaterals</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>CSO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.collateral_check__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Escalation Email alert to HO for Inventory Request - Gifts</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X1_Reminder_Email_alert_to_HO_collateral</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_alert_to_HO_collateral</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>144</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2_Reminder_Email_alert_to_HO_collateral</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>120</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to HO for Inventory Request - Gifts</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>CSO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Check_Gifts__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Escalation Email alert to HO for Inventory Request - Gifts</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X1_Reminder_Email_alert_to_HO_gifts</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>720</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_alert_to_HO_gifts</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>960</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2_Reminder_Email_alert_to_HO_gifts</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>840</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to HO for Inventory Request - Samples and Package materials</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>CSO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Check_Gifts__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.collateral_check__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Escalation Email alert to HO for Inventory Request - Samples and Package materials</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2_Reminder_Email_alert_to_HO_samples_and_package_materials</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>72</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X1_Reminder_Email_alert_to_HO_samples_and_package_materials</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>48</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_alert_to_HO_samples_and_package_materials</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to HO from Depo North East for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 8) AND (5 OR 9 OR 10) AND (6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>Depot</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depot_Zone__c</field>
+            <operation>equals</operation>
+            <value>North</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depot_Zone__c</field>
+            <operation>equals</operation>
+            <value>East</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Self</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Correction of Dispatch Quantity</value>
+        </criteriaItems>
+        <description>Email alert to HO for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2_Reminder_Email_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>240</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_alert_for_NE_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>264</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X1_Reminder_Email_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>216</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to HO from Depo South for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 7) AND (5 OR 8 OR 9) AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>Depot</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depot_Zone__c</field>
+            <operation>equals</operation>
+            <value>South</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Self</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Correction of Dispatch Quantity</value>
+        </criteriaItems>
+        <description>Email alert to HO for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X1_Reminder_Email_for_South_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>96</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2_Reminder_Email_for_South_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>120</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_for_South_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>144</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Escalation Email alert to HO from Depo West for Inventory Request</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 7) AND (5 OR 8 OR 9) AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Collateral Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Collateral_Flows__c</field>
+            <operation>equals</operation>
+            <value>Depot</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Is_In_Approval_Process__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Auto Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Depot_Zone__c</field>
+            <operation>equals</operation>
+            <value>West</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Self</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Correction of Dispatch Quantity</value>
+        </criteriaItems>
+        <description>Email alert to HO for Inventory Request</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X2_Reminder_Email_for_West_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>168</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X1_Reminder_Email_for_West_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>144</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalation_Email_for_West_alert_to_HO</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>192</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>New Case</fullName>
+        <actions>
+            <name>New_Case_Template</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.CaseNumber</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Populate Address when Account is blank</fullName>
+        <actions>
+            <name>Billing_Address_of_the_User</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Shipping_Address_from_User</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>Request_Account__c == null &amp;&amp; RecordType.Name==&apos;Collateral Request&apos; &amp;&amp;  (ISPICKVAL(Status, &apos;Approved by Team Leader&apos;) || ISPICKVAL(Status, &apos;New&apos;) || ISPICKVAL(Status, &apos;Correction of Dispatch Quantity&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Populating address on Account Change</fullName>
+        <actions>
+            <name>Billing_Address</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Shipping_address</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>Request_Account__c != null &amp;&amp; RecordType.Name==&apos;Collateral Request&apos; &amp;&amp;  ISCHANGED(Request_Account__c) &amp;&amp; (ISPICKVAL(Status, &apos;Approved by Team Leader&apos;) || ISPICKVAL(Status, &apos;New&apos;) || ISPICKVAL(Status, &apos;Correction of Dispatch Quantity&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Approved Check - False</fullName>
+        <actions>
+            <name>Update_Approved_Check_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Approve_Check__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Update Approved Check - False</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Expected Date of Completion for Metros</fullName>
+        <actions>
+            <name>Update_Expected_Date_of_Completion_for_M</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Team Leader</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Metro</value>
+        </criteriaItems>
+        <description>Update Expected Date of Completion for Metros</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Expected Date of Completion for Non Metros</fullName>
+        <actions>
+            <name>Update_Expected_Date_of_Completion_for_N</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Approved by Team Leader</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Metro_Non_Metro__c</field>
+            <operation>equals</operation>
+            <value>Non Metro</value>
+        </criteriaItems>
+        <description>Update Expected Date of Completion for Non Metros</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Reject Check - False</fullName>
+        <actions>
+            <name>Update_Reject_Check_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Branding Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Reject_Check__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Update Reject Check - False</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

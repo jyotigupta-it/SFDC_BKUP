@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Branding_Sub_Products__c</fullName>
+    <externalId>false</externalId>
+    <label>Branding Sub Products</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Branding_Products__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CPVC</fullName>
+                <default>false</default>
+                <label>CPVC</label>
+            </value>
+            <value>
+                <fullName>SWR</fullName>
+                <default>false</default>
+                <label>SWR</label>
+            </value>
+            <value>
+                <fullName>Aqua Life</fullName>
+                <default>false</default>
+                <label>Aqua Life</label>
+            </value>
+            <value>
+                <fullName>Column Pipes</fullName>
+                <default>false</default>
+                <label>Column Pipes</label>
+            </value>
+            <value>
+                <fullName>V4</fullName>
+                <default>false</default>
+                <label>V4</label>
+            </value>
+            <value>
+                <fullName>Silent SWR</fullName>
+                <default>false</default>
+                <label>Silent SWR</label>
+            </value>
+            <value>
+                <fullName>UGD</fullName>
+                <default>false</default>
+                <label>UGD</label>
+            </value>
+            <value>
+                <fullName>Pan Connector</fullName>
+                <default>false</default>
+                <label>Pan Connector</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>All Products</controllingFieldValue>
+            <valueName>CPVC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>All Products</controllingFieldValue>
+            <valueName>SWR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <controllingFieldValue>All Products</controllingFieldValue>
+            <valueName>Aqua Life</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Silent SWR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>UGD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing</controllingFieldValue>
+            <valueName>Pan Connector</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>All Products</controllingFieldValue>
+            <valueName>Column Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Column</controllingFieldValue>
+            <controllingFieldValue>All Products</controllingFieldValue>
+            <valueName>V4</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

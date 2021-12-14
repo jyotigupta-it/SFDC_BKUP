@@ -1,0 +1,69 @@
+<aura:component controller="AssignDealerInBeatController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:attribute name="data" type="Map"/>
+    <aura:attribute name="filteredData" type="Map"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="selectedDealers" type="List"/>
+    <aura:attribute name="selectedAccts" type="List"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="truthy" type="Boolean" default= "false" />
+    <aura:attribute name="selection" type="List" />
+    <aura:attribute name="NoRecordsFound" type="boolean" default="true"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this }" action="{!c.init }"/>
+    <aura:if isTrue="{!v.truthy}">
+        <aura:if isTrue="{!v.NoRecordsFound}">
+            
+            
+            <lightning:card>
+                <aura:set attribute="title">
+                    <lightning:icon iconName="standard:event" size="small"/>
+                    Select Beat
+                </aura:set>
+                
+                
+                <div class="slds-grid slds-wrap" >
+                    <div class="slds-size--1-of-1 slds-medium-size--1-of-1 slds-small-size--1-of-1 slds-large-size--1-of-1 slds-p-around_x-small">
+                        
+                        <lightning:input onchange="{!c.searchTable}" type="search" label="Serch Dealer" variant="label-hidden" placeholder="Enter search term" aura:id="SearchBox"/>
+                    </div>
+                </div>
+                <div class="slds-m-top_x-small  slds-box slds-theme_default data_table" style="height: 320px">
+                    <lightning:datatable
+                                         aura:id="accountDataTable"
+                                         columns="{!v.columns}"
+                                         data="{!v.filteredData}"
+                                         keyField="beatId"
+                                         selectedRows = "{!v.selection}"
+                                         maxRowSelection="1"
+                                         onrowselection="{!c.handleSelect}"/>
+                    
+                </div>
+                <aura:set attribute="footer">
+                    <div class="button_Section slds-m-around_small slds-text-align_right">
+                        <lightning:button variant="brand"
+                                          label="Add to Beat"
+                                          title="Add to route" 
+                                          onclick="{!c.addToBeat}"/>
+                        <lightning:button variant="brand"
+                                          label="Cancel"
+                                          title="Cancel" 
+                                          onclick="{!c.onCancel}"/>
+                    </div>
+                </aura:set>
+                
+            </lightning:card>
+            
+            <aura:set attribute="else">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>No Beats are assigned to the logged in User.</h2>
+                </div>
+                
+                
+            </aura:set>
+            
+        </aura:if>
+    </aura:if> 
+    
+</aura:component>

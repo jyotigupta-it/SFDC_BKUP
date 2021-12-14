@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requirements__c</fullName>
+    <externalId>false</externalId>
+    <label>Requirements</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Advt. Materials</fullName>
+                <default>false</default>
+                <label>Advt. Materials</label>
+            </value>
+            <value>
+                <fullName>Branding</fullName>
+                <default>false</default>
+                <label>Branding</label>
+            </value>
+            <value>
+                <fullName>Brochures</fullName>
+                <default>false</default>
+                <label>Brochures</label>
+            </value>
+            <value>
+                <fullName>Gifts</fullName>
+                <default>false</default>
+                <label>Gifts</label>
+            </value>
+            <value>
+                <fullName>Pricelists</fullName>
+                <default>false</default>
+                <label>Pricelists</label>
+            </value>
+            <value>
+                <fullName>Product Samples-Column</fullName>
+                <default>false</default>
+                <label>Product Samples-Column</label>
+            </value>
+            <value>
+                <fullName>Product Samples-CPVC</fullName>
+                <default>false</default>
+                <label>Product Samples-CPVC</label>
+            </value>
+            <value>
+                <fullName>Product Samples-New Range</fullName>
+                <default>false</default>
+                <label>Product Samples-New Range</label>
+            </value>
+            <value>
+                <fullName>Product Samples-SWR</fullName>
+                <default>false</default>
+                <label>Product Samples-SWR</label>
+            </value>
+            <value>
+                <fullName>Product Samples-UPVC</fullName>
+                <default>false</default>
+                <label>Product Samples-UPVC</label>
+            </value>
+            <value>
+                <fullName>Promotional Activity</fullName>
+                <default>false</default>
+                <label>Promotional Activity</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

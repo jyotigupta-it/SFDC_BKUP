@@ -1,0 +1,36 @@
+<apex:page standardController="Account" extensions="feedback">
+<head> 
+      <style type="text/css">
+body {
+background-color:#538ED5;}
+#table1 {
+border:0px solid #000;
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+margin:20px auto;
+background-color:#F2F2F2;
+
+
+}
+</style>  
+</head><br/>
+<apex:form >
+ <apex:pagemessages />
+    <apex:pageBlock >
+        <apex:repeat value="{!AllcheckedFm}" var="f1">
+            <apex:pageBlockTable value="{!f1.Feedback_Master_Line_Items__r}" var="l">
+                <apex:column headerValue="Display Order">
+                    <apex:OutputText value="{!l.Display_Order__c}"/>
+                </apex:column>
+                <apex:column headerValue="Question">
+                    <apex:OutputText value="{!l.Question__c}"/>
+                </apex:column>
+                <apex:column headerValue="Answer">
+                    <apex:inputText value="{!l.Answer__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:repeat>
+    </apex:pageBlock>
+ </apex:form>
+</apex:page>

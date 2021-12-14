@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mass_Update_Tour_Plan</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>MassUpdateTourPlan</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)} 
+
+var o= new sforce.SObject(&quot;Tour_Program__c&quot;); 
+var a=&quot;{!Tour_Program__c.ProfileId__c}&quot;;
+o.id=&quot;{!Tour_Program__c.Id}&quot;; 
+
+o.Tour_Program_Approved__c= &quot;{!Tour_Program__c.Tour_Program_Approved__c}&quot;; 
+if((o.Tour_Program_Approved__c!=true) &amp;&amp; (a=&apos;00e30000001yGyh&apos;)) 
+
+{ 
+window.open(&apos;/apex/TourPlan?scontrolCaching=1&amp;id={!Tour_Program__c.Id}&apos;); 
+
+
+} 
+else 
+{ 
+alert(&apos;You are not authorized to change the Tour Plan, Once it is Approved...!!!&apos;); 
+}</url>
+</WebLink>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Site Visit</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Site Visits</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Depot_Meet</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Site_Visit_must_be_linked_to_tour_plan</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>VisitDate_More_Than_A_Days_in_Past</name>
+    </validationRules>
+    <webLinks>
+        <label></label>
+        <name>New_Sitevisit</name>
+    </webLinks>
+</CustomObjectTranslation>

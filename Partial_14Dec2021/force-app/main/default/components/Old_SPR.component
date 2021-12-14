@@ -1,0 +1,323 @@
+<apex:component controller="displaySPR" layout="block" allowDML="true">
+<style>
+  .white_space th {
+  white-space:normal!important;
+  }
+</style>
+ <apex:outputpanel title="New SPR for Approval" >
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                      <span class="slds-truncate" title="Influencer Details">New SPR for Approval</span>
+                  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                   </div>
+               </button>
+               </h3>
+            
+            
+            <apex:outputpanel title=" New Special Pricing Request" rendered="{!sprNEW != null }">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                      <span class="slds-truncate" title="Influencer Details">New Special Pricing Request</span>
+                  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                   </div>
+               </button>
+               </h3>
+               
+                    <div> 
+            <apex:variable var="i" value="{!1}" />
+         <apex:pagemessages />
+                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal white_space">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            
+                            <th>Del</th>
+                            <th>S.No</th>
+                            <th>Product</th>
+                            <th>Offer MRP</th>
+                            <th>APPL STD Discount</th>
+                            <th>Discount to customer on MRP</th>
+                            <th>ORC/ Margin to Dlr/Dist</th>
+                            <th>Delivery Start Date</th>
+                            <th>Delivery End Date</th>
+                            <th>Competitor Name</th>
+                            <th>Distributor Name</th>
+                            <th>Product Specified</th>
+                            <th>Payment Terms</th>
+                            <th>Delivery Schedule</th>
+                            <th>Why Additional Discount?</th>
+                            <th>Validity for the Price</th>
+                        </tr>   
+                    </thead>
+                    <tbody>   
+                        <apex:repeat value="{!sprNEW }" var="opp" rendered="{!sprNEW != null }" id="test">
+                            
+                            <tr class="slds-hint-parent">
+                            
+                                <td data-label="Del" >
+                                    <div class="slds-truncate" title="Del">
+                                            <apex:commandLink action="{!removeRow}" reRender="test" status="as1" title="RemoveRow" immediate="true">
+                            <apex:image value="{!$Resource.DeleteIcon}"  width="15" height="15"/>
+                            <apex:param value="{!opp.oli.Id}" name="rowNum"/>
+                        </apex:commandLink>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="S.No" >
+                                    <div class="slds-truncate" title="S.No">
+                                            {!i}
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Product" >
+                                    <div class="slds-truncate" title="Product">
+                                            <apex:outputField value="{!opp.oli.Product2Id}" /> 
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Offer MRP" >
+                                    <div class="slds-truncate" title="Offer MRP">
+                                            <apex:outputField value="{!opp.oli.Offer_MRP__c}"   />
+                                    </div>
+                                </td>
+                                
+                                <td data-label="APPL STD Discount" >
+                                    <div class="slds-truncate" title="APPL STD Discount">
+                                            <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.APPL_STD_Discount__c}" styleClass="fieldSSize"   />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Discount to customer on MRP" >
+                                    <div class="slds-truncate" title="Discount to customer on MRP">
+                                            <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Addl_Discount_Required__c}" styleClass="fieldSSize"  />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="ORC/ Margin to Dlr/Dist" >
+                                    <div class="slds-truncate" title="ORC/ Margin to Dlr/Dist">
+                                            <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.ORC_Margin_to_Dlr_Dist__c}" styleClass="fieldSSize"  />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Delivery Start Date" >
+                                    <div class="slds-truncate" title="Delivery Start Date">
+                                            <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                       
+                        <apex:outputField value="{!opp.oli.Delivery_Start_Date__c}" />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Delivery End Date" >
+                                    <div class="slds-truncate" title="Delivery End Date">
+                                            <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Delivery_End_Date__c}"  />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Competitor Name" >
+                                    <div class="slds-truncate" title="Competitor Name">
+                                                <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Competitor_name_Offer__c}"  />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Distributor Name" >
+                                    <div class="slds-truncate" title="Distributor Name">
+                                            <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Distributor__c}" />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Product Specified" >
+                                    <div class="slds-truncate" title="Product Specified">
+                                                <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Product_Specified__c}"  />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Payment Terms" >
+                                    <div class="slds-truncate" title="Payment Terms">
+                                                <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Payment_Terms__c}" />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Delivery Schedule" >
+                                    <div class="slds-truncate" title="Delivery Schedule">
+                                                    <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Delivery_Schedule__c}"  />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Why Additional Discount?" >
+                                    <div class="slds-truncate" title="Why Additional Discount?">
+                                            <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Why_Additional_Discount__c}"  />
+                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Validity for the Price" >
+                                    <div class="slds-truncate" title="Validity for the Price">
+                                                    <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Validity_for_the_Price__c} " />
+                        </div>
+                        <apex:variable var="i" value="{!i+1}" />
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </div>       
+            </apex:outputpanel>
+                        
+        </apex:outputpanel>
+  
+
+
+
+
+
+<!--<apex:pageBlockSection title=" Previous SPR" collapsible="true" columns="1" id="testId">
+             <apex:pageBlock title=" Previous Special Pricing Request" >
+         
+    <apex:variable var="i" value="{!1}" />
+    <apex:pageBlockTable value="{!sprOLD }" var="opp" rendered="{!sprOLD != null &&!sprOLD.empty}">
+                      
+                  
+                  <apex:column >
+                        <apex:facet name="header">S.No</apex:facet>
+                        {!i}
+                    </apex:column>
+                     <apex:column >
+                     <apex:facet name="header">Product</apex:facet>
+                        <apex:outputField value="{!opp.oli.Product2Id}" /> 
+                     </apex:column>
+                     <apex:column >
+                        <apex:facet name="header">Offer MRP</apex:facet>
+                        <apex:outputField value="{!opp.oli.Offer_MRP__c}"   />
+                        </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">APPL STD Discount</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.APPL_STD_Discount__c}" styleClass="fieldSSize"   />
+                        </div>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Discount to customer on MRP</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Addl_Discount_Required__c}" styleClass="fieldSSize"  />
+                        </div>
+                    </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">ORC/ Margin to Dlr/Dist</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.ORC_Margin_to_Dlr_Dist__c}" styleClass="fieldSSize"  />
+                        </div>
+                    </apex:column>
+                     <apex:column >
+                        <apex:facet name="header">Delivery Start Date</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                       
+                        <apex:outputField value="{!opp.oli.Delivery_Start_Date__c}" />
+                        </div>
+                    </apex:column>
+
+                    <apex:column >                        
+                        <apex:facet name="header">Delivery End Date</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Delivery_End_Date__c}"  />
+                        </div>
+                    </apex:column>
+                    <apex:column >                        
+                        <apex:facet name="header">Competitor Name</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Competitor_name_Offer__c}"  />
+                        </div>
+                    </apex:column>
+
+                    <apex:column >                        
+                        <apex:facet name="header">Distributor Name</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Distributor__c}" />
+                        </div>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Product Specified</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Product_Specified__c}"  />
+                        </div>
+                    </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">Payment Terms</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Payment_Terms__c}" />
+                        </div>
+                    </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">Delivery Schedule</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Delivery_Schedule__c}"  />
+                        </div>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Why Additional Discount?</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Why_Additional_Discount__c}"  />
+                        </div>
+                    </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">Validity for the Price</apex:facet>
+                        <div class="{!i}I">
+                        <div class="{!i}B"></div>
+                        <apex:outputField value="{!opp.oli.Validity_for_the_Price__c} " />
+                        </div>
+                        <apex:variable var="i" value="{!i+1}" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:pageBlockSection> ---->
+           
+</apex:component>

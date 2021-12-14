@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Status</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New</fullName>
+                <default>true</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+                <label>In Progress</label>
+            </value>
+            <value>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+                <label>On Hold</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
+            </value>
+            <value>
+                <fullName>Open</fullName>
+                <default>false</default>
+                <label>Open</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+                <label>Scheduled</label>
+            </value>
+            <value>
+                <fullName>Dispatched</fullName>
+                <default>false</default>
+                <label>Dispatched</label>
+            </value>
+            <value>
+                <fullName>Re-Open</fullName>
+                <default>false</default>
+                <label>Re-Open</label>
+            </value>
+            <value>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+                <label>Resolved</label>
+            </value>
+            <value>
+                <fullName>Accepted</fullName>
+                <default>false</default>
+                <label>Accepted</label>
+            </value>
+            <value>
+                <fullName>Work Order Acceptance Pending</fullName>
+                <default>false</default>
+                <label>Work Order Acceptance Pending</label>
+            </value>
+            <value>
+                <fullName>Work Order Accepted</fullName>
+                <default>false</default>
+                <label>Work Order Accepted</label>
+            </value>
+            <value>
+                <fullName>Completed by Contractor</fullName>
+                <default>false</default>
+                <label>Completed by Contractor</label>
+            </value>
+            <value>
+                <fullName>Acceptance Pending</fullName>
+                <default>false</default>
+                <label>Acceptance Pending</label>
+            </value>
+            <value>
+                <fullName>Completed by Plumber</fullName>
+                <default>false</default>
+                <label>Completed by Plumber</label>
+            </value>
+            <value>
+                <fullName>Day Batch</fullName>
+                <default>false</default>
+                <label>Day Batch</label>
+            </value>
+            <value>
+                <fullName>Before Day Batch</fullName>
+                <default>false</default>
+                <label>Before Day Batch</label>
+            </value>
+            <value>
+                <fullName>Already Present</fullName>
+                <default>false</default>
+                <label>Already Present</label>
+            </value>
+            <value>
+                <fullName>Verified</fullName>
+                <default>false</default>
+                <label>Verified</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

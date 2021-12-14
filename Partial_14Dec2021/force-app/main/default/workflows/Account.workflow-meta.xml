@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Approver_1</fullName>
+        <description>Approver 1</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sfdc.support@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>DP_Appointment_Templates/Approver</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_For_State_Head_To_Notify_The_New_Dealer_Has_Been_Inserted</fullName>
+        <ccEmails>jayaprakash.n@ashirvad.com,harshitha.manjunath@ashirvad.com</ccEmails>
+        <description>Email Alert For State Head To Notify The New Dealer Has Been Inserted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>TGM_user__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Email_Template_For_State_Head</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_To_Remind_The_State_Head_That_Assign_Distributor</fullName>
+        <ccEmails>harshitha.manjunath@ashirvad.com,jayaprakash.n@ashirvad.com</ccEmails>
+        <description>Email Alert To Remind The State Head That Assign Distributor</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Email_Template_For_State_Head_To_assign_the_distributor</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_for_TL_Discount_Approval</fullName>
+        <description>Email for TL, Discount Approval</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Manager_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Additional_Discount</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_for_TL_and_DilipKumar_Discount_Approval</fullName>
+        <ccEmails>dilipkumar.cv@ashirvad.com</ccEmails>
+        <description>Email for TL,and DilipKumar Discount Approval</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Manager_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Additional_Discount</template>
+    </alerts>
+    <alerts>
+        <fullName>Final_Approval_mail_alert_order_status_to_dhilip</fullName>
+        <ccEmails>test@test.com</ccEmails>
+        <description>Final Approval mail alert order status to dhilip</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Pricing_Request</template>
+    </alerts>
+    <alerts>
+        <fullName>QC_check_passed_status</fullName>
+        <description>QC check passed status</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Account_QC_passed</template>
+    </alerts>
+    <alerts>
+        <fullName>Verifier_email_alert</fullName>
+        <description>Verifier email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sfdc.support@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>DP_Appointment_Templates/Verifier_Email_Template</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approved_by_Lok</fullName>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Approved by Lok</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved_by_anil</fullName>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved by Mr.Vijay</literalValue>
+        <name>Approved by anil</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Farmers_Meet</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Farmer</literalValue>
+        <name>Farmers Meet</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>GST_in_uppercase</fullName>
+        <field>VAT_CST_Number__c</field>
+        <formula>UPPER( VAT_CST_Number__c )</formula>
+        <name>GST in uppercase</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Jeep_Campaign</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Farmer</literalValue>
+        <name>Jeep Campaign</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Last_Feedback_Date</fullName>
+        <description>This is Related to Feedback</description>
+        <field>Last_Feedback_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Last Feedback Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Market_Update</fullName>
+        <field>Market__c</field>
+        <literalValue>New Market</literalValue>
+        <name>Market Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Market_Update_v1_0</fullName>
+        <field>Market__c</field>
+        <literalValue>New Market</literalValue>
+        <name>Market Update v1.0</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Market_type_field</fullName>
+        <description>Market type field update as &apos;New&apos;</description>
+        <field>Market__c</field>
+        <literalValue>New Market</literalValue>
+        <name>Market type field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Market_type_field1</fullName>
+        <description>Market type field update As &apos; New&apos;</description>
+        <field>Market__c</field>
+        <literalValue>New Market</literalValue>
+        <name>Market type field1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mechanic_Meet</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Mechanic</literalValue>
+        <name>Mechanic Meet</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mobile_Status_Valid</fullName>
+        <description>This is Related to Feedback and Account</description>
+        <field>Mobile_No_Status__c</field>
+        <literalValue>Valid</literalValue>
+        <name>Mobile Status Valid</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Order_status_rejected</fullName>
+        <field>Order_Status1__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Order status rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>PAN_in_uppercase</fullName>
+        <field>TIN_Number__c</field>
+        <formula>UPPER( TIN_Number__c )</formula>
+        <name>PAN in uppercase</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Party_Type_Architect_Update</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Architect</literalValue>
+        <name>Party Type Architect Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Plumber_Meet</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Plumber</literalValue>
+        <name>Plumber Meet</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Populate_Last_Visit_Count_c</fullName>
+        <field>Last_Visit_Count__c</field>
+        <formula>if(ISBLANK(Last_Visit_Count__c),1,Last_Visit_Count__c + 1)</formula>
+        <name>Populate Last_Visit_Count__c</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Prospect_to_dealer</fullName>
+        <field>Order_portal_status__c</field>
+        <literalValue>Dealer</literalValue>
+        <name>Prospect to dealer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Record_Type_to_Dealers</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Dealer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Record Type to Dealers</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejection_by_Gopkumar</fullName>
+        <description>Rejection by Gopkumar</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Rejection by Gopkumar</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Spr_status_Submitted</fullName>
+        <description>Chnage spr status to submitted</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Spr status Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Tractor_Show</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Farmer</literalValue>
+        <name>Tractor Show</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Account_Type</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Farmer</literalValue>
+        <name>Update Account Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Boarers_Meet</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Borer</literalValue>
+        <name>Update Boarers Meet</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Builders_Meet_Meet</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Builder</literalValue>
+        <name>Update Builders Meet Meet</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_DateTime</fullName>
+        <field>Order_Portal_date__c</field>
+        <formula>NOW()</formula>
+        <name>Update DateTime</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Dealer_Record_Type</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Dealer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Dealer Record Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Engineers_Meet</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Engineer</literalValue>
+        <name>Update Engineers Meet</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Individual_contact_Record_Type</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Individual_Contacts</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Individual contact Record Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Manager_Email</fullName>
+        <field>Manager_Email__c</field>
+        <formula>Owner.Manager.Email</formula>
+        <name>Update Manager Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Mobile_Status</fullName>
+        <description>This is Related to Feedback and Accounts</description>
+        <field>Mobile_No_Status__c</field>
+        <literalValue>Invalid</literalValue>
+        <name>Update Mobile Status Invalid</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Partype_as_dealersalesman</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Dealers Salesman</literalValue>
+        <name>Update Partype as dealersalesman</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_RecordType_to_Individual_contacts</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Individual_Contacts</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update RecordType to Individual contacts</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Record_Type_as_Farmer</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Individual_Contacts</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Record Type as Farmer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Recordtype_as_Individual_contact</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Individual_Contacts</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Recordtype as Individual contact</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_Rejected_at_1st_Step</fullName>
+        <description>Rejection by Mr.Vijay</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Update Spr Rejected at 1st Step</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_Rejected_at_2nd_Step</fullName>
+        <description>Rejection at 2nd Step</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Update Spr Rejected at 2nd Step</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_Status_as_Approved</fullName>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved by Mr.Dhilip</literalValue>
+        <name>Update Spr Status as Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_Status_as_Approved_TL</fullName>
+        <description>This Field will update field Spr status as Approved by TL</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved by TL</literalValue>
+        <name>Update Spr Status as Approved by TL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_Status_as_Approved_by_Directo</fullName>
+        <description>Update Spr Status as Approved by Director</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved by Director</literalValue>
+        <name>Update Spr Status as Approved by Directo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_Status_as_Approved_by_Prj_hd</fullName>
+        <description>Update Spr Status as Approved by Projects Head</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved by Projects Head</literalValue>
+        <name>Update Spr Status as Approved by Prjc Hd</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_Status_as_Approved_gopkumar</fullName>
+        <description>Update Spr status as Approved by Gopkumar</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved by Mr.Gopkumar</literalValue>
+        <name>Update Spr Status as Approved by Gopkuma</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Spr_status_as_Submitted</fullName>
+        <description>This will update status field as Submitted</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Update Spr status as Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_peDistributor_Record_Ty</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Distributor</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update peDistributor Record Ty</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_prty_type_plumber</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Plumber</literalValue>
+        <name>Update prty type plumber for PME type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ordervalue</fullName>
+        <field>Order_Value_in_Rs__c</field>
+        <formula>No_of_Bathrooms__c *7500</formula>
+        <name>ordervalue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_builder_grading</fullName>
+        <field>Builder_grading__c</field>
+        <literalValue>Medium</literalValue>
+        <name>update builder grading</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_builder_grading_A</fullName>
+        <field>Builder_grading__c</field>
+        <literalValue>High</literalValue>
+        <name>update builder grading A</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_builder_gradinglow</fullName>
+        <field>Builder_grading__c</field>
+        <literalValue>Low</literalValue>
+        <name>update builder gradinglow</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_dealer</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Dealer</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>update dealer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_order_status_as_Approved</fullName>
+        <field>Order_Status1__c</field>
+        <literalValue>Approved</literalValue>
+        <name>update order status as Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_order_status_as_Rejected</fullName>
+        <field>Order_Status1__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>update order status as Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_order_status_as_Rejected_Dhilip</fullName>
+        <description>update order status as Rejected by dhilip</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>update order status as Rejected by Dhili</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_order_status_as_Rejected_by_Gopku</fullName>
+        <description>update order status as Rejected by Gopkumar</description>
+        <field>Order_Status1__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>update order status as Rejected by Gopku</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_order_status_as_submitted</fullName>
+        <field>Order_Status1__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>update order status as submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_ordervalue</fullName>
+        <field>No_of_Bathrooms__c</field>
+        <formula>No_of_Bathrooms__c * 7500</formula>
+        <name>update ordervalue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_parttypedistributor</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Distributor</literalValue>
+        <name>update parttype as distributor</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_partytype_as_dealer</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Dealer</literalValue>
+        <name>update partytype as  dealer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_partytype_as_projects</fullName>
+        <field>Party_Type__c</field>
+        <literalValue>Projects</literalValue>
+        <name>update partytype as projects</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>GST in uppercase</fullName>
+        <actions>
+            <name>GST_in_uppercase</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR( 
+ISNEW(), 
+ISCHANGED( VAT_CST_Number__c ) 
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Last Feedback Date</fullName>
+        <actions>
+            <name>Last_Feedback_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>No_of_Feedbacks__c&lt;&gt; PRIORVALUE( No_of_Feedbacks__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Market Field Update</fullName>
+        <actions>
+            <name>Market_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 AND 2) AND (3 OR 4 OR 5 OR 6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Account.Business_Line__c</field>
+            <operation>equals</operation>
+            <value>Column</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Dealer,Distributor</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Allahabad,Amravati,Amritsar,Anantpur,Ashoknagar,Aurangabad,Azamgarh,Banswara,Baran,Bareilly,Barmer,Beed,Bhind,Bhopal,Bidar,Bikaner,Buldhana,Chandauli,Chandrapur,Chhindwara,chikkaballapur,Chitradurga,Chittor,Churu,Cuddapah,Dhamtari</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Dharwad,Dhule,East Godavari,Etah,Faizabad,Farrukhabad,Gadag,Gondia,Gorakpur,Gulberga,Gurgaon,Hanumangarh,Harda,Hassan,Haveri,Jabalpur</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Jagdalpur,Jaisalmer,Jalna,Khandwa,Khargone,Kolar,Kota,Kurukshetra,Latur,Mahasamund,Mandya,Meerut,Mehboobnagar,Mirzapur,Moradabad,Morena,Mumbai-City,Nagpur,Nandurbar,Narsinghpur,Nashik</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Navansahar,Neemuch,Nellore,Nizamabad,Osmanabad,Pali,Parbhani,Pratapgarh,Raigad,Ratlam,Sagar,Saharanpur,Satara,Shahdol,Sheopur,Shivpuri,Sirsa,Sonipat,Thane,Tikamgarh,Tumkur,Udaipur,Udupi,Varanasi,Vidisha,West Godavari,Yamunanagar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Badgan,Buldhana,Dungarpur,Durg,Faridabad,Hissar,Jaipur,Jalandhar,Janjgir–Champa,Karim Nagar,Khammam,Kolhpur,Ludhiana,Nanded,Panipat,Sikar</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Market Field Update v1%2E0</fullName>
+        <actions>
+            <name>Market_Update_v1_0</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 AND 2 AND 8) AND (3 OR 4 OR 5 OR 6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Account.Business_Line__c</field>
+            <operation>equals</operation>
+            <value>Column</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Individual Contacts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Allahabad,Amravati,Amritsar,Anantpur,Ashoknagar,Aurangabad,Azamgarh,Banswara,Baran,Bareilly,Barmer,Beed,Bhind,Bhopal,Bidar,Bikaner,Buldhana,Chandauli,Chandrapur,Chhindwara,chikkaballapur,Chitradurga,Chittor,Churu,Cuddapah,Dhamtari</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Dharwad,Dhule,East Godavari,Etah,Faizabad,Farrukhabad,Gadag,Gondia,Gorakpur,Gulberga,Gurgaon,Hanumangarh,Harda,Hassan,Haveri,Jabalpur</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Jagdalpur,Jaisalmer,Jalna,Khandwa,Khargone,Kolar,Kota,Kurukshetra,Latur,Mahasamund,Mandya,Meerut,Mehboobnagar,Mirzapur,Moradabad,Morena,Mumbai-City,Nagpur,Nandurbar,Narsinghpur,Nashik</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Navansahar,Neemuch,Nellore,Nizamabad,Osmanabad,Pali,Parbhani,Pratapgarh,Raigad,Ratlam,Sagar,Saharanpur,Satara,Shahdol,Sheopur,Shivpuri,Sirsa,Sonipat,Thane,Tikamgarh,Tumkur,Udaipur,Udupi,Varanasi,Vidisha,West Godavari,Yamunanagar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Badgan,Buldhana,Dungarpur,Durg,Faridabad,Hissar,Jaipur,Jalandhar,Janjgir–Champa,Karim Nagar,Khammam,Kolhpur,Ludhiana,Nanded,Panipat,Sikar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Party_Type__c</field>
+            <operation>equals</operation>
+            <value>Borer,Borewell Office,Farmer,Mechanic,Winders,Panchayat Head</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Market field update as %27new%27</fullName>
+        <actions>
+            <name>Market_type_field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 AND 2) AND (3 OR 4 OR 5 OR 6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Account.Business_Line__c</field>
+            <operation>equals</operation>
+            <value>Column</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Dealer,Distributor</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Adilabad,Ajmer,Aligarh,Allahabad,Amravati,Anand,Angul,Aurangabad,Bagalkot,Bangalore Rural,Bangalore Urban,Bankura,Bareilly,Beed,Begusarai,Betul,Bharatpur,Bhavnagar,Bhojpur(Arah),Durg,Jaisalmer,Jalandhar,Ludhiana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Bhiwani,Bidar,Birbhum,Budaun,Buldhana,chikkaballapur,Cuttak,Damoh,Datia,Dhanbad,Dharmapuri,Dholpur,Dhule,Dibrugarh,Fatehpur,Gandhinagar,Giridih,Golaghat,Gorakpur,Hanumangarh,Hingoli,Hoshangabad,Burdwan</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Bandra(Mumbai Suburban district),Jabalpur,Jamshedpur(East Singhbhum),Janjgir–Champa,Jaunpur,Jhansi,Jharsuguda,Jhunjhunu,Jodhpur,Kancheepuram,Kanpur(Nagar),Kolar,Kutch,Lakhisarai,Lohardaga,Medak,Mumbai-City,Murshidabad,Nagpur,Nalanda</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Namakkal,Nandurbar,Narsinghpur,Nawada,Pali,Pondicherry,Pune,Purulia,Raebareili,Raigad,Ratnagiri,Rewa,Rohtak,Rohtas(Sasaram),Sabarkantha,Satara,Satna,Sawai Madhopur,Sirohi,Sirsa,Sitapur,Surat,Surendranagar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Thane,Thanjavur,Tiruchiorappalli,Tirunelveli,Tiruvallur,Udaipur</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Market field update as %27new%27 Version V1%2E0</fullName>
+        <actions>
+            <name>Market_type_field1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 AND 2 AND 8) AND (3 OR 4 OR 5 OR 6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Account.Business_Line__c</field>
+            <operation>equals</operation>
+            <value>Column</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Individual Contacts</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Adilabad,Ajmer,Aligarh,Allahabad,Amravati,Anand,Angul,Aurangabad,Bagalkot,Bangalore Rural,Bangalore Urban,Bankura,Bareilly,Beed,Begusarai,Betul,Bharatpur,Bhavnagar,Bhojpur(Arah),Durg,Jaisalmer,Jalandhar,Ludhiana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Bhiwani,Bidar,Birbhum,Budaun,Buldhana,chikkaballapur,Cuttak,Damoh,Datia,Dhanbad,Dharmapuri,Dholpur,Dhule,Dibrugarh,Fatehpur,Gandhinagar,Giridih,Golaghat,Gorakpur,Hanumangarh,Hingoli,Hoshangabad,Burdwan</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Bandra(Mumbai Suburban district),Jabalpur,Jamshedpur(East Singhbhum),Janjgir–Champa,Jaunpur,Jhansi,Jharsuguda,Jhunjhunu,Jodhpur,Kancheepuram,Kanpur(Nagar),Kolar,Kutch,Lakhisarai,Lohardaga,Medak,Mumbai-City,Murshidabad,Nagpur,Nalanda</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Namakkal,Nandurbar,Narsinghpur,Nawada,Pali,Pondicherry,Pune,Purulia,Raebareili,Raigad,Ratnagiri,Rewa,Rohtak,Rohtas(Sasaram),Sabarkantha,Satara,Satna,Sawai Madhopur,Sirohi,Sirsa,Sitapur,Surat,Surendranagar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.District__c</field>
+            <operation>equals</operation>
+            <value>Thane,Thanjavur,Tiruchiorappalli,Tirunelveli,Tiruvallur,Udaipur</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Party_Type__c</field>
+            <operation>equals</operation>
+            <value>Borer,Borewell Office,Farmer,Mechanic,Winders,Panchayat Head</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>PAN in uppercase</fullName>
+        <actions>
+            <name>PAN_in_uppercase</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR( 
+ISNEW(), 
+ISCHANGED( TIN_Number__c ) 
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Architect Update</fullName>
+        <actions>
+            <name>Party_Type_Architect_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Boarers Meet Update</fullName>
+        <actions>
+            <name>Update_Boarers_Meet</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Builders Meet Meet Update</fullName>
+        <actions>
+            <name>Update_Builders_Meet_Meet</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Engineers Meet</fullName>
+        <actions>
+            <name>Update_Engineers_Meet</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Farmers Meet</fullName>
+        <actions>
+            <name>Farmers_Meet</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Jeep Campaign</fullName>
+        <actions>
+            <name>Jeep_Campaign</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Mechanic Meet</fullName>
+        <actions>
+            <name>Mechanic_Meet</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Plumber Meet</fullName>
+        <actions>
+            <name>Plumber_Meet</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Plumber%2FMechanic%2FEngineers Factory Visit Update</fullName>
+        <active>false</active>
+        <description>This Workflow Will Update Party Type as Plumber/Mechanic/Engineers Factory Visit</description>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Sandy Show</fullName>
+        <actions>
+            <name>Update_Account_Type</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Record_Type_as_Farmer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Party Type Tractor Show</fullName>
+        <actions>
+            <name>Tractor_Show</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Plumber club fields-Hide</fullName>
+        <active>false</active>
+        <booleanFilter>1</booleanFilter>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Plumber Club  Enrollment</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Populate Last Visit Count Field</fullName>
+        <actions>
+            <name>Populate_Last_Visit_Count_c</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( Latest_Visit_Date__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>QC check passed</fullName>
+        <actions>
+            <name>QC_check_passed_status</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Profile_status__c</field>
+            <operation>equals</operation>
+            <value>QC passed</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Record Type change to Dealers</fullName>
+        <actions>
+            <name>Record_Type_to_Dealers</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR( )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Record Type change to Individual Contacts</fullName>
+        <actions>
+            <name>Update_RecordType_to_Individual_contacts</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR()</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Manager Email</fullName>
+        <actions>
+            <name>Update_Manager_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>True</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Mini Meet</fullName>
+        <active>false</active>
+        <formula>false</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Mobile Status Invalid</fullName>
+        <actions>
+            <name>Update_Mobile_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Mobile_Status_Rollup__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Mobile Status Valid</fullName>
+        <actions>
+            <name>Mobile_Status_Valid</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Mobile_Status_Rollup__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Recordtype as Dealer based on Party Type</fullName>
+        <actions>
+            <name>Update_Dealer_Record_Type</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR
+(
+ISPICKVAL(Party_Type__c,&apos;Dealer&apos;),
+ISPICKVAL(Party_Type__c,&apos;Dealers Salesman&apos;)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Recordtype as Distributor based on Party Type</fullName>
+        <actions>
+            <name>Update_peDistributor_Record_Ty</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>ISPICKVAL(Party_Type__c,&apos;Distributor&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Recordtype as Individual contact based on Party Type</fullName>
+        <actions>
+            <name>Update_Individual_contact_Record_Type</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR(
+ISPICKVAL(Party_Type__c,&apos;Architect&apos;),
+ISPICKVAL(Party_Type__c,&apos;Borer&apos;),
+ISPICKVAL(Party_Type__c,&apos;Borewell Office&apos;),
+ISPICKVAL(Party_Type__c,&apos;Builder&apos;),
+ISPICKVAL(Party_Type__c,&apos;Consultant&apos;),
+ISPICKVAL(Party_Type__c,&apos;Contractor&apos;),
+ISPICKVAL(Party_Type__c,&apos;Customer&apos;),
+ISPICKVAL(Party_Type__c,&apos;Engineer&apos;),
+ISPICKVAL(Party_Type__c,&apos;Farmer&apos;),
+ISPICKVAL(Party_Type__c,&apos;Government&apos;),
+ISPICKVAL(Party_Type__c,&apos;Institution&apos;),
+ISPICKVAL(Party_Type__c,&apos;Plumber&apos;),
+ISPICKVAL(Party_Type__c,&apos;Mechanic&apos;),
+ISPICKVAL(Party_Type__c,&apos;Others&apos;),
+ISPICKVAL(Party_Type__c,&apos;Plumbing Contractor&apos;),
+ISPICKVAL(Party_Type__c,&apos;Project Manager&apos;),
+ISPICKVAL(Party_Type__c,&apos;Purchase Manager&apos;),
+ISPICKVAL(Party_Type__c,&apos;Site Engineer&apos;),
+ISPICKVAL(Party_Type__c,&apos;Site Incharge / Supervisor&apos;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update ordervalue in Account%28Projects%29</fullName>
+        <actions>
+            <name>ordervalue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Projects</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.No_of_Bathrooms__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>test</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Age__c</field>
+            <operation>equals</operation>
+            <value>6</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>test2</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Age__c</field>
+            <operation>equals</operation>
+            <value>6</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>update builder grading</fullName>
+        <actions>
+            <name>update_builder_grading_A</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Probability__c</field>
+            <operation>equals</operation>
+            <value>High</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>update builder gradinglow</fullName>
+        <actions>
+            <name>update_builder_gradinglow</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Probability__c</field>
+            <operation>equals</operation>
+            <value>Low</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>update builder gradingmedium</fullName>
+        <actions>
+            <name>update_builder_grading</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Probability__c</field>
+            <operation>equals</operation>
+            <value>Medium</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>update partytype  as Dealersalesmen meet</fullName>
+        <actions>
+            <name>Update_Partype_as_dealersalesman</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Recordtype_as_Individual_contact</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>update partytype  as PME Factory Visit</fullName>
+        <actions>
+            <name>Update_prty_type_plumber</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>false</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>when record type is changed to dealer</fullName>
+        <actions>
+            <name>update_dealer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Dealer</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>when record type is changed to direct dealer</fullName>
+        <actions>
+            <name>update_partytype_as_dealer</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Direct Dealer,Dealer</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>when record type is changed to distributor</fullName>
+        <actions>
+            <name>update_parttypedistributor</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Distributor</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>when record type is changed to projects</fullName>
+        <actions>
+            <name>update_partytype_as_projects</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Projects</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

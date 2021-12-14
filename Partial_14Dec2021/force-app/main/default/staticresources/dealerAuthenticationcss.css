@@ -1,0 +1,154 @@
+.signUp{
+            font-size:13px !important;
+            color:white !important;
+            background-color:DarkBlue;
+            width:100px;
+            height:30px;
+            font-family:Lucida Console, Courier, monospace !important;
+            border-radius: 4px;
+            }
+            .clickToOrder{
+            font-size:13px !important;
+            color:white !important;
+            background-color:DarkBlue;
+            width:130px;
+            height:30px;
+            font-family:Lucida Console, Courier, monospace !important;
+            border-radius: 4px;
+            }
+            .textMessage{
+            font-size:25px;
+            color:YELLOW;
+            font-family:Lucida Console, Courier, monospace;
+            }
+            .textBox{
+            width: 54%;
+            color: WHITE !important;
+            font-size:2vw !important;
+            background: transparent;
+            border-radius: 40px;
+            text-align: center;
+            font-family:Lucida Console, Courier, monospace !important;
+            }
+            .mainHeader{
+            font-size:25px;
+            color:YELLOW;
+            font-family:Lucida Console, Courier, monospace;
+            }
+            .submitId{
+            font-size:13px!important;
+            color:white!important;
+            background-color:DarkBlue;
+            width:100px;
+            height:30px;
+            font-family:Lucida Console, Courier, monospace!important;
+            border-radius: 4px!important;
+            }
+            #clickId{
+            font-size:13px;color:white;background-color:DarkBlue;width:130px;height:30px;font-family:Lucida Console, Courier, monospace;border-radius: 4px;
+            }
+            .center { 
+            margin: auto;
+            width: 100%;
+            border: 3px solid rgb(95, 211, 95)4, 46, 44)4, 46, 44);
+            padding: 10px;
+            }
+            
+            .question table tr td {
+            display: block;
+            align-content: center;
+            }
+            .bg-text1 {
+            background-color: rgb(255,255,255); /* Fallback color */
+            background-color: rgba(173, 216, 230,0); /* Black w/opacity/see-through *
+            color: white;
+            font-weight: bold;
+            /*border: 3px solid #f1f1f1;*/
+            z-index: 15;
+            text-align: center;
+            }
+            
+            html{
+            height:100%;
+            
+            }
+            
+            @media (min-width: 1025px) {
+            #respImageContainer {
+            background-size: 100% auto;
+            background-repeat: no-repeat;        
+            background-image: url('{!URLFOR($Resource.DekstopOPBackGround)}');
+            }
+            #header1{
+            font-size: 30px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            text-align:center;
+            }
+            #header2{
+            font-size: 30px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            border-bottom-left-radius: 50px 20px;
+            text-align:center;
+            }
+            #padding1{
+            display: none;
+            }
+            #padding2{
+            display: none;
+            }
+            }
+            @media (max-width: 1024px) and (min-width: 500px){
+            #respImageContainer {
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-image: url('{!URLFOR($Resource.TabOPbackground)}');
+            }
+            #header1{
+            font-size: 17px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            text-align:center;
+            }
+            #header2{
+            font-size: 17px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            border-bottom-left-radius: 50px 20px;
+            text-align:center;
+            }
+            #padding2{
+            display: block;
+            }
+            }
+            @media (max-width: 499px) {
+            #respImageContainer {
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-image: url('{!URLFOR($Resource.MobileOPbackground)}');
+            }
+            #header1{
+            font-size: 12px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            text-align:center;
+            }
+            #header2{
+            font-size: 12px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            border-bottom-left-radius: 50px 20px;
+            text-align:center;
+            }
+            #padding2{
+            display: none;
+            }
+            }
+            

@@ -1,0 +1,15 @@
+<apex:page standardController="Notice__c">
+     <apex:form >
+     <apex:sectionHeader title="{!Notice__c.Name}" subtitle="New Notice"/>
+      <apex:pageBlock title="Notices Edit">
+          <apex:pageBlockButtons >
+              <apex:commandButton value="Save" action="{!save}" rendered="{!IF($UserRole.Name=='Director', TRUE, FALSE)}"/>
+              <apex:commandButton value="Cancel" action="{!cancel}"/>
+          </apex:pageBlockButtons>
+          <apex:pageBlockSection columns="1" title="New Notice" collapsible="false" rendered="{!IF($UserRole.Name=='Director', TRUE, FALSE)}">
+              <apex:inputField value="{!Notice__c.Name}" required="true"/>
+              <apex:inputTextarea cols="75" rows="7" value="{!Notice__c.Content__c}" richText="true" required="true"/>
+          </apex:pageBlockSection>
+      </apex:pageblock>
+  </apex:form>
+</apex:page>

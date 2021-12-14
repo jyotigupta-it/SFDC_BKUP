@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Complaint_mail_to_promotion_Member_owner</fullName>
+        <description>Complaint mail to promotion Member owner</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Manager_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <recipient>sachin.aggarwal@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Complaint_mail_PM</template>
+    </alerts>
+    <alerts>
+        <fullName>Status_others_in_promotion_member</fullName>
+        <description>Status others in promotion member</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>madhavi.mv@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Others_mail_for_promotion_member</template>
+    </alerts>
+    <alerts>
+        <fullName>Verification_status_suggestion_for_promotion_member</fullName>
+        <description>Verification status suggestion for promotion member</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Manager_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Suggestion_mail_to_promotion_member_owner</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Update_Manager_Email</fullName>
+        <field>Manager_Email__c</field>
+        <formula>Promotions2__r.Owner:User.Manager.Email</formula>
+        <name>Update Manager Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Complaint mail to promotion Member owner</fullName>
+        <actions>
+            <name>Complaint_mail_to_promotion_Member_owner</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>INCLUDES(Verification_Status__c,&apos;complaint&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>PM Status others</fullName>
+        <actions>
+            <name>Status_others_in_promotion_member</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <formula>INCLUDES(Verification_Status__c,&apos;Others&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Manager Email</fullName>
+        <actions>
+            <name>Update_Manager_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>true</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>promotion member veri status suggestion</fullName>
+        <actions>
+            <name>Verification_status_suggestion_for_promotion_member</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>INCLUDES(Verification_Status__c,&apos;suggestion&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Promotion_Member_has_not_been_completed</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Promotion Member has not been completed</subject>
+    </tasks>
+</Workflow>

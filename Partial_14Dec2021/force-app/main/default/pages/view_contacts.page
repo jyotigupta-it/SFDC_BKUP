@@ -1,0 +1,36 @@
+<apex:page standardController="Contacts__c">
+<apex:form >
+<apex:pageblock title="Contact Details" mode="edit">
+<apex:pageBlockButtons >
+<apex:commandButton value="Edit" action="{!Edit}"/>
+<apex:commandButton value="Delete" action="{!Delete}"/>
+</apex:pageBlockButtons> 
+<apex:pageblockSection >
+<apex:OutputField value="{!Contacts__c.Type__c}"/>
+<apex:OutputField value="{!Contacts__c.Ownerid}"/>
+<apex:OutputField value="{!Contacts__c.Name}"/>
+<apex:OutputField value="{!Contacts__c.City__c}"/>
+<apex:OutputField value="{!Contacts__c.Mobile__c}"/>
+</apex:pageblockSection>
+<apex:pageblockSection title="Additional Details" rendered="{!AND(Contacts__c.Type__c != '',Contacts__c.Type__c != 'Plumber',Contacts__c.Type__c != 'Farmer',Contacts__c.Type__c != 'Mechanic')}">
+<apex:OutputField value="{!Contacts__c.Firm_Name__c}"/>
+<apex:OutputField value="{!Contacts__c.Distributor__c}"/>
+<apex:OutputField value="{!Contacts__c.Status__c}"/>
+<apex:OutputField value="{!Contacts__c.Visit_Type__c}"/>
+<apex:OutputField value="{!Contacts__c.Street__c}"/>
+<apex:OutputField value="{!Contacts__c.Area__c}"/>
+<apex:OutputField value="{!Contacts__c.State__c}"/>
+<apex:OutputField value="{!Contacts__c.District__c}"/>
+<apex:OutputField value="{!Contacts__c.Pin_Code__c}"/>
+<apex:OutputField value="{!Contacts__c.Phone__c}"/>
+<apex:OutputField value="{!Contacts__c.Email__c}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection rendered="{!AND(Contacts__c.Type__c != '',Contacts__c.Type__c != 'Plumber',Contacts__c.Type__c != 'Farmer',Contacts__c.Type__c != 'Mechanic')}">
+<apex:OutputField value="{!Contacts__c.Birthdate__c}"/>
+<apex:OutputField value="{!Contacts__c.Anniversary_Date__c}"/>
+</apex:pageblockSection>
+</apex:pageblock>
+</apex:form>
+<apex:relatedList list="Visits__r" rendered="{!AND(Contacts__c.Type__c != '',Contacts__c.Type__c != 'Plumber',Contacts__c.Type__c != 'Farmer',Contacts__c.Type__c != 'Mechanic')}"/>
+<apex:relatedList list="Promotions_Attended__r"/>
+</apex:page>

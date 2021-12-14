@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alert_on_Final_Approval</fullName>
+        <description>Alert on Final Approval</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <field>Vendor_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Alert_on_Approved_by_RBM</template>
+    </alerts>
+    <alerts>
+        <fullName>Alert_on_Submission_To_SalesRep</fullName>
+        <description>Alert on Submission To SalesRep</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <field>BDM_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Alert_On_Submission</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_on_Recce_Submission</fullName>
+        <description>Email Alert on Recce Submission</description>
+        <protected>false</protected>
+        <recipients>
+            <field>BDM_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Alert_On_Submission_for_Recce</template>
+    </alerts>
+    <alerts>
+        <fullName>Final_Alert_On_Rejection</fullName>
+        <description>Final Alert On Rejection</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <field>Head_Branding__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Alert_on_Rejected_by_RBM</template>
+    </alerts>
+    <alerts>
+        <fullName>Mail_alert_to_vendor</fullName>
+        <description>Mail alert to vendor on assigning vendor</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>Branding_Email_templates/Alert_to_vendor_after_assigned_by_RBM</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_mail_to_CRM_when_RBM_approves_the_requests_on_vendor_execution</fullName>
+        <description>Send mail to CRM when RBM approves the requests on vendor execution</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Vendor_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/Alert_on_approval_of_Branding_Requests_by_RBM_after_Vendor_Execution</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Branding_Req_Status</fullName>
+        <field>Branding_Approved_Rejected__c</field>
+        <literalValue>Vendor Assigned</literalValue>
+        <name>Branding Req Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Branding_request_completed_date_updation</fullName>
+        <field>Request_completed_date__c</field>
+        <formula>TODAY()</formula>
+        <name>Branding request completed date updation</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>RBM_Approval_Date</fullName>
+        <field>RBM_Approval_Date__c</field>
+        <formula>Today()</formula>
+        <name>RBM Approval Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Update_On_Rejection_by_RBM</fullName>
+        <field>Branding_Approved_Rejected__c</field>
+        <literalValue>Rejected by RBM</literalValue>
+        <name>Status Update On Rejection by RBM</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TL_Email_Update</fullName>
+        <field>TL_Email__c</field>
+        <formula>CreatedBy.Team_Lead__r.Email</formula>
+        <name>TL Email Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Vendor_field_Update</fullName>
+        <field>Vendor_Email__c</field>
+        <formula>User1__r.Email</formula>
+        <name>Update Vendor field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_banding_head_mail</fullName>
+        <field>Head_Branding__c</field>
+        <formula>Submitted_By__r.Branding_Manager__r.Email</formula>
+        <name>Update banding head mail</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Vendor_field_update</fullName>
+        <field>Branding_Approved_Rejected__c</field>
+        <literalValue>Completed</literalValue>
+        <name>Vendor field update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>field_to_update_BDM_email</fullName>
+        <field>BDM_Email__c</field>
+        <formula>Submitted_By__r.Branding_Team_Member__r.Email</formula>
+        <name>field to update BDM email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>vendor_field_update_on_rejection</fullName>
+        <field>Branding_Approved_Rejected__c</field>
+        <literalValue>Vendor Assigned-Rework</literalValue>
+        <name>vendor field update on rejection</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Recce Email alert</fullName>
+        <actions>
+            <name>Email_Alert_on_Recce_Submission</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Branding_Request__c.Branding_Approved_Rejected__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update BDM Email Id</fullName>
+        <actions>
+            <name>TL_Email_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Vendor_field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_banding_head_mail</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>field_to_update_BDM_email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>true</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Vendor Mail alert on assigning request</fullName>
+        <actions>
+            <name>Mail_alert_to_vendor</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Branding_Request__c.Branding_Approved_Rejected__c</field>
+            <operation>equals</operation>
+            <value>Vendor Assigned</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

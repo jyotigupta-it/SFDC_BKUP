@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Give_Reason__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Specify reason for why Branding required or why not required..</inlineHelpText>
+    <label>Give Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Any_Branding_Required__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Good Location</fullName>
+                <default>false</default>
+                <label>Good Location</label>
+            </value>
+            <value>
+                <fullName>Good Visibility</fullName>
+                <default>false</default>
+                <label>Good Visibility</label>
+            </value>
+            <value>
+                <fullName>Good Sales</fullName>
+                <default>false</default>
+                <label>Good Sales</label>
+            </value>
+            <value>
+                <fullName>Good Dealer</fullName>
+                <default>false</default>
+                <label>Good Dealer</label>
+            </value>
+            <value>
+                <fullName>Less Sales</fullName>
+                <default>false</default>
+                <label>Less Sales</label>
+            </value>
+            <value>
+                <fullName>Poor Visibility</fullName>
+                <default>false</default>
+                <label>Poor Visibility</label>
+            </value>
+            <value>
+                <fullName>Not Our Dealer</fullName>
+                <default>false</default>
+                <label>Not Our Dealer</label>
+            </value>
+            <value>
+                <fullName>No Availability</fullName>
+                <default>false</default>
+                <label>No Availability</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Only Outside Required</controllingFieldValue>
+            <controllingFieldValue>Full Shop Required</controllingFieldValue>
+            <valueName>Good Location</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Only Outside Required</controllingFieldValue>
+            <controllingFieldValue>Full Shop Required</controllingFieldValue>
+            <valueName>Good Visibility</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Only Outside Required</controllingFieldValue>
+            <controllingFieldValue>Full Shop Required</controllingFieldValue>
+            <valueName>Good Sales</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Only Outside Required</controllingFieldValue>
+            <controllingFieldValue>Full Shop Required</controllingFieldValue>
+            <valueName>Good Dealer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Required</controllingFieldValue>
+            <valueName>Less Sales</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Required</controllingFieldValue>
+            <valueName>Poor Visibility</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Required</controllingFieldValue>
+            <valueName>Not Our Dealer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Required</controllingFieldValue>
+            <valueName>No Availability</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

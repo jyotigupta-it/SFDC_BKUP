@@ -1,0 +1,35 @@
+table {
+                    border-collapse: collapse;
+                     Padding: 10px;
+                     font-family: arial;
+                }
+                table, th, td {
+                    border: 1px solid black;
+                    
+                }
+                
+                td {
+                
+                    text-align:right;
+                }
+                #total {
+                    background: #FF3333;
+                }
+                .trHead {
+                    background: #C2C2A3;
+                }
+                .blueClass {
+                    background: #85D6FF;
+
+                }
+                .blueDClass {
+                    background: #5CADFF;
+
+                }
+                .trHead2 th{
+                    background: #C2C2A3;
+                    text-align: left;
+                }
+                .trCenter {
+                    text-align: center;
+                }

@@ -1,0 +1,60 @@
+<apex:page standardController="Notice__c" recordSetVar="Notices" >
+
+  <apex:slds />
+  <apex:form >
+  
+    <!-- <apex:pageBlock title="Recent Notices">
+          <apex:pageBlockButtons  styleClass="slds-button slds-button_neutral" location="top" rendered="{!IF($UserRole.Name=='ADMIN', TRUE, FALSE)}">
+              <a href="/a02/e?retURL=%2Fa02%2Fo" class="btn"> New </a>
+          </apex:pageBlockButtons> 
+          
+      </apex:pageBlock>-->
+     <div class="slds-page-header">
+     <div class="slds-clearfix">
+     <div class="slds-float_left">
+     <div class="slds-p-top_x-small">
+     <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Recent notices">Recent notices</h1>
+     </div>
+     </div>
+    <div class="slds-float_right">   
+      <!--<button class="slds-button slds-button_neutral" rendered="{!IF($UserRole.Name=='ADMIN', TRUE, FALSE)}"> <a href="/a02/e?retURL=%2Fa02%2Fo" > New </a> </button>-->
+  <!--<input type="button" rendered="{!IF($UserRole.Name=='ADMIN', TRUE, FALSE)}"  class="slds-button slds-button_neutral"><a href="/a02/e?retURL=%2Fa02%2Fo" >New</a>  </input>-->
+     <apex:commandButton disabled="true" rendered="{!IF($UserRole.Name=='ADMIN', TRUE, FALSE)}" style="display:none">
+              <a href="/a02/e?retURL=%2Fa02%2Fo" Class="btn slds-button slds-button_neutral" > New </a></apex:commandButton>
+ 
+    </div>  
+     </div>
+      
+    
+     </div>
+ 
+      <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+          <thead>
+            <tr class="slds-text-title_caps">
+                <th>Name</th>
+                <th>Content</th>
+                <th>Created Date</th>
+            </tr>   
+          </thead>
+          <tbody>       
+              <apex:repeat value="{!Notices}" var="n">
+                      <apex:variable value="{!n.Notice_Date__c > (Today()-7)}" var="Condition"/>
+                      
+                      <apex:outputPanel rendered="{!Condition}">                  
+                          <tr class="slds-hint-parent">
+                              <td data-label="Name" >
+                                  <div class="slds-truncate" title="Name"><a href="/apex/NoticesView?id={!n.Id}"> {!n.Name}</a></div>
+                              </td>
+                              <td data-label="Content">
+                                  <div class="slds-truncate" title="Content"> <apex:outputText value="{!n.Content__c}" escape="false" /></div>
+                              </td>
+                              <td data-label="Created Date">
+                                  <div class="slds-truncate" title="Created Date"><apex:outputField value="{!n.CreatedDate}" /></div>
+                              </td>
+                          </tr>
+                      </apex:outputPanel>
+              </apex:repeat>
+          </tbody>
+      </table>        
+  </apex:form>
+</apex:page>

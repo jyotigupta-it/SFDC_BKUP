@@ -1,0 +1,525 @@
+<aura:component implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global"
+                controller="Column_Dealer_Survey_Handler">
+    <!-- call doInit function on component load -->  
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+    
+    <!-- aura attributes-->  
+    <aura:attribute name="listControllingValues" type="list" default="[]" description="to store controller field values"/>
+    <aura:attribute name="listDependingValues" type="list" default="[]" description="to store dependent field values"/>
+    <aura:attribute name="depnedentFieldMap" type="map" description="map to store dependent values with controlling value"/>
+    <aura:attribute name="bDisabledDependentFld" type="boolean" default="true"/> 
+    <aura:attribute name="influencerList" type="List"/>
+    <aura:attribute name="conversionTimeOptions" type="List"/>
+    <aura:attribute name="creditFacilityOptions" type="List"/>
+    <aura:attribute name="electricityConnectonOptions" type="List"/>
+    <aura:attribute name="hdpeOptions" type="List"/>
+     <aura:attribute name="fastMovingSize" type="List"/>
+     <aura:attribute name="casingOptions" type="List"/>
+     <aura:attribute name="agriOptions" type="List"/>
+     <aura:attribute name="columnOptions" type="List"/>
+     <aura:attribute name="tankColor" type="List"/>
+    <aura:attribute name="typeOfInfluenceOptions" type="List"/>
+    <aura:attribute name="selectedbrandVectus" type="boolean" default="false"/>
+    <aura:attribute name="selectedbrandSupreme" type="boolean" default="false"/>
+    <aura:attribute name="selectedbrandSintex" type="boolean" default="false"/>
+    <aura:attribute name="selectedbrandPrince" type="boolean" default="false"/>
+    <aura:attribute name="selectedbrandPlasto" type="boolean" default="false"/>
+    <aura:attribute name="selectedbrandSudhakar" type="boolean" default="false"/>
+    <aura:attribute name="selectedbrandKaveri" type="boolean" default="false"/>
+    <aura:attribute name="selectedbrandAquatech" type="boolean" default="false"/>
+    <aura:attribute name="objDetail" type="object"/><!-- default="{'sobjectType' : 'Column_dealer_Survey__c','Product_sold_by_dealer__c' : []}"/-->
+    <aura:attribute name="controllingFieldAPI" type="string" default="Product_sold_by_dealer__c" description="store field API name of Controller field"/>
+    <aura:attribute name="dependingFieldAPI" type="string" default="Name_of_Brands__c" description="store field API name of dependent field"/>
+    <aura:attribute name="prodList" type="list" />
+    <aura:attribute name="selectedBrandNameList" type="List"/>
+    <aura:attribute name="selectedBrandNameInputList" type="List"/>
+    <aura:attribute name="DepFieldMap" type="Map"/>
+    <aura:attribute name="otherFields" type="object" default="{'sobjectType' : 'Column_dealer_Survey__c'}"/>
+    <aura:attribute name="surveyListToInsert" type="Object" default="{'sobjectType' : 'Column_dealer_Survey__c'}"/>
+    <aura:attribute name="displayChildCmp" type="boolean" default="false" />
+    <aura:attribute name="fieldLabelApiMap" type="map" description="map to store field Label and their Api value"/>
+    <aura:attribute name="brandSelectedValueApiMap" type="map" description="map to store field Label of Multiselect and Api value of field" />
+    <aura:attribute name="selectedFieldValuesObject" type="Object" default=""/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="truthy" type="boolean" default="true"/>
+     <aura:attribute name="truthy1" type="boolean" default="true"/>
+    <!--Controller Field-->
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <div style="height:640px">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick="{!c.cancel}" title="Close">
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Column Dealer Survey</h2>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    
+                    <aura:iteration items="{!v.prodList}" var='var1'>
+                        <div style="overflow-y:scroll;max-height: 450px;">
+                            <lightning:card title="Commercial Information-Dealer">
+                                <!--aura:set attribute="actions">
+                    <lightning:button label="Remove" name="{!var1.index}" onclick="{!c.removeProducts}"/>
+                    <lightning:button label="Add" variant="brand" onclick="{!c.addProducts}"/>
+                </aura:set--> 
+                                <div class="slds-container--center  custom-background forceSinglePaneWindowManager">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3">
+                                            <!-- <div class="slds-grid full forcePageBlockSectionRow">-->
+                                            <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                                <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small" >
+                                                    <div class="my_date">
+                                                        <div class="slds-form-element__control">
+                                                            <div class="slds-form-element__control">
+                                                                <lightning:select name="{!var1.index}"
+                                                                                  aura:id="test"
+                                                                                  onchange="{!c.onChangeOfProduct}"
+                                                                                  value="{!var1.objDetail.Product_sold_by_dealer__c}"
+                                                                                  label="Product sold by dealer"
+                                                                                  ><!--onchange="{!c.onControllerFieldChange}"-->
+                                                                    <aura:iteration items="{!var1.controllinglFieldValues}" var="val">
+                                                                        <option value="{!val}">{!val}</option>
+                                                                    </aura:iteration>
+                                                                </lightning:select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <aura:renderIf isTrue="{!var1.objDetail.Product_sold_by_dealer__c != 'Not applicable'}">
+                                            <div class="slds-col slds-size--1-of-1 slds-medium-size--2-of-3 slds-small-size--1-of-1 slds-large-size--2-of-3">
+                                                <!-- <div class="slds-grid full forcePageBlockSectionRow">-->
+                                                <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small" >
+                                                        <div class="my_date">
+                                                            <div class="slds-form-element__control">
+                                                                <div class="slds-form-element__control">
+                                                                    <lightning:dualListbox name="{!var1.index}"  
+                                                                                           label= "Name of the Brands" 
+                                                                                           sourceLabel="Available" 
+                                                                                           selectedLabel="Selected" 
+                                                                                           fieldLevelHelp=""
+                                                                                           value="{!var1.objDetail.Name_of_Brands__c}"
+                                                                                           options="{!var1.objDetail.depFieldValues}"
+                                                                                           onchange="{!c.handleValueChange}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                            <aura:renderIf isTrue="{!var1.showInput}">
+                                                <aura:iteration items="{!var1.surveyListToInsert}" var="key" >
+                                                    <div class="slds-col slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-2 slds-large-size--1-of-2">
+                                                        <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                                            <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                                                <div class="slds-form-element__control">
+                                                                    <div class="slds-form-element__control" style="max-height: 230px;">
+                                                                        <aura:if isTrue="{!key.fieldLabel == 'If-Others'}">
+                                                                            <lightning:input type="text" label="{!key.fieldLabel}" value="{!key.value}"/>
+                                                                             <lightning:input type="text" label="Others Value" Value="{!v.otherFields.If_Others_Value__c}"/>
+                                                                            <aura:set attribute='else'>
+                                                                                <lightning:input type="number" label="{!key.fieldLabel}" value="{!key.value}" min="0"/>
+                                                                            </aura:set>
+                                                                        </aura:if>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </aura:iteration>  
+                                                
+                                            </aura:renderIf>
+                                             <aura:if isTrue="{!and(var1.index ==0 , v.truthy1)}">
+                                                <!-- <lightning:input name="input1" label="Fast Moving Size" value="{!fastMovingSize}"/>-->
+                                                    <!--<lightning:input type="number" label="Fast Moving Size" value="{!v.otherFields.Fast_Moving_Size__c}" step="0.5" min="0" required="true"/>-->
+                                                  <lightning:dualListbox name="languages"  
+                                                                           label= "Column fast moving Size" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Column_fast_moving_Size_Inch__c}"
+                                                                           options="{!v.columnOptions}" 
+                                                                           />
+                                                 
+                                                </aura:if>
+                                            <aura:if isTrue="{!and(var1.index ==1 , v.truthy1)}">
+                                                <!-- <lightning:input name="input1" label="Fast Moving Size" value="{!fastMovingSize}"/>-->
+                                                    <!--<lightning:input type="number" label="Fast Moving Size" value="{!v.otherFields.Fast_Moving_Size__c}" step="0.5" min="0" required="true"/>-->
+                                                  <lightning:dualListbox name="languages"  
+                                                                           label= "Casing fast moving Size" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Casting_fast_moving_Size_Inch__c}"
+                                                                           options="{!v.casingOptions}" 
+                                                                           />
+                                                 
+                                                </aura:if>
+                                            <aura:if isTrue="{!and(var1.index ==2 , v.truthy1)}">
+                                                <!-- <lightning:input name="input1" label="Fast Moving Size" value="{!fastMovingSize}"/>-->
+                                                    <!--<lightning:input type="number" label="Fast Moving Size" value="{!v.otherFields.Fast_Moving_Size__c}" step="0.5" min="0" required="true"/>-->
+                                                  <lightning:dualListbox name="languages"  
+                                                                           label= "Hpde fast moving Size" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Hdpe_fast_moving_Size_Inch__c}"
+                                                                           options="{!v.hdpeOptions}" 
+                                                                           />
+                                                 <lightning:input type="number" label="HPDE Parameter value based on End Customer" value="{!v.otherFields.Hdpe_average_sale_price_mtr__c}" step="0.5" min="0"/>
+                                                 
+                                                </aura:if>
+                                             <aura:if isTrue="{!and(var1.index ==3 , v.truthy1)}">
+                                                <!-- <lightning:input name="input1" label="Fast Moving Size" value="{!fastMovingSize}"/>-->
+                                                    <!--<lightning:input type="number" label="Fast Moving Size" value="{!v.otherFields.Fast_Moving_Size__c}" step="0.5" min="0" required="true"/>-->
+                                                  <lightning:dualListbox name="languages"  
+                                                                           label= "GI fast moving Size" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.GI_fast_moving_Size_Inch__c}"
+                                                                           options="{!v.columnOptions}" 
+                                                                           />
+                                                 
+                                                </aura:if>
+                                                     <aura:if isTrue="{!and(var1.index ==4 , v.truthy1)}">
+                                                <!-- <lightning:input name="input1" label="Fast Moving Size" value="{!fastMovingSize}"/>-->
+                                                    <!--<lightning:input type="number" label="Fast Moving Size" value="{!v.otherFields.Fast_Moving_Size__c}" step="0.5" min="0" required="true"/>-->
+                                                  <lightning:dualListbox name="languages"  
+                                                                           label= "Agri fast moving Size" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Agri_fast_moving_Size_Inch__c}"
+                                                                           options="{!v.agriOptions}" 
+                                                                           />
+                                                 
+                                                </aura:if>
+                                             
+                                                
+                                                <aura:if isTrue="{!and(var1.index ==6 , v.truthy1)}">
+                                                   <!-- <lightning:input name="input1" label="Color Of Tank"/>-->
+                                                     <lightning:combobox name="general" label="Color of Tank" placeholder="Select an Option" options="{!v.tankColor}" value="{!v.otherFields.Color_of_tank__c}" />
+                                                <br></br>
+                                                    <br></br>
+                                                   
+                                                      
+                                                     <aura:if isTrue="{!v.selectedbrandVectus}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Vectus Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Fast_Moving_Size__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                     <aura:if isTrue="{!v.selectedbrandSupreme}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Supreme Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Supreme_Fast_moving_Ltr__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                     <aura:if isTrue="{!v.selectedbrandSintex}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Sintex Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Sintex_Fast_Moving_Ltr__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                     <aura:if isTrue="{!v.selectedbrandPrince}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Prince Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Prince_Fast_Moving_Ltr__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                     <aura:if isTrue="{!v.selectedbrandPlasto}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Plasto Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Plasto_Fast_Moving_Ltr__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                     <aura:if isTrue="{!v.selectedbrandSudhakar}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Sudhakar Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Sudhakar_Fast_Moving_Ltr__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                     <aura:if isTrue="{!v.selectedbrandKaveri}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Kaveri Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Kaveri_Fast_Moving_Ltr__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                     <aura:if isTrue="{!v.selectedbrandAquatech}">
+                                                          <lightning:dualListbox name="languages"  
+                                                                           label= "Aquatech Fast moving Ltr(Size)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Aquatech_Fast_Moving_Ltr__c}"
+                                                                           options="{!v.fastMovingSize}" 
+                                                                       />
+                                                    </aura:if>
+                                                    
+                                                </aura:if>
+    
+                                        </aura:renderIf>
+                                    </div>
+                                    
+                                </div> 
+                                
+                            </lightning:card>
+                            
+                        </div>
+                        <hr/>
+                    </aura:iteration>
+                    
+                    <!--center> <lightning:button label="Add" variant="brand" onclick="{!c.addProducts}"/></center-->          
+                    <lightning:card title="Schemes and Other Information">
+                        
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_2-of-2">
+                                <div class="slds-grid full forcePageBlockSectionRow">
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <lightning:combobox name="general" label="Credit Facility given to dealer by Ashirvad(days)" placeholder="Select an Option" options="{! v.creditFacilityOptions }" value="{!v.otherFields.Credit_Facility_to_dealer_by_Ashirvad__c}" required="true"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <lightning:combobox name="general" label="Credit Facility given to dealer by Pipe competitor in(days)" placeholder="Select an Option" options="{! v.creditFacilityOptions }" value="{!v.otherFields.Credit_Facility_given_to_dealer_by_Pipe__c}" required="true"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="slds-grid full forcePageBlockSectionRow">
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <lightning:input type="number" label="Min Depth of Borewell in(ft)" value="{!v.otherFields.Depth_of_Borewell_min_in_ft__c}" step="0.5" min="0" required="true"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <lightning:input type="number" label="Max Depth of Borewell in(ft)" value="{!v.otherFields.Depth_of_Borewell_max_in_ft__c}" step="0.5" min="0" required="true"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div> </div>
+                                
+                                
+                                
+                                
+                                
+                                <div class="slds-grid full forcePageBlockSectionRow">
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <!--lightning:combobox name="general" label="Hdpe fast moving Size( Inch)" placeholder="Select an Option" options="{! v.hdpeOptions }" value="{!v.otherFields.Hdpe_fast_moving_Size_Inch__c}"/>
+                                              <lightning:dualListbox name="languages"  
+                                                                           label= "Hdpe fast moving Size( Inch)" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Hdpe_fast_moving_Size_Inch__c}"
+                                                                           options="{!v.hdpeOptions}" 
+                                                                           />-->
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                   
+                                                 <lightning:input type="number" label="No. of Dealers tagged to Competition Distributor" value="{!v.otherFields.No_of_Dealers_tagged_to_Competition_Dis__c}" step="0.5" min="0"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-grid full forcePageBlockSectionRow">
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <label></label>
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <lightning:combobox name="general" label="Electricity connection" placeholder="Select an Option" options="{! v.electricityConnectonOptions }" value="{!v.otherFields.Electricity_connection__c}" required="true"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                     <lightning:input type="number" label="Total shop turnover of all Brands and All Products in(Lakhs)" value="{!v.otherFields.Total_shop_turnover_of_all_the_items_in__c}" step="0.5" min="0" required="true"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div> 
+                                    
+                                </div>
+                                <div class="slds-grid full forcePageBlockSectionRow">
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <lightning:dualListbox name="languages"  
+                                                                           label= "Influencer Connection of Dealer in numbers" 
+                                                                           sourceLabel="Available" 
+                                                                           selectedLabel="Selected" 
+                                                                           fieldLevelHelp=""
+                                                                           value="{!v.otherFields.Type_of_Influencers_of_Dealer__c}"
+                                                                           options="{!v.typeOfInfluenceOptions}" 
+                                                                           onchange="{! c.handleInfluencerChange }" aura:id="influence" required="true"/>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div> 
+                                </div>
+                                
+                                
+                                
+                                <aura:iteration items="{!v.influencerList}" var="key" >
+                                                    <div class="slds-col slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-2 slds-large-size--1-of-2">
+                                                        <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                                            <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                                                <div class="slds-form-element__control">
+                                                                    <div class="slds-form-element__control" style="max-height: 230px;">
+                                                                        <lightning:input type="number" label="{!key.label}" value="{!key.value}" min="0" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </aura:iteration>  
+                                    
+                                    <!--div class="slds-col slds-size- -1-of-2 slds-medium-size- -1-of-2 slds-small-size- -1-of-2 slds-large-size- -1-of-2">
+                                        <aura:iteration items="{!v.influencerList}" var="key" >
+                                        <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                            <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                                <div class="slds-form-element__control">
+                                                    <div class="slds-form-element__control" style="max-height: 230px;">
+                                                        <lightning:input type="number" label="{!key.label}" value="{!key.value}" min="0"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            </aura:iteration> 
+                                    </div-->
+                                 
+                                
+                                
+                                
+                                
+                                <div class="slds-grid full forcePageBlockSectionRow">
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <label></label>
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                    <aura:renderIf isTrue="{!v.otherFields.Type_of_Influencers_of_Dealer__c == 'Borewell Operator'}">
+                                                        <lightning:input type="number" label="Influencer count-Borewell operator in(num)" value="{!v.otherFields.Influencer_value_Borewell_operator__c}"/>
+                                                    </aura:renderIf>
+                                                    <aura:renderIf isTrue="{!v.otherFields.Type_of_Influencers_of_Dealer__c == 'Farmer'}">
+                                                        <lightning:input type="number" label="Influencer count -Farmer in(num)" value="{!v.otherFields.Influencer_value_Farmer__c}"/>
+                                                    </aura:renderIf>
+                                                    <aura:renderIf isTrue="{!v.otherFields.Type_of_Influencers_of_Dealer__c == 'Mechanic'}">
+                                                        <lightning:input type="number" label="Influencer count -Mechanic in(num)" value="{!v.otherFields.Influencer_value_Mechanic__c}"/>
+                                                    </aura:renderIf>
+                                                    <aura:renderIf isTrue="{!v.otherFields.Type_of_Influencers_of_Dealer__c == 'Sarpanch'}">
+                                                        <lightning:input type="number" label="Influencer count -Sarpanch in(num)" value="{!v.otherFields.Influencer_value_Sarpanch__c}"/>
+                                                    </aura:renderIf>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="slds-has-flexi-truncate slds-p-horizontal_medium full forcePageBlockItem forcePageBlockItemEdit" role="listitem" style="">
+                                        <div class="slds-form-element slds-form-element_edit slds-hint-parent slds-p-vertical_xx-small">
+                                            <div class="slds-form-element__control">  
+                                                <div class="slds-form-element__control ltng-label-hide">
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></div>
+                    </lightning:card>
+                    <!--center>
+        <br/>
+        <lightning:button variant="brand" label="Save" title="Save" onclick="{! c.surveySaveMethod }"/>
+    </center-->
+                    
+                    
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick="{! c.cancel }">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick="{! c.surveySaveMethod }">Save</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    
+    
+    
+    
+    
+    
+</aura:component>

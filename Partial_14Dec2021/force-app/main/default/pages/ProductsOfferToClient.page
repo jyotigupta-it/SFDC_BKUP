@@ -1,0 +1,109 @@
+<apex:page renderAs="PDF" applyBodyTag="false" controller="Addl_Disc_Component_Controller" standardStylesheets="false" applyHtmlTag="false" showHeader="false">
+  <!--<apex:attribute name="opporId" type="Id" description="Id of the opportunity" assignTo="{!oppId}"/> -->
+  <!--<apex:param value="{!$CurrentPage.parameters.opporId}" assignTo="{!oppId}" id="param1" name="opportyId"/> -->
+     
+    <html>
+        <head>
+             <style>
+                table {
+                    border-collapse: collapse;
+                     Padding: 10px;
+                     font-family: arial;
+                }
+                table, th, td {
+                    border: 1px solid black;
+                    
+                }
+                
+                td {
+                
+                    text-align:right;
+                }
+                #total {
+                    background: #FF3333;
+                }
+                .trHead {
+                    background: #C2C2A3;
+                }
+                .blueClass {
+                    background: #85D6FF;
+
+                }
+                .blueDClass {
+                    background: #5CADFF;
+
+                }
+                .trHead2 th{
+                    background: #C2C2A3;
+                    text-align: left;
+                }
+                .trCenter {
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+            <P align="right">
+                <apex:image id="logo" value="{!$Resource.AshirvadLogoNew}" width="100" height="60"/> <br/>
+            </P>
+            <center>
+                <h3 style="font-family: Arial Unicode MS;"><u>Products Offered</u></h3>
+            </center>
+            <p align="right" style="font-family: Arial Unicode MS; font-size: 12px; ">Date:<b>{!DAY(TODAY())}-{!MONTH(TODAY())}-{!YEAR(TODAY())}</b></p>
+            <apex:repeat value="{!OppDetails}" var="op">
+            <h4 style="font-family: Arial Unicode MS;"><b>Project Name: {!op.opp.Name}</b></h4>
+            <h5 style="font-family: Arial Unicode MS;"><b>To,<br/>{!op.customerName}</b><br/>{!op.customerBillingStreet}<br/>{!op.customerBillingCity}</h5>
+            
+            
+            <p align="left" style="font-family: Arial Unicode MS; font-size: 12px;">
+            Kind Attn:<br/>
+            Dear Sir,<br/>
+            Thanks for your interest in Ashirvad Products. As discussed, please find our offer as below.
+            </p>
+         
+            <h4 style="font-family: Arial Unicode MS;"><b>Offer Details:</b></h4>
+            <table style="font-family: Arial Unicode MS; font-size: 12px; ">
+                
+                <tr class="trHead">
+                    <th>Products</th><th class="blueClass">Discount on MRP %</th><th>MRP Date</th><th>Price Validity</th>
+                </tr>
+
+                <apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td><b>{!pro.product2.name}</b></td>                    
+                    
+                    <td class="blueClass">{!pro.Addl_Discount_Required__c}</td>                   
+                   
+                    
+                    <td>&nbsp;<apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Price_List_Date__c}" /> </apex:outputText>&nbsp;</td>
+
+                    <td>&nbsp;<apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!pro.Validity_for_the_Price__c}" /> </apex:outputText>&nbsp;</td>                                        
+                </tr>        
+                </apex:repeat>                
+            </table>
+
+                      
+
+            <h4 style="font-family: Arial Unicode MS; "><b>Terms and Conditions</b></h4>            
+                
+                <p align="left" style="font-family: Arial Unicode MS; font-size: 12px;">
+                <b>1. Price basis: {!op.opp.Price_Basis__c}</b><br/>
+                <b>2. Offer valid till: {!op.opp.Offer_Valid_Till__c}</b><br/>
+                <b>3. Delivery Condition Guarantee: {!op.opp.Delivery_Conditions_Gurantee__c}</b><br/>
+                <b>4. Taxes: {!op.opp.Taxes__c}</b><br/>
+                <b>5. Payment Terms: {!op.opp.Payment_Term__c}</b><br/>
+                <b>6. Delivery:{!op.opp.Delivery__c}</b><br/>
+                </p>
+
+                <!--<apex:repeat var="pro" value="{!op.oppProdList}">
+                <tr>       
+                    <td class="trCenter"><b>{!pro.product2.name}</b></td>
+                    <td>{!pro.Payment_Terms__c}</td>                    
+                </tr>        
+                </apex:repeat> -->
+            
+
+            </apex:repeat>
+        </body>
+    </html>
+</apex:page>

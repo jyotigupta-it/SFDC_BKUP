@@ -1,0 +1,61 @@
+<apex:page sidebar="false" showHeader="false" controller="promotionclass">
+ 
+ <!--<script>
+function myFunction()
+{
+document.getElementById('demo').innerHTML="SUCCESSFULLY REGISTERED!";
+
+var x=document.getElementById('fn').value
+
+if(x==""||x=="null")
+{
+alert("first name should not be empty");
+}
+}
+
+</script>-->
+  
+   
+    <apex:form id="frm" >
+        
+         <apex:sectionHeader title="New Promotion" />
+         <apex:pageBlock id="pb">
+              
+              <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}" />
+                  <apex:commandButton value="Save & New" action="{!quicksave}" />
+                   <apex:commandButton value="Cancel"  action="https://cs1.salesforce.com/a0N/o" />  
+              </apex:pageBlockButtons>
+             
+             <table align="center">
+             <tr><td>
+             <apex:outputLabel value="Type"/>
+                  <apex:inputField value="{!prm.Type__c}" required="True"/>
+                  
+                  </td>
+                  <td>
+                  <apex:inputField value="{!prm.Vertical__c}" required="True"/>
+                  </td>
+                  
+                  </tr></table><br/>
+                  
+                  <apex:pageBlockSection title="Information" columns="2" id="pbs">
+                  <apex:inputField value="{!prm.Total_no_of_attendees__c}" id="ta" required="True"/>
+                 <!-- <apex:inputField value="{!prm.No_of_Enquiries__c}" required="True"/> -->
+                  <apex:inputField value="{!prm.Total_Expenses__c}" id="te" required="True"/>
+                   <apex:inputField value="{!prm.Distributor__c}"/>
+                   <apex:inputField value="{!prm.Projects__c}"/>
+                   <apex:inputField value="{!prm.Dealer1__c}"/>
+                   <apex:inputField value="{!prm.Date__c}" required="True"/>
+                   <apex:inputField value="{!prm.State__c}" required="True"/>
+                   <apex:inputField value="{!prm.District__c}" required="True"/>
+                   <apex:inputField value="{!prm.Location__c}" required="True"/>
+                   <apex:inputField value="{!prm.Report_c__c}"/>
+                   <apex:inputField value="{!prm.Gifts_given__c}"/>
+                   <!--<apex:inputField value="{!prm.Site_Visit__c}"/> -->
+                   
+                   </apex:PageBlockSection>
+                 
+          </apex:pageBlock>
+      </apex:form>
+  </apex:page>

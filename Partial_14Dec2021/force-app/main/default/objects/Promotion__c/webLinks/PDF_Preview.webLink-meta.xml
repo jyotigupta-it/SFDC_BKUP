@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PDF_Preview</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>PDF Preview</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/25.0/connection.js&quot;)}
+var check1 = {!Promotion__c.Percent_of_attendees__c} 
+
+if(check1&gt;70){ 
+var url=&quot;/apex/New_Promotion_PDF?id={!Promotion__c.Id}&quot;; 
+window.open(url,&apos;Popup&apos;,&apos;height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no&apos;); 
+
+} 
+else{ 
+alert(&apos;You need more than 70% of Attendees&apos;); 
+}</url>
+</WebLink>

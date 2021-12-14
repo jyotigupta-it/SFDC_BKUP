@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>From_date_can_only_1st_or_16th</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+      DAY(From_Date__c) &lt;&gt; 1,
+      DAY(From_Date__c) &lt;&gt; 16
+     )</errorConditionFormula>
+    <errorMessage>From Date can only be (1st or 16th)</errorMessage>
+</ValidationRule>

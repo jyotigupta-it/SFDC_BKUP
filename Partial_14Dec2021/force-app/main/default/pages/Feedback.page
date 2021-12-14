@@ -1,0 +1,199 @@
+<apex:page StandardController="Account" extensions="feedback" sidebar="false" >
+<apex:slds />
+      <script type="text/javascript">
+  function loading(val) {
+    if (val) {
+      document.getElementById('contentLoading').style.display = 'block';
+      document.getElementById('contentLoaded').style.display = 'none';
+    }
+    else {
+      document.getElementById('contentLoading').style.display = 'none';
+      document.getElementById('contentLoaded').style.display = 'block';
+    }
+  }
+</script>
+      
+      <apex:form id="butt">
+      
+      <apex:pageMessages />
+    
+        <apex:outputPanel rendered="{!showexisting=false && !showFM=True}" >
+      <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" >
+          <thead>
+            <tr class="slds-text-title_caps">
+                <th>Date</th>
+                <th>Status</th>
+                <th>Call Center Person Name </th>
+                <th>Status Remarks</th>
+            </tr>   
+          </thead>
+          <tbody>       
+              <apex:repeat value="{!f}" var="c"  >
+                             
+                         <tr class="slds-hint-parent">
+                              <td data-label="Date" >
+                                  <div class="slds-truncate" title="Date"><apex:outputField value="{!c.Date__c}" /></div>
+                              </td>
+                              <td data-label="Status">
+                                  <div class="slds-truncate" title="Status">  <apex:actionRegion >
+                                          <apex:inputField value="{!c.Status__c}" required="true">
+                                          <apex:actionSupport event="onchange" rerender="butt,block" status="loading"/>
+                                          </apex:inputField>
+                                          <apex:actionStatus id="loading" onstart="loading(true)" onstop="loading(false)" />
+                                          </apex:actionRegion></div>
+                              </td>
+                              <td data-label="Call Center Person Name ">
+                                  <div class="slds-truncate" title="Call Center Person Name "> <apex:inputField value="{!c.Call_Center_Person_Name__c}" /></div>
+                              </td>
+                              <td data-label="Status Remarks">
+                                  <div class="slds-truncate" title="Status Remarks "><apex:inputField value="{!c.Status_Remarks__c}" /></div>
+                              </td>
+                          </tr>
+                    
+              </apex:repeat>
+          </tbody>
+      </table> 
+       </apex:outputPanel>
+       
+       
+     <div rendered="{!f.Status__c!='Feedback Given' && f.Status__c!=Null}" >     
+        
+        <apex:commandButton styleClass="slds-float_left slds-button slds-button_neutral" value="Add" action="{!Add}" rendered="{!f.Status__c!='Feedback Given' && f.Status__c!=Null}"/> 
+     
+     
+      </div>
+ <div id="contentLoading" style="display:none;">
+                <div style="text-align: center;">
+                   Please Wait....<br/>
+                  <img src="/img/loading.gif" alt="Loading graphic" />
+                </div>
+              </div>                                                               
+              
+      
+      
+      <!--  <apex:pageBlock >
+       
+        <apex:pageBlockSection >   
+        <apex:pageBlockTable value="{!f}" var="c">               
+                             <apex:column headerValue="Date">
+                             <apex:outputField value="{!c.Date__c}" />
+                             </apex:column>
+                             
+                                          <apex:column headerValue="Status">
+                                          <apex:actionRegion >
+                                          <apex:inputField value="{!c.Status__c}" required="true">
+                                          <apex:actionSupport event="onchange" rerender="butt,block" status="loading"/>
+                                          </apex:inputField>
+                                          <apex:actionStatus id="loading" onstart="loading(true)" onstop="loading(false)" />
+                                          </apex:actionRegion>
+                                          </apex:column>
+                                          
+                                          
+                                          
+                                                       <apex:column headerValue="Call Center Person Name" >
+                                                      
+                                                       </apex:column>
+                                                       
+                                                                    <apex:column headerValue="Status Remarks" >
+                                                                    <apex:inputField value="{!c.Status_Remarks__c}" />
+                                                                    </apex:column>
+                                                                    
+                                                                    </apex:pageBlockTable>
+                                                                    </apex:pageBlocksection>
+                                                                    
+                <apex:pageBlockSection rendered="{!f.Status__c!='Feedback Given' && f.Status__c!=Null}">
+                    <apex:commandButton  value="Add" action="{!Add}" rendered="{!f.Status__c!='Feedback Given' && f.Status__c!=Null}"/> 
+                </apex:pageBlockSection>-->
+                 <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" >
+                 <apex:outputPanel title="Applicable State Feedbacks" id="block">
+          <thead>
+            <tr class="slds-text-title_caps">
+                <th>Checkbox</th>
+                <th>Feedback Master Name</th>
+                <th>Active </th>
+                <th>Applicable State</th>
+            </tr>   
+          </thead>
+          <tbody>       
+              <apex:repeat value="{!fb}" var="e"   >
+                             
+                         <tr class="slds-hint-parent">
+                              <td data-label="Checkbox" >
+                                  <div class="slds-truncate" title="Checkbox"> <apex:inputfield value="{!e.Checkbox__c}"/></div>
+                              </td>
+                              <td data-label="Feedback Master Name">
+                                  <div class="slds-truncate" title="Feedback Master Name">    <apex:Outputfield value="{!e.Name}"/>
+                                          </div>
+                              </td>
+                              <td data-label="Active ">
+                                  <div class="slds-truncate" title="Active ">  <apex:Outputfield value="{!e.Active__c}"/></div>
+                              </td>
+                              <td data-label="Applicable State">
+                                  <div class="slds-truncate" title="Applicable State "><apex:Outputfield value="{!e.Applicable_State__c}"/></div>
+                              </td>
+                          </tr>
+                    
+              </apex:repeat>
+              
+          </tbody>
+          <apex:commandButton styleClass="slds-float_left slds-button slds-button_neutral"  value="Next" action="{!Next}"/>
+                <apex:commandButton styleClass="slds-float_left slds-button slds-button_neutral"  value="Cancel" action="{!Cancel}"/>
+           </apex:outputPanel>
+      </table> 
+            
+                <!-- <apex:pageBlock >
+                 <apex:outputPanel title="Applicable State Feedbacks" id="block">
+                 
+                <apex:pageBlockTable value="{!fb}" var="e" >
+                <apex:column >
+                <apex:inputfield value="{!e.Checkbox__c}"/>
+                </apex:column>
+                <apex:column headerValue="Feedback Master Name">
+                <apex:Outputfield value="{!e.Name}"/>
+                </apex:column>
+                <apex:column headerValue="Active">
+                <apex:Outputfield value="{!e.Active__c}"/>
+                </apex:column>
+                <apex:column headerValue="Applicable State" >
+                <apex:Outputfield value="{!e.Applicable_State__c}"/>
+                </apex:column>
+                
+                
+                
+                </apex:pageBlockTable>
+                <apex:commandButton value="Next" action="{!Next}"/>
+                <apex:commandButton value="Cancel" action="{!Cancel}"/>
+                
+            </apex:outputPanel>
+        </apex:pageBlock>-->
+        
+        <apex:pageBlock rendered="{!showFM=True}">
+        <apex:repeat value="{!AllcheckedFm}" var="f1">
+            <apex:pageBlockTable value="{!f1.Feedback_Master_Line_Items__r}" var="l">
+            <!--<apex:column headerValue="FeedBack Master Name">
+                    <apex:OutputText value="{!f1.Name}"/>
+                </apex:column>-->
+            
+                <apex:column headerValue="Serial No.">
+                    <apex:OutputText value="{!l.Display_Order__c}"/>
+                </apex:column>
+                <apex:column headerValue="Question">
+                    <apex:OutputText value="{!l.Question__c}"/>
+                </apex:column>
+                <apex:column headerValue="Response">
+                    <apex:inputTextArea value="{!l.Answer__c}" rows="3" cols="60"/>
+                </apex:column>
+            </apex:pageBlockTable>
+             <apex:pageBlockTable value="{!fo}" var="co">               
+                             <apex:column headerValue="Over All Satisfaction">
+                             <apex:inputField value="{!co.Overall_Satisfaction__c}" required="true"/>
+                             </apex:column>
+                             </apex:pageblocktable>
+        </apex:repeat>
+        <apex:commandButton value="Save All" action="{!Saveall}"/>
+        <apex:commandButton value="Cancel" action="{!Cancel}"/>
+    </apex:pageBlock>
+      
+       
+  </apex:form>    
+</apex:page>

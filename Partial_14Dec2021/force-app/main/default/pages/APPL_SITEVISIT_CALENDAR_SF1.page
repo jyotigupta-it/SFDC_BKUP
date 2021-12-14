@@ -1,0 +1,2272 @@
+<!--++----------------------------------------------------------------------
+||        Author      : BABA
+||
+||       Purpose     : Browser - Adding Visit - Project Visit and Other Activities 
+||                  
+||        Modified By : 02/07/2015 / Baba
+|| 
+||        Reason      : Code beautification/Review and made code to follow the best practices. 
+++----------------------------------------------------------------------- -->
+<apex:page standardcontroller="Target__c" extensions="APPL_SITEVISIT_CALENDAR_CTRL" showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" >
+
+<c:AP_Calendar_Component />
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<apex:includeScript value="{!URLFOR($Resource.Moment)}"/>
+
+<title>Ashirvad Site-Visit Execution</title>
+<style>
+  #calendar {
+        display: inline-block;
+        vertical-align: top;
+        width: 90%;
+        height: 90%;
+        }
+        .disable{
+            color:red;
+        }
+  div#datePicker {
+          left: 63% !important;
+          top: 361px;
+          z-index: 10000 !important;
+          }
+              
+  #wrap {
+          width: 90%;
+          margin: 0 auto;
+          font-size: 20px;
+          font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+          padding-left: 30px;
+      }
+          
+          .leftPanel{
+              width: 100%;
+          } 
+          .fc-event-time, .fc-event-title {
+                  font-size: 15px !important;
+                }
+          #external-events {
+              display: inline-block;
+              vertical-align: top;
+              width: 300px;
+              font-size: 15px;
+              padding: 0;
+              text-align: left;
+              border-radius:5px 5px 0 0;
+          }
+          .dataWidgets{
+              background: #14558E;
+              box-shadow: 1px 1px 1px #000672;
+              color: #fff;
+              padding: 5px;
+              border-radius: 5px;
+          }
+          .heading {
+              margin-top: 0;
+              padding-top: 1em;
+              background-color: #62BBE9;
+              color: #000;
+              font-size: 14px;
+              font-weight: normal;
+              padding: 6px;
+              height: 12px;
+              border-radius: 5px 5px 0 0;
+          }
+.astriskStyle{
+          color:#FF0000;
+          font-size: 20px;
+          line-height: 8px;
+          margin-left: -7px;
+      }
+
+    div.myImage
+    {
+        display: none;
+    }
+
+    h3,h2,h4{
+        font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+    }
+
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;border-top-width:1px;border-bottom-width:1px;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;border-top-width:1px;border-bottom-width:1px;}
+.tg .tg-9agx{font-weight:bold;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+.tg .tg-il5c{background-color:#D2E4FC;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+.tg .tg-vn4c{background-color:#D2E4FC}
+
+.ex  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.ex td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.ex th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.ex .ex-733k{font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+.ex .ex-il5c{background-color:#D2E4FC;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+
+
+.exp  {border-collapse:collapse;border-spacing:0;border-color:#999;width:100%}
+.exp td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.exp th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.exp .exp-64mc{font-size:14px;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+.exp .exp-cf6s{background-color:#D2E4FC;font-size:14px;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;}
+.exp .exp-ztk1{font-size:14px;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;;background-color:#26ade4;color:#ffffff}
+.exp .exp-c20x{background-color:#D2E4FC;font-size:14px;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;;text-align:right}
+.exp .exp-8m9r{font-size:14px;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;;text-align:right}
+.exp .exp-0aqu{font-size:14px;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;;text-align:center}
+
+
+.ui-dialog .ui-dialog-titlebar-close {
+  width: 40px;
+  /*display: none !important;*/
+}
+
+.loader
+{
+background-image: url({!$Resource.Redcircle});
+background-repeat: no-repeat
+background-position: center;
+height:100px;
+}
+.ui-widget-header {
+  color: #2779AA;
+font-weight: bold;
+font-size: large;
+}
+
+.Error{
+  color: #FF0000;
+  font-size: small;
+  font-family: sans-serif;
+  margin: 0px;
+}
+
+</style>
+<body>
+
+<apex:include pageName="CSS_Daily_Visit_Plan"/>
+
+   <apex:actionstatus id="as1">
+          <apex:facet name="start">
+              <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;z-index: 115;overflow:hidden;position:fixed;"> 
+                <div class="waitingHolder" >
+                  <img class="waitingImage" src= "{!$Resource.Redcircle}" style="width: 90%;height: 40%;" title="Please Wait..." />
+                </div>
+              </div>
+          </apex:facet>
+      </apex:actionstatus>
+
+
+      <div id="header" style="background-color: #62BBE9;">
+          <div class="headerCont">
+              <div id="logo">                           
+                  <img src="{!$Resource.newLogo}" alt="Ashirvad Logo" width="180" height="60"  >
+                  </img>
+              </div>
+          </div>
+      </div>
+      <!-- Main Calender -->
+      <div id='wrap'>
+              <div class="leftPanel">
+                  <div id='calendar'></div>&nbsp;
+              </div>
+               <div id='external-events' style="display:none;">
+      <h3>Promotional Activity</h3>
+           <apex:outputPanel id="FilterResults" styleClass="filterResults" layout="block">  
+              <table class="tg" cellpadding="0" cellspacing="0" border="1" style="background-color: white;" id="example">
+                  <tr>
+                    <th><center>Promotion Type</center></th>
+                    <th><center>Target</center></th>
+                    <th><center>Actual</center></th>
+                    <th><center>Promotion Type</center></th>
+                    <th><center>Target</center></th>
+                    <th><center>Actual</center></th>
+                  </tr>
+                  
+                  <apex:repeat value="{!targetWrapperList_Promotional}" var="w">
+                  <tr>
+                  <td class="tg-il5c">
+                              <div>{!w.targetWrapper1.activityName}</div>
+                                                     </td>
+                                                     <td class="tg-733k">
+                                                     <center><apex:outputtext value="{!IF((w.targetWrapper1.targetValue == ''), '0', w.targetWrapper1.targetValue)}"/></center>
+                                                     </td>
+                  <td><span><center>{!w.targetWrapper1.actuvalValue}</center></span> </td>
+                       <td class="tg-il5c">
+                           <div>{!w.targetWrapper2.activityName}</div>
+                                                  </td>
+                         <td width="100px" class="contentCls tg-733k"><span><center><apex:outputtext value="{!IF((w.targetWrapper2.targetValue == ''), '0', w.targetWrapper2.targetValue)}"/></center></span></td>
+                         <td> 
+                           <span><center>{!w.targetWrapper2.actuvalValue}</center></span>
+                         </td>
+                         
+                          </tr>
+                  </apex:repeat>
+              </table>
+                     </apex:outputPanel> 
+                   
+                   
+                   <h3>Retailing</h3>
+                   <apex:outputPanel layout="block" style="height:auto;">
+                   <table class="tg" cellpadding="0" cellspacing="0" border="1" style="background-color: white;" id="example">
+                   
+                  <tr>
+                      <th><center><b>Type</b></center></th>
+                      <th><center><b>Target</b></center></th>
+                      <th><center><b>Actual</b></center></th>
+                  </tr>
+                  
+                  <apex:repeat value="{!targetWrapperList_Retailing}" var="w">
+                      <tr>
+                          <td class="tg-il5c"> <div>{!w.activityName}</div></td>
+                          <td class="contentCls tg-733k"><span><center><apex:outputtext value="{!IF((w.targetValue == ''), '0', w.targetValue)}"/></center></span></td>
+                          <!-- <apex:outputPanel rendered="{!Target__c.Vertical__c == 'Plumbing'}">
+                            <td class="tg-il5c" rowspan="5"><span>{!Target__c.Retailing_days_field_work__c}</span>
+                            </td>
+                          </apex:outputPanel>
+                          <apex:outputPanel rendered="{!Target__c.Vertical__c != 'Plumbing'}"> -->
+                           <td  style="  border-top-width: 0px;"><center><apex:outputtext value="{!IF((w.actuvalValue == ''), '0', w.actuvalValue)}"/></center></td>
+                          <!-- </apex:outputPanel> -->
+                      </tr>
+                  </apex:repeat>
+              </table>
+                   
+                   </apex:outputPanel>
+                   
+                   <h3>Market Development</h3>
+                   <apex:outputPanel layout="block" style="height:auto;">
+                   <table cellpadding="0" cellspacing="0" border="1" style="background-color: white;" id="example" class="tg">
+                    
+                  <tr>
+                      <th width="200px"><center><b>Type</b></center></th>
+                      <th width="100px"><center><b>Target</b></center></th>
+                       <th width="100px"><center><b>Actual</b></center></th>
+                  </tr>
+                  
+                  <apex:repeat value="{!targetWrapperList_market}" var="w">  
+                      <tr>
+                          <td class="tg-il5c">
+                              <div>{!w.activityName}</div>
+                          </td>
+                          <td class="contentCls tg-733k"><span><center><apex:outputtext value="{!IF((w.targetValue == ''), '0', w.targetValue)}"/></center></span></td>
+                          <td><center><apex:outputtext value="{!IF((w.actuvalValue == ''), '0', w.actuvalValue)}"/></center></td>
+                          <!-- <td class="tg-il5c"><span>{!Target__c.New_Markets_Opened_Actuals__c}</span></td>Primary_Sales_Actuals__c -->
+                      </tr>
+                  </apex:repeat>
+              </table>
+                   
+                   </apex:outputPanel>
+                   
+                   <h3>Primary Sales</h3>
+                   <apex:outputPanel layout="block" style="height:auto;">
+                   <table cellpadding="0" cellspacing="0" border="1" style="background-color: white;" id="example" class="tg">
+                  <tr>
+                      <th width="200px"><center><b>Type</b></center></th>
+                      <th width="100px"><center><b>Target</b></center></th>
+                  </tr>
+                  
+                  <apex:repeat value="{!targetWrapperList_primarySales}" var="w">
+                      <tr>
+                          <td width="200px" class="tg-il5c">
+                              <div>{!w.activityName}</div>
+                          </td>
+                          <td width="100px" class="contentCls tg-733k"><span><center><apex:outputtext value="{!IF((w.targetValue == ''), '0', w.targetValue)}"/></center></span></td>
+                      </tr>
+                      </apex:repeat>
+                  <tr>
+                   <th>Actual</th>
+                   <th><center>
+                      <apex:outputText value="{0, number, ###}">
+                            <apex:param value="{!Target__c.Primary_Sales_Actuals__c}" />
+                      </apex:outputText>
+                    </center>
+                   </th>
+                  </tr>
+              </table> 
+                   </apex:outputPanel>     
+      </div>
+      
+          </div>
+
+
+<!-- POP-IP FOR Site Visit ordBlk-->
+<div id="eventContent" title="Event" style="display:none;font-size:15px;background-color:white; !important;">
+    <apex:form id="frm">
+
+    <apex:actionFunction name="jsInitializeModal" action="{!initializeModal}"   reRender="visitBlk,readVisits,readWriteVisit,ordBlk,holidayBlk,leaveBlk,meetingBlk,promotionalBlk,trainingBlk,mainExp" oncomplete="onInitCompleteHandler()" status="as1">
+        <apex:param id="iniTourId" name="iniTour" value="" />
+        <apex:param id="iniTourDateId" name="iniTourDate" value="" />
+        <apex:param id="iniTourVerId" name="tourVertical" value="" />
+        <apex:param id="dateDiffId" name="dateDiff" value="" />
+    </apex:actionFunction>
+
+
+    <apex:actionFunction name="jsSaveVisits" action="{!saveVisits}" reRender="visitBlk,ordBlk,holidayBlk,leaveBlk,meetingBlk,promotionalBlk,trainingBlk,mainExp,expEditTable,expNewTable" oncomplete="closePopUp();" status="as1">
+        <apex:param id="tourId" name="tourId" value="" />
+        <apex:param id="tourDateId" name="tourDate" value="" />
+    </apex:actionFunction>
+
+      <div id="accordion">
+            <h3>Visit</h3>
+            <!-- This is  -->
+            <div class="accordion-content default">
+              <apex:outputPanel id="visitBlk">
+              <script type="text/javascript">
+                jsSaveExpense = {!extraordinaryExp};
+                console.log('jsSaveExpense in Visit Block '+jsSaveExpense);
+              </script>
+                  <div class="panel-body" >
+                          <!-- Visit For Vistical = Column and Plumbing -->
+                        <apex:outputPanel rendered="{!readWriteMode}">
+                           <apex:outputPanel id="siteVisitList" rendered="{!isPlumbingColumn && readWriteMode}">
+                                  <apex:outputPanel rendered="{!visitList.size !=0}">  
+                                   <table class="tg" style=" width: 100%">
+                                   
+                                    <thead>
+                                      <tr>
+                                          <th class="tg-9agx"></th>
+                                          <th class="tg-9agx">Sl.No</th>
+                                          <th class="tg-9agx">Party Type <sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Party Name <sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Taluk / Tehsil</th>
+                                          <th class="tg-9agx">Add Party</th>
+                                          <th class="tg-9agx">Purpose of Visit <sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Products</th>
+                                          <th class="tg-9agx">Order Value</th>
+                                          <th class="tg-9agx">Remarks<sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Competitors Information</th>
+                                      </tr>
+                                    </thead>
+                                   
+                                    <tbody>
+                                    <apex:variable value="{!1}" var="visitCount"/>
+                                      <apex:repeat var="visit" value="{!visitList}">
+                                      <tr>
+
+                                      <td class="tg-031e">
+
+                                       <apex:commandLink action="{!RemoveVL}"  onclick="if(!confirm('Are you sure?')){return};" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.AP_Remove_Icon}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.id == null )}" title="Remove Visit"/>
+                                          <apex:param name="visitCount" value="{!visitCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!EditVL}" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.RecordEdit__c)}" title="Edit Visit"/>
+                                          <apex:param name="visitCount" value="{!visitCount}"/>
+                                        </apex:commandLink>
+                                        <apex:commandLink action="{!DeleteVL}" onclick="if(!confirm('Are you sure?')){return};" reRender="visitBlk" status="as1"> 
+                                          <apex:image url="{!$Resource.deleteBtn}" width="20" height="20" style="padding-left: 15px;" title="Delete Visit" rendered="{!(visit.RecordEdit__c)}"/>
+                                          <apex:param name="visitCount" value="{!visitCount}"/>
+                                        </apex:commandLink>
+                                        <apex:commandLink action="{!CancelVL}" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Canvel" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null}"/>
+                                          <apex:param name="visitCount" value="{!visitCount}"/>
+                                        </apex:commandLink>
+                                        <apex:commandLink action="{!SaveVL}" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" title="Save" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null }" />
+                                          <apex:param name="visitCount" value="{!visitCount}"/>
+                                        </apex:commandLink>
+                                      </td>
+
+                                      <td class="tg-031e" style="text-align: center">{!visitCount}</td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Party_Type__c}" styleClass="required" id="partyTypeId" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                        <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Party_Type__c}" rendered="{!visit.RecordEdit__c}" /> 
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Party_Name__c}"  id="partyNameId" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                        <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Party_Name__c}" rendered="{!visit.RecordEdit__c}"/> </td>
+                                          <td class="tg-031e">
+                                             <apex:inputField value="{!visit.Taluka__c}"  style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" />                                         
+                                             <apex:outputField value="{!visit.Taluka__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:image id="theImage" title="Add New Party" styleClass="imgClass" value="{!$Resource.AddIcon}" width="20" height="20" onclick="openAccountPopup('{!$Component.partyTypeId}',{!visitCount}); return false;"  style="cursor:pointer;" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                        <apex:image styleClass="imgClass" value="{!$Resource.DisabledAddIcon}" width="20" height="20" rendered="{!(visit.RecordEdit__c)}" style="cursor:not-allowed"/>
+                                      </td>
+                                      
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Purpose_of_Visit__c}" styleClass="required" id="purposeId" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                         <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Purpose_of_Visit__c}" rendered="{!visit.RecordEdit__c}" /> 
+                                      </td>
+                                     
+                                      <td class="tg-031e">
+                                      <apex:outputPanel id="pro" rendered="{!NOT(visit.RecordEdit__c)}">
+                                        <select class="form-control multSel" id="visProList" multiple="true" size="3" style="width:150px" onblur="setProducts('visProList','{!$Component.visProducts}')">
+                                             <apex:repeat value="{!productList}" var="pro">
+                                                <Option value="{!pro}">{!pro}</Option>
+                                              </apex:repeat>
+                                          </select>
+                                      </apex:outputPanel>
+                                      <apex:inputHidden value="{!visit.Products__c}" id="visProducts"/>
+                                      <apex:outputField value="{!visit.Products__c}" rendered="{!visit.RecordEdit__c}" />
+                                      </td>
+
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Order_Value__c}" id="visOrdVal" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}"/>                                          
+                                        <apex:outputField value="{!visit.Order_Value__c}" rendered="{!visit.RecordEdit__c}" /> 
+                                      </td>
+
+                                       <td class="tg-031e"><apex:inputField value="{!visit.Remarks__c}" id="remarksId" style="width:150px" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                         <apex:outputField value="{!visit.Remarks__c}" rendered="{!visit.RecordEdit__c}" />
+                                         </td>
+
+                                       <td class="tg-031e">
+                                       <apex:inputField value="{!visit.Competitors_Information__c}" id="compiInfoId" style="width:150px" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                        <apex:outputField value="{!visit.Competitors_Information__c}" rendered="{!visit.RecordEdit__c}" />
+                                       </td>
+
+                                      </tr>
+                                      <apex:variable value="{!visitCount+1}" var="visitCount"/>
+                                      </apex:repeat>
+                                    
+                                    </tbody>
+                                    </table>
+                                    <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" style="padding-left:15px;cursor:pointer;margin-top: 10px;" onclick="siteVisitList();" title="Add New Entery" rendered="{!readWriteMode}" />
+                                    <apex:actionFunction action="{!addSiteVisitIns}" name="siteVisitList" reRender="visitBlk" status="as1" />
+                                 </apex:outputPanel>
+
+                              <apex:outputPanel rendered="{!visitList.size ==0}"> 
+                                <apex:actionFunction name="addColoums" action="{!addColoums}" reRender="visitBlk" status="as1"/>
+                                <tr>
+                                  <td>
+                                    Select Number of Visits : 
+                                  </td>
+                                  <td>
+                                  <apex:selectList onchange="jsNonProjectAdd();" multiselect="false" size="1" value="{!FileCount}" id="num">
+                                      <apex:selectOption itemLabel="--None--" itemValue=""/>
+                                      <apex:selectOptions value="{!filesCountList}"/>
+                                  </apex:selectList>
+                                  </td>
+                                </tr>
+                                
+                            </apex:outputPanel>
+
+                            </apex:outputPanel>
+
+                             <apex:outputPanel id="projectVisitBlk" rendered="{!NOT(isPlumbingColumn && readWriteMode)}">
+                                <apex:outputPanel rendered="{!projectList.size !=0}">   
+                                   <table class="tg" style=" width: 100%">
+                                    <thead>
+                                      <tr>
+
+                                          <th class="tg-9agx"></th>
+                                          <th class="tg-9agx">Sl.No</th>
+                                          <th class="tg-9agx">Party Type <sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Party Name <sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Taluk / Tehsil</th>
+                                          <th class="tg-9agx">Add Party</th>
+                                          <th class="tg-9agx">Project Name</th>
+                                          <th class="tg-9agx">Purpose of Visit<sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Point Discussed<sub class="astriskStyle"> * </sub></th>
+                                          <th class="tg-9agx">Action Plan</th>
+                                          <th class="tg-9agx">Action Date</th>
+                                          <th class="tg-9agx">Task To</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <apex:variable value="{!1}" var="projectCount"/>
+                                      <apex:repeat var="visit" value="{!projectList}">
+                                      <tr>
+
+                                       <td class="tg-031e">
+
+                                     <apex:commandLink action="{!RemovePVL}" onclick="if(!confirm('Are you sure?')){return};" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.AP_Remove_Icon}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.id == null )}" title="Remove Visit"/>
+                                          <apex:param name="projectCount" value="{!projectCount}"/>
+                                        </apex:commandLink>
+
+                                      <apex:commandLink action="{!EditPVL}" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.RecordEdit__c)}" title="Edit Visit"/>
+                                          <apex:param name="projectCount" value="{!projectCount}"/>
+                                      </apex:commandLink>
+                                      <apex:commandLink action="{!DeletePVL}" onclick="if(!confirm('Are you sure?')){return};" reRender="visitBlk" status="as1">
+                                        <apex:image url="{!$Resource.deleteBtn}" rendered="{!(visit.RecordEdit__c)}" width="20" height="20" style="padding-left: 15px;"/>
+                                          <apex:param name="projectCount" value="{!projectCount}"/>
+                                      </apex:commandLink>
+                                        <apex:commandLink action="{!CancelPVL}" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Canvel" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null}"/>
+                                          <apex:param name="projectCount" value="{!projectCount}"/>
+                                        </apex:commandLink>
+                                        <apex:commandLink action="{!SavePVL}" reRender="visitBlk" status="as1">
+                                          <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" title="Save" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null }" />
+                                          <apex:param name="projectCount" value="{!projectCount}"/>
+                                        </apex:commandLink>
+                                    </td>
+
+                                      <td class="tg-031e" style="text-align: center">{!projectCount}</td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Party_Type__c}" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" id="partyProTypeId" styleClass="required" onchange="checkForProject(this.id,'{!$Component.partyProName}');"/>
+                                         <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Party_Type__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Party_Name__c}" id="partyProName" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" /> 
+                                         <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Party_Name__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                        <td class="tg-031e">
+                                            <apex:inputField value="{!visit.Taluka__c}"  style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" />                                         
+                                             <apex:outputField value="{!visit.Taluka__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      
+                                      <td class="tg-031e">
+                                        <apex:image id="theProImage" title="Add New Party" styleClass="imgClass" value="{!$Resource.AddIcon}" width="20" height="20" onclick="openAccountPopup('{!$Component.partyProTypeId}',{!projectCount}); return false;" rendered="{!NOT(visit.RecordEdit__c)}" style="cursor:pointer;" />
+                                        <apex:image styleClass="imgClass" value="{!$Resource.DisabledAddIcon}" width="20" height="20" rendered="{!(visit.RecordEdit__c)}" style="cursor:not-allowed"/>
+                                      </td>
+                                      
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Project_Name__c}" id="purposeProId" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" />
+                                         <apex:outputField value="{!visit.Project_Name__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Purpose_of_Visit__c}" id="purposeOfVisit" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                         <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Purpose_of_Visit__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Point_Discussed__c}" id="pointsId" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                         <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Point_Discussed__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Action_Plan__c}" id="proActPlan" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                        <apex:outputField value="{!visit.Action_Plan__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+
+                                     <td class="tg-031e">
+                                      <apex:inputField value="{!visit.Action_Date__c}" id="proActDate" rendered="{!NOT(visit.RecordEdit__c)}" onfocus="blur();"/>
+                                      <apex:outputField value="{!visit.Action_Date__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+
+                                    <td class="tg-031e">
+                                      <apex:inputField value="{!visit.Task_To__c}" id="taskToId" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                      <apex:outputField value="{!visit.Task_To__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+                                     
+                                  </tr>
+                                  <apex:variable value="{!projectCount+1}" var="projectCount"/>
+                                  </apex:repeat>
+                                </tbody>
+                              </table>
+
+                              <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" style="padding-left:15px;  margin-top: 10px;" onclick="projectVisitList();" rendered="{!readWriteMode}"/>
+                              <apex:actionFunction action="{!addProjectVisitIns}" name="projectVisitList" reRender="visitBlk" status="as1" oncomplete="addDatePicker();" />
+
+                            </apex:outputPanel> 
+
+                            <apex:outputPanel rendered="{!projectList.size ==0}"> 
+                                <apex:actionFunction name="addProjects" action="{!addProjects}" reRender="visitBlk" status="as1"/>
+                                <tr>
+                                  <td>
+                                    Select Number of Visits : 
+                                  </td>
+                                  <td>
+                                  <apex:selectList onchange="jsProjectAdd();" multiselect="false" size="1" value="{!FileCount}" >
+                                      <apex:selectOption itemLabel="--None--" itemValue=""/>
+                                      <apex:selectOptions value="{!filesCountList}"/>
+                                  </apex:selectList>
+                                  </td>
+                                </tr>
+                            </apex:outputPanel>
+
+                          </apex:outputPanel>
+                      </apex:outputPanel>
+
+                        <apex:outputPanel rendered="{!NOT(readWriteMode)}">
+                             <apex:outputPanel rendered="{!isPlumbingColumn && readMode}">
+                                <apex:outputPanel rendered="{!visitList.size == 0}">
+                                   <h4 style="color:#7f8c8d;" align="center">No Record Found.</h4>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!visitList.size != 0}">
+                                 <table class="tg" style=" width: 100%">
+                                    <thead>
+                                      <tr>
+                                          <th class="tg-9agx">Sl.No</th>
+                                          <th class="tg-9agx">Party Type </th>
+                                          <th class="tg-9agx">Party Name </th>
+                                           <th class="tg-9agx">Taluk / Tehsil</th>
+                                          <th class="tg-9agx">Purpose of Visit </th>
+                                          <th class="tg-9agx">Products</th>
+                                          <th class="tg-9agx">Order Value</th>
+                                          <th class="tg-9agx">Remarks</th>
+                                          <th class="tg-9agx">Competitors Information</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     <apex:variable value="{!1}" var="visitCount"/>
+                                     <apex:repeat var="visit" value="{!visitList}">
+                                      <tr>
+                                        <td class="tg-031e" style="text-align: center">{!visitCount}</td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Party_Type__c}"/></td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Party_Name__c}"/> </td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Purpose_of_Visit__c}"/></td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Products__c}" /></td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Order_Value__c}"/></td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Remarks__c}"/></td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Competitors_Information__c}"/></td>
+                                      </tr>
+                                       <apex:variable value="{!visitCount+1}" var="visitCount"/>
+                                    </apex:repeat>
+                                    </tbody>
+                                  </table>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel rendered="{!NOT(isPlumbingColumn && readMode)}">
+                                <apex:outputPanel rendered="{!projectList.size == 0}">
+                                 <h4 style="color:#7f8c8d;" align="center">No Record Found.</h4>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!projectList.size != 0}">
+                                    <table class="tg" style=" width: 100%">
+                                    <thead>
+                                      <tr>
+                                          <th class="tg-9agx">Sl.No</th>
+                                          <th class="tg-9agx">Party Type </th>
+                                          <th class="tg-9agx">Party Name </th>
+                                           <th class="tg-9agx">Taluk / Tehsil</th>
+                                          <th class="tg-9agx">Project Name</th>
+                                          <th class="tg-9agx">Purpose of Visit</th>
+                                          <th class="tg-9agx">Point Discussed</th>
+                                          <th class="tg-9agx">Action Plan</th>
+                                          <th class="tg-9agx">Action Date</th>
+                                          <th class="tg-9agx">Task To</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <apex:variable value="{!1}" var="projectCount"/>
+                                    <apex:repeat var="visit" value="{!projectList}">
+                                      <tr>
+                                      <td class="tg-031e" style="text-align: center">{!projectCount}</td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Party_Type__c}"/></td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Party_Name__c}" /> </td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Project_Name__c}"/></td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Purpose_of_Visit__c}" /></td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Point_Discussed__c}"/></td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Action_Plan__c}" /></td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Action_Date__c}"/></td>
+                                      <td class="tg-031e"><apex:outputField value="{!visit.Task_To__c}" /></td>
+                                      </tr>
+                                    <apex:variable value="{!projectCount+1}" var="projectCount"/>
+                                    </apex:repeat>
+                                    </tbody>
+                                  </table>  
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                       </div>
+                  </apex:outputPanel>
+            </div><!--End Of Visit-->
+            
+              <!--From Here-->
+               <h3>Other Activities</h3>
+               <div>
+
+                   <div id="accordion2">
+                       <h4>Holiday/ Market Closed - <div class="eventDateDiv" style="display:initial;"></div></h4>
+                           <div class="accordion-content">
+                              <apex:outputPanel id="holidayBlk">
+                                <apex:outputPanel rendered="{!readWriteMode}">
+                                    <table class="tg" style=" width: 100%">
+                                      <thead>
+                                        <tr>
+
+                                            <th class="tg-9agx"></th>
+                                            <th class="tg-9agx">Remarks <sub class="astriskStyle"> * </sub></th>
+
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                       <tr>
+                                         
+                                         <td class="tg-031e">
+                                           <apex:commandLink action="{!EditHI}" reRender="holidayBlk" status="as1">
+                                            <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(holidayVisit.RecordEdit__c)}" title="Edit Holiday"/>
+                                          </apex:commandLink>
+                                          <apex:commandLink action="{!DeleteHI}"  onclick="if(!confirm('Are you sure?')){return};"  reRender="holidayBlk" status="as1">
+                                            <apex:image url="{!$Resource.deleteBtn}" rendered="{!(holidayVisit.RecordEdit__c)}" width="20" height="20" style="padding-left: 15px;" title="Clear Remarks"/>
+                                          </apex:commandLink>
+
+                                            <apex:commandLink action="{!CancelHI}" reRender="holidayBlk" status="as1">
+                                              <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Cancel" rendered="{!readWriteMode && NOT(holidayVisit.RecordEdit__c) && holidayVisit.id != null}" />
+                                            </apex:commandLink>
+
+                                          <apex:commandLink action="{!SaveHI}" reRender="holidayBlk" status="as1">
+                                            <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" rendered="{!readWriteMode && NOT(holidayVisit.RecordEdit__c) && holidayVisit.id != null }" title="Save Holiday"/>
+                                          </apex:commandLink>
+                                         </td>
+                                         <td class="tg-031e">
+                                            <apex:inputField value="{!holidayVisit.Remarks__c}" style="width:75%;" rendered="{!NOT(holidayVisit.RecordEdit__c)}" id="holidayRemarksId" />
+                                            <apex:outputField value="{!holidayVisit.Remarks__c}" rendered="{!(holidayVisit.RecordEdit__c)}"/>
+                                         </td>
+                                       </tr>
+                                      </tbody>
+                                   </table>
+                               </apex:outputPanel>
+
+                               <apex:outputPanel rendered="{!NOT(readWriteMode)}">
+                                   <apex:outputPanel rendered="{!holidayVisit.id != null}">
+                                    <table class="tg" style=" width: 100%">
+                                      <thead>
+                                        <tr>
+                                            <th class="tg-9agx">Remarks</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                       <tr>
+                                         <td class="tg-031e"><apex:outputField value="{!holidayVisit.Remarks__c}"/></td>
+                                       </tr>
+                                      </tbody>
+                                   </table>
+                                 </apex:outputPanel>
+                                 <apex:outputPanel rendered="{!holidayVisit.id == null}">
+                                     <h4 style="color:#7f8c8d;" align="center">No Record Found.</h4>
+                                 </apex:outputPanel>
+                               </apex:outputPanel>
+
+                            </apex:outputPanel>
+                           </div><!--End of Holiday-->
+                       
+                       <h4>Leave - <div class="eventDateDiv" style="display:initial;"></div></h4>
+                           <div>
+                              <apex:outputPanel id="leaveBlk">
+                                <apex:outputPanel rendered="{!readWriteMode}">
+                                  <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>
+                                        <th class="tg-9agx"></th>
+                                        <th class="tg-9agx">Reason for Leave<sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">Compensatory <br/>Leave</th>
+                                        <th class="tg-9agx" style="display:none" id="comLeaveDateTh">Compensatory Leave Date</th>
+                                        <th class="tg-9agx" style="display:{!IF(leaveVisit.Compensatory_Leave__c == 'Yes' && leaveVisit.RecordEdit__c, 'block', 'none')};height: 35px;">Compensatory Leave Date</th> 
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                   <tr>
+                                      <td class="tg-031e">
+                                           <apex:commandLink action="{!EditLI}" reRender="leaveBlk" status="as1">
+                                            <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(leaveVisit.RecordEdit__c)}" title="Edit Holiday"/>
+                                          </apex:commandLink>
+                                          <apex:commandLink action="{!DeleteLI}" onclick="if(!confirm('Are you sure?')){return};"  reRender="leaveBlk" status="as1">
+                                            <apex:image url="{!$Resource.deleteBtn}" rendered="{!(leaveVisit.RecordEdit__c)}" width="20" height="20" style="padding-left: 15px;" title="Clear Remarks"/>
+                                          </apex:commandLink> 
+
+                                            <apex:commandLink action="{!CancelLI}" reRender="leaveBlk" status="as1">
+                                              <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Cancel" rendered="{!readWriteMode && NOT(leaveVisit.RecordEdit__c) && leaveVisit.id != null}" />
+                                            </apex:commandLink>
+
+                                          <apex:commandLink action="{!SaveLI}" reRender="leaveBlk" status="as1">
+                                            <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" rendered="{!readWriteMode && NOT(leaveVisit.RecordEdit__c) && leaveVisit.id != null }" title="Save Holiday"/>
+                                          </apex:commandLink>
+                                         </td>
+
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!leaveVisit.Leave_Reason__c}" style="width:300px;height:40px;" id="leaveReasonId" rendered="{!NOT(leaveVisit.RecordEdit__c)}"/>
+                                        <apex:outputField value="{!leaveVisit.Leave_Reason__c}" rendered="{!(leaveVisit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                      <apex:inputField id="comLeaveId" value="{!leaveVisit.Compensatory_Leave__c}" style="width:100px" rendered="{!NOT(leaveVisit.RecordEdit__c)}"  onChange="showHideDate(this.id)"/>
+                                       <apex:outputField value="{!leaveVisit.Compensatory_Leave__c}" rendered="{!(leaveVisit.RecordEdit__c)}"/>
+                                      </td>
+                                       
+                                      <td class="tg-031e" style="display:none" id="comleaveData">
+                                      
+                                      <apex:inputField value="{!leaveVisit.Compensatory_Leave_Date__c}" id="comLeaveHidden" rendered="{!NOT(leaveVisit.RecordEdit__c)}"/>
+                                      </td>
+
+                                      <td class="tg-031e" style="display:{!IF(leaveVisit.Compensatory_Leave__c == 'Yes' 
+                                      && leaveVisit.RecordEdit__c, 'block', 'none')};  height:50px;">
+                                      <!--  <apex:inputField value="{!leaveVisit.Compensatory_Leave_Date__c}" rendered="{!NOT(leaveVisit.RecordEdit__c)}" /> -->
+                                      <apex:outputField value="{!leaveVisit.Compensatory_Leave_Date__c}" rendered="{!(leaveVisit.RecordEdit__c)}"/>
+                                     </td>
+                                      
+                                  </tr>
+                                </tbody>
+                               </table>
+                              </apex:outputPanel>
+
+                              <apex:outputPanel rendered="{!NOT(readWriteMode)}">
+                                <apex:outputPanel rendered="{!leaveVisit.id != null}">
+                                  <table class="tg" style=" width: 100%">
+                                    <thead>
+                                      <tr>
+                                         <th class="tg-9agx">Reason for Leave</th>
+                                         <th class="tg-9agx">Compensatory <br/>Leave</th>
+                                         <th class="tg-9agx" style="display:{!IF(leaveVisit.Compensatory_Leave__c == 'Yes', 'block', 'none')};height: 35px;">Compensatory Leave Date</th> 
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     <tr>
+                                      <td class="tg-031e"><apex:outputField value="{!leaveVisit.Leave_Reason__c}"/></td>
+                                      <td class="tg-031e"><apex:outputField value="{!leaveVisit.Compensatory_Leave__c}"/></td>
+                                         <td class="tg-031e" style="display:{!IF(leaveVisit.Compensatory_Leave__c == 'Yes', 'block', 'none')}"><apex:outputField value="{!leaveVisit.Compensatory_Leave_Date__c}"/></td>
+                                     </tr>
+                                    </tbody>
+                                 </table>
+                                 </apex:outputPanel>
+                                 <apex:outputPanel rendered="{!leaveVisit.id == null}">
+                                   <h4 style="color:#7f8c8d;" align="center">No Record Found.</h4>
+                                 </apex:outputPanel>
+                               </apex:outputPanel>
+
+                            </apex:outputPanel>
+                           </div>
+                       
+                       <h4>Meeting</h4>
+                            <div>
+                              <apex:outputPanel id="meetingBlk">
+                                <apex:outputPanel rendered="{!(readWriteMode)}">
+                                 <apex:outputPanel rendered="{!meetingVisitList.size !=0}"> 
+                                  <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>
+                                        <th class="tg-9agx"></th>
+                                        <th class="tg-9agx">Sl.No</th>
+                                        <th class="tg-9agx">Meeting Type <sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">State <sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">District <sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">Location <sub class="astriskStyle"> * </sub></th>
+                                         <th class="tg-9agx">Taluka / Tehsil <sub class="astriskStyle">  </sub></th>
+                                        <th class="tg-9agx">MOM <sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">Working with</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  <apex:variable value="{!1}" var="meetCount"/>
+                                   <apex:repeat var="visit" value="{!meetingVisitList}">
+                                   <tr>
+                                        <td class="tg-031e">
+                                        <apex:commandLink action="{!RemoveML}" onclick="if(!confirm('Are you sure?')){return};"   reRender="meetingBlk" status="as1">
+                                          <apex:image url="{!$Resource.AP_Remove_Icon}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.id == null )}" title="Remove Visit"/>
+                                          <apex:param name="meetCount" value="{!meetCount}"/>
+                                        </apex:commandLink>
+
+
+                                         <apex:commandLink action="{!EditML}" reRender="meetingBlk" status="as1">
+                                          <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.RecordEdit__c)}" title="Edit Visit"/>
+                                          <apex:param name="meetCount" value="{!meetCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!DeleteML}" onclick="if(!confirm('Are you sure?')){return};"  reRender="meetingBlk" status="as1">
+                                          <apex:image url="{!$Resource.deleteBtn}" width="20" height="20" style="padding-left: 15px;" title="Delete Meeting" rendered="{!(visit.RecordEdit__c)}"/>
+                                          <apex:param name="meetCount" value="{!meetCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!CancelML}" reRender="meetingBlk" status="as1">
+                                          <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Canvel" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null}"/>
+                                          <apex:param name="meetCount" value="{!meetCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!SaveML}" reRender="meetingBlk" status="as1">
+                                          <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" title="Save" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null }" />
+                                          <apex:param name="meetCount" value="{!meetCount}"/>
+                                        </apex:commandLink>
+                                      </td>
+
+                                      <td class="tg-031e" style="text-align: center">{!meetCount}</td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Meeting_Type__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Meeting_Type__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                       <apex:inputField value="{!visit.State__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                       <p class="Error"></p>
+                                        <apex:outputField value="{!visit.State__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Districts__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                         <apex:outputField value="{!visit.Districts__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Location__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                         <apex:outputField value="{!visit.Location__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                       <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Taluka__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" />
+                                         <p class="Error"></p>
+                                         <apex:outputField value="{!visit.Taluka__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.MOM__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                         <apex:outputField value="{!visit.MOM__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.TL__c}"  rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                         <apex:outputField value="{!visit.TL__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                  </tr>
+                                    <apex:variable value="{!meetCount+1}" var="meetCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                               </table>
+                               </apex:outputPanel>
+                               <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" style="padding-left: 15px;  margin-top: 10px;" onclick="meetingVisit();" title="Add Meeting" />
+                                <apex:actionFunction action="{!meetingVisit}" name="meetingVisit" reRender="meetingBlk" status="as1"/>
+                              </apex:outputPanel>
+                              
+
+                               <apex:outputPanel rendered="{!NOT(readWriteMode)}">
+
+                                 <apex:outputPanel rendered="{!meetingVisitList.size == 0}">
+                                    <h4 style="color:#7f8c8d;" align="center">No Record Found.</h4>
+                                  </apex:outputPanel>
+                                 <apex:outputPanel rendered="{!meetingVisitList.size !=0}"> 
+                                  <table class="tg" style=" width: 100%">
+                                    <thead>
+                                      <tr>
+                                          <th class="tg-9agx">Sl.No</th>
+                                          <th class="tg-9agx">Meeting Type</th>
+                                          <th class="tg-9agx">State</th>
+                                          <th class="tg-9agx">District</th>
+                                          <th class="tg-9agx">Location</th>
+                                          <th class="tg-9agx">MOM</th>
+                                          <th class="tg-9agx">Working with</th>
+                                      </tr>
+                                  </thead>
+                                 <tbody>
+                                  <apex:variable value="{!1}" var="meetCount"/>
+                                   <apex:repeat var="visit" value="{!meetingVisitList}">
+                                     <tr>
+
+                                        <td class="tg-031e" style="text-align: center">{!meetCount}</td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Meeting_Type__c}" /></td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.State__c}" />
+                                        </td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Districts__c}"/>
+                                        </td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.Location__c}"/>
+                                        </td>
+                                        <td class="tg-031e"> <apex:outputField value="{!visit.MOM__c}"/>
+                                        </td>
+                                        <td class="tg-031e"><apex:outputField value="{!visit.TL__c}"/></td>
+                                    </tr>
+                                    <apex:variable value="{!meetCount+1}" var="meetCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                               </table>
+                               </apex:outputPanel>
+                             </apex:outputPanel>
+                            </apex:outputPanel> 
+                              
+                           </div>
+                       
+                       <h4>Promotional Activity</h4>
+                        <div>
+                          <apex:outputPanel id="promotionalBlk">
+                            <apex:outputPanel rendered="{!(readWriteMode)}">
+                             <apex:outputPanel rendered="{!promotionalVisitList.size !=0}"> 
+                              <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>  
+
+                                      <th class="tg-9agx">Action</th>
+                                      <th class="tg-9agx">Sl.No</th>
+                                      <th class="tg-9agx">Create Promotion</th>
+                                      <th class="tg-9agx">Promotion <sub class="astriskStyle"> * </sub></th>
+                                      <th class="tg-9agx">Total Members Attended</th>
+                                      <th class="tg-9agx">Actual Members Added</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                   <apex:variable value="{!1}" var="promoCount"/>
+                                   <apex:repeat var="visit" value="{!promotionalVisitList}">
+                                   <tr>
+                                      <td class="tg-031e">
+                                        
+                                        <apex:commandLink action="{!RemovePL}"  onclick="if(!confirm('Are you sure?')){return};" reRender="promotionalBlk" status="as1">
+                                          <apex:image url="{!$Resource.AP_Remove_Icon}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.id == null )}" title="Remove Visit"/>
+                                          <apex:param name="promoCount" value="{!promoCount}"/>
+                                        </apex:commandLink>
+
+
+                                         <apex:commandLink action="{!EditPL}" reRender="promotionalBlk" status="as1">
+                                          <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.RecordEdit__c)}" title="Edit Visit"/>
+                                          <apex:param name="promoCount" value="{!promoCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!DeletePL}" onclick="if(!confirm('Are you sure?')){return};" reRender="promotionalBlk" status="as1">
+                                          <apex:image url="{!$Resource.deleteBtn}" width="20" height="20" style="padding-left: 15px;" title="Delete Meeting" rendered="{!(visit.RecordEdit__c)}"/>
+                                          <apex:param name="promoCount" value="{!promoCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!CancelPL}" reRender="promotionalBlk" status="as1">
+                                          <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Canvel" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null}"/>
+                                          <apex:param name="promoCount" value="{!promoCount}"/>
+                                        </apex:commandLink>
+                                        
+                                        <apex:commandLink action="{!SavePL}" reRender="promotionalBlk" status="as1">
+                                          <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" title="Save" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null }" />
+                                          <apex:param name="promoCount" value="{!promoCount}"/>
+                                        </apex:commandLink>
+
+                                      </td>
+
+                                      <td class="tg-031e" style="text-align: center">{!promoCount}</td>
+
+                                      <td class="tg-031e">
+                                         <apex:image id="theProImg" styleClass="imgClass" value="{!$Resource.AddIcon}" width="20" height="20" onclick="openPromotionPopup('{!$Component.promotionLookUp}');"  rendered="{!NOT(visit.RecordEdit__c)}" style="cursor:pointer;" />
+
+                                         <!-- <apex:image id="theCoulmnImg" styleClass="imgClass" value="{!$Resource.AddIcon}" width="20" height="20" onclick="openCoulmnPromotion('{!$Component.promotionLookUp}');" rendered="{!isCOULMN && NOT(visit.RecordEdit__c)}" style="cursor:pointer;"/> -->
+                                        
+                                        <apex:image styleClass="imgClass" value="{!$Resource.DisabledAddIcon}" width="20" height="20" rendered="{!(visit.RecordEdit__c)}" style="cursor:not-allowed"/>
+                                      </td>
+
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Promotion__c}" rendered="{!NOT(visit.RecordEdit__c)}" id="promotionLookUp"/>
+                                        <p class="Error"></p>
+                                      <!--   <apex:outputField value="{!visit.Promotion__c}" rendered="{!(visit.RecordEdit__c)}"/> -->
+                                        <apex:outputLink value="/{!visit.Promotion__c}" rendered="{!(visit.RecordEdit__c)}" id="theLink" target="_blank">{!visit.Promotion__r.Type__c}</apex:outputLink>
+                                      </td>
+                                      
+                                      <td class="tg-031e">
+                                      <center><apex:outputField value="{!visit.promotion__r.Total_no_of_attendees__c}" /></center>
+                                      </td>
+                                      
+                                      <td class="tg-031e">
+                                      <center><apex:outputField value="{!visit.promotion__r.Actual_No_of_Members__c}" /></center>
+                                      </td>
+
+                                  </tr>
+                                    <apex:variable value="{!promoCount+1}" var="promoCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                               </table>
+                          </apex:outputPanel>
+                           <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" style="padding-left: 15px;  margin-top: 10px;" onclick="promotionalVisit();"/>
+                          <apex:actionFunction action="{!promotionalVisit}" name="promotionalVisit" reRender="promotionalBlk" status="as1"/>
+                           </apex:outputPanel>
+
+                          <apex:outputPanel rendered="{!NOT(readWriteMode)}">
+                             <apex:outputPanel rendered="{!promotionalVisitList.size == 0}">
+                                <h4 style="color:#7f8c8d;" align="center">No Record Found.</h4>
+                              </apex:outputPanel>
+                             <apex:outputPanel rendered="{!promotionalVisitList.size !=0}"> 
+                                <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>
+                                      
+                                      <th class="tg-9agx">Sl.No</th>
+                                      <th class="tg-9agx">Promotion</th>
+                                      <th class="tg-9agx">Total Members Attended</th>
+                                      <th class="tg-9agx">Actual Members Added</th>
+                                      
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                   <apex:variable value="{!1}" var="promoCount"/>
+                                   <apex:repeat var="visit" value="{!promotionalVisitList}">
+                                   <tr>
+                                      <td class="tg-031e" style="text-align: center">{!promoCount}</td>
+                                      <td class="tg-031e"><apex:outputLink value="/{!visit.Promotion__c}" rendered="{!(visit.RecordEdit__c)}" id="theLink" target="_blank">{!visit.Promotion__r.Type__c}</apex:outputLink></td>
+                                 
+                                  
+                                  <td class="tg-031e">
+                                      <center><apex:outputField value="{!visit.promotion__r.Total_no_of_attendees__c}" /></center>
+                                      </td>
+                                      
+                                      <td class="tg-031e">
+                                      <center><apex:outputField value="{!visit.promotion__r.Actual_No_of_Members__c}" /></center>
+                                      </td>
+                                       </tr>
+                                  <apex:variable value="{!promoCount+1}" var="promoCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                               </table>
+                             </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        </div>
+
+                       <h4>Training</h4>
+                       <div>
+                          <apex:outputPanel id="trainingBlk">
+                           <apex:outputPanel rendered="{!(readWriteMode)}">
+                             <apex:outputPanel rendered="{!trainingVisitList.size !=0}">
+                              <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>
+                                        <th class="tg-9agx" ></th>
+                                        <th class="tg-9agx">Sl.No</th>
+                                        <th class="tg-9agx">State <sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">District <sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">Location <sub class="astriskStyle"> * </sub></th>
+                                        <th class="tg-9agx">Taluka / Tehsil  <sub class="astriskStyle">  </sub></th>
+                                        <th class="tg-9agx">Training Details<sub class="astriskStyle"> * </sub></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                   <apex:variable value="{!1}" var="tempCount"/>
+                                   <apex:repeat var="visit" value="{!trainingVisitList}">
+                                   <tr>
+                                       <td class="tg-031e">
+
+                                        <apex:commandLink action="{!RemoveTL}" onclick="if(!confirm('Are you sure?')){return};" reRender="trainingBlk" status="as1">
+                                          <apex:image url="{!$Resource.AP_Remove_Icon}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.id == null )}" title="Remove Visit"/>
+                                          <apex:param name="tempCount" value="{!tempCount}"/>
+                                        </apex:commandLink>
+
+                                       
+                                        <apex:commandLink action="{!EditTL}" reRender="trainingBlk" status="as1">
+                                          <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.RecordEdit__c)}" title="Edit Visit"/>
+                                          <apex:param name="tempCount" value="{!tempCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!DeleteTL}" onclick="if(!confirm('Are you sure?')){return};" reRender="trainingBlk" status="as1">
+                                          <apex:image url="{!$Resource.deleteBtn}" width="20" height="20" style="padding-left: 15px;" title="Delete Meeting" rendered="{!(visit.RecordEdit__c)}"/>
+                                          <apex:param name="tempCount" value="{!tempCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!CancelTL}" reRender="trainingBlk" status="as1">
+                                          <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Canvel" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null}"/>
+                                          <apex:param name="tempCount" value="{!tempCount}"/>
+                                        </apex:commandLink>
+                                        
+                                        <apex:commandLink action="{!SaveTL}" reRender="trainingBlk" status="as1">
+                                          <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" title="Save" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null }" />
+                                          <apex:param name="tempCount" value="{!tempCount}"/>
+                                        </apex:commandLink>
+
+                                      </td>
+
+                                      <td class="tg-031e" style="text-align: center">{!tempCount}</td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.State__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                        <apex:outputField value="{!visit.State__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Districts__c}" style="width:100px"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Districts__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                      </td>
+                                      <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Location__c}"  rendered="{!NOT(visit.RecordEdit__c)}" style="width:100px" styleClass="required"/>
+                                        <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Location__c}" rendered="{!(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                      </td>
+                                       <td class="tg-031e">
+                                        <apex:inputField value="{!visit.Taluka__c}"  rendered="{!NOT(visit.RecordEdit__c)}" style="width:100px" />
+                                        <p class="Error"></p>
+                                        <apex:outputField value="{!visit.Taluka__c}" rendered="{!(visit.RecordEdit__c)}" />
+                                        <p class="Error"></p>
+                                      </td>
+                                      <td class="tg-031e">
+                                       <apex:inputField value="{!visit.Training_Details__c}"  rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                      <apex:outputField value="{!visit.Training_Details__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                     </td>
+                                     
+                                  </tr>
+                                  <apex:variable value="{!tempCount+1}" var="tempCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                               </table>
+                               </apex:outputPanel>
+                              <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" style="padding-right: 15px;  margin-top: 10px;" onclick="trainingVisit();" title="Add Training Details"/>
+                          
+                        <apex:actionFunction action="{!trainingVisit}" name="trainingVisit" reRender="trainingBlk" status="as1"/>
+                           </apex:outputPanel>
+                              
+
+                          <apex:outputPanel rendered="{!NOT(readWriteMode)}">
+                             <apex:outputPanel rendered="{!trainingVisitList.size == 0}">
+                               <h4 style="color:#7f8c8d;" align="center">No Record Found.</h4>
+                              </apex:outputPanel>
+
+                              <apex:outputPanel rendered="{!trainingVisitList.size !=0}"> 
+                                 <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>
+                                      <th class="tg-9agx">Sl.No</th>
+                                      <th class="tg-9agx">State</th>
+                                      <th class="tg-9agx">District</th>
+                                      <th class="tg-9agx">Location</th>
+                                      <th class="tg-9agx">Training Details</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                 <apex:variable value="{!1}" var="tempCount"/>
+                                 <apex:repeat var="visit" value="{!trainingVisitList}">
+                                <tr>
+                                  <td class="tg-031e" style="text-align: center">{!tempCount}</td>
+                                  <td class="tg-031e"><apex:outputField value="{!visit.State__c}" /></td>
+                                  <td class="tg-031e"><apex:outputField value="{!visit.Districts__c}"/></td>
+                                  <td class="tg-031e"><apex:outputField value="{!visit.Location__c}" /></td>
+                                  <td class="tg-031e"><apex:outputField value="{!visit.Training_Details__c}"/></td>
+                                 </tr>
+                                  <apex:variable value="{!tempCount+1}" var="tempCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                               </table>
+                               </apex:outputPanel>
+                             </apex:outputPanel>
+
+                          </apex:outputPanel>
+                       </div>
+
+                   <h4>Post Visit Order</h4>
+                            <div>
+                              <apex:outputPanel id="ordBlk">
+                               <apex:outputPanel rendered="{!(readWriteMode)}">
+                                 <apex:outputPanel rendered="{!postOrderVisitList.size !=0}"> 
+                                  <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>
+                                      <th class="tg-9agx" ></th>
+                                      <th class="tg-9agx">Sl.No</th>
+                                      <th class="tg-9agx">Source of Order<sub class="astriskStyle"> * </sub></th>
+                                      <th class="tg-9agx">Party Type <sub class="astriskStyle"> * </sub></th>
+                                      <th class="tg-9agx">Party Name <sub class="astriskStyle"> * </sub></th>
+                                      <th class="tg-9agx">Products<sub class="astriskStyle"> * </sub></th>
+                                      <th class="tg-9agx">Order Value<sub class="astriskStyle"> * </sub></th>
+                                      <th class="tg-9agx">Remarks</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                   <apex:variable value="{!1}" var="ordCount"/>
+                                   <apex:repeat var="visit" value="{!postOrderVisitList}">
+                                   <tr>
+
+                                    <td class="tg-031e">
+                                      
+                                        <apex:commandLink action="{!RemovePVO}" onclick="if(!confirm('Are you sure?')){return};" reRender="ordBlk" status="as1">
+                                          <apex:image url="{!$Resource.AP_Remove_Icon}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.id == null )}" title="Remove Visit"/>
+                                          <apex:param name="ordCount" value="{!ordCount}"/>
+                                        </apex:commandLink>
+
+
+                                       <apex:commandLink action="{!EditPVO}" reRender="ordBlk" status="as1">
+                                          <apex:image url="{!$Resource.pencil}" width="20" height="20" style="padding-left: 15px;" rendered="{!(visit.RecordEdit__c)}" title="Edit Visit"/>
+                                          <apex:param name="ordCount" value="{!ordCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!DeletePVO}" onclick="if(!confirm('Are you sure?')){return};" reRender="ordBlk" status="as1">
+                                          <apex:image url="{!$Resource.deleteBtn}" width="20" height="20" style="padding-left: 15px;" title="Delete Meeting" rendered="{!(visit.RecordEdit__c)}"/>
+                                          <apex:param name="ordCount" value="{!ordCount}"/>
+                                        </apex:commandLink>
+
+                                        <apex:commandLink action="{!CancelPVO}" reRender="ordBlk" status="as1">
+                                          <apex:image url="{!$Resource.editBtn}" width="20" height="20" style="padding-left: 15px;" title="Canvel" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null}"/>
+                                          <apex:param name="ordCount" value="{!ordCount}"/>
+                                        </apex:commandLink>
+                                        
+                                        <apex:commandLink action="{!SavePVO}" reRender="ordBlk" status="as1">
+                                          <apex:image url="{!$Resource.correctIcon}" width="20" height="20" style="padding-left: 15px;" title="Save" rendered="{!readWriteMode && NOT(visit.RecordEdit__c) && visit.id != null }" />
+                                          <apex:param name="ordCount" value="{!ordCount}"/>
+                                        </apex:commandLink>
+
+                                    </td>
+
+                                    <td class="tg-031e" style="text-align: center">{!ordCount}</td>
+                                    <td class="tg-031e">
+                                      <apex:inputField value="{!visit.Source__c}" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                      <apex:outputField value="{!visit.Source__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+                                    <td class="tg-031e">
+                                      <apex:inputField value="{!visit.Party_Type__c}" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                      <apex:outputField value="{!visit.Party_Type__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+                                    <td class="tg-031e">
+                                      <apex:inputField value="{!visit.Party_Name__c}" style="width:100px" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                      <apex:outputField value="{!visit.Party_Name__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+                                    <td class="tg-031e">
+                                     <select class="form-control multSel" id="ordProductList" multiple="true" size="3" style="width:100px;display:{!IF((visit.RecordEdit__c), 'none', 'block')}" onblur="setProducts('ordProductList','{!$Component.proHiddenId}')">
+                                       <apex:repeat value="{!productList}" var="pro">
+                                          <Option value="{!pro}">{!pro}</Option>
+                                        </apex:repeat>
+                                      </select>
+                                      <apex:inputHidden value="{!visit.Products__c}" id="proHiddenId" />
+                                        <p class="Error"></p>
+                                      <apex:outputField value="{!visit.Products__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+                                     <td class="tg-031e">
+                                      <apex:inputField value="{!visit.Order_Value__c}" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="required"/>
+                                        <p class="Error"></p>
+                                      <apex:outputField value="{!visit.Order_Value__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+                                    <td class="tg-031e">
+                                      <apex:inputField value="{!visit.Remarks__c}" rendered="{!NOT(visit.RecordEdit__c)}"/>
+                                      <apex:outputField value="{!visit.Remarks__c}" rendered="{!(visit.RecordEdit__c)}"/>
+                                    </td>
+                                    
+                                  </tr>
+                                  <apex:variable value="{!ordCount+1}" var="ordCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                                </table>
+                                </apex:outputPanel>
+                                 <apex:image url="{!$Resource.AP_Add_Icon}" width="25" height="25" style="padding-right: 15px;  margin-top: 10px;" onclick="postOrderVisit();"/>
+                                 <apex:actionFunction action="{!postOrderVisit}" name="postOrderVisit" reRender="ordBlk" status="as1"/>
+                              </apex:outputPanel>
+
+                              <apex:outputPanel rendered="{!NOT(readWriteMode)}">
+                               <apex:outputPanel rendered="{!postOrderVisitList.size == 0}">
+                                   <h3 style="color:#7f8c8d;" align="center">No Record Found.</h3>
+                                </apex:outputPanel>
+                                 <apex:outputPanel rendered="{!postOrderVisitList.size !=0}"> 
+                                   <table class="tg" style=" width: 100%">
+                                  <thead>
+                                    <tr>
+                                      <th class="tg-9agx">Sl.No</th>
+                                      <th class="tg-9agx">Source of Order</th>
+                                      <th class="tg-9agx">Party Type </th>
+                                      <th class="tg-9agx">Party Name </th>
+                                      <th class="tg-9agx">Products</th>
+                                      <th class="tg-9agx">Order Value</th>
+                                      <th class="tg-9agx">Remarks</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                   <apex:variable value="{!1}" var="ordCount"/>
+                                   <apex:repeat var="visit" value="{!postOrderVisitList}">
+                                   <tr>
+                                    <td class="tg-031e" style="text-align: center">{!ordCount}</td>
+                                    <td class="tg-031e"><apex:outputField value="{!visit.Source__c}" /></td>
+                                    <td class="tg-031e"><apex:outputField value="{!visit.Party_Type__c}" /></td>
+                                    <td class="tg-031e"><apex:outputField value="{!visit.Party_Name__c}" /></td>
+                                    <td class="tg-031e"><apex:outputField value="{!visit.Products__c}" id="proHiddenId"/></td>
+                                    <td class="tg-031e"><apex:outputField value="{!visit.Order_Value__c}"/>
+                                    </td>
+                                    <td class="tg-031e"><apex:outputField value="{!visit.Remarks__c}"/>
+                                    </td>
+                                  </tr>
+                                  <apex:variable value="{!ordCount+1}" var="ordCount"/>
+                                  </apex:repeat>
+                                  </tbody>
+                                </table>
+                               </apex:outputPanel>
+                             </apex:outputPanel>
+                             
+                            </apex:outputPanel> 
+                        </div>
+
+                       
+                   </div>
+              </div>
+           <h3 class="expAccordian">Expense</h3>
+            <div>
+             <apex:actionFunction name="jsSaveExpense" action="{!saveExpense}" reRender="mainExp,expEditTable,expNewTable" status="as1">
+                  <apex:param id="exptourId" name="expTourId" value="" />
+                   <apex:param id="exptourDateId" name="expTourDate" value="" />
+            </apex:actionFunction>
+            
+            <apex:outputPanel id="mainExp">
+
+            <apex:outputPanel id="addExp" rendered="{!NOT(showExpense)}">
+                <apex:commandButton value="Add Expense" action="{!addExpens}" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" reRender="mainExp" status="as1" rendered="{!(showExSaveBtn)}"/> 
+                <apex:commandButton value="Show Expense" action="{!addExpens}" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" reRender="mainExp" status="as1" rendered="{!NOT(showExSaveBtn)}"/> 
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!showExpense}">
+            <apex:outputPanel id="expNewTable" rendered="{!showEditTable}">
+              <table class="exp">
+                <tr>
+                  <th class="exp-64mc" colspan="6">Visit Expense Details <br/></th>
+                </tr>
+                <tr>
+                    <td class="exp-cf6s">Expense <br/>Visit Type<sub class="astriskStyle">&nbsp; * </sub></td>
+                    <td class="exp-64mc">
+                      <apex:inputField value="{!dayExpenses.Expens_Visit_Type__c}" style="width:120px" styleClass="required" id="expTypeId"/>
+                      <p class="Error"></p>
+                    </td>
+                    <td class="exp-cf6s">From <sub class="astriskStyle"> &nbsp;* </sub></td>
+                    <td class="exp-64mc"><apex:inputField value="{!dayExpenses.From__c}" style="width:100px" styleClass="required"/>
+                      <p class="Error"></p>
+                    </td>
+                    <td class="exp-cf6s">To <sub class="astriskStyle"> &nbsp;* </sub></td>
+                    <td class="exp-64mc">
+                        <apex:inputField value="{!dayExpenses.To__c}" style="width:100px" styleClass="required"/>
+                        <p class="Error"></p>
+                    </td>
+                </tr>
+                <tr>
+                  <td class="exp-cf6s">Start <sub class="astriskStyle"> &nbsp;* </sub></td>
+                  <td class="exp-64mc">
+                    <apex:inputField value="{!dayExpenses.Start_Time__c}" style="width:100px" styleClass="required"/>
+                    <p class="Error"></p>
+                  </td>
+                  <td class="exp-cf6s">End <sub class="astriskStyle"> &nbsp;* </sub></td>
+                  <td class="exp-64mc">
+                    <apex:inputField value="{!dayExpenses.Time_To__c}" style="width:100px" styleClass="required"/>
+                    <p class="Error"></p>
+                  </td>
+                  <td class="exp-cf6s">Mode of Travel</td>
+                  <td class="exp-64mc">
+                    <select class="form-control multSel" id="modeOfTravelId" multiple="true" size="3" style="width:100px" onblur="searchFlights()">
+                         <apex:repeat value="{!modeOfTravel}" var="mode">
+                            <Option value="{!mode}">{!mode}</Option>
+                          </apex:repeat>
+                      </select>
+                      <apex:inputHidden value="{!dayExpenses.Mode_Of_Travel__c}" id="expModeId"/>
+                  </td>
+                </tr>
+
+              <tr>
+                  <td class="exp-cf6s">Fare <sub class="astriskStyle"> &nbsp;* </sub></td>
+                  <td class="exp-64mc">
+
+                    <input type="number" id="fareId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.fareApex}');" class="required"/>
+                    <apex:inputHidden value="{!dayExpenses.Fare_Local_Conveyance__c}" id="fareApex" />
+                    <p class="Error"></p>
+                  </td>
+
+                  <td class="exp-cf6s">Local Conveyance</td>
+                  <td class="exp-64mc">
+                    <input type="number" id="rateId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.rateApex}');" />
+                    <apex:inputHidden value="{!dayExpenses.Local_Conveyance_New__c}" id="rateApex"/>
+                  </td>
+                  <td class="exp-cf6s">KM</td>
+                  <td class="exp-64mc">
+                    <input type="number" id="kmId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.keApex}');" />
+                    <apex:inputHidden value="{!dayExpenses.KM__c}" id="keApex"/>
+                  </td>
+                  
+                </tr>
+                <tr>
+                  <td class="exp-ztk1" colspan="6">Expense Details<br/></td>
+                </tr>
+
+                <tr>
+                  <td class="exp-cf6s">Hotel Stay/ <br/>Own <br/>Arrangement</td>
+                  <td class="exp-64mc">
+                    <input type="number" id="hotelId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.conveyance}');" />
+                    <apex:inputHidden value="{!dayExpenses.Local_Conveyance__c}" id="conveyance"/>
+                  </td>
+                  <td class="exp-cf6s">Not / Involving <br/>Overnight Stay<br/> DA</td>
+                  <td class="exp-64mc">
+                     <input type="number" id="overNightId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.overNightApex}');" />
+                    <apex:inputHidden value="{!dayExpenses.Not_Involving_Overnight_Stay_DA__c}" id="overNightApex"/>
+                  </td>
+                  <td class="exp-cf6s">Sundries in<br/> addition to<br/> Hotel Bills</td>
+                  <td class="exp-64mc">
+                    <input type="number" id="addionId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.additionApex}');" />
+                    <apex:inputHidden value="{!dayExpenses.Sundries_in_addition_to_Hotel_Bills__c}" id="additionApex"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="exp-cf6s">Stationary/<br/> Photo copy</td>
+                  <td class="exp-64mc">
+                    <input type="number" id="photoId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.photoCopyApex}');" />
+                    <apex:inputHidden value="{!dayExpenses.Stationery_and_Photocopy__c}" id="photoCopyApex"/>
+                  </td>
+                  <td class="exp-cf6s">Tel/ Fax/<br/> Internet</td>
+                  <td class="exp-64mc">
+                     <input type="number" id="telephoneId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.telephoneApex}');" />
+                    <apex:inputHidden value="{!dayExpenses.Telephone_Fax_Internet__c}" id="telephoneApex"/>
+                  </td>
+                  <td class="exp-cf6s">Courier</td>
+                  <td class="exp-64mc">
+                      <input type="number" id="courierId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.courierApex}');" />
+                      <apex:inputHidden value="{!dayExpenses.Courier__c}" id="courierApex"/>
+                  </td>
+                  </tr>
+                <tr>
+                  <td class="exp-cf6s">MISC/ <br/>Promotion</td>
+                  <td class="exp-64mc">
+                    <input type="number" id="miscellaneousId" style="width:100px" onblur="coypToApex(this.id,'{!$Component.miscellaneousApex}');" />
+                      <apex:inputHidden value="{!dayExpenses.Miscellaneous__c}" id="miscellaneousApex"/>
+                  </td>
+                  <td class="exp-cf6s">Remarks<sub class="astriskStyle" id="expRemarks" style="display: none;"> &nbsp;* </sub></td>
+                  <td class="exp-64mc" colspan="3"><apex:inputField value="{!dayExpenses.Remarks__c}" style="width:80%;height:50px;"/><p class="Error"></p></td>
+                </tr>
+                
+                 <tr>
+                  <td class="exp-ztk1" colspan="6"><b>Expense Attchments</b><br/></td>
+                </tr>
+              </table>
+              </apex:outputPanel>
+
+              <apex:outputPanel id="expEditTable" rendered="{!NOT(showEditTable)}">
+              <table class="exp">
+                <tr>
+                  <th class="exp-64mc" colspan="6">Visit Expense Details<br/></th>
+                </tr>
+                <tr>
+                  <td class="exp-cf6s">Expense <br/>Visit Type</td>
+                  <td class="exp-64mc">{!dayExpenses.Expens_Visit_Type__c}</td>
+                  <td class="exp-cf6s">From</td>
+                  <td class="exp-64mc">{!dayExpenses.From__c}</td>
+                  <td class="exp-cf6s">To</td>
+                  <td class="exp-64mc">{!dayExpenses.To__c} </td>
+                 </tr>
+
+                <tr>
+                  <td class="exp-cf6s">Start</td>
+                  <td class="exp-64mc">{!dayExpenses.Start_Time__c}</td>
+                  <td class="exp-cf6s">End</td>
+                  <td class="exp-64mc">{!dayExpenses.Time_To__c}</td>
+                  <td class="exp-cf6s">Mode of Travel</td>
+                  <td class="exp-64mc">{!dayExpenses.Mode_Of_Travel__c}</td>
+                </tr>
+                <tr>
+                  <td class="exp-cf6s">Fare</td>
+                  <td class="exp-64mc">{!dayExpenses.Fare_Local_Conveyance__c}</td>
+                  <td class="exp-cf6s">Local Conveyance</td>
+                  <td class="exp-64mc">{!dayExpenses.Local_Conveyance_New__c}</td>
+                  <td class="exp-cf6s">KM</td>
+                  <td class="exp-64mc">{!dayExpenses.KM__c}</td>
+                </tr>
+                <tr>
+                  <td class="exp-ztk1" colspan="6"><b>Expense Details</b><br/></td>
+                </tr>
+                <tr>
+                  <td class="exp-cf6s">Hotel Stay/ <br/>Own <br/>Arrangement</td>
+                  <td class="exp-64mc">{!dayExpenses.Local_Conveyance__c}</td>
+                  <td class="exp-cf6s">Not / Involving <br/>Overnight Stay<br/> DA</td>
+                  <td class="exp-64mc">{!dayExpenses.Not_Involving_Overnight_Stay_DA__c}</td>
+                   <td class="exp-cf6s">Sundries in<br/> addition to<br/> Hotel Bills</td>
+                  <td class="exp-64mc">{!dayExpenses.Sundries_in_addition_to_Hotel_Bills__c}</td>
+                </tr>
+                <tr>
+                 
+                  <td class="exp-cf6s">Tel/ Fax/<br/> Internet</td>
+                  <td class="exp-64mc">{!dayExpenses.Telephone_Fax_Internet__c}</td>
+                  <td class="exp-cf6s">Courier</td>
+                  <td class="exp-64mc">{!dayExpenses.Courier__c}</td>
+                  <td class="exp-cf6s">Stationary/<br/> Photo copy</td>
+                  <td class="exp-64mc">{!dayExpenses.Stationery_and_Photocopy__c}</td>
+                </tr>                   
+                  <tr>
+                    <td class="exp-cf6s">MISC/ <br/>Promotion</td>
+                    <td class="exp-64mc">{!dayExpenses.Miscellaneous__c}</td>
+                    <td class="exp-cf6s">Remarks</td>
+                    <td class="exp-64mc" colspan="3">{!dayExpenses.Remarks__c}</td>
+                </tr>
+                <tr><!-- c20x = right  -->
+                  <td class="exp-8m9r" colspan="4"><b>Total</b></td>
+                  <td class="exp-8m9r" colspan="2"><b>{!dayExpenses.Total_Expenses__c}</b>
+                  <apex:inputHidden id="expnseId" value="{!dayExpenses.id}"/>
+                  </td>
+                </tr>
+                   <tr style="display:{!IF(expenseAttachments.size != 0, '', 'none')};">
+                      <td  class="exp-ztk1" colspan="6"><b>Expense Attachmnet</b><br/>
+                       </td>
+                    </tr>
+                    <tr style="display:{!IF(expenseAttachments.size != 0, '', 'none')};">
+                      <td class="exp-ztk1" colspan="1"> 
+                        Sl.No
+                      </td>
+                      <td class="exp-ztk1" colspan="4">
+                        Name
+                      </td>
+                      <td class="exp-ztk1" colspan="1">
+                        
+                      </td>
+                    </tr>
+                      
+                      <apex:variable value="{!1}" var="expCount"/>
+                      <apex:repeat value="{!expenseAttachments}" var="att">
+                      <tr>
+                         <td class="exp-cf6s" colspan="1">{!expCount}</td>
+                         <td class="exp-64mc" colspan="4">{!att.Name}</td>
+                          <td class="exp-64mc" colspan="1">
+                        <a href="/servlet/servlet.FileDownload?file={!att.Id}" data-lightbox="image-{!att.Id}" target="_blank" id="my-dialog"> View</a> 
+                        <!-- <a class="preview" href="#" onclick="openImg({!expCount})">View</a>
+                          <div id="{!expCount}" style="position:absolute;height: auto;width: auto;top: 37px;left: 248px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable">
+                             <img src="/servlet/servlet.FileDownload?file={!att.Id}" style="margin: auto;width: auto; height: auto;max-width: 100%;max-height: 100%;pacity: 1;  position: absolute;top: 0;right: 0;bottom: 0;left: 0;" />
+                          </div> -->
+                        </td>
+                     </tr>
+                     <apex:variable value="{!expCount+1}" var="expCount"/>
+                     </apex:repeat>
+                  <!-- </div> -->
+                <tr>
+                  <td class="exp-0aqu" colspan="6">
+                  <center>
+                  <div style="display: initial;">
+                   <apex:commandButton value="Edit Expense" action="{!EditExpense}" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" reRender="mainExp,expEditTable,expNewTable" status="as1" style="margin-top: -50px;" oncomplete="copyToHtml();"/>
+
+                    <apex:commandLink onclick="jsOpenExpnseAtt();" reRender="expEditTable" status="as1">
+                    <apex:image url="{!$Resource.upload2}" width="75" height="75" style="padding-left: 15px;"  rendered="{!dayExpenses.id != null}" title=" Upload Attachments"/> </apex:commandLink>
+                    </div>
+                    </center>
+                  </td>
+                </tr>
+              </table>
+             
+              </apex:outputPanel>
+              </apex:outputPanel>
+
+           
+               </apex:outputPanel>
+            </div>
+            
+          </div>
+    </apex:form>
+  </div>
+<!-- Custom Js -->
+<script>
+var j$ = jQuery.noConflict();
+var tourPlanId;
+var tourDate;
+var tourTile;
+var targetVetical;
+var jsonArr = [];
+var dialogBox = '';
+var param = '';
+var popUp ='';
+var openPopUpJs = '';
+var dateDiff ;
+var jsSaveExpense = false;
+
+var pop2 = '';
+
+
+
+          j$(document).ready(function() {
+
+          j$("a.preview").click(function() {
+              alert('Show Img');
+              j$('div.myImage').dialog("open");
+
+          });
+
+           j$('div.myImage').dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    Cancel: function() {
+                        $(this).dialog('close');
+                       
+                    }
+                }
+            });
+
+           param = "{!$CurrentPage.parameters.id}";
+
+           if( navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+                      //alert(navigator.userAgent.match(/Android/i));
+                      j$("#wrap").attr('style', 'font-size: 18px;width: 98%;padding-left:20px;');
+                      j$(".leftPanel").attr('style', 'font-size: 18px;width:95%;display:inline-block;');
+                      var X_breakPoint = "<br/>";
+                      j$("#breakSpan").html(X_breakPoint);
+                      j$("#calendar").attr('style', 'width:100%;');
+                      j$("#external-events").attr('style', 'width:80%;padding-left:5px;');
+                      j$("#button").attr('style', 'padding-right:220px;');
+ 
+                  } else {
+                       j$("#wrap").attr('style', 'font-size: 14px;width:100%;height:95%;padding-left:20px;');
+                       j$(".leftPanel").attr('style', 'font-size: 14px;width:60%;height:80%;display:inline-block;');
+                       j$("#external-events").attr('style', 'width:35%;padding-left:5px;');
+                       j$("#calendar").attr('style', 'width:100%;height:80%');
+                  }
+                  
+                  j$('#external-events').accordion({
+                    collapsible: true,
+                    heightStyle: "content"
+                  });
+                  
+                  
+              initExternalEvents();
+              EventJSON(param);
+
+              
+            j$('#accordion').accordion({header: 'h3', autoHeight: false, clearStyle: true, heightStyle: "content",
+          collapsible: true, active: false});
+
+               j$('#accordion2').accordion({header: 'h4', autoHeight: false, clearStyle: true, heightStyle: "content",
+          icons: {header: 'ui-icon-plus', headerSelected: 'ui-icon-minus'},
+          collapsible: true, active: false});
+
+          });
+
+          function initExternalEvents(){
+              j$('#external-events div.external-event').each(function() {
+                  var eventObject = {
+                      title: j$.trim(j$(this).text()) 
+                  };
+                  j$(this).data('eventObject', eventObject);
+                  
+                  j$(this).draggable({
+                      zIndex: 999,
+                      revert: true,      // will cause the event to go back to its
+                      revertDuration: 0,  //  original position after the drag
+                      stop: function( event, ui ) {
+                      }
+                  });
+              });
+          }
+          
+      /*    function EventJSON(targetId) {
+                   APPL_SITEVISIT_CALENDAR_CTRL.retreiveTourRelatedTarget(targetId, function(res, event) {
+                       if(event.status) {
+                          // console.log(res);
+                       j$.each(res, function(i, item) {
+                       jsonArr.push({
+                           title: ((item.tourPlan.Visit_Type__c != 'Holiday' && item.tourPlan.Visit_Type__c != 'Leave') ? (item.tourPlan.Target_Vertical__c+';'+item.tourPlan.Promotional_Type__c+';'+item.tourPlan.Visit_Type__c+';'+item.tourPlan.Location__c) : (item.tourPlan.Visit_Type__c == 'Holiday' ?  item.tourPlan.Target_Vertical__c+'; Holiday/Market Closed/' : item.tourPlan.Target_Vertical__c+'; Leave')),
+                           //item.tourPlan.Target_Vertical__c+';'+item.tourPlan.Promotional_Type__c+';'+item.tourPlan.Visit_Type__c+';'+item.tourPlan.Location__c,
+                           start: new Date(item.sDate),
+                           id: item.tourPlan.Id,                          
+                           end: new Date(item.sDate),
+                           allDay: false,
+                           rendering: "inverse-background",
+                           default: true,
+                           color: (item.tourPlan.Visit_Type__c != 'Holiday' && item.tourPlan.Visit_Type__c != 'Leave') ? '#2ecc71' : '#7f8c8d'
+                       }); 
+                   }); 
+                  initializeFullCal(); 
+               }
+               });
+          }*/
+
+          //Populating event JSON data with css.
+          function EventJSON(targetId) {
+               APPL_SITEVISIT_CALENDAR_CTRL.retreiveTourRelatedTarget(targetId, function(res, event) {
+                  if(event.status) {                                                          
+                      
+                      j$.each(res, function(i, item) {
+                          
+                          var eventTitle = '';
+                          if(item.tourPlan.Visit_Type__c != 'Holiday' && item.tourPlan.Visit_Type__c != 'Leave' && item.tourPlan.Visit_Type__c != 'Meetings/Training/Others') {
+                              
+                              if(item.tourPlan.Promotional_Type__c != undefined) {
+                                  
+                                  eventTitle += item.tourPlan.Target_Vertical__c+';'+item.tourPlan.Promotional_Type__c+';';
+                              }
+                              if(item.tourPlan.Visit_Type__c != '--None--' && item.tourPlan.Visit_Type__c != undefined) {
+                                  
+                                  eventTitle += item.tourPlan.Target_Vertical__c+';'+item.tourPlan.Visit_Type__c+';';
+                              }
+                              if(item.tourPlan.Location__c != '') {
+                                  
+                                  eventTitle += item.tourPlan.Location__c;
+                              }                                                            
+                          } else {
+                              
+                              eventTitle = item.tourPlan.Visit_Type__c == 'Holiday' ? item.tourPlan.Target_Vertical__c+'; Holiday/Market Closed' : (item.tourPlan.Visit_Type__c == 'Leave'? item.tourPlan.Target_Vertical__c+'; Leave' : item.tourPlan.Target_Vertical__c+'; Meetings/Training /Others');
+                          }
+                          
+                          
+                          jsonArr.push({
+                              title:  eventTitle,
+                              start: new Date(item.sDate),
+                              end: new Date(item.sDate),
+                              allDay: true,
+                              id: item.tourPlan.Id,
+                              rendering: "inverse-background",
+                              default: true,
+                              AA_pType: item.tourPlan.Promotional_Type__c,
+                              AA_vType: item.tourPlan.Visit_Type__c,
+                              AA_State: item.tourPlan.State__c,
+                              AA_District: item.tourPlan.District__c,
+                              AA_Location: item.tourPlan.Location__c,
+                              AA_Holiday: item.tourPlan.Holiday_Market_Closed__c,
+                              AA_Leave: item.tourPlan.Visit_Type__c == 'Leave' ? true : false,
+                              AA_Meeting: item.tourPlan.Visit_Type__c == 'Meetings/Training/Others' ? true : false,
+                              AA_MeetingDesc: item.tourPlan.Comments__c,
+                              color: item.tourPlan.Visit_Type__c != 'Holiday' && item.tourPlan.Visit_Type__c != 'Leave' ? '#2ecc71' : '#7f8c8d'
+                          }); 
+                      }); 
+                      initializeFullCal();
+                  }
+              });
+          }
+
+          
+function initializeFullCal(){
+              /* initialize the calendar -----------------------------------------------------------------*/
+              j$('#calendar').fullCalendar({
+                  theme: true,
+                  eventLimit: true, // for all non-agenda views
+                       month: "{!startDateMonth}",
+                       year: "{!startDateYear}",
+                       defaultView: 'month',
+                       allDayDefault:true,
+                  header: {
+                           left: 'today',
+                           center: 'title',
+                           right: 'month,agendaWeek,agendaDay'
+                       },
+                       eventRender: function(event, element) { 
+                           //element.find('.fc-event-title').append("<br/>" + event.location); eventDateDiv
+                           element.find('.fc-event-time').hide();
+                       },
+
+                  /*   dayClick: function(date, allDay, jsEvent, view) {
+                       // alert(date);
+                       var clickedDate = moment(date).format('DD/MM/YYYY');
+                       alert('clicked Date '+clickedDate);
+
+                              j$('#calendar').fullCalendar('clientEvents', function(event) {
+                                 // alert(event.start);
+                                  
+                                if (moment(event.start).format('DD/MM/YYYY') ==  moment(date).format('DD/MM/YYYY')) {
+
+                                  j$(this).css('border-color', 'red');
+
+                                  if(event){
+                                     tourPlanId = event.id;
+                                     tourDate = moment(event.start).format('DD/MM/YYYY');
+                                     tourTile = event.title;
+
+                                     console.log('tourPlanId '+tourPlanId);
+                                     console.log('event.id '+event.id);
+
+
+                                    var titleAry = [];
+                                    titleAry = tourTile.split(";");
+                                    targetVetical = '';
+                                    targetVetical = titleAry[0];
+                                   // j$( ".actionDate" ).datepicker({ dateFormat: 'dd-mm-yy' });
+                                    j$( ".eventDateDiv" ).html(tourDate);
+
+                                     // console.log(tourPlanId);
+                                     // console.log(tourDate);
+                                      
+                                     var eventDate = new Date();
+                                     var todayMom = moment(eventDate).format('DD/MM/YYYY');
+                                    // alert(eventDate);
+                                     //Difference from Moment.js
+                                     var tod = moment(todayMom,'DD/MM/YYYY');
+                                     var evt = moment(tourDate,'DD/MM/YYYY');
+                                     dateDiff = evt.diff(tod, 'days');
+                                     console.log(dateDiff);
+
+                                     if(dateDiff > 0){
+                                        alert('Visit Entry can not be made for "Future days".');
+                                     }else{
+                                      jsInitializeModal(tourPlanId,tourDate,targetVetical,dateDiff);
+                                     }
+                                  }
+                              }
+                            });
+                      },*/
+                    eventClick: function(event, jsEvent, view) {
+
+                       j$(this).css('border-color', 'red');
+
+                        // var clickedEventDate = j$('#calendar').fullCalendar('getDate');
+                        // alert("The current date of the calendar is " + moment(clickedEventDate).format('DD/MM/YYYY'));
+
+                          if(event){
+                            console.log(event);
+                             tourPlanId = event.id;
+                              console.log('tourPlanId '+tourPlanId);
+                              console.log('event.id '+event.id);
+
+                             tourDate = moment(event.start).format('DD/MM/YYYY');
+                             console.log('tourDate '+tourDate);
+                             tourTile = event.title;
+
+                            var titleAry = [];
+                            titleAry = tourTile.split(";");
+                            targetVetical = '';
+                            targetVetical = titleAry[0];
+                           // j$( ".actionDate" ).datepicker({ dateFormat: 'dd-mm-yy' });
+                            j$( ".eventDateDiv" ).html(tourDate);
+
+                            // console.log(tourPlanId);
+                             //console.log(tourDate);
+                              
+                             var todayDate = new Date();
+                             var todayMom = moment(todayDate).format('DD/MM/YYYY');
+
+                             //Difference from Moment.js
+                             var tod = moment(todayMom,'DD/MM/YYYY');
+                             var evt = moment(tourDate,'DD/MM/YYYY');
+                             dateDiff = evt.diff(tod, 'days');
+                             console.log(dateDiff);
+
+                             if(dateDiff > 0){
+                                alert('Visit Entry can not be made for "Future days".');
+                             }else{
+                              jsInitializeModal(tourPlanId,tourDate,targetVetical,dateDiff);
+                             }
+                          }
+                    },
+                  editable: false,
+                  events: jsonArr,
+                  droppable: false, // this allows things to be dropped onto the calendar !!!
+                  
+              });
+          }
+
+
+ /***************************
+      Site Visit Pop-up
+  ***************************/
+    popUp = function(){
+       
+       j$("#eventContent").dialog({autoOpen: false,title:tourTile +' - '+tourDate, modal:true, 
+              width: "80%",
+              modal: true,
+              show: {effect: "slide",duration: 800},
+              hide: {effect: "fold",duration: 800},
+              dialogClass: 'ui-dialog-osx',
+              buttons:{
+                      "Save & Exit": function() {
+                            console.log('The Event Id----'+tourPlanId);
+                            var expTypeVal     = j$("[id$=expTypeId]").val();
+                            console.log('this is jsSaveExpense if ='+jsSaveExpense);
+
+                            var leaveReason = j$("[id$=leaveReasonId]").val();
+                            console.log('this is leaveReason  ='+leaveReason);
+                            var holidayRemark = j$("[id$=holidayRemarksId]").val();
+                            console.log('this is holidayRemark  ='+holidayRemark);
+
+                            //Check for the Present (Today and Tomo)
+                            if(dateDiff == 0 || dateDiff == -1){  
+                              //Check for leave or Holdiay
+                                if(leaveReason == '' && holidayRemark == ''){
+                                  //Non Holiday and Non-Leave Visit records
+                                  saveVisitValidation();
+                                }else if( typeof(expTypeVal) == 'undefined' || expTypeVal == 'Travel')
+                                { 
+                                  //For leave and Holiday - Only Travel Expense can be saved
+
+                                  saveVisitValidation();
+                                }else{
+                                   console.log('expTypeVal  ='+expTypeVal);
+                                  alert('For Holiday / Leave, Only "Travel Expense" can be saved');
+                                }
+                               //saveVisitValidation();
+                            }else{
+                               console.log('Past Senario...');
+                                 console.log('Past Record Count='+jsSaveExpense);
+                               if(jsSaveExpense == true){
+                                 saveVisitValidation();
+                               }else if(jsSaveExpense != true){
+                                 if(expTypeVal == 'Travel'){
+                                        saveVisitValidation();
+                                      }else{
+                                        alert('Only "Travel Expense" can be saved');
+                                      }
+                               }
+                            }
+                          }
+                                                                           
+                        }
+                        /*,close: function(){
+                            j$(this).dialog('open');
+                            confirm('Please click on Save & Exit button then close');                     
+                          }  */
+            });
+            j$('.ui-dialog-osx .ui-dialog-titlebar-close').on('click', function(event){
+                event.preventDefault();
+                
+                
+                confirm('YOUR CHANGES HAVE NOT BEEN SAVED please click on "Save & Exit" to save changes');
+                j$("#eventContent").dialog({autoOpen: true,
+                    show: {duration: 0}
+                });
+                
+            });
+  };
+
+
+pop2 = function(divId){
+
+       j$('#'+divId).dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    Cancel: function() {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+}
+
+//On Complete
+function onInitCompleteHandler () {
+//Record Count = Non-Leave and Non-Holiday Visit records
+console.log('RecordCount='+jsSaveExpense);
+  popUp();
+  console.log(dateDiff);
+  if(dateDiff == 0 || dateDiff == -1){
+      j$("#visitWriteReadDiv").css('display', 'block');
+      j$("#visitReadDiv").css('display', 'none');
+  }else{
+      j$("#visitWriteReadDiv").css('display', 'none');
+      j$("#visitReadDiv").css('display', 'block');
+  }
+
+  j$( "#eventContent" ).dialog("open");
+
+  var expId = '{!dayExpenses.id}';
+  if(expId != null){
+      j$("#expDiv").css('display', 'none');
+      j$("#expReadDiv").css('display', 'block');
+  }else{
+     j$("#expDiv").css('display', 'block');
+      j$("#expReadDiv").css('display', 'none');
+  }
+ 
+}
+/***************************
+ autoScroll 
+***************************/
+//Call Controller Method By Action Function.
+function jsCallSaveVisits(tourId,visitDate){
+  console.log('this is Js SaveVisits before Controller');
+  jsSaveVisits(tourId,visitDate);
+}
+
+function showHideDate(leaveId){ 
+  console.log( j$("[id$=comLeaveId]").val());
+  var comLeave = j$("[id$=comLeaveId]").val();
+
+  if(comLeave == 'Yes'){
+
+       j$("[id$=comLeaveDateTh]").css('display', 'block');
+        j$("[id$=comleaveData]").css('display', 'block');
+
+        j$("[id$=comLeaveDateTh]").css('padding', '25px');
+        j$("[id$=comleaveData]").css('padding', '25px');
+         
+  }else{
+      j$("[id$=comLeaveDateTh]").css('display', 'none');
+       j$("[id$=comleaveData]").css('display', 'none');
+  } 
+
+}
+
+//Ifram for Account
+function openAccountPopup (partyId,arrayIndex) {
+  // body...
+ // alert(arrayIndex);
+  var partType =  document.getElementById(partyId).value;
+     console.log('Create Account Type of '+partType);
+   var partyRecordTypeId = '';
+  if(partType == ''){
+      alert('Please select "Party Type"');
+      document.getElementById(partyId).focus();
+  }else{ if(partType == 'Dealer'){
+      partyRecordTypeId = '{!dealerRtId}';
+   }else if(partType =='Direct Dealer'){
+      partyRecordTypeId = '{!directDealerId}';
+   }else if(partType =='Distributor'){
+      partyRecordTypeId = '{!distrubutorId}';
+   }else{
+     partyRecordTypeId = '{!individualRecTypeId}';
+   }
+
+   if(partType != '' && partType == 'Projects'){
+      var url="/apex/AddProjectDetails";
+   }else{
+      var url="/001/e?RecordType="+partyRecordTypeId+"&ent=Account&00N3000000BjlZy="+partType;
+   }
+
+    newWin=window.open(url, 'Popup','height=1000,width=1200,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,status=no');
+  }
+}
+
+//Iframe
+function openPromotionPopup(promotionId) {
+
+   window.open("/apex/APPL_NEW_PROMOTION?promoDate="+tourDate+"&vertical="+targetVetical+"&promoId="+promotionId, 'Popup','height=650,width=1050,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,status=no');
+}
+
+
+//Save Expense
+function jsSaveExp() {
+   APPL_SITEVISIT_CALENDAR_CTRL.getCountOfActivits(tourPlanId, function(res, event) {
+                       if(event.status) {
+                           console.log('Number of Activites ='+res);
+                           if(res == 0){
+                              alert('Expense can not be saved without Saving Day-Activity');
+                           }else{
+
+                              jsSaveExpense(tourPlanId,tourDate);
+                           }
+                         }
+                     });
+}
+
+//Save Expense
+function jsClearExp() {
+  alert('Js Clear Exp');
+}
+
+//Edit Expense
+function jsEditExp() {
+ alert('Edit Espense');
+}
+
+//Copy Mode of Travell
+function searchFlights() {
+    var select1 = document.getElementById("modeOfTravelId");
+    var selected1 = [];
+    for (var i = 0; i < select1.length; i++) {
+        if (select1.options[i].selected) selected1.push(select1.options[i].value);
+    }
+    var selectedStr = selected1.toString();
+    var finalModeVal = selectedStr.replace(/,/g , ";");
+    j$("[id$=expModeId]").val(finalModeVal);
+}
+
+function setProducts(selectId,proId) {
+  console.log(proId);
+  var selectProducts  = document.getElementById(selectId);
+  var selectedPros    = [];
+
+  for (var i = 0; i < selectProducts.length; i++) {
+        if (selectProducts.options[i].selected) selectedPros.push(selectProducts.options[i].value);
+    }
+    console.log(selectedPros);
+
+    var proArray = selectedPros.toString();
+    var finalProductsVal = proArray.replace(/,/g , ";");
+    document.getElementById(proId).value = finalProductsVal;
+   
+}
+
+function openOrderPopup(){
+   alert('openOrderPopup it');
+}
+
+function copyToHiddenDate(dateId,dateHidden) {
+  // body...
+   console.log(dateId+'--'+dateHidden);
+   var htmlDate = document.getElementById(dateId).value;
+   console.log('htmlDate--'+htmlDate);
+}
+
+function saveVisitValidation() {
+  // body...
+    var leaveReason = j$("[id$=leaveReasonId]").val();
+    var holidayRemark = j$("[id$=holidayRemarksId]").val();
+    var expTypeVal     = j$("[id$=expTypeId]").val();
+   console.log('expTypeVal'+expTypeVal);
+  j$('.Error').text( "" );
+  var countError = -1;
+  var hasError = false;
+
+  if(expTypeVal == 'Travel'){
+    j$('.exp textarea').addClass('required');
+     j$("#expRemarks").css('display', 'block');
+  }else{
+    j$('.exp textarea').removeClass('required');
+     j$("#expRemarks").css('display', 'none');
+  }
+
+      j$('.required').each(function(){
+       var fieldVal = j$(this).val();
+       if(fieldVal == '' || fieldVal == null){
+          j$(this).next('.Error').text( "Required field." );
+           countError += 1;
+           hasError = true;
+         // return false;
+         }else{
+            countError -= 1;
+            hasError = false;
+         }
+    });
+  
+ if(hasError){
+    alert('Please fill all the (*)Requried fields');
+   //  j$( "#accordion" ).accordion( "option", "active", 1 );
+   // j$( "#accordion2" ).accordion( "option", "active", 7 );
+ }else{
+     console.log('Call Save Method..');
+     jsSaveVisits(tourPlanId,tourDate);
+ }
+}
+
+//Close Pop-Up
+function closePopUp(){
+  // alert('Saved successfully !');
+  
+   j$("#eventContent").dialog("close");
+   window.location.reload();
+}
+
+//addStyleClass
+function coypToApex(htmlId,expId){
+  var htmlVal = document.getElementById(htmlId).value;
+  document.getElementById(expId).value = htmlVal;
+}
+
+
+function jsOpenExpnseAtt () {
+ var expenseId = j$("[id$=expnseId]").val();
+ console.log('Expense Date ='+expenseId+'-----'+tourDate);
+ var url="/apex/APPL_EXPENSE_ATTACHMENT?expId="+expenseId+"&expDate="+tourDate;
+ newWin=window.open(url, 'Popup','height=350,width=600,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,status=no');
+}
+
+
+function copyToHtml(){
+    var fareApexValue = j$("[id$=fareApex]").val();
+    document.getElementById('fareId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=rateApex]").val();
+    document.getElementById('rateId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=keApex]").val();
+    document.getElementById('kmId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=conveyance]").val();
+    document.getElementById('hotelId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=overNightApex]").val();
+    document.getElementById('overNightId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=additionApex]").val();
+    document.getElementById('addionId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=photoCopyApex]").val();
+    document.getElementById('photoId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=telephoneApex]").val();
+    document.getElementById('telephoneId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=courierApex]").val();
+    document.getElementById('courierId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=miscellaneousApex]").val();
+    document.getElementById('miscellaneousId').value = fareApexValue;
+
+    var fareApexValue = j$("[id$=expModeId]").val();
+    document.getElementById('modeOfTravelId').value = fareApexValue;
+}
+
+function jsNonProjectAdd(){
+          addColoums();
+         }
+
+function jsProjectAdd(){
+          addProjects();
+         }
+         
+function openCoulmnPromotion (promotionId) {
+  window.open("/apex/APPL_NEW_PROMOTION_COLUMN?promoDate="+tourDate+"&vertical="+targetVetical+"&promoId="+promotionId, 'Popup','height=650,width=1050,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,status=no');
+}
+
+
+function openImg(divId) {
+              //alert('Show Img');
+              pop2(divId);
+              j$('#'+divId).dialog("open");
+          }
+
+function checkForProject(partyTypeId,partyNameId){
+  //console.log('partyTypeId ='+partyTypeId);
+  //console.log('partyTypeId ='+partyTypeId);
+  var partyTypeVal = document.getElementById(partyTypeId).value;
+
+  if(partyTypeVal=='Projects'){
+   document.getElementById(partyNameId).disabled = true;
+  }else{
+   document.getElementById(partyNameId).disabled = false;
+  }
+  //console.log('partyTypeVal ='+partyTypeVal);
+
+//var partyType = 
+}
+</script>
+<!-- Cusm Js End -->
+
+
+</body>
+</apex:page>

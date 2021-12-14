@@ -1,0 +1,49 @@
+{
+  "appPageId" : "1ebe3d6c-fce7-4267-a468-981ddc7ea1d2",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "id" : "fede5dff-cf98-4053-98e5-c18cc8e8fe78",
+  "label" : "Dispatcher Console",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "height" : "600",
+        "pageName" : "FSL__vf001_ServiceExpert",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "forceCommunity:visualforcePage",
+      "id" : "7656aabb-5d72-4015-aa19-75f629841e60",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "b0773734-5416-4dc8-82ac-9294b0e4bb86",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "id" : "0e6ea99d-c097-40e6-8aa3-04b32ecaf02f",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "740613e2-1e5f-4a9f-9611-eb5b32296240",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Dispatcher Console"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "83bed1ee-e33a-4033-b090-3e230b73a0de",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "83fa64cf-2663-4f60-b4bc-916d5d63a970",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "custom-dispatcher-console"
+}

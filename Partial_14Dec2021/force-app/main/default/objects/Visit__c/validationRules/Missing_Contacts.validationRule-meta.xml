@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Missing_Contacts</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Visit_To__c, &apos;Contact&apos;) &amp;&amp; ISBLANK(Contacts__c) &amp;&amp;  $User.TL__c !=TRUE</errorConditionFormula>
+    <errorDisplayField>Contacts__c</errorDisplayField>
+    <errorMessage>Please Enter Contact Name</errorMessage>
+</ValidationRule>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Assigning_sharing_access_based_on_State</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Assigning sharing access based on State field to Gujarat</description>
+        <label>Assigning sharing access based on State</label>
+        <sharedTo>
+            <role>Regional_Head_Plumbing_Gujarat</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Gujarat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Gujarat</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Jayant_Kumar</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Jayant_Kumar</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Madhya Pradesh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Madhya Pradesh</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Maharashtra</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Maharashtra</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Maharashtra</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Maharashtra</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>State_All</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share All Sataes  Project with Jayant Kumar</description>
+        <label>State All</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>,Andhra Pradesh,Arunachal Pradesh,Assam,Bihar,Chandigarh,Chhatisgarh,Goa,Gujarat,Haryana,Himachal Pradesh,Jammu &amp; Kashmir,Jharkhand,Karnataka,Kerala,Madhya Pradesh,Maharashtra,Manipur,Meghalaya,Mizoram,Nagaland,New Delhi</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>,Jammu &amp; Kashmir,Jharkhand,Karnataka,Kerala,Madhya Pradesh,Maharashtra,Manipur,Meghalaya,Mizoram,Andhra Pradesh,Arunachal Pradesh,Assam,Bihar,Chandigarh,Chhatisgarh,Goa,Gujarat,Haryana,Nagaland,Himachal Pradesh,New Delhi</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>State_Andhra_Pradesh</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>State Andhra Pradesh</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Andhra Pradesh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Andhra Pradesh</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>State_Gujrat</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share Gujrat Project with Jayant Kumar</description>
+        <label>State Gujrat</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Gujarat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Gujarat</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>State_Haryana</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>State Haryana</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Haryana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Haryana</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>State_Karnataka</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>State Karnataka</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Karnataka</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Karnataka</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>State_Uttar_Pradesh</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share Uttar Pradesh Project with Jayant Kumar</description>
+        <label>State Uttar Pradesh</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Uttar Pradesh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Uttar Pradesh</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Telangana_Projects</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Telangana Projects</label>
+        <sharedTo>
+            <role>Projects_Head</role>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>State__c</field>
+            <operation>equals</operation>
+            <value>Telangana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_State__c</field>
+            <operation>equals</operation>
+            <value>Telangana</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Opportunity_sharing_to_prasad</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Opportunity sharing to prasad</label>
+        <sharedTo>
+            <group>opportunity_share</group>
+        </sharedTo>
+        <sharedFrom>
+            <role>Industrial</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Ranjit_Kumar_Pathak</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Ranjit Kumar Pathak</label>
+        <sharedTo>
+            <role>Zonal_Head_Plumbing_East</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>ASM_Sr_ASM_Projects_Bihar</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

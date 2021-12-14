@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Plumbing_Junior</fullName>
+    <active>true</active>
+    <description>Quiz Question for Plumbing Junior catagory</description>
+    <label>Plumbing Junior</label>
+    <picklistValues>
+        <picklist>Currect_Answer__c</picklist>
+        <values>
+            <fullName>Option 1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 5</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

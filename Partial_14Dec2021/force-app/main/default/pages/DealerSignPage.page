@@ -1,0 +1,197 @@
+<!--
+Created by : Deepak Singh
+Created date : 1/08/2020
+-->
+
+<apex:page controller="DealerSignUpController"  showHeader="false" standardStylesheets="false" lightningStylesheets="true" doctype="html-5.0">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>  
+    <apex:stylesheet value="{!URLFOR($Resource.BootStrap_D)}" />
+    <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_v4_5_3)}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_v4_5_3)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Bootstrap_v4_5_3)}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.dealersignUpcss)}"/>
+</head>
+<style>	
+    
+    @media (min-width: 1025px) {
+    #respImageContainer {
+    background-size: 100% auto;
+    background-repeat: no-repeat;        
+    background-image: url('{!URLFOR($Resource.DekstopOPBackGround)}');
+    }
+    #header1{
+    font-size: 30px; !IMPORTANT
+    }
+    #header2{
+    font-size: 30px; !IMPORTANT
+    }
+    #padding2{
+    display: none;
+    }
+    }
+    @media (max-width: 1024px) and (min-width: 500px){
+    #respImageContainer {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url('{!URLFOR($Resource.TabOPbackground)}');
+    
+    }
+    
+    .labels{
+    text-align: left;
+    
+    }
+    
+    #header1{
+    font-size: 17px; !IMPORTANT
+    }
+    #header2{
+    font-size: 17px; !IMPORTANT
+    }
+    #padding2{
+    display: block;
+    }
+    }
+    @media (max-width: 499px) {
+    #respImageContainer {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url('{!URLFOR($Resource.MobileOPbackground)}');
+    }
+    #header1{
+    font-size: 12px; !IMPORTANT
+    }
+    #header2{
+    font-size: 12px; !IMPORTANT
+    }
+    #padding2{
+    display: none;
+    }
+    .labels{
+    text-align: left;
+    
+    }
+    }
+    
+</style>
+
+<script>
+function checkPhone(){
+    var phone = document.getElementById('{!$Component.form1.pno}').value;
+    if(/^(\d{10}$)/.test(phone)==true){
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var yearSince = document.getElementById('{!$Component.form1.yer}').value;
+        if(/^(\d{4}$)/.test(yearSince)==true){
+            //doSave();
+            //alert('hi');
+            var btn = document.getElementById('{!$Component.form1.signUpButton}');//signUpButton
+            setTimeout(function(){ 
+                btn.disabled = 'disabled';
+                // Use the Salesforce CSS style to make the button appear disabled
+                btn.className = 'btnDisabled';
+                btn.value = "Saving..."; 
+            }, 50);
+        }
+        else{
+            alert('Please enter year in the format YYYY');
+        }
+    }
+    else{
+        alert(' Please match the requested format\n Phone number format - example --> 8762080035');
+    }  
+}
+
+</script>
+<body id="respImageContainer">
+    
+    <apex:slds >
+        <apex:form id="form1" styleClass="form-horizontal">
+            <apex:pageMessages />
+            <div id="padding2">
+                <br/>
+                <br/>
+                
+                
+                
+                
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/> 
+            
+            <h2 class="mainHeader" align="center"><b>SIGN UP</b></h2>
+            <br/>
+            <br/>
+            
+            <div class="bg-text" id="d1">
+                
+                <div class="container" align="center" id="d11">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="form-group row" id="d111">
+                        <label class="control-label col-sm-2 labels" for="email">Name</label>
+                        <div class="col-sm-8">
+                            <apex:inputText value="{!accName}" required="true"  styleClass="form-control inputBox"  html-placeholder="Dealer Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row" id="d112">
+                        <label class="control-label col-sm-2 labels" for="email">State</label>
+                        <div class="col-sm-8">
+                            
+                            <apex:actionRegion id="regin">
+                                <apex:selectList id="state"  styleClass="form-control inputBox"  html-placeholder="Select state" required="true" value="{!selectedState}" label="state" size="{!size}">
+                                    <apex:selectOptions value="{!stateList}"/>
+                                    <apex:actionSupport event="onchange" action="{!enableTGM}" reRender="regin,town" />
+                                </apex:selectList>
+                            </apex:actionRegion>
+                            
+                        </div> 
+                    </div>
+                    <div class="form-group row" id="d113">
+                        <label class="control-label col-sm-2 labels" for="email">District</label>
+                        <div class="col-sm-8">
+                            
+                            
+                            <apex:selectList id="town" styleClass="form-control inputBox"  html-placeholder="Select District" required="true" value="{!selectedSTown}" label="Town" multiselect="false" size="1" >
+                                <apex:selectOptions value="{!townList}" />
+                            </apex:selectList>
+                        </div>
+                    </div> 
+                    <div class="form-group row" id="d114">
+                        <label class="control-label col-sm-2 labels"  for="email">Contact number</label>
+                        <div class="col-sm-8">
+                            
+                            <apex:inputText value="{!enterdPhone}" id="pno" html-pattern="^\d{10}$" required="true" styleClass="form-control inputBox"/>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="d114">
+                        <label class="control-label col-sm-2 labels"  required="true"  for="email">Year Since in Business	
+                        </label>
+                        <div class="col-sm-8">
+                            
+                            <apex:inputText value="{!yearSince}" required="true" html-pattern="^\d{4}$" styleClass="form-control inputBox" id="yer" html-placeholder="YYYY"/>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <div class="col-sm-12" style="text-align:center">
+                            <div class="alignCenter">
+                                <apex:commandButton styleClass="button" id="signUpButton" value="SIGN UP" onclick="checkPhone()" action="{!createRetailer}" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </apex:form>
+    </apex:slds>
+</body>
+</apex:page>

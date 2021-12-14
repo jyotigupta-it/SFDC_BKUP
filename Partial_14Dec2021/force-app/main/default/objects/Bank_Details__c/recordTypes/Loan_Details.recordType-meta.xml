@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_Details</fullName>
+    <active>true</active>
+    <label>Loan Details</label>
+    <picklistValues>
+        <picklist>Type_of_Loan__c</picklist>
+        <values>
+            <fullName>Bank Guarantee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CC%2FOverdraft Letter of Credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Term Loan</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

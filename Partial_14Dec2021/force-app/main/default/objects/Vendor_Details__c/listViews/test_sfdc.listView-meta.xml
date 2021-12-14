@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>test_sfdc</fullName>
+    <columns>NAME</columns>
+    <columns>Vendor__c</columns>
+    <columns>Vendor_Cluster__c</columns>
+    <columns>vendor_cluster_active__c</columns>
+    <columns>isActive__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>lessThan</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>test sfdc</label>
+</ListView>

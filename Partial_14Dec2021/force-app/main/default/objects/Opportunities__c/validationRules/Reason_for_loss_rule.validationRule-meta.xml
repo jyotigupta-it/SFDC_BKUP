@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_for_loss_rule</fullName>
+    <active>true</active>
+    <description>Make Reason_for_loss field editable only when  lost value is selected in won?lost picklist value</description>
+    <errorConditionFormula>IF(TEXT( Stage__c ) &lt;&gt; &quot;Lost&quot;  &amp;&amp; NOT(ISBLANK( Order_Loss_details__c )), true,  IF(TEXT(Stage__c ) = &quot;Lost&quot;  &amp;&amp;  ISBLANK( Order_Loss_details__c ) , true, false) )</errorConditionFormula>
+    <errorDisplayField>Order_Loss_details__c</errorDisplayField>
+    <errorMessage>Please fill the description for the order loss.</errorMessage>
+</ValidationRule>

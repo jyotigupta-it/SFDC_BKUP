@@ -1,0 +1,167 @@
+<apex:page standardcontroller="Case" extensions="ctrlCreateBrandingRequests" tabStyle="Case" >
+<script type='text/javascript' src= '//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'>
+</script>
+ <script language="javascript">
+$(function() {        
+$('select.RemoveNone option[value=]').remove(); 
+ });
+            </script>    
+<style type="text/css">
+.dataCell  {
+border-color:red!important
+border-right-color:red!important
+}
+.requiredField{
+ border-right:3px solid #B00000;
+ padding:0px 16px 5px 0px;
+ margin:0px -18px 0px 0px;
+}
+
+.brandingSubProductClass {
+    width : 140px !important;
+}
+
+</style>
+<apex:form >
+<apex:pageMessages id="errorMsg" ></apex:pageMessages>
+<apex:pageBlock ><br/>
+                <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveDetails}"  />
+                <apex:commandButton value="Save And New" action="{!saveNew}" />
+                <apex:commandButton value="Cancel" action="{!Cancel}" />
+                </apex:pageBlockButtons>
+                <br/>
+                <apex:pageBlock >
+                <apex:pageBlockSection id="test" title="Branding Case Details" columns="2">
+                <apex:pageBlockSectionItem >
+                <apex:outputLabel value="City" style="color:#333;"/>
+                <apex:outputPanel >
+                <div class="requiredInput">
+                <div class="requiredBlock"></div>
+                <apex:inputField label="City" value="{!currentCase.City__c}" styleClass="RemoveNone" id="cityField">
+                 <script language="javascript">
+            $(function() {        
+                $('select.RemoveNone option[value=]').remove();       
+            });
+            </script> 
+                <apex:actionSupport event="onchange" status="stat" action="{!showCityText}" reRender="test,errorMsg,shopSection"/>
+                </apex:inputField>
+                </div></apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                <apex:outputLabel rendered="{!isCity}" value="Please Select the Taluk" style="color:#333;"/>
+                <apex:outputPanel >
+                <div class="requiredInput">
+                <div class="requiredBlock"></div>
+                <apex:inputField rendered="{!isCity}" value="{!currentCase.Taluk__c}">
+                <apex:actionSupport event="onchange" action="{!getTalukDetails}" reRender="testLabel,state,district,clustor"/></apex:inputField>
+                </div></apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:outputField rendered="{!isCity}" id="state" value="{!currentCase.state__c}" style="color:#333;"/>
+                <apex:outputField rendered="{!isCity}" id="district" value="{!currentCase.district__c}" style="color:#333;"/>
+                <apex:outputField rendered="{!isCity}" id="clustor" value="{!currentCase.Clustor__c}" style="color:#333;"/>
+               
+               </apex:pageBlockSection> </apex:pageBlock>
+                 <apex:pageBlock >
+                <apex:pageBlockSection >          
+                <apex:selectList id="vendorclus" value="{!selectedId}" size="1" label="Cluster">
+                   <apex:selectOptions value="{!pickList}"/>
+                   <apex:actionSupport event="onchange" action="{!AsignVendor}" rerender="clus1,errorMsg">  
+                    </apex:actionSupport>
+                        </apex:selectList> 
+                <apex:inputField label="" value="{!currentCase.Vendor_Cluster__c}" id="clus1" style="display:none"/>
+                </apex:pageBlockSection> </apex:pageBlock>
+                <br/> 
+                <br/>
+                <apex:outputPanel id="shopSection" >
+                <apex:pageBlock rendered="{!IF(currentCase.City__c!='Metro',true,false)}" ><!--  -->
+                <apex:outputLabel id="testLabel" rendered="{!currentCase.Metro_Non_Metro__c!=null}" value="*Please select only those Shops that are in {!currentCase.City_Name__c}{!currentCase.district__c}." style="color:red;font-style:italic;"/>
+                <apex:pageBlockSection title="Shop Details" >
+                <apex:pageBlockTable var="req" value="{!wrapperView}"  id="shopDetails">
+                
+                <apex:column >
+               <apex:commandlink action="{!DeleteShop}" reRender="shopDetails,errorMsg" status="as1" id="delete" rendered="{!req.disabled ==false}">
+                    <apex:image id="deleteIcon" value="{!$Resource.deleteBtn}" width="25" height="25" title="Delete Entry"/>
+                     <apex:param name="deleteparam" value="{!req.brRequest.Shop_Name__c}" assignTo="{!shoppToRemove}"/>
+                </apex:commandlink>
+                <apex:commandlink action="{!RefreshAccountDetails}" reRender="shopDetails,errorMsg" status="as2" id="refresh" rendered="{!req.disabled==false}">
+                    <apex:image id="refreshIcon" value="{!$Resource.refresh}" width="25" height="25" title="Refresh Entry"/>
+                    <apex:param name="refreshparam" value="{!req.brRequest.Shop_Name__c}" assignTo="{!shoppId}"/>
+                </apex:commandlink>
+                </apex:column>
+                
+                <apex:column headerValue="Shop Name" style="width: 130px !important;">
+                <apex:inputField value="{!req.brRequest.Shop_Name__c}" id="shop1" style="width: 130px !important;" >
+                <script>document.getElementById('{!$Component.shop1}').disabled = {!req.disabled}; </script>
+                <apex:actionSupport event="onchange" action="{!getAccountDetails}" rerender="shopDetails,errorMsg" status="valStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Shop Link" style="width: 130px !important;">
+                <apex:commandLink target="_blank" value="{!req.brRequest.Shop_Name__r.name}" action="/{!req.brRequest.Shop_Name__c}" id="shop2" style="width: 130px !important;">
+               <!-- <apex:outputField value="{!req.brRequest.Shop_Name__c}" id="shop2" style="width: 130px !important;" />-->
+                </apex:commandLink>
+                </apex:column>
+                <apex:column headerValue="Primary Contact" style="width: 130px !important;" >
+                <apex:outputField value="{!req.brRequest.Shop_Name__r.Primary_Contact_Person_Name__c}"  style="width: 130px !important;">
+                </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Phone Number" style="width: 130px !important;" >
+                <apex:outputField value="{!req.brRequest.Shop_Name__r.Contact_Number_Mobile__c}" style="width: 130px !important;">
+                </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Billing Address" style="width: 130px !important;">
+                <apex:outputField value="{!req.brRequest.Shop_Name__r.Street_Address__c}" style="width: 130px !important;"/><br/>
+                <apex:outputField value="{!req.brRequest.Shop_Name__r.City__c}" style="width: 130px !important;"/><br/>
+                <apex:outputField value="{!req.brRequest.Shop_Name__r.District__c}" style="width: 130px !important;"/><br/>
+                <apex:outputField value="{!req.brRequest.Shop_Name__r.State__c}" style="width: 130px !important;"/>
+                </apex:column>
+                <apex:column headerValue="Shop Type" style="width: 130px !important;">
+                <apex:inputField value="{!req.brRequest.Shop_Type__c}" id="shopType" style="width: 130px !important;">
+                <script>document.getElementById('{!$Component.shopType}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Comments" style="width: 130px !important;">
+                <apex:inputField value="{!req.brRequest.Comments__c}" id="comments" style="width: 130px !important;">
+                <script>document.getElementById('{!$Component.comments}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Shop Description" style="width: 130px !important;"> 
+                <apex:inputField value="{!req.brRequest.Shop_Description__c}" id="desc" style="width: 130px !important;">
+                <script>document.getElementById('{!$Component.desc}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Language" style="width: 130px !important;">
+                <apex:inputField value="{!req.brRequest.Language__c}" id="lang" style="width: 130px !important;" >
+                <script>document.getElementById('{!$Component.lang}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Branding Products" style="width: 130px !important;">
+                <apex:inputField value="{!req.brRequest.Branding_Products__c}" id="prod" style="width: 130px !important;">
+                <script>document.getElementById('{!$Component.prod}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Branding Sub Products" styleClass="brandingSubProductClass">
+                <apex:inputField value="{!req.brRequest.Branding_Sub_Products__c}" id="subProd">
+                <script>document.getElementById('{!$Component.subProd}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Branding Type" style="width: 130px !important;">
+                <apex:inputField value="{!req.brRequest.Branding_Type__c}" id="type" style="width: 130px !important;">
+                <script>document.getElementById('{!$Component.type}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>
+               <!-- <apex:column headerValue="Branding Sub Type" style="width: 130px !important;">
+                <apex:inputField value="{!req.brRequest.Branding_Sub_Type__c}" id="subType" style="width: 130px !important;">
+                <script>document.getElementById('{!$Component.subType}').disabled = {!req.disabled}; </script>
+                </apex:inputField>
+                </apex:column>-->
+                </apex:pageBlockTable> 
+                </apex:pageBlockSection>
+                </apex:pageblock>
+                </apex:outputPanel>
+    </apex:pageblock>
+    
+ 
+ 
+ </apex:form>
+</apex:page>

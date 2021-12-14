@@ -1,0 +1,46 @@
+.alignCenter{
+                text-align:center;
+                }
+                .bs-example{
+                margin: 20px;
+                }
+                
+                @media (min-width: 1025px) {
+                #respImageContainer {
+                background-size: 100% auto;
+                background-repeat: no-repeat;        
+                background-image: url('{!URLFOR($Resource.DekstopOPBackGround)}');
+                }
+                #thankId{
+                font-size: 80px; !IMPORTANT
+                }
+                #thankId1{
+                font-size: 55px; !IMPORTANT
+                }
+                }
+                @media (max-width: 1024px) and (min-width: 500px){
+                #respImageContainer {
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                background-image: url('{!URLFOR($Resource.TabOPbackground)}');
+                }
+                #thankId{
+                font-size: 70px; !IMPORTANT
+                }
+                #thankId1{
+                font-size: 45px; !IMPORTANT
+                }
+                }
+                @media (max-width: 499px) {
+                #respImageContainer {
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                background-image: url('{!URLFOR($Resource.MobileOPbackground)}');
+                }
+                #thankId{
+                font-size: 45px; !IMPORTANT
+                }
+                #thankId1{
+                font-size: 30px; !IMPORTANT
+                }
+                }

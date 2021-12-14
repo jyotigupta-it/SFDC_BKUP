@@ -1,0 +1,92 @@
+<apex:page controller="addrowCon" sidebar="false" id="nonvisits">
+
+<apex:form id="form1">
+<apex:pageblock title="Non Visit Details" mode="edit" >
+<apex:pageBlockButtons rendered="{!(vis.Type__c = 'Non Visit')}">
+<!--<apex:commandButton value="Save" action="{!save}"/>
+
+<apex:commandButton value="Cancel" action="{!cancel}"/>-->
+</apex:pageBlockButtons> 
+<apex:pageblockSection >
+
+ <apex:inputfield value="{!vis.Party_Type__c}" rendered="{!vis.Type__c!='Visit'}" />
+      <apex:inputField value="{!vis.Party_Name__c}" rendered="{!vis.Type__c!='Visit'}"/>  
+      <apex:inputField value="{!vis.Visit_Type__c}" rendered="{!vis.Type__c!='Visit'}"/>                  
+      <apex:inputField value="{!vis.Reason_for_Non_Visit__c }" rendered="{!vis.Type__c!='Visit'}">
+     
+<apex:actionSupport event="onchange" reRender="form1"/>
+</apex:inputField>
+</apex:pageblockSection>
+
+<apex:pageblockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Attending a Complaint')}">
+<apex:inputField value="{!vis.Party_Type__c}"/>
+<apex:inputField value="{!vis.Worked_With__c}"/>
+<apex:inputField value="{!vis.Related_To__c}"/>
+<apex:inputField value="{!vis.Complaint_Report__c}"/>
+<apex:inputField value="{!vis.Action_Taken__c}" />
+<apex:inputField value="{!vis.Escalate_To_TL_HO__c}" />
+</apex:pageblockSection>
+<apex:pageblockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Exhibition/Shows')}">
+<apex:inputField value="{!vis.Worked_With__c}"/>
+
+</apex:pageBlockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Held up at Distributor/Dealer/Contact')}">
+<apex:inputField value="{!vis.Reason_MOM__c}"/>
+<apex:inputField value="{!vis.Remarks__c}"/>
+</apex:pageblockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Held up at Depot')}">
+<apex:inputField value="{!vis.Reason_MOM__c}"/>
+<apex:inputField value="{!vis.Remarks__c}"/>
+</apex:pageblockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Meeting at HO')}">
+<apex:inputField value="{!vis.Reason_MOM__c}"/>
+<apex:inputField value="{!vis.Remarks__c}"/>
+</apex:pageblockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Market Survey')}">
+<apex:inputField value="{!vis.Product__c}">
+<apex:actionSupport event="onchange" reRender="form2"/>
+</apex:inputField>
+</apex:pageblockSection>
+<apex:pageBlockSection id="form2">
+<apex:inputField value="{!vis.Total_Available_Dealers_in_the_market__c }" rendered="{!(vis.Product__c  == 'Plumbing')}">
+
+</apex:inputField>
+<apex:inputField value="{!vis.Our_presence__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Curent_Market_Situation__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Market_Potential__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Ashirvad_s_Current_Position__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Competitors_in_the_Market__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Competitors_Products_available__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Competitors_Current_Position__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Remarks__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+<apex:inputField value="{!vis.Report_To_Management__c}" rendered="{!(vis.Product__c  == 'Plumbing')}"/>
+
+</apex:pageblockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Mentoring')}">
+<apex:inputField value="{!vis.Worked_With__c}"/>
+<apex:inputField value="{!vis.Remarks__c}"/>
+</apex:pageblockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Mentoring')}">
+<apex:inputField value="{!vis.Worked_With__c}"/>
+<apex:inputField value="{!vis.Mentoring_task__c}"/>
+<apex:inputField value="{!vis.Mentoring_Output__c}"/>
+</apex:pageblockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Traveling Outstation')}">
+<apex:inputField value="{!vis.From__c}"/>
+<apex:inputField value="{!vis.To__c}"/>
+<apex:inputField value="{!vis.Start_Time__c}"/>
+<apex:inputField value="{!vis.End_Time__c}"/>
+<apex:inputField value="{!vis.Reason_For_Travelling_During_Day__c }"/>
+</apex:pageblockSection>
+
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Leave')}">
+<apex:inputField value="{!vis.Reason__c}"/>
+<apex:inputField value="{!vis.TL_Approval__c}"/>
+</apex:pageblockSection>
+<apex:pageBlockSection rendered="{!(vis.Reason_for_Non_Visit__c  == 'Promotional Activity')}">
+<apex:inputField value="{!vis.Worked_With__c}"/>
+
+</apex:pageblockSection>
+</apex:pageblock>
+</apex:form>
+</apex:page>

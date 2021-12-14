@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Promotions_Target__c</fullName>
+    <externalId>false</externalId>
+    <formula>Architect_Meet_Target__c +
+ Boarers_Meet_Target__c +
+ Builders_Meet_Target__c +
+ Dealers_Factory_Visit_Target__c +
+ Dealers_Meet_Target__c +
+ Dealers_Salesman_Meet_Target__c +
+ Engineers_Meet_Target__c +
+ Exhibition_Target__c +
+ Farmers_Meet_Target__c +
+ Jeep_Campaign_Target__c +
+ Mechanic_Meet_Target__c +
+ Mini_Meet_Target__c +
+ Plumber_Mechanic_Engineers_Factory_Visit__c+
+ Plumber_Meet_Target__c +
+ Shandy_Show_Target__c +
+ Tractor_Show_Target__c+ Group_ActivityTarget__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Promotions (Target)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,177 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           docType="html-5.0" applyHtmlTag="false" applyBodyTag="false"
+           controller="createPartyAccount_Ctrl">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+	
+	<link rel='stylesheet' href="{!URLFOR($Resource.PartyAccountStaticResource, 'Party/bootstrap.min.css')}" />
+	<script src="{!URLFOR($Resource.PartyAccountStaticResource, 'Party/jquery-1.8.3.js')}"></script>
+	<script src="{!URLFOR($Resource.PartyAccountStaticResource, 'Party/bootstrap.min.js')}"></script>
+
+<script type="text/javascript">
+	//partyTypeId
+	 var j$ = jQuery.noConflict();
+	  j$(document).ready(function() {
+	
+	   var parameterValue = getParameter('partyType');
+		console.log(parameterValue);
+
+		j$("[id$=partyTypeId]").val(parameterValue);
+		j$("[id$=partyTypeId]").prop('disabled', true);
+
+	  });
+
+	  function getParameter(theParameter) { 
+	  var params = window.location.search.substr(1).split('&');
+	 
+	  for (var i = 0; i < params.length; i++) {
+	    var p=params[i].split('=');
+		if (p[0] == theParameter) {
+		  return decodeURIComponent(p[1]);
+		}
+	  }
+	  return false;
+	}
+
+	function jsSaveAcc(){
+    	alert('Call Controller method now...');
+    	jsAccSave();
+    }
+    
+    function closePopUp(){
+  
+	//alert('Account Saved..');
+	window.self.close();
+
+    }
+</script>
+<style type="text/css">
+	.astriskStyle{
+            color:#FF0000;
+            font-size: 20px;
+            line-height: 8px;
+            margin-left: -7px;
+        }
+</style>
+</head>
+
+<body>
+
+<div class="panel panel-info" style="margin-bottom: 20px;background-color: #ffffff; border: 2px solid rgba(80, 135, 173, 0.06); border-radius: 4px;-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);">
+<apex:actionstatus id="as1">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                       height: 100%;opacity:0.85;width:100%;  z-index: 150"> 
+                    <div class="waitingHolder" style="top: 104.2px; width: 100px; right:10%;z-index: 200">
+                         <img class="waitingImage" src= "{!$Resource.Redcircle}" width="360" height="110"  title="Please Wait..." />
+                      <!-- <span class="waitingDescription">Loading...</span> -->                    
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+     <div class="alert alert-info">
+	    <h1>Create Account</h1>
+	    <p>Quick Account Creation</p>
+	  </div>
+
+      <div class="panel-body">
+       	 
+       	<apex:form styleClass="form-horizontal" id="accForm">
+			<fieldset>
+			
+
+			<!-- Select Basic -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="Name">Name<sub class="astriskStyle"> * </sub></label>
+			  	<div class="controls">
+			   <apex:inputField value="{!quickAccount.Name}" styleClass="form-control "/>
+			   </div>
+			</div>
+
+			<!-- Select Basic -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="PartyType">Party Type<sub class="astriskStyle"> * </sub></label>
+			  	<div class="controls" style="padding-top: 6px;">
+			   <apex:inputField value="{!quickAccount.Party_Type__c}" styleClass="form-control" id="partyTypeId" />
+			   </div>
+			</div>
+			
+			<!-- Select Basic -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="FirmName">Firm Name<sub class="astriskStyle"> * </sub></label>
+			  	<div class="controls">
+			   <apex:inputField value="{!quickAccount.Firm_Name__c}" styleClass="form-control" id="firmNameId" />
+			   </div>
+			</div>
+
+			<!-- Select Basic -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="ContactMobile">Contact Number<sub class="astriskStyle"> * </sub></label>
+			  <div class="controls">
+			     <apex:inputField value="{!quickAccount.Contact_Number_Mobile__c}" styleClass="form-control"/>
+			  </div>
+			</div>
+
+			<!-- Select Basic -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="VisitType">Visit Type<sub class="astriskStyle"> * </sub></label>
+			  	<div class="controls">
+			   <apex:inputField value="{!quickAccount.Visit_Type__c}" styleClass="form-control" />
+			   </div>
+			</div>
+
+			<!-- Select Basic -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="state">State<sub class="astriskStyle"> * </sub></label>
+			  <div class="controls">
+			     <apex:inputField value="{!quickAccount.State__c}" styleClass="form-control"/>
+			  </div>
+			</div>
+			<!-- Select Basic -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="district">District<sub class="astriskStyle"> * </sub></label>
+			  <div class="controls">
+			     <apex:inputField value="{!quickAccount.District__c}" styleClass="form-control"/>
+			  </div>
+			</div>
+
+			
+			<!-- Text input-->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="location">Location<sub class="astriskStyle"> * </sub></label>
+			  <div class="controls">
+			     <apex:inputField value="{!quickAccount.City__c}" styleClass="form-control"  />
+			  </div>
+			</div>
+			
+			<!-- Button (Double) -->
+			<div class="control-group">
+			  <label class="col-lg-2 control-label" for="saveAcc"></label>
+			  <div class="controls">
+			  	 <apex:commandButton value="Save Account" action="{!createAccount}" styleClass="btn  btn-info"
+			  	 oncomplete="closePopUp();"  status="as1"/> 
+			 <!--  	 <button id="saveAcc" name="saveAcc" class="btn btn-success">Save Account
+			  	 <apex:actionFunction action="{!createAccount}" name="saveAcc" reRender="accForm" oncomplete="closePopUp();"/></button> -->
+			  <!-- 	 <button id="saveAcc" name="saveAcc" class="btn btn-success" onclick="jsSaveAcc()">Save Account </button>  -->
+			  	 &nbsp;&nbsp;&nbsp;
+			  	 <button id="closeAccId" name="closeAcc" onclick="closePopUp()">Close</button> 
+
+			    <!--  <button id="saveAcc" name="saveAcc" class="btn btn-success">Save Account</button> -->
+			    <!-- <button id="Canel" name="Canel" class="btn btn-default">Cancel</button> -->
+			  </div>
+			</div>
+			<!-- <apex:actionFunction name="jsAccSave" action="{!createAccount}" onComplete="closePopUp('{!accountID}');"> 
+            </apex:actionFunction>-->
+			</fieldset>
+			</apex:form>
+
+      </div>
+    </div>
+  
+</body>
+</html>
+</apex:page>

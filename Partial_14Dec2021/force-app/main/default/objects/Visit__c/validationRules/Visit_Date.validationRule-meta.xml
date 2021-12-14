@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Visit_Date</fullName>
+    <active>true</active>
+    <description>Block entering future visit dates</description>
+    <errorConditionFormula>Date__c &gt; TODAY()&amp;&amp; $User.TL__c !=TRUE</errorConditionFormula>
+    <errorDisplayField>Date__c</errorDisplayField>
+    <errorMessage>You can&apos;t enter future dates...</errorMessage>
+</ValidationRule>

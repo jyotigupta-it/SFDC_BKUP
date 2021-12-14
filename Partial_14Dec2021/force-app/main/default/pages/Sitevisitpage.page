@@ -1,0 +1,10 @@
+<apex:page standardController="Site_Visit__c">
+<script type="text/javascript">
+if('{!$Profile.Name}'=='TL NEW'){
+location.replace('/apex/TLVisitEntry');
+}
+else{
+location.replace('/apex/VisitNewpage');
+}
+</script>
+</apex:page>

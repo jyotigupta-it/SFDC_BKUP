@@ -1,0 +1,192 @@
+<apex:page standardController="Tour_Program__c" extensions="UpdateIncomeClass" Sidebar="false" showHeader="false"  Action="{!AutoRun}" applyHtmlTag="false" >
+<head> 
+      <style type="text/css">
+body {
+background-color:#538ED5;}
+#table1 {
+border:0px solid #000;
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+margin:20px auto;
+background-color:#F2F2F2;
+
+
+}
+</style>  
+</head><br/>   
+    <table width="50%" align="center"  id="table1">
+        <tr>
+            <td align="center"><apex:image id="theImage" value="{!$Resource.AshirvadLogo}" width="100" height="50"/>
+                <apex:form >
+                       
+                        <table width="100%"  border="0" cellspacing="0" bgcolor="#F2F2F2" >
+                            <tr>
+                                <td Style="font-size:20px;font-family:Monospace ;" align="center">
+                                    <b>TOUR PLAN DETAILS</b>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                          
+                        <table  width="100%" border="0" cellspacing="0"  >
+                            <tr>
+                                <td Style="font-size:20px" align="center">
+                                </td>
+                            </tr>
+                        </table><br/>
+                        
+                       <table Style="font-size:12px;color:white;"  border="1" cellspacing="0" width="80%"  bordercolor="#FFFFFF">
+                            <tr>  
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Date</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Day</b>
+                                </td>
+                            
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Visit Type</b>
+                                 </td> 
+                                 <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>State</b>
+                                 </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>District</b>
+                                </td>
+                                 <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Location</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>District 1</b>
+                                </td>
+                               
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Location 1</b>
+                                </td>
+                                
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>No of Distributors</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>No  of Dealers</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>No of Architects</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>No of Consultants</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>No of Engineers</b>
+                                </td>
+                               <!-- <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>No of Builders</b>
+                                </td>-->
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>No of Plumbing Contractors</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Other Contacts (If Any)</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>District2</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Location2</b>
+                                </td>
+                                
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>District3</b>
+                                </td>
+                                <td width="1%" bgcolor="#EB1D1D" align="center" Style="color:white;">
+                                    <b>Location3</b>
+                                </td>
+                               
+                                                           
+                            </tr>
+                        <apex:repeat value="{!plans}" var="m">
+                            <tr >  
+                                <td  align="center" width="10%">
+                                    <b><apex:outputText value="{0,date,dd/MM/yyyy}">
+    <apex:param value="{!m.Date__c}"/>
+</apex:outputText></b>
+                                </td>  
+                                <td  align="center" width="10%">
+                                    <b><apex:outputText value="{0,date,EEEE }">
+    <apex:param value="{!m.Date__c}"/>
+</apex:outputText></b>
+                                </td>  
+                                 <td width="1%" align="center">
+                                <apex:inputField value="{!m.Visit_Type__c}" required="true"/>
+                                </td>                
+
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.State__c}" required="true"/>
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.District__c}" required="true"/>
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.Location__c}" size="6" required="true"/>
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.District_1__c}"/>
+                                </td>
+                                
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.Location_1__c}" size="6"/>
+                                </td>
+                                
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.No_of_Distributors__c}" size="2" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.No_of_Dealers__c}" size="2" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.No_of_Architects__c}" size="2" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.No_of_Consultants__c}" size="2" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.No_of_Engineers__c}" size="2" />
+                                </td>
+                               <!-- <td width="1%" align="center">
+                                <apex:inputText value="{!m.No_of_Builders_Planned__c}" size="2" />
+                                </td>-->
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.No_of_Plumbing_Contractor__c}" size="2" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputText value="{!m.Other_Contacts_if_any__c}" size="2" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.District_2__c}" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.Location_2__c}" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.District_3__c}" />
+                                </td>
+                                <td width="1%" align="center">
+                                <apex:inputField value="{!m.Location_3__c}" />
+                                </td>
+                               
+                                                             
+                            </tr>
+                        </apex:repeat>
+                        </table>
+                                      
+                                    
+                    <table width="100%" border="0" cellspacing="0"> <td align="center">
+                           <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><apex:commandButton value="Save" action="{!UpdateRecords}"/>
+                          &nbsp;&nbsp;&nbsp;&nbsp;<apex:commandButton value="Cancel" action="{!Cancel}"/></td>
+                    </table>
+                </apex:form>
+            </td>
+        </tr>
+    </table>
+</apex:page>

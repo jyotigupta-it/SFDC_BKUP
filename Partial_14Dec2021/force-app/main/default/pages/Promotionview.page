@@ -1,0 +1,42 @@
+<apex:page standardController="Promotion_Members__c">
+<script>function setFocusOnLoad(){}</script>
+
+    <apex:form >
+  <apex:pageBlock title="Promotion-Member Edit">
+   <apex:pageBlockButtons >
+           <apex:commandButton value="Edit" action="{!edit}"/>
+        
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+          </apex:pageBlockButtons>        
+   <apex:pageBlockSection title="Information">
+    
+     <apex:outputfield value="{!Promotion_Members__c.Promotions__c}"/>
+      <apex:outputfield value="{!Promotion_Members__c.Contacts__c}"/>
+       <apex:outputfield value="{!Promotion_Members__c.Remarks__c}"/>
+      
+   </apex:pageBlockSection> 
+  <apex:pageBlockSection title="Call Response" >
+     <apex:outputfield value="{!Promotion_Members__c.Raised_Complaint__c}"/>
+      <apex:outputfield value="{!Promotion_Members__c.Complaints__c}"/>
+      <apex:outputfield value="{!Promotion_Members__c.Promotion_Status__c}"/>
+       <apex:outputfield value="{!Promotion_Members__c.Complaint_Remarks__c}"/>
+         <apex:outputfield value="{!Promotion_Members__c.How_was_the_Promotion__c}"/>
+           <apex:outputfield value="{!Promotion_Members__c.Did_you_get_any_gifts__c}"/>
+            <apex:outputfield value="{!Promotion_Members__c.Will_you_recommend__c}"/>
+             <apex:outputfield value="{!Promotion_Members__c.Suggestion__c}"/>
+              <apex:outputfield value="{!Promotion_Members__c.Suggestion_Remarks__c}"/>
+  </apex:pageBlockSection>
+ <!-- <apex:pageBlockSection id="id18" title="Call Response" rendered="{!$User.BDM__c == TRUE}">
+     <apex:outputfield value="{!Promotion_Members__c.Raised_Complaint__c}"/>
+      <apex:outputfield value="{!Promotion_Members__c.Complaints__c}"/>
+      <apex:outputfield value="{!Promotion_Members__c.Promotion_Status__c}"/>
+       <apex:outputfield value="{!Promotion_Members__c.Complaint_Remarks__c}"/>
+         <apex:outputfield value="{!Promotion_Members__c.How_was_the_Promotion__c}"/>
+           <apex:outputfield value="{!Promotion_Members__c.Did_you_get_any_gifts__c}"/>
+            <apex:outputfield value="{!Promotion_Members__c.Will_you_recommend__c}"/>
+             <apex:outputfield value="{!Promotion_Members__c.Suggestion__c}"/>
+              <apex:outputfield value="{!Promotion_Members__c.Suggestion_Remarks__c}"/>
+  </apex:pageBlockSection>-->
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

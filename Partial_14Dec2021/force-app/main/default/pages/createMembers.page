@@ -1,0 +1,429 @@
+<apex:page standardController="Promotion__c"  applyHtmlTag="false" sidebar="false" showHeader="false" extensions="SearchandCreateMembers">
+<apex:form id="pageId">
+<apex:pageMessages />
+        <apex:pageBlock >
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Architects Meet' || prm.Type__c=='Builders Meet' || prm.Type__c=='Engineers Meet')}">  
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct">               
+                    
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Dealer">
+                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Distributor">
+                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" required="true" rendered="{!newAcct.id==null}"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Firm Name">
+                        <apex:inputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}"/>
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Phone">
+                        <apex:inputField value="{!newAcct.Contact_Number_Phone__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Contact_Number_Phone__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Status">
+                        <apex:inputField value="{!newAcct.Status__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Status__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="PIN">
+                        <apex:inputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                   
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+
+            <apex:pageBlockSection rendered="{!prm.Type__c=='Boarers Meet'}">   
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct">               
+                    
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Dealer">
+                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Distributor">
+                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection rendered="{!prm.Type__c=='Dealers Meet'}"> 
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct">               
+                    
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+               <apex:column headerValue="Primary Contact Person Name">
+                        <apex:inputField value="{!newAcct.Primary_Contact_Person_Name__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Primary_Contact_Person_Name__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                   
+                    <apex:column headerValue="Products">
+                        <apex:inputField value="{!newAcct.Products__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Products__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                   
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Farmers Meet' || prm.Type__c=='Mechanic Meet' || prm.Type__c=='Plumber Meet' )}">   
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct">               
+                    
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Dealer">
+                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Distributor">
+                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Dealers Salesman Meet'|| prm.Type__c='Dealers Factory Visit')}">       
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct">               
+                    
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                  
+                    
+                    <apex:column headerValue="Distributor">
+                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Tractor Show' || prm.Type__c=='Jeep Campaign') }">    
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct">               
+                    
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    <apex:column headerValue="Firm Name">
+                        <apex:inputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Party Type">
+                        <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    <apex:column headerValue="Dealer">
+                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Distributor">
+                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Exhibition' || prm.Type__c=='Plumber/Mechanic/Engineers Factory Visit' || prm.Type__c=='Group Activity') }">    
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct">               
+                    
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                   
+                    <apex:column headerValue="Dealer">
+                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Distributor">
+                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Party Type">
+                      <apex:actionRegion >
+                       <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" required="true">
+                           <apex:actionSupport reRender="pageId" event="onchange"/>
+                         </apex:inputField>
+                            <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" />
+                               </apex:actionRegion>
+                    </apex:column>
+                     
+                     
+                 <apex:column headervalue="Firm Name">
+                       
+                <apex:inputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.Party_Type__c=='Engineer'&&newAcct.id==null}" required="true"/> 
+                  <apex:outputField value="{!newAcct.Firm_Name__c}" rendered="{!newAcct.id!=null}" />
+          </apex:column>  
+                        
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection rendered="{!(prm.Type__c=='Shandy Show' || prm.Type__c=='Mini Meet') }" >    
+                <apex:pageBlockTable value="{!combinedAccountList}" var="newAcct"> 
+                
+                    <apex:column headerValue="Name">
+                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    <apex:column headerValue="PIN">
+                        <apex:inputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.PIN_Code__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                   
+                    <apex:column headerValue="Party Type">
+                        <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    <apex:column headerValue="Dealer">
+                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Distributor">
+                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" />                        
+                    </apex:column>
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="State">
+                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="District">
+                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Location">
+                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}" />
+                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                    <apex:column headerValue="Visit Type">
+                        <apex:inputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id==null}" required="true"/>
+                        <apex:outputField value="{!newAcct.Visit_Type__c}" rendered="{!newAcct.id!=null}" />
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+
+
+     </apex:pageBlock>
+        <apex:commandButton value="Save" action="{!saveMembers}"/>
+        <apex:commandButton value="Cancel" action="{!Cancel}"/>
+       </apex:form>           
+        
+</apex:page>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Not_to_Change_Promotions_after_approval</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND
+(
+(ISPICKVAL( Tour_Program_Approval__c, &quot;Approved&quot;) &amp;&amp; $Profile.Id=&apos;00e30000001yGyh&apos;),
+!ISCHANGED( Architects_Meet_Actuals__c ),
+!ISCHANGED( Boarers_Meet_Actuals__c),
+!ISCHANGED( Builders_Meet_Actuals__c),
+!ISCHANGED( Dealers_Factory_Visit_Actuals__c),
+!ISCHANGED( Dealers_Meet_Actuals__c),
+!ISCHANGED( Dealers_Salesmen_Meet_Actuals__c),
+!ISCHANGED( Engineers_Meet_Actuals__c),
+!ISCHANGED( Exhibition_Actuals__c),
+!ISCHANGED( Farmers_Meet_Actuals__c),
+!ISCHANGED( Jeep_Campaign_Actuals__c),
+!ISCHANGED( Mechanics_Meet_Actuals__c),
+!ISCHANGED( Mini_Meet_Actuals__c),
+!ISCHANGED( Plumbers_Meet_Actuals__c),
+!ISCHANGED( Shandy_Show_Actuals__c),
+!ISCHANGED( Tractor_Show_Actuals__c),
+!ISCHANGED( Plumber_MechanicEngineers_Factory_Visit__c)
+)</errorConditionFormula>
+    <errorMessage>Insufficient Privileges to edit..!!</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>district_state_city</fullName>
+    <active>true</active>
+    <description>Please enter either state, city or district</description>
+    <errorConditionFormula>AND( 
+RecordType.Name = &apos;Geography scheme&apos;,
+( IF(ISBLANK( City__c ), 1, 0) + 
+IF(ISBLANK( District__c ),1, 0) + 
+IF(ISBLANK( State__c ), 1, 0) ) &lt; 2
+)</errorConditionFormula>
+    <errorMessage>Please select only one of city, state and district</errorMessage>
+</ValidationRule>

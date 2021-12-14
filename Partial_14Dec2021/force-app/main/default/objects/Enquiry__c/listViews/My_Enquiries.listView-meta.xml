@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Enquiries</fullName>
+    <columns>NAME</columns>
+    <columns>Verified__c</columns>
+    <columns>Enquiry_Date__c</columns>
+    <columns>Enquiry_Status__c</columns>
+    <columns>Phone_Number__c</columns>
+    <columns>Product__c</columns>
+    <columns>Caller_type__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Eranna</label>
+</ListView>

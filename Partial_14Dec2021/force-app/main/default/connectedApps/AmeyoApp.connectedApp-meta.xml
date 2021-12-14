@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>rnd@drishti-soft.com</contactEmail>
+    <description>Application for computer-telephony integration of ameyo with salesforce</description>
+    <infoUrl>https://www.drishti-soft.com</infoUrl>
+    <label>AmeyoApp</label>
+    <logoUrl>https://www.drishti-soft.com/images/logo/drishti_logo.gif</logoUrl>
+    <oauthConfig>
+        <callbackUrl>https://ameyo.r9.group.corp:8443/ameyowebaccess/_callback</callbackUrl>
+        <consumerKey>3MVG9Ccwq.TeycMZ1tEBAj8_QhYep4fn.KPKgamZTMLUjGfeCSHxqZ7lrwATfAUqWq527xFybk3nurDNkmUga</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+        <scopes>Web</scopes>
+        <scopes>Full</scopes>
+        <scopes>Chatter</scopes>
+        <scopes>CustomApplications</scopes>
+        <scopes>RefreshToken</scopes>
+        <scopes>OpenID</scopes>
+        <scopes>CustomPermissions</scopes>
+        <scopes>Wave</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>infinite</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

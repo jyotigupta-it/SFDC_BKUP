@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_for_Non_Visit__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason for Non Visit</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Attending a Complaint</fullName>
+                <default>false</default>
+                <label>Attending a Complaint</label>
+            </value>
+            <value>
+                <fullName>Exhibition/Shows</fullName>
+                <default>false</default>
+                <label>Exhibition/Shows</label>
+            </value>
+            <value>
+                <fullName>Held up at Depot</fullName>
+                <default>false</default>
+                <label>Held up at Depot</label>
+            </value>
+            <value>
+                <fullName>Held up at Distributor/Dealer/Contact</fullName>
+                <default>false</default>
+                <label>Held up at Distributor/Dealer/Contact</label>
+            </value>
+            <value>
+                <fullName>Holiday / Market Closed</fullName>
+                <default>false</default>
+                <label>Holiday / Market Closed</label>
+            </value>
+            <value>
+                <fullName>Jeep Maintenance</fullName>
+                <default>false</default>
+                <label>Jeep Maintenance</label>
+            </value>
+            <value>
+                <fullName>Leave</fullName>
+                <default>false</default>
+                <label>Leave</label>
+            </value>
+            <value>
+                <fullName>Meeting at HO</fullName>
+                <default>false</default>
+                <label>Meeting at HO</label>
+            </value>
+            <value>
+                <fullName>Meeting with Team Leader</fullName>
+                <default>false</default>
+                <label>Meeting with Team Leader</label>
+            </value>
+            <value>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+                <label>Mentoring</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Promotional Activity</fullName>
+                <default>false</default>
+                <label>Promotional Activity</label>
+            </value>
+            <value>
+                <fullName>Traveling Outstation</fullName>
+                <default>false</default>
+                <label>Traveling Outstation</label>
+            </value>
+            <value>
+                <fullName>Market Survey</fullName>
+                <default>false</default>
+                <label>Market Survey</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

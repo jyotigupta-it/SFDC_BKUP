@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Missing_Distributor_Dealer</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Visit_To__c, &apos;Distributor/Dealer&apos;) &amp;&amp; ISBLANK(Distributor_Dealer__c)&amp;&amp; $User.TL__c !=TRUE</errorConditionFormula>
+    <errorDisplayField>Distributor_Dealer__c</errorDisplayField>
+    <errorMessage>Please Enter Distributor or Dealer</errorMessage>
+</ValidationRule>

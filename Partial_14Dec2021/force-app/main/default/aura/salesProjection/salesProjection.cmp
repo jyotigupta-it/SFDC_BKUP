@@ -1,0 +1,49 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="salesProjections" type="Sales_Projection__c"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="makeReadOnly" type="boolean"/>
+    
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+    <lightning:recordEditForm aura:id="recordForm" objectApiName="Sales_Projection__c">
+        <!-- Error message -->
+        <lightning:messages />
+        <!-- Fields -->
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-5 slds-large-size_1-of-5  slds-p-left_medium slds-p-right_medium">
+                <lightning:inputField required="true" aura:id="Product_Type__c" 
+                                      fieldName="Product_Type__c" 
+                                      value="{!v.salesProjections.Product_Type__c}" disabled="{!v.makeReadOnly}"/>
+            </div>
+            <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-5 slds-large-size_1-of-5  slds-p-left_medium slds-p-right_medium">
+                <lightning:inputField required="true" aura:id="X1st_Year__c" 
+                                      fieldName="X1st_Year__c" 
+                                      value="{!v.salesProjections.X1st_Year__c}" disabled="{!v.makeReadOnly}"/>
+            </div>
+            <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-5 slds-large-size_1-of-5  slds-p-left_medium slds-p-right_medium">
+                <lightning:inputField required="true" aura:id="X2nd_Year__c" 
+                                      fieldName="X2nd_Year__c" 
+                                      value="{!v.salesProjections.X2nd_Year__c}" disabled="{!v.makeReadOnly}"/>
+            </div>
+            <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-5 slds-large-size_1-of-5  slds-p-left_medium slds-p-right_medium">
+                <lightning:inputField required="true" aura:id="X3rd_Year__c" 
+                                      fieldName="X3rd_Year__c" 
+                                      value="{!v.salesProjections.X3rd_Year__c}" disabled="{!v.makeReadOnly}"/>
+            </div>
+            <div class="slds-col slds-size_7-of-7 slds-medium-size_1-of-5 slds-large-size_1-of-5  slds-p-left_medium slds-p-right_medium slds-truncate" title="Action" style="text-align: right;margin-top: 25px;">
+                <aura:if isTrue="{!!v.makeReadOnly}">
+                    <aura:if isTrue="{!v.rowIndex == 0}">
+                        <lightning:icon iconName="action:new" variant="border-filled" size="x-small" onclick="{! c.AddNewRow }" alternativeText="Add Row" title="Add Row" />
+                        <aura:set attribute="else">
+                            <a  onclick="{! c.removeRow }"  data-row-index="{!index}" data-conId="{!index}">
+                                <lightning:icon iconName="action:delete" variant="border-filled" size="x-small" style="margin-left:5px" alternativeText="Remove" title="Remove" />
+                            </a> 
+                        </aura:set>
+                    </aura:if>
+                </aura:if>
+            </div>
+        </div>
+    </lightning:recordEditForm>
+</aura:component>

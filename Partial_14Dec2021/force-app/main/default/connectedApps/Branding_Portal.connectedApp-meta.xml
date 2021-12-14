@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>Sfdc.support@ashirvad.com</contactEmail>
+    <label>Branding_Portal</label>
+    <oauthConfig>
+        <callbackUrl>https://login.salesforce.com/services/oauth2/callback</callbackUrl>
+        <certificate>MIIDhzCCAm+gAwIBAgIEThjkZzANBgkqhkiG9w0BAQsFADB0MQswCQYDVQQGEwJJTjESMBAGA1UECBMJS2FybmF0YWthMRIwEAYDVQQHEwlCYW5nYWxvcmUxEzARBgNVBAoTClNhbGVzZm9yY2UxEzARBgNVBAsTClNhbGVzZm9yY2UxEzARBgNVBAMTClNoYXNoaWRoYXIwHhcNMTgwMTA0MDk1MjE0WhcNMjAwOTMwMDk1MjE0WjB0MQswCQYDVQQGEwJJTjESMBAGA1UECBMJS2FybmF0YWthMRIwEAYDVQQHEwlCYW5nYWxvcmUxEzARBgNVBAoTClNhbGVzZm9yY2UxEzARBgNVBAsTClNhbGVzZm9yY2UxEzARBgNVBAMTClNoYXNoaWRoYXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCltD4uXwwAJENXPWPSh0tYnuVeN3Vvtp2oFsneRdQLmb9HI2p7ktzQ4RcV4RrKVfHpK9N5XeuDLKcuHM70DiEbloRXIKmGr6m/em2FcS+qPiCMLJjoRRNxLpSWflNqEhBbjrWnbjeNyW///0agA5VqnieIlhA5rC0m/VqzlaIEDm6d6xxK+NbDJRSoX6fsCxRbT6ugdQLbCHMJHcMYBGepNHcrlgSfKVGGcMoIzkaLhSt/3zSszttFswijy75H3kYYLFVY/xPtKqUsewUqw8tbZs33t5/91/QWfxKnOFhZS9/mobpIVBDBIyYHv+hSQdtk0UuE0AQtIejo6dTd1nTRAgMBAAGjITAfMB0GA1UdDgQWBBRRohd4vzmqkdgN0gJO6/4PrzhYMzANBgkqhkiG9w0BAQsFAAOCAQEAL5bLVlKjp6WW1WmqEhqNzzBOYlbgU+JUc19meM6Sa7/+f0jeCh8svnIqvCUhMOYnysij7UQwfs33NA5LFZsL57f2nObkMtoLOwrqMKvZ5OGRCYrsBDyOYt8vaRkF0GQs8x0Tx1D3w4whFHuuFb0E9nCIhyTAuCN+RvpMgVSIu7/rC2Vt/IYQv8NJ7LYZoxQ1n0v4U1xKaVlDG71iUBcUS22+Wh8R19y4RfojTVBfAb816EwLlEJKl41Kb5qJaOGoxVxZ+3+VxXyc2wnxKYNF2fm3SDWSoFYbDflbC//C58FSnWwnJktIiHvVE7NFZeaI7gjzI04vaM1RUSahR1dNWQ==</certificate>
+        <consumerKey>3MVG9Ccwq.TeycMZ1tEBAj8_QhYep4fn.KPKgpqxCEgvVrY237IoV6Ti.SrL.ix41HLLLL9dXrFcPuO7DHXBm</consumerKey>
+        <isAdminApproved>true</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+        <scopes>Web</scopes>
+        <scopes>Full</scopes>
+        <scopes>Chatter</scopes>
+        <scopes>CustomApplications</scopes>
+        <scopes>RefreshToken</scopes>
+        <scopes>OpenID</scopes>
+        <scopes>CustomPermissions</scopes>
+        <scopes>Wave</scopes>
+        <scopes>Eclair</scopes>
+        <scopes>Pardot</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+    <permissionSetName>BrandingPortalConnectedApp</permissionSetName>
+    <profileName>Integration Profile</profileName>
+    <sessionPolicy>
+        <sessionTimeout>720</sessionTimeout>
+    </sessionPolicy>
+</ConnectedApp>

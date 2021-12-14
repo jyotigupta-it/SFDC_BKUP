@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Country__c</fullName>
+    <externalId>false</externalId>
+    <label>Country</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FRANCE</fullName>
+                <default>false</default>
+                <label>FRANCE</label>
+            </value>
+            <value>
+                <fullName>JORDAN</fullName>
+                <default>false</default>
+                <label>JORDAN</label>
+            </value>
+            <value>
+                <fullName>UNITED ARAB EMIRATES</fullName>
+                <default>false</default>
+                <label>UNITED ARAB EMIRATES</label>
+            </value>
+            <value>
+                <fullName>SAUDI ARABIA</fullName>
+                <default>false</default>
+                <label>SAUDI ARABIA</label>
+            </value>
+            <value>
+                <fullName>LIBYAN ARAB JAMAHIRIYA</fullName>
+                <default>false</default>
+                <label>LIBYAN ARAB JAMAHIRIYA</label>
+            </value>
+            <value>
+                <fullName>SOUTH AFRICA</fullName>
+                <default>false</default>
+                <label>SOUTH AFRICA</label>
+            </value>
+            <value>
+                <fullName>ITALY</fullName>
+                <default>false</default>
+                <label>ITALY</label>
+            </value>
+            <value>
+                <fullName>CYPRUS</fullName>
+                <default>false</default>
+                <label>CYPRUS</label>
+            </value>
+            <value>
+                <fullName>KUWAIT</fullName>
+                <default>false</default>
+                <label>KUWAIT</label>
+            </value>
+            <value>
+                <fullName>TURKEY</fullName>
+                <default>false</default>
+                <label>TURKEY</label>
+            </value>
+            <value>
+                <fullName>GREECE</fullName>
+                <default>false</default>
+                <label>GREECE</label>
+            </value>
+            <value>
+                <fullName>OMAN</fullName>
+                <default>false</default>
+                <label>OMAN</label>
+            </value>
+            <value>
+                <fullName>IRAN, ISLAMIC REPUBLIC OF</fullName>
+                <default>false</default>
+                <label>IRAN, ISLAMIC REPUBLIC OF</label>
+            </value>
+            <value>
+                <fullName>UNITED STATES</fullName>
+                <default>false</default>
+                <label>UNITED STATES</label>
+            </value>
+            <value>
+                <fullName>SRI LANKA</fullName>
+                <default>false</default>
+                <label>SRI LANKA</label>
+            </value>
+            <value>
+                <fullName>KENYA</fullName>
+                <default>false</default>
+                <label>KENYA</label>
+            </value>
+            <value>
+                <fullName>SYRIAN ARAB REPUBLIC</fullName>
+                <default>false</default>
+                <label>SYRIAN ARAB REPUBLIC</label>
+            </value>
+            <value>
+                <fullName>BAHRAIN</fullName>
+                <default>false</default>
+                <label>BAHRAIN</label>
+            </value>
+            <value>
+                <fullName>ALGERIA</fullName>
+                <default>false</default>
+                <label>ALGERIA</label>
+            </value>
+            <value>
+                <fullName>LEBANON</fullName>
+                <default>false</default>
+                <label>LEBANON</label>
+            </value>
+            <value>
+                <fullName>SINGAPORE</fullName>
+                <default>false</default>
+                <label>SINGAPORE</label>
+            </value>
+            <value>
+                <fullName>PORTUGAL</fullName>
+                <default>false</default>
+                <label>PORTUGAL</label>
+            </value>
+            <value>
+                <fullName>SPAIN</fullName>
+                <default>false</default>
+                <label>SPAIN</label>
+            </value>
+            <value>
+                <fullName>TUNISIA</fullName>
+                <default>false</default>
+                <label>TUNISIA</label>
+            </value>
+            <value>
+                <fullName>SUDAN</fullName>
+                <default>false</default>
+                <label>SUDAN</label>
+            </value>
+            <value>
+                <fullName>COSTA RICA</fullName>
+                <default>false</default>
+                <label>COSTA RICA</label>
+            </value>
+            <value>
+                <fullName>INDIA</fullName>
+                <default>false</default>
+                <label>INDIA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

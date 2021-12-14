@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_SMS</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Send SMS</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/14.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/14.0/apex.js&quot;)}
+var recordType = ‘Contacts__c&apos;;
+var idToUpdate = &apos;{!Contacts__c.Id}&apos;; 
+
+var phoneField = &apos;Cell_Phone__c&apos;;
+var nameField = &apos;&apos;;
+var queryString = parent.window.location.pathname;
+if (parent.window.location.search){
+queryString = queryString + parent.window.location.search
+}
+var url = &quot;/apex/smsmagicvc1__BulkSendSMS?retURL=&quot;+queryString + &quot;&amp;objectType=&quot;+recordType+&quot;&amp;recordIds=&quot;+
+idToUpdate+&quot;&amp;phoneField=&quot;+phoneField+&quot;&amp;nameField=&quot; ;
+parent.window.location = url;</url>
+</WebLink>

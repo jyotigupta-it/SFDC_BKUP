@@ -1,0 +1,99 @@
+.button{
+    font-size:13px !important;
+    color:white !important;
+    background-color:DarkBlue;
+    width:100px;
+    height:30px;
+    font-family:Lucida Console, Courier, monospace !important;
+    border-radius: 4px;
+    }
+    .inputBox{
+    font-size:15px !important;
+    background:transparent;
+    color:black !important;
+    border: 2px solid black;
+    border-radius: 4px;
+    }
+    .labels{
+    font-size:20px;
+    color:black;
+    font-family: Times New Roman, Times, serif;
+    }
+    .mainHeader{
+    font-size:45px !important;
+    align:center !important;
+    color:yellow;
+    font-family:Lucida Console, Courier, monospace !important;
+    }
+    .center {
+    margin: auto;
+    width: 100%;
+    border: 3px solid rgb(95, 211, 95)4, 46, 44)4, 46, 44);
+    padding: 10px;
+    }
+    body {
+    background-image: url("http://darshanincense.com/assets/3.jpg");
+    background-repeat:repeat;
+    }
+    .question table tr td {
+    display: block;
+    align-content: center;
+    }
+    .bg-text {
+    background-color: rgb(255,255,255); /* Fallback color */
+    background-color: rgba(255,255,255, 0.5); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold; 
+    /*border: 3px solid #f1f1f1;*/
+    z-index: 15;
+    
+    }
+    @media (min-width: 1025px) {
+    #respImageContainer {
+    background-size: 100% auto;
+    background-repeat: no-repeat;        
+    background-image: url('{!URLFOR($Resource.DekstopOPBackGround)}');
+    }
+    #header1{
+    font-size: 30px; !IMPORTANT
+    }
+    #header2{
+    font-size: 30px; !IMPORTANT
+    }
+    #padding2{
+    display: none;
+    }
+    }
+    @media (max-width: 1024px) and (min-width: 500px){
+    #respImageContainer {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url('{!URLFOR($Resource.TabOPbackground)}');
+    }
+    #header1{
+    font-size: 17px; !IMPORTANT
+    }
+    #header2{
+    font-size: 17px; !IMPORTANT
+    }
+    #padding2{
+    display: block;
+    }
+    }
+    @media (max-width: 499px) {
+    #respImageContainer {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url('{!URLFOR($Resource.MobileOPbackground)}');
+    }
+    #header1{
+    font-size: 12px; !IMPORTANT
+    }
+    #header2{
+    font-size: 12px; !IMPORTANT
+    }
+    #padding2{
+    display: none;
+    }
+    }
+    

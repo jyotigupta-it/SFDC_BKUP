@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Case Whatsapp Queue</name>
+    <queueMembers>
+        <users>
+            <user>cart.user@ashirvad.com</user>
+            <user>sfdc.support@ashirvad.com</user>
+        </users>
+    </queueMembers>
+    <queueRoutingConfig>Case_Whatsapp_Queue</queueRoutingConfig>
+    <queueSobject>
+        <sobjectType>LiveChatTranscript</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>MessagingEndUser</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>MessagingSession</sobjectType>
+    </queueSobject>
+</Queue>

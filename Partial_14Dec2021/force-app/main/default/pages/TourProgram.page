@@ -1,0 +1,347 @@
+<apex:page standardController="Tour_Program__c" extensions="TorProgramClass" renderAs="PDF" sidebar="false" standardStylesheets="false" applyHtmlTag="False" showHeader="False">
+<head>
+    <style>
+    @page {
+    /* Landscape orientation */
+    margin-top:15px;
+    margin-bottom:0px;
+    size:landscape;
+    }
+    @page { size: 15in 8in; /* A4 width and height */ }
+    </style>
+</head>
+
+    <apex:form >
+        <table width="100%" style="font-size:9pt;">
+        <tr>
+                <td align="center">
+                   <apex:image id="theImage" value="{!$Resource.AshirvadLogoNew}" width="100" height="50"/>
+                </td>
+            </tr>
+            
+            <tr>
+                <td align="center">
+                    <b><apex:outputText value="ASHIRVAD PIPES PVT LTD. BANGALORE"/></b>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table border="1" cellspacing="0" style="font-size:8pt;" width="70%" align="center" bgcolor="#E0E0E0">
+                        <tr>
+                            <td width="10%">
+                                <apex:outputText value="DOC CODE"/>
+                            </td>
+                            <td width="35%">
+                                <apex:outputText value="TITLE : FORTNIGHTLY EXPENSES STATEMENT"/>
+                            </td>
+                           <td width="15%">
+                                <apex:outputText value="DATE:"/>&nbsp;
+                                <apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                                    <apex:param value="{!Today()}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </td>              
+            </tr>
+            <tr>
+                <td align="center"><br/>
+                   <b> <apex:outputText value="STATE:"/></b>&nbsp;
+                    <apex:outputText value="{!User.User_State__c}"/>
+                </td>
+            </tr>
+        </table>
+        
+            <table width="100%" style="font-size:9pt;">
+                <tr>
+                    <td align="left" width="30%">
+                        <apex:outputText value="Name:"/>&nbsp;
+                        <apex:outputText value="{!Tour_Program__c.Owner.Name}"/>
+                    </td>
+                    <td align="center" width="40%">
+                        <apex:outputText value="Employee Code No:"/>
+                        <apex:outputText value="{!User.EmployeeNumber}"/>
+                    </td>
+                    <td align="right" width="30%">
+                        <apex:outputText value="Date:"/>
+                         <apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                                    <apex:param value="{!Today()}" />
+                                </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" width="30%">
+                        <apex:outputText value="DSN:"/>
+                    </td>
+                    <td align="center" width="40%">
+                        
+                    </td>
+                    <td align="right" width="30%">
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" width="30%">
+                        <apex:outputText value="Fortnightly Expenditure Report No:"/>
+                    </td>
+                    <td align="center" width="40%">
+                        
+                    </td>
+                    <td align="right" width="30%">
+                        <apex:outputText value="H.Qtrs:"/>
+                        <apex:outputLabel value="{!User.Head_Quarter__c}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" width="30%">
+                        <apex:outputText value="From:"/> &nbsp;
+                        <apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                             <apex:param value="{!TourProgrm.From_Date__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td align="left" width="40%">
+                        <apex:outputText value="To:"/>&nbsp;
+                        <apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                             <apex:param value="{!TourProgrm.To_Date__c }" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </table><br/>
+            <table width="100%" border="1" cellspacing="0" style="font-size:9pt;" >
+                <tr >
+                    <td rowspan="2" align="center" width="10%" bgcolor="#E0E0E0">
+                        Date
+                    </td>
+                    <td rowspan="2"  align="center" width="10%" bgcolor="#E0E0E0">
+                        Visit Type(HQ/EX/O/S)
+                    </td>
+     
+                    <td colspan="2"  align="center" width="20%" bgcolor="#E0E0E0">
+                        Departure 
+                    </td>
+                    <td rowspan="2"  align="center" width="5%" bgcolor="#E0E0E0">
+                        Mode
+                    </td>
+                    <td rowspan="2"  align="center" width="5%" bgcolor="#E0E0E0">
+                       Fare
+                    </td>
+                    <td rowspan="2"  align="center" width="5%" bgcolor="#E0E0E0">Local Conve
+                    </td>
+                    <td rowspan="2"  align="center" width="5%" bgcolor="#E0E0E0">
+                        Lodge/EX-DA
+                    </td>
+                    <td rowspan="2" align="center" width="3%" bgcolor="#E0E0E0">
+                      Food/Boarding
+                    </td>
+                    <td rowspan="2" align="center" width="3%" bgcolor="#E0E0E0">
+                        Tel/Fax/Internet
+                    </td>
+                    <td rowspan="2" align="center" width="5%" bgcolor="#E0E0E0">
+                        Courier
+                    </td>
+                    <td rowspan="2" align="center" width="5%" bgcolor="#E0E0E0">
+                        Stationary
+                    </td>
+                    <td rowspan="2" align="center" width="5%" bgcolor="#E0E0E0">
+                        Misc Expenses
+                    </td>
+                    <td rowspan="2" align="center" width="5%" bgcolor="#E0E0E0">
+                        Misc Details
+                    </td>
+                    <td rowspan="2" align="center" width="5%" bgcolor="#E0E0E0">
+                        Total
+                    </td>
+                </tr>
+                <tr>                    
+                    <td width="10%" bgcolor="#E0E0E0">
+                        From 
+                    </td>
+                    <td width="10%" bgcolor="#E0E0E0">
+                        To 
+                    </td>               
+                </tr>
+                <apex:variable value="{!0}" var="Total1"/>
+                <apex:variable value="{!0}" var="TotalFare"/>
+                  <apex:variable value="{!0}" var="TotalConv"/>
+                <apex:variable value="{!0}" var="TotalLodge"/>
+                <apex:variable value="{!0}" var="TotalFood"/>
+                <apex:variable value="{!0}" var="TotalTel"/>
+                <apex:variable value="{!0}" var="TotalCourier"/>
+                <apex:variable value="{!0}" var="TotalStationary"/>
+                <apex:variable value="{!0}" var="TotalMisc"/>
+                 <apex:variable value="{!0}" var="Total"/>
+                  <apex:variable value="{!0}" var="GTotal"/>
+                <apex:repeat value="{!TourPlans}" var="tp1">
+                 <apex:variable value="{!TotalFare+tp1.Fare__c}" var="TotalFare"/>
+                  <apex:variable value="{!Total1+tp1.Total_Expenses__c}" var="Total1"/>
+                 <apex:variable value="{!TotalConv+tp1.Local_Conveyance__c}" var="TotalConv"/>
+                 <apex:variable value="{!TotalLodge+tp1.Lodge__c}" var="TotalLodge"/>
+                 <apex:variable value="{!TotalFood+tp1.Food_and_Boarding__c}" var="TotalFood"/>
+                 <apex:variable value="{!TotalTel+tp1.Telephone_Fax_Internet__c}" var="TotalTel"/>
+                 <apex:variable value="{!TotalCourier+tp1.Courier__c}" var="TotalCourier"/>
+                 <apex:variable value="{!TotalStationary+tp1.Stationery_and_Photocopy__c}" var="TotalStationary"/>
+                 <apex:variable value="{!TotalMisc+tp1.Miscellaneous__c}" var="TotalMisc"/>
+                 <apex:variable value="{!Total+tp1.Total_Expenses__c}" var="Total"/>
+                  <apex:variable value="{!GTotal+tp1.Total_Expenses__c}" var="GTotal"/>
+                 </apex:repeat>
+              
+                  <!--<apex:repeat value="{!TourPlans}" var="tp">
+                 <apex:variable value="{!Total1+tp.Total_Expenses__c}" var="Total1"/>
+                 <apex:variable value="{!TotalConv+tp.Local_Conveyance__c}" var="TotalConv"/>
+                 <apex:variable value="{!TotalLodge+tp.Lodge__c}" var="TotalLodge"/>
+                 <apex:variable value="{!TotalFood+tp.Food_and_Boarding__c}" var="TotalFood"/>
+                 <apex:variable value="{!TotalTel+tp.Telephone_Fax_Internet__c}" var="TotalTel"/>
+                 <apex:variable value="{!TotalCourier+tp.Courier__c}" var="TotalCourier"/>
+                 <apex:variable value="{!TotalStationary+tp.Stationery_and_Photocopy__c}" var="TotalStationary"/>
+                 <apex:variable value="{!TotalMisc+tp.Miscellaneous__c}" var="TotalMisc"/>
+                 </apex:repeat>-->
+                <apex:repeat value="{!TourPlans}" var="tp">
+                    <tr>
+                        <td >
+                            <apex:outputText value="{0,date,dd'.'MM'.'yyyy}">
+                                <apex:param value="{!tp.Date__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td >
+                            <apex:outputText value="{!tp.Visit_Type__c}"/>
+                        </td>
+                        <td > 
+                            <apex:outputText value="{!tp.From__c}"/>
+                        </td>
+                        <td >
+                            <apex:outputText value="{!tp.To__c}"/>
+                        </td>
+          
+           
+                        
+                        <td >
+                            <apex:outputText value="{!tp.Mode_of_Travel__c}"/>
+                        </td>
+                        <td align="right" >
+                            <apex:outputText value="{!ROUND(tp.Fare__c,0)}"/>
+                        </td>
+                        <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Local_Conveyance__c,0)}"/>
+                    </td>
+                    <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Lodge__c,0)}"/>
+                    </td>
+                    <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Food_and_Boarding__c,0)}"/>
+                    </td>
+                    <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Telephone_Fax_Internet__c,0)}"/>
+                    </td>
+                    <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Courier__c,0)}"/>
+                    </td>
+                    <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Stationery_and_Photocopy__c,0)}"/>
+                    </td>
+                    <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Miscellaneous__c,0)}"/>
+                    </td>
+                     <td align="right" >
+                        <apex:outputText value="{!tp.Miscellaneous_Details__c}"/>
+                    </td>
+                    <td align="right" >
+                        <apex:outputText value="{!ROUND(tp.Total_Expenses__c,0)}"/>
+                    </td>                
+                    </tr>                    
+                </apex:repeat>
+                     <tr>
+                        <td colspan="5" align="right">
+                            <apex:outputText value="Total Fare"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalFare,0)}"/>
+                        </td>
+                        
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalConv,0)}"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalLodge,0)}"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalFood,0)}"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalTel,0)}"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalCourier,0)}"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalStationary,0)}"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(TotalMisc,0)}"/> 
+                        </td>
+                   
+                        <td align="right">
+                           
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(Total,0)}"/> 
+                        </td>
+                    </tr>
+                    <!--<tr>
+                        <td colspan="14" align="center">
+                            <apex:outputText value="Total"/>
+                        </td>
+                        <td align="right">
+                            <apex:outputText value="{!ROUND(GTotal+Total,0)}"/>
+                        </td>
+                    </tr>-->
+            </table><br/><br/>
+            <table width="70%" style="font-size:9pt;" align="center">
+            <tr>
+                <td align="center" width="100%">
+            <table border="1" cellspacing="0" width="30%" style="font-size:8pt;" align="">                
+                <tr>
+                    <td width="20%">
+                        <apex:outputText value="Hq Visit Days"/>
+                    </td>
+                    <td width="10%">
+                        <apex:outputText value="{!TourProgrm.H_Q_Visit_Days__c}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="10%">
+                        <apex:outputText value="Ex-Station Visit Days"/>
+                    </td>
+                    <td width="10%">
+                        <apex:outputText value="{!TourProgrm.Ex_Station_Visit_Days__c}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="10%">
+                        <apex:outputText value="Out-Station Visit Days"/>
+                    </td>
+                    <td width="10%">
+                        <apex:outputText value="{!TourProgrm.Out_Station_Visit_Days__c}"/>
+                    </td>
+                </tr>
+            </table>
+               </td>
+                </tr>
+            </table><br/><br/><br/>
+          <table width="100%" style="font-size:9pt;">
+        <tr>
+                <td align="left">
+                  <b><apex:outputText value="Approved By"/></b>
+                </td>
+            </tr>
+             <tr>
+                <td align="right">
+                  <b><apex:outputText value="Employee Signature"/></b>
+                </td>
+            </tr>
+            </table>  
+    </apex:form>  
+</apex:page>

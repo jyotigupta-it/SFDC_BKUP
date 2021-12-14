@@ -1,0 +1,6 @@
+<apex:page standardController="Enquiry__c">
+<apex:form >
+<apex:inputfield value=" {!Enquiry__c.Verified__c}" rendered="{!$User.BDM__c != TRUE}"/>
+ <apex:outputtext value="  Verified {!Enquiry__c.Verified__c}" rendered="{!$User.BDM__c == TRUE}"/>
+</apex:form>
+</apex:page>

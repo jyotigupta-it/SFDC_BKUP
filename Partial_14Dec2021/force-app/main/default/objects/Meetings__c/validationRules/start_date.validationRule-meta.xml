@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>start_date</fullName>
+    <active>true</active>
+    <errorConditionFormula>(ISNEW() || ISCHANGED(Meeting_Start_Time__c)) &amp;&amp; 
+(DATEVALUE(Meeting_Start_Time__c) &lt; TODAY())</errorConditionFormula>
+    <errorDisplayField>Meeting_Start_Time__c</errorDisplayField>
+    <errorMessage>Please enter a start date greater than today</errorMessage>
+</ValidationRule>

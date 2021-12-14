@@ -1,0 +1,33 @@
+<apex:page extensions="SPRPDFPreviewRedirectController2" Standardcontroller="Opportunity">
+<apex:slds />
+<br/><br/>
+    <div style="font-size:17px;color:blue;text-align:center">Redirecting....</div>
+    <apex:form >
+         <apex:actionFunction name="createOfferPdf" action="{!sendcreateOfferPdf}"/>
+     </apex:form>
+<br/><br/>
+     
+     <script type="Text/javascript">
+      
+        var projectId = '{!oppId}'; 
+        console.log('ffffffff ' + {!userAgentCreateOffer});
+            
+                 
+               if((typeof sforce != 'undefined') && (sforce != null)) {    
+                   // Request from Desktop(Salesforce Lightning version)
+                   window.open('/apex/ProductsOfferToClient?opporId='+ projectId, "_self");
+                   console.log('Salesforce Lightning version 11111111111111');
+                 } else {
+                      if({!userAgentCreateOffer} == false) {
+                            console.log('Salesforce classic version 2222222222222');
+                            // Request from Desktop(Salesforce classic version)
+                            window.open('/apex/ProductsOfferToClient?opporId='+ projectId, "_self");
+                        } else {
+                            console.log('Salesforce mobile version 33333333333');
+                            // Request from Mobile(Salesforce one app)
+                           // window.open('/apex/ProductsOfferToClient_Mobile?opporId='+ projectId, "_self");
+                            createOfferPdf();
+                        }
+                 } 
+     </script>
+</apex:page>

@@ -1,0 +1,171 @@
+<apex:page standardController="Visit__c">
+<script>function setFocusOnLoad(){}</script>
+
+    <apex:form id="form1">
+<!--- First Block ---->          
+        <apex:pageBlock title="Visit Details" >
+
+         <!-- <apex:pageBlockButtons >-->
+            
+        <!--    <apex:commandButton value="Save & New" action="{!save_new}">
+                <apex:actionSupport action="/a0E/o" id="editPage" method="post" name="editPage" onsubmit="if (window.ffInAlert) { return false; }if (window.sfdcPage && window.sfdcPage.disableSaveButtons) { return window.sfdcPage.disableSaveButtons();}"/>
+            </apex:commandButton> -->
+           
+          <!--</apex:pageBlockButtons>-->        
+          
+         <apex:pageBlockSection id="sec1" columns="1">
+            <apex:inputField value="{!Visit__c.Date__c}">
+                <apex:actionSupport event="onchange" reRender="sec1"/>
+            </apex:inputField>
+            <apex:inputField id="type" rendered="{!NOT(ISBLANK(Visit__c.Date__c))}" required="true" value="{!Visit__c.Type__c}">
+              <apex:actionSupport event="onchange" reRender="form1"/>
+            </apex:inputField>      
+                     
+         </apex:pageBlockSection>
+
+<!--- Non Visit Information ---->                      
+        <apex:pageBlockSection id="sec2" title="Non Visit Information" rendered="{!(Visit__c.Type__c == 'Non Visit'  &&  $User.TL__c != TRUE )}" columns="2">
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Reason for Non Visit"/>
+          <apex:inputField required="true" value="{!Visit__c.Reason_for_Non_Visit__c}">
+              <apex:actionSupport event="onchange" reRender="form1"/>                  
+          </apex:inputField>
+          </apex:pageBlockSectionItem>
+  
+            <apex:inputField value="{!Visit__c.Remarks__c}"/>
+            <apex:inputField value="{!Visit__c.Call_Completed__c}" rendered="{!(Visit__c.Type__c == 'Non Visit'  &&  $User.HO__c == TRUE )}"/>
+           <apex:inputField value="{!Visit__c.Status__c}" rendered="{!(Visit__c.Type__c == 'Non Visit'  &&  $User.HO__c == TRUE )}"/>
+             <apex:inputfield value="{!Visit__c.Visit_Type__c}" required="true"/>   
+           </apex:pageBlockSection> 
+           <apex:pageBlockSection title="Complaints" id="com1"  rendered="{!(Visit__c.Type__c == 'Non Visit'  &&  $User.HO__c == TRUE )}" columns="2">
+           <apex:inputField value="{!Visit__c.Raised_Complaint__c}"/>
+               <apex:inputField value="{!Visit__c.Complaints__c}"/>
+               <apex:inputField value="{!Visit__c.Suggestions__c}"/> 
+               </apex:pageBlockSection>       
+    <!--TeamLead Non visit information-->   
+    <apex:pageBlockSection id="sec6" title="Non Visit Information" rendered="{!(Visit__c.Type__c == 'Non Visit' && $User.TL__c == TRUE)}" columns="2">
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Reason for Non Visit"/>
+          <apex:inputField value="{!Visit__c.Reason_for_Non_Visit__c}">
+              <apex:actionSupport event="onchange" reRender="form1"/>                  
+          </apex:inputField>
+          </apex:pageBlockSectionItem>
+           <apex:inputfield value="{!Visit__c.Visit_Type__c}" required="true"/>   
+          <apex:inputField value="{!Visit__c.Remarks__c}"/>
+          <apex:inputField value="{!Visit__c.CityText__c}" />
+          <apex:inputField value="{!Visit__c.State__c}" />
+           <apex:inputField value="{!Visit__c.Report_to_Management__c}"/>
+           
+           </apex:pageBlockSection>        
+
+           <!--<apex:pageBlockSection title="Complaints" id="com2" rendered="{!(Visit__c.Type__c == 'Non Visit' && $User.BDM__c!= TRUE && ($UserRole.Name == 'TeamLeadNorthIndia' || $UserRole.Name =='Darshak' || $UserRole.Name == 'Sandeep' || $UserRole.Name == 'Suresh' || $UserRole.Name == 'Joseph' || $UserRole.Name == 'Dhilip' || $UserRole.Name == 'PRANAY_SHARMA'))}" columns="2">
+            <apex:inputField value="{!Visit__c.Raised_Complaint__c}"/>
+          <apex:inputField value="{!Visit__c.Complaints__c}"/>
+               <apex:inputField value="{!Visit__c.Suggestions__c}"/>
+            
+        </apex:pageBlockSection>-->     
+
+<!--- Visit Information ---->                              
+        <apex:pageBlockSection id="sec3" title="Visit Information" rendered="{!(Visit__c.Type__c == 'Visit' && $User.TL__c != TRUE)}" columns="2">
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Whom are you going to visit"/>
+          <apex:inputField required="true" value="{!Visit__c.Visit_To__c}">
+          <apex:actionSupport event="onchange" reRender="form1"/>                  
+          </apex:inputField>
+          </apex:pageBlockSectionItem>
+          <apex:inputField required="true" value="{!Visit__c.Distributor_Dealer__c}" rendered="{!Visit__c.Visit_To__c == 'Distributor'}"/>
+          <apex:inputField required="true" value="{!Visit__c.Distributor_Dealer__c}" rendered="{!Visit__c.Visit_To__c == 'Dealer'}"/>
+          <apex:inputField required="true" value="{!Visit__c.Contacts__c}" rendered="{!Visit__c.Visit_To__c == 'Contact'}"/>
+          <apex:inputField required="true" value="{!Visit__c.Project_Name__c}" rendered="{!Visit__c.Visit_To__c == 'Project'}"/> 
+           
+        </apex:pageBlockSection>    
+        
+        <apex:pageBlockSection id="sec4" rendered="{!(NOT(ISNULL(Visit__c.Visit_To__c))&&(Visit__c.Type__c == 'Visit')  &&($User.TL__c != TRUE ))}" columns="2">
+          <!-- <apex:inputField value="{!Visit__c.Nature_of_Visit__c}"/> -->
+           <apex:inputfield value="{!Visit__c.Visit_Type__c}" required="true"/>  
+          <apex:inputField required="true" value="{!Visit__c.Competitor__c}"/>
+          <apex:inputField required="true" value="{!Visit__c.Purpose_of_Visit__c}" />
+          <!-- <apex:inputField value="{!Visit__c.Order_Value__c}"/> -->
+          <apex:inputField value="{!Visit__c.Date_of_Next_Visit__c}"/>
+          <apex:inputField value="{!Visit__c.Remarks__c}"/>
+    
+           <apex:inputField value="{!Visit__c.Call_Completed__c}" rendered="{!(NOT(ISNULL(Visit__c.Visit_To__c))&&(Visit__c.Type__c == 'Visit') && ($User.HO__c == TRUE))}"/>
+           <apex:inputField value="{!Visit__c.Status__c}" rendered="{!(NOT(ISNULL(Visit__c.Visit_To__c))&&(Visit__c.Type__c == 'Visit') && ($User.HO__c == TRUE))}"/>
+           </apex:pageBlockSection>
+           <apex:pageBlockSection id="com3"  title="Complaints" rendered="{!(NOT(ISNULL(Visit__c.Visit_To__c))&&(Visit__c.Type__c == 'Visit') &&($User.HO__c== TRUE ))}" columns="2">
+            <apex:inputField value="{!Visit__c.Raised_Complaint__c}"/>
+            <apex:inputField value="{!Visit__c.Complaints__c}"/>
+               <apex:inputField value="{!Visit__c.Suggestions__c}"/>                  
+        </apex:pageBlockSection>
+        <!--TeamLeadVisit Information-->
+        
+           <apex:pageBlockSection id="sec7" title="Visit Information" rendered="{!(Visit__c.Type__c == 'Visit' && $User.TL__c == TRUE )}" columns="2">
+          
+          <apex:inputfield value="{!Visit__c.Worked_with__c}"/>
+          <apex:inputfield value="{!Visit__c.CityText__c}"/>
+          <apex:inputfield value="{!Visit__c.State__c}"/>
+           <apex:inputfield value="{!Visit__c.Visit_Type__c}" required="true"/>
+           
+             <apex:inputfield value="{!Visit__c.Visit_To__c}" required="true" rendered="{!$User.Alias == 'asriv' || $User.Alias == 'dsaxe'}"/>
+               <apex:inputfield value="{!Visit__c.Visited_Party_Type__c}" required="true" rendered="{!$User.Alias == 'asriv' || $User.Alias == 'dsaxe'}"/>  
+         <!--<apex:outputLabel value="Whom are you going to visit"/>
+          <apex:inputField required="true" value="{!Visit__c.Visit_To__c}">
+              <apex:actionSupport event="onchange" reRender="form1"/>                  
+          </apex:inputField>
+          
+         <apex:inputField required="true" value="{!Visit__c.Distributor_Dealer__c}" rendered="{!Visit__c.Visit_To__c == 'Distributor'}"/>
+          <apex:inputField required="true" value="{!Visit__c.Distributor_Dealer__c}" rendered="{!Visit__c.Visit_To__c == 'Dealer'}"/>
+          <apex:inputField required="true" value="{!Visit__c.Contacts__c}" rendered="{!Visit__c.Visit_To__c == 'Contact'}"/>
+          <apex:inputField required="true" value="{!Visit__c.Project_Name__c}" rendered="{!Visit__c.Visit_To__c == 'Project'}"/> -->         
+        </apex:pageBlockSection>    
+          
+        
+        <apex:pageBlockSection id="sec8" rendered="{!(Visit__c.Type__c == 'Visit' && $User.TL__c == TRUE)}" columns="2">
+         
+        
+            <apex:inputField value="{!Visit__c.Report_to_Management__c}"/>
+          <apex:inputField value="{!Visit__c.Feedback__c}"/> 
+          </apex:pageBlockSection>
+         <!-- <apex:pageBlockSection id="com4" title="Complaints" rendered="{!((Visit__c.Type__c == 'Visit') &&  ($UserRole.Name == 'TeamLeadNorthIndia' || $UserRole.Name == 'Darshak' || $UserRole.Name == 'Sandeep' || $UserRole.Name == 'Suresh' || $UserRole.Name == 'Joseph' || $UserRole.Name == 'Dhilip' ||  $UserRole.Name == 'PRANAY_SHARMA'))}" columns="2">
+           <apex:inputField value="{!Visit__c.Raised_Complaint__c}"/> 
+            <apex:inputField value="{!Visit__c.Complaints__c}"/>
+               <apex:inputField value="{!Visit__c.Suggestions__c}"/>               
+        </apex:pageBlockSection>-->
+        
+        <!--Teamlead Promotional Visit page-->
+        <apex:pageBlockSection title="Information" columns="2" rendered="{!((Visit__c.Type__c == 'Promotional Activity report') && ($User.TL__c == TRUE))}">
+            <apex:inputfield value="{!Visit__c.PromotionalType__c}"/>
+            <apex:inputfield value="{!Visit__c.Total_no_of_attendees__c}" required="true"/>
+            <apex:inputfield value="{!Visit__c.Date__c}" required="true"/><br/>
+           
+          
+           <apex:inputfield value="{!Visit__c.Ashirvad_Representative1__c}"/><br/>
+       
+           <apex:inputfield value="{!Visit__c.Ashirvad_Representative2__c}"/><br/>
+        
+           <apex:inputfield value="{!Visit__c.Ashirvad_Representative3__c}"/><br/>
+          
+           <apex:inputfield value="{!Visit__c.Ashirvad_Representative4__c}"/><br/>
+          
+           <apex:inputfield value="{!Visit__c.Ashirvad_Representative5__c}"/><br/>
+           
+           <apex:inputfield value="{!Visit__c.CityText__c}" required="true"/><br/>
+           <apex:inputfield value="{!Visit__c.Suggestions__c}"/>
+            <apex:inputfield value="{!Visit__c.Report__c}" required="true"/>
+             <apex:inputfield value="{!Visit__c.Visit_Type__c}" required="true"/>
+          
+        </apex:pageBlockSection>
+        <table align="center">
+        <tr>
+        <td>
+        <apex:commandButton value="Save" action="{!save}"  />
+        <apex:commandButton value="Cancel" action="{!cancel}"/>
+       
+       </td>
+       </tr> </table>
+      </apex:pageBlock>
+    </apex:form>
+
+    <apex:relatedList List="Order_Bookings__r" rendered="{!Visit__c.Purpose_of_Visit__c = "New Order Booking"}"/>
+    
+</apex:page>

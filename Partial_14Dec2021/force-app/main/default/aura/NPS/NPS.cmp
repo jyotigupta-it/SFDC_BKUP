@@ -1,0 +1,158 @@
+<aura:component controller="NpsController" implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <!-- call doInit function on component load -->  
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+    
+    <!-- aura attributes-->  
+    <aura:attribute name="listControllingValues" type="list" default="[]" description="to store controller field values"/>
+    <aura:attribute name="listDependingValues" type="list" default="['--None--']" description="to store dependent field values"/>
+    <aura:attribute name="depnedentFieldMap" type="map" description="map to store dependent values with controlling value"/>
+    <aura:attribute name="bDisabledDependentFld" type="boolean" default="true"/> 
+    <aura:attribute name="partyTypeList" type="list" default="['--None--']" description="hold Party Type name"/>
+    <aura:attribute name="talukTypeList" type="list" default="['--None--']" description="hold Taluk name"/>
+    <aura:attribute name="statusList" type="list" default="['--None--']" description="hold Taluk name"/>
+    <aura:attribute name="fromDate" type="Date" />
+    <aura:attribute name="toDate" type="Date" />
+    <aura:attribute name="maxDate" type="Date" />
+    <aura:attribute name="selectedPartyType" type="String" />
+    <aura:attribute name="selectedtalukName" type="String" />
+    <aura:attribute name="selectedStatus" type="String" />
+    <aura:attribute name="selectedAccount" type="list" />
+    <aura:attribute name="executivePage" type="boolean" default="false"/>
+    <aura:attribute name="tableDisplay" type="boolean" default="false"/>
+    <aura:attribute name="talukDisplay" type="boolean" default="true"/>
+    <aura:attribute name="shopStatus" type="boolean" default="false"/>
+    <aura:attribute name="talukData" type="object" />
+    <aura:attribute name="noneAttribute" type="String" default="--None--"/>
+    
+    <aura:attribute name="objDetail" type="Account" default="{'sobjectType' : 'Account'}"/>
+    <aura:attribute name="controllingFieldAPI" type="string" default="State__c" description="store field API name of Controller field"/>
+    <aura:attribute name="dependingFieldAPI" type="string" default="District__c" description="store field API name of dependent field"/>
+    
+    <!-- Lightning data table attribute -->
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="errors" type="Object" default="[]"/>
+    <aura:attribute name="draftValues" type="Object" default="[]"/>
+    
+    <!-- Lightning data table pagination attribute -->
+    <aura:attribute name="pageNumber" type="Integer" default="1"/>
+    <aura:attribute name="pageSize" type="Integer" default="25"/>
+    <aura:attribute name="isLastPage" type="Boolean" default="true"/>
+    <aura:attribute name="dataSize" type="Integer" default="0"/> 
+    
+    <div class="slds-theme_default">
+        <lightning:layout multipleRows="true">
+            <!--Controller Field State -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:select name="controllerFld"
+                                  value="{!v.objDetail.State__c}"
+                                  label="State"
+                                  onchange="{!c.onControllerFieldChange}">
+                    <aura:iteration items="{!v.listControllingValues}" var="val">
+                        <option value="{!val}">{!val}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+            
+            <!--Dependent Field District -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:select name="dependentFld"
+                                  value="{!v.objDetail.District__c}"
+                                  label="District"
+                                  disabled="{!v.bDisabledDependentFld}"
+                                  onchange="{!c.processTalukList}">
+                    <aura:iteration items="{!v.listDependingValues}" var="val">
+                        <option value="{!val}">{!val}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+            
+            <!--From Date -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:input name="FromDate" type="date" label="From Date" value="{!v.fromDate}" />
+            </lightning:layoutItem>
+            
+            <!--To Date -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:input name="toDate" type="date" label="To Date" value="{!v.toDate}" min="{!v.fromDate}" />
+            </lightning:layoutItem>
+            
+            <!--Party Type -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:select name="partyType"
+                                  value="{!v.selectedPartyType}"
+                                  label="Party Type">
+                    <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                    <aura:iteration items="{!v.partyTypeList}" var="val">
+                        <option value="{!val}">{!val}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+            
+            <!--Taluk Name -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:select name="talukName"
+                                  value="{!v.selectedtalukName}"
+                                  label="Taluk"
+                                  disabled="{!v.talukDisplay}">
+                    <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                    <aura:iteration items="{!v.talukTypeList}" var="val">
+                        <option value="{!val.Id}">{!val.Name}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+
+            <!-- Status -->
+            <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                <lightning:select name="status"
+                                  value="{!v.selectedStatus}"
+                                  label="Status">
+                    <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                    <aura:iteration items="{!v.statusList}" var="val">
+                        <option value="{!val}">{!val}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+            
+        </lightning:layout>
+        
+        <!-- button name(SearchAccount) is used in helper method, donot change button name. -->
+        <lightning:button variant="neutral" label="Search Account" name="SearchAccount" title="Search Account" onclick="{! c.findAccount }" class="slds-m-bottom_large slds-align_absolute-center"/>
+               
+        <aura:if isTrue="{!v.tableDisplay}">
+            <lightning:datatable aura:id="dtTable"
+                columns="{! v.columns }"
+                data="{! v.data }"
+                keyField="Id"
+                errors="{! v.errors }"
+                draftValues="{! v.draftValues }"
+                hideCheckboxColumn="false"
+                onrowselection="{! c.getSelectedName }"
+                />
+            <div class="slds-clearfix ">
+                <div class="slds-page-header" role="banner">
+                    <div class="slds-float_right">            
+                        <lightning:button label="Prev" iconName="utility:chevronleft" iconPosition="left" name="Previous"
+                                          onclick="{!c.handlePrev}" disabled="{! v.pageNumber == 1}"/>
+                        <lightning:button label="Next" iconName="utility:chevronright" iconPosition="right" name="Next"
+                                          disabled="{! v.isLastPage}" onclick="{!c.handleNext}"/>
+                    </div>
+                    <aura:if isTrue="{! v.dataSize == 0}">
+                        <p>Page {!v.pageNumber} | Showing records from {! ((v.pageNumber-1)*v.pageSize)+' to '+((v.pageNumber-1)*v.pageSize+v.dataSize)}</p>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! greaterthan(v.dataSize, 0)}">
+                        <p>Page {!v.pageNumber} | Showing records from {! ((v.pageNumber-1)*v.pageSize)+ 1 +' to '+((v.pageNumber-1)*v.pageSize+v.dataSize)}</p>
+                    </aura:if>
+                    
+                </div>
+            </div>
+        </aura:if>                    
+        
+        <!-- Executive assignment page -->
+        <aura:if isTrue="{!v.executivePage}">
+            <c:NPSExecutiveAssignment selectedAccountChild="{!v.selectedAccount}" selectPartyType="{!v.selectedPartyType}"></c:NPSExecutiveAssignment>
+        </aura:if>
+    </div>
+</aura:component>

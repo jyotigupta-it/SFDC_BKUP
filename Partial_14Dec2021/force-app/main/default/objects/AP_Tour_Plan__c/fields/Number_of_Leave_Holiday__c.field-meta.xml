@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Number_of_Leave_Holiday__c</fullName>
+    <externalId>false</externalId>
+    <label>Number of Leave/Holiday</label>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Other Activities, brandingVist</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>AP_Site_Visit__c.Othet_Activities__c</field>
+        <operation>equals</operation>
+        <value>Holiday/ Market Closed, Leave</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AP_Site_Visit__c.AP_Tour_Plan__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

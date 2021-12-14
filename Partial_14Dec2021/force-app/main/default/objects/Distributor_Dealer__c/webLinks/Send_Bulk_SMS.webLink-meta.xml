@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_Bulk_SMS</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Send Bulk SMS</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)}
+var records = {!GETRECORDIDS($ObjectType.Distributor_Dealer__c)};
+if (records[0] == null)
+{
+alert(&quot;Please select at least one staff&quot;)
+}
+else{
+var recordType = “Distributor_Dealer__c&quot;;
+var recordIds = &quot;&quot;;
+var phoneField = &quot;Cell_Phone__c&quot;;
+for (var n in records) {
+
+if(n == &apos;remove&apos; || n == &apos;indexOf&apos;) continue;
+recordIds = recordIds + records[n];
+if (n != records.length-1) {
+recordIds = recordIds + &quot;,&quot;;
+}
+}
+var queryString = parent.window.location.pathname;
+if (parent.window.location.search){
+queryString = queryString + parent.window.location.search
+}
+var url = &quot;/apex/smsmagicvc1__BulkSendSMS?retURL=&quot;+queryString + &quot;&amp;objectType=&quot;+recordType+&quot;&amp;recordIds=&quot;+
+recordIds+&quot;&amp;phoneField=&quot;+phoneField;
+parent.window.location = url;
+}</url>
+</WebLink>

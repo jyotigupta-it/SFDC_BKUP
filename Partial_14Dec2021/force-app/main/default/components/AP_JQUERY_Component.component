@@ -1,0 +1,17 @@
+<apex:component >
+    
+    <!-- CSS Jquery Components -->
+    <!--<apex:stylesheet value="{!URLFOR($Resource.JQuery_AP, 'jquery-ui-1.10.1.custom/css/redmond/jquery-ui-1.10.1.custom.css')}"/> -->
+    <apex:stylesheet value="{!URLFOR($Resource.JQuery_AP, 'jquery-ui-1.11.4.custom/jquery-ui.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.JQuery_AP, 'jquery-ui-1.11.4.custom/jquery-ui.structure.css')}"/>
+    
+    
+    
+    <!-- JS Jquery Components -->
+    <!--<apex:includeScript value="{!URLFOR($Resource.JQuery_AP, 'jquery-ui-1.10.1.custom/js/jquery-1.9.1.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JQuery_AP, 'jquery-ui-1.10.1.custom/js/jquery-ui-1.10.1.custom.js')}"/> -->
+    
+    <apex:includeScript value="{!URLFOR($Resource.JQuery_AP, 'jquery-ui-1.11.4.custom/external/jquery/jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.JQuery_AP, 'jquery-ui-1.11.4.custom/jquery-ui.js')}"/>
+    
+</apex:component>

@@ -1,0 +1,103 @@
+<apex:page standardController="Tour_Program__c" extensions="DisplayTourPlansClass" sidebar="false" standardStylesheets="false" applyHtmlTag="False" showHeader="False" renderAs="pdf">
+  <head>
+    <style>
+    @page {
+    /* Landscape orientation */
+    margin-top:10px;
+    margin-bottom:0px;
+    size:landscape;
+    }
+    </style>
+</head>
+<head> 
+      <style type="text/css">
+body {
+background-color:#538ED5;}
+#table1 {
+border:0px solid #000;
+border-radius:10px;
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+margin:20px auto;
+background-color:#F2F2F2;
+
+
+}
+</style>  
+</head>
+
+            
+    <apex:form >
+            <table border="0" cellspacing="0" width="100%" style="font-size:13pt;">
+
+    <tr>
+                <td align="center">
+                   <apex:image id="theImage" value="{!$Resource.AshirvadLogo}" width="130" height="50"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <apex:outputText value="MONTHLY TOUR PLAN"/>
+                </td>
+            </tr>
+            </table>
+        <table border="1" cellspacing="0" width="100%" style="font-size:8pt;" >
+        
+            <tr>                
+                <td bgcolor="#E0E0E0" align="center" rowspan="2"> <b> Date </b> </td>
+                <td width="5%" bgcolor="#E0E0E0" align="center" rowspan="2"> <b> Day </b> </td>
+                <td bgcolor="#E0E0E0" align="center" rowspan="2"> <b> Visit Type </b> </td>
+               
+                <td bgcolor="#E0E0E0" align="center" colspan="13"> <b> BD Tour Plan</b> </td>
+                
+                  
+                <!--<td><b> No of Plumbing Contractors </b> </td>-->                             
+            </tr>
+            <tr>
+            
+                <td bgcolor="#E0E0E0" align="center"><b> State </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> District </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> Location </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> Market Type </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> No of Architects </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> No of Consultants </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> No of Dealers </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> No of Distributors </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> No of Engineers </b> </td>
+                <td bgcolor="#E0E0E0" align="center"> <b> No of Builders </b> </td>
+                <td bgcolor="#E0E0E0" align="center"><b> No of Plumbing Contractors </b> </td>
+                <td bgcolor="#E0E0E0" align="center"><b> Other Contacts if any </b> </td>
+              
+            </tr>
+            <apex:repeat value="{!TourPlans}" var="tp">
+            <tr>                
+                <td> <b><apex:outputText value="{0,date,dd.MM.YYYY}"><apex:param value="{!tp.Date__c}"/>
+                            </apex:outputText></b></td>
+                <td><b><apex:outputText value="{0,date,EEEE }">
+                            <apex:param value="{!tp.Date__c}"/>
+                            </apex:outputText></b>
+                </td>
+                
+                <td><apex:outputText value="{!tp.Visit_Type__c}"/></td>
+               
+            
+                <td><apex:outputText value="{!tp.State__c}"/> 
+                 </td>
+                <td><apex:outputText value="{!tp.District__c}"/></td>
+                <td><apex:outputText value="{!tp.Location__c}" /> </td>
+                <td><apex:outputText value="{!tp.Market_Type__c}"/></td>
+                <td align="center"><apex:outputText value="{!tp.No_of_Architects__c}"/></td>
+                <td align="center"><apex:outputText value="{!tp.No_of_Consultants__c}"/></td>
+                <td align="center"><apex:outputText value="{!tp.No_of_Dealers__c}"/></td>
+                <td align="center"><apex:outputText value="{!tp.No_of_Distributors__c}"/></td>
+                <td align="center"><apex:outputText value="{!tp.No_of_Engineers__c}"/></td>
+                <td align="center"><apex:outputText value="{!tp.No_of_Builders_Planned__c}"/></td>
+                 <td align="center"><apex:outputText value="{!tp.No_of_Plumbing_Contractor__c}"/></td>
+                 <td align="center"><apex:outputText value="{!tp.Other_Contacts_if_any__c}"/></td>
+                                        
+            </tr>
+            </apex:repeat>
+        </table>        
+    </apex:form>
+      
+</apex:page>

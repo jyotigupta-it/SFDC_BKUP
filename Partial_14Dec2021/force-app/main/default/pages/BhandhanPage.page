@@ -1,0 +1,1667 @@
+<apex:page controller="BandhanController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+
+
+    <!--JavaScript-->
+    
+    <apex:includeScript value="/support/console/27.0/integration.js"/>
+    <script type="text/javascript"> var __sfdcSessionId = '{!GETSESSIONID()}';</script>
+    <script src="../../soap/ajax/38.0/connection.js" type="text/javascript"></script>
+    
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_js)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_UI_js)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_angular_js)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_js)}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_select_js)}"/>
+
+
+    <!--StyleeSheet -->
+    <link href="{!URLFOR($Resource.Ashd_jquery_UI_css)}" rel="stylesheet"/>
+    <link  href="{!URLFOR($Resource.Ashd_bootstrap_css)}" rel="stylesheet"/>
+    <link  href="{!URLFOR($Resource.Ashd_bootstrap_theme_css)}" rel="stylesheet"/>
+    <link  href="{!URLFOR($Resource.Ashd_bootstrap_select_css)}" rel="stylesheet"/>
+
+
+
+    <!--Javascript Link
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+    stylesheet  for the page
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css" />
+    -->
+    <style>
+        body{font-family:Calibri !important;}
+        .navbar-inverse{background-color:#19a8db !important;background-image: -webkit-linear-gradient(top,#19a8db,#0ebdf7 100%); color:#FFF !important; border-radius:0px !important;padding:7px; }
+        .navbar-nav{float:right;}
+        .navbar-inverse .navbar-nav>li>a{color:#FFF !important;}
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{border-color:#0ebdf7 !important;}
+        .navbar{margin-bottom:0px !important;border:0px #FFF none}
+        .jumbotron{margin:0px 0px !important; padding:10px 10px 2px 15px !important}
+        .noPadding-noMargin{padding:0px !important;margin:0px !important}
+
+        #addrError{display:none;}
+        #pin::-webkit-outer-spin-button,#pin::-webkit-inner-spin-button{-webkit-appearance: none;margin: 0;}
+        #pin{-moz-appearance: textfield;}
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{padding:3px 8px !important;}
+        .tr{ display:table;margin-bottom:1px;}
+        label{font-weight:normal !important;}
+        .btn-ashvd{background-color:#0ebdf7 !important;color:#FFF !important;padding:6px 15px !important;}
+        .btn-ashvd-submit{background-color:#24aa98 !important;color:#FFF !important;padding:6px 15px !important;}
+
+        .nav-mn{color:#FFF !important; font-size:16px !important;padding-right:10px; margin-top:17px;}
+        .nav-mn a {color:#FFF !important;}
+        .nav-mn a:hover{text-decoration:none}
+        .addressChange{top:10%!important; background-color:#ffffff!important; position :absolute!important;
+            border-radius:5px!important; border:2px solid ##e3e2e2!important; padding:10px 0px!important;
+            z-index:2!important; margin-bottom:50px!important;
+        }
+
+        .confirmBlock{
+            padding: 0px;
+            top: 30%;
+            background-color: #ffffff;
+            position: fixed;
+            border: 2px solid #e3e2e2;
+            border-radius: 5px;
+            z-index: 2;
+        }
+
+        .circleBlock{
+            height:100%!important;
+            width:100%!important;
+            left:0!important;
+            top:0!important;
+            position:fixed!important;
+            background-color:#000000!important;
+            opacity:.5!important;
+        }
+        #circle{
+            border: 15px solid white!important;
+                border-radius: 50%!important;
+            width: 60px!important;
+            height: 60px!important;
+            position: fixed!important;
+            top: 40%!important;
+            left: 45%!important;
+            z-index: 1!important;
+            border-left-color:#19a8db!important;
+
+        }
+
+
+
+
+        .alertcontent{
+            padding:0px;
+                top: 30%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid #e3e2e2;
+                border-radius:5px;
+                z-index: 2;
+        }
+        .blockcontent{
+            background-color: #ffffff;
+            z-index: 1;
+            position: absolute;
+            height: 250px;
+            top: 30%;
+            left: 35%;
+            border: 2px solid #0f8fbb;
+            border-radius: 5px;
+            padding: 30px;
+        }
+        .brandTable{
+            margin-top:10px;
+        }
+
+        .alert{
+                height:50px!important;
+                color:#000000!important;
+                font-weight:bolder!important;
+                font-family:Verdana!important;
+                font-size:18px!important;
+                background-color:#eee!important;
+                opacity:1!important;
+                text-align:center!important;
+                bottom:40%!important;
+                position:fixed!important;
+                -webkit-animation-name: animationalert!important;
+                animation-name: animationalert!important;
+                animation-duration: 7s !important;
+            }
+            @-webkit-keyframes animationalert {
+                from {opacity: 1;}
+                to {opacity: 0
+            }
+            @keyframes animationalert {
+
+                from {opacity: 1}
+                to {opacity: 0;}
+            }
+            .grp{
+                margin-bottom: 5px!important;
+            }
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+            }
+
+
+
+
+    </style>
+
+    <script>
+    
+    
+        /************************************ Picklist Code Added Ends ***********************/
+        
+    // Get dependent Picklist Values
+        //==============================
+        function getDependentOptions (objName, ctrlFieldName, depFieldName) {
+        console.log(objName);
+        console.log(ctrlFieldName);
+        console.log(depFieldName);
+        
+        // Isolate the Describe info for the relevant fields
+        var objDesc = sforce.connection.describeSObject(objName);
+        var ctrlFieldDesc, depFieldDesc;
+        var found = 0;
+            for (var i=0; i<objDesc.fields.length; i++) {
+                var f = objDesc.fields[i];
+                if (f.name == ctrlFieldName) {
+                    ctrlFieldDesc = f;
+                    found++;
+                } else if (f.name == depFieldName) {
+                    depFieldDesc = f;
+                    found++;
+                }
+                if (found==2) break; 
+            }
+
+            // Set up return object
+            var dependentOptions = {};
+            var ctrlValues = ctrlFieldDesc.picklistValues;
+            for (var i=0; i<ctrlValues.length; i++) {
+                dependentOptions[ctrlValues[i].label] = [];
+            }
+
+            var base64 = new sforce.Base64Binary("");
+            function testBit (validFor, pos) {
+                var byteToCheck = Math.floor(pos/8);
+                var bit = 7 - (pos % 8);
+                return ((Math.pow(2, bit) & validFor.charCodeAt(byteToCheck)) >> bit) == 1;
+            }
+    
+            // For each dependent value, check whether it is valid for each controlling value
+            var depValues = depFieldDesc.picklistValues;
+                for (var i=0; i<depValues.length; i++) {
+                    var thisOption = depValues[i];
+                    var validForDec = base64.decode(thisOption.validFor);
+                    for (var ctrlValue=0; ctrlValue<ctrlValues.length; ctrlValue++) {
+                        if (testBit(validForDec, ctrlValue)) {
+                            dependentOptions[ctrlValues[ctrlValue].label].push(thisOption.label);
+                        }
+                    }
+                }
+            return dependentOptions;
+        }
+  
+  var OBJ_NAME = "Account";
+        var CTRL_FIELD_NAME = "State__c";
+        var DEP_FIELD_NAME = "District__c";
+        var options = getDependentOptions(OBJ_NAME, CTRL_FIELD_NAME, DEP_FIELD_NAME);
+        console.log(options );
+        
+        /************************************ Picklist Code Added Ends ***********************/
+    
+        var alertbol=true;
+        var vertical='{!Vertical}';
+        var paramCheck='{!paramCheck}';
+
+
+        function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)){
+            return false;
+        }
+        return true;
+    }
+
+
+
+    function highlight(rw){
+        $(document).ready(function(){
+            for(var i=0;i<rw.length;i++){
+                $('#row'+rw[i]).css({'border':'2px solid red','margin-bottom':'5px'});
+            }
+        });
+
+    }
+    
+    
+    /******************Added For Picklist Of District********************/
+    function getDistrict(stateKey,optionsMap){
+        //console.log(optionsMap);
+        var mappedDistrictValues=[];
+        $(document).ready(function(){
+            $.each(optionsMap,function(key,value){
+                if(key==stateKey){
+                //console.log(key);
+                //console.log(value);
+                 mappedDistrictValues=value;
+                 
+                 //console.log(mappedDistrictValues);
+                 return;
+                }
+            });
+            console.log(mappedDistrictValues);
+            return mappedDistrictValues;
+        });
+    }
+
+
+/******************Added For Picklist Of District Ends********************/
+
+
+    function addressWindow(obj){
+          $(document).ready(function(){
+          
+          /***************************Added For Picklist*********************/   
+            var opthtml='';
+            $.each(obj.Options,function(it,val){
+               opthtml+='<option value="'+it+'">'+it+'</option>';
+            });
+            
+       /*     var datadist=getDistrict(obj.state,obj.Options);
+            console.log(datadist);
+            var dishtml='';
+            $.each(datadist,function(it,val){
+               dishtml+='<option value="'+val+'">'+val+'</option>';
+            });
+           console.log(dishtml);
+            */
+         
+         /***************************Added For Picklist*********************/      
+          
+              var shpname;
+              for(var i=0;i<obj.acc.length;i++){
+                  if(obj.accc==obj.acc[i].Id){
+                      shpname=obj.acc[i].Name;
+                      break;
+                  }
+              }
+
+             // $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 addressChange"> <div style="border-bottom:1px solid rgba(0, 0, 0, 0.11);padding:20px;"> <label style="float:left;">'+shpname+'</label> <span class="glyphicon glyphicon-remove addcnc" style="float:right;cursor:pointer"></span> </div> <div style="padding:20px 30px;"> <label> Street </label> <textarea class="form-control" id="street" style="resize:none;" rows="3">'+obj.street+'</textarea><span id="streetER" style="color:red;"> Enter Street</span><div style="margin-bottom:30px;margin-bottom:120px;"><div style="width:49%;float:left;"><label> City </label><input type="text" id="city" value="'+obj.city+'" class="form-control"/><span id="cityER" style="color:red;">please enter City</span></div><div style="width:45%;float:right;"> <label> State </label><input type="text" id="state" value="'+obj.state+'" class="form-control"/><span id="stateER" style="color:red;">please enter State</span></div><div style="width:45%;float:left;"> <label> Country </label><input type="text" id="country" value="'+obj.country+'" class="form-control"/><span id="countryER" style="color:red;">please enter Country</span></div><div style="width:45%;float:right;"> <label> Pincode </label><input type="text" maxlength="6" id="pin" onkeypress="return isNumber(event)" value="'+obj.pin+'"  class="form-control"/><span id="pinER" style="color:red;">please enter Pincode Correctly</span></div> </div> <div style="border-top:1px solid rgba(0, 0, 0, 0.11);padding:20px;" align="right"> <input type="button" value="Save Address" class="btn btn-default" id="change"  /> <input type="button" value="Close" class="btn btn-default addcnc" /> </div> </div>');
+          
+          /*Commented By pooja*/
+          //  $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 addressChange"> <div style="border-bottom:1px solid rgba(0, 0, 0, 0.11);padding: 20px 20px 30px 20px;"> <label style="font-weight:bold;float:left;">'+shpname+'</label> <span class="glyphicon glyphicon-remove addcnc" style="float:right;cursor:pointer"></span> </div><div style="margin-left:auto;margin-right:auto;padding-left:45px;"> <div style="float:left;clear:both;width:100%;"><span id="addrError" style="color:red;padding:10px;"></span><div style="float:left;width:100px;padding:10px;"> Street<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"> <textarea class="form-control" id="street" style="resize:none;" rows="3">'+obj.street+'</textarea></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> City<span style="color:red;">*</span> </div><div style="float:left;padding:10px;"><input type="text" id="city" value="'+obj.city+'" class="form-control"/></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> State<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"><input type="text" id="state" value="'+obj.state+'" class="form-control"/></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> Country <span style="color:red;">*</span></div> <div style="float:left;padding:10px;"><input type="text" id="country" value="'+obj.country+'" class="form-control"/></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> Pincode <span style="color:red;">*</span></div><div style="float:left;padding:10px;"><input type="text" maxlength="6" id="pin" onkeypress="return isNumber(event)" value="'+obj.pin+'"  class="form-control"/></div></div><div style="float:left;clear:both;width:100%;"><!--<span style="color:red;font-size:15px;float:left;">*All fields are mandatory </span>--></div>   <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;">&nbsp;</div><div style="float:left;padding:10px;"><input type="button" value="Save Address" class="btn btn btn-ashvd" id="change"  /> &nbsp;&nbsp; <input type="button" value="Close" class="btn btn-default addcnc" /></div></div></div> ');
+         /*Added By pooja*/
+         //  $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 addressChange"> <div style="border-bottom:1px solid rgba(0, 0, 0, 0.11);padding: 20px 20px 30px 20px;"><label style="font-weight:bold;float:left;">'+shpname+'</label> <span class="glyphicon glyphicon-remove addcnc" style="float:right;cursor:pointer"></span> </div><div style="margin-left:auto;margin-right:auto;padding-left:45px;"> <div style="float:left;clear:both;width:100%;"><span id="addrError" style="color:red;padding:10px;"></span><div style="float:left;width:100px;padding:10px;"> Street<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"> <textarea class="form-control" id="street" style="resize:none;" rows="3">'+obj.street+'</textarea></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> City<span style="color:red;">*</span> </div><div style="float:left;padding:10px;"><input type="text" id="city" value="'+obj.city+'" class="form-control"/></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> District <span style="color:red;">*</span></div><div style="float:left;padding:10px;"><input type="text" id="district" value="'+obj.district+'" class="form-control"/></div></div> <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> State<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"><input type="text" id="state" value="'+obj.state+'" class="form-control"/></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> Pincode <span style="color:red;">*</span></div><div style="float:left;padding:10px;"><input type="text" maxlength="6" id="pin" onkeypress="return isNumber(event)" value="'+obj.pin+'"  class="form-control"/></div></div><div style="float:left;clear:both;width:100%;"><!--<span style="color:red;font-size:15px;float:left;">*All fields are mandatory </span>--></div> <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;">&nbsp;</div><div style="float:left;padding:10px;"><input type="button" value="Save Address" class="btn btn btn-ashvd" id="change"  /> &nbsp;&nbsp; <input type="button" value="Close" class="btn btn-default addcnc" /> </div></div></div> ');
+
+  
+    /**Added Picklist Entry**/
+   //  $('body').append('<div id="block" ng-controller="myctrl" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"> </div> <div class="col-sm-4 col-sm-offset-4 addressChange"> <div style="border-bottom:1px solid rgba(0, 0, 0, 0.11);padding: 20px 20px 30px 20px;">  <label style="font-weight:bold;float:left;">'+shpname+'</label> <span class="glyphicon glyphicon-remove addcnc" style="float:right;cursor:pointer"></span> </div><div style="margin-left:auto;margin-right:auto;padding-left:45px;"> <div style="float:left;clear:both;width:100%;"><span id="addrError" style="color:red;padding:10px;"></span><div style="float:left;width:100px;padding:10px;"> Street<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"> <textarea class="form-control" id="street" style="resize:none;" rows="3">'+obj.street+'</textarea></div></div><div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> City<span style="color:red;">*</span> </div><div style="float:left;padding:10px;"> <input type="text" id="city" value="'+obj.city+'" class="form-control"/></div></div> <div style="float:left;clear:both;width:100%;">  <div style="float:left;width:100px;padding:10px;"> District <span style="color:red;">*</span></div>  <div style="float:left;padding:10px;"> <select id="districtt" class="form-control"></select></div> </div> <div style="float:left;clear:both;width:100%;"> <div style="float:left;width:100px;padding:10px;"> State<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;"> <select class="form-control" id="country">'+opthtml+'</select></div></div> <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;"> Pincode <span style="color:red;">*</span></div><div style="float:left;padding:10px;"><input type="text" maxlength="6" id="pin" onkeypress="return isNumber(event)" value="'+obj.pin+'"  class="form-control"/></div></div> <div style="float:left;clear:both;width:100%;"><!--<span style="color:red;font-size:15px;float:left;">*All fields are mandatory </span>--></div>  <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;">&nbsp;</div> <div style="float:left;padding:10px;"><input type="button" value="Save Address" class="btn btn btn-ashvd" id="change"  /> &nbsp;&nbsp; <input type="button" value="Close" class="btn btn-default addcnc" /></div></div></div> ');
+   
+        $('body').append('<div id="block" ng-controller="myctrl" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"> </div>  <div class="col-sm-4 col-sm-offset-4 addressChange"> <div style="border-bottom:1px solid rgba(0, 0, 0, 0.11);padding: 20px 20px 30px 20px;">  <label style="font-weight:bold;float:left;">'+shpname+'</label> <span class="glyphicon glyphicon-remove addcnc" style="float:right;cursor:pointer"></span> </div>   <div style="margin-left:auto;margin-right:auto;padding-left:45px;"> <div style="float:left;clear:both;width:100%;"><span id="addrError" style="color:red;padding:10px;"></span>   <div style="float:left;width:100px;padding:10px;"> Street<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;">    <textarea class="form-control" id="street" style="resize:none;" rows="3">'+obj.street+'</textarea></div></div><div style="float:left;clear:both;width:100%;">   <div style="float:left;width:100px;padding:10px;"> City<span style="color:red;">*</span> </div>   <div style="float:left;padding:10px;"> <input type="text" id="city" value="'+obj.city+'" class="form-control"/></div></div>  <div style="float:left;clear:both;width:100%;">   <div style="float:left;width:100px;padding:10px;"> State<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;">   <select class="form-control" id="country">'+opthtml+'</select></div></div>   <div style="float:left;clear:both;width:100%;">    <div style="float:left;width:100px;padding:10px;"> District <span style="color:red;">*</span></div>   <div style="float:left;padding:10px;"> <select id="districtt" class="form-control"></select></div> </div>  <div style="float:left;clear:both;width:100%;">   <div style="float:left;width:100px;padding:10px;"> Pincode <span style="color:red;">*</span></div><div style="float:left;padding:10px;"><input type="text" maxlength="6" id="pin" onkeypress="return isNumber(event)" value="'+obj.pin+'"  class="form-control"/></div></div> <div style="float:left;clear:both;width:100%;"><!--<span style="color:red;font-size:15px;float:left;">*All fields are mandatory </span>--></div>  <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;">&nbsp;</div> <div style="float:left;padding:10px;"><input type="button" value="Save Address" class="btn btn btn-ashvd" id="change"  /> &nbsp;&nbsp; <input type="button" value="Close" class="btn btn-default addcnc" /></div></div></div> ');
+ // $('body').append('<div id="block" ng-controller="myctrl" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"> </div>  <div class="col-sm-4 col-sm-offset-4 addressChange"> <div style="border-bottom:1px solid rgba(0, 0, 0, 0.11);padding: 20px 20px 30px 20px;">  <label style="font-weight:bold;float:left;">'+shpname+'</label> <span class="glyphicon glyphicon-remove addcnc" style="float:right;cursor:pointer"></span> </div>   <div style="margin-left:auto;margin-right:auto;padding-left:45px;"> <div style="float:left;clear:both;width:100%;"><span id="addrError" style="color:red;padding:10px;"></span>   <div style="float:left;width:100px;padding:10px;"> Street<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;">    <textarea class="form-control" id="street" style="resize:none;" rows="3">'+obj.street+'</textarea></div></div><div style="float:left;clear:both;width:100%;">   <div style="float:left;width:100px;padding:10px;"> City<span style="color:red;">*</span> </div>   <div style="float:left;padding:10px;"> <input type="text" id="city" value="'+obj.city+'" class="form-control"/></div></div>  <div style="float:left;clear:both;width:100%;">   <div style="float:left;width:100px;padding:10px;"> State<span style="color:red;">*</span> </div> <div style="float:left;padding:10px;">   <select class="form-control" id="country">'+opthtml+'</select></div></div>   <div style="float:left;clear:both;width:100%;">    <div style="float:left;width:100px;padding:10px;"> District <span style="color:red;">*</span></div>   <div style="float:left;padding:10px;"> <select id="districtt" class="form-control">'+dishtml+'</select></div> </div>  <div style="float:left;clear:both;width:100%;">   <div style="float:left;width:100px;padding:10px;"> Pincode <span style="color:red;">*</span></div><div style="float:left;padding:10px;"><input type="text" maxlength="6" id="pin" onkeypress="return isNumber(event)" value="'+obj.pin+'"  class="form-control"/></div></div> <div style="float:left;clear:both;width:100%;"><!--<span style="color:red;font-size:15px;float:left;">*All fields are mandatory </span>--></div>  <div style="float:left;clear:both;width:100%;"><div style="float:left;width:100px;padding:10px;">&nbsp;</div> <div style="float:left;padding:10px;"><input type="button" value="Save Address" class="btn btn btn-ashvd" id="change"  /> &nbsp;&nbsp; <input type="button" value="Close" class="btn btn-default addcnc" /></div></div></div> ');
+ 
+  
+     // $('#country').val(obj.country);
+           $('#districtt').val(obj.country);
+           console.log('**********************');
+           console.log(opthtml);
+           console.log('**********************');
+           console.log(obj.district);
+           console.log('**********************');
+           console.log(obj.country); //district value given
+            console.log('**********************');
+           console.log(obj.state); //Country (State given)
+            console.log('**********************');
+  /****************** Added For State, District Picklist*****************/
+           
+           $('#country').val(obj.state);
+            $.each(obj.Options,function(key,value){
+                    if(key==obj.state){
+                    //console.log(key);
+                    //console.log(value);
+                     mappedDistrictValues=value;
+                     var finalValueDistrict='';
+                     $.each(mappedDistrictValues,function(keyMap,valueMap){
+                        finalValueDistrict+='<option value="'+valueMap+'">'+valueMap+'</option>';
+                     });
+                     $('#districtt').html(finalValueDistrict);
+                    }
+                });
+                $('#districtt').val(obj.district);
+            $('body').keyup(function(evt){
+                if(evt.keyCode==27){
+                    $('#block').remove();
+                    $('.addressChange').remove();
+                }
+            });
+
+            $('#country').change(function(){
+                
+                $.each(obj.Options,function(key,value){
+                    if(key==$('#country').val()){
+                    //console.log(key);
+                    //console.log(value);
+                     mappedDistrictValues=value;
+                     var finalValueDistrict='';
+                     $.each(mappedDistrictValues,function(keyMap,valueMap){
+                        finalValueDistrict+='<option value="'+valueMap+'">'+valueMap+'</option>';
+                     });
+                     $('#districtt').html(finalValueDistrict);
+                    }
+                });
+                
+            });
+            
+                  /****************** Added For State, District Picklist Ends*****************/   
+   
+
+
+            $('#change').click(function(){
+
+                  //console.log(obj);
+
+                  /*
+                  var  adrError=[];
+
+                  //console.log(obj.street.length);
+                  if($('#street').val().trim().length==0){
+
+                      //$('#streetER').css({'display':'block'});
+                      return;
+                  }else{
+                     // $('#streetER').css({'display':'none'});
+                      obj.street=''+$('#street').val();
+                  }
+                  if($('#city').val().length==0){
+                      //$('#cityER').css({'display':'block'});
+                      return;
+                  }else{
+                      $('#cityER').css({'display':'none'});
+                       obj.city=''+$('#city').val();
+                  }
+                  if($('#state').val().length==0){
+                      $('#stateER').css({'display':'block'});
+                      return;
+                  }else{
+                      $('#stateER').css({'display':'none'});
+                      obj.state=''+$('#state').val();
+                  }
+                  if($('#country').val().length==0){
+                      $('#countryER').css({'display':'block'});
+                      return;
+                  }else{
+                      $('#countryER').css({'display':'none'});
+                      obj.country=''+$('#country').val();
+                  }
+
+                  if($('#pin').val().length==0 || $('#pin').val().length>6 || $('#pin').val().length<=5){
+                      $('#pinER').css({'display':'block'});
+                      return;
+                  }else{
+                      $('#pinER').css({'display':'none'});
+                      obj.pin=''+$('#pin').val();
+                  }
+                  */
+
+
+
+
+                  var  adrError=[];
+
+            /* Commented by Pooja */
+           /*     if($('#street').val().trim().length==0){
+                  adrError.push(' Street');
+                }
+                  if($('#city').val().length==0){
+                      adrError.push(' City');
+                  }
+                  if($('#state').val().length==0){
+                      adrError.push(' State');
+                  }
+                  if($('#country').val().length==0){
+                      adrError.push(' Country');
+                  }
+
+                  if($('#pin').val().length==0 || $('#pin').val().length>6 || $('#pin').val().length<=5 || (!$.isNumeric($('#pin').val()))){
+
+                      adrError.push(' Pincode');
+                  }
+
+           */
+           
+           
+           /*Added By Pooja*/
+            if($('#street').val().trim().length==0){
+                  adrError.push(' Street');
+                }
+                  if($('#city').val().length==0){
+                      adrError.push(' City');
+                  }
+                  if($('#country').val().length==0){      //Changed ID from state to country
+                      adrError.push(' State');
+                  }
+                /*  if($('#district').val().length==0){
+                      adrError.push(' District');
+                  }*/
+                  
+                   if($('#districtt').val().length==0){
+                      adrError.push(' District');
+                      }
+
+                  if($('#pin').val().length==0 || $('#pin').val().length>6 || $('#pin').val().length<=5 || (!$.isNumeric($('#pin').val()))){
+
+                      adrError.push(' Pincode');
+                  }
+
+
+                  if(adrError.length>0){
+                    $('#addrError').html('Please enter '+adrError);
+                    $('#addrError').css({'display':'block'});
+                    return;
+                  }else{
+                    $('#addrError').css({'display':'none'});
+                  }
+
+
+                /* Commented by Pooja*/
+              /*    obj.street=''+$('#street').val();
+                  obj.city=''+$('#city').val();
+                  obj.state=''+$('#state').val();
+                  obj.country=''+$('#country').val();
+                  obj.pin=''+$('#pin').val();
+                  
+               */   
+               
+               
+               /* added by Pooja*/
+                obj.street=''+$('#street').val();
+                  obj.city=''+$('#city').val();
+                  obj.state=''+$('#country').val();
+                 // obj.district=''+$('#district').val();
+                  
+                  obj.district=''+$('#districtt').val();
+                 
+                  obj.pin=''+$('#pin').val();
+                  
+                    /*Commented By Pooja*/
+              //    BandhanController.changeAddress(obj.accc,obj.street,obj.city,obj.state,obj.country,obj.pin,function(evtt,ress){
+
+                        /*Added by Pooja*/
+                      BandhanController.changeAddress(obj.accc,obj.street,obj.city,obj.state,obj.district,obj.pin,function(evtt,ress){
+
+                          if(ress){
+                              alertWindow('Address saved successfully','');
+                              $('#row'+obj.slno).css({'border':'none'});
+                          }else{
+                              alertWindow('Unable to save record','alert');
+                          }
+                  $('#block').remove();
+                  $('.addressChange').remove();
+                 
+                  });
+                
+          });
+              
+              $('.addcnc').click(function(){
+                  $('#block').remove();
+                  $('.addressChange').remove();
+
+              });
+          });
+      }
+
+      function alertWindow(msg,pic){
+          var htmcode='';
+          var suc='';
+
+           if(pic=='alert'){
+               htmcode='<span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span><b style="font-family:Calibri !important;">Alert</b>';
+           }else {
+            htmcode='<span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span>';
+            suc='padding-bottom:20px;';
+           }
+           $(document).ready(function(){
+
+
+                $('#submit').blur();
+                $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);'+suc+'" >'+htmcode+'<span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left">'+msg+'</label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="btn btn-default acnc" value="Close" /></div></div>');
+               //$('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;padding-bottom:10px;"><span class="glyphicon glyphicon-remove acnc" style="float:right;padding-right:5px;"></span></div><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;"><label style="margin-top:20px;margin-bottom:20px;">'+msg+'</label> <br/></div>  <div style="float:right;margin-top:15px"><a class="btn btn-default acnc"  href="#">Close</a> </div></div>')
+                //setTimeout(function(){window.location.replace("http://www.google.com");},5000);
+                $('.acnc').click(function(){
+                    $('#block').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+            });
+
+           });
+      }
+
+      function blockwindow(){
+            $(document).ready(function(){
+                $('#submit').blur();
+                $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div align="center" class="blockcontent"><span class="glyphicon glyphicon-thumbs-up" style="font-size:100px;color:#0ebdf7;"></span><br/><h5>Your Branding Request Successfully Submitted!!</h5></div>')
+                 //setTimeout(function(){window.location.reload();},3000);
+                  setTimeout(function(){window.location.replace('/apex/BrandingList');},3000);
+
+
+            });
+        }
+        $(document).ready(function(){
+            $('body').keyup(function(evt){
+                if(evt.keyCode==27){
+                    $('#block').remove();
+                    $('.addressChange').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+                    $('.confirmBlock').remove();
+                }
+
+            });
+
+        });
+
+        var app=angular.module('myApp',[]);
+        app.factory('AshirwadFact',function($q,$log){
+            var obj={};
+                obj.getStoredBranding=function(){
+                    var defer=$q.defer();
+
+                    BandhanController.collectStoredBranding(function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);
+                        }else{
+                            $log.error(evt.message);
+                            defer.reject(evt.message);
+                        }
+                    },{escape:true,buffer:true,timeout:30000});
+                    return (defer.promise)
+                };
+
+                obj.getAccountInfo=function(accid){
+                    var defer=$q.defer();
+                    BandhanController.collectAccount(accid,function(res,evt){
+                        if(evt.status){
+                            defer.resolve(res);
+                        }else{
+                            $log.error(evt.message);
+                            defer.reject(evt.message);
+                        }
+                    },{escape:true,buffer:true,timeout:30000});
+                    return (defer.promise);
+                };
+            return obj;
+
+        });
+        app.controller('Ctrl',function($scope,AshirwadFact){
+            var count=0;
+            $scope.brdcount=0;
+            $scope.counter=false;
+
+            $scope.savShw=false;
+            $scope.addcount=0;
+
+            $scope.caseId='';
+            $scope.case=true;
+
+
+            $scope.count=0;
+            $scope.shwsubmit=true;
+
+
+            $scope.brandType=['None','Inshop','Standard','Recce'];
+            $scope.Standard=['None','4x2','6x3','8x3','8x4'];
+            $scope.None=['None'];
+            $scope.Language=['None','English','Hindi','Tamil','Telugu','Bengali','Kannada','Gujarati','Marathi','Assamese','Oriya','Punjabi','English + Hindi']
+            $scope.plumbing=['None','PoP Boards','Hanging Boards','Shelf Stickers','Product Stickers'];
+            $scope.column=['None','PoP Boards','Hanging Boards','Shelf Stickers','Product Stickers'];
+
+
+            $scope.data=[];
+
+            AshirwadFact.getStoredBranding().then(function(response){
+                $scope.brdcount=response.length;
+                if($scope.brdcount>0 && $scope.brdcount<=5){
+                    $scope.counter=true;
+                   /* $(document).ready(function(){$('body').append('<div class="col-sm-6 col-sm-offset-3 alert">'+$scope.brdcount+'/5 Branding Request Save</div>');});
+                    if(alertbol){
+                         setTimeout(function(){$(document).ready(function(){alertbol=false;$('.alert').remove();})},6000);
+                    }*/
+                }else{
+                    $scope.counter=false;
+                }
+                if(response.length>0){
+                    $scope.case=false;
+                    $scope.caseId=''+response[0].Branding_Request__r.Id;
+                }
+
+                for(var i=0;i<response.length;i++){
+                    var temp=new Object();
+                    
+                     
+                    /***********Added ' options ' contains Map of State, District values**************/
+                    temp.Options=options;
+                    /*************************/
+                    
+                    temp.id=response[i].Id;
+                    temp.slno=count;
+                    temp.blist=[];
+                    temp.blist.push(response[i].Branding_Type__c);
+                    temp.btype=temp.blist[0];
+                    temp.submitBy=response[i].Submitted_By__c;
+                    temp.mtypebol=true;
+                    temp.mlist=[];
+                    if(temp.btype=='Recce'){
+                        temp.mtypebol=false;
+                        temp.mlist.push('None');
+                        temp.mtype=temp.mlist[0];
+                    }
+                    if(response[i].Media_Type__c==undefined){
+                        temp.mtypebol=false;
+                        temp.mlist.push('None');
+                        temp.mtype=temp.mlist[0];
+                    }else{
+
+
+                        temp.mlist.push(''+response[i].Media_Type__c);
+                        temp.mtype=temp.mlist[0];
+                    }
+                    temp.mchildlist=[];
+
+                    if(response[i].Type__c==undefined){
+                        temp.mchildshw=false;
+                        temp.mchildlist.push('None');
+                        temp.mchild=temp.mchildlist[0];
+                    }else{
+                        temp.mchildlist.push(''+response[i].Type__c);
+                        temp.mchild=temp.mchildlist[0];
+                    }
+
+
+
+
+                    //temp.mchild='';
+                    temp.mchildshw=false;
+                    //temp.mchildlist=[];
+                    temp.langlist=[];
+                    temp.langlist.push(response[i].Language__c);
+                    temp.lang=temp.langlist[0];
+
+                    if((vertical.toLowerCase()=='column') && (temp.mtype=='PoP Boards')){
+                        temp.mchildshw=true;
+                        //temp.mchildlist=[];
+                        //temp.mchildlist.push(response[i].Type__c);
+                        //temp.mchild=temp.mchildlist[0];
+                    }
+                   if((vertical.toLowerCase()=='projects' || vertical.toLowerCase()=='plumbing' ) && (temp.mtype=='PoP Boards' || temp.mtype=='Product Stickers') ){
+                        temp.mchildshw=true;
+                        //temp.mchildlist=[];
+                        //temp.mchildlist.push(response[i].Type__c);
+                        //temp.mchild=temp.mchildlist[0];
+                    }
+
+
+
+                    temp.ena=true;
+                    count++;
+                    $scope.count++;
+
+                    temp.cluster=''+response[i].Cluster__c;
+                    temp.brand=response[i].Branding_Request__r.Id;
+                    temp.acc=[];
+
+                    temp.acc.push(response[i].Shop_Name__r);
+                    //console.log(temp.acc[0]);
+                           
+                          /*Commented By Pooja*/ 
+                    /*      temp.street='';
+                            temp.city='';
+                            temp.state='';
+                            temp.pin='';
+                            temp.country='';
+                            if(temp.acc[0].ShippingStreet!=undefined){
+                                temp.street=temp.acc[0].ShippingStreet;
+                            }
+                            if(temp.acc[0].ShippingCity!=undefined){
+                                temp.city=temp.acc[0].ShippingCity;
+                            }
+                            if(temp.acc[0].ShippingState!=undefined){
+                                temp.state=temp.acc[0].ShippingState;
+                            }
+                            if(temp.acc[0].ShippingCountry!=undefined){
+                                temp.country=temp.acc[0].ShippingCountry;
+                            }
+                            if(temp.acc[0].ShippingPostalCode!=undefined){
+                                temp.pin=temp.acc[0].ShippingPostalCode;
+                            }
+                            
+                         */
+                         
+                         /******************* Added by pooja***********************/
+                          temp.street='';
+                            temp.city='';
+                            temp.state='';
+                            temp.pin='';
+                            temp.district='';
+                            if(temp.acc[0].Street_Address__c!=undefined){
+                                temp.street=temp.acc[0].Street_Address__c;
+                            }
+                            if(temp.acc[0].City__c!=undefined){
+                                temp.city=temp.acc[0].City__c;
+                            }
+                            if(temp.acc[0].State__c!=undefined){
+                                temp.state=temp.acc[0].State__c;
+                            }
+                            if(temp.acc[0].District__c!=undefined){
+                                temp.district=temp.acc[0].District__c;
+                            }
+                            if(temp.acc[0].PIN_Code__c!=undefined){
+                                temp.pin=temp.acc[0].PIN_Code__c;
+                            }
+                                                        
+                         /******************* Added by pooja***********************/
+                         
+                    //console.log('Account idddddd '+temp.acc);
+                    temp.accc=temp.acc[0].Id;
+                    temp.name=temp.acc[0].Name;
+                    //temp.accid=response[i].Shop_Name__r.Id;
+                    //temp.accName=response[i].Shop_Name__r.Name;
+
+                   //console.log('>>>>>'+temp.accc);
+                   //bw.mediabol=temp.mtypebol;
+                   //bw.mchildbol=temp.mchildshw;
+
+
+                   $scope.data.push(temp);
+                   //BRANDWRAPLIST.push(bw);
+                }
+
+
+                if($scope.count>=5){
+                    $scope.shwsubmit=false;
+                }else{
+                    $scope.shwsubmit=true;
+                }
+            });
+
+
+
+            $scope.updateMedia1=function(obj){
+               if(obj.btype=='None' || obj.btype=='Recce'){
+                   obj.mlist= $scope.None;
+                   obj.mtype='None';
+                   obj.mchildlist= $scope.None;
+                   obj.mchild='None';
+                   obj.mtypebol=false;
+                   obj.mchildshw=false;
+
+               }else if(obj.btype=='Inshop'){
+                   obj.mtypebol=true;
+                   obj.mchildshw=false;
+
+                   obj.mlist= $scope.plumbing;
+                   obj.mtype='None';
+                   obj.mchildlist= $scope.None;
+                   obj.mchild='None';
+
+
+               }else if(obj.btype=='Standard'){
+                   obj.mtypebol=true;
+                   obj.mchildshw=false;
+
+                   obj.mlist= $scope.Standard;
+                   obj.mtype='None';
+                   obj.mchildlist= $scope.None;
+                   obj.mchild='None';
+               }
+           }
+
+
+            $scope.updateMedia=function(obj){
+
+            //console.log(obj);
+                if(obj.btype=='None'){
+
+                   obj.mlist= $scope.None;
+                   obj.mtype=obj.mlist[0];
+                   obj.mchildlist= $scope.None;
+                   obj.mchild=obj.mchildlist[0];
+
+
+                   obj.mtypebol=false;
+                   obj.mchildshw=false;
+                   //obj.mchild='';
+                }
+                else if(obj.btype=='Inshop'){
+                    obj.mtypebol=true;
+                    if(vertical.toLowerCase()=='plumbing' || vertical.toLowerCase()=='projects'){
+                        obj.mlist=$scope.plumbing;
+
+                        if(obj.mtype=='PoP Boards' || obj.mtype=='Product Stickers'){
+                            obj.mchildshw=true;
+                            obj.mchildlist=['None','CPVC','UPVC','SWR','SSWR','UGD'];
+
+                            obj.mchild=obj.mchildlist[0];
+                        }else{
+                            obj.mchildshw=false;
+                            obj.mchildlist=$scope.None;
+                            obj.mchild=obj.mchildlist[0];
+                        }
+
+                    }else{
+                       obj.mlist=$scope.column;
+
+                       if(obj.mtype=='PoP Boards'){
+                           obj.mchildshw=true;
+                            obj.mchildlist=['None','CPVC','UPVC','SWR','SSWR','UGD'];
+                            obj.mchild=obj.mchildlist[0];
+                        }else{
+                            obj.mchildshw=false;
+                            //obj.mchild='';
+                            obj.mchildlist=$scope.None;
+                            obj.mchild=obj.mchildlist[0];
+                        }
+                   }
+                }
+                else if(obj.btype=='Standard'){
+                   obj.mtypebol=true;
+                   obj.mchildshw=false;
+                   obj.mlist= $scope.Standard;
+                   //obj.mtype=obj.mlist[0];
+                   obj.mchildlist=$scope.None;
+                   obj.mchild=obj.mchildlist[0];
+
+                }
+                if(obj.btype=='Recce'){
+                   obj.mchildshw=false;
+                   obj.mlist=$scope.None;
+                   obj.mtypebol=false;
+                   obj.mtype=obj.mlist[0];
+                   obj.mchildlist=$scope.None;
+                   obj.mchild=obj.mchildlist[0];
+
+                }
+                //console.log(obj);
+            };
+
+
+
+
+
+
+            if(paramCheck){
+            var accid=window.location.href.split('=');
+            AshirwadFact.getAccountInfo(accid[1]).then(function(resp){
+            //console.log(resp);
+                $scope.addcount++;
+                var temp=new Object();
+                //console.log('acc id'+resp.Id);
+                temp.accc=resp.Id;
+                temp.acc=[];
+                temp.acc.push(resp);
+                temp.submitBy=resp.APPL_Taluk__r.User__c;
+                temp.name=resp.Name;
+                temp.btype='None';
+                temp.blist=$scope.brandType;
+                temp.mlist=[];
+                temp.mtype='';
+                temp.id='';
+                temp.slno=count;
+                temp.ena=false;
+                temp.brand='';
+                temp.clusIds=$scope.clus;
+                temp.mchild='';
+                temp.langlist=[];
+                temp.mtypebol=true;
+                temp.langlist=$scope.Language;
+                temp.lang=temp.langlist[0];
+                temp.mchildlist=[];
+                temp.mchildshw=false;
+                count++;
+                $scope.count++;
+                $scope.brdcount++;
+                temp.cluster=resp.APPL_Taluk__r.Cluster__c;
+               
+                
+                    /***********Added ' options ' contains Map of State, District values**************/
+                    temp.Options=options;
+                    /*************************/
+               
+                //Commented By Pooja
+              /*  temp.taluk=resp.APPL_Taluk__r.Name;  */
+               
+                $scope.updateMedia(temp);
+              
+             
+             /*Commented By pooja*/
+              /*  temp.street='';
+                temp.city='';
+                temp.state='';
+                temp.pin='';
+                temp.country='';
+                if(resp.ShippingStreet!=undefined){
+                    temp.street=resp.ShippingStreet;
+                }
+                if(resp.ShippingCity!=undefined){
+                    temp.city=resp.ShippingCity;
+                }
+                if(resp.ShippingState!=undefined){
+                    temp.state=resp.ShippingState;
+                }
+                if(resp.ShippingCountry!=undefined){
+                    temp.country=resp.ShippingCountry;
+                }
+                if(resp.ShippingPostalCode!=undefined){
+                    temp.pin=resp.ShippingPostalCode;
+                }        */
+               
+               /* Added by Pooja*/ 
+                 temp.street='';
+                temp.city='';
+                temp.state='';
+                temp.pin='';
+                temp.district='';
+                if(resp.Street_Address__c!=undefined){
+                    temp.street=resp.Street_Address__c;
+                }
+                if(resp.City__c!=undefined){
+                    temp.city=resp.City__c;
+                }
+                if(resp.State__c!=undefined){
+                    temp.state=resp.State__c;
+                }
+                if(resp.District__c!=undefined){
+                    temp.district=resp.District__c;
+                }
+                if(resp.PIN_Code__c!=undefined){
+                    temp.pin=resp.PIN_Code__c;
+                }  
+                
+                $scope.data.push(temp);
+                //console.log($scope.data);
+                if($scope.addcount>0){
+                        $scope.savShw=true;
+
+                }
+                if($scope.count>=5){
+                    $scope.shwsubmit=false;
+                }else{
+                    $scope.shwsubmit=true;
+                }
+                if($scope.brdcount>0 && $scope.brdcount<=5){
+                    $scope.counter=true;
+                }else{
+                    $scope.counter=false;
+                }
+
+
+            });}
+            else{
+                alert('Invalid Id');
+            }
+
+
+
+
+            $scope.delData=[];
+
+
+    $scope.delConfirmation=function(rm,obj){
+        $(document).ready(function(){
+            $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div> <div class="col-sm-4 col-sm-offset-4 confirmBlock"> <div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);"> <span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span> <b style="font-family:Calibri !important;">Remove '+obj.name+'</b> <span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span> </div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left"> <h5><b>Are you sure you want to Remove this Request ?</b></h5> </label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"> <input id="yes" type="button" class="btn btn-default acnc" value="Yes"> <input id="no" type="button" class="btn btn-default acnc" value="No"> </div> </div>');
+
+            $('#yes').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+
+
+
+
+
+
+                $scope.delRow(rm);
+                //return true;
+            });
+            $('.acnc').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('#no').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('body').keyup(function(evt){
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+        });
+
+    };
+
+    $scope.refreshCount=function(){
+                if($scope.count>=5){
+                    $scope.shwsubmit=false;
+                }else{
+                    $scope.shwsubmit=true;
+                }
+                if($scope.addcount==0){
+                    $scope.savShw=false;
+
+                }
+                if($scope.brdcount>0 && $scope.brdcount<=5){
+                    $scope.counter=true;
+                }else{
+                    $scope.counter=false;
+                }
+                //console.log('addcount '+$scope.addcount);
+                //console.log('save  '+$scope.savShw);
+                //console.log('submit'+$scope.shwsubmit);
+                $scope.$apply();
+    };
+
+
+
+     $scope.delRow=function(rm){
+
+             $scope.addcount--;
+             $scope.count--;
+             $scope.brdcount--;
+              var temp=[];
+              for(var i=0;i<$scope.data.length;i++){
+
+                  if($scope.data[i].slno==rm){
+                          if($scope.data[i].id!=''){
+                              $scope.delData.push($scope.data[i]);
+                          }
+                  }else{
+                      temp.push($scope.data[i]);
+                  }
+              }
+              $(document).ready(function(){
+                      $('#row'+rm).remove();
+
+              });
+
+              $scope.data=[];
+              $scope.data=temp;
+              $scope.refreshCount();
+      };
+
+      $scope.shwaddr=function(obj){
+          addressWindow(obj)
+          //alert(obj.street+' '+obj.state+' '+obj.country+' '+obj.city+' '+obj.pin);
+
+      };
+ /**********************************************Added For Picklist Values Angular ****************************************/
+      $scope.States=[];
+      var tempStates =[];
+    
+      angular.forEach(options,function(key,value){
+         
+         console.log(key);
+         console.log(value);
+         tempStates.push(key);
+   });
+      console.log('******ISAAC******');
+      console.log(options);
+      $scope.States=tempStates;
+      console.log($scope.States);
+     
+      /*$scope.ChangeDistrict = function(){
+        angular.forEach(options,funcion(key,value){
+        if(key== )
+        
+        });
+      }*/
+      
+      
+  /**********************************************Added For Picklist Values Ends ****************************************/
+
+
+      $scope.save=function(){
+
+
+            //console.log('case Bol '+$scope.case);
+            //console.log('case Id '+$scope.caseId);
+
+                  //console.log($scope.data);
+                        var DupArray=[];
+
+        for(var i=0;i<$scope.data.length;i++){
+            var dupTemp=new Object();
+            dupTemp.id=$scope.data[i].accc;
+            dupTemp.name=$scope.data[i].name;
+            var countt=0;
+            for(var j=0;j<$scope.data.length;j++){
+               if($scope.data[i].accc==$scope.data[j].accc){
+                   countt++;
+               }
+            }
+            if(countt>1){
+                dupTemp.error=false;
+                if(DupArray.length==0){
+                    DupArray.push(dupTemp);
+                }else{
+                    var dupBol=true;
+                    for(var k=0;k<DupArray.length;k++){
+                        if(dupTemp.id==DupArray[k].id){
+                            dupBol=false;
+                            break;
+                        }
+                    }
+                    if(dupBol){
+                        DupArray.push(dupTemp);
+                    }
+                }
+            }
+        }
+
+        if(DupArray.length>0){
+            var ERROR='<h5><b>Please remove duplicate shop:</b></h5>';
+            for(var i=0;i<DupArray.length;i++){
+                ERROR+=''+DupArray[i].name+'<br/>';
+            }
+            alertWindow(ERROR,'alert');
+            return;
+        }
+
+                   var Defect=[];
+
+
+
+
+                    for(var i=0;i<$scope.data.length;i++){
+                        var dtemp=new Object();
+                        dtemp.accc=$scope.data[i].accc;
+                        dtemp.name=$scope.data[i].name;
+                        dtemp.defect=[];
+                        dtemp.error=true;
+
+                        if($scope.data[i].btype=='None'){
+                            dtemp.defect.push(' Branding Type');
+                            dtemp.error=false;
+                        }
+                        if($scope.data[i].lang=='None'){
+                            dtemp.defect.push(' Language');
+                            dtemp.error=false;
+                        }
+                        if($scope.data[i].mtypebol==true && ($scope.data[i].mtype=='None' || $scope.data[i].mtype=='')){
+                            dtemp.defect.push(' Media');
+                            dtemp.error=false;
+                        }
+                        if($scope.data[i].mchildshw==true && ($scope.data[i].mchild=='None' || $scope.data[i].mchild=='')){
+                            dtemp.defect.push(' Type');
+                            dtemp.error=false;
+                        }
+                        if(!dtemp.error){
+                            Defect.push(dtemp);
+                        }
+                    }
+
+                    if(Defect.length>0){
+                        var ERROR='<h5><b>Please enter the complete details for the following shop(s):</b></h5><table><tr> ';
+                        for(var i=0;i<Defect.length;i++){
+                            ERROR+='<td>'+Defect[i].name+'</td>'+'<td>-</td>'+'<td>'+ Defect[i].defect+'</td></tr>';
+                        }
+                        ERROR+='</table>';
+
+                        alertWindow(ERROR,'alert');
+                        return;
+                    }
+
+            var BRANDWRAPLIST=[];
+
+          for(var i=0;i<$scope.data.length;i++){
+              var bw=new Object();
+              bw.updbol=true;
+              if($scope.data[i].id==''){
+                  bw.updbol=false;
+              }
+              bw.Id=$scope.data[i].id;
+              bw.Shop=$scope.data[i].accc;
+              bw.BrandType=$scope.data[i].btype;
+              bw.OwnerId=$scope.data[i].submitBy;
+              bw.MediaType=$scope.data[i].mtype;
+              if(bw.MediaType=='None'){
+                  bw.MediaType='';
+              }
+              bw.MediaChild=$scope.data[i].mchild;
+              if(bw.MediaChild=='None'){
+                  bw.MediaChild='';
+              }
+              bw.Language=$scope.data[i].lang;
+              bw.Cluster=$scope.data[i].cluster;
+
+            //Commented By pooja
+             /* bw.TalukName=$scope.data[i].taluk;  */
+
+              bw.mediabol=$scope.data[i].mtypebol;
+              bw.mchildbol=$scope.data[i].mchildshw;
+              BRANDWRAPLIST.push(bw);
+          }
+
+
+          $(document).ready(function(){
+               var ci=1;
+               $('body').append('<div class="circleBlock"></div><div id="circle"></div>');
+               loadingCircle();
+               function loadingCircle(){
+                var cir=document.getElementById('circle');
+                    if(ci==360){
+                        ci=0;
+                    }
+
+                    cir.style.transform='rotate('+ci+'deg)';
+                    ci++;
+
+                setTimeout(loadingCircle,1);
+              }
+           });
+          //BrandingRequestController.saveRecords(addAccount,addBrandingType,addMediaType,addBrand,addCluster,delId,$scope.case,$scope.caseId,addmChild,addLang,function(res,evt){
+
+          BandhanController.saveReloaded(BRANDWRAPLIST,$scope.case,$scope.caseId,function(res,evt){
+              //console.log(res);
+              //console.log(evt);
+             $(document).ready(function(){
+                           $('.circleBlock').remove();
+                           $('#circle').remove();
+              });
+              if(evt.status){
+                  if(res=='success'){
+                      $(document).ready(function(){
+                            $('#submit').blur();
+                            $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);padding-bottom:20px;" ><span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span><span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;">Saved Successfully!! </label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="btn btn-default acnc" value="Close" /></div></div>');
+
+                           //$('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;padding-bottom:10px;"><span class="glyphicon glyphicon-remove acnc" style="float:right;padding-right:5px;color:#000000;font-size:20px;"></span></div><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;"><label style="margin-top:20px;margin-bottom:20px;">Saved Successfully</label> <br/></div>  <div style="float:right;margin-top:15px"><a class="btn btn-default acnc"  href="#">Close</a> </div></div>')
+                            //setTimeout(function(){window.location.replace("http://www.google.com");},5000);
+                            $('.acnc').click(function(){
+                                $('#block').remove();
+                                $('.blockcontent').remove();
+                                $('.alertcontent').remove();
+                                window.location.replace('/apex/BhandhanPage');
+                                //window.location.reload();
+                                // window.location.href('/apex/BrandingRequestPage');
+                        });
+                        $('body').keyup(function(event){
+                            if(event.keyCode==27){
+                                 $('#block').remove();
+                                $('.blockcontent').remove();
+                                $('.alertcontent').remove();
+                                window.location.replace('/apex/BrandingCreation');
+                            }
+                        });
+
+
+                       });
+                      //alertWindow('Saved Successfully','');
+                      //window.location.reload();
+                 }else{
+                     alertWindow(JSON.stringify(res),'alert' );
+                 }
+              }else{
+                  alertWindow('Failed','alert' );
+              }
+          });
+
+      }
+
+
+      $scope.submitConfirmation=function(){
+        //console.log('case Bol '+$scope.case);
+            //console.log('case Id '+$scope.caseId);
+
+
+          var addrLst=[];
+
+          var DupArray=[];
+
+        for(var i=0;i<$scope.data.length;i++){
+            var dupTemp=new Object();
+            dupTemp.id=$scope.data[i].accc;
+            dupTemp.name=$scope.data[i].name;
+            var countt=0;
+            for(var j=0;j<$scope.data.length;j++){
+               if($scope.data[i].accc==$scope.data[j].accc){
+                   countt++;
+               }
+            }
+            if(countt>1){
+                dupTemp.error=false;
+                if(DupArray.length==0){
+                    DupArray.push(dupTemp);
+                }else{
+                    var dupBol=true;
+                    for(var k=0;k<DupArray.length;k++){
+                        if(dupTemp.id==DupArray[k].id){
+                            dupBol=false;
+                            break;
+                        }
+                    }
+                    if(dupBol){
+                        DupArray.push(dupTemp);
+                    }
+                }
+            }
+        }
+
+        if(DupArray.length>0){
+            var ERROR='<h5><b>Please remove duplicate shop:</b></h5>';
+            for(var i=0;i<DupArray.length;i++){
+                ERROR+=''+DupArray[i].name+'<br/>';
+            }
+            alertWindow(ERROR,'alert');
+            return;
+        }
+
+
+
+
+
+
+
+
+
+            var Defect=[];
+
+
+
+
+            for(var i=0;i<$scope.data.length;i++){
+                var dtemp=new Object();
+                dtemp.accc=$scope.data[i].accc;
+                dtemp.name=$scope.data[i].name;
+                dtemp.defect=[];
+                dtemp.error=true;
+
+                if($scope.data[i].btype=='None'){
+                    dtemp.defect.push(' Branding Type');
+                    dtemp.error=false;
+                }
+                if($scope.data[i].lang=='None'){
+                    dtemp.defect.push(' Language');
+                    dtemp.error=false;
+                }
+                if($scope.data[i].mtypebol==true && ($scope.data[i].mtype=='None' || $scope.data[i].mtype=='')){
+                    dtemp.defect.push(' Media Type');
+                    dtemp.error=false;
+                }
+                if($scope.data[i].mchildshw==true && ($scope.data[i].mchild=='None' || $scope.data[i].mchild=='')){
+                    dtemp.defect.push(' Type');
+                    dtemp.error=false;
+                }
+                
+                if(!dtemp.error){
+                    Defect.push(dtemp);
+                }
+                
+                /*Commented By Pooja*/
+            /*    if($scope.data[i].street.length==0 || $scope.data[i].city.length==0 || $scope.data[i].state.length==0 || $scope.data[i].country.length==0 || $scope.data[i].pin.length==0){
+                    addrLst.push(''+i);
+                }     */
+                
+                /*Added by Pooja*/
+                 if($scope.data[i].street.length==0 || $scope.data[i].city.length==0 || $scope.data[i].state.length==0 || $scope.data[i].district.length==0 || $scope.data[i].pin.length==0){
+                    addrLst.push(''+i);
+                }
+            }
+
+            if(Defect.length>0){
+              var ERROR='<h5><b>Please enter the complete details for the following shop(s):</b></h5><table><tr> ';
+              for(var i=0;i<Defect.length;i++){
+                  ERROR+='<td>'+Defect[i].name+'</td>'+'<td>-</td>'+'<td>'+ Defect[i].defect+'</td></tr>';
+              }
+              ERROR+='</table>';
+
+              alertWindow(ERROR,'alert');
+              return;
+          }
+
+
+
+
+            if(addrLst.length>0){
+                alertWindow('Please provide address. ','alert');
+                highlight(addrLst);
+                return;
+            }
+
+
+
+        $(document).ready(function(){
+            $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div> <div class="col-sm-4 col-sm-offset-4 confirmBlock"> <div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);"> <span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span> <b style="font-family:Calibri !important;">Confirm Submission</b> <span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span> </div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left"> <h5><b>Are you sure you want to submit all Requests ?</b></h5> </label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"> <input id="yes" type="button" class="btn btn-default acnc" value="Yes"> <input id="no" type="button" class="btn btn-default acnc" value="No"> </div> </div>');
+
+            $('#yes').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+
+
+
+
+
+
+                $scope.submit();
+                //return true;
+            });
+            $('.acnc').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('#no').click(function(){
+                this.blur();
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+            $('body').keyup(function(evt){
+                $('#block').remove();
+                $('.confirmBlock').remove();
+                //return false;
+            });
+        });
+
+    };
+
+
+
+
+      $scope.submit=function(){
+      BRANDWRAPLIST=[];
+      var updlst=[];
+
+
+
+
+
+
+
+          for(var i=0;i<$scope.data.length;i++){
+              var bw=new Object();
+              if($scope.data[i].id==''){
+                  bw.updbol=false;
+              }
+
+              bw.OwnerId=$scope.data[i].submitBy;
+              bw.Id=$scope.data[i].id;
+              bw.Shop=$scope.data[i].accc;
+              bw.BrandType=$scope.data[i].btype;
+              bw.MediaType=$scope.data[i].mtype;
+              if(bw.MediaType=='None'){
+                  bw.MediaType='';
+              }
+              bw.MediaChild=$scope.data[i].mchild;
+              if(bw.MediaChild=='None'){
+                  bw.MediaChild='';
+              }
+              bw.Language=$scope.data[i].lang;
+              bw.Cluster=$scope.data[i].cluster;
+
+            //Commented by Pooja
+         /*     bw.TalukName=$scope.data[i].taluk;  */
+              
+              bw.mediabol=$scope.data[i].mtypebol;
+              bw.mchildbol=$scope.data[i].mchildshw;
+              BRANDWRAPLIST.push(bw);
+          }
+          //console.log(BRANDWRAPLIST);
+
+
+          $(document).ready(function(){
+               var ci=1;
+               $('body').append('<div class="circleBlock"></div><div id="circle"></div>');
+               loadingCircle();
+               function loadingCircle(){
+                var cir=document.getElementById('circle');
+                    if(ci==360){
+                        ci=0;
+                    }
+
+                    cir.style.transform='rotate('+ci+'deg)';
+                    ci++;
+
+                setTimeout(loadingCircle,1);
+              }
+           });
+
+
+
+
+          //BrandingRequestController.updateRecord(addAccount,addBrandingType,addMediaType,addBrand,addCluster,delId,updlst,$scope.case,$scope.caseId,addmChild,addLang,function(res,evt){
+          BandhanController.updateReloaded(BRANDWRAPLIST,$scope.case,$scope.caseId,function(res,evt){
+
+
+
+              $(document).ready(function(){
+                           $('.circleBlock').remove();
+                           $('#circle').remove();
+              });
+              //console.log(evt);
+              //console.log(res);
+              if(evt.status){
+
+                  if(res=='success'){
+                      blockwindow();
+                      //alert('Submitted for Approval','alert');
+
+                  }else{
+
+
+                     alertWindow(JSON.stringify(res),'alert');
+
+                      //alertWindow('Submission failed contact your Administrator!!');
+                  }
+              }else{
+                  alertWindow('Error In Connection','alert');
+              }
+          });
+
+      };
+
+
+
+
+
+
+
+
+
+
+        });
+    </script>
+
+
+    <body  ng-app="myApp" ng-controller="Ctrl">
+
+        <div class="bs-example" data-example-id="inverted-navbar" >
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                <div class="navbar-header"><img src="{!$Resource.AshirvadTranspaarentLogo}" height="56px" width="143px" /></div>
+
+               <!--<div style="width:90%;color:#FFF;font-size:20px;text-align:center;">Branding Creation </div>-->
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+                     <ul class="nav navbar-nav">
+                         <li class="nav-mn">
+                         <span class="glyphicon glyphicon-list">
+                            <a style="font-family:Calibri !important;" href="/apex/BrandingList" >List View</a>
+                         </span>
+                         </li>
+                         <li class="nav-mn">
+                         <span class="glyphicon glyphicon-home">
+                            <a style="font-family:Calibri !important;" href="/home/home.jsp" >Home</a>
+                         </span>
+                         </li>
+
+                     </ul>
+                     <div style="font-family:Calibri !important;margin-top:15px;width:90%;color:#FFF;font-size:20px;text-align:center;">Bhandhan Request<span ng-show="counter" class="badge">{{brdcount}}/5</span></div>
+                   </div>
+
+               </div>
+          </nav>
+       </div>
+        <div class="col-lg-12">
+       <table class="table">
+
+           <tr class="tr" id="row{{p.slno}}" ng-repeat="p in data" ng-disabled="p.ena">
+               <td style="width:30%;" >
+                        <label>Shop Name</label>
+                        <select class="form-control"   ng-model="p.accc" ng-options="acco.Id as acco.Name for acco in p.acc"> </select>
+               </td>
+               <td style="width:14%;">
+                  <label>Branding Type</label>
+                       <select class="form-control" ng-change="updateMedia1(p)"   ng-model="p.btype" ng-options="btype for btype in p.blist"></select>
+               </td>
+               <td style="width:14%;"  >
+                  <label>Media</label>
+                 <select class="form-control" ng-change="updateMedia(p)"   ng-model="p.mtype" ng-options="mtype for mtype in p.mlist"></select>
+               </td>
+               <td style="width:14%;"  >
+                    <label>Type</label><br/>
+                    <select class="form-control"   ng-model="p.mchild" ng-options="mc for mc in p.mchildlist"></select>
+                 </td>
+              <td style="width:14%;" >
+                 <label>Language</label>
+                 <select class="form-control"   ng-model="p.lang" ng-options="lg for lg in p.langlist"></select>
+               </td>
+              <td style="width:7%;" >
+              <label>&nbsp;</label>
+              <a href="#" class="btn btn-ashvd" onclick="this.blur();"  ng-click="shwaddr(p)">View Address</a>
+
+              </td>
+               <td style="width:7%;">
+               <label>&nbsp;</label>
+                 <input type="button" Value="Remove" ng-hide="p.ena" ng-click="delConfirmation(p.slno,p)" class="btn btn-danger"/>
+              </td>
+
+
+
+           </tr>
+       </table>
+       <div align="right">
+
+           <input  class="btn btn-ashvd" id="brdSave" type="button" onclick="this.blur()" ng-show="savShw" ng-click="save()" value="Save" />
+           <input  class="btn btn-ashvd-submit" id="brdSubmit" type="button" onclick="this.blur()"  ng-hide="shwsubmit" ng-click="submitConfirmation()" value="Submit" />
+       </div>
+   </div>
+
+    </body>
+</apex:page>

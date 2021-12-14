@@ -1,0 +1,277 @@
+<apex:page controller="EditSprByManagerController" docType="html-5.0">
+    <apex:slds />
+    <style type="text/css">
+        .inp_fd {
+        position:relative;
+        }
+        .fieldSSize {
+        width: 60px;
+        }
+        .fieldMSize {
+        width: 120px;
+        }
+        .mand {
+        font-size: 20px!important;
+        color: red!important;    
+        }
+        .imgClass:hover {
+        cursor:pointer;
+        }
+        .look_pos  input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        .hideopen{
+        display: none;
+        }
+        
+        .look_pos {
+        position:relative!important;
+        }
+        .look_pos a {
+        position:absolute!important;
+        right:0px;
+        top:3px;
+        }
+        body .bPageBlock .detailList tr th:last {
+        width:50%;
+        }
+        .form_inputs select {
+        width:100%!important;
+        }
+        .look_css {
+        position:relative;
+        }
+        .look_css a {
+        position:absolute;
+        right:5px;
+        top:6px;
+        }
+        .look_css input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .slds-input, .look_css input[type="text"] {
+        width:150px!important;
+        }
+        .look_pos  input[type="text"] {
+        width:200px!important;
+        }
+        
+        }
+        
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        z-index:999999;
+        }
+        
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+        
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        
+    </style>
+    
+    
+    
+    
+    
+    <apex:outputpanel >
+        <apex:actionstatus id="actStatusId">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                                                                     height: 300%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Saving...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+    
+    <apex:form id="theForm">
+        <apex:inputHidden value="{!oppProId}" id="projectId"/>
+        <apex:pageMessages id="theErrorMessage" />
+        <apex:pageBlock Id="PageBlock" > 
+            <apex:pageBlockSection title="{!UniqueSPRName}" Id="PageBlockSec" collapsible="false" >
+                
+                <apex:pageBlockTable value="{!newsprUpdateList}" var="sprChild" rendered="{!newsprUpdateList.size!=null}" id="newOffId" >
+                    
+                    
+                    <apex:column >
+                        <apex:facet name="header">Product</apex:facet>
+                        <apex:outputField value="{!sprChild.Product_name__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Offer MRP</apex:facet>
+                        <apex:outputField value="{!sprChild.MRP_Value__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">MRP Post Discount</apex:facet>
+                        <apex:outputField value="{!sprChild.MRP_Post_Discount2__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Special Project Discount</apex:facet>
+                        <apex:inputField value="{!sprChild.Extra_Discount__c}" />
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">ORC/ MARGIN TO DLR/DIST</apex:facet>
+                        <apex:inputField value="{!sprChild.ORC_MARGIN_TO_DLR_DIST__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Net Invoice Value from APPL</apex:facet>
+                        <apex:outputField value="{!sprChild.Net_Invoice_Value_from_APPL2__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Price Validity</apex:facet>
+                        <apex:inputField value="{!sprChild.Validity_for_the_Price__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">CTC</apex:facet>
+                        <apex:outputField value="{!sprChild.CTC_Value__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Add Disc on APPL Disc</apex:facet>
+                        <apex:outputField value="{!sprChild.Additional_Disc_on_APPL_disc2__c}" />
+                    </apex:column>
+                    <apex:column >
+                         <apex:facet name="header">Click</apex:facet>
+                        <input type="button" value="See History" id="{!sprChild.Product_name__c}" onclick="myJavascriptFunc()" />
+                    </apex:column>
+                    
+                </apex:pageBlockTable> 
+                <!-- <apex:actionFunction action="{!CallApexMethod}" name="SeeHistory" rerender="theForm" >
+<apex:param id="product" name="productNames" value="" />
+</apex:actionFunction>-->
+                <div class="hideopen">
+                    
+                
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            
+                            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Latest History</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="displayhistory">
+                            
+                        </div>
+                        <footer class="slds-modal__footer">
+                           <!--<apex:commandButton onclick="closeblock(),return false;" value="Close"/>-->
+                            <input class="slds-button slds-button_neutral" type="button" value="Close" onclick="closeblock()"/>
+                              <script>
+                                function closeblock(){
+                                    //  alert('hello');
+                          document.querySelector(".hideopen").style.display = 'none';
+                       }
+                            </script>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                </div>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save"  action="{!saveUpdatedOffers}" rerender="shwMsg" styleClass="slds-button slds-button_brand" reRender="theErrorMessage" status="actStatusId" />
+                <apex:commandButton value="Cancel"  action="{!cancelEdit}" status="status" rerender="shwMsg" styleClass="slds-button slds-button_brand" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        
+    </apex:form>
+    <script>
+        
+    function myJavascriptFunc() {
+        var proId=document.getElementById('{!$Component.theForm.projectId}').value;
+        //alert(event.currentTarget.id);
+        //alert(proId);
+        
+        //        var accountName = document.getElementById('acctSearch').value;
+        
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.EditSprByManagerController.getApprovalHistory}',
+            event.currentTarget.id,proId,
+            function(result, event){
+                if (event.status) {
+                 
+                    // console.log(result);
+                    if(result.length > 0){
+                     var htmlContant = '<table>';
+                    var historyresult=result;
+                    // alert(historyresult.size());
+                    htmlContant+='<tr><th>Product Name</th><th>MRP Value</th><th>Discount to Customer</th><th>Net Invoice</br> Value from APPL</th><th>CTC</th><th>Add Disc on</br> APPL disc</th><th>Status</th></tr>';
+                    historyresult.forEach(function(element) {
+                        htmlContant+='<tr><td>'+element.Product_name__c+'</td><td>'+element.MRP_Value__c+'</td><td>'+element.Extra_Discount__c+'</td><td>'+element.Net_Invoice_Value_from_APPL2__c+'</td><td>'+element.CTC_Value__c+'</td><td>'+element.Additional_Disc_on_APPL_disc2__c+'</td><td>'+element.Approval_Status__c+'</td></tr>';
+                    });
+                    htmlContant+='</table>';
+                    console.log(htmlContant);
+                    document.querySelector(".hideopen").style.display = 'block';
+                    document.getElementById("displayhistory").innerHTML = htmlContant;
+                    
+                    }
+                    else {
+                    document.querySelector(".hideopen").style.display = 'block';
+                    document.getElementById("displayhistory").innerHTML = 'There are no history for this particular record';
+                    }
+                   
+                    
+                } else if (event.type === 'exception') {
+                   
+                } else {
+                }
+            }, 
+            {escape: true}
+        );
+    }
+    
+
+    
+    
+    </script>
+</apex:page>

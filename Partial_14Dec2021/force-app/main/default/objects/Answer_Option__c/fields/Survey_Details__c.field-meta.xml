@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Survey_Details__c</fullName>
+    <description>It is used to capture Question Id from Survey Details(Parent) object.</description>
+    <externalId>false</externalId>
+    <label>Survey Details</label>
+    <referenceTo>Survey_Details__c</referenceTo>
+    <relationshipLabel>Answer Options</relationshipLabel>
+    <relationshipName>Answer_Options</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

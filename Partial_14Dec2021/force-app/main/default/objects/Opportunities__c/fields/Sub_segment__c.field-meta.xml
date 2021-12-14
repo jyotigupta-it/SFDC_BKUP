@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_segment__c</fullName>
+    <externalId>false</externalId>
+    <label>Sub segment</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Segment__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ion Exchange</fullName>
+                <default>false</default>
+                <label>Ion Exchange</label>
+            </value>
+            <value>
+                <fullName>Sand</fullName>
+                <default>false</default>
+                <label>Sand</label>
+            </value>
+            <value>
+                <fullName>Carbon and Membrane Filtration</fullName>
+                <default>false</default>
+                <label>Carbon and Membrane Filtration</label>
+            </value>
+            <value>
+                <fullName>Chemical Dosing</fullName>
+                <default>false</default>
+                <label>Chemical Dosing</label>
+            </value>
+            <value>
+                <fullName>CIP</fullName>
+                <default>false</default>
+                <label>CIP</label>
+            </value>
+            <value>
+                <fullName>Reverse Osmosis</fullName>
+                <default>false</default>
+                <label>Reverse Osmosis</label>
+            </value>
+            <value>
+                <fullName>Desalination</fullName>
+                <default>false</default>
+                <label>Desalination</label>
+            </value>
+            <value>
+                <fullName>Clarification/Flocculation</fullName>
+                <default>false</default>
+                <label>Clarification/Flocculation</label>
+            </value>
+            <value>
+                <fullName>Filtration</fullName>
+                <default>false</default>
+                <label>Filtration</label>
+            </value>
+            <value>
+                <fullName>Membrane Bioreactor</fullName>
+                <default>false</default>
+                <label>Membrane Bioreactor</label>
+            </value>
+            <value>
+                <fullName>Disinfection</fullName>
+                <default>false</default>
+                <label>Disinfection</label>
+            </value>
+            <value>
+                <fullName>Post treatment</fullName>
+                <default>false</default>
+                <label>Post treatment</label>
+            </value>
+            <value>
+                <fullName>Make Up system</fullName>
+                <default>false</default>
+                <label>Make Up system</label>
+            </value>
+            <value>
+                <fullName>Ultra Pure water treatment and distribution</fullName>
+                <default>false</default>
+                <label>Ultra Pure water treatment and distribution</label>
+            </value>
+            <value>
+                <fullName>Ultra Pure water Reclaim</fullName>
+                <default>false</default>
+                <label>Ultra Pure water Reclaim</label>
+            </value>
+            <value>
+                <fullName>Process Cool Water</fullName>
+                <default>false</default>
+                <label>Process Cool Water</label>
+            </value>
+            <value>
+                <fullName>Mixer</fullName>
+                <default>false</default>
+                <label>Mixer</label>
+            </value>
+            <value>
+                <fullName>Flotation</fullName>
+                <default>false</default>
+                <label>Flotation</label>
+            </value>
+            <value>
+                <fullName>Thickener</fullName>
+                <default>false</default>
+                <label>Thickener</label>
+            </value>
+            <value>
+                <fullName>Leaching</fullName>
+                <default>false</default>
+                <label>Leaching</label>
+            </value>
+            <value>
+                <fullName>Extraction</fullName>
+                <default>false</default>
+                <label>Extraction</label>
+            </value>
+            <value>
+                <fullName>Adsorption</fullName>
+                <default>false</default>
+                <label>Adsorption</label>
+            </value>
+            <value>
+                <fullName>Elution</fullName>
+                <default>false</default>
+                <label>Elution</label>
+            </value>
+            <value>
+                <fullName>Decant Water</fullName>
+                <default>false</default>
+                <label>Decant Water</label>
+            </value>
+            <value>
+                <fullName>Slurry transport</fullName>
+                <default>false</default>
+                <label>Slurry transport</label>
+            </value>
+            <value>
+                <fullName>Acid mine drainage</fullName>
+                <default>false</default>
+                <label>Acid mine drainage</label>
+            </value>
+            <value>
+                <fullName>Compressed air</fullName>
+                <default>false</default>
+                <label>Compressed air</label>
+            </value>
+            <value>
+                <fullName>Ballast water treatment</fullName>
+                <default>false</default>
+                <label>Ballast water treatment</label>
+            </value>
+            <value>
+                <fullName>Hot and cold water</fullName>
+                <default>false</default>
+                <label>Hot and cold water</label>
+            </value>
+            <value>
+                <fullName>Black and grey water</fullName>
+                <default>false</default>
+                <label>Black and grey water</label>
+            </value>
+            <value>
+                <fullName>Cooling Systems</fullName>
+                <default>false</default>
+                <label>Cooling Systems</label>
+            </value>
+            <value>
+                <fullName>Desalination Water Treatment</fullName>
+                <default>false</default>
+                <label>Desalination Water Treatment</label>
+            </value>
+            <value>
+                <fullName>Exhaust Gas Scrubbers</fullName>
+                <default>false</default>
+                <label>Exhaust Gas Scrubbers</label>
+            </value>
+            <value>
+                <fullName>Pool and Spa</fullName>
+                <default>false</default>
+                <label>Pool and Spa</label>
+            </value>
+            <value>
+                <fullName>Fire extinguishing</fullName>
+                <default>false</default>
+                <label>Fire extinguishing</label>
+            </value>
+            <value>
+                <fullName>Rain Water Drainage</fullName>
+                <default>false</default>
+                <label>Rain Water Drainage</label>
+            </value>
+            <value>
+                <fullName>Industrial waste</fullName>
+                <default>false</default>
+                <label>Industrial waste</label>
+            </value>
+            <value>
+                <fullName>Hydrocarbons</fullName>
+                <default>false</default>
+                <label>Hydrocarbons</label>
+            </value>
+            <value>
+                <fullName>Cold Water</fullName>
+                <default>false</default>
+                <label>Cold Water</label>
+            </value>
+            <value>
+                <fullName>Waste Water Treatment</fullName>
+                <default>false</default>
+                <label>Waste Water Treatment</label>
+            </value>
+            <value>
+                <fullName>Painting Lines</fullName>
+                <default>false</default>
+                <label>Painting Lines</label>
+            </value>
+            <value>
+                <fullName>Chlor Alkali</fullName>
+                <default>false</default>
+                <label>Chlor Alkali</label>
+            </value>
+            <value>
+                <fullName>Surface Treatment</fullName>
+                <default>false</default>
+                <label>Surface Treatment</label>
+            </value>
+            <value>
+                <fullName>Acid Regeneration</fullName>
+                <default>false</default>
+                <label>Acid Regeneration</label>
+            </value>
+            <value>
+                <fullName>Bromine</fullName>
+                <default>false</default>
+                <label>Bromine</label>
+            </value>
+            <value>
+                <fullName>Mixing</fullName>
+                <default>false</default>
+                <label>Mixing</label>
+            </value>
+            <value>
+                <fullName>Tank Filling</fullName>
+                <default>false</default>
+                <label>Tank Filling</label>
+            </value>
+            <value>
+                <fullName>Neutralization</fullName>
+                <default>false</default>
+                <label>Neutralization</label>
+            </value>
+            <value>
+                <fullName>Flue Gas Treatment</fullName>
+                <default>false</default>
+                <label>Flue Gas Treatment</label>
+            </value>
+            <value>
+                <fullName>Dosing Skids</fullName>
+                <default>false</default>
+                <label>Dosing Skids</label>
+            </value>
+            <value>
+                <fullName>Cooling Water</fullName>
+                <default>false</default>
+                <label>Cooling Water</label>
+            </value>
+            <value>
+                <fullName>Aggressive Waste</fullName>
+                <default>false</default>
+                <label>Aggressive Waste</label>
+            </value>
+            <value>
+                <fullName>Influent Water Treatment</fullName>
+                <default>false</default>
+                <label>Influent Water Treatment</label>
+            </value>
+            <value>
+                <fullName>Effluent Treatment and Wash Water Treatment</fullName>
+                <default>false</default>
+                <label>Effluent Treatment and Wash Water Treatment</label>
+            </value>
+            <value>
+                <fullName>Ultra Pure Water Circuits</fullName>
+                <default>false</default>
+                <label>Ultra Pure Water Circuits</label>
+            </value>
+            <value>
+                <fullName>Hot and Cold Water Systems</fullName>
+                <default>false</default>
+                <label>Hot and Cold Water Systems</label>
+            </value>
+            <value>
+                <fullName>Textile</fullName>
+                <default>false</default>
+                <label>Textile</label>
+            </value>
+            <value>
+                <fullName>Fertilizer</fullName>
+                <default>false</default>
+                <label>Fertilizer</label>
+            </value>
+            <value>
+                <fullName>Pharma</fullName>
+                <default>false</default>
+                <label>Pharma</label>
+            </value>
+            <value>
+                <fullName>Mines &amp; Minerals</fullName>
+                <default>false</default>
+                <label>Mines &amp; Minerals</label>
+            </value>
+            <value>
+                <fullName>Petro Chemicals &amp; Refinery</fullName>
+                <default>false</default>
+                <label>Petro Chemicals &amp; Refinery</label>
+            </value>
+            <value>
+                <fullName>Steel &amp; Metals</fullName>
+                <default>false</default>
+                <label>Steel &amp; Metals</label>
+            </value>
+            <value>
+                <fullName>Pulp &amp; Paper</fullName>
+                <default>false</default>
+                <label>Pulp &amp; Paper</label>
+            </value>
+            <value>
+                <fullName>Sugar</fullName>
+                <default>false</default>
+                <label>Sugar</label>
+            </value>
+            <value>
+                <fullName>Oil &amp; Gas</fullName>
+                <default>false</default>
+                <label>Oil &amp; Gas</label>
+            </value>
+            <value>
+                <fullName>WTP (PTP)</fullName>
+                <default>false</default>
+                <label>WTP (PTP)</label>
+            </value>
+            <value>
+                <fullName>WWTP (STP / ETP)</fullName>
+                <default>false</default>
+                <label>WWTP (STP / ETP)</label>
+            </value>
+            <value>
+                <fullName>DM</fullName>
+                <default>false</default>
+                <label>DM</label>
+            </value>
+            <value>
+                <fullName>RO</fullName>
+                <default>false</default>
+                <label>RO</label>
+            </value>
+            <value>
+                <fullName>UF</fullName>
+                <default>false</default>
+                <label>UF</label>
+            </value>
+            <value>
+                <fullName>Process Water</fullName>
+                <default>false</default>
+                <label>Process Water</label>
+            </value>
+            <value>
+                <fullName>Marine</fullName>
+                <default>false</default>
+                <label>Marine</label>
+            </value>
+            <value>
+                <fullName>Semi Conductors</fullName>
+                <default>false</default>
+                <label>Semi Conductors</label>
+            </value>
+            <value>
+                <fullName>Heavy Engineering</fullName>
+                <default>false</default>
+                <label>Heavy Engineering</label>
+            </value>
+            <value>
+                <fullName>Automobile</fullName>
+                <default>false</default>
+                <label>Automobile</label>
+            </value>
+            <value>
+                <fullName>Power Plant</fullName>
+                <default>false</default>
+                <label>Power Plant</label>
+            </value>
+            <value>
+                <fullName>Colour &amp; Coating</fullName>
+                <default>false</default>
+                <label>Colour &amp; Coating</label>
+            </value>
+            <value>
+                <fullName>Dosing</fullName>
+                <default>false</default>
+                <label>Dosing</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Chlor Alkali</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Textile</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Fertilizer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Pharma</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Mines &amp; Minerals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Petro Chemicals &amp; Refinery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Steel &amp; Metals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Pulp &amp; Paper</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Sugar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chemical Process Industries</controllingFieldValue>
+            <valueName>Oil &amp; Gas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>Desalination</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>Cooling Water</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>WTP (PTP)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>WWTP (STP / ETP)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>DM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>RO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>UF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Water treatment</controllingFieldValue>
+            <valueName>Process Water</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Marine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Semi Conductors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Heavy Engineering</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Automobile</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Power Plant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Colour &amp; Coating</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Dosing</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

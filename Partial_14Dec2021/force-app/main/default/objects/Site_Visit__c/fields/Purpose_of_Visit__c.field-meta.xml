@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purpose_of_Visit__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Please fill the value</inlineHelpText>
+    <label>Purpose of Visit</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Party_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Enquiry</fullName>
+                <default>false</default>
+                <label>Enquiry</label>
+            </value>
+            <value>
+                <fullName>New Order Booking</fullName>
+                <default>false</default>
+                <label>New Order Booking</label>
+            </value>
+            <value>
+                <fullName>Order Follow Up</fullName>
+                <default>false</default>
+                <label>Order Follow Up</label>
+            </value>
+            <value>
+                <fullName>Payment Follow up</fullName>
+                <default>false</default>
+                <label>Payment Follow up</label>
+            </value>
+            <value>
+                <fullName>Market Survey</fullName>
+                <default>false</default>
+                <label>Market Survey</label>
+            </value>
+            <value>
+                <fullName>Follow up</fullName>
+                <default>false</default>
+                <label>Follow up</label>
+            </value>
+            <value>
+                <fullName>Approval for Ashirvad Brand</fullName>
+                <default>false</default>
+                <label>Approval for Ashirvad Brand</label>
+            </value>
+            <value>
+                <fullName>Building Relationship</fullName>
+                <default>false</default>
+                <label>Building Relationship</label>
+            </value>
+            <value>
+                <fullName>Complaints-Aqua</fullName>
+                <default>false</default>
+                <label>Complaints-Aqua</label>
+            </value>
+            <value>
+                <fullName>Complaints-Column</fullName>
+                <default>false</default>
+                <label>Complaints-Column</label>
+            </value>
+            <value>
+                <fullName>Complaints-CPVC</fullName>
+                <default>false</default>
+                <label>Complaints-CPVC</label>
+            </value>
+            <value>
+                <fullName>Complaints-SWR</fullName>
+                <default>false</default>
+                <label>Complaints-SWR</label>
+            </value>
+            <value>
+                <fullName>Dispatch</fullName>
+                <default>false</default>
+                <label>Dispatch</label>
+            </value>
+            <value>
+                <fullName>Product Presentation</fullName>
+                <default>false</default>
+                <label>Product Presentation</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Project Manager</controllingFieldValue>
+            <controllingFieldValue>Dealers Salesman</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Enquiry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Project Manager</controllingFieldValue>
+            <controllingFieldValue>Dealers Salesman</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>New Order Booking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Project Manager</controllingFieldValue>
+            <controllingFieldValue>Dealers Salesman</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Order Follow Up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Project Manager</controllingFieldValue>
+            <controllingFieldValue>Dealers Salesman</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <controllingFieldValue>Projects</controllingFieldValue>
+            <valueName>Payment Follow up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Dealers Salesman</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Market Survey</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Dealers Salesman</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Dealer</controllingFieldValue>
+            <controllingFieldValue>Distributor</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Follow up</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Architect</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Approval for Ashirvad Brand</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Architect</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Building Relationship</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Complaints-Aqua</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Complaints-Column</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Complaints-CPVC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Complaints-SWR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Dispatch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Plumbing Contractor</controllingFieldValue>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <controllingFieldValue>Site Incharge / Supervisor</controllingFieldValue>
+            <controllingFieldValue>Plumber</controllingFieldValue>
+            <controllingFieldValue>Government</controllingFieldValue>
+            <controllingFieldValue>Institution</controllingFieldValue>
+            <controllingFieldValue>Purchase Manager</controllingFieldValue>
+            <controllingFieldValue>Site Engineer</controllingFieldValue>
+            <controllingFieldValue>Borewell Office</controllingFieldValue>
+            <controllingFieldValue>Architect</controllingFieldValue>
+            <controllingFieldValue>Builder</controllingFieldValue>
+            <controllingFieldValue>Consultant</controllingFieldValue>
+            <controllingFieldValue>Contractor</controllingFieldValue>
+            <controllingFieldValue>Customer</controllingFieldValue>
+            <controllingFieldValue>Engineer</controllingFieldValue>
+            <controllingFieldValue>Farmer</controllingFieldValue>
+            <controllingFieldValue>Borer</controllingFieldValue>
+            <controllingFieldValue>Mechanic</controllingFieldValue>
+            <valueName>Product Presentation</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

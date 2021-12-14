@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Color_Language_Size__c</fullName>
+    <externalId>false</externalId>
+    <label>Color/Language/Size</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Product_Description__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ENGLISH</fullName>
+                <default>false</default>
+                <label>ENGLISH</label>
+            </value>
+            <value>
+                <fullName>HINDI</fullName>
+                <default>false</default>
+                <label>HINDI</label>
+            </value>
+            <value>
+                <fullName>GUJARATI</fullName>
+                <default>false</default>
+                <label>GUJARATI</label>
+            </value>
+            <value>
+                <fullName>MARATI</fullName>
+                <default>false</default>
+                <label>MARATI</label>
+            </value>
+            <value>
+                <fullName>KANNADA</fullName>
+                <default>false</default>
+                <label>KANNADA</label>
+            </value>
+            <value>
+                <fullName>TELUGU</fullName>
+                <default>false</default>
+                <label>TELUGU</label>
+            </value>
+            <value>
+                <fullName>TAMIL</fullName>
+                <default>false</default>
+                <label>TAMIL</label>
+            </value>
+            <value>
+                <fullName>RED</fullName>
+                <default>false</default>
+                <label>RED</label>
+            </value>
+            <value>
+                <fullName>VIOLET</fullName>
+                <default>false</default>
+                <label>VIOLET</label>
+            </value>
+            <value>
+                <fullName>INDIGO</fullName>
+                <default>false</default>
+                <label>INDIGO</label>
+            </value>
+            <value>
+                <fullName>BLUE</fullName>
+                <default>false</default>
+                <label>BLUE</label>
+            </value>
+            <value>
+                <fullName>GREEN</fullName>
+                <default>false</default>
+                <label>GREEN</label>
+            </value>
+            <value>
+                <fullName>YELLOW</fullName>
+                <default>false</default>
+                <label>YELLOW</label>
+            </value>
+            <value>
+                <fullName>ORANGE</fullName>
+                <default>false</default>
+                <label>ORANGE</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>ENGLISH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>HINDI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>GUJARATI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>MARATI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>KANNADA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>TELUGU</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>TAMIL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>RED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>VIOLET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>INDIGO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>BLUE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>GREEN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>YELLOW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN8</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRT ROUND NECK RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_SMALL</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>PACKING BOX_BIG</controllingFieldValue>
+            <controllingFieldValue>TECHNICAL MANUAL</controllingFieldValue>
+            <controllingFieldValue>PACKING STRIP</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - ALL INDIA</controllingFieldValue>
+            <controllingFieldValue>PACKING TAPE</controllingFieldValue>
+            <controllingFieldValue>PRICELIST - TAMILNADU</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_SMALL</controllingFieldValue>
+            <controllingFieldValue>PIPE SELECTION BOOK</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_MEDIUM</controllingFieldValue>
+            <controllingFieldValue>THERMOFOAM BOARD</controllingFieldValue>
+            <controllingFieldValue>POLYTHENE COVER_BIG</controllingFieldValue>
+            <controllingFieldValue>PRICELIST FOLDERS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE BROUCHER (EXCELLENCE TO BRILLANCE)</controllingFieldValue>
+            <controllingFieldValue>APPLICATION FORM (CHANNEL PARTNERSHIP)</controllingFieldValue>
+            <controllingFieldValue>CORPORATE  LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>BLUE TAPE (SHELF STICKERS)</controllingFieldValue>
+            <controllingFieldValue>LEAFLETS</controllingFieldValue>
+            <controllingFieldValue>HAND BILL</controllingFieldValue>
+            <controllingFieldValue>STICKERS</controllingFieldValue>
+            <controllingFieldValue>BANNERS</controllingFieldValue>
+            <controllingFieldValue>SCROLL 3&apos;x2&apos;</controllingFieldValue>
+            <controllingFieldValue>STALL TENT</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 6&apos; x 3&apos;</controllingFieldValue>
+            <controllingFieldValue>FLEX BOARD 8&apos; x 4&apos;</controllingFieldValue>
+            <controllingFieldValue>POP BOARDS</controllingFieldValue>
+            <controllingFieldValue>V4 12.5 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>V4 15 (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>WHITE FOLDER</controllingFieldValue>
+            <controllingFieldValue>CRYSTAL (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>ALL PRODUCT CLUSTER_STANDEES</controllingFieldValue>
+            <controllingFieldValue>STANDARD (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>MULTI USE KNIFE</controllingFieldValue>
+            <controllingFieldValue>STANDARD PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCHE_EVEREADY</controllingFieldValue>
+            <controllingFieldValue>HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>TORCH_NIPPO</controllingFieldValue>
+            <controllingFieldValue>HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>UMBRELLA</controllingFieldValue>
+            <controllingFieldValue>ASHIRVAD KEY CHAIN -  ENGLISH</controllingFieldValue>
+            <controllingFieldValue>LEATHER  KEY CHAIN</controllingFieldValue>
+            <controllingFieldValue>LEATHERITE PURSE</controllingFieldValue>
+            <controllingFieldValue>HEAVY PLUS (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (BELL TYPE)</controllingFieldValue>
+            <controllingFieldValue>SUPER HEAVY (COUPLER TYPE)</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 11)</controllingFieldValue>
+            <controllingFieldValue>LUNCH BOX_TRAVEL MATE</controllingFieldValue>
+            <controllingFieldValue>CPVC PIPE SAMPLES (SDR 13.5)</controllingFieldValue>
+            <controllingFieldValue>WRIST WATCHES</controllingFieldValue>
+            <controllingFieldValue>CPVC FITTINGS</controllingFieldValue>
+            <controllingFieldValue>MEASURING TAPE (5  Mtr)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 40)</controllingFieldValue>
+            <controllingFieldValue>PENS - ASHIRVAD (ONLY RED)</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE PIPE SAMPLES (SCH 80)</controllingFieldValue>
+            <controllingFieldValue>CAPS</controllingFieldValue>
+            <controllingFieldValue>AQUALIFE FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS RED - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE -  &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>SWR PIPES SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS PUSHFIT</controllingFieldValue>
+            <controllingFieldValue>SWR FITTINGS SOLFIT</controllingFieldValue>
+            <controllingFieldValue>SILENT PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;M&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;L&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS PIPES</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS BLUE - &apos;XL&apos;</controllingFieldValue>
+            <controllingFieldValue>SILENT PLUS FITTINGS</controllingFieldValue>
+            <controllingFieldValue>T - SHIRTS ROUND NECK BLUE - SIZE &apos;S&apos;</controllingFieldValue>
+            <controllingFieldValue>UNDERGROUND PIPES SN4</controllingFieldValue>
+            <valueName>ORANGE</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

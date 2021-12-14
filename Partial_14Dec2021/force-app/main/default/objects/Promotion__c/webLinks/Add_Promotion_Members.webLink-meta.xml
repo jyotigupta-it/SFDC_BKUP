@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Add_Promotion_Members</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Add Promotion Members</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var a=&apos;{!Promotion__c.Difference__c}&apos;; 
+var type = &apos;{!Promotion__c.Type__c}&apos;;
+
+//alert(&apos;type =&apos;+type);
+
+if(a&gt;=15) 
+{ 
+alert(&apos;Error :\n\n Promotion Members Entry has to be made within 15 days from the date of promotion activity conducted&apos;);
+ 
+} else if(type == &apos;Group Activity&apos;){
+   alert(&apos;Members cannot be added to &apos;+type);
+   
+}
+else { 
+window.open(&apos;/apex/APPL_ADD_MEMBERS_DETAIL_PAGE?id={!Promotion__c.Id}&apos;,&apos;_self&apos;); 
+}</url>
+</WebLink>

@@ -1,0 +1,890 @@
+<!--************XXX*********************
+
+Developer       :Mohd.Numaan Ahmed
+Page Name       :Product_Page_v2
+version         :2.0
+Date            :18-Jan-2015
+Modified Date   :
+Description     :This page is used to add products based on appl type.
+
+****************XXX**********************-->
+<apex:page sidebar="false" Standardcontroller="Opportunity" extensions="Product_Page_v2_Controller,CustomLookupForProject" docType="html-5.0" showHeader="false">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+       <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+       <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+       <script type='text/javascript' src='/canvas/sdk/js/publisher.js'/>
+    
+<style type="text/css">
+    .inp_fd {
+    position:relative;
+    }
+    .fieldSSize {
+         width: 60px;
+    }
+    .fieldMSize {
+         width: 120px;
+    }
+    .mand {
+      font-size: 20px!important;
+    color: red!important;    
+    }
+    .imgClass:hover {
+        cursor:pointer;
+    }
+    .look_pos  input[type="text"] {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+}
+
+
+    .look_pos {
+    position:relative!important;
+    }
+    .look_pos a {
+    position:absolute!important;
+    right:0px;
+    top:3px;
+    }
+   body .bPageBlock .detailList tr th:last {
+        width:50%;
+    }
+     .form_inputs select {
+    width:100%!important;
+    }
+    .look_css {
+    position:relative;
+    }
+    .look_css a {
+    position:absolute;
+    right:5px;
+    top:6px;
+    }
+    .look_css input[type="text"] {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+    }
+     @media only screen and (min-width: 250px) and (max-width: 770px) {
+       .slds-input, .look_css input[type="text"] {
+       width:150px!important;
+       }
+       .look_pos  input[type="text"] {
+       width:200px!important;
+       }
+    
+    }
+    
+     .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                z-index:999999;
+            }
+            
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+            
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            
+</style>
+<script>
+    $j=jQuery.noConflict();
+     var newWin=null;
+     function openLookupPopup(name, id, eId)
+     {
+        //document.getElementById('namefield').value='x';
+
+        var url="/apex/ProductLookupPopUp_v2?namefield=" + name + "&idfield=" + id + "&entryId=" + eId;
+        newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+        if (window.focus) 
+        {
+            newWin.focus();
+        }
+
+         return false;
+    }
+          
+        function closeLookupPopup()
+        {
+            if (null!=newWin)
+            {
+               newWin.close();
+            }  
+        }
+        
+</script>
+
+       <apex:slds />
+    <apex:form id="theform">
+    
+    <!---------------------------------------DISTRIBUTOR Name popup------------------------------------- -->
+                       <div id="myModal" class="modal">    
+                                                               <div class="modal-content" >
+                                                                <span class="close">&times;</span>
+                                                                
+                                                                  <apex:outputpanel id="lookupPanel"  styleclass="outpanel">   
+                                                                 
+                                                                 
+                                                                     <div class="slds-page-header">
+                                                                          <div clss="slds-media">
+                                                                            <div class="slds-media__body">
+                                                                             <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                                                             <p class="slds-text-body_small slds-line-height_reset"></p>
+                                                                            </div>
+                                                                          </div>
+                                                                      </div>
+                                                                    
+                                                                    <div class="slds-p-around_x-small">
+                                                                        <p>Please enter the search term below and click the 'Go' button.  This will
+                                                                           execute a search across all text fields</p>
+                                                                        <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>    
+                                                                     
+                                                                        
+                                                                        
+                                                                        <apex:input value="{!orderQuerydist}" id="query" disabled="false" type="text"/> 
+                                                                        <span><apex:commandButton value="Go" action="{!runOrderQueryfordist}" rerender="lookupPanel,dptable"/></span>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                  <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptable">
+                                                                      <thead>
+                                                                        <tr class="slds-text-title_caps">
+                                                                            <th>Name</th>
+                                                                            <th>Primary Contact Person Name</th>
+                                                                            <th>Party Type</th>
+                                                                            <th>Contact Number (Mobile)</th>
+                                                                            <th>State</th>
+                                                                            <th>District</th>
+                                                                            <th>Location</th>
+                                                                          <!--  <th>Status</th>
+                                                                            <th>Street Address</th>
+                                                                            <th>Ramco ID</th>-->
+                                                                        </tr>   
+                                                                      </thead>
+                                                                      <tbody id="myTable">   
+                                                                          
+                                                                          <apex:repeat value="{!orderAccounts}" var="account">
+                                                                                      <tr class="slds-hint-parent">
+                                                                                          <td data-label="Name" >
+                                                                                              <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                                                                              <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2('{!account.id}')">{!account.Name}</apex:outputLink>  </div>
+                                                                                          </td>
+                                                                                          <td data-label="Primary Contact Person Name ">
+                                                                                              <div class="slds-truncate" title="Primary Contact Person Name"><apex:outputText value="{!account.Primary_Contact_Person_Name__c}" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="Party Type">
+                                                                                              <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="Contact Number (Mobile)">
+                                                                                              <div class="slds-truncate" title="Contact Number (Mobile)"><apex:outputText value="{!account.Contact_Number_Mobile__c}" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="State ">
+                                                                                              <div class="slds-truncate" title="State"><apex:outputText value="{!account.State__c}" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="District ">
+                                                                                              <div class="slds-truncate" title="District"><apex:outputText value="{!account.District__c}" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="Location ">
+                                                                                              <div class="slds-truncate" title="Location"><apex:outputText value="{!account.City__c}" /></div>
+                                                                                          </td>
+                                                                                      <!--    <td data-label="Status ">
+                                                                                              <div class="slds-truncate" title="Status "><apex:outputText value="{!account.Status__c}" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="Street Address">
+                                                                                              <div class="slds-truncate" title="Street Address"><apex:outputText value="{!account.Street_Address__c}" /></div>
+                                                                                          </td>
+                                                                                          <td data-label="Ramco ID">
+                                                                                              <div class="slds-truncate" title="Ramco ID"><apex:outputText value="{!account.Ramco_ID__c}" /></div>
+                                                                                          </td>-->
+                                                                                      </tr>
+                                                                                     <input id="closebtn" type="hidden" />
+                                                                          </apex:repeat>
+                                                                      </tbody>
+                                                                  </table> 
+                                                                  
+                                                                  </apex:outputpanel>
+                                                                  </div></div> 
+                                  
+                  <!--------------------------------------DISTRIBUTOR Name popup end-----------------------------------------  -->
+    
+    <apex:pageMessages id="msg"></apex:pageMessages>
+        <apex:outputpanel >
+            <apex:actionstatus id="WaitingStatus">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                                                                         height: 100%;opacity:0.65;width:100%;"> 
+                        <div class="waitingHolder" style="top: 100px; width: 91px;">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span class="waitingDescription">Loading...</span>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+        </apex:outputpanel>
+        
+        <!-- *********  PROBABILITY  *********** -->
+        
+        <apex:outputpanel rendered="{!applType == 'probType'}" title="PROBABILITY" id="probSection">
+            <div> <!-- title=" PROBABILITY"  -->
+                
+                
+                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th>Product</th>
+                            <th>Product Probability</th>
+                            <th>Product Value</th>
+                        </tr>   
+                    </thead>
+                    <tbody>   
+                        <apex:repeat value="{!probabilityListTemp}" var="addP" rendered="{!renderAddProb}">
+                            
+                            <tr class="slds-hint-parent">
+                                <td data-label="Product" >
+                                    <div class="slds-truncate" title="Product">
+                                        <apex:outputField value="{!addP.PricebookEntry.Product2.Name}"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Product Probability" >
+                                    <div class="slds-truncate" title="Product Probability">
+                                        <apex:inputField value="{!addP.Probability_Validation__c}"/>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Product Value" >
+                                    <div class="slds-truncate" title="Product Value">
+                                        <apex:inputField value="{!addP.Product_Value__c}"/>
+                                    </div>
+                                </td>                               
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </div>          
+            <center> 
+            <div class="slds-p-around_small">
+            <apex:commandButton value="Save" action="{!saveProbability}" status="WaitingStatus" styleClass="slds-button slds-button_brand" />
+            <apex:commandButton value="Cancel" onclick="window.top.location='/{!oppProId}'; return false" status="WaitingStatus" styleClass="slds-button slds-button_neutral" />
+            </div>
+        </center>                
+        </apex:outputpanel>
+        
+        
+        <!-- *********APPL Offer Section*********** -->
+        
+            <apex:outputpanel title="OFFER" rendered="{!applType == 'offerType'}" id="offerSection">
+            <div> 
+            <div class="slds-p-around_small">
+            <apex:commandButton value="Generate Offer" action="{!generateOffer}" reRender="offerSection" status="WaitingStatus" rendered="{!offerList == null}" styleClass="slds-button slds-button_brand" />
+              </div>  
+            
+                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th>Offer Check</th>
+                            <th>Product</th>
+                            <th>Offer MRP</th>
+                            <th>Tentative Order Date</th>
+                            <th>Discount Offered</th>
+                            <th>Price List Date</th>
+                             <th>Price Valid Date</th>
+                            <th>Competitor Name</th>
+                            <th>Offer Probability</th>
+                            <th>Reason</th>
+                        </tr>   
+                    </thead>
+                    <tbody>   
+                        <apex:repeat value="{!offerList}" var="oppOffer" id="offerTable" rendered="{!offerList != null && !offerList.empty}">
+                            
+                            <tr class="slds-hint-parent">
+                                <td data-label="Offer Check" >
+                                    <div class="slds-truncate" title="Offer Check">
+                                       <apex:inputCheckbox value="{!oppOffer.Offer_Check__c}"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Product" >
+                                    <div class="slds-truncate" title="Product">
+                                        <apex:outputField value="{!oppOffer.product2.name}"/>
+                                    </div>
+                                </td>                         
+                               
+                                <td data-label="Offer MRP" >
+                                    <div class="slds-truncate" title="Offer MRP">
+                                        <apex:inputField value="{!oppOffer.Offer_MRP__c}" styleClass="fieldMSize slds-input"/>
+                                    </div>
+                                </td>               
+                                <td data-label="Tentative Order Date" >
+                                    <div class="slds-truncate" title="Tentative Order Date">
+                                       <apex:inputField value="{!oppOffer.Tentative_Date__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Discount Offered" >
+                                    <div class="slds-truncate" title="Discount Offered">
+                                        <apex:inputField value="{!oppOffer.Discount_Offered__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Price List Date" >
+                                    <div class="slds-truncate" title="Price List Date">
+                                        <apex:inputField value="{!oppOffer.Price_List_Date__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>       
+                                <td data-label="Price Valid Date" >
+                                    <div class="slds-truncate" title="Price Valid Date">
+                                       <apex:inputField value="{!oppOffer.Price_Valid_Date__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Competitor Name" >
+                                    <div class="slds-truncate" title="Competitor Name">
+                                        <apex:inputField value="{!oppOffer.Competitor_name_Offer__c}" styleClass="fieldMSize slds-input"/>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Offer Probability" >
+                                    <div class="slds-truncate" title="Offer Probability">
+                                        <apex:inputField value="{!oppOffer.Offer_Probability__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>       
+                                <td data-label="Reason" >
+                                    <div class="slds-truncate" title="Reason">
+                                        <apex:inputField value="{!oppOffer.Reason__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>    
+                                
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                                  
+                <apex:outputpanel title="Terms and Conditions" rendered="{!offerList != null && !offerList.empty}">
+
+                 <div class="slds-p-around_small form_inputs">
+                <div class="slds-grid slds-wrap">
+                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                    <label><b>Freight</b></label><sub class="mand">*</sub>
+                    <apex:inputField value="{!oppTC.Freight__c}" required="true" styleClass="slds-input"/>
+                </div>
+                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Delivery</b></label> <sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Delivery__c}" required="true" styleClass="slds-input"/>
+                </div>
+                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Price Basis</b></label><sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Price_Basis__c}" required="true" styleClass="slds-input"/>
+                </div>
+                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Delivery Lots</b></label><sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Delivery_Lots__c}" required="true" styleClass="slds-input"/>
+                </div>
+                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Taxes</b></label><sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Taxes__c}" required="true" styleClass="slds-input"/>
+                </div>
+                <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Offer Valid Till</b></label><sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Offer_Valid_Till__c}" required="true" styleClass="slds-input"/>
+                 </div>
+                 <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Payment Term</b></label><sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Payment_Term__c}" required="true" styleClass="slds-input"/>
+                 </div>
+                 <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Delivery Conditions &amp; Gurantee</b></label><sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Delivery_Conditions_Gurantee__c}" required="true" styleClass="slds-input"/>
+                 </div>
+                 <div class="slds-size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small">
+                        <label><b>Order Placement</b></label><sub class="mand">*</sub>
+                        <apex:inputField value="{!oppTC.Order_Placement__c}" required="true" styleClass="slds-input"/>
+                        </div>
+                        </div>
+                        </div>
+                </apex:outputpanel>
+</div>                  
+<center>    
+            <div class="slds-p-around_small">
+                    <apex:commandButton value="Save" action="{!saveOffer}"  rendered="{!offerList != null && !offerList.empty}" status="WaitingStatus" styleClass="slds-button slds-button_brand" />
+                   <apex:commandButton value="Cancel" onclick="window.top.location='/{!oppProId}'; return false" status="WaitingStatus" styleClass="slds-button slds-button_neutral" />
+            </div>
+            </center> 
+            </apex:outputpanel> 
+            
+            
+            <!-- *********APPL Order Section*********** -->
+            
+            <apex:outputpanel title="ORDER" rendered="{!applType == 'orderType'}" id="orderSection">
+            <div>
+            <div class="slds-p-around_small">
+            <apex:commandButton value="Generate Order" action="{!generateOrder}" reRender="orderSection" status="WaitingStatus" styleClass="slds-button slds-button_brand"/>
+            </div>   
+                <apex:variable var="j" value="{!1}" />
+                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th>Order Check</th>
+                            <th>Product</th>
+                            <th>Order Value</th>
+                            <th>Supply Start Date</th>
+                            <th>Supply End Date</th>
+                            <th>Validity for Price</th>
+                             <th>Payment Terms</th>
+                            <th>Competitor Name</th>
+                            <th>Distributor Name</th>
+                            <th>ORC/Markup</th>
+                            <th>ORC Status</th>
+                            <th>Order Status</th>
+                        </tr>   
+                    </thead>
+                    <tbody>   
+                    
+                        <apex:repeat value="{!OrderItemList}" var="oppOrder"  rendered="{!OrderItemList != null && !OrderItemList.empty}">
+                            
+                            <tr class="slds-hint-parent">
+                                <td data-label="Order Check" >
+                                    <div class="slds-truncate" title="Order Check">
+                                       <apex:inputCheckbox value="{!oppOrder.createOrder}"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Product" >
+                                    <div class="slds-truncate" title="Product">
+                                        <apex:outputText value="{!oppOrder.productName}"/>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Order Value" >
+                                    <div class="slds-truncate" title="Order Value">
+                                        <apex:inputField value="{!oppOrder.orderItemInstance.Order_Value__c}" styleClass="fieldSSize slds-input"/>
+                                    </div>
+                                </td>               
+                                <td data-label="Supply Start Date" >
+                                    <div class="slds-truncate" title="Supply Start Date">
+                                      <apex:inputField value="{!oppOrder.orderItemInstance.ServiceDate}" styleClass="slds-input" />
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Supply End Date" >
+                                    <div class="slds-truncate" title="Supply End Date">
+                                        <apex:inputField value="{!oppOrder.orderItemInstance.EndDate}" styleClass="slds-input" />
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Validity for Price" >
+                                    <div class="slds-truncate" title="Validity for Price">
+                                        <apex:inputField value="{!oppOrder.orderItemInstance.Validity_for_Price__c}" styleClass="slds-input" />
+                                    </div>
+                                </td>       
+                                <td data-label="Payment Terms" >
+                                    <div class="slds-truncate" title="Payment Terms">
+                                       <apex:inputField value="{!oppOrder.orderItemInstance.Payment_Terms__c}" styleClass="slds-input" />
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Competitor Name" >
+                                    <div class="slds-truncate" title="Competitor Name">
+                                       <apex:inputField value="{!oppOrder.orderItemInstance.Competitor_Name__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Distributor Name" >
+                                    <div class="slds-truncate look_css" title="Name">
+                                            <div class="{!j}I">
+                                                <div class="{!j}B"></div>
+                                                
+                                                <div class="slds-grid slds-wrap ">
+                                                     <span style="color:red"></span>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k relative_pos">
+                                                     
+                                                       <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account">
+                                                           <apex:inputText value="{!oppOrder.orderItemInstance.Distributor_Name__c}" id="targetId" styleClass="targetfield{!j}" style="display:none"/>
+                                                              <input type="text" size="20" id="targetName{!j}" styleClass="slds-input"  value="{!oppOrder.orderItemInstance.Distributor_Name__r.name}"/>
+                                                                 <a href="#" id="myBtn" class="lk"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="Myfunction(targetName{!j},{!j})"/> </a>
+                                                        </apex:outputPanel>
+                                                     </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                </td>     
+                                  
+                                <td data-label="ORC/Markup" >
+                                    <div class="slds-truncate" title="ORC/Markup">
+                                       <apex:inputField value="{!oppOrder.orderItemInstance.ORC_Markup__c}" styleClass="fieldMSize slds-input"/>
+                                    </div>
+                                </td>    
+                                <td data-label="ORC Status" >
+                                    <div class="slds-truncate" title="ORC Status">
+                                       <apex:inputField value="{!oppOrder.orderItemInstance.ORC_Status__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td> 
+                                <td data-label="Order Status" >
+                                    <div class="slds-truncate" title="Order Status">
+                                        <apex:inputField value="{!oppOrder.orderItemInstance.Order_Status__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td> 
+                            </tr>
+                           <apex:variable var="j" value="{!j+1}" />
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                                  
+            
+                </div>    
+                 <center>
+                 <div class="slds-p-around_small">
+                    <apex:commandButton value="Save" action="{!saveOrder}" rendered="{!OrderItemList != null && !OrderItemList.empty}" status="WaitingStatus" styleClass="slds-button slds-button_brand"/>
+                    <apex:commandButton value="Cancel" onclick="window.top.location='/{!oppProId}'; return false" status="WaitingStatus" styleClass="slds-button slds-button_neutral"/>
+                 </div>
+            </center> 
+                 <script>
+                    // Get the modal for project by field which fetches account
+                    var modal = document.getElementById('myModal');
+                    var elm;
+                    var fld;
+                    
+                    
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+                    
+                    // When the user clicks the button, open the modal 
+                    function Myfunction(elid, fldid) {                    
+                       // alert('--elid--'+elid.id + '--'+fldid);
+                        var modal2 = document.getElementById('myModal');
+                        elm = elid.id;  
+                        fld = 'targetfield' + fldid; 
+                        console.log('fld='+fld);                    
+                        modal2.style.display = "block";
+                    }
+                    
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
+                    
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+             
+               
+                    function myFunction2(acctId) { 
+                        var nameElementId = 'acctName'+acctId;
+                        console.log(acctId);
+                        var val = document.getElementById(nameElementId).value;
+                        var aid = acctId;
+                        //var x = event.target;
+                        document.getElementById("j_id0:theform:query").value =  val; //fetch searched string
+                        document.getElementById(elm).value =  val;    //assign to Project by input field
+                        document.getElementsByClassName(fld)[0].value = aid;
+                        modal.style.display = "none";
+                    }  
+                
+                
+                    var j$ = jQuery.noConflict();
+                    j$(document).ready(function(){
+                      j$("#myInput").on("keyup", function() {
+                        var value = j$(this).val().toLowerCase();
+                        j$("#myTable tr").filter(function() {
+                          j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                      });
+                    });
+                    
+                    j$('#myModal').find('#myInput').focus();
+                </script>
+            </apex:outputpanel> 
+           
+            
+             <!-- *********APPL Supply Section*********** -->
+             <apex:outputpanel title="SUPPLY" rendered="{!applType == 'supplyType'}" id="supplySection">
+                 
+            <div>
+            <apex:commandButton value="Generate Supply" action="{!generateSupply}" reRender="supplySection" status="WaitingStatus" styleClass="slds-button slds-button_brand slds-m-around_small"/>
+                   <apex:variable var="i" value="{!1}" />
+                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th>Supply Check</th>
+                            <th>Product</th>
+                             <th>Supply Value</th>
+                              <th>Invoice Date</th>
+                               <th>Distributor Name</th> 
+                               <th>ORC/Markup</th>
+                                <th>ORC Status</th>
+                                 <th>Payment Terms</th>
+                                  <th>Order Status</th>
+                        </tr>   
+                    </thead>
+                    <tbody>   
+                       
+                        <apex:repeat value="{!SupplyItemList}" var="supply"  rendered="{!SupplyItemList != null && !SupplyItemList.empty}">
+                            
+                            <tr class="slds-hint-parent">
+                                <td data-label="Supply Check" >
+                                    <div class="slds-truncate" title="Supply Check">
+                                       <apex:inputCheckbox value="{!supply.createSupply}"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Product" >
+                                    <div class="slds-truncate" title="Product">
+                                         <apex:outputText value="{!supply.productName}"/>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Supply Value" >
+                                    <div class="slds-truncate" title="Supply Value">
+                                        <apex:inputField value="{!supply.SupplyLineItemInstance.Order_Value__c}" styleClass="fieldMSize slds-input"/>
+                                    </div>
+                                </td>               
+                                <td data-label="Invoice Date" >
+                                    <div class="slds-truncate" title="Invoice Date">
+                                      <apex:inputField value="{!supply.SupplyLineItemInstance.Invoice_Date__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Distributor Name" >
+                                    <div class="slds-truncate" title="Name">
+                                        <div class="{!i}I">
+                                            <div class="{!i}B"></div>
+                                                
+                                                <div class="slds-grid slds-wrap ">
+                                                     <span style="color:red"></span>
+                                                         <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-p-bottom_small tg-733k relative_pos">
+                                                     
+                                                       <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account" >
+                                                           <apex:inputText value="{!supply.SupplyLineItemInstance.Distributor_Name__r.name}" id="targetId" styleClass="targetfield{!i}" style="display:none"/>
+                                                              <input type="text" size="20" id="targetName{!i}" value="{!supply.SupplyLineItemInstance.Distributor_Name__r.name}" styleClass="slds-input" />
+                                                                 <a href="#" id="myBtn" class="lk"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="Myfunction(targetName{!i},{!i})"/></a>
+                                                        </apex:outputPanel>
+                                                     
+                                                     </div>
+                                                 </div>
+                                        </div>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="ORC/Markup" >
+                                    <div class="slds-truncate" title="ORC/Markup">
+                                       <apex:inputField value="{!supply.SupplyLineItemInstance.ORC_Markup__c}" styleClass="fieldMSize slds-input"/>
+                                    </div>
+                                </td>       
+                                <td data-label="ORC Status" >
+                                    <div class="slds-truncate" title="ORC Status">
+                                       <apex:inputField value="{!supply.SupplyLineItemInstance.ORC_Status__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Payment Terms" >
+                                    <div class="slds-truncate" title="Payment Terms">
+                                     <apex:inputField value="{!supply.SupplyLineItemInstance.Payment_Terms__c}" styleClass="slds-input"/> 
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Order Status" >
+                                    <div class="slds-truncate" title="Order Status">
+                                       <apex:inputField value="{!supply.SupplyLineItemInstance.Supply_Status__c}" styleClass="slds-input"/>
+                                    </div>
+                                </td>       
+                                
+                            </tr>
+                                <apex:variable var="i" value="{!i+1}" />
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                </div>    
+                <center>
+                <div class="slds-p-around_small">
+                    <apex:commandButton value="Save" action="{!saveSupply}" rendered="{!SupplyItemList != null && !SupplyItemList.empty}" status="WaitingStatus" styleClass="slds-button slds-button_brand"/><!-- {!SupplyItemList != null && !SupplyItemList.empty}-->
+                    <apex:commandButton value="Cancel" onclick="window.top.location='/{!oppProId}'; return false" status="WaitingStatus" styleClass="slds-button slds-button_neutral"/>
+               </div>
+            </center> 
+                <script>
+                    // Get the modal for project by field which fetches account
+                    var modal = document.getElementById('myModal');
+                    var elm;
+                    var fld;
+                    
+                    
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+                    
+                    // When the user clicks the button, open the modal 
+                    function Myfunction(elid, fldid) {                    
+                       //alert('--elid--'+elid.id + '--'+fldid);
+                        var modal2 = document.getElementById('myModal');
+                        elm = elid.id;  
+                        fld = 'targetfield' + fldid; 
+                        console.log('fld='+fld);                    
+                        modal2.style.display = "block";
+                    }
+                    
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
+                    
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function(event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+             
+               
+                    function myFunction2(acctId) { 
+                         var nameElementId = 'acctName'+acctId;
+                        console.log(acctId);
+                        var val = document.getElementById(nameElementId).value;
+                        var aid = acctId; 
+                        console.log(elm);
+                        console.log(val);
+                        console.log(aid);
+                        //var x = event.target;
+                        document.getElementById("j_id0:theform:query").value =  val; //fetch searched string
+                        document.getElementById(elm).value =  val;    //assign to Project by input field
+                        document.getElementsByClassName(fld)[0].value = aid;
+                        modal.style.display = "none";
+                    }  
+                
+                
+                    var j$ = jQuery.noConflict();
+                    j$(document).ready(function(){
+                      j$("#myInput").on("keyup", function() {
+                        var value = j$(this).val().toLowerCase();
+                        j$("#myTable tr").filter(function() {
+                          j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                      });
+                    });
+                    
+                    j$('#myModal').find('#myInput').focus();
+                </script>
+            </apex:outputpanel> 
+            
+            
+             <!--     *********APPL Order Loss Section*********** -->
+             
+              <apex:outputpanel title="ORDER LOSS" rendered="{!applType == 'orderLost'}" id="orderLossSection">
+            <div>
+            <apex:commandButton value="Generate Order Loss" action="{!generateOrderLoss}"  status="WaitingStatus" styleClass="slds-button slds-button_brand slds-m-around_small"/>
+               
+                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th>Order Loss</th>
+                            <th>Product</th>
+                             <th>Order Loss by % Disc</th>
+                              <th>Competitor</th>
+                               <th>Reason</th> 
+                               <th>Order Loss</th>
+                                <th>Decription</th>
+                        </tr>   
+                    </thead>
+                    <tbody>   
+                        <apex:repeat value="{!orderLossList}" var="ordLoss"  rendered="{!orderLossList != null && !orderLossList.empty}">
+                            
+                            <tr class="slds-hint-parent">
+                                <td data-label="Order Loss" >
+                                    <div class="slds-truncate" title="Order Loss">
+                                        <apex:inputCheckbox value="{!ordLoss.createOrderLoss}"   />
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Product" >
+                                    <div class="slds-truncate" title="Product">
+                                        <apex:outputText value="{!ordLoss.oLIinstanace.product2.name}"/>
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Order Loss by % Disc" >
+                                    <div class="slds-truncate" title="Order Loss by % Disc">
+                                        <apex:inputField value="{!ordLoss.oLIinstanace.Order_Loss_by_Disc__c}" styleClass="fieldSSize slds-input"   />
+                                    </div>
+                                </td>               
+                                <td data-label="Competitor" >
+                                    <div class="slds-truncate" title="Competitor">
+                                      <apex:inputField value="{!ordLoss.oLIinstanace.Order_Lost_to_Competitor__c}" styleClass="slds-input" />
+                                    </div>
+                                </td>
+                                
+                                <td data-label="Reason" >
+                                    <div class="slds-truncate" title="Reason">
+                                        <apex:inputField value="{!ordLoss.oLIinstanace.Reason_for_Order_Loss__c}" styleClass="fieldSSize slds-input" />
+                                    </div>
+                                </td>                         
+                                
+                                <td data-label="Order Loss" >
+                                    <div class="slds-truncate" title="Order Loss">
+                                      <apex:inputField value="{!ordLoss.oLIinstanace.Order_Loss__c}"  />
+                                    </div>
+                                </td>       
+                                <td data-label="Decription" >
+                                    <div class="slds-truncate" title="Decription">
+                                       <apex:inputField value="{!ordLoss.oLIinstanace.Description}" styleClass="fieldSSize slds-input"  />
+                                    </div>
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                </div>    
+                <center>
+                <div class="slds-p-around_small">
+                    <apex:commandButton value="Save" action="{!saveOrderLoss}"   rendered="{!orderLossList != null && !orderLossList.empty}" status="WaitingStatus" styleClass="slds-button slds-button_brand"/>
+                    <apex:commandButton value="Cancel" onclick="window.top.location='/{!oppProId}'; return false" status="WaitingStatus" styleClass="slds-button slds-button_neutral"/>
+               </div>
+            </center> 
+            
+            </apex:outputpanel> 
+            
+            
+    </apex:form>
+    
+    
+</apex:page>

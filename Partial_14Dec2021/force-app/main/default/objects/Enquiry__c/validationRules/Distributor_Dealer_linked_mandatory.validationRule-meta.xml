@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distributor_Dealer_linked_mandatory</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(ISPICKVAL(Conversion__c ,&apos;Converted to Ashirwad&apos;), ISBLANK(Distributor_DealerLinked__c))</errorConditionFormula>
+    <errorDisplayField>Distributor_DealerLinked__c</errorDisplayField>
+    <errorMessage>please fill DISTRIBUTOR/DEALER LINKED</errorMessage>
+</ValidationRule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expenses_shd_nt_b_there_whn_no_site_vist</fullName>
+    <active>true</active>
+    <description>You can&apos;t enter expenses when there are no sitevisits</description>
+    <errorConditionFormula>AND( Total_Expenses__c &gt;0, No_of_Site_Visits__c =0)</errorConditionFormula>
+    <errorMessage>You Can not enter Expenses when there are no site visits</errorMessage>
+</ValidationRule>

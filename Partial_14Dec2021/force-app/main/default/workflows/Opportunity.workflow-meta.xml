@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Approval_Mail_Depot</fullName>
+        <description>Send Approval Mail to Depots</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depot_eMail_Id_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Depot_eMail_Id_2__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Approval_Mail_to_Depots</fullName>
+        <description>Approval Mail to Depots</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Depot_eMail_Id_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Depot_eMail_Id_2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Initial_Approver_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Copy_of_email_alert_on_approval_of_a_project</fullName>
+        <ccEmails>retail.projects@ashirvad.com</ccEmails>
+        <description>Copy of email alert on approval of a project</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Notification_for_Creating_New_Projects_By_projects_team_Tarun_Sisodiya_Jal</fullName>
+        <description>Email Notification for Creating New Projects By projects team (Tarun, Sisodiya, Jalpesh) of Gujarat</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Regional_Head_Plumbing_Gujarat</recipient>
+            <type>role</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Approval_for_new_Projects_created_by_Gujarat_team_Tarun_Sisodiya_Jalpesh</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Notification_to_Owner_who_is_requested</fullName>
+        <description>Email Notification to Owner who is requested after Approval</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Notification_to_Owner_who_is_requested_after_Rejection</fullName>
+        <description>Email Notification to Owner who is requested after Rejection</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Email_template_for_Discount_Rejection_on_Project</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_cc</fullName>
+        <ccEmails>deviprasad.kotary@ashirvad.com</ccEmails>
+        <description>Email cc</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Spl_Pricing_Req_cc_alert</fullName>
+        <ccEmails>abc@email.com</ccEmails>
+        <description>Spl Pricing Req cc alert</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>cc_Mail_to_Accounts</fullName>
+        <ccEmails>sadashiva.pp@ashirvad.com</ccEmails>
+        <ccEmails>shashidhar.shetty@ashirvad.com</ccEmails>
+        <ccEmails>pradeep.kumar@ashirvad.com</ccEmails>
+        <ccEmails>rajeshwari.m@ashirvad.com</ccEmails>
+        <ccEmails>dhananjaya.ramanna@ashirvad.com</ccEmails>
+        <description>cc_Mail to Accounts</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Ashirvad_Email_Template/Special_Pricing_Req_cc_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>send_notification</fullName>
+        <ccEmails>balagopal.g@etmarlabs.com</ccEmails>
+        <ccEmails>gladiator14307@gmail.com</ccEmails>
+        <description>send notification</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Branding_Email_templates/send_notification_if_opportunity_stage_not_changed</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approval_Date</fullName>
+        <field>Approval_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Approval Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Submission_Date</fullName>
+        <field>Approval_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Approval Submission Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approve_It</fullName>
+        <field>isApproved__c</field>
+        <literalValue>1</literalValue>
+        <name>Approve It</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approved</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Depot_eMail_Id_Update_1</fullName>
+        <description>This field update copies depot email Id from Opportunity owner.</description>
+        <field>Depot_eMail_Id_1__c</field>
+        <formula>Owner.Depot_eMail_Id_1__c</formula>
+        <name>Depot eMail Id Update 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Depot_eMail_Id_Update_2</fullName>
+        <description>This field update copies depot email Id from Opportunity owner.</description>
+        <field>Depot_eMail_Id_2__c</field>
+        <formula>Owner.Depot_eMail_Id_2__c</formula>
+        <name>Depot eMail Id Update 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Initial_Approver_Email_id</fullName>
+        <description>To capture first approver mail id</description>
+        <field>Initial_Approver_Email__c</field>
+        <formula>If(Owner.Manager_Email__c=&apos;jayant.kumar@ashirvad.com&apos;,Owner.Email,Owner.Manager_Email__c)</formula>
+        <name>Initial Approver Email id</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Pending</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Project_Number_Update</fullName>
+        <description>This action will update field Project Number.</description>
+        <field>Project_Number__c</field>
+        <formula>Project_Number_Update__c</formula>
+        <name>Project Number Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Project_Stage_Last_Modified_Date_Update</fullName>
+        <description>Updates Project_Stage_Last_Modified_Date__c in Project with the current date if formula evalutes to be true.
+Updating flaf color to red or green in ashirwad revamp</description>
+        <field>Project_Stage_Last_Modified_Date__c</field>
+        <formula>Today()</formula>
+        <name>Project Stage Last Modified Date Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rejected_Date</fullName>
+        <field>Approval_Rejection_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Rejected Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SPR_Approved_by_Init</fullName>
+        <description>Used in SPR Approved Component.</description>
+        <field>SPR_Approved_By__c</field>
+        <formula>Owner.Manager.FirstName+&quot; &quot;+ Owner.Manager.LastName</formula>
+        <name>SPR Approved by(Init)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Special_Pricing_Req_Field</fullName>
+        <field>Special_Pricing_Request_Approval__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Special Pricing Req Field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Spl_Pricing_Req_Reject</fullName>
+        <field>Special_Pricing_Request_Approval__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Spl Pricing Req Reject</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Spl_Pricing_Req_Update</fullName>
+        <field>Special_Pricing_Request_Approval__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Spl Pricing Req Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_field_update_High_End</fullName>
+        <field>StageName</field>
+        <literalValue>Closed</literalValue>
+        <name>Status field update High End</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_field_update_Mid_end</fullName>
+        <field>StageName</field>
+        <literalValue>Closed</literalValue>
+        <name>Status field update Mid end</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_field_in_project</fullName>
+        <description>Update Project Owner Manager Email field in project</description>
+        <field>Project_Owner_Manager_Email__c</field>
+        <formula>Manager_Email__c</formula>
+        <name>Update field in project</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_update</fullName>
+        <description>Auto status update</description>
+        <field>StageName</field>
+        <literalValue>Closed</literalValue>
+        <name>status update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>update_date_field</fullName>
+        <field>Date_when_stage_is_updated__c</field>
+        <formula>NOW()</formula>
+        <name>update date field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Auto updation of Status field HIghEnd</fullName>
+        <active>true</active>
+        <description>Auto updation of Status field HIghEnd</description>
+        <formula>ISPICKVAL(Category__c,&quot;High End&quot;) &amp;&amp; ISPICKVAL(StageName,&quot;Order Receipt&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Status_field_update_High_End</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Opportunity.LastModifiedDate</offsetFromField>
+            <timeLength>365</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Auto updation of Status field Low End</fullName>
+        <active>true</active>
+        <description>Auto updation of Status field based on the last modified field (low End)</description>
+        <formula>ISPICKVAL(Category__c,&quot;Low End&quot;)  &amp;&amp; ISPICKVAL(StageName,&quot;Order Receipt&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>status_update</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Opportunity.LastModifiedDate</offsetFromField>
+            <timeLength>60</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Auto updation of Status field medium End</fullName>
+        <active>true</active>
+        <description>Auto updation of Status field medium end</description>
+        <formula>ISPICKVAL(Category__c,&quot;Mid End&quot;) &amp;&amp; ISPICKVAL(StageName,&quot;Order Receipt&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Status_field_update_Mid_end</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Opportunity.LastModifiedDate</offsetFromField>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Project Number Update</fullName>
+        <actions>
+            <name>Project_Number_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.CreatedDate</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow will work in conjunction with field Project Number Update to update the field Project Number.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Project Stage Last Modified Date</fullName>
+        <actions>
+            <name>Project_Stage_Last_Modified_Date_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>captures the date every time when the project stage values are changed. It populates Project_Stage_Last_Modified_Date__c field with the date.</description>
+        <formula>ISCHANGED( StageName )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Email Notification when New Project created by Gujarat team</fullName>
+        <actions>
+            <name>Email_Notification_for_Creating_New_Projects_By_projects_team_Tarun_Sisodiya_Jal</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.OwnerId</field>
+            <operation>equals</operation>
+            <value>Tarun Ramachandra Rathod,Sandeep Sisodiya,Jalpesh Thakkar</value>
+        </criteriaItems>
+        <description>In case create any new project by projects team (Tarun, Sisodiya, Jalpesh) of Gujarat, a notification mail should go to the retail team head (Jwalant Jhala).</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Project Owner Manager Email</fullName>
+        <actions>
+            <name>Update_field_in_project</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Update Project Owner Manager Email field with the manager field value in project</description>
+        <formula>OwnerId != NULL</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>send notification if opportunity stage not changed</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.Date_when_stage_is_updated__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>send_notification</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Opportunity.Date_when_stage_is_updated__c</offsetFromField>
+            <timeLength>179</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>update stage update time date</fullName>
+        <actions>
+            <name>update_date_field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( StageName )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

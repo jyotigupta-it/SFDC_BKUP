@@ -1,0 +1,11 @@
+<aura:component controller = "NewPromotionApex" implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" access="global"/>
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="msgcolor" type="String"/> 
+    
+    <br/>
+    <center><span class="slds-icon_container slds-icon-utility-announcement" title="Error Message">
+    <lightning:icon iconName="utility:announcement" variant="warning" size="small"/>        
+    	<span class="slds-text-heading_small" style="{!'padding-left:15px!important;color:'+v.msgcolor+'!important'}">{!v.message}</span>
+    </span></center>
+</aura:component>

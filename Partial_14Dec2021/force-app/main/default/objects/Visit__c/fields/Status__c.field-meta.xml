@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Call Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Others</fullName>
+                <color>#FF6600</color>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Call Completed</fullName>
+                <color>#78C953</color>
+                <default>false</default>
+                <label>Call Completed</label>
+            </value>
+            <value>
+                <fullName>Not Reachable</fullName>
+                <color>#FFCC33</color>
+                <default>false</default>
+                <label>Not Reachable</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

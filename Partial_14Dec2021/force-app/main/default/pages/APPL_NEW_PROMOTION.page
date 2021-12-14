@@ -1,0 +1,907 @@
+<!--+----------------------------------------------------------------------
+||        Author      : BABA
+||
+||        Purpose     : Adding Promotion members to Promotion.If member is not there, then Create Account.
+||                  
+||        Modified By : 02/07/2015 / Baba
+|| 
+||        Reason      : Code beautification/Review and made code to follow the best practices. 
+++----------------------------------------------------------------------+-->
+
+<apex:page sidebar="false" showHeader="false" applyBodyTag="false" controller="APPL_NEW_PROMOTION_CTRL" standardStylesheets="true" docType="html-5.0">
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+        <link rel='stylesheet' href="{!URLFOR($Resource.PromotionResource, '/jquery-ui.css')}" />
+        <link rel='stylesheet' href="{!URLFOR($Resource.PromotionResource, '/bootstrap.min.css')}" />
+        <script src="{!URLFOR($Resource.PromotionResource, '/jquery-1.10.2.js')}"></script>
+        <script src="{!URLFOR($Resource.PromotionResource, '/jquery-ui.js')}"></script>
+        <script src="{!URLFOR($Resource.PromotionResource, '/bootstrap.js')}"></script>
+        
+        <title>New Promotion and Add Members</title>
+        <style type="text/css">
+            .ui-autocomplete {
+                max-height: 100px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+                /* add padding to account for vertical scrollbar */
+                padding-right: 20px;
+            }
+        /* IE 6 doesn't support max-height
+         * we use height instead, but this forces the menu to always be this tall
+         */
+    * html .ui-autocomplete {
+        height: 100px;
+    }
+    .lookupInput a {
+        display:block;
+        position:absolute;
+        top:0px;
+    }
+    
+    .lookupInput img{
+        float:right;
+    }
+    span.lookupInput {
+        position:relative;
+        display : inherit;
+    }
+    .lookupInput a, .lookupInput a{
+        border:none !important;
+        background: none !important;
+    }
+    .astriskStyle{
+        color:#FF0000;
+        font-size: 20px;
+        line-height: 8px;
+        margin-left: -7px;
+    }
+    .dateOnlyInput input {
+        width: 100% !important;
+    }
+    .lookupIcon{
+        margin-left: 125px !important;     
+    }
+    
+    .row {
+        margin-right: 0px !important; 
+        margin-left: 0px !important; 
+    }
+    
+    .Error{
+        color: #FF0000;
+        font-size: small;
+        font-family: sans-serif;
+        margin: 0px;
+    }
+    
+    .borderClass{
+        border-color: #FF1700;
+        border-width:1px;
+        border-style: solid;
+    }
+    
+    </style>
+    
+    </head>
+    <apex:actionstatus id="as1">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;z-index: 115;overflow:hidden;position:fixed;"> 
+                <div class="waitingHolder" >
+                    <img class="waitingImage" src= "{!$Resource.Redcircle}" style="width: 90%;height: 40%;" title="Please Wait..." />
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+    
+    <div class="panel panel-info" style="margin-bottom: 20px;background-color: #ffffff; border: 2px solid rgba(80, 135, 173, 0.06); border-radius: 4px;-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);">
+        
+        <div class="alert alert-info">
+            <h3>Create New Promotion &amp; Add Memebers</h3>
+        </div>
+        
+        <div class="panel-body">
+            
+            <apex:form styleClass="form-horizontal" id="proForm">
+                <apex:pageMessages id="errMsg"/>
+                <apex:actionFunction name="copyAccountRow" action="{!getAccoutRow}" immediate="true"  reRender="proForm,architectsBuilderEngineers,boarersMeet,dealersMeet,farmersMeet,salesmanMeetFactoryVisit,TractorShow,plumberMechanic,Shandy" status="as1">
+                    <apex:param id="cusMobileId" name="cusMobile" value="" />
+                    <apex:param id="rowIndexId" name="rowIndex" value="" />
+                </apex:actionFunction>
+                
+                <apex:outputPanel id="newPromation" rendered="{!showPromotion}">
+                    <legend>Promotion Creation</legend>
+                    <apex:inputHidden value="{!newpromotion.Date__c}" id="promoDateId"/>
+                    
+                    <div class="row">
+                        <div class="form-group col-xs-5">
+                            <label class="control-label" for="Name">Vertical Type<sub class="astriskStyle"> * </sub></label>
+                            <apex:inputField value="{!newpromotion.Vertical__c}" id="vertiId" styleClass="form-control"/>
+                        </div>
+                        <div class="form-group col-xs-2">
+                        </div>
+                        <div class="form-group col-xs-5 pull-right">
+                            <label class="control-label" for="TotalExpenses">Promotion Type<sub class="astriskStyle"> * </sub></label>
+                            <!--     <input type="number" Class="form-control" id="totalExp" onblur="coypToApex(this.id,'{!$Component.totalExpApex}');" />
+                                     <apex:inputHidden value="{!newpromotion.Total_Expenses__c}" id="totalExpApex"/> -->
+                            <div class="form-control">
+                                <apex:inputField value="{!newpromotion.Type__c}" styleClass="form-control reqField" id="typeId"  style="width: 300px;" onchange="onChangeType();"/><p class="Error"></p>
+                            </div>
+                            <!-- <apex:inputField value="{!newpromotion.Total_Expenses__c}" styleClass="form-control" required="true" /> -->
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-xs-5">
+                            <label class="control-label" for="Name">Total Expenses<sub class="astriskStyle"> * </sub></label>
+                            <!-- <input type="number" Class="form-control" id="totalAtt" onblur="coypToApex(this.id,'{!$Component.totalAttApex}');" /> -->
+                            <!-- <apex:inputHidden value="{!newpromotion.Total_no_of_attendees__c}" id="totalAttApex"/> -->
+                            
+                            <apex:inputField value="{!newpromotion.Total_Expenses__c}" styleClass="form-control reqField" id="totalExpense" /><p class="Error"></p>
+                        </div>
+                        <div class="form-group col-xs-2">
+                        </div>
+                        <div class="form-group col-xs-5 pull-right">
+                            <label class="control-label" for="Distributor">Total No. Of Attendees<sub class="astriskStyle"> * </sub></label>
+                            <apex:inputField value="{!newpromotion.Total_no_of_attendees__c}" styleClass="form-control reqField" /><p class="Error"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-xs-5">
+                            <label class="control-label" for="Projects">Distributor</label>
+                            <apex:inputField value="{!newpromotion.Distributor__c}" styleClass="form-control" id="disId"/>
+                        </div>
+                        <div class="form-group col-xs-2">
+                        </div>
+                        <div class="form-group col-xs-5 pull-right">
+                            <label class="control-label" for="Dealer">Projects</label>
+                            <apex:inputField value="{!newpromotion.Project__c}" styleClass="form-control" id="proId"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-xs-5">
+                            <label class="control-label" for="State">Dealer</label>
+                            <apex:inputField value="{!newpromotion.Dealer1__c}" styleClass="form-control" id="dealerId"/>
+                        </div>
+                        <div class="form-group col-xs-2">
+                        </div>
+                        <div class="form-group col-xs-5 pull-right">
+                            <label class="control-label" for="District">State<sub class="astriskStyle"> * </sub></label>
+                            
+                            <apex:inputField value="{!newpromotion.State__c}" styleClass="form-control reqField"/><p class="Error"></p>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-xs-5">
+                            <label class="control-label" for="Location">District<sub class="astriskStyle"> * </sub></label>
+                            <div class="form-control">
+                                <apex:inputField value="{!newpromotion.District__c}" styleClass="form-control reqField" id="distId"/><p class="Error"></p>
+                            </div> 
+                        </div>
+                        <div class="form-group col-xs-2">
+                        </div>
+                        <div class="form-group col-xs-5 pull-right">
+                            <label class="control-label" for="Giftsgiven">Location</label>
+                            <apex:inputField value="{!newpromotion.Location__c}" styleClass="form-control"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                     <div class="form-group col-xs-5">
+                            <label class="control-label" for="Taluka / Tehsil">Taluka / Tehsil</label>
+                            <apex:inputField value="{!newpromotion.Taluka__c}" styleClass="form-control" />
+                        </div>
+                        <div class="form-group col-xs-5 pull-right">
+                         
+                          <div id="asd">
+                            <label class="control-label" for="Report1">Mega Meet Gift 1<sub class="astriskStyle"> * </sub></label>
+                            <apex:inputField value="{!newpromotion.Gift_Given_1__c}" styleClass="form-control"/>
+                            
+                            <label class="control-label" for="Report2">Mega Meet Gift 2</label>                            
+                            <apex:inputField value="{!newpromotion.Gift_Given_11__c}" styleClass="form-control"/>
+                            </div>
+                          <div id="dsa">  
+                            <label class="control-label" for="Report3">Mini Meet Gift 1<sub class="astriskStyle"> * </sub></label>
+                            <apex:inputField value="{!newpromotion.Gift_Given_2__c}" styleClass="form-control"/>
+                             <label class="control-label" for="Report4">Mini Meet Gift 2</label>
+                            <apex:inputField value="{!newpromotion.Gift_Given_22__c}" styleClass="form-control"/>
+                             </div>
+                          <!--  <select class="form-control multSel reqField" id="giftId" multiple="true" size="3" onblur="setProducts(this.id,'{!$Component.giftsGiven}')">
+                                <apex:repeat value="{!giftsGiven}" var="gift">
+                                    <Option value="{!gift}">{!gift}</Option>
+                                </apex:repeat>
+                            </select> -->
+                            <p class="Error"></p>
+                            <apex:inputHidden value="{!newpromotion.Gifts_given__c}" id="giftsGiven"/>
+                            <apex:inputHidden value="{!newpromotion.Type_of_Meet__c}" id="typeGiven"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-5 ">
+                            <label class="control-label" for="Report">Report</label>
+                            <apex:inputField value="{!newpromotion.Report_c__c}" styleClass="form-control" />
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-info" id="fpePannel"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">FPE REPORTING</h3>
+                        </div>
+                        <div class="panel-body">
+                            
+                            <!-- <div id="nonRequriedBlk"> -->
+                            <div class="row">
+                                <div class="form-group col-xs-3">
+                                    <label class="control-label" for="Location">Vehical Number</label>
+                                    <apex:inputField value="{!newpromotion.Vehicle_No__c}" styleClass="form-control fpeRequired"  />
+                                    <p class="Error"></p>
+                                </div>
+                                <div class="form-group col-xs-2">
+                                </div>
+                                <div class="form-group col-xs-3">
+                                    <label class="control-label" for="Location">Starting (KMS)</label>
+                                    <apex:inputField value="{!newpromotion.Starting_Kms__c}" styleClass="form-control fpeRequired" />
+                                    <p class="Error"></p>
+                                </div>
+                                
+                                <div class="form-group col-xs-3 pull-right">
+                                    <label class="control-label" for="Giftsgiven">Ending (KMS)</label>
+                                    <apex:inputField value="{!newpromotion.Ending_Kms__c}" styleClass="form-control fpeRequired" />
+                                    <p class="Error"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="form-group col-xs-5" id="numActivityId">
+                                    <label class="control-label" for="Giftsgiven">Total Activities</label>
+                                    <apex:inputField value="{!newpromotion.No_Of_Activities__c}" styleClass="form-control fpeRequired"/> 
+                                    <p class="Error"></p>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Button (Double) -->
+                    <div class="control-group">
+                        <div class="controls">
+                            <center>
+                                
+                                <apex:actionFunction name="jsPromotionFPEValidation" action="{!CreatePromotion}" reRender="proForm" status="as1" oncomplete="blockVertcal();"></apex:actionFunction>
+
+                                <apex:actionFunction name="jsPromotionGroup" action="{!CreatePromotion}" reRender="proForm" status="as1" oncomplete="blockVertcalNClose();"></apex:actionFunction>
+                                
+                                
+                                <input type="button"  value="Save Promotion & Add Members" id="savePromotionMembers" onclick="ValidatePromotion();" styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" /> 
+                                
+                                <!--Save Button for Group Promotion-->
+                                 <input type="button" value="Save Promotion" id="savePromotion" onclick="showSaveBtn();" styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" /> 
+
+                               <!--  <apex:commandButton value="Save Promotion" rendered="{!showPromotionSaveBtn}" id="savePromotion" onclick="return showSaveBtn()" action="{!CreatePromotion}" styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" reRender="proForm" status="as1" oncomplete="blockVertcalNClose();"/> -->
+                                
+                                
+                                <!--     <apex:commandButton value="Save Promotion & Add Members" rendered="{!showPromotionSaveBtn}"  id="savePromotionMembers"  styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" oncomplete="blockVertcal();" action="{!CreatePromotion}"  reRender="proForm" status="as1"/> -->
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <apex:commandButton id="closeAcId" onclick="closePopUp()" immediate="ture" value="Close"/>
+                                <!-- <input type="button" value="Submit" onclick="post_value();"/> -->
+                            </center>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                
+                <div class="control-group">
+                    <div class="controls">
+                        <center>
+                            <apex:outputPanel id="closeWindow" rendered="{!NOT(showPromotion) && newpromotion.Type__c == 'Group Activity' }">
+                                <script type="text/javascript">
+                                //alert('This is close' +testName);
+                                testName = '{!promotionName}';
+                                console.log('This is Grope Promotion Name '+testName);
+                                 if(testName != '' && testName != undefined) {
+                                        window.opener.document.getElementById(promoId).value = testName;
+                                    }
+                                </script>
+                                <apex:commandButton id="saveClosePromo" onclick="closePopUp()" immediate="ture" value="Close" reRender="proForm"/>
+                            </apex:outputPanel>
+                        </center>
+                    </div>
+                </div>
+                
+                <apex:outputPanel id="promotionMemebers" rendered="{!NOT(showPromotion) && newpromotion.Type__c != 'Group Activity'  }">
+                    
+                    
+                    
+                    <apex:actionFunction action="{!addMember}" name="addMember" immediate="true" reRender="proForm,boarersMeet,architectsBuilderEngineers,dealersMeet,farmersMeet,salesmanMeetFactoryVisit,TractorShow,plumberMechanic,Shandy" status="as1"/>
+                    <legend>Add Members to Promotion - {!promotionName}</legend>
+                    <apex:inputHidden id="promoName" value="{!promotionName}"/>
+                    
+                    <apex:outputPanel id="addRowPanel" rendered="{!NOT(showAddMemberPanel)}">
+                        <div class="row">
+                            <div class="form-group col-xs-5">
+                                <label class="control-label" for="Name">Number of rows/s to add<sub class="astriskStyle"> * </sub></label>
+                                
+                                <input type="number"  maxlength="2" min="1" max="60" Class="form-control" id="totalAtt" onblur="coypToApex(this.id,'{!$Component.totalAttApex}');" oninput="maxLengthCheck(this)"/>
+                                <apex:inputHidden value="{!newpromotion.Total_no_of_attendees__c}" id="totalAttApex"/>
+                                
+                                <!--    <apex:inputField value="{!newpromotion.Total_no_of_attendees__c}" styleClass="form-control" id="totalExpense" required="true"/> -->
+                                <!--        <apex:inputField value="{!newpromotion.Total_no_of_attendees__c}" styleClass="form-control" id="totalExpense" required="true" onkeypress="return isNumber(event)"/> -->
+                            </div>
+                            <div class="form-group col-xs-2">
+                            </div>
+                            
+                            <div class="form-group col-xs-5 pull-right">
+                                <apex:commandButton value="Add Members" action="{!ShowMembers}" styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);  margin-top: 20px;" reRender="msg,proForm" status="as1"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="membersPanel" rendered="{!(showAddMemberPanel)}">        
+                        <apex:outputPanel id="architectsBuilderEngineers" rendered="{!((newpromotion.Vertical__c=='Column' || newpromotion.Vertical__c=='Plumbing' || newpromotion.Vertical__c=='Projects' ||newpromotion.Vertical__c=='Branding'))}">
+                            <div class="table-responsive">
+                                <div id="newVisit">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Sl.No</th><th></th>
+                                                <th>Mobile No.<sub class="astriskStyle"> * </sub></th>
+                                                <th>Name<sub class="astriskStyle"> * </sub></th>
+                                                <th>Party Type<sub class="astriskStyle"> * </sub></th>
+                                                <th>Dealer</th>
+                                                <th>Distributor</th>
+                                                <th>State<sub class="astriskStyle"> * </sub></th>
+                                                <th>District<sub class="astriskStyle"> * </sub></th>
+                                                <th>Location</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <apex:variable value="{!1}" var="archCount"/>
+                                            <apex:repeat value="{!proAccounts}" var="newAcct">
+                                                <tr>
+                                                    <td style="TEXT-ALIGN: CENTER;">{!archCount}</td>
+                                                    <td>
+               <apex:commandlink action="{!DeleteEntry}" status="as1" id="delete" rerender="architectsBuilderEngineers" rendered="{!disabled}">
+                    <apex:image id="deleteIcon" value="{!$Resource.AP_Remove_Icon}" width="25" height="25" title="Delete Entry"/>
+                     <apex:param name="deleteparam" value="{!archCount}" assignTo="{!accToRemove}"/>
+                </apex:commandlink>
+                <apex:commandlink action="{!RefreshEntry}" reRender="architectsBuilderEngineers" status="as2" id="refresh" rendered="{!disabled}">
+                    <apex:image id="refreshIcon" value="{!$Resource.refresh}" width="25" height="25" title="Refresh Entry"/>
+                    <apex:param name="refreshparam" value="{!newAcct.Contact_Number_Mobile__c}" assignTo="{!accToRefresh}"/>
+                    <apex:param name="refreshparam1" value="{!archCount}" assignTo="{!accToRemove}"/>
+                </apex:commandlink>
+               </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsArchi','no-results-{!archCount}');" id="tagsArchi" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!archCount}'); return false;" style="width:125px" styleClass="tagsArchiClass" />
+                                                        <span id="no-results-{!archCount}" style="color: chocolate;"></span>
+                                                        <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="{!validationRequired}"/>
+                                                        <apex:commandLink title="click here to open in new tab" target="_blank" value="{!newAcct.Name}" action="/{!newAcct.id}" rendered="{!newAcct.id!=null}"/>
+                                                       <!-- <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />-->
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="{!validationRequired}"/>
+                                                        <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" style="width:100px"/>
+                                                        <apex:outputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" />
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>
+                                                        <apex:outputField value="{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" /> 
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  required="{!validationRequired}"/>
+                                                        <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" /> 
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="{!validationRequired}"/>
+                                                        <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" /> 
+                                                    </td>
+                                                    <td>
+                                                        <apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}"  />
+                                                        <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" /> 
+                                                    </td>
+                                                </tr>
+                                                <apex:variable value="{!archCount+1}" var="archCount"/>
+                                            </apex:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        
+                        <center>
+                            
+                            <apex:actionFunction name="savePromoAcc" action="{!SavePromotionMembers}" immediate="false"  status="as1"> </apex:actionFunction>
+                            <!-- <apex:commandButton value="Save" action="{!SavePromotionMembers}" styleClass="btn  btn-info"  style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" reRender="proForm" status="as1" oncomplete="saveClosePopUp();"/> -->
+                            <apex:commandButton id="saveAccBtn" rendered="{!showMemberSaveBtn}" onclick="saveProMembers()" style="color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #49afcd;background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4)); background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4); background-image: -o-linear-gradient(top, #5bc0de, #2f96b4); background-image: linear-gradient(to bottom, #5bc0de, #2f96b4); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color: #2f96b4 #2f96b4 #1f6377;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);" value="Save" status="as1" reRender="proForm"></apex:commandButton>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <apex:commandButton id="saveClose" onclick="closePopUp()" immediate="ture" value="Close" reRender="proForm"/>
+                            
+                        </center>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:form>
+        </div>
+    </div>
+<script type="text/javascript">
+        
+    var j$ = jQuery.noConflict();
+    var resultFound = false;
+    var promotionName ='';
+    var mobileList = [];
+    
+    var promoId = "{!$CurrentPage.parameters.promoId}";//var promoId = getParameter('promotionId');
+    var proName =  ''; 
+    var testName = '';
+    
+    var items ={};
+    var mobileNumSet = new Set();
+    var proType = '';
+    var urlVertical = '';
+    
+    j$(document).ready(function() {
+        
+        var promotionDate = getParameter('promoDate');
+        console.log(promotionDate);
+        urlVertical = "{!$CurrentPage.parameters.vertical}";
+        
+        j$("[id$=promoDateId]").val(promotionDate);
+        j$("[id$=vertiId]").val(urlVertical);
+        j$("[id$=vertiId]").prop('disabled', true);
+        
+        j$("[id$=asd]").hide();
+        j$("[id$=dsa]").hide();
+        
+        j$("#fpePannel").hide();
+        
+        if(urlVertical == 'Column' || urlVertical == 'Plumbing'){
+            j$("#fpePannel").show();
+        }else{
+            j$("#fpePannel").hide();
+        }
+        
+        j$("[id$=savePromotionMembers]").hide();
+        j$("[id$=savePromotion]").hide();
+        
+    });
+    
+    function getParameter(theParameter) { 
+        var params = window.location.search.substr(1).split('&');
+        
+        for (var i = 0; i < params.length; i++) {
+            var p=params[i].split('=');
+            if (p[0] == theParameter) {
+                return decodeURIComponent(p[1]);
+            }
+        }
+        return false;
+    }
+    
+    
+    function closePopUp () {
+        window.self.close();
+    }
+    
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    function showMobileNo(tags,noResult) {
+        // console.log('Show Mobile No.');
+        var mobId = "#"+tags;
+        //  mobileList = {!proAccounts};
+        // console.log(mobileList);
+        j$("[id$="+tags+"]").autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+                
+                // console.log(request.term);
+                //Call Remoting 
+                //APPL_NEW_PROMOTION_CTRL.getCustomer(request.term)     
+                APPL_NEW_PROMOTION_CTRL.getCustomer(request.term, function(result,event) {
+                    if(event.status) {
+                        
+                        var data = [];
+                        var customer = [];
+                        j$.each(result,function(key, record) {
+                            //console.log(record);
+                            customer.push(result[key].Contact_Number_Mobile__c);
+                        });
+                        //return the dataa
+                        //console.log(customer);
+                        // response(customer);
+                        var results = j$.ui.autocomplete.filter(customer, request.term);
+                        
+                        if (!results.length) {
+                            // j$("#no-results").text("No results found!");
+                            document.getElementById(noResult).innerHTML = "No results found!";
+                            resultFound = false;
+                        } else {
+                            document.getElementById(noResult).innerHTML = "";
+                            resultFound = true;
+                            
+                        }
+                        response(results);
+                        
+                    } else if(event.type == 'exception') {
+                        alert(event.message);
+                    }
+                    if(event.type == 'rpc') {
+                        //j$("#el_loading").hide();
+                        console.log(event.type);
+                    }
+                },{escape:true});
+                
+            }
+            // alert(j$("[id$=tags]"));
+        });
+    }
+    
+    function callActionJs (mobNumber,rowIndex) {
+        // body...
+        var mobileNumber = document.getElementById(mobNumber).value;
+        //alert('Call Action function');
+        if(mobileNumber.length == 10 && resultFound == true && mobileNumSet.has(mobileNumber) == false){
+            //alert(mobileNumber);
+            mobileNumSet.add(mobileNumber);
+            console.log(mobileNumSet);
+            copyAccountRow(mobileNumber,rowIndex);
+            // alert(mobileNumSet.has(mobileNumber));
+        }else if(mobileNumSet.has(mobileNumber) == true){
+            alert('Mobile Number already in the List');
+            document.getElementById(mobNumber).style.borderColor = "red";
+            document.getElementById(mobNumber).focus();
+            // }
+            // if(mobileNumber.length == 10 && resultFound == true){
+            //     console.log('Call Js Action function ..Mobile Number is 10 Digits..');
+            //     copyAccountRow(mobileNumber,rowIndex);
+        }else{
+            console.log('Mobile Number is not 10 Digits..');
+            //document.getElementById(mobNumber).focus();
+        }
+    }
+    
+    function setProducts(selectId,proId) {
+        console.log(proId);
+        var selectProducts  = document.getElementById(selectId);
+        var selectedPros    = [];
+        
+        for (var i = 0; i < selectProducts.length; i++) {
+            if (selectProducts.options[i].selected) selectedPros.push(selectProducts.options[i].value);
+        }
+        console.log(selectedPros);
+        
+        var proArray = selectedPros.toString();
+        var finalProductsVal = proArray.replace(/,/g , ";");
+        console.log(finalProductsVal);
+        
+        document.getElementById(proId).value = finalProductsVal;
+        
+    }
+    
+    //addStyleClass
+    function coypToApex(htmlId,expId){
+        var htmlVal = document.getElementById(htmlId).value;
+        document.getElementById(expId).value = htmlVal;
+    }
+    
+  
+    function saveProMembers(){
+        console.log('Call Save Promotion..');
+        savePromoAcc();
+        console.log('Save Promotion Done..');
+    }
+    
+    
+    function saveClosePopUp () {
+        //alert('Promotion Saved !');
+        alert('Members added successfully.');
+        window.self.close();
+    }
+    
+    function blockVertcal() {
+        
+        console.log('Create Promotion Completed..! Call Back');
+        console.log('####');
+        j$("[id$=vertiId]").prop('disabled', true);
+        var proName = j$("[id$=promoName]").val();
+
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity'  || proType == 'Others') && proType != '' ){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show()
+            j$("[id$=savePromotion]").hide();
+        }
+        
+        if(urlVertical == 'Column' || urlVertical == 'Plumbing'){
+            j$("#fpePannel").show();
+        }else{
+            j$("#fpePannel").hide();
+        }
+        
+        if(proName != '' && proName != undefined) {
+            window.opener.document.getElementById(promoId).value = proName;
+        }
+    }
+
+    function onChangeType(){
+        console.log('Promotion Type Changed..');
+        
+        proType = j$("[id$=typeId]").val();
+        console.log('Promotion Type ='+proType);
+        
+        if(proType == 'Architects / Engineers / Consultants Factory Visit' || proType == 'Architects Meets' || proType == 'Builders Meets' || proType == 'Engineers Meets' || proType == 'Mega Plumbers Meets' || proType == 'Plumbers Factory Visit'|| proType == 'Plumbing Dealer / Distributor Meets' || proType == 'Plumbing Dealers Factory Visits' || proType == 'Plumbing DSM Meet/Training' || proType == 'Column Dealer / Distributor Meets' || proType == 'Column Distributors / Dealers Factory Visit' || proType == 'Column DSM Meet / Training' || proType == 'Mechanics Factory Visit' || proType == 'Mega Farmer Meets' || proType == 'Mega Mechanic Meets' || proType == 'Projects DSM Meet / Training'){
+        j$("[id$=typeGiven]").val('Mega Meet');
+        j$("[id$=asd]").show();
+        j$("[id$=dsa]").hide();
+        }else if(proType == 'Inshop Plumber Meets' || proType == 'Exhibition / Construction Fairs' ||proType == 'Naaka Meets' || proType == 'Onsite Plumber Meets' || proType == 'Exhibition / Agri Fairs' || proType == 'Inshop Borers Meets' || proType == 'Inshop Mechanic Meets' || proType == 'Jeep Campaign' || proType == 'Mini Farmer Meet' || proType == 'Shandy Shows' || proType == 'Tractor Show'){
+        j$("[id$=typeGiven]").val('Mini Meet');
+        j$("[id$=dsa]").show();
+        j$("[id$=asd]").hide();
+        }else{
+        j$("[id$=asd]").hide();
+        j$("[id$=dsa]").hide();
+        }
+
+        
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity'  || proType == 'Others') && proType != '' ){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show();
+            j$("[id$=savePromotion]").hide();
+        }
+        
+    }
+    
+    function showSaveBtn(){
+        console.log('Promotion Type Changed..');
+        
+        proType = j$("[id$=typeId]").val();
+        console.log('Promotion Type ='+proType);
+        
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity'  || proType == 'Others') && proType != '' ){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show();
+            j$("[id$=savePromotion]").hide();
+        }
+
+        var errCounter = 0;
+        var giftGivenValue = '';
+        var distributorVal = '';
+        var dealerVal      = '';
+        var projectVal     = '';
+        var districtVal    = '';
+        var proType        = '';
+
+       
+        //Check for Mandetory Field
+        // alert('Check for Validation');
+        j$('.form-control.reqField').each(function(){
+            var fieldVal = j$(this).val();
+            //alert(fieldVal);
+            if(fieldVal == '' || fieldVal == null){
+                j$(this).next('.Error').text( "Required field." );
+                j$(this).addClass('borderClass');
+                hasError = true;
+                errCounter +=1;
+            }else{
+                j$(this).next('.Error').text( "" );
+                j$(this).removeClass('borderClass');
+                hasError = false;
+                //errCounter -=1;
+            }
+        });
+
+        //Check for Gifts Given
+       /* giftGivenValue = j$("#giftId").val();
+        //alert(giftGivenValue);
+        if(giftGivenValue == '' || giftGivenValue == undefined){
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").addClass('borderClass');
+            errCounter +=1;
+        }else{
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").removeClass('borderClass');
+        }*/
+
+        if(errCounter > 0){
+            alert('Please fill all the (*)Requried fields');
+            return false;
+        }else{
+            jsPromotionFPEValidation();
+        }
+        
+    }
+    
+    
+    function blockVertcalNClose(){
+       // alert('Call Back--> Gr');
+        j$("[id$=vertiId]").prop('disabled', true);
+        //console.log('this Groupe Activity is Promotion Name '+testName);
+       // alert(testName);
+        console.log('%%%%');
+        var proName = j$("[id$=promoName]").val();
+ 
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity'  || proType == 'Others') && proType != ''){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show()
+            j$("[id$=savePromotion]").hide();
+        }
+        
+       // alert('proName '+proName);
+        if(proName != '' && proName != undefined) {
+            window.opener.document.getElementById(promoId).value = proName;
+        }
+    }
+    
+    /*Validation Check
+     1) Column and Plumbing vertical --> FPE is Mandetory
+     2) Distributor || Dealer || Project 
+     3) Gift Given is Mandetory
+
+     --If all fields are filled ---> Call Action Function
+  */
+    function ValidatePromotion() {
+        console.log('Check for FPE Validation..');
+        console.log('proType ='+proType);
+        var errCounter = 0;
+        var giftGivenValue = '';
+        var distributorVal = '';
+        var dealerVal      = '';
+        var projectVal     = '';
+        var districtVal    = '';
+        var proType        = '';
+    
+         //Check for Dealer || Project || Distributor
+         proType = j$("[id$=typeId]").val();
+        console.log('Promotion Type ='+proType);
+       
+        //Check for Mandetory Field
+        // alert('Check for Validation');
+        j$('.form-control.reqField').each(function(){
+            var fieldVal = j$(this).val();
+            //alert(fieldVal);
+            if(fieldVal == '' || fieldVal == null){
+                j$(this).next('.Error').text( "Required field." );
+                j$(this).addClass('borderClass');
+                hasError = true;
+                errCounter +=1;
+            }else{
+                j$(this).next('.Error').text( "" );
+                j$(this).removeClass('borderClass');
+                hasError = false;
+                //errCounter -=1;
+            }
+        });
+        
+        //Check for FPE
+        if((proType == 'Tractor Show' || proType == 'Jeep Campaign' || proType == 'Mega Farmer Meets' || proType == 'Mini Farmer Meet' || proType == 'Shandy Shows')){
+            // alert('Check for Validation');
+            j$('.form-control.fpeRequired').each(function(){
+                var fieldVal = j$(this).val();
+                //alert(fieldVal +' j$(this)');
+                if(fieldVal == '' || fieldVal == null){
+                    j$(this).next('.Error').text( "Required field." );
+                    j$(this).addClass('borderClass');
+                    hasError = true;
+                    errCounter +=1;
+                }else{
+                    j$(this).next('.Error').text( "" );
+                    j$(this).removeClass('borderClass');
+                    hasError = false;
+                    //errCounter -=1;
+                }
+            });
+            
+        }
+        
+        //Check for Gifts Given
+       /* giftGivenValue = j$("#giftId").val();
+        //alert(giftGivenValue);
+        if(giftGivenValue == '' || giftGivenValue == undefined){
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").addClass('borderClass');
+            errCounter +=1;
+        }else{
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").removeClass('borderClass');
+        }*/
+        
+        //Check for District Value
+        districtVal = j$("[id$=distId]").val();
+        console.log('District Value ='+districtVal);
+        
+        // Get the Project, Dealer and Distribuor Values.
+        distributorVal = j$("[id$=disId]").val();
+        dealerVal = j$("[id$=dealerId]").val();
+        projectVal = j$("[id$=proId]").val();
+        
+       
+
+        if(distributorVal == '' &&  dealerVal == '' && projectVal == '' && proType != 'Group Activity' && proType != ''){
+            alert('Please fill either "Distributor", "Dealer" or "Project".');
+            errCounter +=1;
+            // j$("[id$=disId]").addClass('borderClass');
+            // j$("[id$=dealerId]").addClass('borderClass');
+            // j$("[id$=proId]").addClass('borderClass');
+            //break outerFunction;
+            return false;
+        }else{
+            // j$("[id$=disId]").removeClass('borderClass');
+            // j$("[id$=dealerId]").removeClass('borderClass');
+            // j$("[id$=proId]").removeClass('borderClass');
+        }
+        
+        //Call Action Function
+        // jsPromotionFPEValidation();
+        //alert('Error Counter ='+errCounter);
+        if(errCounter > 0){
+            alert('Please fill all the (*)Requried fields');
+        }else{
+            //Call Action function
+            jsPromotionGroup();
+        }
+        
+    }
+    
+    function maxLengthCheck(object) {
+        
+          if((object.value.length > object.maxLength)) {
+             object.value = object.value.slice(0, object.maxLength);
+             }
+             
+             if((object.value > object.max)) {
+             object.value = object.value.slice(0, 1);
+             alert('Value range allowed to enter is 01 - 60');
+             }
+        }
+    
+    </script>
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+        </style>
+</apex:page>

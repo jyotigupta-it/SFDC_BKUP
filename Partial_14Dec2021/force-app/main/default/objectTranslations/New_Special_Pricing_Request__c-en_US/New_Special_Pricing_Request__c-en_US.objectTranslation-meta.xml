@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>New Special Pricing Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>New Special Pricing Requests</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>If_Appl_Std_discount_is_Zero</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,211 @@
+<!--*****************************************************************************************************************************************
+*Created By:  Subhajit Ghosh
+*Company:     KVP
+*Created Date : 23.09.2019
+*Description: This page is for edit of offers in the new project revamp structure. 
+****************************************************************************************************************************************-->
+<apex:page controller="EditOfferRevampController" docType="html-5.0">
+     <apex:slds />
+    <style type="text/css">
+        .inp_fd {
+        position:relative;
+        }
+        .fieldSSize {
+        width: 60px;
+        }
+        .fieldMSize {
+        width: 120px;
+        }
+        .mand {
+        font-size: 20px!important;
+        color: red!important;    
+        }
+        .imgClass:hover {
+        cursor:pointer;
+        }
+        .look_pos  input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        
+        
+        .look_pos {
+        position:relative!important;
+        }
+        .look_pos a {
+        position:absolute!important;
+        right:0px;
+        top:3px;
+        }
+        body .bPageBlock .detailList tr th:last {
+        width:50%;
+        }
+        .form_inputs select {
+        width:100%!important;
+        }
+        .look_css {
+        position:relative;
+        }
+        .look_css a {
+        position:absolute;
+        right:5px;
+        top:6px;
+        }
+        .look_css input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .slds-input, .look_css input[type="text"] {
+        width:150px!important;
+        }
+        .look_pos  input[type="text"] {
+        width:200px!important;
+        }
+        
+        }
+        
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        z-index:999999;
+        }
+        
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+        
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        
+    </style>
+    <apex:outputpanel >
+        <apex:actionstatus id="actStatusId">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                                                                     height: 100%;opacity:0.65;width:300%;"> 
+                    <div class="waitingHolder" style="top: 94.2px; width: 300px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Saving...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+    
+    <apex:form id="theForm">
+        <apex:pageMessages id="theErrorMessage" />
+               <apex:pageBlock Id="PageBlock" > 
+            <apex:pageBlockSection Id="PageBlockSec" >
+                   <apex:pageBlockTable value="{!newsprUpdateList}" var="sprChild" rendered="{!newsprUpdateList.size!=null}" id="newOffId" >
+                    
+                  
+                    <apex:column >
+                        <apex:facet name="header">Product</apex:facet>
+                        <apex:outputField value="{!sprChild.Product_name__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Offer MRP</apex:facet>
+                        <apex:outputField value="{!sprChild.MRP_Value__c}"/>
+                    </apex:column>
+                 
+                    <apex:column >
+                        <apex:facet name="header">MRP Post Discount</apex:facet>
+                        <apex:outputField value="{!sprChild.MRP_Post_Discount2__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Discount to Customer</apex:facet>
+                        <apex:outputField value="{!sprChild.Extra_Discount__c}" />
+                    </apex:column>
+                   
+                    <apex:column >
+                        <apex:facet name="header">ORC/ MARGIN TO DLR/DIST</apex:facet>
+                        <apex:outputField value="{!sprChild.ORC_MARGIN_TO_DLR_DIST__c}" />
+                    </apex:column>
+                       <apex:column >
+                        <apex:facet name="header">Tentative Order Date</apex:facet>
+                        <apex:inputField value="{!sprChild.Tentative_Order_Date__c}" />
+                    </apex:column>
+                       <apex:column >
+                        <apex:facet name="header">Offer Probability</apex:facet>
+                        <apex:inputField value="{!sprChild.Offer_Probability__c}" />
+                    </apex:column>
+                       <apex:column >
+                        <apex:facet name="header">Price List Date</apex:facet>
+                        <apex:inputField value="{!sprChild.Price_List_Date__c}" />
+                    </apex:column>
+                     <apex:column >
+                        <apex:facet name="header">Reason</apex:facet>
+                        <apex:inputField value="{!sprChild.Reason__c}" />
+                    </apex:column>
+                    
+                     <apex:column >
+                        <apex:facet name="header">Product Status</apex:facet>
+                        <apex:inputField value="{!sprChild.Product_Status__c}" />
+                    </apex:column>
+                        <apex:column >
+                        <apex:facet name="header">Lost to Brand</apex:facet>
+                        <apex:inputField value="{!sprChild.Loss_to_brand__c}" />
+                    </apex:column>
+                        <apex:column >
+                        <apex:facet name="header">Reason of Lost Sales</apex:facet>
+                        <apex:inputField value="{!sprChild.Reason_of_lost_sales__c}" />
+                    </apex:column>
+                        <apex:column >
+                        <apex:facet name="header">Others(Reason)</apex:facet>
+                        <apex:inputField value="{!sprChild.Others_Lost_Sales__c}" />
+                    </apex:column>
+                    
+                  
+                </apex:pageBlockTable> 
+                
+                
+            </apex:pageBlockSection>
+                   <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Save"  action="{!saveUpdatedOffers}" rerender="shwMsg" styleClass="slds-button slds-button_brand" reRender="theErrorMessage" status="actStatusId" />
+                    <apex:commandButton value="Cancel"  action="{!cancelEdit}" status="status" rerender="shwMsg" styleClass="slds-button slds-button_brand" />
+                </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

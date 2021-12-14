@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Territory2 xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accountAccessLevel>Edit</accountAccessLevel>
+    <caseAccessLevel>Edit</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Uttarakhand</description>
+    <name>Uttarakhand</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentTerritory>Uttarakhand</parentTerritory>
+    <ruleAssociations>
+        <inherited>true</inherited>
+        <ruleName>Uttarakhand</ruleName>
+    </ruleAssociations>
+    <territory2Type>Cluster</territory2Type>
+</Territory2>

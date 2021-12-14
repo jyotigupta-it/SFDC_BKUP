@@ -1,0 +1,38 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,lightning:actionOverride" access="global">
+	<h1 style="font-size:150%;">
+       <center><b> Ashirvad Pipelines </b></center>
+    </h1>
+    <p><i><b>
+        Hello,thank you for calling Ashirvad.My name is [name of representative ].I'd like to tell you that this call may be recorded for quality assurance and<br/>
+        training purpose.How can I help you today?</b></i>
+    </p><br/>
+  <h3 style="color:red;"><i>
+        <b> After hearing out the issue?</b></i>
+  </h3><br/>
+    <p><b><i>
+        I sincerely apologize for any inconvenience caused to you and thank you for your patience in communicating your concerns with us.
+     </i></b>
+    </p><br/>
+   <h3 style="color:red;">
+       <i> <b>Details Collection:</b></i>
+    </h3>
+    <p>
+        <b><i> "Is it okay if I ask you a few questions about the issues,this will help us to serve you better"</i></b>
+    </p><br/><br/>
+    <h3 style="color:red;"><i><b> In Case Of Service City:</b></i></h3><br/>
+    <p><b><i>Thank you for your patience,Your complaint is registered with us and you will receive a ticket number along with code which will<br/> 
+        be used for closure on your phone.Please keep it for future reference.Your complaint will be resolvedwithin 48 hrs.<br/><br/>
+        Thank you for calling Ashirvad and have a good day.
+        </i></b>
+    </p><br/>
+    <h3 style="color:red;"><i><b>In Case of non Service City:</b></i></h3><br/>
+    <p><b><i> 
+        Thank you for your patience,Your complaint is registered with us and you will receive a ticket no.on your phone.Please keep it for <br/>
+        future reference.You will hear from us within 2 working days.<br/>
+        Is there anything else we can help you with ?<br/><br/>
+        Thank you for calling Ashirvad and have a good day.<br/><br/>
+        </i>
+        </b>
+        
+    </p>
+</aura:component>

@@ -1,0 +1,198 @@
+<!--
+Created by : Deepak Singh
+Created date : 1/08/2020
+-->
+
+<apex:page controller="DealerAuthenticationController" showHeader="false" standardStylesheets="false" lightningStylesheets="true" doctype="html-5.0" >
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+        <apex:stylesheet value="{!URLFOR($Resource.BootStrap_D)}" />
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_v4_5_3)}" />
+        <apex:includeScript value="{!URLFOR($Resource.Bootstrap_v4_5_3)}" />
+        <apex:stylesheet value="{!URLFOR($Resource.dealerAuthenticationcss)}" />
+        <style>
+            
+            @media (min-width: 1025px) {
+            #respImageContainer {
+            background-size: 100% auto;
+            background-repeat: no-repeat;        
+            background-image: url('{!URLFOR($Resource.DekstopOPBackGround)}');
+            }
+            #header1{
+            font-size: 30px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            text-align:center;
+            }
+            #header2{
+            font-size: 30px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            border-bottom-left-radius: 50px 20px;
+            text-align:center;
+            }
+            #padding1{
+            display: none;
+            }
+            #padding2{
+            display: none;
+            }
+            }
+            @media (max-width: 1024px) and (min-width: 500px){
+            #respImageContainer {
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-image: url('{!URLFOR($Resource.TabOPbackground)}');
+            }
+            #header1{
+            font-size: 17px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            text-align:center;
+            }
+            #header2{
+            font-size: 17px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            border-bottom-left-radius: 50px 20px;
+            text-align:center;
+            }
+            #padding2{
+            display: block;
+            }
+            }
+            @media (max-width: 499px) {
+            #respImageContainer {
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-image: url('{!URLFOR($Resource.MobileOPbackground)}');
+            }
+            #header1{
+            font-size: 12px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            text-align:center;
+            }
+            #header2{
+            font-size: 12px !IMPORTANT;
+            width: 100%;
+            color:WHITE;
+            font-family:Arial, Helvetica, sans-serif;
+            border-bottom-left-radius: 50px 20px;
+            text-align:center;
+            }
+            #padding2{
+            display: none;
+            }
+            }
+            
+        </style>
+        
+    </head>
+    
+    <script type="text/javascript">
+    function checkPhone(){
+        var phone = document.getElementById('{!$Component.form1.pno}').value;
+        if(/^(\d{10}$)/.test(phone)==true){
+        }else{
+            alert(' Please match the requested format\n Phone number format - example --> 8762080035');
+            
+        }
+    }
+    </script> 
+    
+    <body id="respImageContainer">
+        <apex:slds >
+            <div >
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
+                <div id="padding1">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/> 
+                    <br/>
+                </div>
+                
+                <div id="padding2">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/> 
+                    <br/>
+                </div>
+                
+                <div class="container" >
+                    <div id="divHead1">
+                        <h1 id="header1" class="h1Header1">
+                            <b> WORLD'S LARGEST SELLING</b>
+                        </h1>
+                        <h2 id="header2">
+                            CPVC PIPES &amp; FITTINGS |uPVC COLUMN PIPES
+                        </h2>
+                    </div>  
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:form id="form1" styleClass="bg-text w-100">
+                        <div align="center" calss="form-group"> 
+                            <apex:outputPanel >
+                                <div class="col-sm-16">
+                                    <apex:outputLabel styleClass="mainHeader" value="DEALER ORDER PORTAL"></apex:outputLabel>
+                                    <br/>
+                                    <apex:inputText id="pno" html-pattern="^\d{10}$" required="{!require}" styleClass="textBox" value="{!phone}" html-placeholder="ENTER YOUR MOBILE NUMBER HERE" disabled="{!disablePhone}" />
+                                </div> 
+                                <br/>
+                                <br/>
+                                <apex:commandButton onclick="checkPhone(this)" styleClass="submitId"  value="SUBMIT" action="{!searchRetailerThroughPhone}"
+                                                    rendered="{!if(showSubmit, true, false)}"        >
+                                    <br/>
+                                    <apex:actionSupport event="onclick" rerender="rerenderId" status="pageStatus"/>	
+                                </apex:commandButton>
+                            </apex:outputPanel>
+                            
+                            <div class="bg-text1">
+                                <apex:outputLabel rendered="{!if(OneDealer, true, false)}" value="WELCOME {!acc.Name}," styleClass="textMessage"></apex:outputLabel>
+                                <apex:outputLabel rendered="{!if(OneDealer, true, false)}" value="CLICK BELOW TO PROCEED TO THE ORDER PAGE !" styleClass="textMessage" style="font-size:25px;color:YELLOW;font-family:Lucida Console, Courier, monospace;"></apex:outputLabel>
+                                <apex:outputLabel styleClass="textMessage"  value="Your request is pending with us. Our team will get in touch with you soon." rendered="{!if(prospectPhoneNumberPresent, true, false)}" />
+                                <apex:outputLabel styleClass="textMessage"  value="DEALER ACCOUNT NOT FOUND." rendered="{!if(showSignUp, true, false)}" />
+                                <apex:outputLabel styleClass="textMessage"  value="CLICK HERE TO SIGN-UP !" rendered="{!if(showSignUp, true, false)}" />
+                            </div>  
+                            
+                            <apex:commandButton value="SIGN UP" action="{!goToSignUpPage}" rendered="{!if(showSignUp, true, false)}" styleClass="signUp" />
+                            <apex:commandButton value="CLICK TO ORDER"   action="{!SelectedRetailer}" rendered="{!if(showSelect, true, false)}" styleClass="clickToOrder" />
+                            
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <apex:actionStatus id="pageStatus">
+                                <apex:facet name="start">
+                                    <apex:outputPanel >
+                                        <img src="/img/loading32.gif" width="50" height="50" />
+                                        <apex:outputLabel value="Loading..." />
+                                    </apex:outputPanel>
+                                </apex:facet>
+                            </apex:actionStatus>
+                        </div>   
+                    </apex:form>
+                </div>
+            </div>
+        </apex:slds>
+    </body>
+</apex:page>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tentative_Order_Date__c</fullName>
+    <externalId>false</externalId>
+    <label>Tentative Order Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Jan 16</fullName>
+                <default>false</default>
+                <label>Jan 16</label>
+            </value>
+            <value>
+                <fullName>Feb 16</fullName>
+                <default>false</default>
+                <label>Feb 16</label>
+            </value>
+            <value>
+                <fullName>Mar 16</fullName>
+                <default>false</default>
+                <label>Mar 16</label>
+            </value>
+            <value>
+                <fullName>Apr 16</fullName>
+                <default>false</default>
+                <label>Apr 16</label>
+            </value>
+            <value>
+                <fullName>May 16</fullName>
+                <default>false</default>
+                <label>May 16</label>
+            </value>
+            <value>
+                <fullName>Jun 16</fullName>
+                <default>false</default>
+                <label>Jun 16</label>
+            </value>
+            <value>
+                <fullName>Jul 16</fullName>
+                <default>false</default>
+                <label>Jul 16</label>
+            </value>
+            <value>
+                <fullName>Aug 16</fullName>
+                <default>false</default>
+                <label>Aug 16</label>
+            </value>
+            <value>
+                <fullName>Sept 16</fullName>
+                <default>false</default>
+                <label>Sept 16</label>
+            </value>
+            <value>
+                <fullName>Oct 16</fullName>
+                <default>false</default>
+                <label>Oct 16</label>
+            </value>
+            <value>
+                <fullName>Nov 16</fullName>
+                <default>false</default>
+                <label>Nov 16</label>
+            </value>
+            <value>
+                <fullName>Dec 16</fullName>
+                <default>false</default>
+                <label>Dec 16</label>
+            </value>
+            <value>
+                <fullName>Jan 17</fullName>
+                <default>false</default>
+                <label>Jan 17</label>
+            </value>
+            <value>
+                <fullName>Feb 17</fullName>
+                <default>false</default>
+                <label>Feb 17</label>
+            </value>
+            <value>
+                <fullName>Mar 17</fullName>
+                <default>false</default>
+                <label>Mar 17</label>
+            </value>
+            <value>
+                <fullName>Apr 17</fullName>
+                <default>false</default>
+                <label>Apr 17</label>
+            </value>
+            <value>
+                <fullName>May 17</fullName>
+                <default>false</default>
+                <label>May 17</label>
+            </value>
+            <value>
+                <fullName>Jun 17</fullName>
+                <default>false</default>
+                <label>Jun 17</label>
+            </value>
+            <value>
+                <fullName>Jul 17</fullName>
+                <default>false</default>
+                <label>Jul 17</label>
+            </value>
+            <value>
+                <fullName>Aug 17</fullName>
+                <default>false</default>
+                <label>Aug 17</label>
+            </value>
+            <value>
+                <fullName>Sept 17</fullName>
+                <default>false</default>
+                <label>Sept 17</label>
+            </value>
+            <value>
+                <fullName>Oct 17</fullName>
+                <default>false</default>
+                <label>Oct 17</label>
+            </value>
+            <value>
+                <fullName>Nov 17</fullName>
+                <default>false</default>
+                <label>Nov 17</label>
+            </value>
+            <value>
+                <fullName>Dec 17</fullName>
+                <default>false</default>
+                <label>Dec 17</label>
+            </value>
+            <value>
+                <fullName>Jan 18</fullName>
+                <default>false</default>
+                <label>Jan 18</label>
+            </value>
+            <value>
+                <fullName>Feb 18</fullName>
+                <default>false</default>
+                <label>Feb 18</label>
+            </value>
+            <value>
+                <fullName>Mar 18</fullName>
+                <default>false</default>
+                <label>Mar 18</label>
+            </value>
+            <value>
+                <fullName>Apr 18</fullName>
+                <default>false</default>
+                <label>Apr 18</label>
+            </value>
+            <value>
+                <fullName>May 18</fullName>
+                <default>false</default>
+                <label>May 18</label>
+            </value>
+            <value>
+                <fullName>Jun 18</fullName>
+                <default>false</default>
+                <label>Jun 18</label>
+            </value>
+            <value>
+                <fullName>Jul 18</fullName>
+                <default>false</default>
+                <label>Jul 18</label>
+            </value>
+            <value>
+                <fullName>Aug 18</fullName>
+                <default>false</default>
+                <label>Aug 18</label>
+            </value>
+            <value>
+                <fullName>Sept 18</fullName>
+                <default>false</default>
+                <label>Sept 18</label>
+            </value>
+            <value>
+                <fullName>Oct 18</fullName>
+                <default>false</default>
+                <label>Oct 18</label>
+            </value>
+            <value>
+                <fullName>Nov 18</fullName>
+                <default>false</default>
+                <label>Nov 18</label>
+            </value>
+            <value>
+                <fullName>Dec 18</fullName>
+                <default>false</default>
+                <label>Dec 18</label>
+            </value>
+            <value>
+                <fullName>Jan 19</fullName>
+                <default>false</default>
+                <label>Jan 19</label>
+            </value>
+            <value>
+                <fullName>Feb 19</fullName>
+                <default>false</default>
+                <label>Feb 19</label>
+            </value>
+            <value>
+                <fullName>Mar 19</fullName>
+                <default>false</default>
+                <label>Mar 19</label>
+            </value>
+            <value>
+                <fullName>Apr 19</fullName>
+                <default>false</default>
+                <label>Apr 19</label>
+            </value>
+            <value>
+                <fullName>May 19</fullName>
+                <default>false</default>
+                <label>May 19</label>
+            </value>
+            <value>
+                <fullName>Jun 19</fullName>
+                <default>false</default>
+                <label>Jun 19</label>
+            </value>
+            <value>
+                <fullName>Jul 19</fullName>
+                <default>false</default>
+                <label>Jul 19</label>
+            </value>
+            <value>
+                <fullName>Aug 19</fullName>
+                <default>false</default>
+                <label>Aug 19</label>
+            </value>
+            <value>
+                <fullName>Sept 19</fullName>
+                <default>false</default>
+                <label>Sept 19</label>
+            </value>
+            <value>
+                <fullName>Oct 19</fullName>
+                <default>false</default>
+                <label>Oct 19</label>
+            </value>
+            <value>
+                <fullName>Nov 19</fullName>
+                <default>false</default>
+                <label>Nov 19</label>
+            </value>
+            <value>
+                <fullName>Dec 19</fullName>
+                <default>false</default>
+                <label>Dec 19</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

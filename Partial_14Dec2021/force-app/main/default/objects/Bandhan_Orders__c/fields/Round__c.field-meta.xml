@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Round__c</fullName>
+    <description>Bandhan order round number</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select Round</inlineHelpText>
+    <label>Round</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Round1</fullName>
+                <default>false</default>
+                <label>Round 1</label>
+            </value>
+            <value>
+                <fullName>Round2</fullName>
+                <default>false</default>
+                <label>Round 2</label>
+            </value>
+            <value>
+                <fullName>Round3</fullName>
+                <default>false</default>
+                <label>Round 3</label>
+            </value>
+            <value>
+                <fullName>Round4</fullName>
+                <default>false</default>
+                <label>Round 4</label>
+            </value>
+            <value>
+                <fullName>Round5</fullName>
+                <default>false</default>
+                <label>Round 5</label>
+            </value>
+            <value>
+                <fullName>Round6</fullName>
+                <default>false</default>
+                <label>Round 6</label>
+            </value>
+            <value>
+                <fullName>Round7</fullName>
+                <default>false</default>
+                <label>Round 7</label>
+            </value>
+            <value>
+                <fullName>Round8</fullName>
+                <default>false</default>
+                <label>Round 8</label>
+            </value>
+            <value>
+                <fullName>Round9</fullName>
+                <default>false</default>
+                <label>Round 9</label>
+            </value>
+            <value>
+                <fullName>Round10</fullName>
+                <default>false</default>
+                <label>Round 10</label>
+            </value>
+            <value>
+                <fullName>Round 11</fullName>
+                <default>false</default>
+                <label>Round 11</label>
+            </value>
+            <value>
+                <fullName>Round 12</fullName>
+                <default>false</default>
+                <label>Round 12</label>
+            </value>
+            <value>
+                <fullName>Round 13</fullName>
+                <default>false</default>
+                <label>Round 13</label>
+            </value>
+            <value>
+                <fullName>Round 14</fullName>
+                <default>false</default>
+                <label>Round 14</label>
+            </value>
+            <value>
+                <fullName>Round 15</fullName>
+                <default>false</default>
+                <label>Round 15</label>
+            </value>
+            <value>
+                <fullName>Round  16</fullName>
+                <default>false</default>
+                <label>Round  16</label>
+            </value>
+            <value>
+                <fullName>D_E</fullName>
+                <default>false</default>
+                <label>D_E</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

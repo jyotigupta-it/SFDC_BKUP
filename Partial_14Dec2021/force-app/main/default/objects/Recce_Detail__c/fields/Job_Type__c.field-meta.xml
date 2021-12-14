@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Job_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Job Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Branding_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Vinyl</fullName>
+                <default>false</default>
+                <label>Vinyl</label>
+            </value>
+            <value>
+                <fullName>Vinyl on Sunboard</fullName>
+                <default>false</default>
+                <label>Vinyl on Sunboard</label>
+            </value>
+            <value>
+                <fullName>One-way-Vision</fullName>
+                <default>false</default>
+                <label>One-way-Vision</label>
+            </value>
+            <value>
+                <fullName>Front lit Flex Board</fullName>
+                <default>false</default>
+                <label>Front lit Flex Board</label>
+            </value>
+            <value>
+                <fullName>Back lit board (GSB)</fullName>
+                <default>false</default>
+                <label>Back lit board (GSB)</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>In Shop</controllingFieldValue>
+            <controllingFieldValue>Full Shop</controllingFieldValue>
+            <valueName>Vinyl</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>In Shop</controllingFieldValue>
+            <controllingFieldValue>Full Shop</controllingFieldValue>
+            <valueName>Vinyl on Sunboard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>In Shop</controllingFieldValue>
+            <controllingFieldValue>Full Shop</controllingFieldValue>
+            <valueName>One-way-Vision</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Out Shop</controllingFieldValue>
+            <controllingFieldValue>Full Shop</controllingFieldValue>
+            <valueName>Front lit Flex Board</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Out Shop</controllingFieldValue>
+            <controllingFieldValue>Full Shop</controllingFieldValue>
+            <valueName>Back lit board (GSB)</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

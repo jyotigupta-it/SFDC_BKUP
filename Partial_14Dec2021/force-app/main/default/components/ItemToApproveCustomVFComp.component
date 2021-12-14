@@ -1,0 +1,168 @@
+<!--*****************************************************************************************************************************************
+*Created By:  Subhajit Ghosh
+*company:     KVP
+*Description: Display the items to be approved in the Lightning home page. It displays the Project name instead of the Unique SPR 
+name. This is a quick link to go the project. 
+****************************************************************************************************************************************-->
+<apex:component controller="ItemsToApproveCustomControllerCls" >
+    
+    <apex:slds />
+    <style type="text/css">
+        .inp_fd {
+        position:relative;
+        }
+        .fieldSSize {
+        width: 60px;
+        }
+        .fieldMSize {
+        width: 120px;
+        }
+        .mand {
+        font-size: 20px!important;
+        color: red!important;    
+        }
+        .imgClass:hover {
+        cursor:pointer;
+        }
+        .look_pos  input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        
+        
+        .look_pos {
+        position:relative!important;
+        }
+        .look_pos a {
+        position:absolute!important;
+        right:0px;
+        top:3px;
+        }
+        body .bPageBlock .detailList tr th:last {
+        width:50%;
+        }
+        .form_inputs select {
+        width:100%!important;
+        }
+        .look_css {
+        position:relative;
+        }
+        .look_css a {
+        position:absolute;
+        right:5px;
+        top:6px;
+        }
+        .look_css input[type="text"] {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(221, 219, 218);
+        border-radius: .25rem;
+        width: 100%;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(1.875rem + (1px * 2));
+        }
+        @media only screen and (min-width: 250px) and (max-width: 770px) {
+        .slds-input, .look_css input[type="text"] {
+        width:150px!important;
+        }
+        .look_pos  input[type="text"] {
+        width:200px!important;
+        }
+        
+        }
+        
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        z-index:999999;
+        }
+        
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+        
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        
+    </style>
+    <style>
+        .scroll .pbSubsection {
+        width:100%!important;
+        overflow-y:scroll!important;
+        }
+        .tabledesign th {
+        background: #e5e5e5!important;
+        font-weight: bold!important;
+        }
+        
+        
+    </style>
+    
+    <apex:form >
+        
+        
+        <apex:outputPanel rendered="{!uniqueProjectNameList.size !=null}">
+            <table id="orderNew" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered tabledesign">
+                
+                
+                <apex:repeat value="{!uniqueProjectNameList}" var="proj">
+                    
+                    <apex:variable value="{!1}" var="rowNum"/>
+                    
+                    <tr>
+                        <td><apex:outputLink onclick="window.top.location='/{!proj.recordId}'; return false;">{!proj.ProjectName}</apex:outputLink> </td> 
+                        
+                    </tr>
+                    <tr>
+                        <td>Project : Submitted By - {!proj.submittedBy}</td> 
+                        
+                    </tr>
+                    
+                </apex:repeat>
+            </table>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!uniqueProjectNameList==null || uniqueProjectNameList.size==0}">
+            
+           No approval requests need your attention right now.
+        </apex:outputPanel>
+        
+        
+        
+    </apex:form>
+    
+</apex:component>

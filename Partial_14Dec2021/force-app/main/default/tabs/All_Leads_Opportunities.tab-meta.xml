@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Industrial report</description>
+    <frameHeight>600</frameHeight>
+    <hasSidebar>false</hasSidebar>
+    <label>All Leads &amp; Opportunities</label>
+    <motif>Custom27: Laptop</motif>
+    <url>https://appl-ashirvadpipes.lightning.force.com/lightning/r/Folder/00l3A000002c5ZGQAY/view?queryScope=userFoldersSharedWithMe</url>
+    <urlEncodingKey>UTF-8</urlEncodingKey>
+</CustomTab>

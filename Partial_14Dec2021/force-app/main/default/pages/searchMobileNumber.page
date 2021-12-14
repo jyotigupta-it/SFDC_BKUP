@@ -1,0 +1,27 @@
+<apex:page standardController="Promotion__c" applyHtmlTag="false" sidebar="false" showHeader="false" extensions="SearchandCreateMembers">
+ <apex:form >
+  <apex:pageMessages />
+        <apex:pageBlock >
+            <apex:pageMessage rendered="{!showmsg=True}" summary="Some Same Mobile Numbers are entered more than one time they are removed now check further...!!! " severity="info"/>
+            <apex:pageMessages />
+            <apex:pageBlockSection id="div">                   
+                <apex:inputText value="{!num}" style="width:50px"/>&nbsp;
+                <apex:commandButton value="Add rows" action="{!add_rows}" id="div"/>      
+            </apex:pageBlockSection>
+            
+             
+            <apex:pageBlockSection >    
+                <apex:pageBlockTable value="{!MobileNumbers}" var="mob">               
+                    
+                    <apex:column headerValue="Mobile">
+                        <apex:inputField value="{!mob.Contact_Number_Mobile__c}"/>
+                    </apex:column>
+                   
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+     </apex:pageBlock>
+        <apex:commandButton value="Next" action="{!searchMobileNumber}"/>
+        <apex:commandButton value="Cancel" action="{!Cancel}"/>
+       </apex:form>          
+            
+</apex:page>

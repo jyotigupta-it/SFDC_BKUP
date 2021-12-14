@@ -1,0 +1,857 @@
+<apex:page controller="VendorPageController" showHeader="false" sidebar="false" applyBodyTag="false" standardStylesheets="false">
+    <apex:slds />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_js)}"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_UI_js)}"/>
+
+<link  href="{!URLFOR($Resource.font_awsome_css)}" rel="stylesheet"/>
+<link  href="{!URLFOR($Resource.sticky_css)}" rel="stylesheet"/>
+
+<link href="{!URLFOR($Resource.Ashd_jquery_UI_css)}" rel="stylesheet"/>
+<!--<link  href="{!URLFOR($Resource.Ashd_bootstrap_css)}" rel="stylesheet"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_theme_css)}" rel="stylesheet"/>-->
+<apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_js)}"/>
+<apex:includeScript value="{!URLFOR($Resource.Ashd_angular_js)}"/>
+<link  href="{!URLFOR($Resource.Ashd_bootstrap_select_css)}" rel="stylesheet"/>
+
+<apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_select_js)}"/>
+
+
+
+  
+<style>
+ <!--body{font-family:Calibri !important;}
+.navbar-inverse{background-color:#19a8db !important;background-image: -webkit-linear-gradient(top,#19a8db,#0ebdf7 100%); color:#FFF !important; border-radius:0px !important;padding:7px; }
+.navbar-nav{float:right;}
+.navbar-inverse .navbar-nav>li>a{color:#FFF !important;}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{border-color:#0ebdf7 !important;}
+.navbar{margin-bottom:0px !important;border:0px #FFF none}
+.jumbotron{margin:0px 0px !important; padding:10px !important}
+
+ .nav-mn{color:#FFF !important; font-size:16px !important;padding-right:10px;margin-top:17px;}
+ .nav-mn a {color:#FFF !important;}
+ .nav-mn a:hover{text-decoration:none}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{vertical-align:middle !important;}
+body{
+    background-color:#ebebe0!important;
+}
+thead{
+    background-color:#ebebe0!important;
+}
+.bbc{
+padding:10px;
+height:50px;
+    background-color:#ffffff!important;
+}
+.bodyy{
+    width:100%;
+   
+    
+}
+.tablebody,tr,{
+    background-color:#ffffff!important;
+    height:100%!important;
+    width:100%!important;
+}
+.mainBlock{
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:1;
+    background-color:#000000;
+    opacity:.3;
+}
+.main{
+    z-index:1!important;
+    background-color:#ffffff!important;
+    height:500px!important;
+    top:10%!important;
+    border:2px solid #19a8db !important;
+    border-radius:2px!important;
+    padding:0px!important;
+    
+}
+
+
+
+.approvalBar{
+    background-color:#2471A3!important;
+    height:25px!important;
+}
+
+//For Checkbox
+label i {
+  display: inline-block;
+  height: 20px;
+  position: relative;
+  
+  font-style: normal;
+  color: #ccc;
+  
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input[type="radio"],
+input[type="checkbox"] { display: none; }
+input[type="radio"] + i:before,
+input[type="checkbox"] + i:before {
+  font-family: 'FontAwesome';
+  font-size: 20px;
+  height: 20px;
+  width: 26px;
+  display: inline-block;
+  /*margin-left: 100px;*/
+} 
+input[type="checkbox"] + i:before { content: "\f096"; }
+
+input[type="checkbox"]:checked + i:before { content: "\f046"; }
+
+input[type="checkbox"]:checked + i + span,
+input[type="checkbox"]:checked + i:before { color: rgba(0, 128, 0, 0.5); }      For Checkbox Ends
+
+
+.button{
+    width:90px!important;
+    height:35px!important;
+    margin-bottom:0px!important;
+  
+  
+}
+
+.button-Approve{ background-color:#24aa98;color:white; }
+            
+
+
+#commentsER{
+    display:none;
+}
+-->
+       .navi li {
+        float:left;
+        margin-left:20px;
+    }  
+    th, td .slds-truncate {
+    white-space:normal!important;
+    }
+    .alertfullwindow{
+    height:100%!important;
+    width:100%!important;
+    left:0!important;
+    top:0!important;
+    position:fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+    z-index:2;
+}
+
+.alertcontent{
+            padding:0px;
+                top: 35%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid #e3e2e2;
+                border-radius:5px;
+                z-index: 2;
+    left:40%;
+        }
+    .btn_css {
+        padding: 4px 15px;
+    border-radius: 3px;
+    text-align: center!important;
+    vertical-align: middle!important;
+    border: 1px solid rgb(221, 219, 218)!important;
+    transition: border .15s linear!important;
+    background-color: rgba(27, 82, 151, 1)!important;
+    border-color: rgba(27, 82, 151, 1)!important;
+    color: rgb(255, 255, 255)!important;
+    }
+    .blockwindow1{
+    height:100%!important;
+    width:100%!important;
+    left:0!important;
+    top:0!important;
+    position: fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+}
+.approval{
+   z-index: 1!important;
+                    
+    margin-bottom:10%;
+
+    background-color: white!important;
+    border-radius: 5px;
+    padding: 0;
+      position: fixed!important;
+    top: 20%!important;
+    left: 36%;
+    width:27%;
+}
+    .blockwindow{
+    height:100%!important;
+    width:100%!important;
+    left:0!important;
+    top:0!important;
+    position:fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+}
+.ImageWindow{
+    position:fixed!important;
+    top:15%!important;
+    z-index:1!important;
+    background-color:#ffffff!important;
+    left:34%;
+                    
+                    margin-bottom:10%;
+                   
+                    
+                    border-radius: 5px;
+                    padding: 0;
+                width:450px!important;
+}
+.ImageBar{
+    background-color:#2471A3!important;
+    height:25px!important;
+}
+      @media only screen and (min-width: 250px) and (max-width: 768px) {
+    .slds-scope .slds-max-medium-table_stacked td:before, .slds-scope .slds-max-medium-table_stacked th:before, .slds-scope .slds-max-medium-table--stacked td:before, .slds-scope .slds-max-medium-table--stacked th:before {
+    float:left;
+    }
+    td .slds-truncate {
+    float:right;
+    }
+    .approval{
+   z-index: 1!important;
+                    
+    margin-bottom:10%;
+
+    background-color: white!important;
+    border-radius: 5px;
+    padding: 0;
+      position: fixed!important;
+    top: 5%!important;
+    left: 5%;
+    width:90%;
+}
+    .alertcontent{
+            padding:0px;
+                top: 10%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid #e3e2e2;
+                border-radius:5px;
+                z-index: 2;
+    left:5%;
+    width:90%;
+        }
+    .ImageWindow{
+    position:fixed!important;
+    top:10%!important;
+    z-index:1!important;
+    background-color:#ffffff!important;
+    
+                    
+                    left:5%;
+                   
+                    
+                    border-radius: 5px;
+                    padding: 0;
+                width:90%!important;
+}
+    td .slds-truncate {
+    white-space:normal!important;
+    }
+    }
+</style>
+<script>
+ var ImageURL="{!$Label.AttachmentURL}";
+ console.log(ImageURL);
+ var alertblock=true;
+ var reloadbol=false;
+ 
+     /*function alertWindow(msg){
+           $(document).ready(function(){
+               alertblock=false;
+                $('#submit').blur();
+               $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;"><label class="acnc" style="float:right;padding-right:5px;color:#000000;font-size:20px;">X</label></div><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;"><label style="margin-top:20px;margin-bottom:20px;">'+msg+'</label> <br/></div>  <div style="float:right;margin-top:15px"><a class="btn btn-default acnc"  href="#">Close</a> </div></div>')
+                //setTimeout(function(){window.location.replace("http://www.google.com");},5000);
+                $('.acnc').click(function(){
+                    alertblock=true;
+                    $('#block').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+                   
+            });
+            
+           });
+        } */
+        
+        
+        function alertWindow(msg,pic){
+            var htmcode='';
+          var suc='';
+          
+           if(pic=='alert'){
+               htmcode='<span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span><b style="font-family:Calibri !important;">Alert</b>';
+           }else {
+            htmcode='<span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span>';
+            suc='padding-bottom:20px;';
+           }
+           $(document).ready(function(){
+               alertblock=false;
+                $('#submit').blur();
+                $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class=" alertcontent"><div style="padding:20px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);'+suc+'">'+htmcode+'<span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;">'+msg+'</label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="btn_css acnc" value="Close" /></div></div>');
+
+               //$('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class=" alertcontent"><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;"><label class="acnc" style="float:right;padding-right:5px;color:#000000;font-size:20px;">X</label></div><div style="float:left;width:100%;border-bottom:1px solid #e2e2e2;"><label style="margin-top:20px;margin-bottom:20px;">'+msg+'</label> <br/></div>  <div style="float:right;margin-top:15px"><a class="btn btn-default acnc"  href="#">Close</a> </div></div>')
+                //setTimeout(function(){window.location.replace("http://www.google.com");},5000);
+                $('.acnc').click(function(){
+                    alertblock=true;
+                    $('#block').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+                    if(reloadbol){
+                        window.location.reload();
+                    }
+            });
+            
+           });
+        }   
+
+
+            $(document).ready(function()
+            {
+                $('body').keyup(function(event){
+                    if(event.keyCode==27){
+                        if(alertblock){
+                             $('.blockwindow').remove();
+                            $('.ImageWindow').remove();
+                            $('.blockwindow1').remove();
+                            $('.approval').remove();
+                        }
+                    }
+                });
+                   
+           });
+
+            function displayPic(evt){
+             //console.log('zuzuzuzu');
+                $(document).ready(function(){
+                    $('#ban').prop('src',evt.target.src);
+                    
+                    
+                });
+            }
+
+
+            function ApproveReject(obj,p){
+             var onComment;
+                if(p=='Approve'){
+                    onComment='Approval';
+                }else{
+                    onComment='Rejection';
+                }
+                $(document).ready(function(){
+                    $('body').append('<div class="blockwindow1"></div> <div class="approval col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor:pointer;" class="glyphicon glyphicon-remove appcnc"></span> <span style="float:left;font-weight: bold;font-size: 16px;">Approval/Rejection Detail</span> </div> </div><div style="width:100%;padding: 5px 10px;"> <h4 style="text-align:left;padding-left:10px;">'+ obj.shopname+'</h4> <h4 style="text-align:left;padding-left:10px;">Comments :</h4> <div align="center" style="width:100%;margin-bottom:5px;text-align:left;"><div id="commentsER" >Enter the Comments</div> <textarea class="slds-textarea" style="resize:none;width:88%" placeholder="Enter '+onComment+' reason" id="comments" rows="5"></textarea></div> </div> <div style="border-top: 1px solid rgba(0, 0, 0, 0.11);text-align: right;padding: 10px 15px;"> <input type="button" id="sub" class="btn_css" value="Submit" /> <input type="button" class="btn_css appcnc" value="Close"> </div> </div>');
+
+                    //$('body').append('<div class="blockwindow1"></div><div class="col-sm-4 col-sm-offset-4 approval"><div class="row approvalBar" ><label style="float:left;color:#ffffff;font-family:helvetica;font-size:18px;padding-left:5px;">'+p+' Window ['+obj.shopname+']</label><label id="appcnc"style="float:right;color:#ffffff;font-size:20px;padding-right:5px;">X</label></div><div class="row"><h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">Comments :</h4><div align="center" style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5px;"><textarea class="form-control" style="resize:none;" placeholder="Please leave '+p+' comments" id="comments" rows="5"></textarea></div><div align="right" style="margin-top:10px;margin-right:20px;"><input type="button" id="sub" class="btn btn-default" value="Submit" /></div>  </div> <div>');
+                    //$('body').append('<div class="blockwindow1"></div><div class="col-sm-4 col-sm-offset-4 approval" style="height:280px!important;"><div class="row approvalBar" ><label style="float:left;color:#ffffff;font-family:helvetica;font-size:18px;padding-left:5px;">'+p+' Window</label><label id="appcnc"style="float:right;color:#ffffff;font-size:20px;padding-right:5px;">X</label></div><div class="row"><h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">'+ obj.shopname+'</h4><h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">Comments :</h4><div align="center" style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5px;"><textarea class="form-control" style="resize:none;" placeholder="Please leave '+p+' comments" id="comments" rows="5"></textarea></div><div align="right" style="margin-top:10px;margin-right:20px;"><input type="button" id="sub" class="btn btn-default" value="Submit" /></div>  </div> <div>');
+                    $('#sub').click(function(){
+                        reloadbol=true;
+                        
+                         if(p=='Reject'){
+                        if($('#comments').val().trim().length==0){
+                            //alertWindow('please give Comment','alert');
+                             $('#commentsER').css({'display':'block'});
+                            return;
+                        }
+                       } 
+                        
+                        obj.comment=$('#comments').val();
+                        obj.action=p;
+                        var ArrayObj=[];
+                        ArrayObj.push(obj.id);
+                        
+                        if(p=='Approve'){
+                        VendorPageController.approveRequest(ArrayObj,obj.comment,function(res,evt){
+                            if(evt.status){
+                                  
+                                if(res){
+                                  
+                                      alertWindow('The selected Shop name(s) has been Approved.','');
+                                 
+                               }else{
+                                   
+                                      alertWindow('The selected Shop name(s) has failed to Approve.','alert');
+                               }
+
+                            }else{
+                                //alert('Error in Connection');
+                                alertWindow('Error in Connection.','alert');
+                            }
+                        
+                        });
+                        
+                        
+                        }else if(p=='Reject'){
+                        VendorPageController.rejectRequest(ArrayObj,obj.comment,function(res,evt){
+                            if(evt.status){
+                                  
+                                if(res){
+                                  
+                                      alertWindow('The selected Shop name(s) has been Rejected.','');
+                                  
+                               }else{
+                                   
+                                      alertWindow('The selected Shop name(s) has failed to Reject.','alert');
+                               }  
+                                
+                                
+                                
+                            }else{
+                                //alert('Error in Connection');
+                                alertWindow('Error in Connection.','alert');
+                            }
+                        
+                        });
+                        
+                        }
+                        
+                        $('.blockwindow1').remove();
+                        $('.approval').remove();
+                        //window.loaction.reload();
+                    });
+                    $('.appcnc').click(function(){
+                        reloadbol=false;
+                        $('.blockwindow1').remove();
+                        $('.approval').remove();
+                    });
+                });
+            }
+            
+            function ApproveRejectAll(ArrObj,p){
+             var onComment;
+                if(p=='Approve'){
+                    onComment='Approval';
+                }else{
+                    onComment='Rejection';
+                }
+                
+                $(document).ready(function(){
+                     $('body').append('<div class="blockwindow1"></div> <div class="approval col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor:pointer;" class="glyphicon glyphicon-remove appcnc"></span> <span style="float:left;font-weight: bold;font-size: 16px;">Approval/Rejection Detail</span> </div> </div><div style="width:100%;padding: 5px 10px;">  <h4 style="text-align:left;padding-left:10px;">Comments :</h4> <div align="center" style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5px;" ><span id="commentsER" style="color:red;float: left;">Enter the Comments</span> <textarea class="form-control" style="resize:none;" placeholder="Enter '+onComment+' reason" id="comments" rows="5"></textarea></div> </div> <div style="border-top: 1px solid rgba(0, 0, 0, 0.11);text-align: right;padding: 10px 15px;"> <input type="button" id="sub" class="btn btn-default" value="Submit" /> <input type="button" class="btn btn-default appcnc" value="Close"> </div> </div>');
+
+                    //$('body').append('<div class="blockwindow1"></div><div class="col-sm-4 col-sm-offset-4 approval"><div class="row approvalBar" ><label style="float:left;color:#ffffff;font-family:helvetica;font-size:18px;padding-left:5px;">'+p+' All Window</label><label id="appcnc"style="float:right;color:#ffffff;font-size:20px;padding-right:5px;">X</label></div><div class="row"><h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">Comments :</h4><div align="center" style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5px;"><textarea class="form-control" style="resize:none;" placeholder="Please leave '+p+' comments" id="comments" rows="5"></textarea></div><div align="right" style="margin-top:10px;margin-right:20px;"><input type="button" id="sub" class="btn btn-default" value="Submit" /></div>  </div> <div>');
+                    $('#sub').click(function(){
+                    reloadbol=true;
+                        var ArrayObj=[];
+                      
+                       if(p=='Reject'){
+                        if($('#comments').val().trim().length==0){
+                            //alertWindow('please give Comment.','alert');
+                            $('#commentsER').css({'display':'block'});
+                            return;
+                        }
+                       } 
+                        for(var i=0;i<ArrObj.length;i++){
+                            if(ArrObj[i].select){
+                                ArrObj[i].comment=$('#comments').val();
+                                ArrObj[i].action=p;
+                                 ArrayObj.push(ArrObj[i].id);
+                            }
+                        }
+                      
+                        if(p=='Approve'){
+                        VendorPageController.approveRequest(ArrayObj,ArrObj[0].comment,function(res,evt){
+                            if(evt.status){
+                                  
+                                if(res){
+                                  
+                                      alertWindow('The selected Shop name(s) has been Approved.','');
+                                 
+                               }else{
+                                   
+                                      alertWindow('The selected Shop name(s) has failed to Approve.','alert');
+                               }
+
+                            }else{
+                                //alert('Error in Connection');
+                                alertWindow('Error in Connection','alert');
+                            }
+                        
+                        });
+                        
+                        
+                        }else if(p=='Reject'){
+                        VendorPageController.rejectRequest(ArrayObj,ArrObj[0].comment,function(res,evt){
+                            if(evt.status){
+                                  
+                                if(res){
+                                  
+                                      alertWindow('The selected Shop name(s) has been Rejected.','');
+                                  
+                               }else{
+                                   
+                                      alertWindow('The selected Shop name(s) has failed to Reject.','alert');
+                               }  
+                                
+                                
+                                
+                            }else{
+                                //alert('Error in Connection');
+                                alertWindow('Error in Connection','alert');
+                            }
+                        
+                        });
+                        
+                        }
+                        
+                        $('.blockwindow1').remove();
+                        $('.approval').remove();
+                        //window.location.reload();
+                    });
+                    $('.appcnc').click(function(){
+                    reloadbol=false;
+                        $('.blockwindow1').remove();
+                        $('.approval').remove();
+                    });
+                     
+                      
+                   
+                });
+            }
+            
+            /*function fan(event){
+               //console.log(event.target.src);
+               document.getElementById('ban').src=event.target.src;
+               
+           }
+            function cnc(){
+                $(document).ready(function(){
+                    $('.mainBlock').remove();
+                    $('.main').remove();
+                });
+            }*/
+            
+         function imgcnc() {
+             
+                    reloadbol=false;
+                        $('.blockwindow').remove();
+              $('.ImageWindow').remove();
+             }
+
+
+    var app=angular.module('myApp',[]);
+    
+
+app.factory('Ashirwad_Fact',function($q,$log){
+    var tt={};
+    
+    tt.getVendor=function(){
+        var defer=$q.defer();
+        VendorPageController.collectApproveBrand(function(res,evt){
+            if(evt.status){
+                
+                defer.resolve(res);
+            }else{
+                $log.error(evt.Message);
+                defer.reject(event.Message);
+            }
+             
+            },{ buffer: true, escape: false, timeout: 30000 }
+            );
+            
+        
+        return(defer.promise);
+    }
+    
+    return tt;
+});
+    app.controller('ctrl',function($scope,Ashirwad_Fact){
+           $scope.mshow=true;
+           
+           Ashirwad_Fact.getVendor().then(function(resp){
+                //console.log(resp);
+                $scope.data=[];
+                for(var i=0;i<resp.length;i++){
+                
+                    var temp=new Object();
+                    temp.id=resp[i].Id;
+                    temp.shopname=resp[i].Shop_Name__r.Name;
+                    temp.btype=resp[i].Branding_Type__c;
+                    temp.rtype=resp[i].Request_Type__c;
+                    temp.vtype=resp[i].Vertical_type__c;
+                    temp.cname=resp[i].Shop_Name__r.Primary_Contact_Person_Name__c;
+                    temp.mob=resp[i].Shop_Name__r.Contact_Number_Mobile__c;
+                    temp.phone=resp[i].Shop_Name__r.Contact_Number_Phone__c;
+
+     temp.address=resp[i].Shop_Name__r.Street_Address__c+','+resp[i].Shop_Name__r.City__c+',\n'+resp[i].Shop_Name__r.District__c+','+resp[i].Shop_Name__r.State__c+',\n'+resp[i].Shop_Name__r.PIN_Code__c;
+   
+   
+                    temp.vendorfee=resp[i].Vendor_Fee__c;
+                    if(temp.vendorfee==0){
+                        temp.vendorfee=0.00;
+                    }
+                 //   temp.status=resp[i].Status__c;
+                            
+               /**********************Added ********************/     
+                    temp.vstatus=resp[i].Branding_Approved_Rejected__c;
+                    temp.status='';
+                       
+                    if(temp.vstatus=='Vendor Assigned-Rework'){
+                        temp.status='Rework';
+                    }else if(temp.vstatus=='Vendor Assigned'){
+                                     
+                        temp.status='Open';
+                        
+                    }else if(temp.vstatus=='Request Completed and Submitted'){
+                        temp.status='Submitted';
+                      }
+                                   
+                   
+               /**********************Added ********************/ 
+                    
+                    
+                    var dt=new Date(resp[i].Vendor_Submitted_Date__c);
+                    temp.createdDate=''+dt.getDate()+'/'+(dt.getMonth()+1)+'/'+dt.getFullYear();
+                    temp.docafter='';
+                    temp.docbefore='';
+                    temp.Attachments=[];
+                    temp.action='';
+                    temp.comment='';
+                    temp.select=false;
+                    
+                    temp.Attachments=resp[i].Attachments;
+                    if(temp.Attachments==undefined){
+                        temp.docafter='';
+                        temp.docbefore='';
+                    }else if(temp.Attachments.length==1){
+                    //console.log('zuzu');
+                        var a;
+                        if(temp.Attachments[0]!=undefined){
+                            a=temp.Attachments[0].Name.toLowerCase();
+                            //console.log(a);
+                            if(a.search('before')!=-1){
+                                temp.docbefore=temp.Attachments[0].Id;
+                            }else{
+                                temp.docafter=temp.Attachments[0].Id;
+                            }
+                        }
+                        
+                    }else if(temp.Attachments.length==2){
+                        var a;
+                        if(temp.Attachments[0]!=undefined){
+                            a=temp.Attachments[0].Name.toLowerCase();
+                            //console.log(a);
+                            if(a.search('before')!=-1){
+                                temp.docbefore=temp.Attachments[0].Id;
+                                temp.docafter=temp.Attachments[1].Id;
+                            }else{
+                                temp.docafter=temp.Attachments[0].Id;
+                                temp.docbefore=temp.Attachments[1].Id;
+                            }
+                        }
+                    }
+                    
+                    //console.log(temp.Attachments);
+                    
+                    
+                    temp.tk=false;
+                    
+                    $scope.data.push(temp);
+                }
+                //console.log($scope.data);
+           });
+           
+           function blockWindow(obj){
+                console.log(ImageURL);
+                $(document).ready(function(){
+                    //$('body').append('<div class="mainBlock"></div> <div class="col-sm-6 col-sm-offset-3 main"> <div align="right" style="height:30px;width:100%;background-color:#19a8db;padding-right:10px"> <label style="font-size:25px;" onclick="cnc()">X</label> <div align="center" style="margin-top:100px;"> <table > <tr> <td style="height:inherit;vertical-align:bottom;"> <div style="width:100%;"> <div style="float:right;width:50%;"> <label>Before</label><br/> <img onmouseover="fan(event)" id="before" src="/servlet/servlet.FileDownload?file='+obj.docbefore+'" style="width:100px;height:100px;"/> </div> <div style="float:left;width:50%;"> <label> After</label><br/><img onmouseover="fan(event)" id="after" src="/servlet/servlet.FileDownload?file='+obj.docafter+'" style="width:100px;height:100px;" /> </div> </div> </td> <td style="vertical-align:bottom;"> <div > <img id="ban" src="/servlet/servlet.FileDownload?file='+obj.docbefore+'" alt="Not Found/Uploaded" style="width:200px;height:300px;"/> </div> </td> </tr> </table> </div> </div> </div>');
+                    //$('body').append('<div class="blockwindow"></div> <div class="col-sm-4 col-sm-offset-4 ImageWindow"> <div class="row ImageBar" ><label style="float:left;color:#ffffff;font-family:helvetica;font-size:18px;padding-left:5px;">Image Window</label><label id="appcnc"style="float:right;color:#ffffff;font-size:20px;padding-right:5px;">X</label></div> <div class="row"> <h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">'+obj.shopname+'</h4> <div style="width:80%;margin-left:auto;margin-right:auto;margin-bottom:5px;"> <div align="center" style="width:100%"> <div style="width:30%;float:left;vertical-align: bottom;bottom: 10px;position: absolute;"> <div style="float:left;width:50%;"> Before <img alt="Not Uploaded" onmouseover="displayPic(event)" src="/servlet/servlet.FileDownload?file='+obj.docbefore+'" style="height:50px;width:100%;border:1px solid #000000;border-radius:2px;margin:2px;"/> </div> <div style="float:right;width:50%;"> After <img alt="Not Uploaded" onmouseover="displayPic(event)" src="/servlet/servlet.FileDownload?file='+obj.docafter+'" style="height:50px;width:100%;border-radius:2px;margin:2px;border:1px solid #000000;"/> </div> </div> <div style="width: 70%;height: 80%;float:right;margin-right: -2%;"> <img alt="Not Uploaded" id="ban" src="/servlet/servlet.FileDownload?file='+obj.docbefore+'" style="width: 80%;border-radius:2px;margin:2px;border:1px solid #000000;height: 260px;" /> </div> </div> </div> </div> <div>');
+                  
+                  /*Previous*/
+                 //  $('body').append('<div class="blockwindow"></div> <div class="ImageWindow col-sm-4 col-sm-offset-4 "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor:pointer;" class="glyphicon glyphicon-remove appcnc"></span> <span style="float:left;font-weight: bold;font-size: 16px;">Image Window</span> </div> </div> <div style="width:100%;padding: 5px 10px;text-align:center;"> <h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">'+obj.shopname+'</h4> <div align="center" style="width:30%;float:left;vertical-align: bottom;bottom: 30px;position: absolute;"margin-bottom:10px;> <div style="float:left;width:50%;"> Before <img alt="Not Uploaded" onmouseover="displayPic(event)" src="/servlet/servlet.FileDownload?file='+obj.docbefore+'" style="height:50px;width:100%;border:1px solid #000000;border-radius:2px;margin:2px;"/> </div> <div style="float:right;width:50%;"> After <img alt="Not Uploaded" onmouseover="displayPic(event)" src="/servlet/servlet.FileDownload?file='+obj.docafter+'" style="height:50px;width:100%;border-radius:2px;margin:2px;border:1px solid #000000;"/> </div> </div> <div style="width: 70%;height: 80%;float:right;margin-right: -2%;margin-bottom:30px;"> <img alt="Not Uploaded" id="ban" src="/servlet/servlet.FileDownload?file='+obj.docbefore+'" style="width: 80%;border-radius:2px;margin:2px;border:1px solid #000000;height: 260px;" /> </div> </div> </div>');   
+     
+                   /*using label*/
+                    $('body').append('<div class="blockwindow"></div> <div class="ImageWindow  "> <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.11);width:100%;padding: 10px 15px;"> <div style="width:100%;padding:10px 15px;"> <span style="float:right;cursor:pointer" class="glyphicon glyphicon-remove appcnc"></span> <span style="float:left;font-weight: bold;font-size: 16px;">Image Window</span> </div> </div> <div style="width:100%;padding: 5px 10px;text-align:center;"> <h4 style="text-align:left;padding-left:10px;padding-bottom:5px;">'+obj.shopname+'</h4> <div align="center" style="width:30%;float:left;vertical-align: bottom;bottom: 30px;position: absolute;"margin-bottom:10px;> <div style="float:left;width:50%;"> Before <img alt="Not Uploaded" onmouseover="displayPic(event)" src="'+ImageURL+obj.docbefore+'" style="height:50px;width:100%;border:1px solid #000000;border-radius:2px;margin:2px;"/> </div> <div style="float:right;width:50%;"> After <img alt="Not Uploaded" onmouseover="displayPic(event)" src="'+ImageURL+obj.docafter+'" style="height:50px;width:100%;border-radius:2px;margin:2px;border:1px solid #000000;"/> </div> </div> <div style="width: 70%;height: 80%;float:right;margin-right: -2%;margin-bottom:30px;"> <div style="height: 180px;width: 80%;"><img alt="Not Uploaded" id="ban" src="'+ImageURL+obj.docbefore+'" style="height: 180px;width: 80%;border-radius:2px;margin:2px;border:1px solid #000000;" /></div> </div> </div> <div style="clear:both;padding:10px;text-align:right;"><input type="button" class="btn_css slds-p-top_small" onclick="imgcnc()" value="Close"></div></div></div>');   
+                  
+                    $('.appcnc').click(function(){
+                
+                    $('.blockwindow').remove();
+                    $('.ImageWindow').remove();
+                    
+                });    
+               });
+            }
+            
+           
+           
+           $scope.view=function(obj){
+               blockWindow(obj);
+           };
+           
+           $scope.approve=function(obj,p){
+               ApproveReject(obj,p);
+               
+           };
+           $scope.reject=function(obj,p){
+               ApproveReject(obj,p);
+           };
+           
+           $scope.seeall=function(){
+               //console.log($scope.data);
+           };
+           $scope.approveall=function(){
+               var count=0;
+               for(var i=0;i<$scope.data.length;i++){
+                   if($scope.data[i].select){
+                       count++;
+                   }
+               }
+               if(count==0){
+                   //alert('please select Shop');
+                    alertWindow('No Shop is selected. Please select the Shop(s).','alert');
+                   return;
+               }
+               ApproveRejectAll($scope.data,'Approve');
+           };
+           $scope.rejectall=function(){
+               var count=0;
+               for(var i=0;i<$scope.data.length;i++){
+                   if($scope.data[i].select){
+                       count++;
+                   }
+               }
+               if(count==0){
+                   //alert('please select Shop');
+                   alertWindow('No Shop is selected. Please select the Shop(s).','alert');
+                   return;
+               }
+               ApproveRejectAll($scope.data,'Reject');
+           };
+    
+    });
+</script>
+
+<body ng-app="myApp" ng-controller="ctrl">
+    <div class="slds-scope">
+<div class="bs-example" data-example-id="inverted-navbar" > 
+  <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="" style="float:left">
+<img src="{!$Resource.AshirvadLogoNew}"  width="130px" />
+</h1>
+
+ <div  id="bs-example-navbar-collapse-9" style="float:right;margin-top:22px;"> 
+ 
+                     <ul class="navi"> 
+                         <!--<li ><a style="font-weight:bolder;" href="/apex/BrandingList">List View</a></li>-->
+                         <li class="nav-mn">
+                            <span class="glyphicon glyphicon-list">
+                                <a style="font-family:Calibri !important;" href="/apex/BrandingList">List View</a>
+                            </span>
+                         </li> 
+                         <li id="li2" class="nav-mn">
+                            <span class="glyphicon glyphicon-plus">
+                                <a id="link1" style="font-family:Calibri !important;" href="/apex/BrandingAction">Branding Action</a>
+                            </span>
+                        </li>
+                         <li class="nav-mn">
+                            <span class="glyphicon glyphicon-home">
+                                <a style="font-family:Calibri !important;" href="/home/home.jsp">Home</a>
+                            </span>
+                         </li> 
+
+                     </ul>
+       </div>
+            </div>
+        </div>
+                  
+
+               
+ </div>
+ 
+   <div class="slds-text-heading_medium slds-p-vertical_small">Branding Approval </div>
+  
+   </div>
+   <div >
+       <div class="bodyy bbc slds-p-vertical_small" align="right" >
+           <input type="button" class="slds-button slds-button_brand" value="Approve all" onclick="this.blur();" ng-show="mshow" ng-click="approveall()"/>
+           <input type="button" class="slds-button slds-button_brand" value="Reject all" onclick="this.blur();" ng-show="mshow" ng-click="rejectall()" />
+       </div>
+       <div class="bodyy">
+<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked">
+    <thead>
+      <tr class="slds-line-height_reset">
+       <th  class="" scope="col" ng-show="mshow">
+          </th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Shop Name</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Branding Type</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Request type</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Vertical type</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Shop Address</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Contact Name</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Contact Number</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Vendor Fee</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Status</div></th>
+          <th  class="" scope="col">
+              <div class="slds-truncate" title="">Shop Image</div></th>
+          <th   class="" scope="col" colspan="2"><div class="slds-truncate" title=""></div></th>
+        </tr>
+    </thead>
+    <tbody id="tablebody">
+      <tr ng-repeat="p in data" >
+      
+       <td ng-show="mshow"  data-label="">
+           <label>
+                <input type="checkbox" id="{{p.id}}" ng-model="p.select" ng-change="seeall()"  />
+            <i> </i></label>
+         </td>
+          
+          <td data-label="Shop Name">
+              <div class="slds-truncate" title="">{{p.shopname}}</div></td>
+          <td   data-label="Branding Type">
+              <div class="slds-truncate" title="">{{p.btype}}</div></td>
+          <td   data-label="Request type">
+              <div class="slds-truncate" title="">{{p.rtype}}</div></td>
+          <td   data-label="Vertical type">
+              <div class="slds-truncate" title="">{{p.vtype}}</div>
+          </td>
+          <td  data-label="Shop Address">
+              <div class="slds-truncate" title="">{{p.address}}</div></td>
+          <td   data-label="Contact Name">
+              <div class="slds-truncate" title="">{{p.cname}}</div></td>
+          <td  data-label="Contact Number">
+              <div class="slds-truncate" title="">{{p.mob}}<br/>{{p.phone}}</div></td>
+          <td  data-label="Vendor Fee">
+              <div class="slds-truncate" title=""><label >{{p.vendorfee}}</label></div></td>
+          <td   data-label="Status"><div class="slds-truncate" title="">{{p.status}}<br/>{{p.createdDate}}</div></td>
+          <td  data-label="Shop Image">
+              <div class="slds-truncate" title="" ><input type="button" class="slds-button slds-button_neutral" value="View Image" onclick="this.blur();"  ng-click="view(p)" /></div></td>
+          <td   data-label="">
+              <div class="slds-truncate" title=""><input type="button" value="Approve" class="slds-button slds-button_neutral" onclick="this.blur();" ng-click="approve(p,'Approve')"/></div></td>
+          <td   data-label="">
+              <div class="slds-truncate" title=""><input type="button" value="Reject" class="slds-button slds-button_neutral" onclick="this.blur();" ng-click="reject(p,'Reject')"/></div></td>
+      </tr>
+    
+    </tbody>
+  
+</table>
+</div>
+   </div>
+    </div>
+</body>
+
+</apex:page>

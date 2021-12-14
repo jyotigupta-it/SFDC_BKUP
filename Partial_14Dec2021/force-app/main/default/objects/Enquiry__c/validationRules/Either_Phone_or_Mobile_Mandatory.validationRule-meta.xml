@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Either_Phone_or_Mobile_Mandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Phone_Number__c  =&apos;&apos;,Mobile__c =&apos;&apos;, $Profile.Name ==&apos;BD&apos;)</errorConditionFormula>
+    <errorMessage>Enter Either Phone Or Mobile Number...!!!</errorMessage>
+</ValidationRule>

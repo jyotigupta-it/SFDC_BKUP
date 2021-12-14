@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>If_Competitor_is_Others</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND((INCLUDES( Competitor__c , &quot;Others&quot;)), Description__c =&apos;&apos;)</errorConditionFormula>
+    <errorDisplayField>Description__c</errorDisplayField>
+    <errorMessage>If the Competitor is &apos;Others&apos; then Description is mandatory</errorMessage>
+</ValidationRule>

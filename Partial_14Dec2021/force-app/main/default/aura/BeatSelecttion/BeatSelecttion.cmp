@@ -1,0 +1,55 @@
+<aura:component controller="BeatSelectionController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!-- attributes -->
+    <aura:attribute name="data" type="Map"/>
+    <aura:attribute name="filteredData" type="Map"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:method name="callChild" action="{!c.callChildMethod}" >
+        <aura:attribute name="param1" type="List" default="parameter 1"/>
+    </aura:method>
+    <aura:attribute name="selectedDealers" type="List"/>
+    <aura:method name="sveBeat" action="{!c.saveBeat}"/>
+    <aura:attribute name="selectedAccts" type="List"/>
+    <aura:attribute name="selection" type="List" />
+    <aura:attribute name="NoRecordsFound" type="boolean" default="true"/>
+    <aura:attribute name="loaded1" type="Boolean" default="false" />
+    
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this }" action="{!c.init }"/>
+    <aura:if isTrue="{!v.NoRecordsFound}">
+        
+        <lightning:card title ="Search Beat" variant="Narrow">
+            
+            <span>
+                <lightning:input onchange="{!c.searchTable}" type="search" label="Search" placeholder="Enter search term" variant="label-hidden" aura:id="SearchBox"/>
+            </span>
+            <br/>
+            <div style="height: 300px;">
+                <lightning:datatable
+                                     aura:id="accountDataTable"
+                                     columns="{!v.columns}"
+                                     data="{!v.filteredData}"
+                                     keyField="beatId"
+                                     selectedRows = "{!v.selection}"
+                                     maxRowSelection="1"
+                                     onrowselection="{!c.handleSelect}"/>
+            </div>
+            
+            
+        </lightning:card>
+        <aura:set attribute="else">
+            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+                <span class="slds-assistive-text">error</span>
+                <h2>No Beats are assigned to the logged in User.</h2>
+            </div>
+            
+            
+        </aura:set>
+        <aura:if isTrue="{! v.loaded1}">
+            <div class="Spinner">
+                <lightning:spinner alternativeText="Loading" size="medium" variant="brand"/>
+            </div>
+        </aura:if>
+    </aura:if>
+    
+</aura:component>

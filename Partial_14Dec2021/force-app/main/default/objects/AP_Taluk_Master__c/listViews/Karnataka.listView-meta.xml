@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Karnataka</fullName>
+    <columns>NAME</columns>
+    <columns>District__c</columns>
+    <columns>State__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>State__c</field>
+        <operation>equals</operation>
+        <value>Tamil Nadu</value>
+    </filters>
+    <label>Karnataka</label>
+</ListView>

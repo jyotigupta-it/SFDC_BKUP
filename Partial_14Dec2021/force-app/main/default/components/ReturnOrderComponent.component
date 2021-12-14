@@ -1,0 +1,47 @@
+<apex:component controller="ReturnOrderController" access="global">
+    <apex:attribute name="ReturnOrderId" type="Id" description="Id of the ProductRequest" assignTo="{!ReturnOrderIds}"/>
+    <table class="tableClass" border = "2" cellspacing = "5">
+          <tr>
+            <th align="left">
+              Return Order number
+            </th>
+            
+            <th align="left">
+              Location
+            </th>
+              <th>
+                  ProductCode
+              </th>
+              <th align="left">
+              Product Description
+            </th>
+            <th align="left">
+              Quantity Returned
+            </th>
+            
+          
+          </tr>          
+        <apex:repeat value="{!ReturnlineItem}" var="lineItem">
+            <tr>
+              <td>
+                {!lineItem.ReturnOrder.ReturnOrderNumber}
+              </td>
+              
+                <td>
+                {!lineItem.SourceLocation.Name}
+              </td>
+              <td>
+                {!lineItem.ProductItem.Product2.ProductCode}
+              </td>
+                <td>
+                {!lineItem.ProductItem.Product2.Description}
+              </td>
+              
+              <td>
+                {!lineItem.QuantityReturned}
+              </td>
+              
+            </tr>
+          </apex:repeat>
+        </table>
+</apex:component>

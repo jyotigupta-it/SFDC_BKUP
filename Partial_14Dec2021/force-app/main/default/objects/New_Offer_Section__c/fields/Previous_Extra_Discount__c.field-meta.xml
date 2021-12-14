@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Previous_Extra_Discount__c</fullName>
+    <description>Previous extra discount field updated by workflow whenever the approval status is changed to approved or rejected. put the previous value of extra discount field to Previous_Extra_Discount__c</description>
+    <externalId>false</externalId>
+    <label>Previous Extra Discount</label>
+    <precision>6</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

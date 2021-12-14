@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Final_od_Value_after_Disc__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Special_Pricing_Request_Approved__c, 
+((((Order_Value__c) - 
+(Order_Value__c * APPL_STD_Discount__c))- 
+((Order_Value__c)- (Order_Value__c * APPL_STD_Discount__c))* Disc_to_Customer_on_MRP__c )- 
+(((Order_Value__c)-(Order_Value__c * APPL_STD_Discount__c))- 
+((Order_Value__c)- (Order_Value__c * APPL_STD_Discount__c))* Disc_to_Customer_on_MRP__c )* ORC_Margin_to_Dlr_Dist__c ), 
+
+((((Order_Value__c) - 
+(Order_Value__c * APPL_STD_Discount__c))- 
+((Order_Value__c)- (Order_Value__c * APPL_STD_Discount__c)))- 
+(((Order_Value__c)-(Order_Value__c * APPL_STD_Discount__c))- 
+((Order_Value__c)- (Order_Value__c * APPL_STD_Discount__c)))* ORC_Margin_to_Dlr_Dist__c ) - 
+
+(Order_Value__c * Disc_to_Customer_on_MRP__c) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Final od Value after Disc</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<apex:page standardController="Opportunity">
+     <script>
+    var userVerticalType =  '{!text($User.Vertical_Type__c)}';
+    
+     if(userVerticalType == 'Projects') {    
+     window.open('/apex/AddProjectDetails',"_self");
+     } else if(userVerticalType == 'Plumbing' || userVerticalType == 'Column') {
+       window.open('/apex/AP_NewRetailProjectPage',"_self");
+     } else if(userVerticalType == '') {
+        alert('Vertical is NOT DEFINED by ADMIN, Please Contact Administrator.');        
+     }
+     </script>
+</apex:page>

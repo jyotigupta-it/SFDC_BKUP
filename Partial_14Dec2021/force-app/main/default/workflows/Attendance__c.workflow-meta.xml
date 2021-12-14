@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Mail_Alert_to_update_site_visits</fullName>
+        <description>Mail Alert to update site visits</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sfdc.support@ashirvad.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/Non_Updation_of_visit_entries_in_SFDC</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Email_Update</fullName>
+        <field>Email_of_Employee__c</field>
+        <formula>Employee__r.Email</formula>
+        <name>Email Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Updation of visits</fullName>
+        <actions>
+            <name>Email_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND(StatusDaily__c=0,Day_of_Date__c&lt;&gt;&quot;Sunday&quot;)</formula>
+        <triggerType>onCreateOnly</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Mail_Alert_to_update_site_visits</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Attendance__c.CreatedDate</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

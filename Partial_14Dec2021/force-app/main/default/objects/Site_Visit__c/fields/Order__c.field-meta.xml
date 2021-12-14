@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order__c</fullName>
+    <externalId>false</externalId>
+    <label>Order</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>WCPC New Order</fullName>
+                <default>false</default>
+                <label>WCPC New Order</label>
+            </value>
+            <value>
+                <fullName>WCPC Repeat Order</fullName>
+                <default>false</default>
+                <label>WCPC Repeat Order</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<apex:component >
+  
+  <!-- CSS BootStrap Components -->
+  <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_AP, 'Bootstrap_DBR/css/bootstrap.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_AP, 'Bootstrap_DBR/css/bootstrap-theme.css')}"/>
+  
+  <!-- JS Bootstrap Component -->
+  <apex:includeScript value="{!URLFOR($Resource.Bootstrap_AP, 'Bootstrap_DBR/js/bootstrap.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Bootstrap_AP, 'Bootstrap_DBR/js/typeahead_DBR.js')}"/>
+  
+</apex:component>

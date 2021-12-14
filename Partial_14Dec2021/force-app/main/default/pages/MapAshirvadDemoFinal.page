@@ -1,0 +1,3376 @@
+<apex:page standardController="Beat_Master__c" extensions="MapAccountUtility" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" showHeader="false" standardStylesheets="false" lightningStylesheets="true" id="pageid">   
+    <apex:slds />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"/> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <apex:includeScript value="/soap/ajax/32.0/apex.js"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"/>
+        <html>
+        <head>
+        
+        <title>Ashirvad Maps</title>
+        
+        
+        <!-- STYLING STARTS -->
+            <style>
+            /* Always set the map height explicitly to define the size of the div
+                * element that contains the map. */
+            #map {
+        height: 100vh;
+    
+    }
+    
+    
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif!important;
+    }
+    /* The popup bubble styling. */
+    .popup-bubble {
+        /* Position the bubble centred-above its parent. */
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, 0%);
+        /* Style the bubble. */
+        background-color: white;
+        
+        padding: 5px;
+        border-radius: 5px;
+        font-family: sans-serif;
+        overflow-y: auto;
+        max-height: 60px;
+        box-shadow: 0px 2px 10px 1px rgba(0,0,0,0.5);
+        z-index:-99;
+    }
+    /* The parent of the bubble. A zero-height div at the top of the tip. */
+    .popup-bubble-anchor {
+        /* Position the div a fixed distance above the tip. */
+        position: absolute;
+        width: 100%;
+        bottom: /* TIP_HEIGHT= */ 0px;
+        left: 0;
+        z-index:-999;
+    }
+    /* This element draws the tip. */
+    .popup-bubble-anchor::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* Center the tip horizontally. */
+        transform: translate(-50%, 0);
+        /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+        width: 0;
+        height: 0;
+        /* The tip is 8px high, and 12px wide. */
+        //border-left: 6px solid transparent;
+        //border-right: 6px solid transparent;
+        //border-bottom: /* TIP_HEIGHT= */ 8px solid white;
+        
+    }
+    /* JavaScript will position this div at the bottom of the popup tip. */
+    .popup-container {
+        cursor: auto;
+        height: 0;
+        position: absolute;
+        /* The max width of the info window. */
+        width: 200px;
+    }
+    
+    
+    
+    
+    
+    
+    
+    .fs22 {
+        font-size:22px;
+        cursor:pointer;
+    }
+    
+    .fs14 {
+        font-size:14px;
+    }
+    
+    .side_bar {
+        height: 100%;
+        width: 0px;
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        background:#f5f5f5;
+        overflow-x: hidden;
+        
+        padding-top: 60px;
+    }
+    .gm-style-iw-c {
+        max-width: none!important;
+        max-height: none!important;
+        width:290px;
+    }
+    .gm-style-iw-d {
+        max-width: none!important;
+        max-height: none!important;
+        width:280px;
+    }
+    
+    .side_bar a:hover {
+        color: #f1f1f1;
+    }
+    
+    .panelopenclose {
+        position: absolute;
+        top: 12px;
+        left: 0px;
+        background: black;
+        opacity: 0.9;
+        padding: 12px 20px 12px 12px;
+        width: 20px;
+        z-index: 9;
+        color: white;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        text-align: center;
+    }
+    .sidebar_icon button {
+        width:50px!important;
+        height:50px!important;
+        border-radius:50%!important;
+        
+    }
+    .rotated {
+        transform: rotate(180deg); /* Equal to rotateZ(45deg) */
+        
+    }
+    
+    .info_win_btn .info_button {
+        width:40px!important;
+        height:40px!important;
+        border-radius:50%!important;
+        
+    }
+    
+    .sidebar_icon i {
+        font-size:17px;
+    }
+    .info_win button {
+        width:45px!important;
+        height:45px!important;
+        border-radius:50%!important;
+        border:1px solid white;
+    }  
+    .sidebar_icon button {
+        width:38px!important;
+        height:38px!important;
+        border-radius:50%!important;
+        border:1px solid white;
+    }    
+    .dirc_btn {
+        position:absolute;
+        right:30px;
+        top:-20px;
+    }
+    .white {
+        color:white!important;
+    }
+    .more_info {
+        color:white!important;
+        font-size:12px!important;
+        text-decoration:underline!important;
+    }
+    
+    
+    
+    <!-- .Search{ 
+        height: 3%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 50px;
+        
+        
+        z-index: 2;
+        position: relative;
+        margin-left: 26%;
+    }-->
+        
+        .p15 {
+            padding:15px;
+        }
+    .Buttons {
+        position: absolute;
+        z-index: 10;
+        top: 140px;
+        right: 12px;
+        width: 280px;
+        height:auto!important;
+        background-color: #ffffff;            
+    }
+    
+    .Buttons button{
+        background: transparent;
+        cursor:pointer;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+    .shopdis {
+        background:#4285f4;
+        color:white;
+    }
+    .btn_white button {
+        background: #ffffff!important;
+        border: 1px solid #c3c3c3!important;
+        width: 102px!important;
+        box-shadow: none!important;
+        text-shadow: none!important;
+        border-radius: 2px!important;
+        height: 31px!important;
+        border-radius: 5px!important;
+        color:black!important;
+        margin-top:8px!important;
+    }
+    .btn_white button:hover {
+        background: #ababab!important;
+        border: 1px solid #c3c3c3!important;
+        width: 102px!important;
+        box-shadow: none!important;
+        text-shadow: none!important;
+        border-radius: 2px!important;
+        height: 31px!important;
+        border-radius: 5px!important;
+        color:#000000!important;
+        margin-top:8px!important;
+    }
+    .filter_btn_css {
+        background: white;
+        
+        border: 1px solid #cccccc;
+        width: 31px;
+        height: 31px;
+        text-align: center;
+        box-sizing: border-box;
+        
+    }
+    
+    
+    .Buttons h2{
+        font-size: 20px;
+        font-weight: normal;
+    }
+    .left_arrow {
+        position: absolute;
+        top: 115px;
+        left: 0px;
+    }
+    .right_arrow {
+        position: absolute;
+        top: 115px;
+        right: 0px;
+    }
+    .Links a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 30px;
+        color: #000000;
+        display: block;
+        vertical-align: center;
+    }
+    .fleft {
+        float:left;
+    }
+    /* The side navigation menu */
+    
+    
+    .content{
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    #main {
+    transition: margin-left .5s;
+    padding: 20px;
+    }
+    
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    
+    
+    
+    .p0 {
+        padding:0px;
+    }
+    
+    .pos_rel {
+        position:relative;
+    }
+    .pos_abs {
+        position: absolute;
+        top: 45px;
+        left: 10px;
+        color: #adadad;
+    }
+    .btn_style {
+        background: #d6aa2b!important;
+        color: white!important;
+        border: 1px solid #d6aa2b!important;
+        border-radius: 5px!important;
+        padding: 3px 19px;
+        margin-right:5px;
+    }
+    .pos_abs_filter {
+        position: absolute;
+        top:105px;
+        right: 12px;
+    }
+    .beat_btn {
+        position: absolute;
+        top: 150px;
+        right: 12px;
+        background: white;
+        width: 31px;
+        height: 31px;
+        text-align: center;
+        display:none;
+        font-size: 14px;
+        font-weight: bold;
+        box-sizing: border-box;
+        padding-top: 5px;
+        border: 1px solid #cccccc;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        
+    }
+    .popupbg {
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    
+    .white {
+        color:white!important;
+    }
+    .btn_color {
+        background:#1FA5AA!important;
+        color:white!important;
+    }
+    
+    
+    .round_btn {
+        border-radius:50%;
+        background:white;
+        border:1px solid green;
+        
+    }
+    .remove_btn {
+        font-size: 13px!important;
+        color: white!important;
+        background: #c51212!important;
+        padding: 0px 5px!important;
+        border-radius: 4px!important;
+        text-decoration:none!important;
+    }
+    
+    #Travelpanel {
+    position: absolute;
+    top: 1%;
+    right:8%;
+    background: whitesmoke;
+    
+    padding: 5px;
+    
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+    }
+    
+    .sidebarscroll {
+        height:100vh;
+        overflow:auto;
+        
+    }
+    
+    .mtdir {
+        margin-top:3px;
+    }
+    
+    #beatbutton{
+    position: absolute;
+    top: 0%;
+    right:78px;
+    
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    
+    }
+    
+    
+    
+    #radiusvalue{
+    display:none;
+    position: absolute;
+    bottom: 7%;
+    right:12px;
+    
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    }
+    
+    
+    .trapezoid {
+        width: 81px;
+        height: 27px;
+        background: black;
+        transform: perspective(5px) rotateX(-1deg);
+        font-size:28px;
+        text-align:center;
+        color : white;
+    }
+    .addr_inp, .rad_inp {
+        background: #ffffff url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center!important;
+        border: solid 1px #ccc!important;
+        
+        width: 55px;
+        
+        -webkit-border-radius: 10em!important;
+        -moz-border-radius: 10em!important;
+        border-radius: 10em!important;
+        
+        -webkit-transition: all .5s!important;
+        -moz-transition: all .5s!important;
+        transition: all .5s!important;
+    }
+    .rad_inp { padding-right:10px!important;
+              padding-left:32px!important;
+              padding-top:0px!important;
+              padding-bottom:0px!important;
+             }  
+    .addr_inp {
+        padding: 5px 10px 5px 32px!important;
+    }
+    
+    .w60 {
+        width:max-content!important;
+    }
+    .addr_btn, .rad_btn {
+        border-radius: 15px;
+        border: none;
+        background: #4285f4;
+        color: white!important;
+        padding: 3px 10px;
+    }
+    
+    #btnAction {
+    position: absolute;
+    top: 57%;
+    right:12px;
+    
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    
+    }
+    
+    #iw-container .iw-title {
+    
+    font-size: 12px;
+    
+    padding: 10px;
+    background-color: #4285f4;
+    color: white;
+    
+    }
+    
+    #sample{
+    color: #4285f4;
+    }
+    
+    #sample1:hover{
+    box-shadow: 0px 6px rgba(0, 0, 0, 0.1);
+    }
+    .modal_no_record {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content_no_record {
+        background-color: #fefefe;
+        margin: auto;
+        
+        border: 1px solid #888;
+        width: max-content!important;
+        text-align:center;
+        box-shadow: 5px 5px 43px #5d5d5d;
+        border-radius:5px;
+    }
+    .p15 {
+        padding:15px;
+    }
+    /* The Close Button */
+    .close_no_record {
+        color: white;
+        border:1px solid #506fa7;
+        background:#506fa7;
+        font-size: 18px;
+        width:100%;
+        padding:7px 0px;
+        box-sizing: border-box;
+        font-size:16px;
+    }
+    
+    .close_no_record:hover,
+        .close_no_record:focus {
+            color:white!important;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    .errormsg {
+        color: #c51212;
+        font-weight: bold;
+    }
+    
+    .errormsg2 {
+        color: #c51212;
+        font-weight: bold;
+    }
+    
+    .addr_btn, .rad_div {
+        display:none;
+    }
+    
+    .addr_rad {
+        position:absolute;
+        top:33px;
+        right:11px;
+        z-index:1;
+    }
+    .savebtn_css {
+        background: #506fa7!important;
+        color: white!important;
+        border: none!important;
+        width: 100%!important;
+        padding: 7px!important;
+        font-size: 16px!important;
+        font-weight: normal!important;
+    }
+    .createbeatclose, .planbeatclose, .beatpanelclose, .Unsuccesscheckinclose, .successcheckinclose, .FailedBeatclose, .saveBeatclose  {
+        background: #c30b0b;
+        font-size: 14px;
+        color: white;
+        padding: 0px 6px;
+        margin-bottom: 6px;
+        border-radius: 3px;
+    }
+    .Unsuccesscheckinclose, .successcheckinclose, .FailedBeatclose, .saveBeatclose  {
+        margin-top: -12px;
+        margin-right: -14px; 
+    }
+    .Unsuccesscheckinclose:hover {
+        color:white!important;
+    }
+    .successcheckinclose:hover {
+        color:white!important;
+    }
+    .FailedBeatclose:hover {
+        color:white!important;
+    }
+    .saveBeatclose:hover {
+        color:white!important;
+    }
+    .beatpanelclose:hover {
+        color:white!important;
+    }
+    .createbeatclose:hover {
+        color:white!important;
+    }
+    .planbeatclose:hover {
+        color:white;
+    }
+    
+    
+    .mr5 {
+        margin-right:5px!important;
+    }
+    .w350 {
+        width:350px!important;
+    }
+    .input_css {
+        background-color: rgb(255, 255, 255)!important;
+        border: 1px solid rgb(221, 219, 218)!important;
+        border-radius: .25rem!important;
+        
+        transition: border .1s linear,background-color .1s linear!important;
+        display: inline-block!important;
+        padding: 0 1rem 0 .75rem!important;
+        line-height: 1.875rem!important;
+        min-height: calc(1.875rem + (1px * 2))!important;
+    }
+    .label_css {
+        font-size:14px!important;
+        font-family: 'Roboto', sans-serif!important;
+    }
+    .popup_btn_css {
+        background: #506fa7!important;
+        color: white!important;
+        padding: 6px 23px;
+        border: none!important;
+        border-radius: 3px!important;
+        margin-top: 10px!important;
+        margin-bottom: 10px!important;
+    }
+    .mt5 {
+        margin-top:5px!important;
+    }
+    .table_css th {
+        font-weight:normal;
+        background: #506fa7!important;
+        color:white;
+        text-align:left;
+    }
+    .table_css {
+        width:100%;
+        border-collapse:collapse;
+        font-size:14px;
+    }
+    .table_css th, .table_css td {
+        border:1px solid #c5c4c4;
+        padding:4px 5px;
+        
+    }
+    .attc_div {
+        padding: 5px;
+        color: white;
+        background: #4285f4;
+    }
+    .beatpanelmodal {
+        position: absolute;
+        z-index: 10;
+        top: 184px;
+        right: 12px;
+        width: 155px!important;
+        height:auto!important;
+        background-color: #ffffff;
+        padding:10px; 
+    }
+    .w100 {
+        width:100%;
+    }
+    .beatpanelbtn {
+        background: transparent;
+        border: none;
+        color: #2c2cb1!important;
+        text-decoration: underline;
+    }
+    .tiles {
+        box-sizing: border-box;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        margin: 5px;
+        
+        background: white;
+        
+    }
+    .pvh150 {
+        padding: 15px 0px;
+    }
+    .div_header {
+        padding: 8px 12px!important;
+        
+        color: white;
+    }
+    .curr_nps {
+        float: right;
+        background: white;
+        color: #4285f4;
+        border-radius: 5px;
+        margin-right: 10px!important;
+        padding: 1px 5px!important;
+        font-size:12px;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 49px;
+        height: 24px;
+    }
+    
+    .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    
+    .switch_silde {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #a0a0a0;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    
+    .switch_silde:before {
+        position: absolute;
+        content: "";
+        height: 19px;
+        width: 19px;
+        left: 2px;
+        top:2px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    
+    input:checked + .switch_silde {
+        background-color: #000000;
+    }
+    
+    input:focus + .switch_silde {
+        box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .switch_silde:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .switch_silde.switch_round {
+        border-radius: 34px;
+    }
+    
+    .switch_silde.switch_round:before {
+        border-radius: 50%;
+    }
+    .beattable tbody {
+        display:block;
+        height:200px;
+        overflow-y:auto;
+        overflow-x:hidden;
+    }
+    .beattable thead,.beattable tbody tr {
+        display:table;
+        width:100%;
+        table-layout:fixed;
+    }
+    .beattable thead {
+        width: calc( 100% - 1em )
+    }
+    .beattable {
+        width:100%;
+        border-bottom:1px solid #c5c4c4;
+    }
+    .w_80 {
+        width:60%!important;
+    }
+    .w_i80 {
+        width:40%!important;
+    }
+    .todaybeat {
+        position:absolute;
+        top:3px;
+        right:1.5%;
+    }
+    .mt0 {
+        margin-top:0px!important;
+    }
+    .promhover:hover {
+        color:#006dcc!important;
+        }
+    .promalign {
+        margin-top:3px;
+        }
+    @media only screen and (min-width: 250px) and (max-width: 780px)  {
+        .promalign {
+        margin-top:6px;
+        }
+        .sidenav a {font-size: 18px;}
+        #Travelpanel {
+        position: absolute;
+        top: 1%;
+        right:12%;
+    }
+     .fs12 { font-size:12px!important; }
+    .w_80 {
+        width:90%!important;
+    }
+    .w_i80 {
+        width:90%!important;
+    }
+    .Buttons {
+        position: absolute;
+        z-index: 10;
+        top: 140px;
+        right: 12px;
+    }
+    .modal-content_no_record {
+        
+        width:90%!important;
+    }
+    .w60 {
+        width:90%!important;
+    }
+    .w350 {
+        width:100%!important;
+    }
+    .addr_inp {
+        padding-top:10px!important;
+        padding-bottom:10px!important;
+    }
+    }
+    @-moz-document url-prefix() {
+        .gm-style-iw-c {
+            width:309px!important;
+        }
+    }
+    
+    #spinner{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url("/img/loading32.gif");
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: 9999999;
+    opacity: 1;
+    }
+    
+    </style>
+    <!-- STYLING ENDS -->
+        
+        </head>
+    <body>
+        <script>
+        
+        /*  function showOrders(String ids){
+        if(ids != NULL && ids !=''){alert(ids);}
+        else{alert('null');}
+    }*/
+        
+        function clearForm(){
+        document.getElementById('{!$Component.pageid:formSam:pgid:beatDateId}').value = null;
+        document.getElementById('{!$Component.pageid:formSam:pgid:theTextInput}').value = null;
+        document.getElementById('beatTableId').style.display = "none";
+        document.getElementById('{!$Component.pageid:formSam:pgid:beatPlanSave}').style.display = "none";
+        document.getElementById('{!$Component.pageid:formSam:pgid:beatPlanClose}').style.display = "none";
+        alert("Your Beat Has Been Planned");
+    }
+    
+    function hold(ids){
+        // alert("coming inside this function"+ids);
+        
+        function showVisits(ids,names,phNo){
+            //  alert("Coming inside testing function " + ids);
+        }
+        
+    }
+    function searchByArea(){
+        var abc;
+        abc=document.getElementById("rds").value;
+        console.log("abc"+abc);
+        //   alert("radi"+abc);
+        document.querySelector(".radi").value=abc;
+        CallApexMethod();
+        
+    }
+    // to navigate to Account detail page and back to map in mobile and tab
+    function navigateTo(sObjectId) {
+        if ((typeof sforce != 'undefined') && sforce && (!!sforce.one)){
+            // Salesforce1 navigation                 
+            sforce.one.navigateToSObject(sObjectId, 'detail');
+        } else {
+            // Set the window's URL using a Visualforce expression
+            window.location.href = '{!$Label.AccountDetailPageRedirect+recId}' + sObjectId +'/view';
+            // site prefix helps when navigation in community
+        }
+    }
+    
+     // to navigate to Promotion detail page and back to map in mobile and tab
+     function navigateToPromotion(sObjectId) {
+        if ((typeof sforce != 'undefined') && sforce && (!!sforce.one)){
+            // Salesforce1 navigation                 
+            sforce.one.navigateToSObject(sObjectId, 'detail');
+        } else {
+            // Set the window's URL using a Visualforce expression
+            window.location.href = '{!$Label.PromotionRedirect+Id}' + sObjectId ;
+            
+            
+            // site prefix helps when navigation in community
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    </script>
+    <div id="loadspinner">
+        <div id="spinner"></div>
+    </div>
+    
+    <div class="slds-scope">
+        
+        <div class="p0 sidebarscroll side_bar" id="my_Side_bar" >
+            
+            <div class="headings">
+                <div>
+                    <apex:actionStatus id="statusspinner">
+                        <apex:facet name="start">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 9999; background-color: black;">
+                                &nbsp;
+                            </div>
+                            <div style="position: absolute; left: 0; top: 0; bottom: 0; right: 0; z-index: 1; margin: 80% 30%">
+                                <div style="display: inline-block; padding: 1px; ">
+                                    <img src="https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1550038268000/sldsloader?" width="80"  />
+                                    
+                                </div>
+                            </div>
+                        </apex:facet>
+                    </apex:actionStatus>
+                    
+                </div>
+                <div id="headingDiv" style="font-size:20px"></div></div>
+            
+            
+            <!-- INPUT FORM STARTS -->
+            
+            
+            <apex:form id="frmtype">
+                <script>
+                function checkinUpdate(){
+                    //alert({!checkindatavalue});
+                    var dte ={!checkindatavalue};
+                    // alert(dte);
+                    if(dte==true){
+                        //    alert('hiii');
+                        checkinUpdatediv();
+                        //   markerSet();
+                    }else{
+                        // alert('noo');
+                        checkinUpdateUnsuccess();
+                        
+                    }
+                }
+                
+                
+             
+                                        
+                </script>
+                
+                <apex:actionFunction name="checkinvisit"  id="checkin" action="{!CheckinData}" reRender="frmtype" oncomplete="checkinUpdate()">
+                    <apex:param id="currentlat" name="clt" value=""/>
+                    <apex:param id="currentlng" name="clg" value=""/>
+                    <apex:param id="currentid" name="cid" value=""/>
+                </apex:actionFunction>
+                
+            </apex:form>
+            
+            
+            <apex:form id="frmid" >  
+                <apex:outputPanel id="idop">
+                    
+                    <apex:actionFunction name="actfun" id="atfn" action="{!actfunmethod}" reRender="idop">
+                        <apex:param id="latval" name="latv" value="" />
+                        <apex:param id="longval" name="longv" value="" />
+                    </apex:actionFunction>
+                    
+                </apex:outputPanel>
+                
+                
+                
+                <apex:inputHidden value="{!geocode_latitude}" id="lati"/> 
+                <apex:inputHidden value="{!geocode_longitude}" id="longi"/>
+                
+                
+                <div class="form-group pos_rel">
+                </div>
+                <div id="radiusvalue">
+                    <apex:inputText value="{!radius}" id="Radius" styleClass="radi"/>
+                    
+                    <apex:commandButton action="{!search}" value="Search" id="theButton" /> 
+                </div>
+                
+                
+                <apex:actionFunction name="CallApexMethod" action="{!search}"/>
+                
+                <!--<apex:actionFunction name="reloadpage" action="{!redirectUser}"/>
+
+<apex:actionFunction name="beatMethod" action="{!OpenPopupBeat}" oncomplete="createbeatpopup()" reRender="Modalidbeat"/>-->
+                
+                
+                <!-- SLIDER IMAGES -->
+                
+                <apex:outputPanel id="opID" >
+                    <div id="mySidenav" class="sidenav" > 
+                        <div id="fileImage" style="height:184px;">
+                            <!-- <apex:image url="/servlet/servlet.FileDownload?file={!attachedFiles[0].id}" style="height: 184px; width:100%;" alt="NO IMAGE FOUND" rendered="{!IF(fileId != NULL,true,false)}"/>-->
+                            <apex:repeat value="{!FileId}" var="v">
+                                <apex:image url="/servlet/servlet.FileDownload?file={!v}" style="height: 184px; width:100%;" alt="NO IMAGE FOUND" rendered="{!IF(fileId != NULL,true,false)}" styleClass="mySlides" />
+                            </apex:repeat> 
+                            
+                            <div class="slds-align_absolute-center">
+                                <apex:outputText style="font-style:bold" value="NO IMAGE FOUND" rendered="{!IF(fileId == NULL,true,false)}"/>    
+                            </div>
+                        </div>
+                        <div id="buttonInfo" class="sidebar_icon">
+                            
+                            <div class="shopdis slds-p-vertical_small slds-p-left_small pos_rel">
+                                <div class="slds-align_absolute-center dirc_btn">
+                                    <button id="sample1" class="round_btn " type="button" onClick="goToMap();" style="color:#4285f4;">
+                                        <i id="sample" class="fas fa-directions text_blue mtdir" style="font-size:24px;"></i>
+                                    </button>
+                                    
+                                </div>
+                                <div >
+                                    <div style="width:240px;" class="fs12">
+                                        Shop Name :{!recName} 
+                                    </div> 
+                                    
+                                    <div style="float:left;" class="fs12">Contact Number:{!recPhNo}</div> 
+                                    <div style="float:right;" class="curr_nps">Current NPS : {!currentNPS}   </div>
+                                    <div style="clear:both;">
+                                        <p class="curr_nps currchurn_bg" style="margin-top:3px;"> Churn : <span class="currentchurnbg">{!currentChurn}</span></p>
+                                     <!--    <p style="float:left;"><a class="more_info" href="{!$Label.AccountDetailPageRedirect+recId}/view" target='_blank'>More Details</a></p><p class="curr_nps currchurn_bg" style="margin-top:3px;"> Churn : <span class="currentchurnbg">{!currentChurn}</span></p>
+                                        
+                                                          
+                                       <p style="float:left;"><a class="more_info" href="{!$Label.AccountDetailPageRedirect+recId}/view" onclick="window.open{!$Label.AccountDetailPageRedirect+recId}/view",'newwindow'> More Details</a>a></p><p class="curr_nps currchurn_bg" style="margin-top:3px;"> Churn : <span class="currentchurnbg">{!currentChurn}</span></p>
+ -->
+                                       <!-- <a href="#" data-role="button" id="NavigateToSobjectDetail" onclick="navSObjectDetail()">Navigate To SObject Chatter</a> -->
+                                   
+                                      <!--  <a href="{!$Label.AccountDetailPageRedirect+recId}/view"  
+                                           onclick="window.open('{!$Label.AccountDetailPageRedirect+recId}/view', 
+                                                    'newwindow', 
+                                                    'width=300,height=250'); 
+                                                    return false;"
+                                           >Print</a>-->
+                                        
+                                        <p style="float:left;"> <a class="more_info" href="#" onClick="navigateTo('{!recId}');">More Details</a></p>
+                                        
+                                    
+                                    </div>
+                                   
+                                    <div style="clear:both;">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tiles pvh150 sidebarrndbtn">
+                                <div class="slds-grid slds-wrap ">
+                                    
+                                    
+                                    
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center">
+                                        <button onclick="visitFunc()" class="round_btn" type="button" style="background:#e5454c;">
+                                            <i class="fas fa-map-marked-alt white"></i>
+                                        </button>
+                                        
+                                    </div> 
+                                    
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center">
+                                        <button onclick="projectFunc()" class="round_btn" style="background:#29b6d2;" type="button">
+                                            <i class="fas fa-gem white" style="margin-top:7px;"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center">
+                                        <button onclick="promoFunc()" style="background:#faa33f;"  class="btn round_btn bgrey" type="button" >
+                                            <i class="fas fa-ad white promalign" ></i></button>
+                                    </div>
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center">
+                                        <button onclick="nptpFunc()" style="background:#944c0e;"  class="btn round_btn bgrey" type="button" >
+                                            <i class="fas fa-thumbtack white" style="margin-top:3px;"></i></button>
+                                    </div>
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center">
+                                        <button style="background:#dcb90e;" onclick="window.open('{!$Label.TargetPageRedirect+Target[0].id}','_blank')"  class="btn round_btn bgrey" type="button" >
+                                            <i class="fas fa-suitcase white" style="margin-top:3px;"></i></button>
+                                        
+                                    </div>
+                                    
+                                </div> 
+                                <div class="slds-grid slds-wrap sidebar_icon fs14 slds-p-top_x-small" style="font-size:12px;">
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center mt0">
+                                        <p style="color:#000000f7;">Visits</p>
+                                    </div>
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center mt0">
+                                        <p style="color:#000000f7;text-align:center;">Sec. Sales</p>
+                                    </div>
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center mt0">
+                                        <p style="color:#000000f7;">Promotions</p>
+                                    </div>
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center mt0">
+                                        <p style="color:#000000f7;">NPTB</p>
+                                    </div>
+                                    <div class="slds-size--1-of-5 slds-medium-size--1-of-5 slds-small-size--1-of-5 slds-large-size--1-of-5 slds-align_absolute-center mt0">
+                                        <p style="color:#000000f7;">Orders</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <!-- SLIDER IMAGES -->
+                            
+                            
+                            <div>
+                            </div>    
+                            <div class="tiles">
+                                <!--div id="mySidenav" class="sidenav" style="margin-top:0px;"-->
+                                <div id="visits" style="display:none;" >
+                                    <p class="div_header" style="background:#e5454c;border-top-left-radius:8px;border-top-right-radius: 8px;">VISITS</p>
+                                    <div style="overflow-x:auto;">
+                                        <table class="tab_des slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped slds-scrollable_x" style="width:350px;font-size:12px;" >
+                                            <thead>
+                                                <tr class="slds-line-height_reset">
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Date</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Vertical Type</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Purpose Of Visit</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Order Value</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">CPVC Order Value</div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!VisitData}" var="vd" id="theRepeat">
+                                                    <tr class="slds-hint-parent">
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                <apex:outputText value="{0, date, dd/MM/yy}">
+                                                                    <apex:param value="{!vd.Date__c}" /> 
+                                                                </apex:outputText>
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                {!vd.Target_Vertical__c}</div></td>
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">{!vd.Purpose_of_Visit__c}</div></td>
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                <apex:outputText value="{0, number, ###,##0}">
+                                                                    <apex:param value="{!vd.Order_Value__c}" /> 
+                                                                </apex:outputText>
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                <apex:outputText value="{0, number, ###,##0}">
+                                                                    <apex:param value="{!vd.CPVC_Order_Value__c}" /> 
+                                                                </apex:outputText>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </apex:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div id="projects" style="display:none;margin-top:8px;margin-top:12px;">
+                                    <p class="div_header" style="background:#29b6d2;">SECONDARY SALES</p>
+                                    <div style="overflow-x:auto;">
+                                        <table class="tab_des slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped slds-scrollable_x" style="font-size:12px;width:350px;">
+                                            <thead>
+                                                <tr>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Date</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Amount (Rs.)</div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!orderList}" var="od">
+                                                    <tr>
+                                                        <!--td data-label="" scope="row">
+<div class="slds-truncate" title="">
+<a href="https://ashirwardpipeslighting--partial.my.salesforce.com/{!od.Id}" target="_blank">{!od.OrderNumber}</a>
+</div></td-->
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                <apex:outputText value="{0, date, dd/MM/yy}">
+                                                                    <apex:param value="{!od.Date__c}" /> 
+                                                                </apex:outputText> 
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                {!od.Amount__c}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </apex:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div id="promotions" style="display:none;margin-top:12px;">
+                                    <p class="div_header" style="background:#faa33f;">PROMOTIONS</p>
+                                    <div style="overflow-x:auto;">
+                                        <table class="tab_des slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped slds-scrollable_x" style="font-size:12px;width:350px;">
+                                            <thead>
+                                                <tr>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Promotion Name</div></th>
+                                                    <!--th class="" scope="col">
+<div class="slds-truncate" title=" ">Promotion Dealer</div></th-->
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Promotion Vertical</div></th>
+                                                    <th class="" scope="col">
+                                                        <div class="slds-truncate" title=" ">Promotion Total Expenses</div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!promoList}" var="pr">
+                                                   
+                                                    <tr>
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                <!--
+                                                                <a href="{!$Label.PromotionRedirect+pr.Id}/view" target="_blank">{!pr.Name}</a> -->
+                                                                
+                                                                  <a href="#" onClick="navigateToPromotion('{!pr.Id}');" class="fs12 promhover">{!pr.Name}</a>
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                            </div></td>
+                                                        <!--td data-label="" scope="row">
+<div class="slds-truncate" title="">
+<apex:outputText value="{0, date, dd/MM/yy}">
+<apex:param value="{!pr.EffectiveDate}" /> 
+</apex:outputText> 
+</div>
+</td-->
+                                                        <!--td data-label="" scope="row">
+<div class="slds-truncate" title="">
+{!pr.Dealer1__c.Name}
+</div>
+</td-->
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                {!pr.Vertical__c}
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="" scope="row">
+                                                            <div class="slds-truncate" title="">
+                                                                {!pr.Total_Expenses__c}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </apex:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div id="nptb_tab" style="display:none;margin-top:12px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;">
+                                    <p class="div_header" style="background:#944c0e;">NPTB</p>
+                                    <div style="overflow-x:auto;">
+                                        <table class="tab_des slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped slds-scrollable_x" style="font-size:12px;width:350px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!nptbList}" var="nptb">
+                                                    <tr>
+                                                        <td>{!nptb}</td>
+                                                    </tr>
+                                                </apex:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tiles">
+                                <div id = "analyticsDiv" class="slds-m-around_x-small btn_white pos_rel">
+                                    <!--analytics:reportChart cacheAge="10" cacheResults="false" reportid="00O3A000009AW0U" size="tiny" showRefreshButton="true" filter="{column:'Opportunity.Project_By__c', operator:'equals', value:'Rakesh'}" /-->   <!--{!recName}--> 
+                                    <!--analytics:reportChart cacheAge="10" cacheResults="false" reportid="00O3A000009AW0U" size="tiny" showRefreshButton="true" filter="{column:'Opportunity.Project_By__c', operator:'equals', value:'Rakesh'}" /-->   <!--{!recName}-->
+                                    
+                                    <apex:variable var="i" value="{!0}"/>
+                                    <apex:repeat value="{!getData }" var="A">
+                                        <!--div id="reportId{!i}"-->
+                                        <!--apex:variable var="i" value="{!i+1}"/-->
+                                        <div class="mygraph slds-p-around_medium">
+                                            <analytics:reportChart cacheAge="10" cacheResults="false" reportid="{!A.Id__c}" size="tiny" showRefreshButton="true" filter="{column:'{!A.column__c}', operator:'{!A.operator__c}', value:'{!A.value__c}'}" />   <!--{!recName}-->
+                                        </div>
+                                        
+                                        <!--/div-->
+                                        
+                                    </apex:repeat>    
+                                    <div class="left_arrow fs22"  onclick="plusDivs(-1)">&#10094;</div>
+                                    <div class="right_arrow fs22" onclick="plusDivs(1)">&#10095;</div>                       
+                                </div>
+                            </div> 
+                        </div>  
+                    </div>
+                    
+                </apex:outputPanel>
+                
+                <!-- Modal content -->
+                <div id="myModal" class="modal">
+                    
+                    <apex:outputPanel id="thePanel1">
+                        
+                        <div class="Buttons slds-p-around_large" id="bt3" >
+                            
+                            <apex:variable value="{!0}" var="rowNum" id="rowNum"/>
+                            <apex:outputPanel rendered="{!filteredList.size>0}">
+                                <div class="errormsg">
+                                    <apex:pageMessages />
+                                </div>
+                                
+                                <div class="slds-box slds-box_xx-small">
+                                    
+                                    
+                                    <apex:repeat value="{!filteredList}" var="string" id="theRepeat1">
+                                        
+                                        <div>
+                                            <div style="width:200px;float:left;">
+                                                <apex:outputText value="{!string}" id="theValue1" style="font-size:12px;color:navy;" />
+                                                &nbsp;
+                                            </div>
+                                            <div class="slds-float_right">
+                                                <apex:commandLink id="addRoleButton3" action="{!removeFilter}" value="x" status="status" rerender="thePanel1"  styleClass="remove_btn"  tabindex="99" oncomplete="disableLink();">
+                                                    <apex:param value="{!rowNum}" name="prmVal"/>
+                                                    
+                                                </apex:commandLink>
+                                            </div>
+                                            <div style="clear:both;"></div>
+                                            
+                                            <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                                            
+                                        </div>
+                                    </apex:repeat>
+                                </div>
+                            </apex:outputPanel>
+                            <div class="slds-form-element">
+                                
+                                <apex:selectList multiselect="false" value="{!selectedField}" size="1"  styleClass="slds-select"  >
+                                    <label class="slds-form-element__label" for="text-input-id-1"> 
+                                        Fields: </label><apex:selectOptions value="{!AccountFields}" ></apex:selectOptions>
+                                    <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" oncomplete="disableLink()"/>
+                                    
+                                </apex:selectList>  
+                                
+                            </div>
+                            
+                            <div class="slds-form-element">
+                                <apex:selectList multiselect="false" value="{!operatorVal}" size="1"  styleClass="slds-select operatorVal">
+                                    <label class="slds-form-element__label" for="text-input-id-1">
+                                        Operator: </label><apex:selectOptions value="{!Operators}" ></apex:selectOptions>
+                                    <!-- <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" />-->
+                                    
+                                </apex:selectList>
+                            </div>
+                            
+                            <div class="slds-form-element">
+                                <apex:outputPanel id="thePanel" rendered="{!pickHandle}">
+                                    
+                                    
+                                    <apex:selectList multiselect="true" value="{!pickListValues}" size="3"  styleClass="slds-input StringVal"  onchange="userHasToEnterValidDataString(this);" onkeyup="userHasToEnterValidDataString(this);">
+                                        <label class="slds-form-element__label" for="text-input-id-1"> 
+                                            Values: </label><apex:selectOptions value="{!pickListValuesList}" ></apex:selectOptions>
+                                        <!-- <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" />-->
+                                    </apex:selectList> 
+                                </apex:outputPanel>
+                                
+                                
+                                <div class="slds-form-element">
+                                    <apex:outputPanel id="thePanels" rendered="{!integerHandle}" >
+                                        <label class="slds-form-element__label" for="text-input-id-1">  
+                                            Values: </label><apex:input value="{!selectedValByInteger}" id="theTextInputs" styleClass="slds-input StringVal" type="number" onchange="userHasToEnterValidDataIntgerAndDouble(this);" onkeyup="userHasToEnterValidDataIntgerAndDouble(this);"/>
+                                        <!-- <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" />-->
+                                    </apex:outputPanel>
+                                </div>
+                                <div class="slds-form-element">
+                                    <apex:outputPanel id="thePane" rendered="{!doubleHandle}" >
+                                        <label class="slds-form-element__label" for="text-input-id-1">   
+                                            Values: </label><apex:input value="{!selectedValByDouble}" id="theTextInpu" styleClass="slds-input StringVal" type="number" onchange="userHasToEnterValidDataIntgerAndDouble(this);" onkeyup="userHasToEnterValidDataIntgerAndDouble(this);"/>
+                                        <!-- <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" />-->
+                                    </apex:outputPanel>
+                                </div>
+                                <div class="slds-form-element">
+                                    <apex:outputPanel id="thePanel2" rendered="{!valHandle}" >
+                                        <label class="slds-form-element__label" for="text-input-id-1"> 
+                                            Values: </label><apex:input value="{!selectedValByString}" id="theTextInput1" styleClass="slds-input StringVal" onchange="userHasToEnterValidDataString(this);" onkeyup="userHasToEnterValidDataString(this);"/>
+                                        <!-- <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" />-->
+                                    </apex:outputPanel>
+                                </div>
+                                
+                                <div class="slds-form-element"> 
+                                    <apex:outputPanel id="thePanel3" rendered="{!dateHandle}" >
+                                        <label class="slds-form-element__label" for="text-input-id-1"> 
+                                            Values: </label><apex:input type="date" value="{!datVal}"  styleClass="slds-input StringVal"  onchange="userHasToEnterValidDataString(this);" onkeyup="userHasToEnterValidDataString(this);" />
+                                        <!-- <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" />-->
+                                    </apex:outputPanel>
+                                </div>
+                                <apex:outputPanel id="thePanel4" rendered="{!boolHandle}" >
+                                    
+                                    
+                                    <div class="slds-form-element">
+                                        <apex:selectList multiselect="false" value="{!boolVal}" size="1"  styleClass="slds-select StringVal" onchange="userHasToEnterValidDataString(this);" onkeyup="userHasToEnterValidDataString(this);">
+                                            <label class="slds-form-element__label" for="text-input-id-1">
+                                                Values: </label><apex:selectOptions value="{!booleanValue}" ></apex:selectOptions>
+                                            <!-- <apex:actionSupport event="onchange" action="{!accFilter}" rerender="thePanel1" status="status" />-->
+                                            
+                                        </apex:selectList>
+                                    </div>
+                                </apex:outputPanel>
+                            </div>
+                            
+                            
+                            
+                            <apex:actionStatus id="status">
+                                <apex:facet name="start">
+                                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 9999; background-color: black;">
+                                        &nbsp;
+                                    </div>
+                                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1; margin: 15% 50%">
+                                        <div style="display: inline-block; padding: 1px; ">
+                                            <img src="https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1550038268000/sldsloader?" style="float: left; margin: 40px;" />
+                                            <span style="display: inline-block; padding: 10px 0px;">Please Wait...</span>
+                                        </div>
+                                    </div>
+                                </apex:facet>
+                            </apex:actionStatus>
+                            
+                            
+                            
+                            <div class="form-group slds-float_left slds-m-top_small">
+                                <apex:commandLink id="addRoleButton" action="{!addListMethod}" value="Add Filter" status="status" rerender="thePanel1" styleclass="slds-button adfilt" tabindex="99" oncomplete="disableLink();" />
+                                &nbsp; &nbsp;
+                                <a href="javascript:window.location.href=window.location.href" class="slds-button">Clear</a>
+                                
+                            </div>
+                            <div class="form-group slds-float_right">
+                                <apex:commandButton styleClass="slds-button slds-button_brand slds-m-top_small" title="Click after adding the filters" value="Done" action="{!accFilter}" status="status" disabled="{!disableDoneButton}"/>
+                            </div>
+                            
+                            
+                        </div>   <!-- END OF Buttons p3-->
+                    </apex:outputPanel>
+                </div>   <!-- END OF modal-->
+                
+                <!--apex:actionFunction name="showVisits" action="{!getFileId}" rerender="fileImage"/-->
+                
+                <apex:actionFunction name="showVisits" action="{!testFunction}" rerender="opID" oncomplete="carousel()" status="statusspinner">
+                    <apex:param name="firstParam" assignTo="{!recId}" value="" />
+                    <apex:param name="secondParam" assignTo="{!recName}" value="" />
+                    <apex:param name="thirdParam" assignTo="{!recphNo}" value="" />
+                    <apex:param name="fourthParam" assignTo="{!currentNPS}" value="" />
+                    <apex:param name="fifthParam" assignTo="{!currentChurn}" value="" />
+                </apex:actionFunction>
+                
+                <!--apex:actionFunction name="searchByArea" action="{!search}" rerender="opID">
+<apex:param name="firstParam" assignTo="{!recId}" value="" />
+</apex:actionFunction-->
+            </apex:form>
+            <script>
+            
+            </script> 
+            
+            <!-- creating beat record -->
+            
+            <!--- For Pop up show visit Entry 
+
+<apex:CommandButton value="Create Beat" action="{!OpenPopupBeat}" reRender="Modalidbeat" onclick="createbeatpopup()"/>-->
+            
+            <div id="successDiv" class="modal popupbg" style="display: none;">
+                <div class="modal-content w60">
+                    <span class="saveBeatclose close">x</span>
+                    <apex:OutputPanel id="Modalidbeat1">
+                        
+                        
+                        
+                        <apex:outputPanel styleClass="custPopupnew" layout="block">
+                            <div id="beatpgid" >
+                                Your Record is created successfully                                    
+                            </div>
+                            
+                        </apex:outputPanel>
+                        
+                    </apex:OutputPanel>
+                    
+                </div>
+            </div>
+            
+            <div id="UnsuccessDivBeat" class="modal popupbg" style="display: none;">
+                <div class="modal-content w60">
+                    <span class="FailedBeatclose close">x</span>
+                    <apex:OutputPanel id="Modalidbeat5">
+                        
+                        
+                        
+                        <apex:outputPanel styleClass="custPopupnew" layout="block">
+                            <div id="beatpgidUnsuccess" >
+                                Your Record is not created! Please select some accounts.                                    
+                            </div>
+                            
+                        </apex:outputPanel>
+                        
+                    </apex:OutputPanel>
+                    
+                </div>
+            </div>
+            
+            <div id="CheckinDiv" class="modal popupbg" style="display: none;">
+                <div class="modal-content w60">
+                    <span class="successcheckinclose close">x</span>
+                    <apex:OutputPanel id="Modalidbeat2">
+                        
+                        
+                        
+                        <apex:outputPanel styleClass="custPopupnew" layout="block">
+                            <div id="Checkinpgid" >
+                                Checkin is completed successfully.                                
+                            </div>
+                            
+                        </apex:outputPanel>
+                        
+                    </apex:OutputPanel>
+                    
+                </div>
+            </div>
+            
+            <div id="CheckinDivUnsuccess" class="modal popupbg" style="display: none;">
+                <div class="modal-content w60">
+                    <span class="Unsuccesscheckinclose close">x</span>
+                    <apex:OutputPanel id="Modalidbeat4">
+                        
+                        
+                        
+                        <apex:outputPanel layout="block">
+                            <div id="Checkinpgid" >
+                                There is no site visit record for Today's date.So Checkin unsuccessful!                                  
+                            </div>
+                            
+                        </apex:outputPanel>
+                        
+                    </apex:OutputPanel>
+                    
+                </div>
+            </div>
+            
+            
+            
+            <apex:form id="formbeat">
+                
+                <script>
+                function beatUpdate(){
+                    var bte ={!beatUpdatemessage};
+                    // alert(bte);
+                    if(bte==true){
+                        //   alert('bte hiii');
+                        clearFields();
+                    }else{
+                        //alert('noo');
+                        clearFieldsUnsuccess();
+                    }
+                }
+                </script>
+                
+                
+                <apex:outputPanel id="idtype">
+                    <apex:actionFunction name="marker_Detailsvalue" id="savebt" action="{!doUpdate}" oncomplete="beatUpdate()" reRender="formbeat">
+                        <apex:param id="currentName" name="BtName1" value="" assignTo="{!BtName}"  />
+                        
+                    </apex:actionFunction>
+                </apex:outputPanel>
+                
+                <div id="createbeatModal" class="modal popupbg"> 
+                    <div class="modal-content w60">
+                        <span class="createbeatclose close">x</span>
+                        <apex:outputPanel id="Modalidbeatnew">
+                            
+                            
+                            <!--  <apex:outputPanel layout="block" rendered="{!displayPopupbeat}">
+<apex:outputPanel styleClass="custPopupnew" layout="block" rendered="{!displayPopupbeat}">
+<apex:pageBlock id="beatpgid" >
+
+<apex:outputPanel layout="block" rendered="{!displayPopupbeat}"/>-->
+                            
+                            
+                            <div id="pbsid">
+                                <label>Beat Name</label>
+                                <apex:inputField value="{!beatmst.Name}" type="text" id="mastername" required="true" styleClass="slds-input w350" html-placeholder="Beat Name" />
+                            </div>
+                            
+                            
+                            <br/>
+                            <!--   <apex:commandButton value="X" action="{!closePopupBeat}" rerender="Modalidbeat"/>
+<apex:commandButton value="save" onclick="saveBeat()" rerender="pgid" oncomplete="CloseAndRefresh()"/>
+<apex:commandButton value="save" onclick="saveBeat()" disabled="{!OR(ISBLANK(beatmst.Name), '' == beatmst.Name)}" id="save"/>-->
+                            <apex:actionStatus id="mySaveStatus1">
+                                
+                                <apex:facet name="stop">
+                                    <apex:commandButton value="Save" onclick="saveBeat()" status="mySaveStatus1" disabled="false"  styleClass="savebtn_css" reRender="Modalidbeatnew"/>
+                                    
+                                </apex:facet>
+                                
+                                <apex:facet name="start">
+                                    
+                                    <apex:commandButton value="Processing" onclick="saveBeat()" status="mySaveStatus1"  disabled="true"  styleClass="savebtn_css" reRender="Modalidbeatnew"/>
+                                </apex:facet>
+                            </apex:actionStatus>
+                            <!--<button onclick ="saveBeat()" >
+savebtn
+</button>  <apex:commandButton value="Save" onclick="saveBeat()" styleClass="savebtn_css" reRender="mastername"/>--> 
+                            
+                            
+                            
+                            <!--    </apex:pageBlock> -->
+                            
+                        </apex:outputPanel>  
+                        
+                        
+                    </div>
+                </div>
+            </apex:form>
+            <!-- INPUT FORM ENDS -->
+            
+        </div> <!-- END OF colsm12 colmd3 collg3 p0-->
+        
+        <div id="floating-panel"  class="addr_rad">
+            
+            <div class="addr_div">
+                <input id="address" type="textbox" style="width:74px" class="addr_inp" placeholder="Area" onfocus="addr_input()"/>
+                <input id="submit" type="button" value="Area" class="addr_btn" />
+            </div>
+            <div class="rad_div">
+                <input id="rds" type="text" style="width:100px" class="rad_inp slds-input" placeholder="Radius" />
+                <input type="button" onclick ="searchByArea()" value="Search"  class="rad_btn" />
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        <div class="p0" id="main_map">
+            <div class="pos_rel">
+                <div id="map"></div>
+                <i class="fas fa-filter pos_abs_filter filters filter_btn_css" id="myBtn" style="padding-top: 10px;"></i>
+                <div  class="beat_btn" onclick="beatpanelopen()">B</div>
+                <div class="panelopenclose" onclick="opencloseNav()"><i id="rarrow" class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+        
+        
+        
+        <div id="button-layer">
+            <div class="recenter_bg">
+                <div id="btnAction" class="recenter filter_btn_css"  onClick="locate()"><i class="fas fa-dot-circle " style="padding-top:9px;"></i></div>
+            </div> 
+        </div>
+        
+        <div id="beatbutton">            
+            <button id="buttonBeat" type="button" onClick ="beatModeOn()" class="trapezoid" >Beat Mode</button>
+            <button id="buttonMap" type="button" onClick ="beatModeOff()" class="trapezoid">Map Mode</button>
+            <button id="loadMap" type="button" onClick ="loadBeats();" disabled="true" class="trapezoid"  style="background-color: deepskyblue;width:94px;">Today's Beat</button>          
+            
+        </div>
+        
+        <!--  <div class="todaybeat">
+<label class="switch">
+<input type="checkbox" id="myToggle"/>
+<span class="switch_silde switch_round"></span>
+</label> 
+</div>     --> 
+        
+        <div id="beatpanel" class="modal">
+            
+            <!-- Modal content -->
+            <div class="beatpanelmodal w100">
+                <span class="close beatpanelclose">&times;</span>
+                <button type="button" onClick ="callBeatPlan()" class="beatpanelbtn" > Create Beat </button>
+                <button type="button" onClick ="planbeatpopup()" class="beatpanelbtn" > Plan My Beat </button>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT -->
+    <!--apex:form id="formSam">
+
+<div id="planbeatModal" class="modal popupbg">
+<div class="modal-content w_80">
+<span class="close planbeatclose">x</span>
+<apex:OutputPanel id="Modalid"> 
+<apex:outputPanel layout="block" rendered="{!displayPopup}"/>
+
+<apex:pageBlock id="pgid" >
+<div class="slds-grid slds-wrap">
+<div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2">
+
+<div><label class="label_css">Date:</label></div>
+<apex:input value="{!beatDate}" type="auto" required="true" label="Beat Date" styleClass="input_css w_i80" id="beatDateId"/>
+</div>
+
+<div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2">
+<div><label class="label_css mt5">Search Beat:</label></div>
+<apex:inputText value="{!searchbeat}" label="Search Beat" required="true" styleClass="input_css w_i80" id="theTextInput" />
+</div>
+</div>
+<apex:commandButton value="Search" action="{!BeatList}" rerender="Modalid" styleClass="popup_btn_css" status="actStatusId"/>
+<apex:actionStatus id="actStatusId" >
+<apex:facet name="start" >
+<img src="/img/loading.gif" />                    
+</apex:facet>
+</apex:actionStatus>
+<br/>
+
+<apex:outputPanel rendered="{!renderPlanTable}">
+<table class="slds-table slds-table_cell-buffer slds-table_bordered table_css beattable">
+<thead class="beattablehead">
+<tr class="slds-line-height_reset">
+<th class="" scope="col">
+<div class="slds-truncate" title="Select">
+Select</div></th>
+<th class="" scope="col">
+<div class="slds-truncate" title="Beat Name">Beat Name</div></th>
+<th class="" scope="col">
+<div class="slds-truncate" title="#Accounts">#Accounts</div></th>                                                                                                            
+</tr>
+</thead>
+
+<tbody class="beattablebody">
+<apex:repeat value="{!beatMasterList}" var="b">
+<tr class="slds-hint-parent">
+<td data-label="Select" scope="row">
+<div class="slds-truncate" title="Cloudhub">
+<apex:inputCheckbox value="{!b.Checked__c}"/></div></td>
+<td data-label="Beat Name" scope="row">
+<div class="slds-truncate" title="Beat Name">
+{!b.Name}</div></td>
+<td data-label="#Accounts" scope="row">
+<div class="slds-truncate" title="Beat Name">
+{!b.NoOfAccounts__c}</div></td>
+</tr>
+</apex:repeat>
+</tbody>
+</table>
+
+
+<apex:commandButton value="Save Beat" action="{!processSelected}" onclick="clearForm();" rerender="Modalid" styleClass="popup_btn_css" style="margin-right:5px" />
+
+
+<apex:commandButton value="Close" action="{!closePopup}" rerender="Modalid" styleClass="popup_btn_css " />
+</apex:outputPanel>
+</apex:pageBlock>
+</apex:outputPanel>
+</div>
+</div>
+</apex:form-->
+    
+    <!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT -->
+    
+    
+    <!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT -->
+    <apex:form id="formSam">
+        <!--apex:CommandButton value="Plan My Beat" action="{!OpenPopup}" reRender="Modalid" onclick="planbeatpopup()" /-->
+        <apex:actionFunction name="planMyBeatFunction" action="{!OpenPopup}" reRender="Modalidbeat"/>
+        
+        <div id="planbeatModal" class="modal popupbg">
+            <div class="modal-content w_80">
+                <span class="close planbeatclose">x</span>
+                <apex:OutputPanel id="Modalid"> 
+                    <apex:outputPanel layout="block" rendered="{!displayPopup}"/>
+                    
+                    <!-- <apex:outputPanel  layout="block" rendered="{!displayPopup}">-->
+                    <apex:pageBlock id="pgid" >
+                        <div class="errormsg2">
+                            <apex:pageMessages />
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                                
+                                <!--Date:<apex:inputField value="{!beatplan.Beat_Date__c}" type="auto" label="Beat Date"/>-->
+                                <div><label class="label_css">Date:</label></div>
+                                <apex:input value="{!beatDate}" type="auto" required="true" label="Beat Date" styleClass="input_css w_i80" id="beatDateId"/>
+                            </div>
+                            
+                            <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2">
+                                <div><label class="label_css mt5">Search Beat:</label></div>
+                                <apex:inputText value="{!searchbeat}" label="Search Beat" required="true" styleClass="input_css w_i80" id="theTextInput" />
+                            </div>
+                        </div>
+                        <apex:commandButton value="Search" action="{!BeatList}" rerender="Modalid" styleClass="popup_btn_css" status="actStatusId"/>
+                        <apex:actionStatus id="actStatusId" >
+                            <apex:facet name="start" >
+                                <img src="/img/loading.gif" />                    
+                            </apex:facet>
+                        </apex:actionStatus>
+                        <br/>
+                        
+                        <apex:outputPanel rendered="{!renderPlanTable}">
+                            <!--div class="errormsg2">
+<apex:pageMessages />
+</div-->
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered table_css beattable" id="beatTableId">
+                                <thead class="beattablehead">
+                                    <tr class="slds-line-height_reset">
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Select">
+                                                Select</div></th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Beat Name">Beat Name</div></th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="#Accounts">#Accounts</div></th>                                                                                                            
+                                    </tr>
+                                </thead>
+                                
+                                <tbody class="beattablebody">
+                                    <apex:repeat value="{!beatMasterList}" var="b" id="beatRepeatId">
+                                        <tr class="slds-hint-parent">
+                                            <td data-label="Select" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">
+                                                    <apex:inputCheckbox value="{!b.Checked__c}" id="checkboxId"/></div></td>
+                                            <td data-label="Beat Name" scope="row">
+                                                <div class="slds-truncate" title="Beat Name">
+                                                    {!b.Name}</div></td>
+                                            <td data-label="#Accounts" scope="row">
+                                                <div class="slds-truncate" title="Beat Name">
+                                                    {!b.NoOfAccounts__c}</div></td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                            
+                            
+                            
+                            
+                            
+                            <!--apex:commandButton value="Close" action="{!closePopup}" rerender="Modalid" styleClass="popup_btn_css " id="beatPlanClose"  /-->
+                            
+                            <apex:commandButton value="Save Beat" action="{!processSelected}" rerender="Modalid" styleClass="popup_btn_css" style="margin-right:5px" id="beatPlanSave"/>
+                        </apex:outputPanel>
+                    </apex:pageBlock>
+                </apex:OutputPanel>
+            </div>
+        </div>
+    </apex:form>
+    
+    <!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT --><!-- SAVING THE BEAT -->
+    
+    <div id="myModalnorecord" class="modal_no_record">
+        
+        <!-- Modal content -->
+        <div class="modal-content_no_record">
+            <p class="p15">There is no Accounts in Today's Beat.</p>
+            <div class="close_no_record">Ok</div>
+        </div>
+        
+    </div>
+    <script type="text/javascript">
+    
+    
+    function currentchurnbg() {
+        var ccbg=document.querySelector(".currentchurnbg").innerHTML;
+        if(ccbg=="Likely to churn") {
+            document.querySelector(".currchurn_bg").style.background="#cbb122";
+            document.querySelector(".currchurn_bg").style.color="white";
+            document.querySelector(".currchurn_bg").style.border= "1px solid #afafaf";
+            
+        }
+        else if(ccbg=="Churned"){
+            document.querySelector(".currchurn_bg").style.background="#ba1d1d";
+            document.querySelector(".currchurn_bg").style.color="white";
+            document.querySelector(".currchurn_bg").style.border= "1px solid #afafaf";
+            
+            
+        }
+            else if(ccbg=="Others"){
+                document.querySelector(".currchurn_bg").style.background="#187035";
+                document.querySelector(".currchurn_bg").style.color="white";
+                document.querySelector(".currchurn_bg").style.border= "1px solid #afafaf";
+                
+                
+            }
+        
+    }
+    //Important part start 
+    document.getElementById("buttonBeat").style.display="none"; 
+    document.querySelector(".addr_rad").style.display="none"; 
+    document.getElementById("myBtn").style.display="none"; 
+    document.getElementById("buttonMap").style.display="none"; 
+    
+    
+    //document.querySelector(".panelopenclose").style.display="none"; 
+    
+    document.getElementById("main_map").addEventListener("click", function() {
+        document.querySelector(".rad_div").style.display="none";
+        document.querySelector(".addr_btn").style.display="none";
+        document.querySelector(".addr_inp").style.width="74px";
+        
+    });
+    function disableLink(){    
+        var stringVal=document.querySelector(".StringVal").value;    
+        //alert(stringVal);
+        if(stringVal==null||stringVal==''){
+            document.querySelector(".adfilt").style.pointerEvents="none";
+            $(document).ready(function(){
+                $(".adfilt").attr("disabled", true);             
+            });         
+        }
+        else{
+            document.querySelector(".adfilt").style.pointerEvents="visible";
+            $(document).ready(function(){
+                $(".adfilt").attr("disabled", false);             
+            });
+        }     
+    }
+    
+    //fuction for Disabling the Add Filter Link when user dosent't fill any value and if user 0, -ve value then he can't able to add filter
+    function userHasToEnterValidDataIntgerAndDouble(mainVal){
+        var main=mainVal.value;
+        // var operatorValue=document.querySelector(".operatorVal").value;
+        // alert(operatorValue);
+        if(main<=0){
+            mainVal.value=null; 
+        }
+        //  var resvalue=document.querySelector(".inte").value;
+        //  if(operatorValue!=null&&operatorValue!=''){
+        if(main==null||main==''||main<=0) {
+            document.querySelector(".adfilt").style.pointerEvents="none";
+            $(document).ready(function(){
+                $(".adfilt").attr("disabled", true);
+                
+            });
+        }
+        
+        else{
+            
+            document.querySelector(".adfilt").style.pointerEvents="visible";
+            $(document).ready(function(){
+                $(".adfilt").attr("disabled", false);
+                
+            });
+        }
+        //  }
+        
+        
+    }  
+    
+    //fuction for Disabling the Add Filter Link when user dosent't fill any value
+    function userHasToEnterValidDataString(mainVal){
+        var main=mainVal.value;
+        //alert(main);
+        // var operatorValue=document.querySelector(".operatorVal").value;
+        //  var resvalue=document.querySelector(".inte").value;
+        // if(operatorValue!=null||operatorValue!=''){
+        if(main==null||main=='') {
+            document.querySelector(".adfilt").style.pointerEvents="none";
+            $(document).ready(function(){
+                $(".adfilt").attr("disabled", true);
+                
+            });
+        }else{
+            
+            document.querySelector(".adfilt").style.pointerEvents="visible";
+            $(document).ready(function(){
+                $(".adfilt").attr("disabled", false);
+                
+            });
+            // }    
+        }
+    }  
+    
+    function beatpanelopen() {
+        closeNav();
+        var modalbeat = document.getElementById("beatpanel");
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("beatpanelclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        
+        modalbeat.style.display = "block";
+        
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modalbeat.style.display = "none";
+        }
+        
+    }
+    
+    
+    function planbeatpopup() {
+        document.querySelector("#beatpanel").style.display="none";
+        var modal = document.getElementById('planbeatModal');
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("planbeatclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        
+        modal.style.display = "block";
+        
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    }
+    
+    
+    /* 
+    function createbeatpopup() {
+        
+        var modal = document.getElementById('createbeatModal');
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("createbeatclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        modal.style.display = "block";
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    }*/
+    
+    function setVar(param){
+        jQuery('[id$=Radius]').val(param);
+        passStringToController();
+    }
+    
+    function addr_input() {
+        document.querySelector(".addr_btn").style.display="inline-block";
+        document.querySelector(".addr_inp").style.width="200px";
+        closeNav();
+    }
+    
+    
+    document.getElementById('buttonMap').style.backgroundColor='black';
+    document.getElementById('buttonMap').style.color='white';
+    document.getElementById('buttonMap').style.border='none';
+    document.getElementById('buttonBeat').style.backgroundColor='White';
+    document.getElementById('buttonBeat').style.border='none';
+    
+    
+    //var rightarrow = document.getElementById("rarrow");
+    
+    
+    document.querySelector(".side_bar").style.width="0px";
+    function opencloseNav() {
+        //alert("openning");
+        var a=document.getElementById("my_Side_bar").style.width;
+        var b=document.querySelector(".side_bar").style.width;
+        
+        if(b=="0px" ){
+            
+            openNav();
+            // rightarrow.classList.add("rotated");
+        }
+        else if(a=="350px"){
+            
+            closeNav();
+            // rightarrow.classList.remove("rotated");
+            
+        }
+    }
+    
+    
+    function openNav() {
+        // alert("nav");
+        document.getElementById("my_Side_bar").style.width = "350px";
+        document.getElementById("main_map").style.marginLeft = "350px";
+        document.getElementById("rarrow").style.transform = "rotate(180deg)";
+        // carousel();
+        // showDivs(slideIndex);
+    }
+    
+    function closeNav() {
+        document.getElementById("my_Side_bar").style.width = "0";
+        document.getElementById("main_map").style.marginLeft= "0";
+        document.getElementById("rarrow").style.transform = "rotate(0deg)";
+    }   
+    
+    
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    <script src="/soap/ajax/29.0/connection.js" type="text/javascript"></script>
+    <script>
+        
+        function no_record_popup() {   
+        //
+        
+        // alert("no");
+        var modalno = document.getElementById('myModalnorecord');
+        
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close_no_record")[0];
+        
+        // When the user clicks the button, open the modal 
+        
+        modalno.style.display = "block";
+        
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modalno.style.display = "none";
+            //reloadpage();
+        }
+    } 
+    //------------------------------VARIABLE DECLARATION STARTS------------------------------------ 
+    var map;
+    var recId;
+    
+    var accDetails = {!BeatRecords};
+    
+    
+    var ac={!acc};
+    
+    var latitude ;
+    var longitude;
+    
+    var currentId;
+    var beaton ;
+    
+    var promotionid;
+    //------------------------------VARIABLE DECLARATION ENDS------------------------------------
+    
+    //---------------------------------------------FUNCTION FOR ATTACHMENT UPLOAD STARTS---------------------------------------------
+    function uploadFile()
+    {       
+        console.log("entering the function");
+        
+        var input = document.getElementById('file-input');
+        console.log("input value is " + input);
+        
+        var parentId = currentId;  //clicked marker's account's ID
+        console.log("parent id " + parentId);
+        
+        var filesToUpload = input.files;  //input files
+        console.log("files to upload " + filesToUpload);
+        
+        
+        
+        for(var i = 0, f; f = filesToUpload[i]; i++) //iterating the uploaded input files
+        {
+            console.log("Entering for loop");
+            var reader = new FileReader();     
+            console.log("Contents of Reader " + reader);
+            
+            // Keep a reference to the File in the FileReader so it can be accessed in callbacks
+            reader.file = f; 
+            console.log("Contents of f " + f);
+            
+            reader.onerror = function(e) 
+            {
+                switch(e.target.error.code) 
+                {
+                    case e.target.error.NOT_FOUND_ERR:
+                        alert('File Not Found!');
+                        break;
+                    case e.target.error.NOT_READABLE_ERR:
+                        alert('File is not readable');
+                        break;
+                    case e.target.error.ABORT_ERR:
+                        break; // noop
+                    default:
+                        alert('An error occurred reading this file.');
+                };
+            };     
+            
+            reader.onabort = function(e) 
+            {attributes
+            alert('File read cancelled');
+            };
+            
+            reader.onload = function(e) 
+            {
+                var att = new sforce.SObject("Attachment");
+                att.Name = this.file.name;
+                att.ContentType = this.file.type;
+                att.ParentId = parentId;
+                
+                att.Body = (new sforce.Base64Binary(e.target.result)).toString();
+                
+                sforce.connection.create([att],
+                                         {
+                                             onSuccess : function(result, source) 
+                                             {
+                                                 if (result[0].getBoolean("success")) 
+                                                 {
+                                                     console.log("new attachment created with id " + result[0].id);
+                                                     document.getElementById("file-input").value = "";
+                                                     alert('File uploaded successfully.');
+                                                 } 
+                                                 else 
+                                                 {
+                                                     console.log("failed to create attachment " + result[0]);
+                                                     alert('Failed to create Attachment due to ' + result[0]);
+                                                 }
+                                             }, 
+                                             onFailure : function(error, source) 
+                                             {
+                                                 console.log("An error has occurred " + error);
+                                             }
+                                         });
+            };
+            
+            reader.readAsBinaryString(f);
+        }
+    }
+    //---------------------------------------------FUNCTION FOR ATTACHMENT UPLOAD ENDS---------------------------------------------\    
+    function open_more_sec() {
+        $("#more_sec").toggle();   
+    }
+    
+    function GetLocation() {
+        console.log(currentLatitude+' '+currentLongitude);
+        actfun(currentLatitude,currentLongitude);  
+    }
+    
+    
+    
+    var idString ='';// holds clicked marker id , usage in beat master record
+    var marker_arrayBeat ='';// holds  beat master record data as string
+    var markerString ='';
+    var orderArray='';
+    var popup, Popup;
+    var dyn_div=[];
+    var markerCluster;
+    var mrCluster=[];
+    function initMap() {
+        beaton=true;
+        var features = [];
+        if(ac){
+            accDetails= {!BeatRecords};
+        }
+        Popup = createPopupClass();
+        for (var key in accDetails) {
+            checks=accDetails[key].Party_Type__c; 
+            churnCheck=accDetails[key].PredictedClass__c;
+            
+            recId = accDetails[key].Id;
+            recPhNo = accDetails[key].Contact_Number_Mobile__c;
+            recNamefirst = accDetails[key].Name; ///getting record name
+            recName = recNamefirst.replace(' ', '+'); //replacing all spaces by '+' symbol.
+            console.log(accDetails[key].Name);
+            num1 = accDetails[key].Name;
+            console.log(key + " -> " + accDetails[key].Latitude+'longoi-->'+ accDetails[key].Longitude+'ID'+accDetails[key].Id); //latitude of each account
+            features.push({
+                position: new google.maps.LatLng(accDetails[key].Latitude, accDetails[key].Longitude),
+                type:checks=="Architect"?'Architect':checks=="Borer"?'Borer':checks=="Borewell Office"?'BorewellOffice':checks=="Builder"?'Builder':checks=="Consultant"?'Consultant':checks=="Contractor"?'Contractor':checks=="Customer"?'Customer':checks=="Dealer"?'Dealer':
+                checks=="Dealers Salesman"?'DealersSalesman':checks=="Direct Dealer"?'DirectDealer':checks=="Distributor"?'Distributor':checks=="Engineer"?'Engineer':checks=="Farmer"?'Farmer':checks=="Government"?'Government':checks=="Institution"?'Institution':
+                checks=="Mechanic"?'Mechanic':checks=="Others"?'Others':checks=="Plumber"?'Plumber':checks=="Plumber Cum Mechanic"?'PlumberCumMechanic':checks=="Plumbing Contractor"?'PlumbingContractor':checks=="Project Manager"?'ProjectManager':
+                checks=="Project Owner/Developer"?'ProjectOwnerDeveloper':checks=="Projects"?'Projects':checks=="Purchase Manager"?'PurchaseManager':checks=="Site Engineer"?'SiteEngineer':checks=="Site Incharge / Supervisor"?'SiteInchargeSupervisor':
+                checks=="Winders"?'Winders':checks=="Panchayat Head"?'PanchayatHead':checks=="GI/MS Dealer"?'GIMSDealer':checks=="GI/MS DP"?'GIMSDP':'',
+                churnClass:churnCheck=="Likely to churn"?'Likelytochurn':churnCheck=="Churned"?'Churned':churnCheck=="Others"?'ChurnOthers':'None',
+                churnName:accDetails[key].PredictedClass__c,
+                currentNPS:accDetails[key].Current_NPS__c==null?'':accDetails[key].Current_NPS__c,
+                
+                title:accDetails[key].Name,
+                orderVal:accDetails[key].Total_Order_Values__c,
+                id: accDetails[key].Id,
+                
+                phNo: accDetails[key].Contact_Number_Mobile__c,
+                
+                sContent: '<div id="iw-container">' + '<div class="iw-title"><p>'+accDetails[key].Map_Field__c+'</p></div><div class="slds-grid slds-wrap info_win_btn slds-p-vertical_small" style="color:#000000f7;border: 1px solid #4285f4"><div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-2 slds-large-size--1-of-2 slds-text-align_center"><a href="tel:'+recPhNo+'"><button class="round_btn info_button" style="background:#b5561e;border:1px solid #b5561e;background:#5eb939;border:1px solid #5eb939;"><i class="fas fa-phone white" style="margin-top:2px;transform: rotate(98deg);"></i></button></a><p style="padding-top:3px;">Call</p></div><div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-2 slds-large-size--1-of-2 slds-text-align_center" ><button onclick="locatecheckin()" class="round_btn info_button" style="background:#e0950d;border:1px solid #e0950d;"><i class="fas fa-check-double white" style="margin-top:3px;"></i></button><p style="padding-top:3px;">Checkin</p> </div></div><div class="attc_div"><div class="slds-grid slds-wrap info_win_btn " style="color:#000000f7"><div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-2 slds-large-size--1-of-2 white">Attachment:<input type="file" id="file-input" accept="image/*"></input></div><div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-2 slds-large-size--1-of-2 slds-text-align_right white"><button type="button" value="" onclick="uploadFile();" style="background:transparent;border:none;height:25px;width:auto;"><i class="fas fa-cloud-upload-alt white" style="font-size:28px;"></i></button><p style="padding-top:3px;">Upload</p></div></div></div>',
+            });                   
+        }
+        
+        
+        /* var India_BOUNDS = {
+            north: 38.39,
+            south: -2.20,
+            west: 58.59,
+            east: 97.35,
+        };
+        */
+        var cntr = {lat: 23.2599, lng: 77.4126};
+        
+        map = new google.maps.Map(document.getElementById('map'), {
+            
+            center: cntr,
+            mapTypeId: 'roadmap',
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+            /* restriction: {
+                latLngBounds: India_BOUNDS,
+                strictBounds: false,
+            },*/
+            zoom: 4.5,
+            
+        });
+        if(accDetails == ''||accDetails==null){
+            document.querySelector(".panelopenclose").style.display="none"
+            no_record_popup();
+        }
+        
+        for(var key in accDetails){
+            popup = new Popup(
+                new google.maps.LatLng(accDetails[key].Latitude, accDetails[key].Longitude),
+                dyn_div[key]=document.createElement("div"));
+            popup.setMap(map);
+            dyn_div[key].innerHTML=accDetails[key].Name+"<br/>"+"Order Value:"+(accDetails[key].Total_Order_Values__c!=null?accDetails[key].Total_Order_Values__c:"No Orders");
+            // nameVal=accDetails[key].Name;
+            dyn_div[key].style.display="none";
+            // dyn_div[key].onclick=function() {myFunction(accDetails[key].Id)};
+            dyn_div[key].style.fontSize="10px";
+        }
+        console.log("div Array"+dyn_div);
+        
+        //-------TRAFFIC LAYER--------
+        
+        /*var trafficLayer = new google.maps.TrafficLayer();
+                 trafficLayer.setMap(map);*/
+        
+        
+        //-------TRAFFIC LAYER--------
+        
+        
+        
+        var markerLabel = {  
+            'Architect': 'A',
+            'Borer':'B',
+            'BorewellOffice':'BO',
+            'Builder':'BU',
+            'Consultant': 'CO',
+            'Contractor':'CN',
+            'Customer':'CU',
+            'Dealer':'D',
+            'DealersSalesman': 'DS',
+            'DirectDealer':'DD',
+            'Distributor':'DI',
+            'Engineer':'E',
+            'Farmer': 'F',
+            'Government':'G',
+            'Institution':'I',
+            'Mechanic':'M',
+            'Others': 'O',
+            'Plumber':'P',
+            'PlumberCumMechanic':'PCM',
+            'PlumbingContractor':'PC',
+            'ProjectManager': 'PM',
+            'ProjectOwnerDeveloper':'POD',
+            'Projects':'PR',
+            'PurchaseManager':'PRM',
+            'SiteEngineer': 'SE',
+            'SiteInchargeSupervisor':'SIS',                                                                                                    
+            'Winders': 'W',
+            'PanchayatHead':'PH',
+            'GIMSDealer':'GD',
+            'GIMSDP':'GDP'
+        };
+        
+        var markerLabelColor = {                                                                                                    
+            'Architect': 'Red',
+            'Borer':'Red',
+            'BorewellOffice':'Red',
+            'Builder':'Red',
+            'Consultant': 'Red',
+            'Contractor':'Red',
+            'Customer':'Red',
+            'Dealer':'Red',
+            'DealersSalesman': 'Red',
+            'DirectDealer':'Red',
+            'Distributor':'Red',
+            'Engineer':'Red',
+            'Farmer': 'Red',
+            'Government':'Red',
+            'Institution':'Red',
+            'Mechanic':'Red',
+            'Others': 'Red',
+            'Plumber':'Red',
+            'PlumberCumMechanic':'Red',
+            'PlumbingContractor':'Red',
+            'ProjectManager': 'Red',
+            'ProjectOwnerDeveloper':'Red',
+            'Projects':'Red',
+            'PurchaseManager':'Red',
+            'SiteEngineer': 'Red',
+            'SiteInchargeSupervisor':'Red',                                                                                                    
+            'Winders': 'Red',
+            'PanchayatHead':'Red',
+            'GIMSDealer':'Red',
+            'GIMSDP':'Red'
+        };
+        var url1={
+            'Architect': 'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625636000/ArchitectMapIcon',
+            'Borer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625668000/BorerMapIcon',
+            'BorewellOffice':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625706000/BorewellOfficeMapIcon',
+            'Builder':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625743000/BuilderMapIcon',
+            'Consultant':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625773000/ConsultantMapIcon',
+            'Contractor': 'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625828000/ContractorMapIcon',
+            'Customer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625964000/CustomerMapIcon',
+            'Dealer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552625999000/DealerMapIcon',
+            'DealersSalesman':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626040000/DealerSalesmanMapIcon',
+            'DirectDealer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626094000/DirectDealerMapIcon',
+            'Distributor': 'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626210000/DistributorMapIcon',
+            'Engineer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626250000/EngineerMapIcon',
+            'Farmer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626276000/FarmerMapIcon',
+            'Government':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626334000/GovernmentMapIcon',
+            'Institution':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626454000/InstitutionMapIcon',
+            'Mechanic': 'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626494000/MechanicMapIcon',
+            'Others':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552626543000/OthersMapIcon',
+            'Plumber':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627419000/PlumberMapIcon',
+            'PlumberCumMechanic':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627514000/PlumberCumMechanicMapIcon',
+            'PlumbingContractor':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627552000/PlumbingContractorMapIcon',
+            'ProjectManager': 'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627586000/ProjectManagerMapIcon',
+            'ProjectOwnerDeveloper':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627693000/ProjectOwnerDeveloperMapIcon',
+            'Projects':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627738000/ProjectsMapIcon',
+            'PurchaseManager':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627783000/PurchaseManagerMapIcon',
+            'SiteEngineer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552627814000/SiteEngineerMapIcon',
+            'SiteInchargeSupervisor': 'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552634361000/SiteInchargeSupervisorMapIcon',
+            'Winders':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552628016000/WindersMapIcon',
+            'PanchayatHead':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552628101000/PanchayatHeadMapIcon',
+            'GIMSDealer':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552628158000/GIMSDealerMapIcon',
+            'GIMSDP':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1552628185000/GIMSDPMapIcon',
+            
+        };
+        var churnVar={
+            'Churned':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1559042495000/finalred',
+            'Likelytochurn':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1559042555000/finalyellow',
+            'ChurnOthers':'https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1559042528000/finalgreen',
+            
+        };
+        
+        var markerIcon = {
+            url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
+            scaledSize: new google.maps.Size(30, 30),
+            labelOrigin: new google.maps.Point(15, 12),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(22,35)
+        };
+        
+        var markerIcon2 = {
+            url: 'http://simpleicon.com/wp-content/uploads/map-marker-17.svg',
+            scaledSize: new google.maps.Size(40, 40),
+            labelOrigin: new google.maps.Point(15, 12),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(22,35)
+        };
+        
+        infoWindow = new google.maps.InfoWindow({ content: '' });
+        
+        var markers = [];
+        
+        //--------------Create markers--------------
+        features.forEach(function(feature) {
+            console.log(feature);
+            
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                title: feature.title,
+                info: feature.sContent,
+                animation: google.maps.Animation.DROP,
+                icon: { 
+                    url:churnVar[feature.churnClass],
+                    scaledSize: new google.maps.Size(30, 30),
+                    labelOrigin: new google.maps.Point(15, 12),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(22,35)  
+                },
+                label: {
+                    //text: markerLabel[feature.type],
+                    color: markerLabelColor[feature.type],
+                    fontSize: "11px",
+                    fontWeight: "bold"
+                },
+                map: map,
+                id: feature.id, //getting the id of the account of the clicked marker
+                phNo: feature.phNo,
+                orderVal:feature.orderVal,
+                churnName:feature.churnName,
+                currentNPS:feature.currentNPS
+                
+            });
+            
+            //----------------------ON CLICK OF MAP, HIDES TABLE AND IMAGE-------------------
+            google.maps.event.addListener( map, 'click', function() {
+                //document.getElementById("mySidenav").style.width = "0px";
+                /*document.getElementById("fileImage").style.visibility = "none";
+                document.getElementById("visits").style.visibility = "none";
+                document.getElementById('analyticsDiv').style.display = 'none';
+                document.getElementById("headingDiv").style.visibility = "hidden"; */
+                infoWindow.close();                        
+            });
+            
+            //--------------------THIS METHOD GIVES THE CURRENT ZOOM LEVEL AND THIS METHOD IS USED FOR HIDING THE POPUP AND SHOWING THE POPUP----------
+            google.maps.event.addListener(map, 'zoom_changed', function() {
+                
+                
+                zoomLevel = map.getZoom();
+                console.log("HI"+zoomLevel);
+                var s; 
+                if (zoomLevel >= 14) {
+                    for (s = 0; s < dyn_div.length; s++) { 
+                        // locator_label();
+                        dyn_div[s].style.display="block";
+                    }
+                }
+                else{
+                    
+                    for (s = 0; s < dyn_div.length; s++) { 
+                        // locator_label();
+                        dyn_div[s].style.display="none";
+                    }                      
+                }
+                
+            });
+            //----------------------ON CLICK OF MAP, HIDES TABLE AND IMAGE-------------------
+            
+            var contnew =document.getElementById('buttonInfo').innerHtml;
+            var staticimg = "https://ashirwardpipeslighting--partial--c.cs17.visual.force.com/resource/1557382237000/beatIcon";
+            var clk;
+            var vkl;
+            google.maps.event.addListener( marker, 'click', function() {
+                var cont = this.info;
+                currentId = marker.id;
+                idstring =currentId;
+                // document.getElementById('loadspinner').style.display = 'block';
+                // document.getElementById("spinner").style.display = "block";
+                
+                
+                // markerPos = [marker.getPosition().lat(), marker.getPosition().lng()];// hold lat long of current click marker
+                // alert('markerPos'+markerPos);
+                if(beaton == true){
+                    
+                    markerPos = [marker.getPosition().lat(), marker.getPosition().lng()];// hold lat long of current click marker
+                    // alert('markerPos for beaton'+markerPos);
+                    if(markerString.includes(markerPos)){
+                        console.log();
+                        markerString = markerString.replace('/'+markerPos, "");
+                        marker.setIcon(clk);
+                        //alert('first value'+markerString);
+                        var cont = this.info;
+                        infoWindow.setContent( cont );
+                        infoWindow.open( map, this );
+                        
+                        
+                        console.log('on beaton true values in side nav');
+                        
+                        
+                        document.getElementById("my_Side_bar").style.width = "0";
+                        document.getElementById("main_map").style.marginLeft= "0";
+                        document.getElementById("rarrow").style.transform = "rotate(0deg)";
+                        
+                        contnew = '';
+                        document.getElementById("mySidenav").innerHTML  = contnew;
+                        
+                        console.log(marker.id); //to get clicked marker id
+                        currentId = marker.id;// its account id that we are passing to controller and checkin method
+                        console.log("current id is " + currentId);
+                        currentName = marker.title;
+                        churName=marker.churnName;
+                        currentNPS=marker.currentNPS;
+                        console.log("current name is " + currentName);
+                        
+                        marker_arrayBeat = marker_arrayBeat.replace('/'+idstring, "");
+                        //alert('marker_arrayBeat inside first cond'+marker_arrayBeat);
+                        console.log("marker_arrayBeat first  is " + marker_arrayBeat); 
+                        
+                        
+                        
+                        currentphNo = marker.phNo;
+                        console.log("current phNo is " + currentphNo);
+                        //document.getElementById("fileImage").style.visibility = "visible"; //on clisk of marker make image visible
+                        // document.getElementById("visits").style.visibility = "visible";  //on clisk of marker make visits table visible
+                         //document.getElementById("headingDiv").style.visibility = "visible";
+                     
+                        // document.getElementById("mySidenav").innerHTML  = contnew;
+                        
+                      
+                       
+                        /*showVisits(currentId,currentName,currentphNo,currentNPS,churName);
+                        document.getElementById("my_Side_bar").style.width = "0";
+                        document.getElementById("main_map").style.marginLeft= "0";
+                        document.getElementById("rarrow").style.transform = "rotate(0deg)";
+                        console.log("Marker String " + markerString);*/
+                        
+                        
+                    }else{
+                        
+                        document.getElementById("my_Side_bar").style.width = "0";
+                        document.getElementById("main_map").style.marginLeft= "0";
+                        document.getElementById("rarrow").style.transform = "rotate(0deg)";
+                        
+                        markerString += '/'+markerPos;
+                        
+                        // orderArray+= ','+marker.orderVal;          
+                        clk = marker.getIcon();
+                        console.log('clk val;;;'+JSON.stringify(clk));
+                        marker.setIcon(staticimg);  
+                        var cont = this.info;
+                        infoWindow.setContent( cont );
+                        infoWindow.open( map, this );
+                        console.log(marker.id); //to get clicked marker id
+                        currentId = marker.id;// its account id that we are passing to controller and checkin method
+                        console.log("current id is " + currentId);
+                        currentName = marker.title;
+                        churName=marker.churnName;
+                        currentNPS=marker.currentNPS;
+                        console.log("current name is " + currentName);
+                        
+                        marker_arrayBeat += '/'+idstring;
+                        //  alert('marker_arrayBeat inside second cond    '  +marker_arrayBeat);
+                        console.log("marker_arrayBeat second second second  is " + marker_arrayBeat); 
+                        
+                        
+                        
+                        currentphNo = marker.phNo;
+                        console.log("current phNo is " + currentphNo);
+                        //document.getElementById("fileImage").style.visibility = "visible"; //on clisk of marker make image visible
+                        // document.getElementById("visits").style.visibility = "visible";  //on clisk of marker make visits table visible
+                         document.getElementById("mySidenav").innerHTML  = contnew;
+                        //document.getElementById("headingDiv").style.visibility = "visible";
+                        showVisits(currentId,currentName,currentphNo,currentNPS,churName);
+                        console.log("Marker String " + markerString);
+                        
+                        
+                    }
+                    
+                    //openNav();
+                }else{
+                    // alert('its in else');
+                    
+                    document.getElementById("my_Side_bar").style.width = "0";
+                    document.getElementById("main_map").style.marginLeft= "0";
+                    document.getElementById("rarrow").style.transform = "rotate(0deg)";
+                    
+                    markerPos = [marker.getPosition().lat(), marker.getPosition().lng()];// hold lat long of current click marker
+                    var cont = this.info;
+                    infoWindow.setContent( cont );
+                    infoWindow.open( map, this );
+                    console.log(marker.id); //to get clicked marker id
+                    currentId = marker.id;// its account id that we are passing to controller and checkin method
+                    console.log("current id is " + currentId);
+                    currentName = marker.title;
+                    churName=marker.churnName;
+                    currentNPS=marker.currentNPS;
+                    console.log("current name is " + currentName);
+                    currentphNo = marker.phNo;
+                    console.log("current phNo is " + currentphNo);
+                    // document.getElementById("fileImage").style.visibility = "visible"; //on clisk of marker make image visible
+                    //document.getElementById("visits").style.visibility = "visible";  //on clisk of marker make visits table visible
+                    document.getElementById("mySidenav").innerHTML  = contnew;
+                    //document.getElementById("headingDiv").style.visibility = "visible";
+                    showVisits(currentId,currentName,currentphNo,currentNPS,churName);
+                    //openNav();
+                    console.log("Marker String " + markerString);
+                    
+                }
+                //  document.getElementById("spinner").style.display = "none";
+                
+            });
+            markers.push(marker);
+        }); 
+        // To make cluster based on number of accounts in that region in diffrent color. you can see when zoom out
+        var clusterStyles = [
+            {
+                textColor: 'black',
+                url: 'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclusterer/images/m1.png',
+                height: 52,
+                width: 52,
+                textSize:12,
+                anchorIcon: [20, 140]
+            },
+            {
+                textColor: 'black',
+                url: 'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclusterer/images/m2.png',
+                height: 56,
+                width: 56,
+                textSize:12,
+                anchorIcon: [20, 140]
+            },
+            {
+                textColor: 'black',
+                url: 'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclusterer/images/m3.png',
+                height: 66,
+                width: 66,
+                textSize:12,
+                anchorIcon: [20, 140]
+            }
+        ];
+        
+        
+        
+        var mcOptions = {
+            //imagePath:'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+            minimumClusterSize: 2,
+            maxZoom:13,
+            gridSize: 50,
+            averageCenter:false,
+            styles: clusterStyles
+        };
+        
+        // To make cluster based on number of accounts in that region in diffrent color. you can see when zoom out
+        markerCluster = new MarkerClusterer(map, markers,mcOptions);
+        // var clusters = markerCluster.getGridSize(); // use the get clusters method which returns an array of objects
+        //console.log("Marker Cluster==>"+clusters);
+        
+        //GEOCODER FOR AUTO SEARCH ADDRESS
+        var origin_input = document.getElementById('address');  
+        var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
+        origin_autocomplete.bindTo('bounds', map);
+        
+        var geocoder = new google.maps.Geocoder();
+        document.getElementById('submit').addEventListener('click', function() {
+            geocodeAddress(geocoder, map);
+            var addressvalue=document.querySelector("#address").value;
+            if(addressvalue=="") {
+                alert("Please fill the area");
+                
+            } else {
+                
+                document.querySelector(".rad_div").style.display="block";
+                
+                document.querySelector(".addr_inp").style.width="74px";
+            }
+            
+        });
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+                    //alert(latitude+'  '+longitude);
+                    document.getElementById("{!$Component.frmid:lati}").value= latitude ;
+                    document.getElementById("{!$Component.frmid:longi}").value= longitude ;
+                    // alert('hiii'+latitude);
+                    resultsMap.setCenter(results[0].geometry.location);
+                    resultsMap.setZoom(15);
+                    
+                    var markernew = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        center: results[0].geometry.location,
+                    });
+                    var circle = new google.maps.Circle({
+                        center: results[0].geometry.location,
+                        map: map,
+                        radius:2000,//document.getElementById('pageid:formid:rad').innerHTML=radiusval;,          // IN METERS.//
+                        fillColor: '#E0E0E0',
+                        fillOpacity: 0.1,
+                        //strokeColor: "#FFF",
+                        strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
+                    });
+                    map.fitBounds(circle.getBounds());
+                }
+            });
+        }
+        
+    } //init function ends
+    
+    
+    // filter panel code was here
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        disableLink();
+        closeNav();
+        modal.style.display = "block";
+        console.log("open popup");
+        
+    }
+    
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            
+            console.log("click on map");
+        }
+    }
+    
+    $(document).ready(function(){
+        $("#buttonInfo").hide();
+    });
+    
+    var currentLatitude;
+    var currentLongitude;
+    var currentLocation ;
+    var marker2;
+    var img = 'https://img.icons8.com/ios/50/000000/street-view-filled.png';
+    // to fetch current loaction and its zoom in ur current loaction with a icon.
+    function locate(){
+        closeNav();
+        
+        if ("geolocation" in navigator){
+            
+            navigator.geolocation.getCurrentPosition(function(position){ 
+                currentLatitude = position.coords.latitude;
+                currentLongitude = position.coords.longitude;
+                if(currentLocation!=null){
+                    marker2.setVisible(false);
+                }
+                currentLocation = { lat: currentLatitude, lng: currentLongitude };
+                marker2 = new google.maps.Marker({
+                    position: currentLocation,
+                    title: 'Current Location',
+                    animation: google.maps.Animation.DROP,
+                    icon: img,
+                    map: map,
+                    
+                });
+                ZoomAndCenter();
+                var zoom = 14;
+                
+                pos1 = [position.coords.latitude, position.coords.longitude];
+                
+                var contentString = "You Are Here";
+                
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        }
+    }
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos1);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+    // zooms to current loaction when called ie works when current loaction button is clicked
+    function ZoomAndCenter() {
+        map.setCenter(currentLocation);
+        map.setZoom(15);
+        // GetLocation();
+        //doCheckin();
+    }
+    /* this method is called when checkin button is called its send current lat long values  and account id ie marker id 
+    to controller with the help of apex function
+    
+    */
+    
+    var currentLatitudeval;
+    var currentLongitudeval;
+    var currentLocation1 ;
+    var marker3;
+    var img = 'https://img.icons8.com/ios/50/000000/street-view-filled.png';
+    
+    function locatecheckin(){
+        closeNav();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    
+    function showPosition(position) {
+        currentLatitudeval = position.coords.latitude ;
+        currentLongitudeval=  position.coords.longitude;
+        // alert('vv'+currentLatitudeval);
+        ZoomLocation();
+    }
+    
+    function ZoomLocation() {
+        GetLocation();
+        doCheckin();
+    }
+    
+    function doCheckin(){
+        
+        //  alert('capture'+currentLongitudeval);
+        //  alert('capture ddfd'+currentId);
+        checkinvisit(currentLatitudeval,currentLongitudeval,currentId);
+        // alert('checkinvisit'+JSON.stringify(checkinvisit));
+        //alert("checkin");  
+    }
+    
+    function beatModeOn(){
+        //    alert('hiii on');
+        closeNav();
+        beaton =true;
+        document.getElementById('buttonBeat').style.backgroundColor='black';
+        document.getElementById('buttonBeat').style.color='white';
+        document.getElementById('buttonBeat').style.border='none';
+        document.getElementById('buttonMap').style.backgroundColor='white';
+        document.getElementById('buttonMap').style.border='none';
+        document.getElementById('buttonMap').style.color='black';  
+        document.querySelector(".beat_btn").style.display="block";
+        document.getElementById("myBtn").style.display = "block";
+        document.getElementById("address").style.display= "inline-block";
+    }
+    function beatModeOff(){
+        document.querySelector(".panelopenclose").style.display="none"; 
+        document.getElementById("myBtn").style.display = "none";
+        document.getElementById("address").style.display= "inline-block";
+        // alert('hiii off');
+        closeNav();
+        if(markerString!=null && markerString!=''){
+            // alert(markerString);
+            //location.reload();
+        }else{
+            console.log('hiii');
+        }
+        
+        
+        beaton =false;
+        document.getElementById('buttonMap').style.backgroundColor='black';
+        document.getElementById('buttonMap').style.color='white';
+        document.getElementById('buttonMap').style.border='none';
+        
+        document.getElementById('buttonBeat').style.backgroundColor='white';
+        document.getElementById('buttonBeat').style.border='none';
+        document.getElementById('buttonBeat').style.color='black';
+        document.querySelector(".beat_btn").style.display="none";
+        initMap();
+    }
+    
+    function visitFunc(){
+        var x = document.getElementById("visits");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    
+    function projectFunc(){
+        var x = document.getElementById("projects");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function promoFunc(){
+        var x = document.getElementById("promotions");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function nptpFunc(){
+        var x = document.getElementById("nptb_tab");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    
+    
+    window.onload = function() { 
+        /*document.getElementById('visits').style.display = 'none';
+        document.getElementById('projects').style.display = 'none';*/
+        //document.getElementById('fileImage').style.display = 'none';
+        document.getElementById('analyticsDiv').style.display = 'none';
+        document.getElementById('loadspinner').style.display = 'none';
+        
+    };
+    
+    /* to auto detect current lat long value for direction in case the user dosen't use current loaction icon but clicks on the direction icon
+    it sends the current lat long values to goToMap() written below
+    */
+    navigator.geolocation.getCurrentPosition(function(position) {
+        console.log('Geolocation permissions granted');
+        console.log('Latitude:' + position.coords.latitude);
+        console.log('Longitude:' + position.coords.longitude);
+        pos2 = [position.coords.latitude, position.coords.longitude];
+        
+    });
+    // This method redirects to google map page with all clicked markers lat long this method is called when direction icon is clicked
+    
+    function goToMap(){
+        var mainMarkerString='';
+        var mainArray=[];
+        var currentPos = pos2;
+        if ("geolocation" in navigator){
+            var marker2;
+            navigator.geolocation.getCurrentPosition(function(position){ 
+                pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                console.log("position @@@@");   
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        }
+        console.log(markerString);
+        
+        // the variable holds lat long of all clicked markers seperated by a '/'
+       var markerStringDuplicate='';
+        markerStringDuplicate=markerString;
+        if(markerStringDuplicate.charAt(0)=='/'){
+            markerStringDuplicate= markerStringDuplicate.substring(1);
+            
+            
+        }
+        console.log(markerStringDuplicate);
+        
+        orderArray=orderArray.substring(1);
+        var markerStringArray =markerStringDuplicate.split("/");
+        var orderArray1=orderArray.split(",");
+        var mapVal = new Map();
+        //var mainArray=new array();
+        
+        var i;
+        var k;
+        console.log("order Value"+orderArray1);
+        console.log("Marker "+markerStringDuplicate);
+        
+        
+        for (i = 0; i < markerStringArray.length; i++) { 
+            // mainArray[i]=parseInt(orderArray1[i]);
+            if(i==0){
+                mainMarkerString+=markerStringArray[i];
+            }
+            else{
+                mainMarkerString+='/'+markerStringArray[i];
+                
+            }
+            //mapVal.set(orderArray1[i],markerStringArray[i]);
+            
+        }
+        //mainArray.sort();
+        /* mainArray.sort(function(a, b){return a - b});
+        
+        
+        mainArray.reverse();
+        for (k = 0; k < mainArray.length; k++) { 
+            //mapVal.set(orderArray1[i],markerString1[i]);
+            if(k==0){
+                mainMarkerString+=mapVal.get(mainArray[k].toString());
+            }
+            else{
+                mainMarkerString+='/'+mapVal.get(mainArray[k].toString());
+                
+            }
+        }*/
+        console.log("Map Value"+mapVal);
+        
+        console.log(mainArray);
+        console.log(mainMarkerString);
+        
+        if(beaton == true && mainMarkerString!=null){
+            
+            if(mainMarkerString==null||mainMarkerString==''){
+                alert('Please select Accounts.');
+            }else{
+                // alert('true');
+                var check='';
+                // URL to open google maps
+                window.open("https://www.google.com/maps/dir/"+pos2+"/"+mainMarkerString);
+                console.log("https://www.google.com/maps/dir/"+pos2+"/"+mainMarkerString)
+            }
+        }
+        else{
+            // alert('false');
+            window.open("https://www.google.com/maps/dir/"+pos2+"/"+markerPos);
+        }
+        
+    }
+    
+    var myIndex = 0;
+    
+    
+    function carousel() {     
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+       
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+         
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}    
+        x[myIndex-1].style.display = "block";  
+        setTimeout(carousel, 5000); // Change image every 2 seconds
+        showDivs(slideIndex);
+         
+        
+    }
+    
+    
+    
+    var slideIndex = 1;
+    
+    
+    function plusDivs(n) {
+        
+        showDivs(slideIndex += n);
+    }
+    
+    function showDivs(n) {
+        currentchurnbg();
+        var i;
+        var x = document.getElementsByClassName("mygraph");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+        x[slideIndex-1].style.display = "block";  
+    }
+    
+    
+    function createPopupClass() {
+        function Popup(position, content) {
+            this.position = position;
+            
+            content.classList.add('popup-bubble');
+            
+            // This zero-height div is positioned at the bottom of the bubble.
+            var bubbleAnchor = document.createElement('div');
+            bubbleAnchor.classList.add('popup-bubble-anchor');
+            bubbleAnchor.appendChild(content);
+            
+            // This zero-height div is positioned at the bottom of the tip.
+            this.containerDiv = document.createElement('div');
+            this.containerDiv.classList.add('popup-container');
+            this.containerDiv.appendChild(bubbleAnchor);
+            
+            // Optionally stop clicks, etc., from bubbling up to the map.
+            google.maps.OverlayView.preventMapHitsAndGesturesFrom(this.containerDiv);
+        }
+        // ES5 magic to extend google.maps.OverlayView.
+        Popup.prototype = Object.create(google.maps.OverlayView.prototype);
+        
+        /** Called when the popup is added to the map. */
+        Popup.prototype.onAdd = function() {
+            this.getPanes().floatPane.appendChild(this.containerDiv);
+        };
+        
+        /** Called when the popup is removed from the map. */
+        Popup.prototype.onRemove = function() {
+            if (this.containerDiv.parentElement) {
+                this.containerDiv.parentElement.removeChild(this.containerDiv);
+            }
+        };
+        
+        /** Called each frame when the popup needs to draw itself. */
+        Popup.prototype.draw = function() {
+            var divPosition = this.getProjection().fromLatLngToDivPixel(this.position);
+            
+            // Hide the popup when it is far out of view.
+            var display =
+                Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000 ?
+                'block' :
+            'none';
+            
+            if (display === 'block') {
+                this.containerDiv.style.left = divPosition.x + 'px';
+                this.containerDiv.style.top = divPosition.y + 'px';
+            }
+            if (this.containerDiv.style.display !== display) {
+                this.containerDiv.style.display = display;
+            }
+        };
+        
+        return Popup;
+    }
+    
+    // saving beat master
+    function saveBeat(){
+        // BeatSave(BeatName,BeatId);
+        //console.log('array are here'+markerJson);
+        //var type = document.getElementById(id).value;
+        console.log('test check'+marker_arrayBeat);
+        marker_Detailsvalue(marker_arrayBeat);
+        
+        //  myWindow.close();
+        
+    }  
+    function callBeatPlan(){
+        // beatMethod();
+        
+        // document.querySelector(".beatpopup");
+        var modal = document.getElementById('createbeatModal');
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("createbeatclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        
+        modal.style.display = "block";
+        
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        document.querySelector("#beatpanel").style.display="none";
+        
+    }
+    function clearFields(){
+        console.log('hiiii');
+        // alert('entering the clear field fn');
+        
+        
+        
+        document.getElementById('{!$Component.pageid:formbeat:mastername}').value = '';
+        
+        var modal = document.getElementById('successDiv');
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("saveBeatclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        modal.style.display = "block";
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        /* var myWindow = document.getElementsByClassName("modal-content")[0];
+        myWindow.close();*/
+        return false;
+    }
+    
+    function clearFieldsUnsuccess(){
+        console.log('hiiii');
+        document.getElementById('{!$Component.pageid:formbeat:mastername}').value = '';
+        console.log('hello check');
+        var modal = document.getElementById('UnsuccessDivBeat');
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("FailedBeatclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        modal.style.display = "block";
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        return false;
+    }
+    
+    
+    function planMyBeat(){
+        // alert('entering plan my beat');
+        planMyBeatFunction();
+    }
+    
+    
+    function checkinUpdateUnsuccess(){
+        var modal = document.getElementById('CheckinDivUnsuccess');
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("Unsuccesscheckinclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        modal.style.display = "block";
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    }
+    
+    
+    function checkinUpdatediv(){
+        
+        var modal = document.getElementById('CheckinDiv');
+        
+        var span = document.getElementsByClassName("successcheckinclose")[0];
+        
+        // When the user clicks the button, open the modal 
+        modal.style.display = "block";
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    }
+    
+    
+    
+    //------------------------------DIRECTION BETWEEN LOCATIONS ENDS------------------------------------ 
+    
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    
+    <script async='async' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKTVWBhDiTGconvGKvNorbXYlCnFHD94I&libraries=places&callback=initMap">
+    </script>
+    
+    
+</body>
+</html>
+</apex:page>

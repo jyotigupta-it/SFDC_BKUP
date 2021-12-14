@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Mail_Alert_for_non_updation_of_site_visits</fullName>
+        <ccEmails>vijay.j@ashirvad.com;bhargav.surapaneni@ashirvad.com</ccEmails>
+        <description>Mail Alert for non-updation of site visits</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/Non_Updation_of_visit_entries_in_SFDC</template>
+    </alerts>
+    <alerts>
+        <fullName>When_the_change_Beat_will_get_Approved_then_Approval_email_will_go_to_the_submit</fullName>
+        <description>When the change Beat will get Approved then Approval email will go to the submitter.</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Change_Beat_Approval_Status_to_submitter</template>
+    </alerts>
+    <alerts>
+        <fullName>When_the_change_Beat_will_get_Rejected_then_Rejected_email_will_go_to_the_submit</fullName>
+        <description>When the change Beat will get Rejected then Rejected email will go to the submitter.</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Change_Beat_Rejected_Status_to_submitter</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Market_type_field</fullName>
+        <field>Market_Type__c</field>
+        <literalValue>New</literalValue>
+        <name>Market type field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Market_type_update_as_new</fullName>
+        <field>Market_Type__c</field>
+        <literalValue>New</literalValue>
+        <name>Market type update as &apos;new&apos;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Null_to_change_Beat</fullName>
+        <field>Change_To_Beat_Name__c</field>
+        <name>Null to change Beat</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Null_to_change_Beat1</fullName>
+        <field>Change_To_Beat_Name__c</field>
+        <name>Null to change Beat1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_To_Approve</fullName>
+        <field>Change_Beat_Approval__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Status To Approve</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_To_Approve1</fullName>
+        <field>Change_Beat_Approval__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Status To Approve</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_To_Pending</fullName>
+        <field>Change_Beat_Approval__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Status To Pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_To_Rejected</fullName>
+        <field>Change_Beat_Approval__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Status To Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Mail alert for updation of visits</fullName>
+        <active>false</active>
+        <description>mail alert for users for non-updation of visit enteries</description>
+        <formula>AND( IF(AND(Day_of_date__c &lt;&gt; &quot;Sunday&quot;, NOT( OR(INCLUDES(Visit_Type__c  ,&quot;Holiday&quot; ),INCLUDES(Visit_Type__c,&quot;Leave&quot;) )) )  , true, false) , IF( No_of_visits_added__c =0, true,false) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <offsetFromField>AP_Tour_Plan__c.Date__c</offsetFromField>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Market Type Update</fullName>
+        <actions>
+            <name>Market_type_field</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3 OR 4 OR 5</booleanFilter>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Amritsar,Anantpur,Ashoknagar,Aurangabad,Azamgarh,Banswara,Baran,Bareilly,Barmer,Beed,Bhind,Bhopal,Bidar,Bikaner,Chandauli,Chandrapur,Chhindwara,Chitradurga,Chittor,Churu,Cuddapah,Dhamtari,Dharwad,Dhule,East Godavari,Etah,Faizabad</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Farrukhabad,Gadag,Gondia,Gorakpur,Gulberga,Gurgaon,Hanumangarh,Harda,Hassan,Haveri,Jabalpur,Jagatsinghpur,Jaisalmer,Jalna,Khandwa,Khargone,Kolar,Kota,Kurukshetra,Latur,Mahasamund,Mandya,Meerut,Mehboobnagar,Mirzapur,Moradabad</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Morena,Mumbai-City,Nagpur,Nandurbar,Narsinghpur,Nashik,Navansahar,Neemuch,Nellore,Nizamabad,Osmanabad,Pali,Parbhani,Pratapgarh,Pune,Raigad,Ratlam,Sagar,Saharanpur</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Fatehabad,Satara,Shahdol,Sheopur,Shivpuri,Sirsa,Sonipat,Thane,Tikamgarh,Tumkur,Udaipur,Udupi,Varanasi,Vidisha,West Godavari,Yamunanagar,Badgan,Buldhana,Dungarpur,Durg,Faridabad</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Allahabad,Amravati,Hissar,Jaipur,Jalandhar,Janjgir-Champa,Karim Nagar,Khammam,Kolhpur,Ludhiana,Nanded,Panipat,Sikar</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Market Type update as %27new%27</fullName>
+        <actions>
+            <name>Market_type_update_as_new</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3 OR 4 OR 5</booleanFilter>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Adilabad,Ajmer,Aligarh,Allahabad,Amravati,Anand,Angul,Aurangabad,Bagalkot,Bangalore Rural,Bangalore Urban,Bankura,Bareilly,Beed,Begusarai,Betul,Bharatpur,Bhavnagar,Bhojpur(Arah),Durg,Jaisalmer,Jalandhar,Ludhiana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Bhiwani,Bidar,Birbhum,Budaun,Buldhana,Chikkaballapur,Cuttak,Damoh,Datia,Dhanbad,Dharmapuri,Dholpur,Dhule,Dibrugarh,Fatehpur,Gandhinagar,Giridih,Golaghat,Gorakpur,Hanumangarh,Hingoli,Hoshangabad</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Bandra(Mumbai Suburban district),Jabalpur,Jamshedpur(East Singhbhum),Janjgir-Champa,Jaunpur,Jhansi,Jharsuguda,Jhunjhunu,Jodhpur,Kancheepuram,Kanpur(Nagar),Kolar,Kutch,Lakhisarai,Lohardaga,Medak,Mumbai-City,Murshidabad,Nagpur,Nalanda</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Namakkal,Nandurbar,Narsinghpur,Nawada,Pali,Pondicherry,Pune,Purulia,Raebareili,Raigad,Ratnagiri,Rewa,Rohtak,Rohtas(Sasaram),Sabarkantha,Satara,Satna,Sawai Madhopur,Sirohi,Sirsa,Sitapur,Surat,Surendranagar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>AP_Tour_Plan__c.District__c</field>
+            <operation>equals</operation>
+            <value>Thane,Thanjavur,Tiruchiorappalli,Tirunelveli,Tiruvallur,Udaipur</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

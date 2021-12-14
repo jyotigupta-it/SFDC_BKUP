@@ -1,0 +1,41 @@
+<apex:page standardController="User" extensions="vendorController">
+<script src= "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<script language="javascript">
+j$ = jQuery.noConflict();
+
+j$(document).ready(function(){
+if('{!flagVar}' == 'true'){
+window.top.location = '/{!Id}?noredirect=1&isUserEntityOverride=1';
+}
+$('div').children().attr('readonly', true);
+});
+</script>
+
+
+<style>
+tab{
+padding-left:10px;
+}
+</style>
+ <apex:form >
+<apex:pageMessages id="errorMsg" ></apex:pageMessages>
+ <apex:pageBlock ><br/>
+                <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveVendorDetails}" />
+                <apex:commandButton value="Cancel" action="{!Cancel}" />
+                </apex:pageBlockButtons>
+Cluster <tab></tab><apex:inputField value="{!caseRecord.Vendor_Cluster__c}"/>
+Select the Vendor <tab></tab> <apex:inputField value="{!caseRecord.Vendor_Details__c}"> 
+     <apex:actionSupport event="onchange" action="{!getVendorDetails}" reRender="vendor,vendor_code">
+</apex:actionSupport>
+      </apex:inputField> <br/> <br/>
+   Vendor:<tab></tab><tab></tab> <tab></tab> <tab></tab><apex:outputText value="{!Vendor}" id="vendor"/>    <br/> <br/>
+    Vendor Code: <tab></tab>   <apex:outputText value="{!Vendor_Code}" id="vendor_code"/><br/>    
+             
+    </apex:pageblock>
+ 
+ 
+ </apex:form>
+</apex:page>

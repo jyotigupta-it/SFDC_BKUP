@@ -1,0 +1,14 @@
+<apex:page standardController="Notice__c">
+    <br/>
+    <apex:outputText style="font-size:25px;font-face:verdana;color:red;" value="Cannot delete!!" rendered="{!IF($UserRole.Name!='Director', TRUE, FALSE)}"></apex:outputText>
+    <br/>
+    <apex:outputText style="font-size:15px;font-face:verdana;" value="You do not have sufficient privilege." rendered="{!IF($UserRole.Name!='Director', TRUE, FALSE)}"></apex:outputText>
+    <br/><br/>
+    Click <a href="/apex/NoticesTab"> here </a> to go back.
+    <apex:form >
+        <br/><br/><br/>
+        <apex:pageblock rendered="{!IF($UserRole.Name=='Director', TRUE, FALSE)}">
+            <apex:commandButton value="Delete" action="{!delete}"/>
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

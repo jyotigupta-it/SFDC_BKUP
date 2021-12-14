@@ -1,0 +1,2241 @@
+<!--************XXX*********************
+
+    Developer       :Srilakashmi
+    Page Name       :Addl_Disc_Req
+    version         :1.0
+    Date            :13-Jan-2015
+    Modified Date   :17 Feb-2015
+    Description     :Component used in Additional Discount Request Email Template
+     
+****************XXX**********************-->
+<apex:component access="global" controller="APPL_NEW_PROMOTION_CTRL_Modified" extensions="CustomLookupForProject" id="applPromoCompId" allowDML="true">
+    <!--<apex:attribute name="opporId" type="Id" description="Id of the opportunity" assignTo="{!oppId}"/>
+     promoDate=" + tourDate + "&vertical=" + targetVetical + "&promoId=" + promotionId -->
+    <apex:attribute name="tourDate" type="string" description="promotion tour Date" assignTo="{!calpromoDate}"/>
+    <apex:attribute name="verticaltype" type="string" description="verticaltype" assignTo="{!calvertical}"/>
+    <apex:attribute name="promoid" type="string" description="promotion id" assignTo="{!calpromoId}"/>
+        
+
+<html>
+    <style>
+    .look_css select, .look_css input[type="text"] {
+        background-color: #fff;
+    color: #16325c;
+    border: 1px solid #d8dde6;
+    border-radius: .25rem;
+    width: 50%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+    }
+    .look_css input[type="text"] {
+    position:relative;
+    }
+    .look_css a {
+    position:absolute;
+    right:0px;
+    top:8px;
+    }
+.slds-lookup a {
+    position: relative;
+    width: inherit!important;
+    border: none!important;
+    background: none!important;
+    left: -30px;
+    top: -1px;
+    padding: 0!important;
+}
+sub {
+  font-size:20px!important;
+  color:red;
+  }
+  @media only screen and (min-width: 250px) and (max-width: 770px) {
+  .table_inp_wid .slds-input, .table_inp_wid .slds-select {
+  width:150px!important; 
+  }
+  }
+  
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    z-index:999999;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.positionrel {
+ position:relation;
+ }
+ .positionabs {
+     position: absolute;
+    right: 6px;
+    top: 6px;
+ }
+ .lookup_style {
+ position:relative;
+ }
+ .lookup_style a {
+ position:absolute;
+ right:5px;
+ }
+</style>
+<body>
+<apex:slds />
+<apex:actionstatus id="as1">
+<apex:facet name="start">
+<div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;z-index: 115;overflow:hidden;position:fixed;">
+  <div class="waitingHolder" > <img class="waitingImage" src= "{!$Resource.Redcircle}" style="width: 20%" title="Please Wait..." /> </div>
+</div>
+</apex:facet>
+</apex:actionstatus>
+<div class="panel panel-info" style="margin-bottom: 20px;background-color: #ffffff; border: 2px solid rgba(80, 135, 173, 0.06); border-radius: 4px;-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);">
+  <div class="slds-page-header">
+    <div class="slds-media">
+      <div class="slds-media__body">
+        <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">Create New Promotion &amp; Add Members </h1>
+        <p class="slds-text-body_small slds-line-height_reset"></p>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+      <input type="hidden" id="tmpPromoId" value="" />
+    <apex:form styleClass="form-horizontal" id="proForm">
+    
+      <apex:pageMessages id="errMsg"/>
+      <apex:actionFunction name="copyAccountRow" action="{!getAccoutRow}" immediate="true"  reRender="proForm,architectsBuilderEngineers,boarersMeet,dealersMeet,farmersMeet,salesmanMeetFactoryVisit,TractorShow,plumberMechanic,Shandy" status="as1">
+        <apex:param id="cusMobileId" name="cusMobile" value="" />
+        <apex:param id="rowIndexId" name="rowIndex" value="" />
+      </apex:actionFunction>
+      
+      <!----------------------------------Distributor POPUP-------------------------------------------------------------->
+            <div id="myModalDistributor" class="modal">    
+               <div class="modal-content" >
+                <span class="closeDistributor close">&times;</span>
+                
+                    <apex:outputpanel id="lookupPanelForDistributor"  styleclass="outpanelDistributor">                          
+                 
+                        <div class="slds-page-header">
+                              <div clss="slds-media">
+                                <div class="slds-media__body">
+                                 <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                 <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                              </div>
+                        </div>
+                        
+                        <div class="slds-p-around_x-small">
+                            <p>Please enter the search term below and click the 'Go' button.  This will
+                               execute a search across all text fields</p>
+                            <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>                                    
+                            
+                            <apex:input value="{!distrqrypromo}" id="CustomLookupForDistributor" disabled="false" type="text"/> 
+                            <span><apex:commandButton value="Go" action="{!searchQueryforDistri}" rerender="errMsg,lookupPanelForDistributor,dptableDistributor"/></span>
+                            
+                        </div>
+                        
+                        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableDistributor">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th>Name</th>
+                                    <th>Party Type</th>
+                                    <th>Mobile No</th>
+                                    <th>Status </th>
+                                    <th>State </th>
+                                    <th>District</th> 
+                                    <th>Location</th>                                           
+                                </tr>   
+                            </thead>
+                            <tbody id="myTableForDistributor">                                      
+                                <apex:repeat value="{!distracc}" var="account">                                           
+                                                      
+                                        <tr class="slds-hint-parent">
+                                              <td data-label="Name" >
+                                                    <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                                  <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2Distributor('{!account.id}')" >{!account.Name}</apex:outputLink>  </div>
+                                              </td>
+                                              <td data-label="Party Type">
+                                                  <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                              </td>
+                                              <td data-label="Mobile No">
+                                                      <div class="slds-truncate" title="Mobile No"> <apex:outputText value="{!account.Contact_Number_Mobile__c }" escape="false" /></div>
+                                                  </td>
+                                              <td data-label="Status ">
+                                                  <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Status__c}" /></div>
+                                              </td>
+                                              <td data-label="State ">
+                                                  <div class="slds-truncate" title="State "><apex:outputField value="{!account.State__c}" /></div>
+                                              </td>
+                                              <td data-label="District ">
+                                                  <div class="slds-truncate" title="District "><apex:outputField value="{!account.District__c}" /></div>
+                                              </td>
+                                               <td data-label="Location">
+                                                  <div class="slds-truncate" title="Location"><apex:outputField value="{!account.City__c}" /></div>
+                                              </td>
+                                        </tr>
+                                      
+                                     
+                                </apex:repeat>
+                            </tbody>
+                        </table>                  
+                  
+                    </apex:outputpanel>
+                </div>
+              </div>  
+            <!----------------------------------Distributor POPUP END-------------------------------------------------------------->
+      <!----------------------------------Project POPUP-------------------------------------------------------------->
+            <div id="myModalProject" class="modal">    
+               <div class="modal-content" >
+                <span class="closeProject close">&times;</span>
+                
+                    <apex:outputpanel id="lookupPanelForProject"  styleclass="outpanelProject">                          
+                 
+                        <div class="slds-page-header">
+                              <div clss="slds-media">
+                                <div class="slds-media__body">
+                                 <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                 <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                              </div>
+                        </div>
+                        
+                        <div class="slds-p-around_x-small">
+                            <p>Please enter the search term below and click the 'Go' button.  This will
+                               execute a search across all text fields</p>
+                            <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>                                    
+                            
+                            <apex:input value="{!projQry}" id="CustomLookupForProject" disabled="false" type="text"/> 
+                            <span><apex:commandButton value="Go" action="{!searchQueryforProject}" rerender="errMsg,lookupPanelForProject,dptableProject"/></span>                            
+                        </div>
+                        
+                        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableProject">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th>Name</th>                                           
+                                </tr>   
+                            </thead>
+                            <tbody id="myTableForProject">                                      
+                                <apex:repeat value="{!oppqryList}" var="project">                                                 
+                                    <tr class="slds-hint-parent">
+                                          <td data-label="Name" >
+                                              <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2Project('{!project.Name}', '{!project.id}')" >{!project.Name}</apex:outputLink>  </div>
+                                          </td>                                              
+                                    </tr>                               
+                                </apex:repeat>
+                            </tbody>
+                        </table>               
+                    </apex:outputpanel>
+                </div>
+              </div>  
+            <!----------------------------------Project POPUP END-------------------------------------------------------------->  
+             
+            <!----------------------------------Dealer POPUP-------------------------------------------------------------->
+            <div id="myModalDealer" class="modal">    
+               <div class="modal-content" >
+                <span class="closeDealer close">&times;</span>
+                
+                    <apex:outputpanel id="lookupPanelForDealer"  styleclass="outpanelDealer">                          
+                 
+                        <div class="slds-page-header">
+                              <div clss="slds-media">
+                                <div class="slds-media__body">
+                                 <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                 <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                              </div>
+                        </div>
+                        
+                        <div class="slds-p-around_x-small">
+                            <p>Please enter the search term below and click the 'Go' button.  This will
+                               execute a search across all text fields</p>
+                            <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>                                    
+                            
+                            <apex:input value="{!dealerPromqry}" id="CustomLookupForDealer" disabled="false" type="text"/> 
+                            <span><apex:commandButton value="Go" action="{!searchqueryforDealerProm}" rerender="lookupPanelForDealer,dptableDealer"/></span>
+                            
+                        </div>
+                        
+                        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableDealer">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th>Name</th>
+                                    <th>Column club ID</th>
+                                    <th>Plumbing club ID</th>
+                                    <th>Party Type</th>
+                                    <th>Mobile No</th>
+                                    <th>Status </th>
+                                    <th>State </th>
+                                    <th>District</th>
+                                    
+                                    <th>Location</th>                                            
+                                </tr>   
+                            </thead>
+                            <tbody id="myTableForDealer">                                      
+                                <apex:repeat value="{!dealerPromacc}" var="account">                                                  
+                                    <tr class="slds-hint-parent">
+                                          <td data-label="Name" >
+                                               <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                              <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2Dealer('{!account.id}')" >{!account.Name}</apex:outputLink>  </div>
+                                          </td>
+                                          <td data-label="Column club ID">
+                                              <div class="slds-truncate" title="Column club ID"> <apex:outputText value="{!account.Column_club_ID__c}" escape="false" /></div>
+                                          </td>
+                                          <td data-label="Plumbing club ID">
+                                              <div class="slds-truncate" title="Plumbing club ID"> <apex:outputText value="{!account.Plumbing_club_ID__c}" escape="false" /></div>
+                                          </td>
+                                          <td data-label="Party Type">
+                                              <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                          </td>
+                                          <td data-label="Mobile No">
+                                              <div class="slds-truncate" title="Mobile No"> <apex:outputText value="{!account.Contact_Number_Mobile__c }" escape="false" /></div>
+                                          </td>
+                                          <td data-label="Status ">
+                                              <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Status__c}" /></div>
+                                          </td>
+                                          <td data-label="State ">
+                                              <div class="slds-truncate" title="State "><apex:outputField value="{!account.State__c}" /></div>
+                                          </td>
+                                          <td data-label="District ">
+                                              <div class="slds-truncate" title="District "><apex:outputField value="{!account.District__c}" /></div>
+                                          </td>
+                                           <td data-label="Location">
+                                                 <div class="slds-truncate" title="Location"><apex:outputField value="{!account.City__c}" /></div>
+                                           </td>
+                                    </tr>                                      
+                                     
+                                </apex:repeat>
+                            </tbody>
+                        </table>                  
+                  
+                    </apex:outputpanel>
+                </div>
+              </div>  
+            <!----------------------------------Dealer POPUP END-------------------------------------------------------------->  
+            
+           <!----------------------------------TALUK/TEHSIL POPUP-------------------------------------------------------------->
+            <div id="myModalTaluk" class="modal">    
+               <div class="modal-content" >
+                <span class="closeTaluk close">&times;</span>
+                
+                    <apex:outputpanel id="lookupPanelForTaluk"  styleclass="outpanelTaluk">                          
+                 
+                        <div class="slds-page-header">
+                              <div clss="slds-media">
+                                <div class="slds-media__body">
+                                 <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                 <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                              </div>
+                        </div>
+                        
+                        <div class="slds-p-around_x-small">
+                            <p>Please enter the search term below and click the 'Go' button.  This will
+                               execute a search across all text fields</p>
+                            <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>                                    
+                            
+                            <apex:input value="{!Talukquery}" id="CustomLookupForTaluk" disabled="false" type="text"/> 
+                            <span><apex:commandButton value="Go" action="{!Searchqueryfortaluk}" rerender="lookupPanelForTaluk,dptableTaluk"/></span>
+                            
+                        </div>
+                        
+                        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableTaluk">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th>Taluk Name</th>
+                                    <th>State </th>
+                                    <th>District</th>
+                                    <th>Cluster</th>                                            
+                                </tr>   
+                            </thead>
+                            <tbody id="myTableForTaluk">                                      
+                                <apex:repeat value="{!TalukList}" var="Taluk">                                           
+                                                      
+                                        <tr class="slds-hint-parent">
+                                              <td data-label="TalukName" >
+                                                  <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2Taluk('{!Taluk.Name}','{!Taluk.id}')">{!Taluk.Name}</apex:outputLink>  </div>
+                                              </td>                                                   
+                                              <td data-label="State ">
+                                                  <div class="slds-truncate" title="State "><apex:outputField value="{!Taluk.State__c}" /></div>
+                                              </td>
+                                              <td data-label="District ">
+                                                  <div class="slds-truncate" title="District "><apex:outputField value="{!Taluk.District__c}" /></div>
+                                              </td>
+                                              <td data-label="Cluster ">
+                                                  <div class="slds-truncate" title="Cluster "><apex:outputField value="{!Taluk.Cluster__c}" /></div>
+                                              </td>
+                                        </tr>
+                                      
+                                     <input id="closebtn" type="hidden" />
+                                </apex:repeat>
+                            </tbody>
+                        </table>                  
+                  
+                    </apex:outputpanel>
+                </div>
+              </div> 
+            <!----------------------------------TALUK/TEHSIL POPUP END-------------------------------------------------------------->  
+      <!----------------------------------User POPUP-------------------------------------------------------------->
+            <div id="myModalUser" class="modal">    
+               <div class="modal-content" >
+                <span class="closeUser close">&times;</span>
+                
+                    <apex:outputpanel id="lookupPanelForUser"  styleclass="outpanelUser">                          
+                 
+                        <div class="slds-page-header">
+                              <div clss="slds-media">
+                                <div class="slds-media__body">
+                                 <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                 <p class="slds-text-body_small slds-line-height_reset"></p>
+                                </div>
+                              </div>
+                        </div>
+                        
+                        <div class="slds-p-around_x-small">
+                            <p>Please enter the search term below and click the 'Go' button.  This will
+                               execute a search across all text fields</p>
+                            <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>                                    
+                            
+                            <apex:input value="{!Userquery}" id="CustomLookupForUser" disabled="false" type="text"/> 
+                            <span><apex:commandButton value="Go" action="{!Searchqueryforuser}" rerender="lookupPanelForUser,dptableUser"/></span>
+                            
+                        </div>
+                        
+                        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableUser">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>                                            
+                                </tr>   
+                            </thead>
+                            <tbody id="myTableForUser">                                      
+                                <apex:repeat value="{!UserList}" var="account">                                                  
+                                    <tr class="slds-hint-parent">
+                                          <td data-label="Name" >
+                                              <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2User('{!account.Name}', '{!account.id}')" >{!account.Name}</apex:outputLink>  </div>
+                                          </td>
+                                          <td data-label="Party Type">
+                                              <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Title}" escape="false" /></div>
+                                          </td>
+                                          <td data-label="Status ">
+                                              <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Phone}" /></div>
+                                          </td>
+                                          <td data-label="State ">
+                                              <div class="slds-truncate" title="State "><apex:outputField value="{!account.Email}" /></div>
+                                          </td>
+                                    </tr>                                      
+                                     
+                                </apex:repeat>
+                            </tbody>
+                        </table>                  
+                  
+                    </apex:outputpanel>
+                </div>
+              </div>  
+            <!----------------------------------User POPUP END--------------------------------------------------------------> 
+            <!----------------------------------Dealer for add member POPUP-------------------------------------------------------------->
+                    <div id="myModalDealerAM" class="modal">    
+                       <div class="modal-content" >
+                        <span class="closeDealerAM close">&times;</span>
+                        
+                            <apex:outputpanel id="lookupPanelForDealerAM"  styleclass="outpanelDealerAM">                          
+                         
+                                <div class="slds-page-header">
+                                      <div clss="slds-media">
+                                        <div class="slds-media__body">
+                                         <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                         <p class="slds-text-body_small slds-line-height_reset"></p>
+                                        </div>
+                                      </div>
+                                </div>
+                                
+                                <div class="slds-p-around_x-small">
+                                    <p>Please enter the search term below and click the 'Go' button.  This will
+                                       execute a search across all text fields</p>
+                                    <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>                                    
+                                    
+                                    <apex:input value="{!dealerqry}" id="CustomLookupForDealerAM" disabled="false" type="text"/> 
+                                    <span><apex:commandButton value="Go" action="{!searchqueryforDealer}" rerender="lookupPanelForDealerAM,dptableDealerAM"/></span>
+                                    
+                                </div>
+                                
+                                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableDealerAM">
+                                    <thead>
+                                        <tr class="slds-text-title_caps">
+                                            <th>Name</th>
+                                            <th>Party Type</th>
+                                            <th>Mobile No</th>
+                                            <th>Status </th>
+                                            <th>State </th>
+                                            <th>District</th> 
+                                            <th> Column club ID</th>    
+                                            <th>Location</th>                                            
+                                        </tr>   
+                                    </thead>
+                                    <tbody id="myTableForDealerAM">                                      
+                                        <apex:repeat value="{!dealeracc}" var="account">                                           
+                                                              
+                                                <tr class="slds-hint-parent">
+                                                      <td data-label="Name" >
+                                                           <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                                          <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2DealerAM('{!account.id}')" >{!account.Name}</apex:outputLink>  </div>
+                                                      </td>
+                                                      <td data-label="Party Type">
+                                                          <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                                      </td>
+                                                      <td data-label="Mobile No">
+                                                       <div class="slds-truncate" title="Mobile No"> <apex:outputText value="{!account.Contact_Number_Mobile__c }" escape="false" /></div>
+                                                      </td>
+                                                      <td data-label="Status ">
+                                                          <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Status__c}" /></div>
+                                                      </td>
+                                                      <td data-label="State ">
+                                                          <div class="slds-truncate" title="State "><apex:outputField value="{!account.State__c}" /></div>
+                                                      </td>
+                                                      <td data-label="District ">
+                                                          <div class="slds-truncate" title="District "><apex:outputField value="{!account.District__c}" /></div>
+                                                      </td>
+                                                      <td data-label="Location">
+                                                       <div class="slds-truncate" title="Location"><apex:outputField value="{!account.City__c}" /></div>
+                                                      </td>
+                                                </tr>
+                                              
+                                             
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>                  
+                          
+                            </apex:outputpanel>
+                        </div>
+                      </div>  
+                    <!----------------------------------Dealer for add member POPUP END-------------------------------------------------------------->                   
+              <!----------------------------------Distributor for add member POPUP-------------------------------------------------------------->
+                <div id="myModalDistributorAM" class="modal">    
+                   <div class="modal-content" >
+                    <span class="closeDistributorAM close">&times;</span>
+                    
+                        <apex:outputpanel id="lookupPanelForDistributorAM"  styleclass="outpanelDistributorAM">                          
+                     
+                            <div class="slds-page-header">
+                                  <div clss="slds-media">
+                                    <div class="slds-media__body">
+                                     <h1 class="slds-page-header__title slds-truncate slds-align-middle">Lookup</h1>
+                                     <p class="slds-text-body_small slds-line-height_reset"></p>
+                                    </div>
+                                  </div>
+                            </div>
+                            
+                            <div class="slds-p-around_x-small">
+                                <p>Please enter the search term below and click the 'Go' button.  This will
+                                   execute a search across all text fields</p>
+                                <p><span style="color:red">IMPORTANT: </span>Please ensure you enter at least two characters</p>                                    
+                                
+                                <apex:input value="{!distrqry}" id="CustomLookupForDistributorAM" disabled="false" type="text"/> 
+                                <span><apex:commandButton value="Go" action="{!searchqueryforDistributor}" rerender="lookupPanelForDistributorAM,dptableDistributorAM"/></span>
+                                
+                            </div>
+                            
+                            <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" id="dptableDistributorAM">
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th>Name</th>
+                                        <th>Party Type</th>
+                                        <th>Mobile No</th>
+                                        <th>Status </th>
+                                        <th>State </th>
+                                        <th>District</th>  
+                                        <th>Location</th>                                           
+                                    </tr>   
+                                </thead>
+                                <tbody id="myTableForDistributorAM">                                      
+                                    <apex:repeat value="{!distracc}" var="account">                                           
+                                                          
+                                            <tr class="slds-hint-parent">
+                                                  <td data-label="Name" >
+                                                       <input type="hidden" id="acctName{!account.Id}" value="{!account.Name}" />
+                                                      <div class="slds-truncate" title="Name"><apex:outputLink value="#" onclick="myFunction2DistributorAM('{!account.id}')" >{!account.Name}</apex:outputLink>  </div>
+                                                  </td>
+                                                  <td data-label="Party Type">
+                                                      <div class="slds-truncate" title="Party type"> <apex:outputText value="{!account.Party_Type__c}" escape="false" /></div>
+                                                  </td>
+                                                  <td data-label="Mobile No">
+                                                      <div class="slds-truncate" title="Mobile No"> <apex:outputText value="{!account.Contact_Number_Mobile__c }" escape="false" /></div>
+                                                  </td>
+                                                  <td data-label="Status ">
+                                                      <div class="slds-truncate" title="Status "><apex:outputField value="{!account.Status__c}" /></div>
+                                                  </td>
+                                                  <td data-label="State ">
+                                                      <div class="slds-truncate" title="State "><apex:outputField value="{!account.State__c}" /></div>
+                                                  </td>
+                                                  <td data-label="District ">
+                                                      <div class="slds-truncate" title="District "><apex:outputField value="{!account.District__c}" /></div>
+                                                  </td>
+                                                  <td data-label="Location">
+                                                    <div class="slds-truncate" title="Location"><apex:outputField value="{!account.City__c}" /></div>
+                                                  </td>
+                                            </tr>                                          
+                                         
+                                    </apex:repeat>
+                                </tbody>
+                            </table>                  
+                      
+                        </apex:outputpanel> 
+                    </div>
+                  </div>  
+                <!----------------------------------Distributor for add member POPUP END--------------------------------------------------------------> 
+      <apex:variable value="{!1}" var="archCount"/>   
+        <apex:outputpanel id="firstPanel">
+            
+      <apex:outputPanel id="newPromation" rendered="{!showPromotion}">
+        <div class="slds-panel  slds-panel_docked slds-panel_docked-left slds-is-open" aria-hidden="false">
+          <div class="slds-panel__body slds-p-around_large">
+            <div class="slds-form slds-form_compound">
+              <fieldset class="slds-form-element">
+                <div class="slds-form-element__group">
+                  <div class="slds-grid slds-wrap">
+                  
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <apex:inputHidden value="{!newpromotion.Date__c}" id="promoDateId"/>
+                      <label class="slds-form-element__label" for="Name">Vertical Type<sub class="astriskStyle"> * </sub></label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <div class="slds-select_container">
+                          <apex:inputField value="{!newpromotion.Vertical__c}" id="vertiId" styleClass="slds-select"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label  class="slds-form-element__label" for="TotalExpenses">Promotion Type<sub class="astriskStyle"> * </sub></label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <div class="slds-select_container">
+                          <apex:inputField value="{!newpromotion.Type__c}" styleClass="slds-select reqField" id="typeId"  onchange="onChangeType();"/>
+                          <p class="Error"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" for="Name">Total Expenses<sub class="astriskStyle"> * </sub></label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Total_Expenses__c}" styleClass="slds-input " id="totalExpense" />
+                        <p class="Error"></p>
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" for="Distributor">Total No. Of Attendees</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Total_no_of_attendees__c}" styleClass="slds-input " id="attendees" />
+                        <p class="Error"></p>
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small"> 
+                      <!-- additional fields -->
+                      <label class="slds-form-element__label" >Company Share%</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Company_Share__c}" styleClass="slds-input" />
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" >DP/Dealer Share%</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Dealer_share__c}" styleClass="slds-input" />
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" >Advanced Received From Ashirvad</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Advance_Received__c}" styleClass="slds-input" />
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" >Amount Spent by Dealer</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Amount_spent_by_the_dealer__c}" styleClass="slds-input" />
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" >Credit Note Amount to Dealer Rs</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Credit_Note__c}" styleClass="slds-input" />
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" >Order Value Received</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Order_Value_Received__c}" styleClass="slds-input" id="ordvalID" />
+                      </div>
+                    </div>
+                    <!-- additional fields ends here -->
+                    
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" for="Projects">Distributor</label>
+                      <div class="slds-form-element__control slds-p-bottom_large positionrel">
+                        <!--<apex:inputField value="{!newpromotion.Distributor__c}" styleClass="slds-input slds-combobox__input" id="disId"/>-->                        
+                        <apex:inputText value="{!newpromotion.Distributor__c}" id="targetIdDistr" styleClass="targetfieldDistr{!archCount} slds-input slds-combobox__input" style="display:none" />
+                        <apex:outputPanel layout="inline" style="vertical-align:middle">
+                         <p class="Error"></p>                                        
+                            <input type="text" size="20" id="targetNameDistr{!archCount}" value="{!newpromotion.Distributor__c}" class="slds-input" />
+                            <a href="#" id="myBtn2Distr" class="lk positionabs"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionDistributor(targetNameDistr{!archCount},{!archCount})"/></a>
+                        </apex:outputPanel> 
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" for="Dealer">Projects</label>
+                      <div class="slds-form-element__control slds-p-bottom_large positionrel">
+                        <apex:inputText value="{!newpromotion.Project__c}" id="targetIdPrj" styleClass="targetfieldPrj{!archCount} slds-input slds-combobox__input" style="display:none"/> <!-- id="proId"-->
+                        <apex:outputPanel layout="inline" style="vertical-align:middle">
+                         <p class="Error"></p>                                        
+                            <input type="text" size="20" id="targetNamePrj{!archCount}" value="{!newpromotion.Project__c}"  class="slds-input" />
+                            <a href="#" id="myBtn2Prj" class="lk positionabs"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionProject(targetNamePrj{!archCount},{!archCount})"/></a>
+                        </apex:outputPanel> 
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" for="State">Dealer</label>
+                      <div class="slds-form-element__control slds-p-bottom_large positionrel">
+                        <!--<apex:inputField value="{!newpromotion.Dealer1__c}" styleClass="slds-input slds-combobox__input" id="dealerId"/>-->
+                        <apex:inputText value="{!newpromotion.Dealer1__c}" id="targetIdDealer" styleClass="targetfieldDealer{!archCount} slds-input slds-combobox__input" style="display:none"/> 
+                        <apex:outputPanel layout="inline" style="vertical-align:middle">                                       
+                            <input type="text" size="20" id="targetNameDealer{!archCount}" value="{!newpromotion.Dealer1__c}" class="slds-input" />
+                            <a href="#" id="myBtn2Prj" class="lk positionabs"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionDealer(targetNameDealer{!archCount},{!archCount})"/></a>
+                        </apex:outputPanel>
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <label class="slds-form-element__label" for="District">State<sub class="astriskStyle"> * </sub></label>
+                        <div class="slds-select_container">
+                          <apex:inputField value="{!newpromotion.State__c}" styleClass="slds-select reqField" id="stateid"/>
+                          <p class="Error"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <label class="slds-form-element__label" for="Location">District<sub class="astriskStyle"> * </sub></label>
+                        <div class="slds-select_container">
+                          <apex:inputField value="{!newpromotion.District__c}" styleClass="slds-select reqField" id="distId"/>
+                          <p class="Error"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <label class="slds-form-element__label" for="Giftsgiven">Location</label>
+                        <apex:inputField value="{!newpromotion.Location__c}" styleClass="slds-input"/>
+                         <p class="Error"></p> 
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" for="Taluka / Tehsil">Taluka / Tehsil</label>
+                      <div class="slds-form-element__control slds-p-bottom_large positionrel">
+                        <!--<apex:inputField value="{!newpromotion.Taluka__c}" styleClass="slds-input slds-combobox__input" />-->
+                        <apex:inputText value="{!newpromotion.Taluka__c}" id="targetId" styleClass="targetfield{!archCount} slds-input slds-combobox__input" style="display:none"/>
+                        <apex:outputPanel layout="inline" style="vertical-align:middle" id="xx_account"> 
+                             <input type="text" size="20" id="targetName{!archCount}" value="{!newpromotion.Taluka__c}" class="slds-input" />
+                             <a href="#" id="myBtn2tlk" class="lk positionabs"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionTaluk(targetName{!archCount},{!archCount})"/></a>
+                        </apex:outputPanel>
+                      </div>
+                    </div>
+                    <div id="asd" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                     <!-- <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-float_left">
+                        <label class="slds-form-element__label" for="Report1">Mega Meet Gift 1<sub class="astriskStyle"> * </sub></label>
+                        <div class="slds-form-element__control slds-p-bottom_large slds-lookup">
+                          <apex:inputField value="{!newpromotion.Gift_Given_1__c}" styleClass="slds-input slds-combobox__input"/>
+                        </div>
+                      </div>-->
+                     <!-- <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-float_left">
+                        <label class="slds-form-element__label" for="Report2">Mega Meet Gift 2</label>
+                        <div class="slds-form-element__control slds-p-bottom_large slds-lookup">
+                          <apex:inputField value="{!newpromotion.Gift_Given_11__c}" styleClass="slds-input slds-combobox__input"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="dsa" class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small slds-float_left">
+                        <label class="slds-form-element__label" for="Report3">Mini Meet Gift 1<sub class="astriskStyle"> * </sub></label>
+                        <div class="slds-form-element__control slds-p-bottom_large slds-lookup">
+                          <apex:inputField value="{!newpromotion.Gift_Given_2__c}" styleClass="slds-input slds-combobox__input"/>
+                        </div>
+                      </div>
+                      <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-float_left">
+                        <label class="slds-form-element__label" for="Report4">Mini Meet Gift 2</label>
+                        <div class="slds-form-element__control slds-p-bottom_large slds-lookup">
+                          <apex:inputField value="{!newpromotion.Gift_Given_22__c}" styleClass="slds-input slds-combobox__input"/>
+                        </div>
+                      </div>-->
+                      <p class="Error"></p>
+                      <apex:inputHidden value="{!newpromotion.Gifts_given__c}" id="giftsGiven"/>
+                      <apex:inputHidden value="{!newpromotion.Type_of_Meet__c}" id="typeGiven"/>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label" for="Report">Report</label>
+                      <div class="slds-form-element__control slds-p-bottom_large">
+                        <apex:inputField value="{!newpromotion.Report_c__c}" styleClass="slds-textarea" />
+                      </div>
+                    </div>
+                    <div class="slds-size--1-of-1 slds-large-size--1-of-2 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-p-right_small">
+                      <label class="slds-form-element__label labeltxt" for="lookup-348"><b>Team Leader Present</b></label>
+                      <div class="slds-form-element__control slds-p-bottom_large positionrel">
+                        <div class="">
+                          <div class="lookup_block team_lookup_image" id="divId">
+                            <!--<apex:inputField value="{!newpromotion.Team_Leader_Present__c}" styleClass="slds-lookup__search-input look_css" id="thelookup" />-->
+                            <apex:inputText value="{!newpromotion.Team_Leader_Present__c}" id="targetIdUser" styleClass="targetfieldUser{!archCount} slds-input slds-combobox__input" style="display:none" />
+                            <apex:outputPanel layout="inline" style="vertical-align:middle">                                       
+                                <input type="text" size="20" id="targetNameUser{!archCount}" value="{!newpromotion.Team_Leader_Present__c}"  class="slds-input" />
+                                <a href="#" id="myBtn2User" class="lk positionabs"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionUser(targetNameUser{!archCount},{!archCount})"/></a>
+                            </apex:outputPanel>
+                            <br/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div>
+        
+          <apex:outputPanel id="promotionalBlk">
+            
+            <!-- ADDINPUT BELOW-->
+            <apex:outputPanel >
+              <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal table_inp_wid">
+                <thead>
+                  <tr class="slds-text-title_caps">
+                    <th >
+                        <div class="slds-truncate" title="Action">Action</div>
+                    </th>
+                    <th scope="col"><div class="slds-truncate" title="Sl.No">Sl.No</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Nature of Expenditure">Nature of Expenditure</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Total of Expenses">Total of Expenses <sub class="astriskStyle"> * </sub></div></th>
+                    <th scope="col"><div class="slds-truncate" title="Appl Share Rs.">Appl Share Rs.</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Dealer Share Rs.">Dealer Share Rs.</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Remarks">Remarks</div></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <apex:variable value="{!1}" var="expListCount"/>
+                  <apex:repeat var="visit" value="{!newpromotionExpenseList}">
+                    <tr class="slds-hint-parent">
+                      <td data-label="Action"><div class="slds-truncate" title="Action"><apex:commandLink action="{!RemovePL}"  onclick="if(!confirm('Are you sure?')){return};" reRender="promotionalBlk" status="as1">
+                          <apex:image url="{!$Resource.AP_Remove_Icon}" width="30" height="20" style="padding-left: 10px;" rendered="{!(visit.id == null )}" title="Remove Visit"/>
+                          <apex:param name="expListCount" value="{!expListCount}"/>
+                        </apex:commandLink>
+                        <apex:commandLink action="{!EditPL}" reRender="promotionalBlk" status="as1">
+                          <apex:image url="{!$Resource.pencil}" width="30" height="20" style="padding-left: 10px;"  title="Edit Visit"/>
+                          <apex:param name="expListCount" value="{!expListCount}"/>
+                        </apex:commandLink>
+                        <apex:commandLink action="{!RemovePL}" onclick="if(!confirm('Are you sure?')){return};" reRender="promotionalBlk" status="as1">
+                          <apex:image url="{!$Resource.deleteBtn}" width="30" height="20" style="padding-left: 10px;"  title="Delete Meeting" />
+                          <apex:param name="expListCount" value="{!expListCount}"/>
+                        </apex:commandLink>
+                        <apex:commandLink action="{!CancelPL}" reRender="promotionalBlk" status="as1">
+                          <apex:image url="{!$Resource.editBtn}" width="30" height="20" style="padding-left: 10px;"  title="Cancel" rendered="{ visit.id != null}"/>
+                          <apex:param name="expListCount" value="{!expListCount}"/>
+                        </apex:commandLink>
+                        <apex:commandLink action="{!SavePL}" reRender="promotionalBlk" status="as1">
+                          <apex:image url="{!$Resource.correctIcon}" width="30" height="20" style="padding-left: 10px; " title="Save" rendered="{ visit.id != null }" />
+                          <apex:param name="expListCount" value="{!expListCount}"/>
+                        </apex:commandLink></div></td>
+                      <td data-label="Sl.No"><div class="slds-truncate" title="Sl.No">{!expListCount}</div></td>
+                      <td data-label="Nature of Expenditure">
+                                  <div class="slds-truncate" title="Nature of Expenditure"><apex:inputField id="NatureOfOExpenditure" value="{!visit.Nature_of_Expenditure__c}" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="slds-select"/>
+                        <p class="Error"></p>
+                        
+                        <!--   <apex:outputField value="{!visit.Promotion__c}" rendered="{!(visit.RecordEdit__c)}"/> -->
+                        
+                        <apex:outputLink value="/{!visit.Promotion__c}"  id="theLink" target="_blank">{!visit.Promotion__c}</apex:outputLink></div></td>
+                      <td data-label="Total of Expenses"><div class="slds-truncate" title="Total of Expenses"><apex:inputField id="TotalExpenses" value="{!visit.Total_Expenses__c}" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="slds-input"/></div></td>
+                      <td data-label="Appl Share Rs."><div class="slds-truncate" title="Appl Share Rs."><apex:inputField id="APPLShare" value="{!visit.APPL_Share__c}" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="slds-input"/></div></td>
+                      <td data-label="Dealer Share Rs."><div class="slds-truncate" title="Dealer Share Rs."><apex:inputField id="Dealershare" value="{!visit.Dealer_share__c}" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="slds-input"/></div></td>
+                      <td data-label="Remarks"><div class="slds-truncate" title="Remarks"><apex:inputField id="Remarks" value="{!visit.Remarks__c}" rendered="{!NOT(visit.RecordEdit__c)}" styleClass="slds-input"/></div></td>
+                    </tr>
+                    <apex:variable value="{!expListCount+1}" var="expListCount"/>
+                  </apex:repeat>
+                </tbody>
+              </table>
+            </apex:outputPanel>
+            <apex:image url="{!$Resource.AP_Add_Icon}" width="35" height="25" style="padding-left: 15px;  margin-top: 10px;" onclick="AddnewpromotionExpense();"/>
+            <apex:actionFunction action="{!newpromotionExpense}" name="AddnewpromotionExpense" reRender="promotionalBlk" status="as1"/>
+            <apex:outputPanel rendered="{!newpromotionExpenseList.size == 0}">
+              <h4 style="color:#7f8c8d;" font-size="5px" align="center">No Record Found.</h4>
+            </apex:outputPanel>
+            
+            <!--ADD OUTPUT BELOW --> 
+            
+          </apex:outputPanel>
+        </div>
+        
+        <!-- New expense table  body ends here--> 
+        
+        <!-- for new expense table ends here! --> 
+        <!-- Button (Double) -->
+        <div class="control-group">
+          <div class="controls">
+            <center>
+              <apex:actionFunction name="jsPromotionFPEValidation" action="{!CreatePromotion}" reRender="proForm" status="as1" oncomplete="blockVertcal();"></apex:actionFunction>
+              <apex:actionFunction name="jsPromotionGroup" action="{!CreatePromotion}" reRender="proForm" status="as1" oncomplete="blockVertcalNClose();"></apex:actionFunction>
+              <input type="button"  value="Save Promotion & Add Members" id="savePromotionMembers" rendered="{!showsaveAndAddButton}" onclick="ValidatePromotion();" class="btn  btn-info slds-button slds-button_neutral"  style="" />
+             
+              <!--Save Button for Group Promotion-->
+              <!--<apex:outputpanel id="tesmp" rendered="{!if(newpromotion.Type__c = '' && newpromotion.Type__c != 'Group Activity',false,true)}">-->
+              
+              <input type="button" value="Save Promotion" id="savePromotion" rendered="{!showsavepromoButton}"  onclick="showSaveBtn();" class="btn  btn-info slds-button slds-button_neutral"  style="" /><!--</apex:outputpanel>-->
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!--<input type="button" value="Close" id="closePromotion" onclick="closePopUp();" class="btn  btn-info slds-button slds-button_neutral"  style="" /> 
+              <apex:commandButton id="closeAcId" onclick="closePopUp()" immediate="true" value="Close" styleClass="slds-button slds-button_neutral" />-->
+              <!-- <input type="button" value="Submit" onclick="post_value();"/> -->
+              
+            </center>
+          </div>
+        </div>
+      </apex:outputPanel>
+            </apex:outputpanel>
+      <div class="control-group">
+        <div class="controls">
+          <center>
+            <apex:outputPanel id="closeWindow" rendered="{!NOT(showPromotion) && (newpromotion.Type__c == 'Group Activity' || newpromotion.Type__c == 'Gold Coin Delivery' || newpromotion.Type__c == 'Rupay card delivery' || newpromotion.Type__c =='HDFC card delivery') }"> 
+              <script type="text/javascript">
+                                //alert('This is close' +testName);
+                                testName = '{!promotionName}';
+                                console.log('This is Group Promotion Name '+testName);
+                                 if(testName != '' && testName != undefined) {
+                                        window.opener.document.getElementById(promoId).value = testName;
+                                    }
+                                </script>
+                            Promotion name -    {!promotionName}
+               <apex:inputHidden id="promoNameGrp" value="{!promotionName}"/>
+               <apex:inputHidden id="promotionIdGrp" value="{!newpromotion.Id}"/>
+               <apex:inputHidden id="promotionTypeGrp" value="{!newpromotion.Type__c}"/>
+              <!--<apex:commandButton id="saveClosePromo" onclick="closePopUp()" immediate="ture" value="Close" reRender="proForm"/> -->
+              <input type="button" value="Close" onclick="callCloseAFGrp()" id="saveClosePromo" class="btn  btn-info slds-button slds-button_neutral"/>
+            </apex:outputPanel>
+            <apex:actionFunction action="{!resetVariables}" name="calendarAFCloseGrp" oncomplete="closePopUpGrp();" reRender="firstPanel,errMsg">        
+                  </apex:actionFunction>
+          </center>
+        </div>
+      </div>
+      
+      <apex:outputPanel id="promotionMemebers" rendered="{!showAddMember && newpromotion.Type__c != 'Group Activity' && newpromotion.Type__c != 'Gold Coin Delivery' && newpromotion.Type__c != 'Rupay card delivery' && newpromotion.Type__c !='HDFC card delivery'}">
+        <apex:actionFunction action="{!addMember}" name="addMember" immediate="true" reRender="proForm,boarersMeet,architectsBuilderEngineers,dealersMeet,farmersMeet,salesmanMeetFactoryVisit,TractorShow,plumberMechanic,Shandy" status="as1"/>
+        <legend>Add Members to Promotion - {!promotionName}</legend>
+        
+        <apex:inputHidden id="promoName" value="{!promotionName}"/>
+        <apex:inputHidden id="promotionId" value="{!newpromotion.Id}"/>
+        <apex:inputHidden id="promotionType" value="{!newpromotion.Type__c}"/>
+        <apex:outputPanel id="addRowPanel" rendered="{!NOT(showAddMemberPanel)}">
+          <div class="row">
+            <div class="form-group col-xs-5">
+              <!--<br/><apex:commandLink onclick="window.open('/{!newpromotion.Id}')" value="ADD MEMBERS FROM PROMOTION PAGE" target="_blank" oncomplete="closePopUp()"/><br/><br/>-->
+              
+              <label class="control-label" for="Name">Number of rows/s to add<sub class="astriskStyle"> * </sub></label>
+              <input type="number"  maxlength="2" min="1" max="60" Class="form-control" id="totalAtt" onblur="coypToApex(this.id,'{!$Component.totalAttApex}');" oninput="maxLengthCheck(this)"/>
+              <apex:inputHidden value="{!newpromotion.Total_no_of_attendees__c}" id="totalAttApex"/>
+              
+              <!--    <apex:inputField value="{!newpromotion.Total_no_of_attendees__c}" styleClass="form-control" id="totalExpense" required="true"/> --> 
+              <!--        <apex:inputField value="{!newpromotion.Total_no_of_attendees__c}" styleClass="form-control" id="totalExpense" required="true" onkeypress="return isNumber(event)"/> --> 
+            </div>
+            <div class="form-group col-xs-2"> </div>
+            <div class="form-group col-xs-5 pull-right">
+              <apex:commandButton value="Add Members" action="{!ShowMembers}" styleClass="btn  btn-info"  style="" reRender="msg,proForm" status="as1"/>
+              <input type="button" value="Close" onclick="callCloseAF()" id="closePromotion" class="btn  btn-info slds-button slds-button_neutral"/>
+            </div>
+          </div>
+        </apex:outputPanel>
+        <apex:outputPanel id="membersPanel" rendered="{!(showAddMemberPanel)}">
+          <apex:outputPanel id="architectsBuilderEngineers" rendered="{!((newpromotion.Vertical__c=='Column' || newpromotion.Vertical__c=='Plumbing' || newpromotion.Vertical__c=='Projects' ||newpromotion.Vertical__c=='Branding'))}">
+            <div class="">
+              <div id="newVisit">
+                <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                  <thead>
+                    <tr class="slds-text-title_caps">
+                      <th scope="col"> Sl.No</th>
+                      <th scope="col"></th>
+                      <th scope="col">Mobile No.<sub class="astriskStyle"> * </sub></th>
+                      <th scope="col">Name<sub class="astriskStyle"> * </sub></th>
+                      <th scope="col">Party Type<sub class="astriskStyle"> * </sub></th>
+                      <th scope="col">Dealer</th>
+                      <th scope="col">Distributor</th>
+                      <th scope="col">State<sub class="astriskStyle"> * </sub></th>
+                      <th scope="col">District<sub class="astriskStyle"> * </sub></th>
+                      <th scope="col">Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <apex:variable value="{!1}" var="archCount"/>
+                    <apex:repeat value="{!proAccounts}" var="newAcct">
+                      <tr>
+                        <td data-label=" Sl.No" >
+                              <div class="slds-truncate" title="Sl.No">{!archCount}
+                              </div></td>
+                        <td data-label="Delete/Refresh" >
+                              <div class="slds-truncate" title="Delete/Refresh"><apex:commandlink action="{!DeleteEntry}" status="as1" id="delete" rerender="architectsBuilderEngineers" rendered="{!disabled}">
+                            <apex:image id="deleteIcon" value="{!$Resource.AP_Remove_Icon}" width="25" height="25" title="Delete Entry"/>
+                            <apex:param name="deleteparam" value="{!archCount}" assignTo="{!accToRemove}"/>
+                          </apex:commandlink>
+                          <apex:commandlink action="{!RefreshEntry}" reRender="architectsBuilderEngineers" status="as2" id="refresh" rendered="{!disabled}">
+                            <apex:image id="refreshIcon" value="{!$Resource.refresh}" width="25" height="25" title="Refresh Entry"/>
+                            <apex:param name="refreshparam" value="{!newAcct.Contact_Number_Mobile__c}" assignTo="{!accToRefresh}"/>
+                            <apex:param name="refreshparam1" value="{!archCount}" assignTo="{!accToRemove}"/>
+                          </apex:commandlink>
+                          </div></td>
+                        <td data-label=" Mobile No." >
+                              <div class="slds-truncate" title="Mobile No.">
+                              <apex:inputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id==null}"  onkeyup="showMobileNo('tagsArchi','no-results-{!archCount}');" id="tagsArchi" html-placeholder="Search Mobile No.." onblur="callActionJs(this.id,'{!archCount}'); return false;" style="width:125px" styleClass="tagsArchiClass" />
+                          <span id="no-results-{!archCount}" style="color: chocolate;"></span>
+                          <apex:outputField value="{!newAcct.Contact_Number_Mobile__c}" rendered="{!newAcct.id!=null}" />
+                          </div></td>
+                        <td data-label="Name" >
+                              <div class="slds-truncate" title="Name">
+                              <apex:inputField value="{!newAcct.Name}" rendered="{!newAcct.id==null}" required="{!validationRequired}"/>
+                          <apex:commandLink title="click here to open in new tab" target="_blank" value="{!newAcct.Name}" action="/{!newAcct.id}" rendered="{!newAcct.id!=null}"/>
+                          
+                          <!-- <apex:outputField value="{!newAcct.Name}" rendered="{!newAcct.id!=null}" />-->
+                          </div></td>
+                        <td data-label="Party Type" >
+                              <div class="slds-truncate" title="Party Type">
+                              <apex:inputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id==null}" style="width:100px" required="{!validationRequired}"/>
+                          <apex:outputField value="{!newAcct.Party_Type__c}" rendered="{!newAcct.id!=null}" style="width:100px"/>
+                          </div></td>
+                        <td data-label="Dealer" >
+                              <div class="slds-truncate lookup_style" title="Dealer">
+                              <!--<apex:inputField value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}" style="width:100px"/>-->
+                          <apex:inputText value="{!newAcct.Dealer__c}" rendered="{!newAcct.id==null}"   id="targetIdDealerAM" styleClass="targetfieldDealerAM{!archCount}" style="display:none"/>                                                    
+                            <apex:outputPanel layout="inline" style="vertical-align:middle" rendered="{!newAcct.id==null}">
+                                <input type="text" size="20" id="targetNameDealerAM{!archCount}" styleClass="slds-input" />
+                                <a href="#" id="myBtn2DealerAM" class="lk"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionDealerAM(targetNameDealerAM{!archCount},{!archCount})"/></a>
+                             </apex:outputPanel>
+                             <apex:outputText value="{!newAcct.Dealer__r.name}"  rendered="{!newAcct.id!=null}" style="display:none"/>
+                                </div>
+                              <apex:outputLink value="/{!newAcct.Dealer__c}" rendered="{!newAcct.id!=null}" onclick="" >{!newAcct.Dealer__r.name}</apex:outputLink> </td>
+                       
+                        <td data-label="Distributor" >
+                              <div class="slds-truncate lookup_style" title="Distributor"><!--<apex:inputField value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}"  style="width:100px"/>-->
+                          <apex:inputText value="{!newAcct.Account__c}" rendered="{!newAcct.id==null}" id="targetIdDistributorAM" styleClass="targetfieldDistributorAM{!archCount}" style="display:none" />
+                            <apex:outputPanel layout="inline" style="vertical-align:middle" rendered="{!newAcct.id==null}">                                       
+                                <input type="text" size="20" id="targetNameDistributorAM{!archCount}" styleClass="slds-input" />
+                                <a href="#" id="myBtn2DistrAM" class="lk"> <apex:image url="{!$Resource.Addlookupicon}" width="20" height="20" onclick="MyfunctionDistributorAM(targetNameDistributorAM{!archCount},{!archCount})"/></a>
+                           </apex:outputPanel> 
+                          
+                           <apex:outputText value="{!newAcct.Account__r.name}" rendered="{!newAcct.id!=null}" style="display:none"/> 
+                          </div>
+                          <apex:outputLink value="/{!newAcct.Account__c}" rendered="{!newAcct.id!=null}" onclick="" >{!newAcct.Account__r.name}</apex:outputLink> </td>
+                        <td data-label="State " >
+                              <div class="slds-truncate" title="State "><apex:inputField value="{!newAcct.State__c}" rendered="{!newAcct.id==null}"  required="{!validationRequired}"/>
+                          <apex:outputField value="{!newAcct.State__c}" rendered="{!newAcct.id!=null}" />
+                          </div></td>
+                        <td data-label="District" >
+                              <div class="slds-truncate" title="District"><apex:inputField value="{!newAcct.District__c}" rendered="{!newAcct.id==null}" required="{!validationRequired}"/>
+                          <apex:outputField value="{!newAcct.District__c}" rendered="{!newAcct.id!=null}" />
+                          </div></td>
+                        <td data-label="Location" >
+                              <div class="slds-truncate" title="Location"><apex:inputField value="{!newAcct.City__c}" rendered="{!newAcct.id==null}"  />
+                          <apex:outputField value="{!newAcct.City__c}" rendered="{!newAcct.id!=null}" />
+                          </div></td>
+                      </tr>
+                      <apex:variable value="{!archCount+1}" var="archCount"/>
+                    </apex:repeat>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </apex:outputPanel>
+          <center>
+            <apex:actionFunction name="savePromoAcc" action="{!SavePromotionMembers}" immediate="false" reRender="errMsg,membersPanel" status="as1"> </apex:actionFunction>
+            <!--<apex:actionFunction name="savePromoAcc" action="{!resetVariables}" immediate="false" oncomplete="closePopUp();" reRender="firstPanel,errMsg" status="as1"> </apex:actionFunction>-->
+            
+            <apex:commandButton id="saveAccBtn" rendered="{!showMemberSaveBtn}" onclick="saveProMembers()" styleClass="btn-info slds-button slds-button_neutral"  value="Save" status="as1" reRender="proForm"></apex:commandButton>
+            <!--<apex:commandButton id="saveAccBtn" action="{!SavePromotionMembers}" rendered="{!showMemberSaveBtn}" oncomplete="saveProMembers()" styleClass="btn-info slds-button slds-button_neutral"  value="Save" status="as1" reRender="errMsg"></apex:commandButton>-->
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <!--<apex:commandButton id="saveClose" onclick="closePopUp()"  immediate="ture" value="Close" reRender="proForm"/>-->
+              <input type="button" value="Close" onclick="callCloseAF()" id="closePromotion" class="btn  btn-info slds-button slds-button_neutral"/>
+          </center>
+          
+        </apex:outputPanel>
+      </apex:outputPanel>
+       <apex:actionFunction action="{!resetVariables}" name="calendarAFClose" oncomplete="closePopUp();" reRender="firstPanel,errMsg">        
+                  </apex:actionFunction>
+                  
+          <script>
+          
+            // Get the modal for project by field which fetches account
+            var modalDistr = document.getElementById('myModalDistributor');
+            var elmDistr;
+            var fldDistr;
+            
+            
+            // Get the <span> element that closes the modal
+            var spanDistr = document.getElementsByClassName("closeDistributor")[0];
+            
+            // When the user clicks the button, open the modal 
+            function MyfunctionDistributor(elidDistr,fldidDistr) {                    
+              //alert('--elid11111--'+elidDistr.id + '--'+fldidDistr);
+                var modal2Distr = document.getElementById('myModalDistributor');
+                elmDistr = elidDistr.id;  
+                fldDistr = 'targetfieldDistr'+fldidDistr;
+                console.log('elmDistr='+elmDistr); 
+                console.log('fldDistr='+fldDistr);                    
+                modal2Distr.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            spanDistr.onclick = function() {
+                var modalDistr = document.getElementById('myModalDistributor');
+                modalDistr.style.display = "none";               
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modalDistr) {
+                    modalDistr.style.display = "none";
+                }
+            }
+     
+       
+            function myFunction2Distributor(acctId) { 
+               var j$ = jQuery.noConflict();
+                var nameElementId = 'acctName'+acctId;
+                console.log(acctId);
+                var val = document.getElementById(nameElementId).value;
+                var aid = acctId;
+                //console.log("myFunction2Distr");
+                console.log(elmDistr);
+                console.log(fldDistr);
+                console.log("testing...."+val);
+                console.log(aid);
+               j$('.'+fldDistr).val(acctId);
+                //var x = event.target;
+               // document.getElementById("pageID:proForm:CustomLookupForDistributor").value =  val ; //fetch search string on popup
+                //console.log("testing....for spl"+ document.getElementById("pageID:proForm:CustomLookupForDistributor").value);
+                document.getElementById(elmDistr).value =  val;    //assign to input search element 
+                document.getElementsByClassName(fldDistr)[0].value = aid;    // input field
+                modalDistr.style.display = "none";
+            }  
+        
+        
+            var j$ = jQuery.noConflict();
+            j$(document).ready(function(){
+              j$("#myInput").on("keyup", function() {
+                var value = j$(this).val().toLowerCase();
+                j$("#myTable tr").filter(function() {
+                  j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+            
+            j$('#myModalDistributor').find('#myInput').focus();
+        </script>
+        
+        <script>
+            // Get the modal for project by field which fetches account
+            var modalPrj = document.getElementById('myModalProject');
+            var elmPrj;
+            var fldPrj;
+            
+            
+            // Get the <span> element that closes the modal
+            var spanPrj = document.getElementsByClassName("closeProject")[0];
+            
+            // When the user clicks the button, open the modal 
+            function MyfunctionProject(elidPrj,fldidPrj) {                    
+              //  alert('--elid--'+elid.id + '--'+fldid);
+                var modal2Prj = document.getElementById('myModalProject');
+                elmPrj = elidPrj.id;  
+                fldPrj = 'targetfieldPrj'+fldidPrj;
+                console.log('fldPrj='+fldPrj);                    
+                modal2Prj.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            spanPrj.onclick = function() {
+                modalPrj.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modalPrj) {
+                    modalPrj.style.display = "none";
+                }
+            }
+     
+       
+            function myFunction2Project(val,aid) { 
+                var j$ = jQuery.noConflict();
+                console.log("myFunction2Prj");
+                console.log(elmPrj);
+                console.log(val);
+                console.log(aid);
+                 j$('.'+fldPrj).val(aid);
+                //var x = event.target;
+               // document.getElementById("pageID:proForm:CustomLookupForProject").value =  val; //fetch search string on popup
+                document.getElementById(elmPrj).value =  val;    //assign to input search element 
+                document.getElementsByClassName(fldPrj)[0].value = aid;    // input field
+                modalPrj.style.display = "none";
+            }  
+        
+        
+            var j$ = jQuery.noConflict();
+            j$(document).ready(function(){
+              j$("#myInput").on("keyup", function() {
+                var value = j$(this).val().toLowerCase();
+                j$("#myTable tr").filter(function() {
+                  j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+            
+            j$('#myModalProject').find('#myInput').focus();
+        </script>
+        
+        <script>
+            // Get the modal for dealer by field which fetches account
+            var modalDealer = document.getElementById('myModalDealer');
+            var elmDealer;
+            var fldDealer;
+            
+            
+            // Get the <span> element that closes the modal
+            var spanDealer = document.getElementsByClassName("closeDealer")[0];
+            
+            // When the user clicks the button, open the modal 
+            function MyfunctionDealer(elidDealer, fldidDealer) {                    
+              //  alert('--elid--'+elid.id + '--'+fldid);
+                var modal2Dealer = document.getElementById('myModalDealer');
+                elmDealer = elidDealer.id;  
+                fldDealer = 'targetfieldDealer' + fldidDealer; 
+                console.log('fldDealer='+fldDealer);                    
+                modal2Dealer.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            spanDealer.onclick = function() {
+                modalDealer.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modalDealer) {
+                    modalDealer.style.display = "none";
+                }
+            }
+     
+       
+            function myFunction2Dealer(acctId) { 
+                var j$ = jQuery.noConflict();
+                var nameElementId = 'acctName'+acctId;
+                console.log(acctId);
+                var val = document.getElementById(nameElementId).value;
+                var aid = acctId;
+                console.log("myFunction2Dealer");
+                console.log(elmDealer);
+                console.log(val);
+                console.log(aid);
+               j$('.'+fldDealer).val(acctId);
+                //var x = event.target;
+               // document.getElementById("pageID:proForm:CustomLookupForDealer").value =  val; //fetch search string on popup
+                document.getElementById(elmDealer).value =  val;    //assign to Project by input field
+                document.getElementsByClassName(fldDealer)[0].value = aid;
+                modalDealer.style.display = "none";
+            }  
+        
+        
+            var j$ = jQuery.noConflict();
+            j$(document).ready(function(){
+              j$("#myInput").on("keyup", function() {
+                var value = j$(this).val().toLowerCase();
+                j$("#myTable tr").filter(function() {
+                  j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+            
+            j$('#myModalDealer').find('#myInput').focus();
+        </script>        
+
+         <script>
+                // Get the modal for project by field which fetches account
+                var modal = document.getElementById('myModalTaluk');
+                var elm;
+                var fld;
+                
+                
+                // Get the <span> element that closes the modal
+                var spanTaluk = document.getElementsByClassName("closeTaluk")[0];
+                
+                // When the user clicks the button, open the modal 
+                function MyfunctionTaluk(elid, fldid) {                    
+                    console.log('--elid--'+elid.id + '--'+fldid);
+                    var modal2 = document.getElementById('myModalTaluk');
+                    elm = elid.id;  
+                    fld = 'targetfield' + fldid; 
+                    console.log('fld='+fld);                    
+                    modal2.style.display = "block";
+                }
+                
+                // When the user clicks on <span> (x), close the modal
+                spanTaluk.onclick = function() {
+                     modal.style.display = "none";
+                }
+                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+         
+           
+                function myFunction2Taluk(val,aid) { 
+                    var j$ = jQuery.noConflict();
+                    var modal = document.getElementById('myModalTaluk');
+                    console.log("myFunction2");
+                    console.log(elm);
+                    console.log(val);
+                    console.log(aid);
+                     j$('.'+fld).val(aid);
+                    //var x = event.target;
+                    //document.getElementById("pageID:proForm:CustomLookupForTaluk").value =  val; //fetch search string on popup
+                    document.getElementById(elm).value =  val;    //html input
+                    document.getElementsByClassName(fld)[0].value = aid;    //field
+                    modal.style.display = "none";
+                }  
+            
+            
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function(){
+                  j$("#myInput").on("keyup", function() {
+                    var value = j$(this).val().toLowerCase();
+                    j$("#myTable tr").filter(function() {
+                      j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                  });
+                });
+                
+                j$('#myModalTaluk').find('#myInput').focus();
+            </script> 
+             <script>
+                // Get the modal for distributor for add member by field which fetches account
+                var modalDistributorAM = document.getElementById('myModalDistributorAM');
+                var elmDistributorAM;
+                var fldDistributorAM;
+                
+                
+                // Get the <span> element that closes the modal
+                var spanDistributorAM = document.getElementsByClassName("closeDistributorAM")[0];
+                
+                // When the user clicks the button, open the modal 
+                function MyfunctionDistributorAM(elidDistributorAM, fldidDistributorAM) {                    
+                 // alert('--elid22222--'+elidDistributorAM.id + '--'+fldidDistributorAM);
+                    var modal2DistributorAM = document.getElementById('myModalDistributorAM');
+                    elmDistributorAM = elidDistributorAM.id;  
+                    fldDistributorAM = 'targetfieldDistributorAM' + fldidDistributorAM; 
+                    console.log('fldDistributorAM='+fldDistributorAM);                    
+                    modal2DistributorAM.style.display = "block";
+                }
+                
+                // When the user clicks on <span> (x), close the modal
+                spanDistributorAM.onclick = function() {
+                    modalDistributorAM.style.display = "none";
+                }
+                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modalDistributorAM) {
+                        modalDistributorAM.style.display = "none";
+                    }
+                }
+         
+           
+                function myFunction2DistributorAM(acctId) { 
+                     var nameElementId = 'acctName'+acctId;
+                    console.log("acctId    "+acctId);
+                     console.log("nameElementId "+nameElementId);
+                    var val = document.getElementById(nameElementId).value;
+                    var aid = acctId;
+                    console.log("myFunction2DistributorAM");
+                    console.log(elmDistributorAM);
+                    console.log(val);
+                    console.log(aid);
+                    j$('.'+fldDistributorAM).val(acctId);
+                    //var x = event.target;
+                    //document.getElementById("pageID:proForm:CustomLookupForDistributorAM").value =  val; //fetch search string on popup
+                    document.getElementById(elmDistributorAM).value =  val;    //assign to Project by input field
+                    document.getElementsByClassName(fldDistributorAM)[0].value = aid;
+                    modalDistributorAM.style.display = "none";
+                }  
+            
+            
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function(){
+                  j$("#myInput").on("keyup", function() {
+                    var value = j$(this).val().toLowerCase();
+                    j$("#myTable tr").filter(function() {
+                      j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                  });
+                });
+                
+                j$('#myModalDistributorAM').find('#myInput').focus();
+            </script> 
+            <script>
+            // Get the modal for user by field which fetches account
+            var modalUser = document.getElementById('myModalUser');
+            var elmUser;
+            var fldUser;
+            
+            
+            // Get the <span> element that closes the modal
+            var spanUser = document.getElementsByClassName("closeUser")[0];
+            
+            // When the user clicks the button, open the modal 
+            function MyfunctionUser(elidUser, fldidUser) {                    
+              //  alert('--elid--'+elid.id + '--'+fldid);
+                var modal2User = document.getElementById('myModalUser');
+                elmUser = elidUser.id;  
+                fldUser = 'targetfieldUser' + fldidUser; 
+                console.log('fldUser='+fldUser);                    
+                modal2User.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            spanUser.onclick = function() {
+                modalUser.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modalUser) {
+                    modalUser.style.display = "none";
+                }
+            }
+     
+       
+            function myFunction2User(val,aid) { 
+                var j$ = jQuery.noConflict();
+                var modalUser = document.getElementById('myModalUser');
+                console.log("myFunction2User");
+                console.log(elmUser);
+                console.log(val);
+                console.log(aid);
+                j$('.'+fldUser).val(aid);
+                //var x = event.target;
+                //document.getElementById("pageID:proForm:CustomLookupForUser").value =  val; //fetch search string on popup
+                document.getElementById(elmUser).value =  val;    //assign to Project by input field
+                document.getElementsByClassName(fldUser)[0].value = aid;
+                modalUser.style.display = "none";
+            }  
+        
+        
+            var j$ = jQuery.noConflict();
+            j$(document).ready(function(){
+              j$("#myInput").on("keyup", function() {
+                var value = j$(this).val().toLowerCase();
+                j$("#myTable tr").filter(function() {
+                  j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+            
+            j$('#myModalUser').find('#myInput').focus();
+        </script>  
+        
+        <script>
+                // Get the modal for dealer in add member by field which fetches account
+                var modalDealerAM = document.getElementById('myModalDealerAM');
+                var elmDealerAM;
+                var fldDealerAM;
+                
+                
+                // Get the <span> element that closes the modal
+                var spanDealerAM = document.getElementsByClassName("closeDealerAM")[0];
+                
+                // When the user clicks the button, open the modal 
+                function MyfunctionDealerAM(elidDealerAM, fldidDealerAM) {                    
+                  //  alert('--elid--'+elid.id + '--'+fldid);
+                    var modal2DealerAM = document.getElementById('myModalDealerAM');
+                    elmDealerAM = elidDealerAM.id;  
+                    fldDealerAM = 'targetfieldDealerAM' + fldidDealerAM; 
+                    console.log('fldDealerAM='+fldDealerAM);                    
+                    modal2DealerAM.style.display = "block";
+                }
+                
+                // When the user clicks on <span> (x), close the modal
+                spanDealerAM.onclick = function() {
+                    modalDealerAM.style.display = "none";
+                }
+                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modalDealerAM) {
+                        modalDealerAM.style.display = "none";
+                    }
+                }
+         
+           
+                function myFunction2DealerAM(acctId) { 
+                     var j$ = jQuery.noConflict();
+                     var nameElementId = 'acctName'+acctId;
+                    console.log(acctId);
+                    var val = document.getElementById(nameElementId).value;
+                    var aid = acctId;
+                    console.log("myFunction2DealerAM");
+                    console.log(elmDealerAM);
+                    console.log(val);
+                    console.log(aid);
+                     j$('.'+fldDealerAM).val(acctId);
+                    //var x = event.target;
+                    //document.getElementById("pageID:proForm:CustomLookupForDealerAM").value =  val; //fetch search string on popup
+                    document.getElementById(elmDealerAM).value =  val;    //assign to Project by input field
+                    document.getElementsByClassName(fldDealerAM)[0].value = aid;
+                    modalDealerAM.style.display = "none";
+                }  
+            
+            
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function(){
+                  j$("#myInput").on("keyup", function() {
+                    var value = j$(this).val().toLowerCase();
+                    j$("#myTable tr").filter(function() {
+                      j$(this).toggle(j$(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                  });
+                });
+                
+                j$('#myModalDealerAM').find('#myInput').focus();
+            </script> 
+            
+            
+    </apex:form>
+  </div>
+</div>
+
+    
+    
+    
+<script type="text/javascript">
+
+
+ /* window.onload = function geo(){
+        if(navigator.geolocation){     
+            //browser support geolocation 
+            navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError,{enableHighAccuracy:true,timeout:3000});
+             
+         }else{ 
+                alert('Not supported'); 
+         }
+    } */
+        
+    var j$ = jQuery.noConflict();
+    var resultFound = false;
+    var promotionName ='';
+    var mobileList = [];
+    
+    var promoId = "{!calpromoId}";  //var promoId = getParameter('promotionId');
+    var proName =  ''; 
+    var testName = '';
+    
+    var items ={};
+    var mobileNumSet = new Set();
+    var proType = '';
+    var urlVertical = '';
+    
+    j$(document).ready(function() {
+        
+        var promotionDate = "{!calpromoDate}";    //getParameter('promoDate');
+        console.log(promotionDate);
+        urlVertical = "{!calvertical}";  //"{!$CurrentPage.parameters.vertical}";
+        //alert('--vert--'+urlVertical );
+        j$("[id$=promoDateId]").val(promotionDate);
+        j$("[id$=vertiId]").val(urlVertical);
+        j$("[id$=vertiId]").prop('disabled', true);
+        
+        j$("[id$=asd]").hide();
+        j$("[id$=dsa]").hide();
+        
+        j$("[id$=savePromotionMembers]").hide();
+        j$("[id$=savePromotion]").hide();
+        /*
+         if(navigator.geolocation){     
+            //browser support geolocation 
+            navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError,{enableHighAccuracy:true,timeout:3000});
+             
+         }else{ 
+                alert('Not supported'); 
+         }
+        */
+    });
+    
+    
+    
+    /*function getParameter(theParameter) { 
+        var params = window.location.search.substr(1).split('&');
+        
+        for (var i = 0; i < params.length; i++) {
+            var p=params[i].split('=');
+            if (p[0] == theParameter) {
+                return decodeURIComponent(p[1]);
+            }
+        }
+        return false;
+    }*/
+    
+    
+    function closePopUp () {
+        
+        //alert('closing...');
+        var proName = j$("[id$=promoName]").val();
+        var promotionId = j$("[id$=promotionId]").val();  
+        promoId = j$("#tmpPromoId").val();
+        var className = document.getElementById(promoId).className;
+        console.log('--promoid**--'+promoId);
+        console.log('--className**--'+className);
+        className = className.replace("targetfieldPro", "");
+        
+        document.getElementById(promoId).value = promotionId;
+        document.getElementById('targetPromotionName'+className).value = proName;
+        j$("div#promoCompPanel").dialog("close");
+        j$("[id$=savePromotionMembers]").hide();
+        j$("[id$=savePromotion]").hide();
+        j$("[id$=promotionMemebers]").hide();
+        j$("[id$=closeWindow]").hide();
+        //self.close();
+        //var closepopwin = document.getElementById('promotionMemebers');
+        //closepopwin.style.display = "none";
+        
+    }
+    
+    function closePopUpGrp () {
+        
+        //alert('closing Grp...');
+        
+        var proName = j$("[id$=promoNameGrp]").val();
+        var promotionId = j$("[id$=promotionIdGrp]").val();  
+        promoId = j$("#tmpPromoId").val();
+        var className = document.getElementById(promoId).className;
+        className = className.replace("targetfieldPro", "");
+        console.log('--promoid**---'+promoId);
+        console.log('--className**---'+className);
+        document.getElementById(promoId).value = promotionId;
+        document.getElementById('targetPromotionName'+className).value = proName;
+        j$("div#promoCompPanel").dialog("close");
+        j$("[id$=savePromotionMembers]").hide();
+        j$("[id$=savePromotion]").hide();
+        j$("[id$=promotionMemebers]").hide();
+        j$("[id$=closeWindow]").hide();
+        //self.close();
+        //var closepopwin = document.getElementById('promotionMemebers');
+        //closepopwin.style.display = "none";
+        
+    }
+    
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    function showMobileNo(tags,noResult) {
+        // console.log('Show Mobile No.');
+        var mobId = "#"+tags; //var recid='01230000001DIm0';
+         var promotype = j$("[id$=promotionType]").val();
+         console.log("promotype mob.."+promotype);
+        //  mobileList = {!proAccounts};
+        // console.log(mobileList);
+        j$("[id$="+tags+"]").autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+                
+                //console.log('request term...'+request.term);
+                //Call Remoting 
+                //APPL_NEW_PROMOTION_CTRL.getCustomer(request.term)     
+                //APPL_NEW_PROMOTION_CTRL_Modified.getCustomer(request.term, recid, function(result,event) {
+                APPL_NEW_PROMOTION_CTRL_Modified.getCustomer(request.term, promotype, function(result,event) {
+                    if(event.status) {
+                       
+                        var data = [];
+                        var customer = [];
+                        j$.each(result,function(key, record) {
+                            //console.log(record);
+                            console.log("promotype mob33.."+promotype);
+                            customer.push(result[key].Contact_Number_Mobile__c);
+                        });
+                        //return the dataa
+                        //console.log(customer);
+                        // response(customer);
+                        var results = j$.ui.autocomplete.filter(customer, request.term);
+                        
+                        if (!results.length) {
+                            // j$("#no-results").text("No results found!");
+                            document.getElementById(noResult).innerHTML = "No results found!";
+                            resultFound = false;
+                        } else {
+                            document.getElementById(noResult).innerHTML = "";
+                            resultFound = true;
+                            
+                        }
+                        response(results);
+                        
+                    } else if(event.type == 'exception') {
+                        alert(event.message);
+                    }
+                    if(event.type == 'rpc') {
+                        //j$("#el_loading").hide();
+                        console.log(event.type);
+                    }
+                },{escape:true});
+                
+            }
+            // alert(j$("[id$=tags]"));
+        });
+    }
+    
+ function callActionJs (mobNumber,rowIndex) {
+        // body...
+        var mobileNumber = document.getElementById(mobNumber).value;
+        //alert('Call Action function');
+        if(mobileNumber.length == 10 && resultFound == true && mobileNumSet.has(mobileNumber) == false){
+            //alert(mobileNumber);
+            mobileNumSet.add(mobileNumber);
+            console.log(mobileNumSet);
+            copyAccountRow(mobileNumber,rowIndex);
+            // alert(mobileNumSet.has(mobileNumber));
+        }else if(mobileNumSet.has(mobileNumber) == true){
+            alert('Mobile Number already in the List');
+           // document.getElementById(mobNumber).style.borderColor = "red";
+            //document.getElementById(mobNumber).focus();
+            // }
+            // if(mobileNumber.length == 10 && resultFound == true){
+            //     console.log('Call Js Action function ..Mobile Number is 10 Digits..');
+            //     copyAccountRow(mobileNumber,rowIndex);
+        }else{
+            console.log('Mobile Number is not 10 Digits..');
+            //document.getElementById(mobNumber).focus();
+        }
+    }
+    
+    function setProducts(selectId,proId) {
+        console.log(proId);
+        var selectProducts  = document.getElementById(selectId);
+        var selectedPros    = [];
+        
+        for (var i = 0; i < selectProducts.length; i++) {
+            if (selectProducts.options[i].selected) selectedPros.push(selectProducts.options[i].value);
+        }
+        console.log(selectedPros);
+        
+        var proArray = selectedPros.toString();
+        var finalProductsVal = proArray.replace(/,/g , ";");
+        console.log(finalProductsVal);
+        
+        document.getElementById(proId).value = finalProductsVal;
+        
+    }
+    
+    //addStyleClass
+    function coypToApex(htmlId,expId){
+        var htmlVal = document.getElementById(htmlId).value;
+        document.getElementById(expId).value = htmlVal;
+    }
+    
+   function callCloseAF(){
+       alert('close popup');
+       calendarAFClose();
+   }
+   
+   function callCloseAFGrp(){
+       alert('close Grp popup');
+       calendarAFCloseGrp();
+   }
+   
+    function saveProMembers(){
+        console.log('Call Save Promotion..');
+        savePromoAcc();
+        console.log('Save Promotion Done..');
+    }
+    
+    
+    function saveClosePopUp () {
+        //alert('Promotion Saved !');
+        alert('Members added successfully.');
+        window.self.close();
+    }
+    
+    function blockVertcal() {
+        
+        console.log('Create Promotion Completed..! Call Back');
+        console.log('####');
+        j$("[id$=vertiId]").prop('disabled', true);
+        var proName = j$("[id$=promoName]").val();
+        
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity'  || proType == 'Gold Coin Delivery' || proType =='HDFC card delivery'  || proType =='Rupay card delivery' || proType == 'Others') && proType != '' ){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show()
+            j$("[id$=savePromotion]").hide();
+        }
+        
+        
+        if(proName != '' && proName != undefined) {
+            window.opener.document.getElementById(promoId).value = proName;
+        }
+    }
+
+    function onChangeType(){
+        console.log('Promotion Type Changed..');
+        
+        proType = j$("[id$=typeId]").val();
+        console.log('Promotion Type ='+proType);
+        
+        if(proType == 'Architects / Engineers / Consultants Factory Visit' || proType == 'Architects Meets' || proType == 'Builders Meets' || proType == 'Engineers Meets' || proType == 'Mega Plumbers Meets' || proType == 'Plumbers Factory Visit'|| proType == 'Plumbing Dealer / Distributor Meets' || proType == 'Plumbing Dealers Factory Visits' || proType == 'Plumbing DSM Meet/Training' || proType == 'Column Dealer / Distributor Meets' || proType == 'Column Distributors / Dealers Factory Visit' || proType == 'Column DSM Meet / Training' || proType == 'Mechanics Factory Visit' || proType == 'Mega Farmer Meets' || proType == 'Mega Mechanic Meets' || proType == 'Projects DSM Meet / Training'){
+        j$("[id$=typeGiven]").val('Mega Meet');
+        j$("[id$=asd]").show();
+        j$("[id$=dsa]").hide();
+        }else if(proType == 'Inshop Plumber Meets' || proType == 'Exhibition / Construction Fairs' ||proType == 'Naaka Meets' || proType == 'Onsite Plumber Meets' || proType == 'Exhibition / Agri Fairs' || proType == 'Inshop Borers Meets' || proType == 'Inshop Mechanic Meets' || proType == 'Jeep Campaign' || proType == 'Mini Farmer Meet' || proType == 'Shandy Shows' || proType == 'Tractor Show'){
+        j$("[id$=typeGiven]").val('Mini Meet');
+        j$("[id$=dsa]").show();
+        j$("[id$=asd]").hide();
+        }else{
+        j$("[id$=asd]").hide();
+        j$("[id$=dsa]").hide();
+        }
+
+        
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity' || proType == 'Gold Coin Delivery'  || proType == 'Rupay card delivery' || proType == 'HDFC card delivery' || proType == 'Others') && proType != '' ){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show();
+            j$("[id$=savePromotion]").hide();
+        }
+        
+    }
+    
+    function showSaveBtn(){
+        console.log('Promotion Type Changed..');
+        
+        proType = j$("[id$=typeId]").val();
+        console.log('Promotion Type ='+proType);
+        
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity'  || proType == 'Gold Coin Delivery' || proType == 'Rupay card delivery' || proType =='HDFC card delivery' || proType == 'Others') && proType != '' ){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show();
+            j$("[id$=savePromotion]").hide();
+        }
+
+        var errCounter = 0;
+        var giftGivenValue = '';
+        var distributorVal = '';
+        var dealerVal      = '';
+        var projectVal     = '';
+        var districtVal    = '';
+        var proType        = '';
+
+       
+        //Check for Mandetory Field
+        // alert('Check for Validation');
+        j$('.form-control.reqField').each(function(){
+            var fieldVal = j$(this).val();
+            //alert(fieldVal);
+            if(fieldVal == '' || fieldVal == null){
+                j$(this).next('.Error').text( "Required field." );
+                j$(this).addClass('borderClass');
+                hasError = true;
+                errCounter +=1;
+            }else{
+                j$(this).next('.Error').text( "" );
+                j$(this).removeClass('borderClass');
+                hasError = false;
+                //errCounter -=1;
+            }
+        });
+        
+
+        //Check for Gifts Given
+       /* giftGivenValue = j$("#giftId").val();
+        //alert(giftGivenValue);
+        if(giftGivenValue == '' || giftGivenValue == undefined){
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").addClass('borderClass');
+            errCounter +=1;
+        }else{
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").removeClass('borderClass');
+        }*/
+        
+       /* if(navigator.geolocation){     
+            //browser support geolocation 
+            navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError,{enableHighAccuracy:true,timeout:3000});
+             
+         }else{ 
+                alert('Not supported'); 
+         } */
+         
+        /*  if(navigator.geolocation){     
+            //browser support geolocation 
+            navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError,{enableHighAccuracy:true,timeout:3000});
+             
+         }else{ 
+                alert('Not supported'); 
+         } */
+
+        if(errCounter > 0){
+            alert('Please fill all the (*)Requried fields');
+            return false;
+        }else{
+            
+            jsPromotionFPEValidation();
+        }
+        
+    }
+    
+    
+    
+    
+    function blockVertcalNClose(){
+       // alert('Call Back--> Gr');
+        j$("[id$=vertiId]").prop('disabled', true);
+        //console.log('this Groupe Activity is Promotion Name '+testName);
+       // alert(testName);
+        console.log('%%%%');
+        var proName = j$("[id$=promoName]").val();
+ 
+        if(proType == '' || proType == undefined){
+            j$("[id$=savePromotionMembers]").hide();
+            j$("[id$=savePromotion]").hide();
+        }else if((proType == 'Group Activity'  || proType == 'Gold Coin Delivery' || proType == 'Rupay card delivery' || proType == 'HDFC card delivery'|| proType == 'Others') && proType != ''){
+            j$("[id$=savePromotion]").show();
+            j$("[id$=savePromotionMembers]").hide();
+        }else{
+            j$("[id$=savePromotionMembers]").show()
+            j$("[id$=savePromotion]").hide();
+        }
+        
+       // alert('proName '+proName);
+        if(proName != '' && proName != undefined) {
+            window.opener.document.getElementById(promoId).value = proName;
+        }
+    }
+    
+    /*Validation Check
+     1) Column and Plumbing vertical --> FPE is Mandetory
+     2) Distributor || Dealer || Project 
+     3) Gift Given is Mandetory
+
+     --If all fields are filled ---> Call Action Function
+  */
+    function ValidatePromotion() {
+        console.log('Check for FPE Validation..');
+        console.log('proType ='+proType);
+        var errCounter = 0;
+        var giftGivenValue = '';
+        var distributorVal = '';
+        var dealerVal      = '';
+        var projectVal     = '';
+        var districtVal    = '';
+        var stateval       = '';
+        var proType        = '';
+
+        var Expenditure        = '';
+        var dealerShre        = '';
+        var applShre        = '';
+        var remarks       = '';
+        var expenses       = '';
+        var attendees      = '';
+        
+
+    
+         //Check for Dealer || Project || Distributor
+         proType = j$("[id$=typeId]").val();
+        console.log('Promotion Type ='+proType);
+              
+        //Check for Mandetory Field
+        // alert('Check for Validation');
+        j$('.form-control.reqField').each(function(){
+            var fieldVal = j$(this).val();
+            //alert(fieldVal);
+            if(fieldVal == '' || fieldVal == null){
+                j$(this).next('.Error').text( "Required field." );
+                j$(this).addClass('borderClass');
+                hasError = true;
+                errCounter +=1;
+            }else{
+                j$(this).next('.Error').text( "" );
+                j$(this).removeClass('borderClass');
+                hasError = false;
+                //errCounter -=1;
+            }
+        });
+        
+        //Check for FPE
+        if((proType == 'Tractor Show' || proType == 'Jeep Campaign' || proType == 'Mega Farmer Meets' || proType == 'Mini Farmer Meet' || proType == 'Shandy Shows')){
+            // alert('Check for Validation');
+            j$('.form-control.fpeRequired').each(function(){
+                var fieldVal = j$(this).val();
+                //alert(fieldVal +' j$(this)');
+                if(fieldVal == '' || fieldVal == null){
+                    j$(this).next('.Error').text( "Required field." );
+                    j$(this).addClass('borderClass');
+                    hasError = true;
+                    errCounter +=1;
+                }else{
+                    j$(this).next('.Error').text( "" );
+                    j$(this).removeClass('borderClass');
+                    hasError = false;
+                    //errCounter -=1;
+                }
+            });
+            
+        }
+        
+        //Check for Gifts Given
+       /* giftGivenValue = j$("#giftId").val();
+        //alert(giftGivenValue);
+        if(giftGivenValue == '' || giftGivenValue == undefined){
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").addClass('borderClass');
+            errCounter +=1;
+        }else{
+            j$("#giftId").next('.Error').text( "Required field." );
+            j$("#giftId").removeClass('borderClass');
+        }*/
+        
+        //Check for District Value
+        districtVal = j$("[id$=distId]").val();
+        stateval    = j$("[id$=stateid]").val();
+        console.log('District Value ='+districtVal);
+        console.log('State Value ='+stateval);
+       
+        
+        // Get the Project, Dealer and Distribuor Values.
+        distributorVal = j$("[id$=targetIdDistr]").val();
+        dealerVal = j$("[id$=targetIdDealer]").val();
+        projectVal = j$("[id$=targetIdPrj]").val();
+
+        Expenditure  = j$("[id$=NatureOfOExpenditure]").val();
+        dealerShre   =j$("[id$=Dealershare]").val();
+        applShre     = j$("[id$=APPLShare]").val();
+        remarks      = j$("[id$=Remarks]").val();
+        expenses     = j$("[id$=TotalExpenses]").val();
+        attendees    =  j$("[id$=attendees]").val();
+           if(stateval == '' || districtVal == '' || attendees == '' || expenses == ''){
+             alert('Please fill mandatory fields');
+             errCounter +=1;
+             return false;
+           }           
+                                  
+                                  
+                              
+         if(Expenditure == '' &&  dealerShre == '' && applShre == '' && expenses =='' && remarks ==''){
+            alert('Please fill "Expenditure", "Dealershare" , "APPLShare","Remarks" AND "TotalExpenses".');
+            return false;
+         }
+         else{
+                    }                          
+        
+       if( dealerVal == '' && proType != 'Group Activity' && proType != '' && (urlVertical=='Plumbing' || urlVertical=='Column') ){
+            alert('Please fill Dealer ');
+            errCounter +=1;
+            // j$("[id$=disId]").addClass('borderClass');
+            // j$("[id$=dealerId]").addClass('borderClass');
+            // j$("[id$=proId]").addClass('borderClass');
+            //break outerFunction;
+            return false;
+        }else if(distributorVal == '' &&  dealerVal == '' && projectVal == '' && proType != 'Group Activity' && proType != ''){
+            alert('Please fill either "Distributor", "Dealer" or "Project" ');
+            errCounter +=1;
+            // j$("[id$=disId]").addClass('borderClass');
+            // j$("[id$=dealerId]").addClass('borderClass');
+            // j$("[id$=proId]").addClass('borderClass');
+            //break outerFunction;
+            return false;
+        }
+        
+        else{
+            // j$("[id$=disId]").removeClass('borderClass');
+            // j$("[id$=dealerId]").removeClass('borderClass');
+            // j$("[id$=proId]").removeClass('borderClass');
+        }
+        //    if(dealerVal == '' && proType == 'Inshop Plumber Meets'){
+        //alert('Please fill Dealer if Promotiontype is Inshop Plumber Meets');
+        //return false;
+        //}
+        //else{
+        //}
+        
+        //Call Action Function
+        // jsPromotionFPEValidation();
+        //alert('Error Counter ='+errCounter);
+        
+         typeVal = j$("[id$=typeId]").val();
+         ordVal = j$("[id$=ordvalID]").val();
+         //alert('typ value'+tempval);
+        if(typeVal == 'Plumbing Dealer / Distributor Meets' && ordVal == ''){
+        alert('Please fill Order Value if Promotiontype is Plumbing Dealer/distributor meet');
+        return false;
+        }
+        else if(typeVal == 'Column Dealer / Distributor Meets' && ordVal == ''){
+        alert('Please fill Order Value if Promotiontype is Column Dealer/distributor meet');
+        return false;
+        }
+        else{
+        }
+        
+       /* if(navigator.geolocation){     
+            //browser support geolocation 
+            navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError,{enableHighAccuracy:true,timeout:3000});
+                 
+       }else{ 
+                alert('Not supported'); 
+       } */ 
+       
+     /*   if(navigator.geolocation){     
+            //browser support geolocation 
+            navigator.geolocation.getCurrentPosition(callbackSuccess, callbackError,{enableHighAccuracy:true,timeout:3000});
+             
+         }else{ 
+                alert('Not supported'); 
+         }  */
+        
+        if(errCounter > 0){
+            alert('Please fill all the (*)Required fields');
+        }else{
+             
+            //Call Action function
+            jsPromotionGroup();
+        }
+               
+        
+    }
+    
+    
+    
+    
+    
+    function maxLengthCheck(object) {
+        
+          if((object.value.length > object.maxLength)) {
+             object.value = object.value.slice(0, object.maxLength);
+             }
+             
+             if((object.value > object.max)) {
+             object.value = object.value.slice(0, 1);
+             alert('Value range allowed to enter is 01 - 60');
+             }
+        }
+        
+        
+        function callbackSuccess(position) { 
+            //get latitude and longitude 
+           /* if(position.coords.accuracy<15)
+                {
+                    var lat = position.coords.latitude; 
+                    var lon = position.coords.longitude;
+                    document.getElementById('pageID:proForm:latID').value = lat;
+                    document.getElementById('pageID:proForm:lonID').value = lon;
+                    //alert('latitude = '+ lat +'longitude = '+ lon);
+                    
+                    }
+            else if(position.coords.accuracy<25)
+                {
+                    var lat = position.coords.latitude; 
+                    var lon = position.coords.longitude;
+                    document.getElementById('pageID:proForm:latID').value = lat;
+                    document.getElementById('pageID:proForm:lonID').value = lon;
+                   //alert('latitude = '+ lat +'longitude = '+ lon);
+            
+           
+                    
+                    }
+            else
+                {
+                    var lat = position.coords.latitude; 
+                    var lon = position.coords.longitude;
+                    document.getElementById('pageID:proForm:latID').value = lat;
+                    document.getElementById('pageID:proForm:lonID').value = lon;
+                    //alert('latitude = '+ lat +'longitude = '+ lon); 
+           
+                    
+                }  */         
+        } 
+        
+        function callbackError(error) { 
+            switch(error.code) { 
+                case error.UNKNOWN_ERROR: 
+                alert("Geotagging encountered an error."); 
+                break; 
+            case error.PERMISSION_DENIED: 
+                alert("The user does not want to give his position."); 
+                break; 
+            case error.POSITION_UNAVAILABLE: 
+                alert("User's coordinates could not be found."); 
+                break; 
+            case error.TIMEOUT: 
+                alert("Geotagging is taking too long."); 
+                break; 
+            } 
+        }
+
+    
+    </script>
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    </body>
+    </html>
+</apex:component>

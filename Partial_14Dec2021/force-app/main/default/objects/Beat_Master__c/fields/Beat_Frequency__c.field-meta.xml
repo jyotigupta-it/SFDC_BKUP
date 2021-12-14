@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Beat_Frequency__c</fullName>
+    <externalId>false</externalId>
+    <label>Beat Frequency</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Monday Week1</fullName>
+                <default>false</default>
+                <label>Monday Week1</label>
+            </value>
+            <value>
+                <fullName>Monday Week2</fullName>
+                <default>false</default>
+                <label>Monday Week2</label>
+            </value>
+            <value>
+                <fullName>Monday Week3</fullName>
+                <default>false</default>
+                <label>Monday Week3</label>
+            </value>
+            <value>
+                <fullName>Monday Week4</fullName>
+                <default>false</default>
+                <label>Monday Week4</label>
+            </value>
+            <value>
+                <fullName>Tuesday Week1</fullName>
+                <default>false</default>
+                <label>Tuesday Week1</label>
+            </value>
+            <value>
+                <fullName>Tuesday Week2</fullName>
+                <default>false</default>
+                <label>Tuesday Week2</label>
+            </value>
+            <value>
+                <fullName>Tuesday Week3</fullName>
+                <default>false</default>
+                <label>Tuesday Week3</label>
+            </value>
+            <value>
+                <fullName>Tuesday Week4</fullName>
+                <default>false</default>
+                <label>Tuesday Week4</label>
+            </value>
+            <value>
+                <fullName>Wednesday Week1</fullName>
+                <default>false</default>
+                <label>Wednesday Week1</label>
+            </value>
+            <value>
+                <fullName>Wednesday Week2</fullName>
+                <default>false</default>
+                <label>Wednesday Week2</label>
+            </value>
+            <value>
+                <fullName>Wednesday Week3</fullName>
+                <default>false</default>
+                <label>Wednesday Week3</label>
+            </value>
+            <value>
+                <fullName>Wednesday Week4</fullName>
+                <default>false</default>
+                <label>Wednesday Week4</label>
+            </value>
+            <value>
+                <fullName>Thursday Week1</fullName>
+                <default>false</default>
+                <label>Thursday Week1</label>
+            </value>
+            <value>
+                <fullName>Thursday Week2</fullName>
+                <default>false</default>
+                <label>Thursday Week2</label>
+            </value>
+            <value>
+                <fullName>Thursday Week3</fullName>
+                <default>false</default>
+                <label>Thursday Week3</label>
+            </value>
+            <value>
+                <fullName>Thursday Week4</fullName>
+                <default>false</default>
+                <label>Thursday Week4</label>
+            </value>
+            <value>
+                <fullName>Friday Week1</fullName>
+                <default>false</default>
+                <label>Friday Week1</label>
+            </value>
+            <value>
+                <fullName>Friday Week2</fullName>
+                <default>false</default>
+                <label>Friday Week2</label>
+            </value>
+            <value>
+                <fullName>Friday Week3</fullName>
+                <default>false</default>
+                <label>Friday Week3</label>
+            </value>
+            <value>
+                <fullName>Friday Week4</fullName>
+                <default>false</default>
+                <label>Friday Week4</label>
+            </value>
+            <value>
+                <fullName>Saturday Week1</fullName>
+                <default>false</default>
+                <label>Saturday Week1</label>
+            </value>
+            <value>
+                <fullName>Saturday Week2</fullName>
+                <default>false</default>
+                <label>Saturday Week2</label>
+            </value>
+            <value>
+                <fullName>Saturday Week3</fullName>
+                <default>false</default>
+                <label>Saturday Week3</label>
+            </value>
+            <value>
+                <fullName>Saturday Week4</fullName>
+                <default>false</default>
+                <label>Saturday Week4</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

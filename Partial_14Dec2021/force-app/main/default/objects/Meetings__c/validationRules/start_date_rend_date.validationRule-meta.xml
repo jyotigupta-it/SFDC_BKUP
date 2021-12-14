@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>start_date_rend_date</fullName>
+    <active>true</active>
+    <errorConditionFormula>Meeting_Start_Time__c &gt;  Meeting_End_Time__c</errorConditionFormula>
+    <errorDisplayField>Meeting_Start_Time__c</errorDisplayField>
+    <errorMessage>Please enter a start date less than end date</errorMessage>
+</ValidationRule>

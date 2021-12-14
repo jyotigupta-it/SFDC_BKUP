@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pin_Code_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(LEN( PIN_CODE__c )&lt;&gt; 6,NOT(ISNUMBER(PIN_CODE__c )))</errorConditionFormula>
+    <errorDisplayField>PIN_CODE__c</errorDisplayField>
+    <errorMessage>Enter 6 digit Pin Code.</errorMessage>
+</ValidationRule>

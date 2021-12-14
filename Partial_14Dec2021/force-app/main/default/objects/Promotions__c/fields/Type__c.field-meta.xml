@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Architects Meet</fullName>
+                <color>#0B6FCE</color>
+                <default>false</default>
+                <label>Architects Meet</label>
+            </value>
+            <value>
+                <fullName>Boarers Meet</fullName>
+                <color>#78C953</color>
+                <default>false</default>
+                <label>Boarers Meet</label>
+            </value>
+            <value>
+                <fullName>Builders Meet</fullName>
+                <color>#E27001</color>
+                <default>false</default>
+                <label>Builders Meet</label>
+            </value>
+            <value>
+                <fullName>Dealers Meet</fullName>
+                <color>#A845DC</color>
+                <default>false</default>
+                <label>Dealers Meet</label>
+            </value>
+            <value>
+                <fullName>Engineers Meet</fullName>
+                <color>#F3D904</color>
+                <default>false</default>
+                <label>Engineers Meet</label>
+            </value>
+            <value>
+                <fullName>Exhibition</fullName>
+                <color>#A53711</color>
+                <default>false</default>
+                <label>Exhibition</label>
+            </value>
+            <value>
+                <fullName>Farmers Meet</fullName>
+                <color>#66E9BD</color>
+                <default>false</default>
+                <label>Farmers Meet</label>
+            </value>
+            <value>
+                <fullName>Jeep Campaign</fullName>
+                <color>#0B24BE</color>
+                <default>false</default>
+                <label>Jeep Campaign</label>
+            </value>
+            <value>
+                <fullName>Mechanic Meet</fullName>
+                <color>#419249</color>
+                <default>false</default>
+                <label>Mechanic Meet</label>
+            </value>
+            <value>
+                <fullName>Plumber Meet</fullName>
+                <color>#B6E32E</color>
+                <default>false</default>
+                <label>Plumber Meet</label>
+            </value>
+            <value>
+                <fullName>Shandy Show</fullName>
+                <color>#641CCF</color>
+                <default>false</default>
+                <label>Shandy Show</label>
+            </value>
+            <value>
+                <fullName>Tractor Show</fullName>
+                <color>#F96FB7</color>
+                <default>false</default>
+                <label>Tractor Show</label>
+            </value>
+            <value>
+                <fullName>Dealers Salesman Meet</fullName>
+                <color>#8F6429</color>
+                <default>false</default>
+                <label>Dealers Salesman Meet</label>
+            </value>
+            <value>
+                <fullName>Mini Meet</fullName>
+                <color>#EFAE73</color>
+                <default>false</default>
+                <label>Mini Meet</label>
+            </value>
+            <value>
+                <fullName>Dealers Factory Visit</fullName>
+                <color>#BBBBBB</color>
+                <default>false</default>
+                <label>Dealers Factory Visit</label>
+            </value>
+            <value>
+                <fullName>Plumber/Mechanic/Engineers Factory Visit</fullName>
+                <default>false</default>
+                <label>Plumber/Mechanic/Engineers Factory Visit</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

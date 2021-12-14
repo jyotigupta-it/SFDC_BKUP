@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BDTourPlan</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>BD - TourPlan</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var a=&quot;{!Tour_Program__c.ProfileId__c}&quot;; 
+
+if(a!=&apos;00e30000001yGyh&apos;) 
+{ 
+alert(&apos;Error :\n\n  Please click on MassUpdateTourPlan button to update &apos;); 
+} 
+
+else 
+{ 
+window.open(&apos;https://c.na1.visual.force.com/apex/BDMassUpdate?id={!Tour_Program__c.Id}&apos;); 
+}</url>
+</WebLink>

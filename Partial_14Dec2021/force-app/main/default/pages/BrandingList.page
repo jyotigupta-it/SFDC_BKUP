@@ -1,0 +1,620 @@
+<apex:page controller="BrandingRequestController" showHeader="false" sidebar="false" standardStylesheets="false">
+<apex:slds />
+ <meta name="viewport" content="width=device-width, initial-scale=1"/>
+   <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_js)}"/>
+   <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_UI_js)}"/>
+   <link href="{!URLFOR($Resource.Ashd_jquery_UI_css)}" rel="stylesheet"/>
+ <!-- <link  href="{!URLFOR($Resource.Ashd_bootstrap_css)}" rel="stylesheet"/>
+   <link  href="{!URLFOR($Resource.Ashd_bootstrap_theme_css)}" rel="stylesheet"/> -->
+  <apex:includeScript value="{!URLFOR($Resource.Ashd_bootstrap_js)}"/>
+   <apex:includeScript value="{!URLFOR($Resource.Ashd_angular_js)}"/> 
+   <apex:includeScript value="{!URLFOR($Resource.Ashd_jquery_datatable_js)}"/>
+   <apex:includeScript value="{!URLFOR($Resource.Ashd_datatable_js)}"/> 
+    
+   <link  href="{!URLFOR($Resource.Ashd_jquery_datatable_css)}" rel="stylesheet"/>
+    
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+-->
+
+<!--<style>
+body{font-family:Calibri !important;}
+.navbar-inverse{background-color:#19a8db !important;background-image: -webkit-linear-gradient(top,#19a8db,#0ebdf7 100%); color:#FFF !important; border-radius:0px !important;padding:7px; }
+.navbar-nav{float:right;}
+.navbar-inverse .navbar-nav>li>a{color:#FFF !important;}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{border-color:#0ebdf7 !important;}
+.navbar{margin-bottom:0px !important;border:0px #FFF none}
+.jumbotron{margin:0px 0px !important; padding:10px !important}
+.btn-ashvd{background-color:#0ebdf7 !important;color:#FFF !important;padding:6px 15px !important;}
+.nav-mn{color:#FFF !important; font-size:16px !important;padding-right:10px; margin-top:17px;}
+        .nav-mn a {color:#FFF !important;}
+        .nav-mn a:hover{text-decoration:none}
+.Completed{
+background-color: #a3c2c2!important;
+}
+.RejectedbyRBM{
+background-color: #FFF!important;
+}
+.SubmittedToRBM{
+background-color: #CCD1D1!important;
+}
+.NotSubmitted{
+background-color: #eff5f5!important;
+}
+.Approved{
+
+}
+.Rejected{
+background-color:White!important;
+
+}
+.Completed1{
+
+}
+.NotSubmitted1{
+
+}
+.Approved1{
+color:#66ff33!important;
+
+}
+.ApprovedbyTL1{
+color:#66ff33!important;
+
+}
+.SubmittedToRBM1{
+color:Black!important;
+
+}
+.RejectedbyRBM1{
+color:Red!important;
+
+}
+
+.RejectedbyTL1{
+color:#ff0000!important;
+
+}
+.Rejected1{
+color:#ff0000!important;
+
+}
+
+.tableBorder{
+    padding: 15px;
+    border: 2px solid #19a8db ;
+    text-align: left;
+}
+.tdheader{
+    width:40%;
+    font-weight:bold;
+    font-size:14px;
+    padding-bottom:5px
+}
+.tdbody{
+    font-weight:lighter;
+    font-size:14px;
+    padding-bottom:5px
+}
+
+th{
+  text-align:left!important;
+  padding-left:10px!important;   
+}
+
+
+        
+        
+       
+
+</style>-->
+<style>
+    table.dataTable, table.dataTable th, table.dataTable td {
+        box-sizing:border-box!important;
+    }
+    .dataTables_filter {
+        float:left!important;
+        margin:10px!important;
+        text-align:left!important;
+    }
+    .dataTables_filter input {
+    background-color: #fff;
+    color: #16325c;
+    border: 1px solid #d8dde6;
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+    }
+    .navi li {
+        float:left;
+        margin-left:20px;
+    }
+    .tab_des th, .tab_des .slds-truncate {
+    white-space:normal!important;
+    }
+     .mainblock{
+    width:100%!important;
+    height:100%;
+    top:0!important;
+    left:0!important;
+    position:fixed!important;
+    background-color:#000000!important;
+    opacity:.5!important;
+    z-index:1!important;
+}
+.main{
+       
+        z-index: 2!important;
+        top: 10%!important;
+        margin-bottom:10%;
+        position: absolute!important;
+        background-color: white!important;
+        border-radius: 5px;
+       
+        padding: 15px;
+    width: 54%!important;
+    left:24%;
+}
+    .alertcontent{
+            padding:0px;
+                top: 35%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid ##e3e2e2;
+                border-radius:5px;
+                z-index: 3;
+                width:40%;
+                left:29%;
+        }
+        @media only screen and (min-width: 250px) and (max-width: 640px) {
+        .alertcontent{
+            padding:0px;
+                top: 10%;
+                background-color: #ffffff;
+                position: fixed;
+                border: 2px solid ##e3e2e2;
+                border-radius:5px;
+                z-index: 3;
+                width:90%;
+                left:5%;
+        }
+    .main{
+       
+        z-index: 2!important;
+        top: 5%!important;
+        margin-bottom:10%;
+        position: absolute!important;
+        background-color: white!important;
+        border-radius: 5px;
+       
+        padding: 15px;
+    width: 90%!important;
+    left:5%;
+}
+        }
+</style>
+<script>
+          $.noConflict();
+       var data=[];       
+        function fan(z){
+       $(document).ready(function(){
+           $('body').append('<div class="mainblock"></div> <div class="main">  <span  onclick="cnc()"></span> '+z.ShopName+' <div class="slds-grid slds-wrap"><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 ">  <img src="'+z.ShopImg+'" class="img-responsive" style="border-radius:5px;height:150px;border: 1px solid rgba(0, 255, 243, 0.25);"/> </div><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 "> <table> <tr> <td class="tdheader">BDM</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.CreatedBy.Name+'</td> </tr> <tr> <td class="tdheader">Contact Name & Number</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.contactName+' - '+z.contact+'</td> </tr>  <tr> <td class="tdheader">Request Type</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.rtype+'</td> </tr> <tr> <td class="tdheader">Brand Type</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.btype+'</td> </tr> <tr> <td class="tdheader">Vertical Type</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.vtype+'</td> </tr> <tr> <td class="tdheader">Media Type</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.mediaType+'</td> </tr> <tr> <td class="tdheader">Status</td><td style="font-weight:bold;padding-left:20px;padding-right:20px;">:</td><td class="tdbody">'+z.status+'</td> </tr> </table> </div></div><br/>  <div class="slds-grid slds-wrap"><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 "><div style="width:100%;/*min-height:100px;*/"><div style="width:100%;min-height:100px;"><label style="font-weight:bold;font-size:14px;padding-bottom:2px;display:'+z.venShw+'">Vendor Name  : <font style="font-weight:100;">'+z.VendorName+'</font>  </label><!--<span style="font-weight:lighter;font-size:14px;padding-bottom:2px;padding-left:10px;display:'+z.escShw+'"> '+z.isEscalated+'</span>--><br/><label style="font-weight:bold;font-size:14px;padding-bottom:2px">Address :  </label><label style="font-weight:lighter;font-size:14px;padding-bottom:2px;padding-left:10px;"> '+z.address+'</label><br/> <!--<div style="width:100%;">--> <div > <label style="font-weight:bold;font-size:14px;padding-bottom:2px">Last branding request on : <span style="font-weight:lighter;font-size:14px;padding-bottom:2px;padding-left:10px;">'+z.CreatedDate+'</span></label> </div> <div > <label style="font-weight:bold;font-size:14px;padding-bottom:2px">Last request submitted by BDM : <span style="font-weight:lighter;font-size:14px;padding-bottom:2px;padding-left:10px;">'+z.submitforApproval+'</span></label> </div> <br/> <div > <label style="font-weight:bold;font-size:14px;padding-bottom:2px">Previous Brand Type  : <span style="font-weight:lighter;font-size:14px;padding-bottom:2px;padding-left:10px;">'+z.Pbtype+'</span></label> </div> <div > <label style="font-weight:bold;font-size:14px;padding-bottom:2px">Previous Media Type  : <span style="font-weight:lighter;font-size:14px;padding-bottom:2px;padding-left:10px;">'+z.Pmtype+'</span></label> </div></div></div></div><div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-small-size--1-of-1 slds-large-size--1-of-2 "> <div id="approval" ></div></div><div >  </div></div><input type="button" class="slds-button slds-button_brand slds-m-top_small slds-float_right dcnc" value="Close" onclick="cnc()"><div class="slds-clearfix"></div> </div>');
+      
+ if(z.Approve.length>0){
+     $('#approval').append('<h4 style="background-color:#d5d5d5;padding:5px;"><b>Approval History</b></h4> <div> <table class="tab_des slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked" > <thead><th>Action</th><th >Date</th><th>Comments</th><th>Action taken by</th></thead> <tbody id="apbody"> </tbody> </table> </div>');
+     for(var i=0;i<z.Approve.length;i++){
+          var ttdate = new Date(z.Approve[i].CompletedDate);
+          var hours = ttdate.getHours();
+          var minutes = ttdate.getMinutes();
+          var ampm = hours >= 12 ? 'pm' : 'am';
+          hours = hours % 12;
+          hours = hours ? hours : 12; 
+          minutes = minutes < 10 ? '0'+minutes : minutes;
+          var strTime = hours + ':' + minutes + ' ' + ampm;
+         var zz= '' +ttdate.getDate() +'/'+( ttdate.getMonth()+1) + '/'+ttdate.getFullYear()+' '+strTime;
+          var comm='';
+         if(z.Approve[i].StepsAndWorkitems[0].Comments!=undefined){
+            comm=z.Approve[i].StepsAndWorkitems[0].Comments;
+         }
+         $('#apbody').append('<tr> <td data-label="Action" scope="row"><div class="slds-truncate" title="">'+z.Approve[i].Status+'</div></td> <td data-label="Date" scope="row"><div class="slds-truncate" title="">'+zz+'</div></td><td data-label="Comments" scope="row"><div class="slds-truncate" title="">'+comm+'</div></td><td data-label="Action taken by" scope="row"><div class="slds-truncate" title="">'+z.Approve[i].LastActor.Name+'</div></td></tr>');
+     }
+ }
+       });
+        //console.log(z);
+             
+         } 
+         function cnc(){
+             $(document).ready(function(){
+                 $('.mainblock').remove();
+                    $('.main').remove();
+             });
+         }
+                  
+         $(document).ready(function(){
+            var prof='{!profileName}';
+            //console.log(prof);
+            if(prof=='System Administrator' || prof=='BDM'){
+                $('#li1').remove();
+                $('#link1').attr('href','/apex/BrandingCreation');
+                $('#link1').html('New BR');
+                
+            }else if(prof=='Regional Branding Manager'){
+                
+                $('#link1').attr('href','/apex/BrandingApproval');
+                $('#link1').html('Branding Approval');
+                $('#link2').attr('href','/apex/BrandingAction');
+                $('#link2').html('Branding Action');
+            }else{
+                $('#li1').remove();
+                $('#li2').remove();
+            }
+            
+            $('body').keyup(function(event){
+             if(event.keyCode==27){
+                   $('.mainblock').remove();
+                    $('.main').remove();
+                    $('#block').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+                 
+                
+              }  
+            });
+        });                   
+
+$(document).ready(function(){
+
+            function view(){
+                      //console.log(data);
+                      } 
+         
+
+        function alertWindow(msg,pic){
+            var htmcode='';
+          var suc='';
+          
+           if(pic=='alert'){
+               htmcode='<span class="glyphicon glyphicon-alert" style="font-size:15px;float:left;color:orange;margin-right:10px;"></span><b style="font-family:Calibri !important;">Alert</b>';
+           }else {
+            htmcode='<span class="glyphicon glyphicon-thumbs-up" style="font-size:15px;float:left;color:green;margin-right:10px;"></span>';
+            suc='padding-bottom:20px;';
+           }
+           //$(document).ready(function(){
+                $('#submit').blur();
+                $('body').append('<div id="block" style="width:100%;height:100%;top:0px;left:0px;position:fixed;background-color:#000000;opacity:.2;z-index:1;"></div><div class="col-sm-4 col-sm-offset-4 alertcontent"><div style="padding:10px 15px;border-bottom:1px solid rgba(0, 0, 0, 0.11);'+suc+' " >'+htmcode+'<span class="glyphicon glyphicon-remove acnc" style="float:right;cursor: pointer;"></span></div> <div style="padding:10px 15px;"> <label style="font-size:14px;padding:10px 0px;text-align:left;font-weight:100;">'+msg+'</label> </div> <div style="padding:10px 15px;border-top:1px solid rgba(0, 0, 0, 0.11);" align="right"><input type="button" class="slds-button slds-button_brand acnc" value="Close" /></div></div>');
+                $('.acnc').click(function(){
+                    $('#block').remove();
+                    $('.blockcontent').remove();
+                    $('.alertcontent').remove();
+            });
+            
+           //});
+        }
+
+
+
+
+ /*Date Function*/
+                //$(document).ready(function(){
+                 $('#fromdate').datepicker({
+                      dateFormat: "dd-M-yy"
+                    });
+                    
+                    $('#todate').datepicker({
+                      dateFormat: "dd-M-yy"
+                    });
+                    //});
+                    
+                $('#search').click(function(){
+                this.blur();
+                //console.log('date'+document.getElementById('fromdate').value);
+                    var fromdate=document.getElementById('fromdate').value;
+                    var todate=document.getElementById('todate').value;
+                      if(fromdate=='' && todate==''){
+                        //alert('Please choose FromDate And ToDate');
+                        alertWindow('Please choose FromDate And ToDate','alert');
+                        return false;
+                    }
+                    
+                    //Some Validation Missing
+                    
+                   
+                        var fdd=new Date(fromdate);
+                        var fdt=fdd.getFullYear()+'-'+(fdd.getMonth()+1)+'-'+fdd.getDate();
+                        var tdd=new Date(todate);
+                        var tdt=tdd.getFullYear()+'-'+(tdd.getMonth()+1)+'-'+tdd.getDate();
+                    
+                  
+                  var diffDays = Math.ceil((tdd-fdd) / (1000 * 3600 * 24));
+                            
+                 if(diffDays>365){
+                   alertWindow('Duration is for Year','alert');
+                   return false;
+                 }
+                   else if(fromdate!='' && todate==''){
+                        //alert('Please choose To Date');
+                        alertWindow('Please choose To Date','alert');
+                        return false;
+                    }else if(fromdate=='' && todate!=''){
+                        //alert('Please Choose From Date');
+                        alertWindow('Please choose From Date','alert');
+                        return false;
+                    }else if(fromdate!='' && todate!=''){
+                        //var d1=new Date(fromdate);
+                        //var d2=new Date(todate);
+                        ////console.log(d1);
+                        ////console.log(d2);
+                        if(fdd>tdd){
+                           //alert('From date is Greater!');
+                           alertWindow('From date is greater!','alert');
+                            return false;
+                        }
+                        if(tdd<fdd){
+                             //alert('To date is Smaller!');
+                             alertWindow('To date is smaller!','alert');
+                        }
+
+                             //console.log(fdd);
+                             //console.log(tdd);                  
+                           checkRecords(fdt,tdt); 
+                                                                                                                                                        
+                        return true;
+                        
+                    }
+                });
+                                
+                  function checkRecords( d1,  d2){
+                 $(document).ready(function(){
+                     //var accTable=[];
+                      BrandingRequestController.relatedBrandingRequests(d1,d2,function(res,evt){
+                          //console.log(res);
+                          $('#tabDiv').html('');
+                          if(res.newrequest.length==0){
+                              alertWindow('No Data!!','alert');
+                              
+                              return;
+                          }
+                          
+                          $('#tabDiv').append('<table id="tab" class="tg slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_col-bordered" ><thead> <tr class="slds-text-title_caps"><th scope="row" data-label=""><div class="slds-truncate" title="">Customer</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">Cluster</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">Branding Type</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">Request Type</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">Vertical Type</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">Size</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">Status</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">Created By</div></th><th scope="row" data-label=""><div class="slds-truncate" title="">View Details</div></th></tr><thead><tbody id="tablebody" ></tbody></table>');
+                                                   
+                          data=res;
+                                          
+                         $("#tablebody").html('');
+                         //console.log(res);
+                         if(data!=null){
+                            for(var i=0;i<data.newrequest.length;i++){
+                                 var t=data.newrequest[i].Branding_Approved_Rejected__c.split(' ');
+                                 //console.log(t);
+                                 var tem=t.join('');
+                                  //console.log(tem);
+                                 $("#tablebody").append('<tr class="'+tem+'"><td data-label="Customer"><div class="slds-truncate" title="">'+data.newrequest[i].Shop_Name__r.Name+'</div></td><td data-label="Cluster"><div class="slds-truncate" title="">'+data.newrequest[i].Cluster__c+'</div></td><td data-label="Branding Type"><div class="slds-truncate" title="">'+data.newrequest[i].Branding_Type__c+'</div></td><td data-label="Request Type"><div class="slds-truncate" title="">'+data.newrequest[i].Request_Type__c+'</div></td><td data-label="Vertical Type"><div class="slds-truncate" title="">'+data.newrequest[i].Vertical_type__c+'</div></td><td data-label="Size"><div class="slds-truncate" title="">'+data.newrequest[i].Media_Type__c+'</td><td  data-label="Status" class="'+tem+'1"><div class="slds-truncate" title="">'+data.newrequest[i].Branding_Approved_Rejected__c+'</div></td><td data-label="Created By"><div class="slds-truncate" title="">'+data.newrequest[i].CreatedBy.Name+'</div></td><td data-label="View Details"><div class="slds-truncate" title=""><input class="slds-button slds-button_neutral"  type="button" value="View Detail" id="'+data.newrequest[i].Id+'"/></div></td></tr>');
+                                                                       
+                                 $('#'+data.newrequest[i].Id).click(function(event){
+                                 this.blur();
+                                 var idd=event.target.id;
+                                 for(var j=0;j<data.newrequest.length;j++){
+                                     if(data.newrequest[j].Id==idd){
+                                     
+                                     /********************************************/
+                                      var temp=new Object();
+                                      temp.btype=data.newrequest[j].Branding_Type__c;
+                                      temp.vtype=data.newrequest[j].Vertical_type__c;
+                                      temp.rtype=data.newrequest[j].Request_Type__c;
+                                      temp.CreatedBy=data.newrequest[j].CreatedBy;
+                        
+                        /*********Approval/REjection/Pending Table*********/
+                        temp.Approve=[];
+                        for(var k=0;k<data.approval.length;k++){
+                     
+                            if(data.approval[k].TargetObjectId==data.newrequest[j].Id){
+                                temp.Approve.push(data.approval[k]);
+                            }
+                        }
+                         temp.status= data.newrequest[j].Branding_Approved_Rejected__c;
+                         temp.venShw='none';
+                         if(temp.status=='Vendor Assigned-Rework' || temp.status=='Vendor Assigned-Completed' || temp.status=='Request Completed and Submitted' || temp.status=='Vendor Assigned' || temp.status=='Completed'){
+                            temp.venShw='block';
+                         
+                         }
+                         temp.VendorName='';
+                         if(data.newrequest[j].User1__r.Name!=undefined){
+                         
+                         temp.VendorName=data.newrequest[j].User1__r.Name;  
+                         }  
+                        
+                        var tempdate = new Date(data.newrequest[j].CreatedDate);
+                        temp.CreatedDate= '' +tempdate.getDate() +'/'+( tempdate.getMonth()+1) + '/'+tempdate.getFullYear();
+                        temp.cluster=data.newrequest[j].Cluster__c;
+                        temp.Id=data.newrequest[j].Id;
+                        temp.ShopName=data.newrequest[j].Shop_Name__r.Name;
+                        temp.ShopId=data.newrequest[j].Shop_Name__r.Id;
+                       
+                       
+                        temp.ShopImg=data.newrequest[j].Shop_Name__r.Website;
+                        
+                        if( temp.ShopImg==undefined){
+                          temp.ShopImg='{!URLFOR($Resource.Photo_not_Available_Image)}';
+                       }
+                       
+                        
+                        
+                          if(temp.btype=='Recce'){
+                             temp.mediaType='*Not Applicable*';
+                         }else{    
+                            temp.mediaType=data.newrequest[j].Media_Type__c;
+                         }  
+                        
+                   
+                        
+                        if(data.newrequest[j].Shop_Name__r.Primary_Contact_Person_Name__c!=undefined){
+                        temp.contactName=data.newrequest[j].Shop_Name__r.Primary_Contact_Person_Name__c;
+                        }else{
+                         temp.contactName='*Not Available*';
+                        }
+                        
+                       temp.contactMob=data.newrequest[j].Shop_Name__r.Contact_Number_Mobile__c;
+                        temp.contactPhone='';
+                        if(data.newrequest[j].Shop_Name__r.Contact_Number_Phone_1__c!=undefined){
+                        temp.contactPhone=data.newrequest[j].Shop_Name__r.Contact_Number_Phone_1__c;
+                        }
+                  
+                          temp.contact=''+temp.contactMob;
+                                              
+                        var tempdatesubmit=new Date(data.newrequest[j].Submit_For_Aprroval_Date__c);
+                        
+                       temp.submitforApproval= '' +tempdatesubmit.getDate() +'/'+( tempdatesubmit.getMonth()+1) + '/'+tempdatesubmit.getFullYear(); 
+                         if( data.newrequest[j].Submit_For_Aprroval_Date__c==undefined){
+                             temp.submitforApproval= '';
+                          }else{
+                              temp.submitforApproval= '' +tempdatesubmit.getDate() +'/'+( tempdatesubmit.getMonth()+1) + '/'+tempdatesubmit.getFullYear();
+                          } 
+                           temp.PinNo='';
+                          if(data.newrequest[j].Shop_Name__r.PIN_Code__c!=undefined){
+                          temp.PinNo=data.newrequest[j].Shop_Name__r.PIN_Code__c;
+                          }
+                          temp.State='';
+                          if(data.newrequest[j].Shop_Name__r.State__c!=undefined){
+                          temp.State=data.newrequest[j].Shop_Name__r.State__c;
+                          }
+                          temp.District='';
+                          if(data.newrequest[j].Shop_Name__r.District__c!=undefined){
+                          temp.District=data.newrequest[j].Shop_Name__r.District__c;
+                          }
+                          temp.city='';
+                          if(data.newrequest[j].Shop_Name__r.City__c!=undefined){
+                          temp.city=data.newrequest[j].Shop_Name__r.City__c;
+                          }
+                            temp.StreetAddress='';
+                           if(data.newrequest[j].Shop_Name__r.Street_Address__c!=undefined){
+                          temp.StreetAddress=data.newrequest[j].Shop_Name__r.Street_Address__c;
+                          }
+                          temp.address=''+temp.StreetAddress+','+temp.city+','+temp.District+','+temp.PinNo+','+temp.State+'';
+                    
+                     /**************** Added by Pooja**************************/
+                           
+                      temp.Pbtype='';
+                        temp.Pmtype='';
+                        
+                        for(var j=0;j<data.oldrequest.length;j++){
+                            if(data.oldrequest[j].Shop_Name__c==data.newrequest[i].Shop_Name__c){
+                                 temp.Pbtype=data.oldrequest[j].Branding_Type__c;
+                                 temp.Pmtype=data.oldrequest[j].Media_Type__c;
+                                 temp.Pvtype=data.oldrequest[j].Vertical_type__c;
+                            }
+                        }
+                        if(temp.Pbtype.length==0){
+                            temp.Pbtype=temp.btype;
+                        }
+                        if(temp.Pmtype.length==0){
+                            temp.Pmtype=temp.mediaType;
+                        }
+       
+                                         fan(temp);break;
+                                     }
+                                     
+                                 }
+                                 
+                                 
+                                 });
+                            }
+                            
+         var accTable=$('#tab').DataTable({"bLengthChange":false,"pageLength": 30,"sPaginationType": "full_numbers","iDisplayLength": 5, "bPaginate": true});                                
+                       
+                         }
+                    },{escape:true});
+                  });
+                 }
+                  
+ });           
+   $(document).ready(function(){
+     $('#printId').click(function(){
+                
+                    $('.hidecol').hide();
+                      $('.hideFunc').hide();
+                       $('#printId').hide();
+                        $('#logoPic').show();
+                    window.print();
+                     $('.hidecol').show();
+                      $('.hideFunc').show();
+                        $('#printId').show();
+                         $('#logoPic').hide();
+     });
+   });        
+
+</script>
+
+
+<div class="bs-example" data-example-id="inverted-navbar" > 
+
+ <div class="slds-page-header">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="" style="float:left">
+<img src="{!$Resource.AshirvadLogoNew}"  width="130px" />
+</h1>
+                   <div  id="bs-example-navbar-collapse-9" style="float:right;margin-top:22px;"> 
+    
+    <ul class="navi">   
+        <li id="li1">
+           
+                <a id="link2" style="font-family:Calibri !important;" href="/apex/BrandingCreation">New BR</a>
+          
+        </li>
+        
+        <li id="li2">
+            
+                <a id="link1" style="font-family:Calibri !important;" href="/apex/BrandingCreation">New BR</a>
+            
+        </li>  
+        <li id="li3" >
+             
+              <a style="font-family:Calibri !important;" href="/home/home.jsp">Home</a> 
+        </li> 
+    </ul> 
+    
+        
+ 
+ </div>
+                </div>
+            </div>
+        </div>
+
+<div class="slds-text-heading_medium slds-p-around_small">Branding List </div>
+
+ 
+
+  
+   </div>
+   
+<div class="slds-grid slds-wrap">
+    <div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_small">
+  <input class="slds-input" id="fromdate" placeholder="From Date"/> 
+  </div>
+  <div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_small">
+   <input class="slds-input" id="todate" placeholder="To Date"/> 
+</div>
+<div class="slds-size--1-of-1 slds-medium-size--1-of-3 slds-small-size--1-of-1 slds-large-size--1-of-3 slds-p-around_small">
+  <button type="button" class="slds-button slds-button_brand" id="search">Search</button>
+  <label id="printId" class="slds-button slds-button_brand" style="cursor:pointer;font-family: Calibri!important;" > Print</label> 
+  </div>
+</div>
+<div id='tabDiv'>
+    
+</div>
+
+</apex:page>

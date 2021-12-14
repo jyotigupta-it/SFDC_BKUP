@@ -1,0 +1,126 @@
+<apex:page sidebar="false" Extensions="Addrowspecialpricingreq" standardController="Account" showHeader="false">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<apex:slds />
+<style>
+  .dateFormat {
+  display:none!important;
+  }
+  @media only screen and (min-width: 250px) and (max-width: 770px) {
+  .slds-input, .slds-select {
+  width:125px!important;
+  }
+  }
+</style>
+<apex:form >
+   <!-- <apex:pageBlock id="addroworder" > -->  
+   <apex:outputPanel id="addroworder">               
+       <!-- <apex:pageblockSection > -->
+       <apex:outputPanel >
+           <!-- <apex:pageBlockTable value="{!orderList}" var="add"> -->
+           <table class="slds-table slds-table_bordered  slds-max-medium-table_stacked-horizontal slds-table_col-bordered">
+           <thead>
+               <tr class="slds-text-title_caps">
+                   <th scope="col"><div class="slds-truncate" title="Products">Products</div></th>
+                   <th scope="col"><div class="slds-truncate" title="Order Quantity (In Nos/Mtrs)">Order Quantity (In Nos/Mtrs)</div></th>
+                   <th scope="col"><div class="slds-truncate" title="Total MRP">Total MRP</div></th>
+                   <th scope="col"><div class="slds-truncate" title="APPL STD Disc %">APPL STD Disc %</div></th>
+                   <th scope="col"><div class="slds-truncate" title="Disc to Customer on MRP %">Disc to Customer on MRP %</div></th>
+                   <th scope="col"><div class="slds-truncate" title="ORC/ Margin to Dlr/Dist %">ORC/ Margin to Dlr/Dist %</div></th>
+                   <th scope="col"><div class="slds-truncate" title="Payment Terms">Payment Terms</div></th>
+                   <th scope="col"><div class="slds-truncate" title="Delivery Schedule">Delivery Schedule</div></th>
+                   <th scope="col"><div class="slds-truncate" title="Why Addtnl Disc?">Why Addtnl Disc?</div></th>
+                   <th scope="col"><div class="slds-truncate" title="Validity for the Price">Validity for the Price</div></th>
+               </tr>
+           </thead>
+           <tbody>
+           <apex:repeat value="{!orderList}" var="add">
+           <tr>
+                <!--<apex:column headerValue="Order Number">
+                    <apex:inputField value="{!add.Name}" required="true"/>
+                </apex:column>-->
+               <!-- <apex:column headerValue="Products">-->
+               <td data-label="Products" ><div class="slds-truncate" title="{!add.Products__c}">
+                    <apex:inputField value="{!add.Products__c}" required="true" styleClass="slds-select"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+                <!--<apex:column headerValue="Order Quantity (In Nos/Mtrs)">-->
+               <td data-label="Order Qty(In Nos/Mtrs)" ><div class="slds-truncate" title="{!add.Order_Quantity__c}">
+                    <apex:inputField value="{!add.Order_Quantity__c}" required="true" styleClass="slds-input"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+                <!--<apex:column headerValue="Total MRP">-->
+               <td data-label="Total MRP" ><div class="slds-truncate" title="{!add.Order_Value__c}">
+                    <apex:inputField value="{!add.Order_Value__c}" required="true" styleClass="slds-input"/>
+                    </div>
+               </td>
+               <!-- </apex:column>-->
+                <!--<apex:column headerValue="APPL STD Disc %">-->
+               <td data-label="APPL STD Disc %" ><div class="slds-truncate" title="{!add.APPL_STD_Discount__c}">
+                    <apex:inputField value="{!add.APPL_STD_Discount__c}" required="true" styleClass="slds-input"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+                <!--<apex:column headerValue="Disc to Customer on MRP %">-->
+               <td data-label="Disc to Customer on MRP %" ><div class="slds-truncate" title="{!add.Disc_to_Customer_on_MRP__c}">
+                    <apex:inputField value="{!add.Disc_to_Customer_on_MRP__c}" required="true" styleClass="slds-input"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+                <!--<apex:column headerValue="ORC/ Margin to Dlr/Dist %">-->
+               <td data-label="ORC/ Margin to Dlr/Dist %" ><div class="slds-truncate" title="{!add.ORC_Margin_to_Dlr_Dist__c}">
+                    <apex:inputField value="{!add.ORC_Margin_to_Dlr_Dist__c}" required="true" styleClass="slds-input"/>
+                    </div>
+               </td>
+               <!-- </apex:column>-->
+                <!--<apex:column headerValue="Payment Terms">-->
+               <td data-label="Payment Terms" ><div class="slds-truncate" title="{!add.Payment_Terms__c}">
+                    <apex:inputField value="{!add.Payment_Terms__c}" required="true" styleClass="slds-select"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+                <!--<apex:column headerValue="Delivery Schedule">-->
+               <td data-label="Delivery Schedule" ><div class="slds-truncate" title="{!add.Delivery_Schedule__c}">
+                    <apex:inputField value="{!add.Delivery_Schedule__c}" required="true" styleClass="slds-select"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+                <!--<apex:column headerValue="Why Addtnl Disc?">-->
+               <td data-label="Why Addtnl Disc?" ><div class="slds-truncate" title="{!add.Why_Addl_Disc_Rqd__c}">
+                    <apex:inputField value="{!add.Why_Addl_Disc_Rqd__c}" required="true" styleClass="slds-input"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+                <!--<apex:column headerValue="Validity for the Price">-->
+               <td data-label="Validity for the Price" ><div class="slds-truncate" title="{!add.Validity_for_the_Price__c}">
+                    <apex:inputField value="{!add.Validity_for_the_Price__c}" required="true" styleClass="slds-input"/>
+                    </div>
+               </td>
+                <!--</apex:column>-->
+           </tr>
+           </apex:repeat>
+           </tbody>
+           </table>
+           
+           <!-- </apex:pageBlockTable> -->
+            <apex:commandButton value="Add Row" action="{!AddRow}" reRender="addroworder" styleClass="slds-button slds-button_brand slds-m-around_x-small"/> 
+       </apex:outputPanel>       
+       <!-- </apex:pageblockSection> -->       
+       <!-- <apex:pageblockSection columns="1" >-->
+       <apex:outputPanel >
+       
+           <!-- <apex:pageblockSectionItem > -->
+           <apex:outputPanel >
+                <apex:commandButton value="Save" action="{!saveorder}" styleClass="slds-button slds-button_brand"/>
+                <apex:commandButton value="Cancel" action="{!cancelorder}" styleClass="slds-button slds-button_neutral"/>
+           </apex:outputPanel>
+           
+           <!-- </apex:pageblockSectionItem> -->
+       </apex:outputPanel>   
+         
+       <!-- </apex:pageblockSection>-->
+  </apex:outputPanel>
+  <!--  </apex:pageBlock> -->
+</apex:form>
+</apex:page>

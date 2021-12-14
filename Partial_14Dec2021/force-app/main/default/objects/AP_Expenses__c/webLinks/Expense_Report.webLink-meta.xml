@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expense_Report</fullName>
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Expense Report</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/00OV0000000Jy5x?pv0={!AP_Expenses__c.Expense_Date__c}</url>
+</WebLink>

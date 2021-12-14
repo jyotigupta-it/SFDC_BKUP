@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>dealer_distributor_club_required</fullName>
+    <active>true</active>
+    <description>Please enter either state, city or district</description>
+    <errorConditionFormula>AND( 
+RecordType.Name = &apos;Seller scheme&apos;,
+ISBLANK(  dealer__c  ), 
+ISBLANK(  Distributor_sap__c   ), 
+ISBLANK(  Club__c  ),
+ISBLANK(  Plumber_club__c )
+)</errorConditionFormula>
+    <errorMessage>Please select one of seller filter: dealer, distributor or club</errorMessage>
+</ValidationRule>

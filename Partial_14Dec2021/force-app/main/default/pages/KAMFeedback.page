@@ -1,0 +1,120 @@
+<!--******************************XXX*****************************************
+
+    Author          : Bhargav Surapaneni
+    Page Name       : KAM FeedBack
+    version         : 1.0
+    Date            : 16-Feb-2017
+    Description     : To take Feedback through call for Key Account Managers
+     
+************************************XXX**************************************-->
+<apex:page standardController="Account"  extensions="KAM_Feedback" sidebar="false">
+    <script type="html/javascript">
+    function loading(val) {
+        if (val) {
+        document.getElementById('contentLoading').style.display = 'block';
+        document.getElementById('contentLoaded').style.display = 'none';
+        }
+        else {
+        document.getElementById('contentLoading').style.display = 'none';
+        document.getElementById('contentLoaded').style.display = 'block';
+        }
+    }
+    </script>
+    <html>
+    <head>
+     <center>
+                <h4 style="font-family: Arial Unicode MS;"><u>FeedBack Form</u></h4>
+     </center>
+    </head>
+    </html>
+    <apex:form id="but">
+        <apex:pageMessages />
+        <apex:pageBlock >
+            <apex:outputPanel rendered="{!showexisting=false && !showKFM=True}">
+                <apex:pageBlockSection >
+                    <apex:pageBlockTable value="{!kf}" var="c">
+                     
+                        <apex:column headerValue="Date">
+                             <apex:inputField value="{!c.Date__c}" />
+                        </apex:column>
+                     
+                        <apex:column headerValue="Status">
+                            <apex:actionRegion >
+                                <apex:inputField value="{!c.Status__c}" required="true">
+                                    <apex:actionSupport event="onchange" rerender="but,block" status="loading"/>
+                                </apex:inputField>
+                                <apex:actionStatus id="loading" onstart="loading(true)" onstop="loading(false)" />
+                            </apex:actionRegion>
+                        </apex:column>
+                     
+                        <apex:column headerValue="Call Person Name">
+                            <apex:inputField value="{!c.Call_Person_Name__c}" />
+                        </apex:column>
+                     
+                        <apex:column headerValue="Status Remarks">
+                            <apex:inputField value="{!c.status_Remarks__c}" />
+                        </apex:column>
+                        
+                    </apex:pageBlockTable>   
+                </apex:pageBlockSection>
+            
+                <apex:pageBlockSection rendered="{!kf.Status__c!='Feedback Given' && kf.Status__c!=Null}">
+                    <apex:commandButton value="Add" action="{!Add}" rendered="{!kf.Status__c!='Feedback Given' && kf.Status__c!=Null}"/> 
+                </apex:pageBlockSection>
+            
+                <div id="contentLoading" style="display:none;">
+                    <div style="text-align: center;">
+                       Please Wait....<br/>
+                       <img src="/img/loading.gif" alt="Loading graphic" />
+                    </div>
+                </div>             
+            </apex:outputPanel>
+        </apex:pageBlock>    
+        
+        <apex:pageBlock >
+            <apex:outputPanel title="Applicable State Feedbacks" id="block">
+                <apex:pageBlockTable value="{!kfb}" var="e" >
+                    <apex:column >
+                        <apex:inputfield value="{!e.CheckBox__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="KAM Feedback Master Name">
+                        <apex:Outputfield value="{!e.Name}"/>
+                    </apex:column>
+                    <apex:column headerValue="Active">
+                        <apex:Outputfield value="{!e.Active__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Applicable State" >
+                        <apex:Outputfield value="{!e.Applicable_State__c}"/>
+                    </apex:column>
+                </apex:pageBlockTable>                   
+                <apex:commandButton value="Next" action="{!Next}"/>
+                <apex:commandButton value="Cancel" action="{!Cancel}"/>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        
+        <apex:pageBlock rendered="{!showKFM=True}">
+            <apex:repeat value="{!AllcheckedKFm}" var="f1">
+                <apex:pageBlockTable value="{!f1.KAM_Feedback_Master_Line_Items__r}" var="l">                        
+                    <apex:column headerValue="Serial No.">
+                        <apex:OutputText value="{!l.Display_order__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Question">
+                        <apex:OutputText value="{!l.Question__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Response">
+                        <apex:inputTextArea value="{!l.Answer__c}" rows="3" cols="60"/>
+                    </apex:column>
+                </apex:pageBlockTable> 
+                
+                <apex:pageBlockTable value="{!kf}" var="c">               
+                     <apex:column headerValue="Over All Satisfaction">
+                         <apex:inputField value="{!c.OverAll_Satisfaction__c}" required="true"/>
+                     </apex:column>
+                </apex:pageblocktable>
+                                        
+            </apex:repeat>
+            <apex:commandButton value="Save All" action="{!Saveall}"/>
+            <apex:commandButton value="Cancel" action="{!Cancel}"/>
+        </apex:pageBlock>            
+    </apex:form>
+</apex:page>

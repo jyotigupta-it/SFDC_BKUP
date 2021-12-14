@@ -1,0 +1,20 @@
+<apex:page standardController="Visit__c" recordSetVar="visits" sidebar="false" showHeader="false">
+<apex:pageBlock >
+  <apex:pageBlockTable value="{!Visit__c}" var="visit">
+
+    <apex:column headerValue="Date of next appintment">
+        <apex:outputfield value="{!visit.Date_of_Next_Visit__c}"/>
+    </apex:column>
+    <apex:column headerValue="Distributor">    
+        <apex:outputfield value="{!visit.Distributor_Dealer__c}"/>
+    </apex:column>    
+    <apex:column headerValue="Date">
+        <apex:outputfield value="{!visit.Date__c}"/>
+    </apex:column>    
+    <apex:column headerValue="No.">
+        <apex:outputfield value="{!visit.name}"/>    
+    </apex:column>    
+
+ </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:page>

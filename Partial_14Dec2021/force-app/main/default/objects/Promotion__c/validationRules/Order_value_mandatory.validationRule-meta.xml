@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_value_mandatory</fullName>
+    <active>false</active>
+    <description>To make &quot;Order Value Received&quot; field mandatory when Promotion &quot;Type&quot; is &quot;Column Dealer / Distributor Meets&quot; or &quot;Plumbing Dealer / Distributor Meets&quot;.</description>
+    <errorConditionFormula>AND(  OR(ISPICKVAL(Type__c , &apos;Column Dealer / Distributor Meets&apos;), ISPICKVAL(Type__c , &apos;Plumbing Dealer / Distributor Meets&apos;) ) ,  ISNULL(Order_Value_Received__c) )</errorConditionFormula>
+    <errorMessage>Please enter the Order value.</errorMessage>
+</ValidationRule>

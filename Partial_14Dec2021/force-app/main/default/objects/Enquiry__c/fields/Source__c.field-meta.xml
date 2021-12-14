@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source__c</fullName>
+    <externalId>false</externalId>
+    <label>Source</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BANDHAN</fullName>
+                <default>false</default>
+                <label>BANDHAN</label>
+            </value>
+            <value>
+                <fullName>DIGITAL MARKETING</fullName>
+                <default>false</default>
+                <label>DIGITAL MARKETING</label>
+            </value>
+            <value>
+                <fullName>ENQ MB</fullName>
+                <default>false</default>
+                <label>ENQ MB</label>
+            </value>
+            <value>
+                <fullName>EXHIBITION</fullName>
+                <default>false</default>
+                <label>EXHIBITION</label>
+            </value>
+            <value>
+                <fullName>INDIA MART</fullName>
+                <default>false</default>
+                <label>INDIA MART</label>
+            </value>
+            <value>
+                <fullName>INFO</fullName>
+                <default>false</default>
+                <label>INFO</label>
+            </value>
+            <value>
+                <fullName>LANDLINE</fullName>
+                <default>false</default>
+                <label>LANDLINE</label>
+            </value>
+            <value>
+                <fullName>PAPER AD</fullName>
+                <default>false</default>
+                <label>PAPER AD</label>
+            </value>
+            <value>
+                <fullName>PROMOTIONAL ACTIVITY</fullName>
+                <default>false</default>
+                <label>PROMOTIONAL ACTIVITY</label>
+            </value>
+            <value>
+                <fullName>RADIO AD</fullName>
+                <default>false</default>
+                <label>RADIO AD</label>
+            </value>
+            <value>
+                <fullName>SMS</fullName>
+                <default>false</default>
+                <label>SMS</label>
+            </value>
+            <value>
+                <fullName>SOCIAL MEDIA</fullName>
+                <default>false</default>
+                <label>SOCIAL MEDIA</label>
+            </value>
+            <value>
+                <fullName>TOLLFREE</fullName>
+                <default>false</default>
+                <label>TOLLFREE</label>
+            </value>
+            <value>
+                <fullName>TV AD</fullName>
+                <default>false</default>
+                <label>TV AD</label>
+            </value>
+            <value>
+                <fullName>VEHICLE BRANDING</fullName>
+                <default>false</default>
+                <label>VEHICLE BRANDING</label>
+            </value>
+            <value>
+                <fullName>WALL PAINTING</fullName>
+                <default>false</default>
+                <label>WALL PAINTING</label>
+            </value>
+            <value>
+                <fullName>WHATSAPP</fullName>
+                <default>false</default>
+                <label>WHATSAPP</label>
+            </value>
+            <value>
+                <fullName>MISSED CALL</fullName>
+                <default>false</default>
+                <label>MISSED CALL</label>
+            </value>
+            <value>
+                <fullName>Zendesk</fullName>
+                <default>false</default>
+                <label>Zendesk</label>
+            </value>
+            <value>
+                <fullName>Zendesk Chat</fullName>
+                <default>false</default>
+                <label>Zendesk Chat</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

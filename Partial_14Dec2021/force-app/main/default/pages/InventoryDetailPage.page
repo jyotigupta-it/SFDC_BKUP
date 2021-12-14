@@ -1,0 +1,503 @@
+<apex:page standardcontroller="Case" extensions="CtrlInventoryDetailPage" tabStyle="inventory__c">
+
+<script src= "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<script language="javascript">
+j$ = jQuery.noConflict();
+
+j$(document).ready(function(){
+if('{!flagvar}' == 'true'){
+window.top.location = '/{!currentCase.Id}';
+
+
+}
+<!--if('{!flagvar1}' == 'true'){
+window.top.location = 'https://ashirvadsb-ashirvadbranding.cs12.force.com/Depot/{!currentCase.Id}';
+}
+$('div').children().attr('readonly', true);-->
+});
+</script>
+<script type="text/javascript">
+if('{!flagvar}' == 'true'){
+window.top.location = '/{!currentCase.Id}';
+window.parent.location = window.parent.location;
+
+}
+</script>
+
+
+<apex:form >
+<apex:pageMessages id="errorMsg"></apex:pageMessages>
+<apex:pageBlock title="Collateral Request Details" rendered="{!editable}" >
+<apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveDetails}" />
+                <apex:commandButton value="Cancel" action="{!Cancel}" />
+                </apex:pageBlockButtons>
+
+<apex:pageBlockSection title="Gifts Request Details" columns="1">
+<apex:pageBlockTable var="gift" value="{!gifReq1}" id="GiftRequest1" columnsWidth="70%, 20%, 50%">
+<apex:column headerValue="Type Of Meet">
+                <apex:outputField value="{!gift.Type_Of_Meet__c}" />
+                </apex:column>
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRender1}">
+                <apex:inputField value="{!gift.Required_Quantity__c}" rendered="{!objectRender1}"/>
+                </apex:column>
+                <apex:column headerValue="Comments" rendered="{!objectRender1}">
+                <apex:inputField value="{!gift.Comments__c}" rendered="{!objectRender1}" />
+                </apex:column>
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRender2}">
+                <apex:outputField value="{!gift.Required_Quantity__c}" rendered="{!objectRender2}" />
+                </apex:column>
+                <apex:column headerValue="Reason" rendered="{!objectRender2}">
+                <apex:outputField value="{!gift.Comments__c}" rendered="{!objectRender2}" />
+                </apex:column>
+
+</apex:pageBlockTable>
+<br/>
+
+<apex:pageBlockSection title="Mega Gift Details" columns="1" rendered="{!giftEdit}">
+<apex:pageBlockTable var="mega" value="{!giftListMega}" id="megaRequest" style="width:1000px;" columnsWidth="5%,10%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Gift Id" rendered="{!objectRendergift1}">
+                <apex:inputField value="{!mega.invRequest.inventory_mega__c}"  rendered="{!objectRendergift1}">
+                 <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="megaRequest,errorMsg" status="megaGiftStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="gift Id" rendered="{!objectRendergift2}">
+                <apex:outputField value="{!mega.invRequest.Type_of_Item__c}" rendered="{!objectRendergift2}">
+                </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!mega.invRequest.inventory_mega__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!mega.invRequest.inventory_mega__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Color">
+                <apex:outputField value="{!mega.invRequest.inventory_mega__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!mega.invRequest.inventory_mega__r.Item_Code__c}"/>
+                </apex:column>               
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRendergift1}">
+                <apex:inputField value="{!mega.invRequest.Required_Quantity__c}" rendered="{!objectRendergift1}"/>
+                </apex:column>
+                 <apex:column headerValue="Requested Quantity" rendered="{!objectRendergift2}">
+                <apex:outputField value="{!mega.invRequest.Required_Quantity__c}" rendered="{!objectRendergift2}"/>
+                </apex:column>
+                 <apex:column headerValue="Dispatched Quantity">
+                <apex:inputField value="{!mega.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:inputField value="{!mega.invRequest.Comments_Remarks__c}" />
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+
+</apex:pageBlockSection>
+
+<br/>
+
+<apex:pageBlockTable var="gift" value="{!gifReq2}" id="GiftRequest2"  columnsWidth="70%, 20%, 50%">
+<apex:column headerValue="Type Of Meet">
+                <apex:outputField value="{!gift.Type_Of_Meet__c}" />
+                </apex:column>
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRender1}">
+                <apex:inputField value="{!gift.Required_Quantity__c}" rendered="{!objectRender1}"/>
+                </apex:column>
+                <apex:column headerValue="Comments" rendered="{!objectRender1}">
+                <apex:inputField value="{!gift.Comments__c}" rendered="{!objectRender1}" />
+                </apex:column>
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRender2}">
+                <apex:outputField value="{!gift.Required_Quantity__c}" rendered="{!objectRender2}" />
+                </apex:column>
+                <apex:column headerValue="Reason" rendered="{!objectRender2}">
+                <apex:outputField value="{!gift.Comments__c}" rendered="{!objectRender2}" />
+                </apex:column>
+
+</apex:pageBlockTable>
+
+
+<apex:pageBlockSection title="Mini Gift Details" columns="1" collapsible="true" rendered="{!giftEdit}">
+
+<apex:pageBlockTable var="mini" value="{!giftListMini}" id="miniRequest"  style="width:1000px;" columnsWidth="5%,10%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+
+
+<apex:column headerValue="Gift Id" rendered="{!objectRendergift1}">
+                <apex:inputField value="{!mini.invRequest.inventory_mini__c}"  rendered="{!objectRendergift1}">
+ <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="miniRequest,errorMsg" status="minigiftStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="gift Id" rendered="{!objectRendergift2}">
+                <apex:outputField value="{!mini.invRequest.Type_of_Item__c}" rendered="{!objectRendergift2}">
+                </apex:outputField>
+                </apex:column>              
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!mini.invRequest.inventory_mini__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!mini.invRequest.inventory_mini__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Color">
+                <apex:outputField value="{!mini.invRequest.inventory_mini__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!mini.invRequest.inventory_mini__r.Item_Code__c}"/>
+                </apex:column>
+               
+                
+                 <apex:column headerValue="Requested Quantity" rendered="{!objectRendergift1}">
+                <apex:inputField value="{!mini.invRequest.Required_Quantity__c}" rendered="{!objectRendergift1}"/>
+                </apex:column>
+                 <apex:column headerValue="Requested Quantity" rendered="{!objectRendergift2}">
+                <apex:outputField value="{!mini.invRequest.Required_Quantity__c}" rendered="{!objectRendergift2}"/>
+                </apex:column>
+                <apex:column headerValue="Dispatched Quantity">
+                <apex:inputField value="{!mini.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                
+                <apex:column headerValue="Reason">
+                <apex:inputField value="{!mini.invRequest.Comments_Remarks__c}"/>
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+
+</apex:pageBlockSection>           
+
+</apex:pageBlockSection>
+ <br/>
+<apex:pageBlockSection title="Product Collateral Request Details" columns="1">
+<apex:pageBlockTable var="product" value="{!productCollList}" id="ProdRequest" style="width:1000px;" columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Product Id" rendered="{!objectRender1}">
+                <apex:inputField value="{!product.invRequest.inventory_Product__c}" rendered="{!objectRender1}">
+                 <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="ProdRequest,errorMsg" status="prodStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Product Id" rendered="{!objectRender2}">
+                <apex:outputField value="{!product.invRequest.inventory_Product__c}" rendered="{!objectRender2}">
+                </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Language">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRender1}">
+                <apex:inputField value="{!product.invRequest.Required_Quantity__c}" rendered="{!objectRender1}"/>
+                </apex:column>
+                 <apex:column headerValue="Requested Quantity" rendered="{!objectRender2}">
+                <apex:outputField value="{!product.invRequest.Required_Quantity__c}" rendered="{!objectRender2}"/>
+                </apex:column>
+                 <apex:column headerValue="Dispatched Quantity">
+                <apex:inputField value="{!product.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:inputField value="{!product.invRequest.Comments_Remarks__c}" />
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+
+
+<apex:pageBlockSection title="Sample Request Details" columns="1">
+<apex:pageBlockTable var="sample" value="{!sampleList}" style="width:1000px;" id="SampleRequest" columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Sample Id" rendered="{!objectRender1}">
+                <apex:inputField value="{!sample.invRequest.inventory_Sample__c}" rendered="{!objectRender1}">
+                 <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="SampleRequest,errorMsg" status="sampStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Sample Id" rendered="{!objectRender2}">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__c}" rendered="{!objectRender2}">
+                                 </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Size">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRender1}">
+                <apex:inputField value="{!sample.invRequest.Required_Quantity__c}" rendered="{!objectRender1}"/>
+                </apex:column>
+                 <apex:column headerValue="Requested Quantity" rendered="{!objectRender2}">
+                <apex:outputField value="{!sample.invRequest.Required_Quantity__c}" rendered="{!objectRender2}"/>
+                </apex:column>
+                <apex:column headerValue="Dispatched Quantity">
+                <apex:inputField value="{!sample.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:inputField value="{!sample.invRequest.Comments_Remarks__c}" />
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+
+<apex:pageBlockSection title="Package Material Request Details" columns="1">
+<apex:pageBlockTable var="package" value="{!packMaterialList}" id="PackageRequest"  style="width:1000px;" columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Package Id" rendered="{!objectRender1}">
+                <apex:inputField value="{!package.invRequest.inventory_PackMaterials__c}" rendered="{!objectRender1}">
+                 <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="PackageRequest,errorMsg" status="valStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Package Id" rendered="{!objectRender2}">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__c}" rendered="{!objectRender2}">
+                </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Size">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity" rendered="{!objectRender1}">
+                <apex:inputField value="{!package.invRequest.Required_Quantity__c}" rendered="{!objectRender1}"/>
+                </apex:column>
+                 <apex:column headerValue="Requested Quantity" rendered="{!objectRender2}">
+                <apex:outputField value="{!package.invRequest.Required_Quantity__c}" rendered="{!objectRender2}"/>
+                </apex:column>
+                <apex:column headerValue="Dispatched Quantity">
+                <apex:inputField value="{!package.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:inputField value="{!package.invRequest.Comments_Remarks__c}" />
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+</apex:pageBlock>
+
+
+
+<apex:pageBlock title="Collateral Request Details" rendered="{!IF(editable == false ,true,false)}" >
+<apex:pageBlockButtons >
+                <apex:commandButton value="Edit" action="{!editDetails}" />                
+                 </apex:pageBlockButtons>
+<apex:pageBlockSection title="Gifts Request Details" columns="1" >
+<apex:pageBlockTable var="gift" value="{!gifReq1}" id="GiftRequest11" columnsWidth="80%,20%,50%"><!-- rendered="{!autoflag}">-->
+<apex:column headerValue="Type Of Meet">
+                <apex:outputField value="{!gift.Type_Of_Meet__c}" />
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:outputField value="{!gift.Required_Quantity__c}" />
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:outputField value="{!gift.Comments__c}" />
+                </apex:column>
+
+</apex:pageBlockTable>
+<apex:pageBlockSection title="Mega Gift Details" columns="1" rendered="{!giftEdit}">
+
+<apex:pageBlockTable var="mega" value="{!giftListMega1}" id="megaRequest"  columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Gift Id">
+                <apex:outputField value="{!mega.invRequest.Type_of_Item__c}" style="width:50px;">
+                </apex:outputField>
+                </apex:column>
+                
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!mega.invRequest.type_of_item__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!mega.invRequest.type_of_item__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Color">
+                <apex:outputField value="{!mega.invRequest.type_of_item__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!mega.invRequest.type_of_item__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:outputField value="{!mega.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                 <apex:column headerValue="Dispatched Quantity">
+                <apex:outputField value="{!mega.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:outputField value="{!mega.invRequest.Comments_Remarks__c}"  style="width:200px;"/>
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+
+</apex:pageBlockSection>
+
+<apex:pageBlockTable var="gift" value="{!gifReq2}" id="GiftRequest12" columnsWidth="80%,20%,50%"> <!-- rendered="{!autoflag}">-->
+<apex:column headerValue="Type Of Meet">
+                <apex:outputField value="{!gift.Type_Of_Meet__c}" />
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:outputField value="{!gift.Required_Quantity__c}" />
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:outputField value="{!gift.Comments__c}" />
+                </apex:column>
+
+</apex:pageBlockTable>
+<apex:pageBlockSection title="Mini Gift Details" columns="1" collapsible="true" rendered="{!giftEdit}">
+<apex:pageBlockTable var="mini" value="{!giftListMini1}" id="miniRequest" columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Gift Id">
+                <apex:outputField value="{!mini.invRequest.Type_of_Item__c}" style="width:50px;" >
+                 </apex:outputField>
+                </apex:column>
+                
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!mini.invRequest.type_of_item__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!mini.invRequest.type_of_item__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Color">
+                <apex:outputField value="{!mini.invRequest.type_of_item__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!mini.invRequest.type_of_item__r.Item_Code__c}"/>
+                </apex:column>
+<apex:column headerValue="Requested Quantity">
+                <apex:outputField value="{!mini.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                 <apex:column headerValue="Dispatched Quantity">
+                <apex:outputField value="{!mini.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:outputField value="{!mini.invRequest.Comments_Remarks__c}"  style="width:200px;"/>
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+
+
+</apex:pageBlockSection>           
+
+</apex:pageBlockSection>
+ <br/>
+                 
+<apex:pageBlockSection title="Product Collateral Request Details" columns="1">
+<apex:pageBlockTable var="product" value="{!productCollList1}" id="ProdRequest"  columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Product Id">
+                <apex:outputField value="{!product.invRequest.inventory_Product__c}" style="width:50px;">
+                </apex:outputField>
+                </apex:column>
+                
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Language">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:outputField value="{!product.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                 <apex:column headerValue="Dispatched Quantity">
+                <apex:outputField value="{!product.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:outputField value="{!product.invRequest.Comments_Remarks__c}"  style="width:200px;"/>
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+
+
+<apex:pageBlockSection title="Sample Request Details" columns="1">
+<apex:pageBlockTable var="sample" value="{!sampleList1}" id="SampleRequest" columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Sample Id">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__c}" style="width:50px;">
+                </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Size">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:outputField value="{!sample.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                 <apex:column headerValue="Dispatched Quantity">
+                <apex:outputField value="{!sample.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:outputField value="{!sample.invRequest.Comments_Remarks__c}"  style="width:200px;"/>
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+
+<apex:pageBlockSection title="Package Material Request Details" columns="1">
+
+<apex:pageBlockTable var="package" value="{!packMaterialList1}" id="PackageRequest" columnsWidth="10%,20%,20%,20%,20%,10%,10%,30%">
+<div style="overflow: scroll; height:1000px;">
+<apex:column headerValue="Package Id">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__c}" style="width:50px;">
+                </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Size">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:outputField value="{!package.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                 <apex:column headerValue="Dispatched Quantity">
+                <apex:outputField value="{!package.invRequest.Quantity_Dispatched__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <apex:outputField value="{!package.invRequest.Comments_Remarks__c}"  style="width:200px;"/>
+                </apex:column>
+</div>
+</apex:pageBlockTable>
+
+</apex:pageBlockSection>
+</apex:pageBlock>
+
+</apex:form>
+</apex:page>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ThisMonthTourProgram_Approved</fullName>
+    <columns>NAME</columns>
+    <columns>From_Date__c</columns>
+    <columns>To_Date__c</columns>
+    <columns>Tour_Program_Approved__c</columns>
+    <columns>Tour_Program_Approval__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tour_Program_Approval__c</field>
+        <operation>equals</operation>
+        <value>Approved</value>
+    </filters>
+    <filters>
+        <field>From_Date__c</field>
+        <operation>equals</operation>
+        <value>THIS_MONTH</value>
+    </filters>
+    <label>This Month TourProgram-Approved</label>
+</ListView>

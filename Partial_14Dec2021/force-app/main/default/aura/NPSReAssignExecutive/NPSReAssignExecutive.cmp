@@ -1,0 +1,95 @@
+<aura:component controller="NpsController" implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+    <!-- call doInit function on component load -->  
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+
+    <!-- Executive Re-assignment list-->
+    <aura:attribute name="executiveReAssignList" type="list" /> 
+    <aura:attribute name="selectedExecutiveName" type="String" />
+    <aura:attribute name="selectedExecutiveReAssign" type="String" />
+    <aura:attribute name="selectedAccount" type="list" />
+    <aura:attribute name="executivePage" type="boolean" default="false"/>
+    <aura:attribute name="noneAttribute" type="String" default="--None--"/>
+    <aura:attribute name="tableDisplay" type="boolean" default="false"/>
+
+    <!-- Lightning data table attribute -->
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="errors" type="Object" default="[]"/>
+    <aura:attribute name="draftValues" type="Object" default="[]"/>
+    
+    <!-- Lightning data table pagination attribute -->
+    <aura:attribute name="pageNumber" type="Integer" default="1"/>
+    <aura:attribute name="pageSize" type="Integer" default="25"/>
+    <aura:attribute name="isLastPage" type="Boolean" default="true"/>
+    <aura:attribute name="dataSize" type="Integer" default="0"/> 
+
+    <div class="slds-theme_default">
+            <lightning:card variant="Narrow" title="Executive Re-Assignment" iconName="standard:account" ></lightning:card>
+            <lightning:layout multipleRows="true">
+                <!--Executive List -->
+                <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                    <lightning:select name="assignToExecutive"
+                                      value="{!v.selectedExecutiveName}"
+                                      label="Executive">
+                        <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                        <aura:iteration items="{!v.executiveReAssignList}" var="val">
+                            <option value="{!val}">{!val}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:button variant="neutral" label="Search" name="SearchTaggedAccount" title="Search" onclick="{! c.SearchTaggedAccount }" class="slds-m-bottom_large slds-align_absolute-center"/>
+
+            <aura:if isTrue="{!v.tableDisplay}">
+                <lightning:datatable aura:id="dtTable"
+                    columns="{! v.columns }"
+                    data="{! v.data }"
+                    keyField="Id"
+                    errors="{! v.errors }"
+                    draftValues="{! v.draftValues }"
+                    hideCheckboxColumn="false"
+                    onrowselection="{! c.getSelectedName }"
+                    />
+            <div class="slds-clearfix ">
+                <div class="slds-page-header" role="banner">
+                    <div class="slds-float_right">            
+                        <lightning:button label="Prev" iconName="utility:chevronleft" iconPosition="left" name="Previous"
+                                        onclick="{!c.handlePrev}" disabled="{! v.pageNumber == 1}"/>
+                        <lightning:button label="Next" iconName="utility:chevronright" iconPosition="right" name="Next"
+                                        disabled="{! v.isLastPage}" onclick="{!c.handleNext}"/>
+                    </div>
+                    <aura:if isTrue="{! v.dataSize == 0}">
+                        <p>Page {!v.pageNumber} | Showing records from {! ((v.pageNumber-1)*v.pageSize)+' to '+((v.pageNumber-1)*v.pageSize+v.dataSize)}</p>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! greaterthan(v.dataSize, 0)}">
+                        <p>Page {!v.pageNumber} | Showing records from {! ((v.pageNumber-1)*v.pageSize)+ 1 +' to '+((v.pageNumber-1)*v.pageSize+v.dataSize)}</p>
+                    </aura:if>
+                    
+                </div>
+            </div>
+            </aura:if>
+            
+
+            <!-- Executive Re-assignment page -->
+            <aura:if isTrue="{!v.executivePage}">
+                <lightning:layout multipleRows="true">
+                    <!--Executive Assign To List -->
+                    <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                        <lightning:select name="reAssignToExecutive"
+                                        value="{!v.selectedExecutiveReAssign}"
+                                        label="Assign To New Executive">
+                            <option value="{!v.noneAttribute}">{!v.noneAttribute}</option>
+                            <aura:iteration items="{!v.executiveReAssignList}" var="val">
+                                <option value="{!val}">{!val}</option>
+                            </aura:iteration>
+                        </lightning:select>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:button variant="neutral" label="Assign" title="Assign" onclick="{! c.AssignToNewExecutive }" class="slds-m-bottom_large slds-align_absolute-center"/>
+            </aura:if>
+            
+        </div>
+</aura:component>

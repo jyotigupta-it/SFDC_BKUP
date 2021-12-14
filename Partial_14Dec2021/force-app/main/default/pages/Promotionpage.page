@@ -1,0 +1,102 @@
+<apex:page standardcontroller="Promotions__c">
+<head>
+  <script>
+       function reloadLocation2(){
+           location.reload();
+       }
+  </script>
+ 
+    <apex:sectionHeader title="Promotion Edit" subtitle="New Promotion"/>
+        <apex:actionStatus id="saveProgress"
+                           startText="Saving. Please Wait..."
+                           stopText=""
+                           startStyleClass="progressStyle">
+        </apex:actionStatus>
+        <br/>
+</head>
+<apex:form id="form1">
+    <apex:pageBlock title="Promotion Edit" id="theBlock">
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!Save}"/>
+            <apex:commandButton value="Save & New" action="{!quicksave}" status="saveProgress"  oncomplete="reloadLocation2()"/>
+            <apex:commandButton value="Cancel" action="{!Cancel}"/>
+        </apex:pageBlockButtons>  
+        <apex:pageBlockSection id="kkkkk" columns="1">
+        <apex:pageBlockSectionItem >   
+                <apex:actionRegion >
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputLabel value="Type" for="Type" style="font-weight:bold;font-family:Arial;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:inputfield value="{!Promotions__c.Type__c}">
+                        <apex:actionSupport event="onchange" reRender="kkkkk"/>
+                    </apex:inputfield>
+                   </apex:actionRegion>                 
+            </apex:pageBlockSectionItem>  
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Exhibition Name" for="Exhibition" rendered="{!Promotions__c.Type__c='Exhibition'}"/>
+                    <apex:inputfield value="{!Promotions__c.Exhibition_Name__c}"  rendered="{!Promotions__c.Type__c='Exhibition'}" required="true"/>
+            </apex:pageBlockSectionItem>
+            
+        </apex:pageBlockSection>     
+        <apex:pageBlockSection id="sec2" title="Information" columns="2">
+            
+            <!--
+            <apex:pageBlockSectionItem>   
+                <apex:actionRegion>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:outputLabel value="Type" for="Type" style="font-weight:bold;font-family:Arial;"/>
+                    <apex:inputfield value="{!Promotions__c.Type__c}">
+                        <apex:actionSupport event="onchange" reRender="sec2"/>
+                    </apex:inputfield>
+                   </apex:actionRegion>                 
+            </apex:pageBlockSectionItem>  
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Exhibition Name" for="Exhibition" rendered="{!Promotions__c.Type__c='Exhibition'}"/>
+                    <apex:inputfield value="{!Promotions__c.Exhibition_Name__c}"  rendered="{!Promotions__c.Type__c='Exhibition'}"/>
+            </apex:pageBlockSectionItem>                    
+            -->
+            
+            <apex:inputfield value="{!Promotions__c.Total_no_of_attendees__c}" required="true"/>
+            <apex:inputfield value="{!Promotions__c.Date__c}" required="true"/>
+            <apex:inputfield value="{!Promotions__c.Remarks__c}"/>
+            <apex:inputfield value="{!Promotions__c.Targets__c}"/>
+            <apex:inputfield value="{!Promotions__c.Total_Expenses__c}" required="true"/>
+            <apex:inputfield value="{!Promotions__c.City__c}" required="true"/>
+            <apex:inputfield value="{!Promotions__c.Distributor_Dealer__c}"/>
+        </apex:pageBlockSection>
+        
+        <!--<apex:pageBlockSection title="Information" columns="2" rendered="{!($User.TL__c == TRUE)}">
+            <apex:inputfield value="{!Promotions__c.Type__c}"/>
+            <apex:inputfield value="{!Promotions__c.Total_no_of_attendees__c}" required="true"/>
+            <apex:inputfield value="{!Promotions__c.Date__c}" required="true"/>
+            <apex:inputfield value="{!Promotions__c.Remarks__c}" required="true"/>
+        
+           <apex:inputfield value="{!Promotions__c.Ashirvad_Representative1__c}"/>
+           <apex:inputHidden value="{!Promotions__c.Ashirvad_Representative1__c}"/>
+           <apex:inputfield value="{!Promotions__c.Ashirvad_Representative2__c}"/>
+           <apex:inputHidden value="{!Promotions__c.Ashirvad_Representative1__c}"/>
+           <apex:inputfield value="{!Promotions__c.Ashirvad_Representative3__c}"/>
+           <apex:inputHidden value="{!Promotions__c.Ashirvad_Representative1__c}"/>
+           <apex:inputfield value="{!Promotions__c.Ashirvad_Representative4__c}"/>
+           <apex:inputHidden value="{!Promotions__c.Ashirvad_Representative1__c}"/>
+           <apex:inputfield value="{!Promotions__c.Ashirvad_Representative5__c}"/>
+           <apex:inputHidden value="{!Promotions__c.Ashirvad_Representative1__c}"/>
+           <apex:inputfield value="{!Promotions__c.City__c}" required="true"/>
+           <apex:inputfield value="{!Promotions__c.Suggestion__c}"/>
+          
+        </apex:pageBlockSection>-->
+        
+        <apex:pageBlockSection title="Remarks" columns="2" rendered="{!($User.HO__c == TRUE || $UserRole.Name == 'Director')}">
+            <apex:inputfield value="{!Promotions__c.Promotion_Status__c}" />
+            <apex:inputfield value="{!Promotions__c.Call_Center_Remarks__c}"/>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Remarks" columns="2" rendered="{!($User.HO__c != TRUE && $UserRole.Name != 'Director')}">
+            <apex:outputfield value="{!Promotions__c.Promotion_Status__c}"/>
+            <apex:outputfield value="{!Promotions__c.Call_Center_Remarks__c}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

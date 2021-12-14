@@ -1,0 +1,6 @@
+.THIS .slds-dropdown_length-with-icon-10{
+    max-height : calc((1.5rem + 1rem) * 3);
+}
+.THIS .slds-dueling-list__options{
+    height: 7rem;
+}

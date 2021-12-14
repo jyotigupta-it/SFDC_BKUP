@@ -1,0 +1,165 @@
+<apex:page standardcontroller="Case" extensions="CtrlInventoryRequestPage" tabStyle="inventory__c">
+  <style>
+  .vfHelpText a            {position:relative;}
+.vfHelpText a span       {display: none;}
+.vfHelpText a:hover span {display: block;
+                                  position:absolute;
+                                  top:1.5em;
+                                  padding:2px 5px;
+                                  left:-60px; width:auto;
+                                  z-index:100;
+                                  border:1px solid orange;
+                                  background-color:#FEFDB9;
+                                  color:black; 
+                                 }
+  
+  </style>
+<apex:form >
+<apex:pageMessages id="errorMsg" ></apex:pageMessages>
+<apex:pageBlock ><br/>
+                <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveDetails}" />
+                <apex:commandButton value="Cancel" action="{!Cancel}" />
+                </apex:pageBlockButtons>
+                <br/>
+ <apex:pageBlockSection title="Collateral Case Details" columns="2" >
+                 <apex:outputField value="{!currentCase.Request_Raised_By__c}"/>
+                <apex:outputField value="{!currentCase.Origin}"/>
+                <apex:outputField value="{!currentCase.Priority}"/>
+                <apex:outputField value="{!currentCase.Shipping_Address__c}"  style="width:200px;"/>
+                 <apex:inputField value="{!currentCase.Description}" style="width:150%;"/>
+                </apex:pageBlockSection>
+                <br/>
+<apex:pageBlockSection title="Gifts Request Details" columns="1">
+
+<apex:pageBlockTable var="gift" value="{!gifReq}" style="width:1000px;" id="GiftRequest" columnsWidth="100%,20%,30%">
+<apex:column headerValue="Type Of Meet">
+                <apex:outputField value="{!gift.Type_Of_Meet__c}" />
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:inputField value="{!gift.Required_Quantity__c}" />
+                </apex:column>
+                <apex:column headerValue="Reason"><span class="vfHelpText" >
+                <apex:outputLink value="javascript:return false;">
+                 <img src="/s.gif" alt="" class="helpOrb" />
+                <span>{!$ObjectType.inventory_Gift_request__c.fields.Comments__c.inlineHelpText}</span>            
+</apex:outputLink>
+</span>
+                <apex:inputField value="{!gift.Comments__c}"/>
+                </apex:column>
+
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+                 
+<apex:pageBlockSection title="Product Collateral Request Details" columns="1">
+<apex:pageBlockTable var="product" value="{!productCollList}" style="width:1000px;" id="ProdRequest" columnsWidth="10%,20%,30%,20%,20%,20%,30%">
+<apex:column headerValue="Product Id">
+                <apex:inputField value="{!product.invRequest.inventory_Product__c}" style="width:50px;">
+                 <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="ProdRequest,errorMsg" status="prodStatus"/>
+                </apex:inputField>
+                </apex:column>
+                
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Language">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!product.invRequest.inventory_Product__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:inputField value="{!product.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <span class="vfHelpText" >
+                <apex:outputLink value="javascript:return false;">
+                 <img src="/s.gif" alt="" class="helpOrb" />
+                <span>{!$ObjectType.inventory_request__c.fields.Comments_Remarks__c.inlineHelpText}</span>            
+</apex:outputLink>
+</span>
+                <apex:inputField value="{!product.invRequest.Comments_Remarks__c}"  />
+                </apex:column>
+
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+
+
+<apex:pageBlockSection title="Sample Request Details" columns="1">
+<apex:pageBlockTable var="sample" value="{!sampleList}" style="width:1000px;" id="SampleRequest" columnsWidth="10%,20%,30%,20%,20%,20%,30%">
+<apex:column headerValue="Sample Id">
+                <apex:inputField value="{!sample.invRequest.inventory_Sample__c}" style="width:50px;">
+                 <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="SampleRequest,errorMsg" status="sampStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Size">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!sample.invRequest.inventory_Sample__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:inputField value="{!sample.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <span class="vfHelpText" >
+                <apex:outputLink value="javascript:return false;">
+                 <img src="/s.gif" alt="" class="helpOrb" />
+                <span>{!$ObjectType.inventory_request__c.fields.Comments_Remarks__c.inlineHelpText}</span>            
+</apex:outputLink>
+</span>       <apex:inputField value="{!sample.invRequest.Comments_Remarks__c}"  />
+                </apex:column>
+
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+
+<apex:pageBlockSection title="Package Material Request Details" columns="1">
+<apex:pageBlockTable var="package" value="{!packMaterialList}" style="width:1000px;" id="PackageRequest" columnsWidth="10%,20%,30%,20%,20%,20%,30%">
+<apex:column headerValue="Package Id">
+                <apex:inputField value="{!package.invRequest.inventory_PackMaterials__c}" style="width:50px;">
+                 <apex:actionSupport event="onchange" action="{!getinventoryDetails}" rerender="PackageRequest,errorMsg" status="valStatus"/>
+                </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Product">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Product__c}"/>
+                </apex:column>
+                <apex:column headerValue="Product Description">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Product_Description__c}"/>
+                </apex:column>
+                <apex:column headerValue="Size">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Color_Language_Size__c}"/>
+                </apex:column>
+                <apex:column headerValue="Item Code">
+                <apex:outputField value="{!package.invRequest.inventory_PackMaterials__r.Item_Code__c}"/>
+                </apex:column>
+                <apex:column headerValue="Requested Quantity">
+                <apex:inputField value="{!package.invRequest.Required_Quantity__c}"/>
+                </apex:column>
+                <apex:column headerValue="Reason">
+                <span class="vfHelpText" >
+                <apex:outputLink value="javascript:return false;">
+                 <img src="/s.gif" alt="" class="helpOrb" />
+                <span>{!$ObjectType.inventory_request__c.fields.Comments_Remarks__c.inlineHelpText}</span>            
+</apex:outputLink>
+</span>      <apex:inputField value="{!package.invRequest.Comments_Remarks__c}" />
+                </apex:column>
+
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+ <br/>
+
+</apex:pageblock>
+ </apex:form>
+</apex:page>

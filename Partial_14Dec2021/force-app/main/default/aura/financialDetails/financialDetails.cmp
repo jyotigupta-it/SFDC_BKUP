@@ -1,0 +1,38 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="financialDetails" type="Bank_Details__c"/>
+    <aura:attribute name="rowIndex" type="String"/>
+    <aura:attribute name="makeReadOnly" type="boolean"/>
+    <aura:registerEvent name="DeleteRowEvt" type="c:DeleteRowEvtDistributionDetails"/> 
+    <aura:registerEvent name="AddRowEvt" type="c:AddNewRowEvtDistributionDetails"/> 
+    
+        <lightning:recordEditForm aura:id="recordForm" objectApiName="Bank_Details__c">
+            <!-- Error message -->
+            <lightning:messages />
+            <!-- Fields -->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_3-of-6 slds-large-size_3-of-6  slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Name_of_your_Bank__c" fieldName="Name_of_your_Bank__c" 
+                                          value="{!v.financialDetails.Name_of_your_Bank__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_3-of-6  slds-large-size_3-of-6  slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Full_Address_of_the_Bank_with_Pin_Code__c" fieldName="Full_Address_of_the_Bank_with_Pin_Code__c" 
+                                          value="{!v.financialDetails.Full_Address_of_the_Bank_with_Pin_Code__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_3-of-6  slds-large-size_3-of-6  slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="LandLine__c" fieldName="LandLine__c" value="{!v.financialDetails.LandLine__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_3-of-6  slds-large-size_3-of-6  slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Mobile_Number__c" fieldName="Mobile_Number__c" value="{!v.financialDetails.Mobile_Number__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_3-of-6  slds-large-size_3-of-6  slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Bank_Account_Number__c" fieldName="Bank_Account_Number__c" 
+                                          value="{!v.financialDetails.Bank_Account_Number__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+                <div class="slds-col slds-size_7-of-7 slds-medium-size_3-of-6 slds-large-size_3-of-6  slds-p-left_medium slds-p-right_medium">
+                    <lightning:inputField required="true" aura:id="Date_on_Which_this_Account_was_Opened__c" fieldName="Date_on_Which_this_Account_was_Opened__c" 
+                                          value="{!v.financialDetails.Date_on_Which_this_Account_was_Opened__c}" disabled="{!v.makeReadOnly}"/>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+</aura:component>

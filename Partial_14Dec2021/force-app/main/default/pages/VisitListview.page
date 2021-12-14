@@ -1,0 +1,41 @@
+<apex:page standardcontroller="Visit__c" showHeader="false" sidebar="false" recordSetVar="Visit" >
+<div class="homeTab">
+    <apex:ListViews type="Visit__c">
+     <apex:facet name="header">
+                            &nbsp;
+                            </apex:facet>
+    </apex:ListViews>
+</div>
+ <!--<apex:form >
+        <apex:pageBlock title="Visits">
+            <apex:pageBlockTable value="{!Visit}" var="Vis">
+             <apex:column > 
+                    <apex:facet name="header">No.</apex:facet>
+                        <a href="https://c.na1.visual.force.com/{!Vis.id}"><apex:outputText value="{!Vis.name}"/></a>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Date</apex:facet>
+                       <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                       <apex:param value="{!Vis.Date__c}"/>
+                       </apex:outputtext>
+                </apex:column> 
+                <apex:column >
+                    <apex:facet name="header">Date of next appintment</apex:facet>
+                      <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> 
+                       <apex:param value="{!Vis.Date_of_Next_Visit__c}"/>
+                       </apex:outputtext>
+                </apex:column>
+                 <apex:column >
+                    <apex:facet name="header">Distributor</apex:facet>
+                       <apex:outputText value="{!Vis.Distributor_Dealer__r.Name}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Visitor Status</apex:facet>
+                       <apex:outputText value="{!Vis.Status__c}"/>
+                </apex:column>
+               
+                 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form> -->   
+</apex:page>

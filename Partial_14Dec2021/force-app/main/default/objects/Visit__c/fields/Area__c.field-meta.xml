@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Area__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Visit_To__c, &apos;Distributor&apos;), Distributor_Dealer__r.Area__c, IF(ISPICKVAL(Visit_To__c, &apos;Dealer&apos;), Distributor_Dealer__r.Area__c, IF(ISPICKVAL(Visit_To__c, &apos;Contact&apos;), Contacts__r.Area__c, IF(ISPICKVAL(Visit_To__c, &apos;Project&apos;), Project_Name__r.Area__c ,&apos; &apos;))))</formula>
+    <label>Area</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

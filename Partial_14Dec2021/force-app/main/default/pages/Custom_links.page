@@ -1,0 +1,21 @@
+<apex:page >
+  <title>Custom Links</title>
+ 
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000007hCBp">My Distributors</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O3A000009TdeQ">Plumber Club</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008RqeK">My Dealers</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008RqfN">My Contacts</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008UjPb">My Projects</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008SigM">Distibutor/Dealer's Birthday (Today)</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008RrF1">Contacts Birthday (Today)</a><br/>
+  <a href="https://appl-ashirvadpipes--c.na45.content.force.com/servlet/servlet.FileDownload?file=0153A000004GnOX">Lightning Training PPT-2019</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000007hDZ9">Tour Program Report</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/01Z30000000nvNI">New Version Dashboard</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008RWO2">Planned Vs Actuals Tour Plan</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/06930000002Dyau">Presentations and SOP</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/06930000004Gdbz">Special Pricing Request - Projects</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008UDKU">My Orders</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/00O30000008V6nA">My Supplies</a><br/>
+  <a href="https://appl-ashirvadpipes--c.na45.content.force.com/servlet/servlet.FileDownload?file=0153A000004K1oQ">HDFC Process Flow</a><br/>
+  <a href="https://appl-ashirvadpipes.my.salesforce.com/01Z30000000nypN">Swacch SFDC Andholan</a>
+  </apex:page>

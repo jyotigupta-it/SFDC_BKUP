@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BDM_should_notbe_able_to_change_Tourplan</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND( 
+  Tour_Program_Approved__c,$Profile.Name ==&apos;BD&apos;, 
+OR( 
+ISCHANGED(Name ), 
+ISCHANGED( State__c  ), 
+ISCHANGED(  District__c  ),
+ISCHANGED(  District_1__c   ), 
+ISCHANGED(  Tour_Program__c  ), 
+ISCHANGED(  Market_Type__c ), 
+ISCHANGED(  No_of_Distributors__c  ), 
+ISCHANGED(  No_of_Dealers__c  ), 
+ISCHANGED(  No_of_Architects__c  ), 
+ISCHANGED(  No_of_Consultants__c  ), 
+ISCHANGED(  No_of_Engineer__c  ), 
+ISCHANGED( Other_Contacts_if_any__c  ), 
+ISCHANGED( Location__c ),
+ISCHANGED(  Location_1__c  ) ,
+ISCHANGED( Date__c )
+
+) 
+)</errorConditionFormula>
+    <errorMessage>You are not authorized to change the Tour Plan, once it is Approved...!!!</errorMessage>
+</ValidationRule>

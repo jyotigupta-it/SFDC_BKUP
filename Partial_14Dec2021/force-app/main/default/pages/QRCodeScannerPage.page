@@ -1,0 +1,190 @@
+<apex:page standardStylesheets="false" lightningStylesheets="true" standardController="Account" extensions="QRCodeScannerController" showHeader="false" sidebar="false" showQuickActionVfHeader="false">
+    <head>
+        <script type="text/javascript" src="/canvas/sdk/js/publisher.js"></script>
+        <script type="text/javascript" src="{!URLFOR($Resource.html5qrcode)}"></script>
+        <script type="text/javascript">
+        function closeQuickAction() {
+            Sfdc.canvas.publisher.publish({ name: "publisher.close", payload:{ refresh: "true" }});
+        }
+        </script>
+        <apex:slds />
+    </head>
+    
+    <body>
+        <script type="text/javascript">
+        // All the messages must be shown from custom labels
+        var qr_code_already_exists = "{!JSENCODE($Label.qr_code_already_exists)}";
+        var account_location_undefined = "{!JSENCODE($Label.account_location_undefined)}";
+        var not_dealer_account = "{!JSENCODE($Label.not_dealer_account)}";
+        var user_location_undefined = "{!JSENCODE($Label.user_location_undefined)}";
+        var user_location_incorrect = "{!JSENCODE($Label.user_location_incorrect)}";
+        var user_denied_the_request_for_geolocation = "{!JSENCODE($Label.user_denied_the_request_for_geolocation)}";
+        var location_information_is_unavailable = "{!JSENCODE($Label.location_information_is_unavailable)}";
+        var the_request_to_get_user_location_timed_out = "{!JSENCODE($Label.the_request_to_get_user_location_timed_out)}";
+        var an_unknown_error_occurred = "{!JSENCODE($Label.an_unknown_error_occurred)}";
+        var first_success = false;
+        // To set High Accuracy level, used in navigator
+        var geoSettings = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+        
+        window.onload = function() {
+            console.log('loaded!');
+            //navigator.geolocation.getCurrentPosition(showPosition);
+            let message = '';
+            console.log('{!accountRecordMain.Geolocation__Latitude__s}');
+            if('{!accountRecordMain.QR_Code__c}' != '') {
+                message = qr_code_already_exists;
+            }else if('{!accountRecordMain.Geolocation__Latitude__s}' == '') {
+                message = account_location_undefined;
+            }else if('{!accountRecordMain.Party_Type__c}' != 'Dealer') {
+                message = not_dealer_account;
+            }else if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(getPosition, showError, geoSettings);
+            }else{
+                message = user_location_undefined; 
+            }
+            
+            if(message != '') {
+                showMessage(message);
+            }
+        }
+        
+        function showPosition(position) {
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude); 
+        }
+        
+        function getPosition(position){
+            let latitudue = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            console.log(latitudue);
+            //alert(latitudue);
+            //alert(longitude);
+            console.log(longitude);
+            settingGeoLocation(latitudue, longitude);
+        }
+        
+        function setPosition(outOfRange){
+            console.log(outOfRange);
+            if(!outOfRange && navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(getPosition, showError, geoSettings);
+            }else{
+                showMessage(user_location_incorrect);
+            }
+        }
+        
+        function showError(error) {
+            console.log('error');
+            let message = '';
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    message = user_denied_the_request_for_geolocation
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    message = location_information_is_unavailable
+                    break;
+                case error.TIMEOUT:
+                    message = the_request_to_get_user_location_timed_out
+                    break;
+                case error.UNKNOWN_ERROR:
+                    message = an_unknown_error_occurred
+                    break;
+            }
+            showMessage(message);
+        }
+        
+        function checkRange(isOutOfRange){
+            console.log(isOutOfRange);
+            if(isOutOfRange){
+                showMessage(user_location_incorrect);
+            } else {
+                qrScanner();
+            }
+        }
+        
+        function showMessage(message){
+            console.log(message);
+            alert(message);
+            closeQuickAction();
+        }
+        
+        function qrScanner(){
+            console.log('{!accountRecordMain.QR_Code__c}');
+            var cameraId = null;
+            // This method will trigger user permissions 
+            Html5Qrcode.getCameras().then(devices => {
+                //alert(JSON.stringify(devices));
+                if (devices && devices.length) {
+                cameraId = devices[0].id;
+                
+                devices.forEach(function(camera) {
+                cameraId = camera.id;
+            });
+            const html5QrCode = new Html5Qrcode("reader");
+            html5QrCode.start(
+                cameraId, // retrieved in the previous step.
+                {
+                    fps: 10,    // sets the framerate to 10 frame per second 
+                    qrbox: 250  // sets only 250 X 250 region of viewfinder to
+                }, qrCodeMessage => {
+                    // do something when code is read. For example:
+                    if(!first_success) {
+                        first_success = true;
+                        alert(`QR Code detected: ${qrCodeMessage}`);
+                        addQRCodeToAccount(qrCodeMessage);
+                    }
+        }, errorMessage => {
+            // parse error, ideally ignore it. For example:
+            console.log(`QR Code no longer in front of camera.`);
+        }).catch(err => {
+            // Start failed, handle it. For example, 
+            console.log(`Unable to start scanning, error: ${err}`);
+        });
+        }
+        }).catch(err => {
+            // handle err
+            console.log(`catch, error: ${err}`);
+        });
+        }
+        
+        function addQRCodeToAccount(qrCodeMessage){
+            console.log(qrCodeMessage);
+            saveQRCodeFunction(qrCodeMessage);
+        }
+        </script>
+        
+        <apex:form >
+            <div class="slds-scope">
+                <apex:outputPanel id="mainPanel">
+                    <apex:outputPanel rendered="{!message != ''}">
+                        <script>
+                        alert('{!message}');
+                        closeQuickAction();
+                        </script>
+                    </apex:outputPanel>
+                    <apex:actionFunction action="{!calculateAccountRange}" name="settingGeoLocation" rerender="mainPanel" oncomplete="checkRange({!isOutOfRange})">
+                        <apex:param name="latitudue" assignTo="{!currentLatitude}" value="" />
+                        <apex:param name="longitude" assignTo="{!currentLongitude}" value="" />
+                    </apex:actionFunction>
+                    
+                    <apex:actionFunction action="{!saveQRCode}" name="saveQRCodeFunction" rerender="mainPanel">
+                        <apex:param name="qrcode" assignTo="{!accountRecordMain.QR_Code__c}" value="" />
+                    </apex:actionFunction>
+                    
+                    <apex:outputPanel id="qrScannerPanel" rendered="{!!isOutOfRange}"><!-- styleClass="slds-align_absolute-center" -->
+                        <div class="slds-button-group" role="group">
+                            <button class="slds-button slds-button_neutral" onclick="closeQuickAction();" value="Cancel">Cancel</button>
+                        </div>
+                        <br/><br/>
+                        <div> <!-- class="slds-box slds-box_x-smal" -->
+                            <div id="reader" style="width:370px"></div>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </div>
+        </apex:form>
+    </body>
+</apex:page>

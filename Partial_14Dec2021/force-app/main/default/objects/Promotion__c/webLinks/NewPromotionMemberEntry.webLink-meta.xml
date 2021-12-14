@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NewPromotionMemberEntry</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>NewPromotionMemberEntry</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var a=&apos;{!Promotion__c.Difference__c}&apos;; 
+
+if(a&gt;=150) 
+{ 
+alert(&apos;Error :\n\n Promotion Members Entry has to be made within 15 days from the date of promotion activity conducted&apos;); 
+} 
+else 
+{ 
+window.open(&apos;https://c.na1.visual.force.com/apex/searchMobileNumber?id={!Promotion__c.Id}&apos;); 
+}</url>
+</WebLink>

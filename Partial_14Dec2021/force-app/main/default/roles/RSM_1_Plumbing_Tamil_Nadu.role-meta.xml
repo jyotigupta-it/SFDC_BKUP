@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Edit</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>RSM[1] - Plumbing - Tamil Nadu</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>RGM[1] - Plumbing - Tamil Nadu</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>Zonal_Head_Plumbing_South</parentRole>
+</Role>

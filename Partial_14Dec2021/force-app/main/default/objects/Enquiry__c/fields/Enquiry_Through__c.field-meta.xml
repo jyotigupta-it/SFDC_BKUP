@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enquiry_Through__c</fullName>
+    <externalId>false</externalId>
+    <label>Enquiry Through(not used)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>eindia</fullName>
+                <default>false</default>
+                <label>eindia</label>
+            </value>
+            <value>
+                <fullName>Info</fullName>
+                <default>false</default>
+                <label>Info</label>
+            </value>
+            <value>
+                <fullName>Vsnl</fullName>
+                <default>false</default>
+                <label>Vsnl</label>
+            </value>
+            <value>
+                <fullName>Enquiry Mobile</fullName>
+                <default>false</default>
+                <label>Enquiry Mobile</label>
+            </value>
+            <value>
+                <fullName>Nandini Mobile</fullName>
+                <default>false</default>
+                <label>Nandini Mobile</label>
+            </value>
+            <value>
+                <fullName>Vani Mobile</fullName>
+                <default>false</default>
+                <label>Vani Mobile</label>
+            </value>
+            <value>
+                <fullName>Landline</fullName>
+                <default>false</default>
+                <label>Landline</label>
+            </value>
+            <value>
+                <fullName>Toll Free</fullName>
+                <default>false</default>
+                <label>Toll Free</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
